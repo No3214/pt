@@ -10,6 +10,7 @@ export interface Client {
   sessions: number; max: number; price: number
   habitScore: number; habitMax: number
   notes: ClientNote[]
+  phone?: string; email?: string; startDate?: string
 }
 
 export interface CalSession { name: string; day: string; time: string }
@@ -21,6 +22,11 @@ export interface Measurement {
 
 export interface ProgressPhoto { src: string; date: string }
 
+export interface SavedProgram {
+  id: string; name: string; clientId?: string
+  exercises: { name: string; sets: string; reps: string; note?: string }[]
+  createdAt: string
+}
 interface AIKeys {
   gemini: string; openrouter: string
   openrouterModel: string; deepseek: string
@@ -38,8 +44,10 @@ interface AppState {
   // CRM
   clients: Client[]
   addClient: (c: Omit<Client, 'id' | 'habitScore' | 'habitMax' | 'notes'>) => void
+  updateClient: (id: string, data: Partial<Client>) => void
   deleteClient: (id: string) => void
   useSession: (id: string) => void
+  resetClientSessions: (id: string, newMax: number) => void
   markHabit: (id: string, success: boolean) => void
   addNote: (id: string, text: string) => void
   deleteNote: (clientId: string, noteId: number) => void
@@ -48,8 +56,7 @@ interface AppState {
   addFood: (f: FoodItem) => void
   removeFood: (idx: number) => void
   clearFoodLog: () => void
-  // Calendar
-  calSessions: CalSession[]
+  // Calendar  calSessions: CalSession[]
   addCalSession: (s: CalSession) => void
   deleteCalSession: (idx: number) => void
   // Measurements
@@ -59,6 +66,10 @@ interface AppState {
   progressPhotos: ProgressPhoto[]
   addProgressPhoto: (p: ProgressPhoto) => void
   deleteProgressPhoto: (idx: number) => void
+  // Saved Programs
+  savedPrograms: SavedProgram[]
+  addSavedProgram: (p: Omit<SavedProgram, 'id' | 'createdAt'>) => void
+  deleteSavedProgram: (id: string) => void
   // AI
   aiKeys: AIKeys
   setAiKeys: (k: Partial<AIKeys>) => void
@@ -74,7 +85,6 @@ export const useStore = create<AppState>()(
       // ─── Dark Mode ───
       darkMode: false,
       toggleDarkMode: () => set(s => ({ darkMode: !s.darkMode })),
-
       // ─── Toast ───
       toastMsg: '',
       showToast: (msg) => {
@@ -86,8 +96,8 @@ export const useStore = create<AppState>()(
       // ─── Admin Auth ───
       isAdminAuth: false,
       loginAdmin: (pin) => {
-        // Geçici basit PIN: 1234
-        if (pin === '1234') {
+        const validPasswords = ['ElaCoach2026!', 'Ela2026Admin']
+        if (validPasswords.includes(pin)) {
           set({ isAdminAuth: true })
           return true
         }
@@ -97,15 +107,20 @@ export const useStore = create<AppState>()(
 
       // ─── CRM ───
       clients: [
-        { id: '1', name: 'Mina Aksoy', goal: 'Voleybol - Sıçrama', sessions: 8, max: 12, price: 5000, habitScore: 5, habitMax: 6, notes: [] },
-        { id: '2', name: 'Burcu Yılmaz', goal: 'Kuvvet / Yağ Yakımı', sessions: 0, max: 8, price: 3500, habitScore: 2, habitMax: 5, notes: [] },
+        { id: '1', name: 'Mina Aksoy', goal: 'Voleybol - Sıçrama', sessions: 8, max: 12, price: 5000, habitScore: 5, habitMax: 6, notes: [], phone: '', email: '', startDate: '2026-01-15' },
+        { id: '2', name: 'Burcu Yılmaz', goal: 'Kuvvet / Yağ Yakımı', sessions: 0, max: 8, price: 3500, habitScore: 2, habitMax: 5, notes: [], phone: '', email: '', startDate: '2026-02-01' },
       ],
       addClient: (c) => set(s => ({
-        clients: [...s.clients, { ...c, id: Date.now().toString(), habitScore: 0, habitMax: 0, notes: [] }]
+        clients: [...s.clients, { ...c, id: Date.now().toString(), habitScore: 0, habitMax: 0, notes: [], startDate: c.startDate || new Date().toISOString().split('T')[0] }]
       })),
+      updateClient: (id, data) => set(s => ({
+        clients: s.clients.map(c => c.id === id ? { ...c, ...data } : c)      })),
       deleteClient: (id) => set(s => ({ clients: s.clients.filter(c => c.id !== id) })),
       useSession: (id) => set(s => ({
         clients: s.clients.map(c => c.id === id && c.sessions > 0 ? { ...c, sessions: c.sessions - 1 } : c)
+      })),
+      resetClientSessions: (id, newMax) => set(s => ({
+        clients: s.clients.map(c => c.id === id ? { ...c, sessions: newMax, max: newMax } : c)
       })),
       markHabit: (id, success) => set(s => ({
         clients: s.clients.map(c =>
@@ -128,7 +143,6 @@ export const useStore = create<AppState>()(
       addFood: (f) => set(s => ({ foodLog: [...s.foodLog, f] })),
       removeFood: (idx) => set(s => ({ foodLog: s.foodLog.filter((_, i) => i !== idx) })),
       clearFoodLog: () => set({ foodLog: [] }),
-
       // ─── Calendar ───
       calSessions: [],
       addCalSession: (s) => set(st => ({ calSessions: [...st.calSessions, s] })),
@@ -142,6 +156,13 @@ export const useStore = create<AppState>()(
       progressPhotos: [],
       addProgressPhoto: (p) => set(s => ({ progressPhotos: [...s.progressPhotos, p] })),
       deleteProgressPhoto: (idx) => set(s => ({ progressPhotos: s.progressPhotos.filter((_, i) => i !== idx) })),
+
+      // ─── Saved Programs ───
+      savedPrograms: [],
+      addSavedProgram: (p) => set(s => ({
+        savedPrograms: [...s.savedPrograms, { ...p, id: Date.now().toString(), createdAt: new Date().toISOString() }]
+      })),
+      deleteSavedProgram: (id) => set(s => ({ savedPrograms: s.savedPrograms.filter(p => p.id !== id) })),
 
       // ─── AI Keys ───
       aiKeys: { gemini: '', openrouter: '', openrouterModel: 'anthropic/claude-sonnet-4', deepseek: '' },

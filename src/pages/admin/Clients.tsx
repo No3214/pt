@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import { useNavigate } from 'react-router-dom'
@@ -7,20 +7,65 @@ import { sanitize } from '../../lib/constants'
 const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }
 const stagger = { show: { transition: { staggerChildren: 0.06 } } }
 
+type SortKey = 'name' | 'sessions' | 'price' | 'habit'
+
 export default function Clients() {
-  const { clients, addClient, deleteClient, useSession, markHabit, addNote, deleteNote, showToast, darkMode: dm } = useStore()
+  const { clients, addClient, updateClient, deleteClient, useSession, resetClientSessions, markHabit, addNote, deleteNote, showToast, darkMode: dm } = useStore()
   const navigate = useNavigate()
-  const [form, setForm] = useState({ name: '', goal: '', sessions: 12, price: 5000 })
+  const [form, setForm] = useState({ name: '', goal: '', sessions: 12, price: 5000, phone: '', email: '' })
   const [notesModal, setNotesModal] = useState<string | null>(null)
+  const [editModal, setEditModal] = useState<string | null>(null)
+  const [editForm, setEditForm] = useState({ name: '', goal: '', sessions: 0, max: 0, price: 0, phone: '', email: '' })
   const [noteText, setNoteText] = useState('')
   const [showForm, setShowForm] = useState(false)
+  const [search, setSearch] = useState('')
+  const [sortBy, setSortBy] = useState<SortKey>('name')
+
+  // Search + Sort
+  const filteredClients = useMemo(() => {
+    let list = clients.filter(c =>
+      c.name.toLowerCase().includes(search.toLowerCase()) ||
+      c.goal.toLowerCase().includes(search.toLowerCase())
+    )    list.sort((a, b) => {
+      switch (sortBy) {
+        case 'sessions': return b.sessions - a.sessions
+        case 'price': return b.price - a.price
+        case 'habit': {
+          const ha = a.habitMax > 0 ? a.habitScore / a.habitMax : 0
+          const hb = b.habitMax > 0 ? b.habitScore / b.habitMax : 0
+          return hb - ha
+        }
+        default: return a.name.localeCompare(b.name, 'tr')
+      }
+    })
+    return list
+  }, [clients, search, sortBy])
 
   const handleAdd = () => {
     if (!form.name.trim()) { showToast('İsim giriniz.'); return }
-    addClient({ name: sanitize(form.name), goal: sanitize(form.goal), sessions: form.sessions, max: form.sessions, price: form.price })
-    setForm({ name: '', goal: '', sessions: 12, price: 5000 })
+    addClient({ name: sanitize(form.name), goal: sanitize(form.goal), sessions: form.sessions, max: form.sessions, price: form.price, phone: form.phone, email: form.email })
+    setForm({ name: '', goal: '', sessions: 12, price: 5000, phone: '', email: '' })
     setShowForm(false)
     showToast('Danışan eklendi!')
+  }
+
+  const openEdit = (c: typeof clients[0]) => {
+    setEditForm({ name: c.name, goal: c.goal, sessions: c.sessions, max: c.max, price: c.price, phone: c.phone || '', email: c.email || '' })
+    setEditModal(c.id)
+  }
+
+  const handleEdit = () => {
+    if (!editModal) return
+    updateClient(editModal, {      name: sanitize(editForm.name),
+      goal: sanitize(editForm.goal),
+      sessions: editForm.sessions,
+      max: editForm.max,
+      price: editForm.price,
+      phone: editForm.phone,
+      email: editForm.email,
+    })
+    setEditModal(null)
+    showToast('Danışan güncellendi!')
   }
 
   const handleHabit = (id: string) => {
@@ -42,11 +87,20 @@ export default function Clients() {
 
   const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const notesClient = notesModal ? clients.find(c => c.id === notesModal) : null
-
   // Stats
   const totalClients = clients.length
   const activeSessions = clients.reduce((a, c) => a + c.sessions, 0)
-  const totalRevenue = clients.reduce((a, c) => a + c.price, 0)  return (
+  const totalRevenue = clients.reduce((a, c) => a + c.price, 0)
+  const avgHabit = clients.length > 0 ? Math.round(clients.reduce((a, c) => a + (c.habitMax > 0 ? (c.habitScore / c.habitMax) * 100 : 0), 0) / clients.length) : 0
+
+  const sortOptions: { key: SortKey; label: string }[] = [
+    { key: 'name', label: 'İsim' },
+    { key: 'sessions', label: 'Seans' },
+    { key: 'price', label: 'Ücret' },
+    { key: 'habit', label: 'Uyum' },
+  ]
+
+  return (
     <motion.div initial="hidden" animate="show" variants={stagger}>
       {/* Header */}
       <motion.div variants={fadeUp} className="flex flex-wrap justify-between items-start mb-10 gap-4">
@@ -61,17 +115,17 @@ export default function Clients() {
           className={`px-6 py-3 rounded-full text-sm font-medium cursor-pointer transition-all ${showForm ? (dm ? 'bg-white/10 text-white border-none' : 'bg-stone-100 text-stone-700 border-none') : 'bg-terracotta text-white border-none'}`}
         >
           {showForm ? '✕ Kapat' : '+ Yeni Danışan'}
-        </motion.button>
-      </motion.div>
+        </motion.button>      </motion.div>
 
       {/* Quick Stats */}
-      <motion.div variants={fadeUp} className="grid grid-cols-3 gap-4 mb-8">
+      <motion.div variants={fadeUp} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         {[
           { label: 'Toplam Danışan', value: totalClients, icon: '👥' },
           { label: 'Aktif Seans', value: activeSessions, icon: '🏋️' },
           { label: 'Toplam Gelir', value: `₺${totalRevenue.toLocaleString('tr-TR')}`, icon: '💰' },
+          { label: 'Ort. Uyum', value: `%${avgHabit}`, icon: '📊' },
         ].map((s, i) => (
-          <div key={i} className={`p-5 rounded-2xl border ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`}>
+          <motion.div key={i} whileHover={{ y: -2 }} className={`p-5 rounded-2xl border transition-all ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`}>
             <div className="flex items-center gap-3">
               <span className="text-2xl">{s.icon}</span>
               <div>
@@ -79,8 +133,34 @@ export default function Clients() {
                 <p className="text-2xl font-semibold mt-0.5">{s.value}</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
+      </motion.div>
+
+      {/* Search + Sort Bar */}
+      <motion.div variants={fadeUp} className="flex flex-wrap gap-3 mb-6">
+        <div className="flex-1 min-w-[200px]">
+          <input
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="Danışan ara..."
+            className={inp}          />
+        </div>
+        <div className="flex gap-1.5 items-center">
+          {sortOptions.map(o => (
+            <button
+              key={o.key}
+              onClick={() => setSortBy(o.key)}
+              className={`px-4 py-3 rounded-xl text-xs font-medium cursor-pointer border-none transition-all ${
+                sortBy === o.key
+                  ? 'bg-terracotta text-white'
+                  : (dm ? 'bg-white/[0.06] text-white/50 hover:bg-white/10' : 'bg-stone-100 text-stone-500 hover:bg-stone-200')
+              }`}
+            >
+              {o.label}
+            </button>
+          ))}
+        </div>
       </motion.div>
 
       {/* Add Client Form */}
@@ -92,8 +172,8 @@ export default function Clients() {
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden mb-8"
           >
-            <div className={`p-8 rounded-2xl border ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`}>              <h3 className="font-display text-xl font-medium mb-6">Yeni Danışan Ekle</h3>
-              <div className="grid md:grid-cols-2 gap-5">
+            <div className={`p-8 rounded-2xl border ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`}>
+              <h3 className="font-display text-xl font-medium mb-6">Yeni Danışan Ekle</h3>              <div className="grid md:grid-cols-3 gap-5">
                 <div>
                   <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Ad Soyad</label>
                   <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} className={inp} placeholder="Mina Aksoy" />
@@ -101,6 +181,14 @@ export default function Clients() {
                 <div>
                   <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Alan / Hedef</label>
                   <input value={form.goal} onChange={e => setForm({ ...form, goal: e.target.value })} className={inp} placeholder="Kuvvet / Voleybol" />
+                </div>
+                <div>
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Telefon</label>
+                  <input value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} className={inp} placeholder="+90 5xx xxx xx xx" />
+                </div>
+                <div>
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>E-posta</label>
+                  <input value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} className={inp} placeholder="mail@ornek.com" />
                 </div>
                 <div>
                   <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Ders Sayısı</label>
@@ -114,8 +202,7 @@ export default function Clients() {
               <motion.button
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
-                onClick={handleAdd}
-                className="mt-6 w-full py-4 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer"
+                onClick={handleAdd}                className="mt-6 w-full py-4 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer"
               >
                 Danışanı Kaydet
               </motion.button>
@@ -125,22 +212,26 @@ export default function Clients() {
       </AnimatePresence>
 
       {/* Client Cards */}
-      {clients.length === 0 ? (
+      {filteredClients.length === 0 ? (
         <motion.div variants={fadeUp} className={`text-center py-20 rounded-2xl border border-dashed ${dm ? 'border-white/10' : 'border-black/10'}`}>
           <p className="text-4xl mb-4">👥</p>
-          <p className={`font-display text-xl ${dm ? 'text-white/40' : 'text-stone-400'}`}>Henüz danışan eklenmedi</p>
-          <p className={`text-sm mt-1 ${dm ? 'text-white/25' : 'text-stone-300'}`}>Yeni danışan eklemek için yukarıdaki butonu kullanın</p>
+          <p className={`font-display text-xl ${dm ? 'text-white/40' : 'text-stone-400'}`}>
+            {search ? 'Sonuç bulunamadı' : 'Henüz danışan eklenmedi'}
+          </p>
+          <p className={`text-sm mt-1 ${dm ? 'text-white/25' : 'text-stone-300'}`}>
+            {search ? 'Farklı bir arama deneyin' : 'Yeni danışan eklemek için yukarıdaki butonu kullanın'}
+          </p>
         </motion.div>
       ) : (
         <motion.div variants={stagger} className="space-y-4">
-          {clients.map(c => {
+          {filteredClients.map(c => {
             const comp = c.habitMax > 0 ? Math.round((c.habitScore / c.habitMax) * 100) : 0
             const sessionPercent = c.max > 0 ? Math.round((c.sessions / c.max) * 100) : 0
             const isLow = c.sessions <= 2
-            return (              <motion.div
+            return (
+              <motion.div
                 key={c.id}
-                variants={fadeUp}
-                layout
+                variants={fadeUp}                layout
                 className={`p-6 rounded-2xl border transition-all duration-300 hover:shadow-lg ${dm ? 'bg-white/[0.03] border-white/[0.06] hover:border-white/[0.12]' : 'bg-white border-black/[0.04] hover:border-black/[0.08]'}`}
               >
                 <div className="flex flex-col md:flex-row md:items-center gap-6">
@@ -152,6 +243,11 @@ export default function Clients() {
                     <div>
                       <h4 className="font-medium text-lg leading-tight">{c.name}</h4>
                       <p className={`text-xs mt-0.5 ${dm ? 'text-white/40' : 'text-stone-400'}`}>{c.goal || 'Hedef belirtilmedi'}</p>
+                      {(c.phone || c.email) && (
+                        <p className={`text-[0.65rem] mt-0.5 ${dm ? 'text-white/25' : 'text-stone-300'}`}>
+                          {c.phone || c.email}
+                        </p>
+                      )}
                     </div>
                   </div>
 
@@ -164,22 +260,27 @@ export default function Clients() {
                     <div className={`h-2 rounded-full overflow-hidden ${dm ? 'bg-white/[0.06]' : 'bg-stone-100'}`}>
                       <motion.div
                         initial={{ width: 0 }}
-                        animate={{ width: `${sessionPercent}%` }}
-                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        animate={{ width: `${sessionPercent}%` }}                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className={`h-full rounded-full ${isLow ? 'bg-terracotta' : 'bg-sage'}`}
                       />
                     </div>
                     <div className="flex items-center gap-4 mt-2">
                       <span className={`text-xs ${dm ? 'text-white/30' : 'text-stone-300'}`}>₺{c.price.toLocaleString('tr-TR')}</span>
                       <span className={`text-xs ${comp > 70 ? 'text-sage' : 'text-terracotta'}`}>Uyum: %{comp}</span>
+                      {c.sessions === 0 && <span className="text-xs text-terracotta font-medium">Seans Bitti!</span>}
                     </div>
                   </div>
 
                   {/* Actions */}
                   <div className="flex flex-wrap gap-2 md:justify-end">
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => useSession(c.id)}
-                      className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
+                      disabled={c.sessions === 0}
+                      className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${c.sessions === 0 ? 'opacity-40 cursor-not-allowed' : ''} ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
                       Seans -1
+                    </motion.button>
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => openEdit(c)}
+                      className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-sage/10 text-sage border-none">
+                      Düzenle
                     </motion.button>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => navigate('/admin/builder')}
                       className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-terracotta/10 text-terracotta border-none">
@@ -188,8 +289,7 @@ export default function Clients() {
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => handleHabit(c.id)}
                       className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
                       Disiplin
-                    </motion.button>
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setNotesModal(c.id)}
+                    </motion.button>                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setNotesModal(c.id)}
                       className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
                       Not ({c.notes.length})
                     </motion.button>
@@ -210,6 +310,85 @@ export default function Clients() {
         </motion.div>
       )}
 
+      {/* Edit Modal */}
+      <AnimatePresence>
+        {editModal && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
+            onClick={(e) => { if (e.target === e.currentTarget) setEditModal(null) }}          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ type: 'spring', damping: 30, stiffness: 400 }}
+              className={`rounded-2xl p-8 max-w-[560px] w-full shadow-2xl ${dm ? 'bg-[#111111]' : 'bg-white'}`}
+            >
+              <div className="flex justify-between items-center mb-6">
+                <div>
+                  <h3 className="font-display text-2xl font-semibold">Danışan Düzenle</h3>
+                  <p className={`text-sm ${dm ? 'text-white/40' : 'text-stone-400'}`}>Bilgileri güncelleyin</p>
+                </div>
+                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} onClick={() => setEditModal(null)}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center cursor-pointer border-none text-lg ${dm ? 'bg-white/10 text-white' : 'bg-stone-100 text-stone-500'}`}>
+                  ✕
+                </motion.button>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-2">
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Ad Soyad</label>
+                  <input value={editForm.name} onChange={e => setEditForm({ ...editForm, name: e.target.value })} className={inp} />
+                </div>
+                <div className="col-span-2">
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Hedef</label>
+                  <input value={editForm.goal} onChange={e => setEditForm({ ...editForm, goal: e.target.value })} className={inp} />
+                </div>
+                <div>
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Kalan Seans</label>                  <input type="number" value={editForm.sessions} onChange={e => setEditForm({ ...editForm, sessions: +e.target.value })} className={inp} />
+                </div>
+                <div>
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Toplam Seans</label>
+                  <input type="number" value={editForm.max} onChange={e => setEditForm({ ...editForm, max: +e.target.value })} className={inp} />
+                </div>
+                <div>
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Ücret (₺)</label>
+                  <input type="number" value={editForm.price} onChange={e => setEditForm({ ...editForm, price: +e.target.value })} className={inp} />
+                </div>
+                <div>
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Telefon</label>
+                  <input value={editForm.phone} onChange={e => setEditForm({ ...editForm, phone: e.target.value })} className={inp} />
+                </div>
+                <div className="col-span-2">
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>E-posta</label>
+                  <input value={editForm.email} onChange={e => setEditForm({ ...editForm, email: e.target.value })} className={inp} />
+                </div>
+              </div>
+
+              <div className="flex gap-3 mt-6">
+                <motion.button
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                  onClick={handleEdit}
+                  className="flex-1 py-3.5 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer"
+                >
+                  Kaydet
+                </motion.button>
+                <motion.button                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                  onClick={() => setEditModal(null)}
+                  className={`px-8 py-3.5 rounded-full font-medium cursor-pointer border ${dm ? 'border-white/10 text-white/60 bg-transparent' : 'border-stone-200 text-stone-500 bg-transparent'}`}
+                >
+                  İptal
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Notes Modal */}
       <AnimatePresence>
         {notesModal && notesClient && (
@@ -224,8 +403,7 @@ export default function Clients() {
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              transition={{ type: 'spring', damping: 30, stiffness: 400 }}
-              className={`rounded-2xl p-8 max-w-[560px] w-full max-h-[80vh] overflow-y-auto shadow-2xl ${dm ? 'bg-[#111111]' : 'bg-white'}`}
+              transition={{ type: 'spring', damping: 30, stiffness: 400 }}              className={`rounded-2xl p-8 max-w-[560px] w-full max-h-[80vh] overflow-y-auto shadow-2xl ${dm ? 'bg-[#111111]' : 'bg-white'}`}
             >
               <div className="flex justify-between items-center mb-6">
                 <div>
@@ -253,8 +431,7 @@ export default function Clients() {
                 <p className={`text-center py-8 ${dm ? 'text-white/30' : 'text-stone-300'}`}>Henüz not yok.</p>
               ) : (
                 <div className="space-y-3">
-                  {notesClient.notes.map(n => (
-                    <motion.div
+                  {notesClient.notes.map(n => (                    <motion.div
                       key={n.id}
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
