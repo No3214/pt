@@ -20,7 +20,7 @@ export default function App() {
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode)
     const meta = document.querySelector('meta[name="theme-color"]')
-    if (meta) meta.setAttribute('content', darkMode ? '#1a1a2e' : '#C2684A')
+    if (meta) meta.setAttribute('content', darkMode ? '#050505' : '#FAF6F1')
   }, [darkMode])
 
   return (
