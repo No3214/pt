@@ -56,7 +56,8 @@ interface AppState {
   addFood: (f: FoodItem) => void
   removeFood: (idx: number) => void
   clearFoodLog: () => void
-  // Calendar  calSessions: CalSession[]
+  // Calendar
+  calSessions: CalSession[]
   addCalSession: (s: CalSession) => void
   deleteCalSession: (idx: number) => void
   // Measurements

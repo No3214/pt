@@ -101,7 +101,7 @@ export default function CalendarPage() {
             <div className={`mt-6 pt-5 border-t ${dm ? 'border-white/[0.06]' : 'border-stone-100'}`}>
               <p className={`text-xs font-medium uppercase tracking-wider mb-3 ${dm ? 'text-white/40' : 'text-stone-400'}`}>Sonraki Seanslar</p>
               <div className="space-y-2">
-                {calSessions.slice().sort((a, b) => { const d = daysArr.indexOf(a.day) - daysArr.indexOf(b.day); return d !== 0 ? d : a.time.localeCompare(b.time) }).slice(0, 4).map((s, i) => (
+                {calSessions.slice().sort((a: any, b: any) => { const d = (daysArr as readonly string[]).indexOf(a.day) - (daysArr as readonly string[]).indexOf(b.day); return d !== 0 ? d : a.time.localeCompare(b.time) }).slice(0, 4).map((s: any, i: number) => (
                   <div key={i} className={`flex items-center gap-3 p-2.5 rounded-lg ${dm ? 'bg-white/[0.03]' : 'bg-stone-50'}`}>
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-[0.6rem] font-bold text-white bg-${dayColors[s.day] || 'terracotta'}`}>{s.day}</div>
                     <div className="flex-1 min-w-0">

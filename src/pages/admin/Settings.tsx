@@ -57,7 +57,8 @@ export default function Settings() {
 
     setTestStatus(s => ({ ...s, [key]: 'testing' }))
     try {
-      const provider = providers.find(p => p.key === key)!      const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+      const provider = providers.find(p => p.key === key)!
+      const headers: Record<string, string> = { 'Content-Type': 'application/json' }
       let url = provider.testUrl
 
       if (key === 'gemini') {
