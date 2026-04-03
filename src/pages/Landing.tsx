@@ -437,8 +437,8 @@ export default function Landing() {
         <div className="max-w-[1100px] mx-auto px-6 md:px-16">
           <Reveal>
             <motion.div variants={fadeUp}
-              className={`overflow-x-auto rounded-[1.5rem] border backdrop-blur-xl ${dm ? 'border-white/[0.05] bg-white/[0.02]' : 'border-black/[0.05] bg-white'}`}>
-              <table className="w-full text-left text-[0.85rem]">
+              className={`overflow-x-auto max-w-full rounded-[1.5rem] border backdrop-blur-xl ${dm ? 'border-white/[0.05] bg-white/[0.02]' : 'border-black/[0.05] bg-white'}`}>
+              <table className="w-full min-w-[480px] text-left text-[0.85rem]">
                 <thead>
                   <tr className={`border-b ${dm ? 'border-white/[0.04]' : 'border-black/[0.04]'}`}>
                     <th className={`p-3 md:p-5 font-medium text-[0.65rem] md:text-[0.75rem] uppercase tracking-[0.1em] ${dm ? 'text-white/30' : 'text-[#1C1917]/30'}`}>Özellik</th>
