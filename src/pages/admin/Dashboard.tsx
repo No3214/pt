@@ -1,5 +1,5 @@
-import { useMemo } from 'react'
-import { motion } from 'framer-motion'
+import { useMemo, useState, useEffect, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
@@ -34,6 +34,43 @@ function ChartTooltip({ dm }: { dm: boolean }) {
     cursor: { stroke: dm ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)' },
   }
 }
+/* ═══ Animated Counter ═══ */
+function AnimatedCounter({ value, prefix = '', suffix = '', duration = 1.2 }: {
+  value: number; prefix?: string; suffix?: string; duration?: number
+}) {
+  const [display, setDisplay] = useState(0)
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-50px' })
+
+  useEffect(() => {
+    if (!inView) return
+    const start = performance.now()
+    const animate = (now: number) => {
+      const progress = Math.min((now - start) / (duration * 1000), 1)
+      const eased = 1 - Math.pow(1 - progress, 3) // cubic ease-out
+      setDisplay(Math.round(eased * value))
+      if (progress < 1) requestAnimationFrame(animate)
+    }
+    requestAnimationFrame(animate)
+  }, [inView, value, duration])
+
+  return <span ref={ref}>{prefix}{display.toLocaleString('tr-TR')}{suffix}</span>
+}
+
+/* ═══ Mini Sparkline ═══ */
+function Sparkline({ data, color, dm }: { data: number[]; color: string; dm: boolean }) {
+  const max = Math.max(...data)
+  const min = Math.min(...data)
+  const range = max - min || 1
+  const w = 60; const h = 24
+  const points = data.map((v, i) => `${(i / (data.length - 1)) * w},${h - ((v - min) / range) * h}`).join(' ')
+  return (
+    <svg width={w} height={h} className="opacity-50">
+      <polyline points={points} fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
+
 export default function Dashboard() {
   const { clients, foodLog, calSessions, darkMode } = useStore()
   const dm = darkMode
@@ -104,10 +141,12 @@ export default function Dashboard() {
         </svg>
       ),
       trend: '+3',
+      spark: [3, 5, 4, 7, 6, stats.activeCount || 8],
     },
     {
       label: 'Aylık Gelir',
-      value: `₺${stats.mrr.toLocaleString('tr-TR')}`,
+      value: stats.mrr,
+      prefix: '₺',
       sub: 'MRR',
       color: 'sage',
       icon: (
@@ -116,9 +155,11 @@ export default function Dashboard() {
         </svg>
       ),
       trend: '+12%',
+      spark: [8500, 10000, 12500, stats.mrr || 15000, 13000, 17500],
     },    {
       label: 'Uyum Skoru',
-      value: `%${stats.compliance}`,
+      value: stats.compliance,
+      prefix: '%',
       sub: 'bu hafta',
       color: 'coast',
       icon: (
@@ -127,6 +168,7 @@ export default function Dashboard() {
         </svg>
       ),
       trend: '+5%',
+      spark: [65, 72, 68, 78, 82, stats.compliance || 85],
     },
     {
       label: 'Kalan Seans',
@@ -184,13 +226,20 @@ export default function Dashboard() {
               <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${bgMap[card.color]} ${colorMap[card.color]}`}>
                 {card.icon}
               </div>
-              {card.trend && (
-                <span className={`text-[0.65rem] font-semibold px-2 py-0.5 rounded-lg ${dm ? 'bg-sage/10 text-sage' : 'bg-sage/[0.08] text-sage'}`}>
-                  {card.trend}
-                </span>
-              )}
+              <div className="flex items-center gap-2">
+                {card.spark && <Sparkline data={card.spark} color={card.color === 'terracotta' ? '#C2684A' : card.color === 'sage' ? '#7A9E82' : card.color === 'coast' ? '#5e8fa8' : '#c49a6c'} dm={dm} />}
+                {card.trend && (
+                  <span className={`text-[0.65rem] font-semibold px-2 py-0.5 rounded-lg ${dm ? 'bg-sage/10 text-sage' : 'bg-sage/[0.08] text-sage'}`}>
+                    {card.trend}
+                  </span>
+                )}
+              </div>
             </div>
-            <p className={`text-[2rem] font-semibold tracking-[-0.03em] leading-none mb-1 ${colorMap[card.color]}`}>{card.value}</p>
+            <p className={`text-[2rem] font-semibold tracking-[-0.03em] leading-none mb-1 ${colorMap[card.color]}`}>
+              {typeof card.value === 'number'
+                ? <AnimatedCounter value={card.value} prefix={card.prefix || ''} suffix={card.suffix || ''} />
+                : card.value}
+            </p>
             <div className="flex items-center gap-2 mt-2">
               <p className={`text-[0.7rem] uppercase tracking-[0.08em] ${dm ? 'text-white/25' : 'text-[#1C1917]/25'}`}>{card.label}</p>
               {card.sub && (

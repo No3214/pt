@@ -238,8 +238,13 @@ export default function Clients() {
                 <div className="flex flex-col md:flex-row md:items-center gap-6">
                   {/* Avatar & Info */}
                   <div className="flex items-center gap-4 md:w-[240px]">
-                    <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold ${dm ? 'bg-terracotta/20 text-terracotta' : 'bg-terracotta/10 text-terracotta'}`}>
-                      {c.name.charAt(0).toUpperCase()}
+                    <div className="relative">
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold ${dm ? 'bg-terracotta/20 text-terracotta' : 'bg-terracotta/10 text-terracotta'}`}>
+                        {c.name.charAt(0).toUpperCase()}
+                      </div>
+                      <div className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 ${dm ? 'border-[#111]' : 'border-white'} ${
+                        c.sessions === 0 ? 'bg-red-400' : c.sessions <= 2 ? 'bg-amber-400' : 'bg-sage animate-pulse'
+                      }`} />
                     </div>
                     <div>
                       <h4 className="font-medium text-lg leading-tight">{c.name}</h4>
