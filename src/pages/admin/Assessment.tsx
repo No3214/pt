@@ -156,7 +156,7 @@ export default function Assessment() {
           <motion.div key="measurements" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
             <div className={card}>
               <h3 className="font-display text-xl font-medium mb-6">Çevre Ölçümleri (cm)</h3>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                 {(['shoulder', 'chest', 'waist', 'hip', 'leg', 'arm'] as const).map(k => (
                   <div key={k}>
                     <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>{measLabels[k]}</label>

@@ -68,7 +68,7 @@ export default function FoodTracker() {
       </motion.div>
 
       {/* Macro Summary Bar */}
-      <motion.div variants={fadeUp} className="grid grid-cols-4 gap-3 mb-8">
+      <motion.div variants={fadeUp} className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
         {[
           { label: 'Kalori', value: totals.cal.toString(), unit: 'kcal', color: 'text-terracotta' },
           { label: 'Protein', value: Math.round(totals.p).toString(), unit: 'g', color: 'text-sage' },
