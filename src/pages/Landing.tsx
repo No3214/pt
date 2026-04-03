@@ -441,10 +441,10 @@ export default function Landing() {
               <table className="w-full text-left text-[0.85rem]">
                 <thead>
                   <tr className={`border-b ${dm ? 'border-white/[0.04]' : 'border-black/[0.04]'}`}>
-                    <th className={`p-5 font-medium text-[0.75rem] uppercase tracking-[0.1em] ${dm ? 'text-white/30' : 'text-[#1C1917]/30'}`}>Özellik</th>
-                    <th className={`p-5 font-medium text-[0.75rem] uppercase tracking-[0.1em] ${dm ? 'text-white/50' : 'text-[#1C1917]/50'}`}>Online</th>
-                    <th className={`p-5 font-semibold text-[0.75rem] uppercase tracking-[0.1em] text-terracotta`}>Voleybol</th>
-                    <th className={`p-5 font-medium text-[0.75rem] uppercase tracking-[0.1em] ${dm ? 'text-white/50' : 'text-[#1C1917]/50'}`}>Premium</th>
+                    <th className={`p-3 md:p-5 font-medium text-[0.65rem] md:text-[0.75rem] uppercase tracking-[0.1em] ${dm ? 'text-white/30' : 'text-[#1C1917]/30'}`}>Özellik</th>
+                    <th className={`p-3 md:p-5 font-medium text-[0.65rem] md:text-[0.75rem] uppercase tracking-[0.1em] ${dm ? 'text-white/50' : 'text-[#1C1917]/50'}`}>Online</th>
+                    <th className={`p-3 md:p-5 font-semibold text-[0.65rem] md:text-[0.75rem] uppercase tracking-[0.1em] text-terracotta`}>Voleybol</th>
+                    <th className={`p-3 md:p-5 font-medium text-[0.65rem] md:text-[0.75rem] uppercase tracking-[0.1em] ${dm ? 'text-white/50' : 'text-[#1C1917]/50'}`}>Premium</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -459,19 +459,19 @@ export default function Landing() {
                     { feature: '1:1 Görüşmeler', v: [false, false, true] },
                   ].map((row, i) => (
                     <tr key={i} className={`border-b last:border-0 transition-colors ${dm ? 'border-white/[0.03] hover:bg-white/[0.02]' : 'border-black/[0.03] hover:bg-black/[0.01]'}`}>
-                      <td className={`p-4 pl-5 ${dm ? 'text-white/45' : 'text-[#1C1917]/45'}`}>{row.feature}</td>
+                      <td className={`p-3 md:p-4 pl-3 md:pl-5 text-[0.75rem] md:text-[0.85rem] ${dm ? 'text-white/45' : 'text-[#1C1917]/45'}`}>{row.feature}</td>
                       {row.v.map((v, j) => (
-                        <td key={j} className={`p-4 text-center ${j === 1 ? (dm ? 'bg-terracotta/[0.04]' : 'bg-terracotta/[0.02]') : ''}`}>
+                        <td key={j} className={`p-3 md:p-4 text-center text-[0.75rem] md:text-[0.85rem] ${j === 1 ? (dm ? 'bg-terracotta/[0.04]' : 'bg-terracotta/[0.02]') : ''}`}>
                           {v ? <span className="text-sage text-base">✓</span> : <span className={`${dm ? 'text-white/10' : 'text-[#1C1917]/10'}`}>—</span>}
                         </td>
                       ))}
                     </tr>
                   ))}
                   <tr className={`border-t ${dm ? 'border-white/[0.06]' : 'border-black/[0.06]'}`}>
-                    <td className={`p-4 pl-5 font-semibold ${dm ? 'text-white/60' : 'text-[#1C1917]/60'}`}>Aylık</td>
-                    <td className={`p-4 text-center font-bold text-[1.1rem] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>₺2.500</td>
-                    <td className={`p-4 text-center font-bold text-[1.1rem] text-terracotta ${dm ? 'bg-terracotta/[0.04]' : 'bg-terracotta/[0.02]'}`}>₺3.000</td>
-                    <td className={`p-4 text-center font-bold text-[1.1rem] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>₺5.500</td>
+                    <td className={`p-3 md:p-4 pl-3 md:pl-5 font-semibold text-[0.75rem] md:text-[0.85rem] ${dm ? 'text-white/60' : 'text-[#1C1917]/60'}`}>Aylık</td>
+                    <td className={`p-3 md:p-4 text-center font-bold text-[0.95rem] md:text-[1.1rem] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>₺2.500</td>
+                    <td className={`p-3 md:p-4 text-center font-bold text-[0.95rem] md:text-[1.1rem] text-terracotta ${dm ? 'bg-terracotta/[0.04]' : 'bg-terracotta/[0.02]'}`}>₺3.000</td>
+                    <td className={`p-3 md:p-4 text-center font-bold text-[0.95rem] md:text-[1.1rem] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>₺5.500</td>
                   </tr>
                 </tbody>
               </table>
@@ -697,7 +697,7 @@ export default function Landing() {
                 { label: 'WhatsApp', href: 'https://wa.me/905362486849' },
               ].map(l => (
                 <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer"
-                  className={`text-[0.78rem] no-underline transition-all duration-300 hover:text-terracotta ${dm ? 'text-white/25' : 'text-[#1C1917]/25'}`}>
+                  className={`text-[0.78rem] no-underline transition-all duration-300 hover:text-terracotta py-3 px-2 -my-3 ${dm ? 'text-white/25' : 'text-[#1C1917]/25'}`}>
                   {l.label}
                 </a>
               ))}
