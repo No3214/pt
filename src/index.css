@@ -58,16 +58,12 @@ h1, h2, h3, h4 {
   mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
   -webkit-mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
 }
-
 .marquee-content {
   display: flex;
   animation: marquee 30s linear infinite;
   width: max-content;
 }
-
-.marquee-content:hover {
-  animation-play-state: paused;
-}
+.marquee-content:hover { animation-play-state: paused; }
 
 @keyframes marquee {
   0% { transform: translateX(0); }
@@ -79,7 +75,8 @@ h1, h2, h3, h4 {
   position: relative;
   overflow: hidden;
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}.card-hover::before {
+}
+.card-hover::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
@@ -91,7 +88,53 @@ h1, h2, h3, h4 {
 }
 .card-hover:hover::before { transform: scaleX(1); }
 .card-hover:hover { transform: translateY(-2px); }
+/* ═══════════════════ Shimmer / Skeleton ═══════════════════ */
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(194,104,74,0.06) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 
+/* ═══════════════════ Floating Animation ═══════════════════ */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ═══════════════════ Glow Pulse ═══════════════════ */
+.glow-pulse {
+  animation: glowPulse 3s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(194,104,74,0.1); }
+  50% { box-shadow: 0 0 40px rgba(194,104,74,0.2); }
+}
+
+/* ═══════════════════ Gradient Border ═══════════════════ */
+.gradient-border {
+  position: relative;
+  background-clip: padding-box;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #C2684A, #7A9E82, #5e8fa8);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
 /* ═══════════════════ Toast ═══════════════════ */
 .toast {
   position: fixed;
@@ -108,7 +151,8 @@ h1, h2, h3, h4 {
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
   backdrop-filter: blur(20px);
-}.toast.show {
+}
+.toast.show {
   transform: translateX(-50%) translateY(0);
   opacity: 1;
 }
@@ -118,31 +162,19 @@ h1, h2, h3, h4 {
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.08); border-radius: 10px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(194, 104, 74, 0.4); }
-
 .dark ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.06); }
 .dark ::-webkit-scrollbar-thumb:hover { background: rgba(194, 104, 74, 0.4); }
-
 /* ═══════════════════ Image Loading ═══════════════════ */
-img {
-  transition: opacity 0.3s ease;
-}
+img { transition: opacity 0.3s ease; }
+img[loading="lazy"] { opacity: 0; }
+img[loading="lazy"].loaded, img:not([loading="lazy"]) { opacity: 1; }
 
-img[loading="lazy"] {
-  opacity: 0;
-}
+/* ═══════════════════ Text Balance ═══════════════════ */
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
 
-img[loading="lazy"].loaded,
-img:not([loading="lazy"]) {
-  opacity: 1;
-}
-/* ═══════════════════ Shake Animation ═══════════════════ */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-8px); }
-  40% { transform: translateX(8px); }
-  60% { transform: translateX(-4px); }
-  80% { transform: translateX(4px); }
-}
+/* ═══════════════════ Smooth Anchor ═══════════════════ */
+a { transition: color 0.3s ease, opacity 0.3s ease; }
 
 /* ═══════════════════ Reduced Motion ═══════════════════ */
 @media (prefers-reduced-motion: reduce) {
@@ -151,9 +183,7 @@ img:not([loading="lazy"]) {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .marquee-content {
-    animation: none !important;
-  }
+  .marquee-content { animation: none !important; }
 }
 
 /* ═══════════════════ Print ═══════════════════ */

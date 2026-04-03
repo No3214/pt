@@ -12,7 +12,9 @@ import FoodTracker from './pages/admin/FoodTracker'
 import CalendarPage from './pages/admin/Calendar'
 import Settings from './pages/admin/Settings'
 import Portal from './pages/Portal'
+import NotFound from './pages/NotFound'
 import Toast from './components/Toast'
+import Preloader from './components/Preloader'
 
 export default function App() {
   const darkMode = useStore(s => s.darkMode)
@@ -22,9 +24,9 @@ export default function App() {
     const meta = document.querySelector('meta[name="theme-color"]')
     if (meta) meta.setAttribute('content', darkMode ? '#050505' : '#FAF6F1')
   }, [darkMode])
-
   return (
     <>
+      <Preloader />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/admin" element={<AdminLayout />}>
@@ -39,6 +41,7 @@ export default function App() {
           <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="/portal" element={<Portal />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Toast />
     </>
