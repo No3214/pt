@@ -230,6 +230,52 @@ function TestimonialCarousel({ testimonials, dm }: { testimonials: { text: strin
     </div>
   )
 }
+/* ═══════════════ FAQ Item ═══════════════ */
+function FaqItem({ question, answer, index, dm }: { question: string; answer: string; index: number; dm: boolean }) {
+  const [open, setOpen] = useState(false)
+  return (
+    <motion.div variants={fadeUp} custom={index}
+      className={`border-b ${dm ? 'border-white/[0.06]' : 'border-black/[0.06]'}`}>
+      <button
+        onClick={() => setOpen(!open)}
+        className={`w-full flex items-center justify-between py-6 text-left bg-transparent border-none cursor-pointer group transition-colors duration-300 ${dm ? 'text-white' : 'text-[#1C1917]'}`}
+      >
+        <span className={`font-display text-[1.15rem] font-semibold pr-8 transition-colors duration-300 ${open ? 'text-terracotta' : ''}`}>
+          {question}
+        </span>
+        <motion.div
+          animate={{ rotate: open ? 45 : 0 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+            open
+              ? 'bg-terracotta/10 text-terracotta'
+              : dm ? 'bg-white/5 text-white/30 group-hover:bg-white/10' : 'bg-black/[0.03] text-[#1C1917]/25 group-hover:bg-black/[0.06]'
+          }`}
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+        </motion.div>
+      </button>
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <p className={`pb-6 text-[0.95rem] leading-[1.8] max-w-[640px] ${dm ? 'text-white/40' : 'text-[#1C1917]/45'}`}>
+              {answer}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  )
+}
+
 /* ═══════════════ Landing Page ═══════════════ */
 export default function Landing() {
   const { darkMode, toggleDarkMode } = useStore()
@@ -701,6 +747,33 @@ export default function Landing() {
           </RevealSection>
         </div>
       </section>
+      {/* ─── SSS / FAQ ─── */}
+      <section className={`py-32 md:py-40 ${dm ? 'bg-[#0a0a0a]' : 'bg-white'}`}>
+        <div className="max-w-[1400px] mx-auto px-8 md:px-12">
+          <RevealSection>
+            <motion.p variants={fadeUp} className="text-[0.75rem] uppercase tracking-[0.2em] font-medium text-terracotta mb-6">
+              Sıkça Sorulan Sorular
+            </motion.p>
+            <motion.h2 variants={fadeUp} custom={1}
+              className={`font-display text-[clamp(2.2rem,4vw,3.8rem)] font-semibold leading-[1.1] tracking-[-0.02em] max-w-[700px] mb-16 ${dm ? 'text-white' : 'text-[#1C1917]'}`}>
+              Merak ettiklerin.
+            </motion.h2>
+          </RevealSection>
+
+          <RevealSection className="max-w-[800px]">
+            {[
+              { q: 'Programa nasıl başlarım?', a: 'Başvuru formunu doldurduktan sonra WhatsApp üzerinden iletişime geçiyorum. Ücretsiz 15 dakikalık tanışma görüşmesinde hedeflerini konuşup, sana uygun programı belirliyoruz.' },
+              { q: 'Online antrenman nasıl işliyor?', a: 'Sana özel hazırladığım program, video açıklamalı egzersizlerle uygulamanda gönderiliyor. Haftalık check-in\'lerle formu kontrol edip, programı gerektiğinde güncelliyorum.' },
+              { q: 'Beslenme planı dahil mi?', a: 'Online Koçluk paketinde temel beslenme takibi var. Premium Büyüme paketinde ise günlük TDEE hesaplı tam beslenme planı, makro takibi ve birebir beslenme danışmanlığı dahil.' },
+              { q: 'Voleybol oynamıyorum, katılabilir miyim?', a: 'Elbette! Voleybol Performance paketi sahaya özel olsa da, Online Koçluk ve Premium Büyüme paketleri her seviye için uygun. Kuvvet, postür ve genel fitness hedeflerine yönelik çalışıyoruz.' },
+              { q: 'Sonuçları ne zaman görürüm?', a: 'Disiplinli takipte ilk 4 haftada gözle görülür değişim başlıyor. 3 aylık süreçte ciddi dönüşümler yaşanıyor. Her danışanın süreci farklı, ama tutarlılık her zaman sonuç verir.' },
+            ].map((faq, i) => (
+              <FaqItem key={i} question={faq.q} answer={faq.a} index={i} dm={dm} />
+            ))}
+          </RevealSection>
+        </div>
+      </section>
+
       {/* ─── İletişim / Contact ─── */}
       <section id="iletisim" className={`py-32 md:py-40 ${dm ? 'bg-[#0a0a0a]' : 'bg-[#FAF6F1]'}`}>
         <div className="max-w-[1400px] mx-auto px-8 md:px-12">

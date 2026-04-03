@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { useStore } from '../stores/useStore'
 import { turkishFoods, sanitize, type FoodItem } from '../lib/constants'
 
@@ -43,6 +43,15 @@ export default function Portal() {
     if (h < 18) return 'İyi Günler'
     return 'İyi Akşamlar'
   })()
+
+  const quotes = [
+    'Disiplin motivasyonun bittiği yerde başlar.',
+    'Bugünün ter\'i, yarının gücüdür.',
+    'Güçlü bir beden, güçlü bir zihinle başlar.',
+    'Sınırlarını zorlayan tek kişi sensin.',
+    'Her tekrar seni bir adım öne taşır.',
+  ]
+  const todayQuote = quotes[new Date().getDay() % quotes.length]
 
   return (
     <div className={`min-h-screen font-body ${dm ? 'bg-[#050505] text-white' : 'bg-[#F7F5F2]'}`}>
@@ -106,6 +115,29 @@ export default function Portal() {
           </div>
         </motion.div>
       </div>
+      {/* ═══ Daily Quote ═══ */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        className="max-w-[1200px] mx-auto px-6 pb-8"
+      >
+        <div className={`relative overflow-hidden p-6 rounded-2xl border ${dm ? 'border-white/[0.04] bg-gradient-to-r from-terracotta/[0.04] to-sage/[0.03]' : 'border-black/[0.03] bg-gradient-to-r from-terracotta/[0.03] to-sage/[0.02]'}`}>
+          <div className="flex items-center gap-4">
+            <div className={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center ${dm ? 'bg-terracotta/10' : 'bg-terracotta/[0.06]'}`}>
+              <svg className="w-5 h-5 text-terracotta" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+              </svg>
+            </div>
+            <div>
+              <p className={`text-[0.65rem] uppercase tracking-[0.15em] font-medium mb-1 ${dm ? 'text-white/25' : 'text-[#1C1917]/25'}`}>Günün Sözü</p>
+              <p className={`font-display text-[1.05rem] font-medium italic ${dm ? 'text-white/60' : 'text-[#1C1917]/60'}`}>"{todayQuote}"</p>
+            </div>
+          </div>
+          <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full opacity-[0.04]" style={{ background: 'radial-gradient(circle, #C2684A, transparent)' }} />
+        </div>
+      </motion.div>
+
       {/* ═══ Content ═══ */}
       <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-[1200px] mx-auto px-6 pb-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -254,6 +286,62 @@ export default function Portal() {
             )}
           </motion.div>
         </div>
+
+        {/* ── Weekly Streak ── */}
+        <motion.div variants={fadeUp} className="md:col-span-3 mt-2">
+          <div className={card}>
+            <div className="flex items-center justify-between mb-5">
+              <h3 className={`font-display text-xl font-semibold tracking-[-0.02em] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>Haftalık Streak</h3>
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${dm ? 'bg-honey/10' : 'bg-honey/[0.06]'}`}>
+                <svg className="w-4 h-4 text-honey" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+                </svg>
+              </div>
+            </div>
+            <div className="grid grid-cols-7 gap-2">
+              {['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'].map((day, i) => {
+                const today = new Date().getDay()
+                const adjustedToday = today === 0 ? 6 : today - 1
+                const isPast = i < adjustedToday
+                const isToday = i === adjustedToday
+                const done = isPast || (isToday && doneCount >= 3)
+                return (
+                  <motion.div key={day}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: i * 0.05, duration: 0.3 }}
+                    className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-all duration-300 ${
+                      isToday
+                        ? dm ? 'bg-terracotta/10 border border-terracotta/20' : 'bg-terracotta/[0.04] border border-terracotta/15'
+                        : dm ? 'bg-white/[0.02]' : 'bg-black/[0.01]'
+                    }`}
+                  >
+                    <span className={`text-[0.65rem] uppercase tracking-[0.1em] font-medium ${
+                      isToday ? 'text-terracotta' : dm ? 'text-white/25' : 'text-[#1C1917]/25'
+                    }`}>{day}</span>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      done
+                        ? 'bg-sage text-white'
+                        : isToday
+                          ? dm ? 'bg-white/[0.06] border border-white/10' : 'bg-black/[0.03] border border-black/[0.06]'
+                          : dm ? 'bg-white/[0.03]' : 'bg-black/[0.02]'
+                    }`}>
+                      {done ? (
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                        </svg>
+                      ) : isToday ? (
+                        <span className="text-[0.65rem] font-bold text-terracotta">{doneCount}</span>
+                      ) : (
+                        <span className={`text-[0.5rem] ${dm ? 'text-white/10' : 'text-[#1C1917]/10'}`}>—</span>
+                      )}
+                    </div>
+                  </motion.div>
+                )
+              })}
+            </div>
+          </div>
+        </motion.div>
       </motion.div>
     </div>
   )

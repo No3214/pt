@@ -15,6 +15,7 @@ import Portal from './pages/Portal'
 import NotFound from './pages/NotFound'
 import Toast from './components/Toast'
 import Preloader from './components/Preloader'
+import CookieConsent from './components/CookieConsent'
 
 export default function App() {
   const darkMode = useStore(s => s.darkMode)
@@ -44,6 +45,7 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Toast />
+      <CookieConsent />
     </>
   )
 }
