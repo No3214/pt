@@ -108,7 +108,7 @@ export default function Portal() {
       </div>
       {/* ═══ Content ═══ */}
       <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-[1200px] mx-auto px-6 pb-20">
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
 
           {/* ── Habits ── */}
           <motion.div variants={fadeUp} className={card}>

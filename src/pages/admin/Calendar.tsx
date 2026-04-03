@@ -49,7 +49,7 @@ export default function CalendarPage() {
       </motion.div>
 
       {/* Quick Stats */}
-      <motion.div variants={fadeUp} className="grid grid-cols-3 gap-4 mb-8">
+      <motion.div variants={fadeUp} className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         {[
           { label: 'Toplam Randevu', value: todaySessions, icon: '📅' },
           { label: 'Farklı Danışan', value: uniqueClients, icon: '👥' },
@@ -66,7 +66,7 @@ export default function CalendarPage() {
         ))}
       </motion.div>
 
-      <div className="grid md:grid-cols-[320px_1fr] gap-8 items-start">
+      <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-8 items-start">
         {/* Form */}
         <motion.div variants={fadeUp} className={card}>
           <h3 className="font-display text-xl font-medium mb-6">Randevu Ekle</h3>

@@ -92,11 +92,11 @@ export default function AdminLayout() {
             <NavLink to="/" className={`flex items-center gap-3 font-display text-lg font-semibold no-underline tracking-[-0.02em] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-terracotta to-terracotta-dark flex items-center justify-center">
                 <span className="text-white text-xs font-bold font-body">EE</span>
-              </div>
-              <span className="hidden sm:inline">Ela Ebeoğlu</span>
-              <span className={`text-[0.55rem] font-body font-semibold uppercase tracking-[0.15em] px-2 py-0.5 rounded-md ${dm ? 'bg-white/[0.06] text-white/40' : 'bg-terracotta/8 text-terracotta/80'}`}>Admin</span>
+              </div>              <span className="hidden sm:inline">Ela Ebeoğlu</span>
+              <span className={`text-[0.65rem] font-body font-semibold uppercase tracking-[0.15em] px-2 py-0.5 rounded-md ${dm ? 'bg-white/[0.06] text-white/40' : 'bg-terracotta/8 text-terracotta/80'}`}>Admin</span>
             </NavLink>
           </div>
+
           <div className="flex gap-2 items-center">
             {/* Theme toggle */}
             <motion.button
@@ -121,7 +121,6 @@ export default function AdminLayout() {
           </div>
         </div>
       </header>
-
       <div className="pt-16 max-w-[1600px] mx-auto flex">
         {/* ═══ Sidebar ═══ */}
         <AnimatePresence>
@@ -135,12 +134,13 @@ export default function AdminLayout() {
             />
           )}
         </AnimatePresence>
-        <aside className={`${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 fixed md:sticky top-16 left-0 z-50 md:z-auto w-[260px] h-[calc(100vh-64px)] flex-shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] overflow-y-auto`}>
+
+        <aside className={`${sidebarOpen ? 'translate-x-0 pointer-events-auto' : '-translate-x-full pointer-events-none md:pointer-events-auto'} md:translate-x-0 fixed md:sticky top-16 left-0 z-50 md:z-auto w-[260px] h-[calc(100vh-64px)] flex-shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] overflow-y-auto`}>
           <div className="p-4 md:p-5 h-full flex flex-col">
             <div className={`rounded-2xl p-4 flex-1 flex flex-col ${dm ? 'bg-[#0c0c0c] border border-white/[0.04]' : 'bg-white border border-black/[0.03]'}`}>
               {/* Section label */}
               <div className="px-3 mb-4 pt-1">
-                <p className={`text-[0.6rem] uppercase tracking-[0.2em] font-medium ${dm ? 'text-white/20' : 'text-[#1C1917]/20'}`}>Yönetim</p>
+                <p className={`text-[0.68rem] uppercase tracking-[0.2em] font-medium ${dm ? 'text-white/20' : 'text-[#1C1917]/20'}`}>Yönetim</p>
               </div>
 
               {/* Nav items */}
@@ -148,8 +148,7 @@ export default function AdminLayout() {
                 {tabs.map(t => (
                   <NavLink key={t.to} to={t.to} onClick={() => setSidebarOpen(false)}
                     className={({ isActive }) =>
-                      `flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline text-[0.8rem] transition-all duration-200 ${
-                        isActive
+                      `flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline text-[0.8rem] transition-all duration-200 ${                        isActive
                           ? `font-medium ${dm ? 'bg-terracotta/10 text-terracotta' : 'bg-terracotta/[0.06] text-terracotta'}`
                           : `${dm ? 'text-white/35 hover:text-white/60 hover:bg-white/[0.03]' : 'text-[#1C1917]/35 hover:text-[#1C1917]/65 hover:bg-black/[0.02]'}`
                       }`
@@ -165,18 +164,18 @@ export default function AdminLayout() {
                 <div className="px-3 py-2 flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sage/20 to-sage/5 flex items-center justify-center">
                     <span className="text-sage text-[0.65rem] font-bold">EE</span>
-                  </div>                  <div className="flex-1 min-w-0">
+                  </div>
+                  <div className="flex-1 min-w-0">
                     <p className={`text-[0.75rem] font-medium truncate ${dm ? 'text-white/60' : 'text-[#1C1917]/60'}`}>Ela Ebeoğlu</p>
-                    <p className={`text-[0.6rem] ${dm ? 'text-white/20' : 'text-[#1C1917]/20'}`}>v2.0 Performance</p>
+                    <p className={`text-[0.68rem] ${dm ? 'text-white/20' : 'text-[#1C1917]/20'}`}>v2.0 Performance</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </aside>
-
         {/* ═══ Main Content ═══ */}
-        <main className="flex-1 min-h-[calc(100vh-64px)] p-4 md:p-6 w-full max-w-full overflow-hidden">
+        <main className="flex-1 min-h-[calc(100vh-64px)] p-4 md:p-6 w-full max-w-full overflow-x-hidden overflow-y-auto">
           <div className={`rounded-2xl p-6 md:p-8 min-h-[calc(100vh-96px)] ${dm ? 'bg-[#0c0c0c] border border-white/[0.04]' : 'bg-white border border-black/[0.03]'}`}>
             <AnimatePresence mode="wait">
               <motion.div
@@ -201,12 +200,12 @@ export default function AdminLayout() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-[200] px-6 py-3.5 rounded-2xl shadow-2xl text-[0.82rem] font-medium backdrop-blur-xl ${
-              dm
+            className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-[200] px-6 py-3.5 rounded-2xl shadow-2xl text-[0.82rem] font-medium backdrop-blur-xl ${              dm
                 ? 'bg-white/95 text-[#1C1917] shadow-black/40'
                 : 'bg-[#1C1917] text-white shadow-black/20'
             }`}
-          >            <div className="flex items-center gap-2.5">
+          >
+            <div className="flex items-center gap-2.5">
               <div className="w-5 h-5 rounded-full bg-sage/20 flex items-center justify-center">
                 <svg className="w-3 h-3 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
