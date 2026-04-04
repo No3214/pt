@@ -26,8 +26,7 @@ export default function Clients() {
     let list = clients.filter(c =>
       c.name.toLowerCase().includes(search.toLowerCase()) ||
       c.goal.toLowerCase().includes(search.toLowerCase())
-    )
-    list.sort((a, b) => {
+    )    list.sort((a, b) => {
       switch (sortBy) {
         case 'sessions': return b.sessions - a.sessions
         case 'price': return b.price - a.price
@@ -56,8 +55,8 @@ export default function Clients() {
   }
 
   const handleEdit = () => {
-    if (!editModal) return
-    updateClient(editModal, {      name: sanitize(editForm.name),
+    if (!editModal) return    updateClient(editModal, {
+      name: sanitize(editForm.name),
       goal: sanitize(editForm.goal),
       sessions: editForm.sessions,
       max: editForm.max,
@@ -85,9 +84,9 @@ export default function Clients() {
     setNoteText('')
     showToast('Not kaydedildi!')
   }
-
   const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const notesClient = notesModal ? clients.find(c => c.id === notesModal) : null
+
   // Stats
   const totalClients = clients.length
   const activeSessions = clients.reduce((a, c) => a + c.sessions, 0)
@@ -112,11 +111,11 @@ export default function Clients() {
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          onClick={() => setShowForm(!showForm)}
-          className={`px-6 py-3 rounded-full text-sm font-medium cursor-pointer transition-all ${showForm ? (dm ? 'bg-white/10 text-white border-none' : 'bg-stone-100 text-stone-700 border-none') : 'bg-terracotta text-white border-none'}`}
+          onClick={() => setShowForm(!showForm)}          className={`px-6 py-3 rounded-full text-sm font-medium cursor-pointer transition-all ${showForm ? (dm ? 'bg-white/10 text-white border-none' : 'bg-stone-100 text-stone-700 border-none') : 'bg-terracotta text-white border-none'}`}
         >
           {showForm ? '✕ Kapat' : '+ Yeni Danışan'}
-        </motion.button>      </motion.div>
+        </motion.button>
+      </motion.div>
 
       {/* Quick Stats */}
       <motion.div variants={fadeUp} className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
@@ -139,13 +138,13 @@ export default function Clients() {
       </motion.div>
 
       {/* Search + Sort Bar */}
-      <motion.div variants={fadeUp} className="flex flex-wrap gap-3 mb-6">
-        <div className="flex-1 min-w-[200px]">
+      <motion.div variants={fadeUp} className="flex flex-wrap gap-3 mb-6">        <div className="flex-1 min-w-[200px]">
           <input
             value={search}
             onChange={e => setSearch(e.target.value)}
             placeholder="Danışan ara..."
-            className={inp}          />
+            className={inp}
+          />
         </div>
         <div className="flex gap-1.5 items-center">
           {sortOptions.map(o => (
@@ -167,14 +166,14 @@ export default function Clients() {
       {/* Add Client Form */}
       <AnimatePresence>
         {showForm && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
+          <motion.div            initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden mb-8"
           >
             <div className={`p-8 rounded-2xl border ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`}>
-              <h3 className="font-display text-xl font-medium mb-6">Yeni Danışan Ekle</h3>              <div className="grid md:grid-cols-3 gap-5">
+              <h3 className="font-display text-xl font-medium mb-6">Yeni Danışan Ekle</h3>
+              <div className="grid md:grid-cols-3 gap-5">
                 <div>
                   <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Ad Soyad</label>
                   <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} className={inp} placeholder="Mina Aksoy" />
@@ -195,15 +194,15 @@ export default function Clients() {
                   <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Ders Sayısı</label>
                   <input type="number" value={form.sessions} onChange={e => setForm({ ...form, sessions: +e.target.value })} className={inp} />
                 </div>
-                <div>
-                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Ücret (₺)</label>
+                <div>                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Ücret (₺)</label>
                   <input type="number" value={form.price} onChange={e => setForm({ ...form, price: +e.target.value })} className={inp} />
                 </div>
               </div>
               <motion.button
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
-                onClick={handleAdd}                className="mt-6 w-full py-4 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer"
+                onClick={handleAdd}
+                className="mt-6 w-full py-4 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer"
               >
                 Danışanı Kaydet
               </motion.button>
@@ -225,26 +224,24 @@ export default function Clients() {
         </motion.div>
       ) : (
         <motion.div variants={stagger} className="space-y-4">
-          {filteredClients.map(c => {
-            const comp = c.habitMax > 0 ? Math.round((c.habitScore / c.habitMax) * 100) : 0
+          {filteredClients.map(c => {            const comp = c.habitMax > 0 ? Math.round((c.habitScore / c.habitMax) * 100) : 0
             const sessionPercent = c.max > 0 ? Math.round((c.sessions / c.max) * 100) : 0
             const isLow = c.sessions <= 2
             return (
               <motion.div
                 key={c.id}
-                variants={fadeUp}                layout
+                variants={fadeUp}
+                layout
                 className={`p-6 rounded-2xl border transition-all duration-300 hover:shadow-lg ${dm ? 'bg-white/[0.03] border-white/[0.06] hover:border-white/[0.12]' : 'bg-white border-black/[0.04] hover:border-black/[0.08]'}`}
               >
                 <div className="flex flex-col md:flex-row md:items-center gap-6">
                   {/* Avatar & Info */}
                   <div className="flex items-center gap-4 md:w-[240px]">
                     <div className="relative">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold ${dm ? 'bg-terracotta/20 text-terracotta' : 'bg-terracotta/10 text-terracotta'}`}>
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold transition-transform duration-300 ${dm ? 'bg-terracotta/20 text-terracotta' : 'bg-terracotta/10 text-terracotta'}`}>
                         {c.name.charAt(0).toUpperCase()}
                       </div>
-                      <div className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 ${dm ? 'border-[#111]' : 'border-white'} ${
-                        c.sessions === 0 ? 'bg-red-400' : c.sessions <= 2 ? 'bg-amber-400' : 'bg-sage animate-pulse'
-                      }`} />
+                      <div className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 ${dm ? 'border-[#0c0c0c]' : 'border-white'} ${c.sessions > 2 ? 'bg-sage' : c.sessions > 0 ? 'bg-amber-400' : 'bg-red-400'}`} />
                     </div>
                     <div>
                       <h4 className="font-medium text-lg leading-tight">{c.name}</h4>
@@ -256,7 +253,6 @@ export default function Clients() {
                       )}
                     </div>
                   </div>
-
                   {/* Session Progress */}
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
@@ -266,7 +262,8 @@ export default function Clients() {
                     <div className={`h-2 rounded-full overflow-hidden ${dm ? 'bg-white/[0.06]' : 'bg-stone-100'}`}>
                       <motion.div
                         initial={{ width: 0 }}
-                        animate={{ width: `${sessionPercent}%` }}                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        animate={{ width: `${sessionPercent}%` }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className={`h-full rounded-full ${isLow ? 'bg-terracotta' : 'bg-sage'}`}
                       />
                     </div>
@@ -283,8 +280,7 @@ export default function Clients() {
                       disabled={c.sessions === 0}
                       className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${c.sessions === 0 ? 'opacity-40 cursor-not-allowed' : ''} ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
                       Seans -1
-                    </motion.button>
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => openEdit(c)}
+                    </motion.button>                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => openEdit(c)}
                       className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-sage/10 text-sage border-none">
                       Düzenle
                     </motion.button>
@@ -295,7 +291,8 @@ export default function Clients() {
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => handleHabit(c.id)}
                       className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
                       Disiplin
-                    </motion.button>                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setNotesModal(c.id)}
+                    </motion.button>
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setNotesModal(c.id)}
                       className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
                       Not ({c.notes.length})
                     </motion.button>
@@ -315,7 +312,6 @@ export default function Clients() {
           })}
         </motion.div>
       )}
-
       {/* Edit Modal */}
       <AnimatePresence>
         {editModal && (
@@ -324,7 +320,8 @@ export default function Clients() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
-            onClick={(e) => { if (e.target === e.currentTarget) setEditModal(null) }}          >
+            onClick={(e) => { if (e.target === e.currentTarget) setEditModal(null) }}
+          >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -342,7 +339,6 @@ export default function Clients() {
                   ✕
                 </motion.button>
               </div>
-
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
                   <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Ad Soyad</label>
@@ -353,7 +349,8 @@ export default function Clients() {
                   <input value={editForm.goal} onChange={e => setEditForm({ ...editForm, goal: e.target.value })} className={inp} />
                 </div>
                 <div>
-                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Kalan Seans</label>                  <input type="number" value={editForm.sessions} onChange={e => setEditForm({ ...editForm, sessions: +e.target.value })} className={inp} />
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Kalan Seans</label>
+                  <input type="number" value={editForm.sessions} onChange={e => setEditForm({ ...editForm, sessions: +e.target.value })} className={inp} />
                 </div>
                 <div>
                   <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Toplam Seans</label>
@@ -372,7 +369,6 @@ export default function Clients() {
                   <input value={editForm.email} onChange={e => setEditForm({ ...editForm, email: e.target.value })} className={inp} />
                 </div>
               </div>
-
               <div className="flex gap-3 mt-6">
                 <motion.button
                   whileHover={{ scale: 1.01 }}
@@ -382,7 +378,8 @@ export default function Clients() {
                 >
                   Kaydet
                 </motion.button>
-                <motion.button                  whileHover={{ scale: 1.01 }}
+                <motion.button
+                  whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                   onClick={() => setEditModal(null)}
                   className={`px-8 py-3.5 rounded-full font-medium cursor-pointer border ${dm ? 'border-white/10 text-white/60 bg-transparent' : 'border-stone-200 text-stone-500 bg-transparent'}`}
@@ -401,15 +398,15 @@ export default function Clients() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
+            exit={{ opacity: 0 }}            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
             onClick={(e) => { if (e.target === e.currentTarget) setNotesModal(null) }}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              transition={{ type: 'spring', damping: 30, stiffness: 400 }}              className={`rounded-2xl p-8 max-w-[560px] w-full max-h-[80vh] overflow-y-auto shadow-2xl ${dm ? 'bg-[#111111]' : 'bg-white'}`}
+              transition={{ type: 'spring', damping: 30, stiffness: 400 }}
+              className={`rounded-2xl p-8 max-w-[560px] w-full max-h-[80vh] overflow-y-auto shadow-2xl ${dm ? 'bg-[#111111]' : 'bg-white'}`}
             >
               <div className="flex justify-between items-center mb-6">
                 <div>
@@ -432,12 +429,12 @@ export default function Clients() {
               >
                 Not Kaydet
               </motion.button>
-
               {notesClient.notes.length === 0 ? (
                 <p className={`text-center py-8 ${dm ? 'text-white/30' : 'text-stone-300'}`}>Henüz not yok.</p>
               ) : (
                 <div className="space-y-3">
-                  {notesClient.notes.map(n => (                    <motion.div
+                  {notesClient.notes.map(n => (
+                    <motion.div
                       key={n.id}
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
