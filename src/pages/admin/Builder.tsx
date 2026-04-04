@@ -1,4 +1,4 @@
-﻿import { useState, useMemo, useRef } from 'react'
+import { useState, useMemo, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import { splits, sanitize } from '../../lib/constants'
@@ -279,9 +279,9 @@ export default function Builder() {
               {/* Muscle group summary chips */}
               {programStats.muscles.length > 0 && (
                 <div className="flex flex-wrap gap-1.5 mb-4">
-                  {programStats.muscles.map(m => (
-                    <span key={m} className={`text-[0.65rem] px-2.5 py-1 rounded-full ${dm ? 'bg-white/[0.06] text-white/50' : 'bg-stone-100 text-stone-500'}`}>
-                      {muscleIcons[m] || '●'} {m}
+                  {programStats.muscles.map((m, i) => (
+                    <span key={m || i} className={`text-[0.65rem] px-2.5 py-1 rounded-full ${dm ? 'bg-white/[0.06] text-white/50' : 'bg-stone-100 text-stone-500'}`}>
+                      {muscleIcons[m || ''] || '●'} {m}
                     </span>
                   ))}
                 </div>

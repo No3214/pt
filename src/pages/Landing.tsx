@@ -155,7 +155,7 @@ function GrainOverlay() {
 /* ═══════════════ Testimonial Carousel ═══════════════ */
 function TestimonialCarousel({ testimonials, dm }: { testimonials: { text: string; name: string; role: string; metric: string }[]; dm: boolean }) {
   const [active, setActive] = useState(0)
-  const timerRef = useRef<ReturnType<typeof setInterval>>()
+  const timerRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined)
 
   useEffect(() => {
     timerRef.current = setInterval(() => {
