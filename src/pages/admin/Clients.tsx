@@ -26,7 +26,8 @@ export default function Clients() {
     let list = clients.filter(c =>
       c.name.toLowerCase().includes(search.toLowerCase()) ||
       c.goal.toLowerCase().includes(search.toLowerCase())
-    )    list.sort((a, b) => {
+    )
+    list.sort((a, b) => {
       switch (sortBy) {
         case 'sessions': return b.sessions - a.sessions
         case 'price': return b.price - a.price
@@ -55,7 +56,8 @@ export default function Clients() {
   }
 
   const handleEdit = () => {
-    if (!editModal) return    updateClient(editModal, {
+    if (!editModal) return
+    updateClient(editModal, {
       name: sanitize(editForm.name),
       goal: sanitize(editForm.goal),
       sessions: editForm.sessions,

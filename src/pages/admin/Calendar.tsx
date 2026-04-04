@@ -25,7 +25,8 @@ const dayColorMap: Record<string, { bg: string; text: string; accent: string }> 
 }
 
 export default function CalendarPage() {
-  const { clients, calSessions, addCalSession, deleteCalSession, showToast, darkMode: dm } = useStore()  const activeClients = clients.filter(c => c.sessions > 0)
+  const { clients, calSessions, addCalSession, deleteCalSession, showToast, darkMode: dm } = useStore()
+  const activeClients = clients.filter(c => c.sessions > 0)
   const [form, setForm] = useState({ client: '', day: 'Pzt', time: '10:00' })
   const [selectedDay, setSelectedDay] = useState<string | null>(null)
 

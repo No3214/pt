@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from 'react'
+﻿import { useState, useMemo, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import { splits, sanitize } from '../../lib/constants'
@@ -15,9 +15,9 @@ const fadeUp = {
 const stagger = { show: { transition: { staggerChildren: 0.07 } } }
 
 const muscleIcons: Record<string, string> = {
-  Göğüs: '🫁', Sırt: '🔙', Omuz: '🤾', Bacak: '🦵',
-  Kol: '💪', Karın: '🧱', Kalça: '🍑', Ön Kol: '🦾',
-  Trapez: '🔺', 'Tam Vücut': '🏋️',
+  'Gogus': '\uD83E\uDEC1', 'Sirt': '\uD83D\uDD19', 'Omuz': '\uD83E\uDD3E', 'Bacak': '\uD83E\uDDB5',
+  'Kol': '\uD83D\uDCAA', 'Karin': '\uD83E\uDDF1', 'Kalca': '\uD83E\uDDB4', 'On Kol': '\uD83D\uDCAA',
+  'Trapez': '\uD83D\uDD1D', 'Tam Vucut': '\uD83C\uDFCB',
 }
 
 const diffColors: Record<string, { bg: string; text: string }> = {

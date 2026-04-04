@@ -80,7 +80,8 @@ export default function FoodTracker() {
     try {
       let result: string | null = null
       if (aiKeys.gemini) result = await callGemini(prompt, base64)
-      else if (aiKeys.openrouter) result = await callOpenRouter(prompt, base64)      if (!result) throw new Error('Vision API yanıt vermedi')
+      else if (aiKeys.openrouter) result = await callOpenRouter(prompt, base64)
+      if (!result) throw new Error('Vision API yanıt vermedi')
       const cleaned = result.replace(/```json/g, '').replace(/```/g, '').trim()
       const foodData: FoodItem = JSON.parse(cleaned)
       addFood(foodData)
