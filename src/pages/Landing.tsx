@@ -1238,25 +1238,62 @@ export default function Landing() {
       </section>
 
       {/* ─── Footer ─── */}
-      <footer className={`py-16 border-t ${dm ? 'border-white/5 bg-[#0a0a0a]' : 'border-black/5 bg-white'}`}>
-        <div className="max-w-[1400px] mx-auto px-8 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div>
-            <span className={`font-display text-lg font-semibold ${dm ? 'text-white' : 'text-[#1C1917]'}`}>Ela Ebeoğlu</span>
-            <span className={`text-[0.7rem] uppercase tracking-[0.12em] ml-3 ${dm ? 'text-white/25' : 'text-[#1C1917]/25'}`}>Performance</span>
+      <footer className={`pt-20 pb-8 border-t ${dm ? 'border-white/5 bg-[#050505]' : 'border-black/5 bg-[#FAF6F1]'}`}>
+        <div className="max-w-[1400px] mx-auto px-8 md:px-12">
+          <div className="grid md:grid-cols-4 gap-12 mb-16">
+            {/* Brand */}
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl bg-terracotta/10 flex items-center justify-center">
+                  <svg width="20" height="20" viewBox="0 0 64 64" fill="none"><circle cx="32" cy="32" r="28" stroke="#C2684A" strokeWidth="3"/><path d="M4 32h56" stroke="#D4C4AB" strokeWidth="1.5" opacity="0.5"/><path d="M32 4v56" stroke="#D4C4AB" strokeWidth="1.5" opacity="0.5"/></svg>
+                </div>
+                <div>
+                  <span className={`font-display text-lg font-semibold ${dm ? 'text-white' : 'text-[#1C1917]'}`}>Ela Ebeoğlu</span>
+                  <span className={`text-[0.6rem] uppercase tracking-[0.15em] ml-2 ${dm ? 'text-white/25' : 'text-[#1C1917]/25'}`}>Performance</span>
+                </div>
+              </div>
+              <p className={`text-[0.85rem] leading-[1.8] max-w-[360px] ${dm ? 'text-white/30' : 'text-[#1C1917]/35'}`}>
+                Kişiye özel antrenman programları, voleybol performans koçluğu ve bütüncül beslenme danışmanlığı.
+              </p>
+            </div>
+            {/* Quick Links */}
+            <div>
+              <h4 className={`text-[0.7rem] uppercase tracking-[0.15em] font-medium mb-5 ${dm ? 'text-white/40' : 'text-[#1C1917]/40'}`}>Sayfalar</h4>
+              <div className="space-y-3">
+                {[
+                  { label: 'Hakkında', href: '#hakkinda' },
+                  { label: 'Programlar', href: '#programlar' },
+                  { label: 'Sonuçlar', href: '#sonuclar' },
+                  { label: 'Fiyatlar', href: '#fiyatlar' },
+                  { label: 'İletişim', href: '#iletisim' },
+                ].map(l => (
+                  <a key={l.label} href={l.href} className={`block text-[0.82rem] no-underline transition-colors duration-300 ${dm ? 'text-white/30 hover:text-white' : 'text-[#1C1917]/30 hover:text-[#1C1917]'}`}>{l.label}</a>
+                ))}
+              </div>
+            </div>
+            {/* Social */}
+            <div>
+              <h4 className={`text-[0.7rem] uppercase tracking-[0.15em] font-medium mb-5 ${dm ? 'text-white/40' : 'text-[#1C1917]/40'}`}>İletişim</h4>
+              <div className="space-y-3">
+                <a href="https://instagram.com/elaebeoglu" target="_blank" rel="noopener noreferrer" className={`flex items-center gap-2.5 text-[0.82rem] no-underline transition-colors duration-300 ${dm ? 'text-white/30 hover:text-white' : 'text-[#1C1917]/30 hover:text-[#1C1917]'}`}>
+                  <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                  Instagram
+                </a>
+                <a href="https://wa.me/905362486849" target="_blank" rel="noopener noreferrer" className={`flex items-center gap-2.5 text-[0.82rem] no-underline transition-colors duration-300 ${dm ? 'text-white/30 hover:text-white' : 'text-[#1C1917]/30 hover:text-[#1C1917]'}`}>
+                  <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                  WhatsApp
+                </a>
+              </div>
+            </div>
           </div>
-          <p className={`text-[0.75rem] tracking-wide ${dm ? 'text-white/25' : 'text-[#1C1917]/25'}`}>
-            &copy; 2026 Tüm Hakları Saklıdır.
-          </p>
-          <div className="flex gap-6">
-            {[
-              { label: 'Instagram', href: 'https://instagram.com/elaebeoglu' },
-              { label: 'WhatsApp', href: 'https://wa.me/905362486849' },
-            ].map(l => (
-              <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer"
-                className={`text-[0.78rem] no-underline transition-all duration-300 py-3 px-2 -my-3 ${dm ? 'text-white/30 hover:text-white' : 'text-[#1C1917]/30 hover:text-[#1C1917]'}`}>
-                {l.label}
-              </a>
-            ))}
+          {/* Bottom */}
+          <div className={`pt-6 border-t flex flex-col md:flex-row justify-between items-center gap-3 ${dm ? 'border-white/5' : 'border-black/5'}`}>
+            <p className={`text-[0.72rem] tracking-wide ${dm ? 'text-white/20' : 'text-[#1C1917]/20'}`}>
+              &copy; 2026 Ela Ebeoğlu Performance. Tüm hakları saklıdır.
+            </p>
+            <p className={`text-[0.72rem] ${dm ? 'text-white/15' : 'text-[#1C1917]/15'}`}>
+              KVKK & Gizlilik Politikası
+            </p>
           </div>
         </div>
       </footer>
