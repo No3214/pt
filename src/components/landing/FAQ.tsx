@@ -52,7 +52,7 @@ function FaqItem({ question, answer, index, dm }: { question: string; answer: st
 export default function FAQ() {
   const { darkMode } = useStore();
   return (
-    <section className="py-32 md:py-40 bg-bg">
+    <section id="faq" className="py-32 md:py-40 bg-bg">
       <div className="max-w-[1400px] mx-auto px-8 md:px-12">
         <div className="grid lg:grid-cols-[1fr_1.5fr] gap-20">
           <RevealSection>

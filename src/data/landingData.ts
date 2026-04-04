@@ -83,6 +83,6 @@ export const navigationLinks = [
   { id: 'hakkinda', label: 'Hakkında' },
   { id: 'programlar', label: 'Programlar' },
   { id: 'sonuclar', label: 'Sonuçlar' },
-  { id: 'fiyatlar', label: 'Fiyatlar' },
+  { id: 'faq', label: 'SSS' },
   { id: 'iletisim', label: 'İletişim' },
 ];
