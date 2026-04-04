@@ -873,6 +873,71 @@ export default function Landing() {
           </RevealSection>
         </div>
       </section>
+      {/* ─── CTA Banner ─── */}
+      <section className={`py-24 md:py-32 relative overflow-hidden ${dm ? 'bg-[#0a0a0a]' : 'bg-white'}`}>
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] rounded-full opacity-[0.04]"
+            style={{ background: 'radial-gradient(circle, #C2684A 0%, transparent 70%)' }} />
+        </div>
+        <div className="max-w-[1400px] mx-auto px-8 md:px-12">
+          <RevealSection className="text-center">
+            <motion.div variants={fadeUp}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-[0.7rem] font-medium uppercase tracking-[0.15em] mb-8 mx-auto ${dm ? 'bg-terracotta/10 text-terracotta/80 border border-terracotta/15' : 'bg-terracotta/[0.06] text-terracotta border border-terracotta/10'}`}>
+              <span className="w-1.5 h-1.5 bg-terracotta rounded-full animate-pulse" />
+              Sınırlı Kontenjan
+            </motion.div>
+
+            <motion.h2 variants={fadeUp} custom={1}
+              className={`font-display text-[clamp(2.5rem,5vw,4.5rem)] font-semibold leading-[1.05] tracking-[-0.03em] max-w-[800px] mx-auto mb-6 ${dm ? 'text-white' : 'text-[#1C1917]'}`}>
+              Değişim için{' '}
+              <span className="bg-gradient-to-r from-terracotta via-[#d4845e] to-sage bg-clip-text text-transparent">
+                bugün
+              </span>{' '}başla.
+            </motion.h2>
+
+            <motion.p variants={fadeUp} custom={2}
+              className={`text-[1.05rem] leading-[1.8] max-w-[520px] mx-auto mb-12 ${dm ? 'text-white/40' : 'text-[#1C1917]/40'}`}>
+              Ücretsiz 15 dakikalık tanışma görüşmesiyle hedeflerini konuşalım. Seninle çalışıp çalışamayacağıma birlikte karar verelim.
+            </motion.p>
+
+            <motion.div variants={fadeUp} custom={3} className="flex gap-4 justify-center flex-wrap">
+              <a href="#iletisim"
+                className="group relative px-10 py-5 bg-terracotta text-white rounded-full text-[0.95rem] font-medium no-underline overflow-hidden transition-all duration-300 hover:shadow-[0_20px_40px_rgba(194,104,74,0.3)]">
+                <span className="relative z-10 flex items-center gap-3">
+                  Hemen Başvur
+                  <motion.svg animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                    className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </motion.svg>
+                </span>
+                <span className="absolute inset-0 bg-[#a8543a] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              </a>
+              <a href="https://wa.me/905362486849" target="_blank" rel="noopener noreferrer"
+                className={`px-10 py-5 rounded-full text-[0.95rem] font-medium no-underline border flex items-center gap-3 transition-all duration-300 ${dm ? 'border-white/10 text-white/60 hover:text-white hover:border-white/25' : 'border-black/10 text-[#1C1917]/50 hover:text-[#1C1917] hover:border-black/20'}`}>
+                <svg viewBox="0 0 24 24" className="w-5 h-5 fill-[#25D366]"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z" /></svg>
+                WhatsApp ile Sor
+              </a>
+            </motion.div>
+
+            {/* Trust indicators */}
+            <motion.div variants={fadeUp} custom={4}
+              className={`mt-16 flex flex-wrap items-center justify-center gap-8 ${dm ? 'text-white/20' : 'text-[#1C1917]/20'}`}>
+              {[
+                { icon: '🏐', text: '8+ Yıl Voleybol' },
+                { icon: '🎯', text: '100% Memnuniyet' },
+                { icon: '📊', text: 'Bilimsel Yaklaşım' },
+                { icon: '🔒', text: 'Gizlilik Garantisi' },
+              ].map((badge, i) => (
+                <div key={i} className="flex items-center gap-2 text-[0.78rem]">
+                  <span className="text-base">{badge.icon}</span>
+                  <span>{badge.text}</span>
+                </div>
+              ))}
+            </motion.div>
+          </RevealSection>
+        </div>
+      </section>
+
       {/* ─── Footer ─── */}
       <footer className={`py-16 border-t ${dm ? 'border-white/5 bg-[#0a0a0a]' : 'border-black/5 bg-white'}`}>
         <div className="max-w-[1400px] mx-auto px-8 md:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
