@@ -58,7 +58,8 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   useEffect(() => {
     if (!isInView) return
     const duration = 1400
-    const start = performance.now()    const animate = (now: number) => {
+    const start = performance.now()
+    const animate = (now: number) => {
       const progress = Math.min((now - start) / duration, 1)
       const eased = 1 - Math.pow(1 - progress, 4) // quartic ease-out
       setCount(Math.round(eased * target))
