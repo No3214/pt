@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { useStore } from '../stores/useStore'
@@ -135,6 +135,57 @@ export default function Portal() {
             </div>
           </div>
           <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full opacity-[0.04]" style={{ background: 'radial-gradient(circle, #C2684A, transparent)' }} />
+        </div>
+      </motion.div>
+
+      {/* ═══ Motivational Quote & Weekly Streak ═══ */}
+      <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-[1200px] mx-auto px-6 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          {/* Daily Quote */}
+          <motion.div variants={fadeUp} className={`${card} relative overflow-hidden`}>
+            <div className="absolute top-3 right-4 text-6xl font-display opacity-[0.04] leading-none select-none">"</div>
+            <p className={`text-[0.68rem] uppercase tracking-[0.2em] mb-3 font-medium ${dm ? 'text-sage/50' : 'text-sage/70'}`}>Günün Motivasyonu</p>
+            <p className={`font-display text-[1.2rem] font-semibold tracking-[-0.02em] leading-relaxed italic ${dm ? 'text-white/70' : 'text-[#1C1917]/70'}`}>
+              {[
+                'Bugün yapacağın seçimler, yarının bedenini inşa eder.',
+                'Disiplin, motivasyon bittiğinde devam etmektir.',
+                'Her tekrar seni daha güçlü yapar.',
+                'Küçük adımlar büyük dönüşümler yaratır.',
+                'Vücudun senden pes etmeni isteyecek. Aklın bunu reddetsin.',
+                'En zor antrenman, ilk adımı atandır.',
+                'Bugün ter dök, yarın gurur duy.',
+              ][new Date().getDay()]}
+            </p>
+          </motion.div>
+
+          {/* Weekly Streak */}
+          <motion.div variants={fadeUp} className={card}>
+            <p className={`text-[0.68rem] uppercase tracking-[0.2em] mb-4 font-medium ${dm ? 'text-terracotta/50' : 'text-terracotta/70'}`}>Haftalık Seri</p>
+            <div className="grid grid-cols-7 gap-2">
+              {['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cts', 'Paz'].map((day, i) => {
+                const today = (new Date().getDay() + 6) % 7
+                const isPast = i < today
+                const isToday = i === today
+                return (
+                  <div key={day} className="flex flex-col items-center gap-1.5">
+                    <span className={`text-[0.65rem] font-medium ${dm ? 'text-white/25' : 'text-[#1C1917]/25'}`}>{day}</span>
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{ delay: i * 0.06, type: 'spring', damping: 15 }}
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center text-[0.7rem] font-bold transition-all duration-300 ${
+                        isPast ? (dm ? 'bg-sage/15 text-sage' : 'bg-sage/10 text-sage') :
+                        isToday ? 'bg-terracotta/15 text-terracotta ring-2 ring-terracotta/20' :
+                        (dm ? 'bg-white/[0.03] text-white/15' : 'bg-black/[0.03] text-[#1C1917]/15')
+                      }`}
+                    >
+                      {isPast ? '✓' : isToday ? '●' : '—'}
+                    </motion.div>
+                  </div>
+                )
+              })}
+            </div>
+          </motion.div>
         </div>
       </motion.div>
 
