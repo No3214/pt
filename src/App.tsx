@@ -18,6 +18,7 @@ import Preloader from './components/Preloader'
 import CookieConsent from './components/CookieConsent'
 import ScrollToTop from './components/ScrollToTop'
 import NotFound from './pages/NotFound'
+import WhatsAppWidget from './components/WhatsAppWidget'
 
 export default function App() {
   const darkMode = useStore(s => s.darkMode)
@@ -52,6 +53,7 @@ export default function App() {
         </Routes>
       </AnimatePresence>
       <Toast />
+      <WhatsAppWidget />
       <CookieConsent />
     </>
   )
