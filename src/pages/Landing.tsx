@@ -612,6 +612,32 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* ─── Rakamlar / Stats ─── */}
+      <section className={`py-20 md:py-24 border-y ${dm ? 'bg-[#050505] border-white/[0.04]' : 'bg-white border-black/[0.04]'}`}>
+        <div className="max-w-[1400px] mx-auto px-8 md:px-12">
+          <RevealSection>
+            <motion.div variants={fadeUp} className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+              {[
+                { value: '150+', label: 'Mutlu Danışan', icon: '🏆' },
+                { value: '12+', label: 'Yıl Deneyim', icon: '⏱️' },
+                { value: '3000+', label: 'Antrenman Programı', icon: '📋' },
+                { value: '%96', label: 'Memnuniyet Oranı', icon: '⭐' },
+              ].map((stat, i) => (
+                <motion.div key={i} variants={scaleIn} className="text-center group">
+                  <div className="text-2xl mb-3">{stat.icon}</div>
+                  <div className={`font-display text-[clamp(2rem,4vw,3rem)] font-bold tracking-tight leading-none mb-2 transition-colors duration-300 group-hover:text-terracotta ${dm ? 'text-white' : 'text-[#1C1917]'}`}>
+                    {stat.value}
+                  </div>
+                  <div className={`text-[0.82rem] ${dm ? 'text-white/35' : 'text-[#1C1917]/35'}`}>
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </RevealSection>
+        </div>
+      </section>
+
       {/* ─── Programlar ─── */}
       <section id="programlar" className={`py-32 md:py-40 ${dm ? 'bg-[#0a0a0a]' : 'bg-white'}`}>
         <div className="max-w-[1400px] mx-auto px-8 md:px-12">

@@ -1,5 +1,5 @@
-import { useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useEffect, useCallback, useState } from 'react'
+import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
 
 interface LightboxProps {
   images: string[]
@@ -11,6 +11,11 @@ interface LightboxProps {
 }
 
 export default function Lightbox({ images, currentIndex, isOpen, onClose, onNext, onPrev }: LightboxProps) {
+  const [dragDir, setDragDir] = useState<'x' | 'y' | null>(null)
+  const y = useMotionValue(0)
+  const bgOpacity = useTransform(y, [-200, 0, 200], [0.3, 0.9, 0.3])
+  const imgScale = useTransform(y, [-200, 0, 200], [0.85, 1, 0.85])
+
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === 'Escape') onClose()
     if (e.key === 'ArrowRight') onNext()
@@ -28,6 +33,17 @@ export default function Lightbox({ images, currentIndex, isOpen, onClose, onNext
     }
   }, [isOpen, handleKeyDown])
 
+  const handleDragEnd = (_: any, info: { offset: { x: number; y: number }; velocity: { x: number; y: number } }) => {
+    const { offset, velocity } = info
+    if (dragDir === 'y' && (Math.abs(offset.y) > 100 || Math.abs(velocity.y) > 500)) {
+      onClose()
+    } else if (dragDir === 'x') {
+      if (offset.x < -80 || velocity.x < -500) onNext()
+      else if (offset.x > 80 || velocity.x > 500) onPrev()
+    }
+    setDragDir(null)
+  }
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -40,7 +56,7 @@ export default function Lightbox({ images, currentIndex, isOpen, onClose, onNext
           onClick={onClose}
         >
           {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" />
+          <motion.div className="absolute inset-0 backdrop-blur-xl" style={{ backgroundColor: useTransform(bgOpacity, v => `rgba(0,0,0,${v})`) }} />
 
           {/* Close button */}
           <motion.button
@@ -86,30 +102,44 @@ export default function Lightbox({ images, currentIndex, isOpen, onClose, onNext
             </>
           )}
 
-          {/* Image */}
+          {/* Image with drag gestures */}
           <motion.div
             key={currentIndex}
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-[1] max-w-[90vw] max-h-[85vh]"
+            style={{ y, scale: imgScale }}
+            drag
+            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+            dragElastic={0.7}
+            onDragStart={(_, info) => {
+              setDragDir(Math.abs(info.delta.x) > Math.abs(info.delta.y) ? 'x' : 'y')
+            }}
+            onDragEnd={handleDragEnd}
+            className="relative z-[1] max-w-[90vw] max-h-[85vh] cursor-grab active:cursor-grabbing"
             onClick={(e) => e.stopPropagation()}
           >
             <img
               src={images[currentIndex]}
               alt=""
-              className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl"
+              className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl select-none pointer-events-none"
+              draggable={false}
             />
           </motion.div>
 
-          {/* Counter */}
+          {/* Counter + dots */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 px-4 py-2 rounded-full bg-white/10 border border-white/10 backdrop-blur-md"
+            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3 px-4 py-2.5 rounded-full bg-white/10 border border-white/10 backdrop-blur-md"
           >
+            {images.length <= 7 && images.map((_, i) => (
+              <div key={i} className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                i === currentIndex ? 'bg-white scale-125' : 'bg-white/30'
+              }`} />
+            ))}
             <span className="text-white/60 text-[0.75rem] font-medium tabular-nums">
               {currentIndex + 1} / {images.length}
             </span>
