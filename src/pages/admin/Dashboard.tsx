@@ -6,7 +6,7 @@ import {
   PieChart, Pie, Cell, AreaChart, Area, LineChart, Line, RadialBarChart, RadialBar
 } from 'recharts'
 
-const COLORS = ['#7A9E82', '#D4C4AB', '#C2684A', '#5e8fa8']
+const COLORS = ['var(--color-secondary)', 'var(--color-sand)', 'var(--color-primary)', 'var(--color-accent)']
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
@@ -89,10 +89,10 @@ function QuickAction({ icon, label, dm, onClick }: { icon: React.ReactNode; labe
            : 'bg-white border-black/[0.03] hover:bg-[#FAFAF8] hover:border-black/[0.06] hover:shadow-md'
       }`}
     >
-      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${dm ? 'bg-terracotta/10 text-terracotta' : 'bg-terracotta/[0.06] text-terracotta'}`}>
+      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${dm ? 'bg-primary/10 text-primary' : 'bg-primary/[0.06] text-primary'}`}>
         {icon}
       </div>
-      <span className={`text-[0.72rem] font-medium ${dm ? 'text-white/40' : 'text-[#1C1917]/40'}`}>{label}</span>
+      <span className={`text-[0.72rem] font-medium ${dm ? 'text-text-main/40' : 'text-text-main/40'}`}>{label}</span>
     </motion.button>
   )
 }
@@ -156,7 +156,7 @@ export default function Dashboard() {
   const radialData = useMemo(() => [{
     name: 'Seans Kullanımı',
     value: stats.totalMaxSessions > 0 ? Math.round((stats.usedSessions / stats.totalMaxSessions) * 100) : 0,
-    fill: '#C2684A'
+    fill: 'var(--color-primary)'
   }], [stats])
 
   const lowSessionClients = clients.filter(c => c.sessions > 0 && c.sessions <= 2)
@@ -165,19 +165,19 @@ export default function Dashboard() {
   const kpiCards = [
     {
       label: 'Aktif Danışan', value: stats.activeCount, numericValue: stats.activeCount,
-      sub: `/ ${stats.totalClients} toplam`, color: 'terracotta', trend: '+3', trendUp: true,
+      sub: `/ ${stats.totalClients} toplam`, color: 'primary', trend: '+3', trendUp: true,
       sparkData: [3, 5, 4, 7, 6, 8, stats.activeCount || 10],
       icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>,
     },
     {
       label: 'Aylık Gelir', value: `₺${stats.mrr.toLocaleString('tr-TR')}`, numericValue: stats.mrr,
-      prefix: '₺', sub: 'MRR', color: 'sage', trend: '+12%', trendUp: true,
+      prefix: '₺', sub: 'MRR', color: 'secondary', trend: '+12%', trendUp: true,
       sparkData: [8500, 10000, 12500, 11000, 13000, stats.mrr || 15000],
       icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" /></svg>,
     },
     {
       label: 'Uyum Skoru', value: `%${stats.compliance}`, numericValue: stats.compliance,
-      suffix: '%', sub: 'bu hafta', color: 'coast', trend: '+5%', trendUp: true,
+      suffix: '%', sub: 'bu hafta', color: 'accent', trend: '+5%', trendUp: true,
       sparkData: [65, 72, 68, 78, 82, stats.compliance || 85],
       icon: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" /></svg>,
     },
@@ -190,16 +190,16 @@ export default function Dashboard() {
   ]
 
   const colorMap: Record<string, string> = {
-    terracotta: '#C2684A', sage: '#7A9E82', coast: '#5e8fa8', sand: '#D4C4AB',
+    primary: 'var(--color-primary)', secondary: 'var(--color-secondary)', accent: 'var(--color-accent)', sand: 'var(--color-sand)',
   }
   const colorClassMap: Record<string, string> = {
-    terracotta: 'text-terracotta', sage: 'text-sage', coast: 'text-coast',
-    sand: dm ? 'text-sand' : 'text-sand-dark',
+    primary: 'text-primary', secondary: 'text-secondary', accent: 'text-accent',
+    sand: 'text-sand',
   }
   const bgMap: Record<string, string> = {
-    terracotta: dm ? 'bg-terracotta/10' : 'bg-terracotta/[0.06]',
-    sage: dm ? 'bg-sage/10' : 'bg-sage/[0.06]',
-    coast: dm ? 'bg-[#5e8fa8]/10' : 'bg-[#5e8fa8]/[0.06]',
+    primary: dm ? 'bg-primary/10' : 'bg-primary/[0.06]',
+    secondary: dm ? 'bg-secondary/10' : 'bg-secondary/[0.06]',
+    accent: dm ? 'bg-accent/10' : 'bg-accent/[0.06]',
     sand: dm ? 'bg-sand/10' : 'bg-sand/[0.06]',
   }
 
@@ -216,7 +216,7 @@ export default function Dashboard() {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className={`text-[0.78rem] font-medium mb-1.5 ${dm ? 'text-terracotta/60' : 'text-terracotta/70'}`}
+            className={`text-[0.78rem] font-medium mb-1.5 ${dm ? 'text-primary/60' : 'text-primary/70'}`}
           >
             {greeting}, Ela
           </motion.p>
@@ -227,8 +227,8 @@ export default function Dashboard() {
             Tüm veriler tek bakışta
           </p>
         </div>
-        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-[0.72rem] font-medium ${dm ? 'bg-white/[0.04] text-white/40' : 'bg-black/[0.03] text-[#1C1917]/40'}`}>
-          <div className="w-1.5 h-1.5 rounded-full bg-sage animate-pulse" />
+        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-[0.72rem] font-medium ${dm ? 'bg-white/[0.04] text-text-main/40' : 'bg-black/[0.03] text-text-main/40'}`}>
+          <div className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
           {new Date().toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long' })}
         </div>
       </motion.div>
@@ -251,7 +251,7 @@ export default function Dashboard() {
                 <div className="flex items-center gap-2">
                   <Sparkline data={card.sparkData} color={colorMap[card.color]} dm={dm} />
                   {card.trend && (
-                    <span className={`text-[0.65rem] font-semibold px-2 py-0.5 rounded-lg ${dm ? 'bg-sage/10 text-sage' : 'bg-sage/[0.08] text-sage'}`}>
+                    <span className={`text-[0.65rem] font-semibold px-2 py-0.5 rounded-lg ${dm ? 'bg-secondary/10 text-secondary' : 'bg-secondary/[0.08] text-secondary'}`}>
                       {card.trend}
                     </span>
                   )}
@@ -294,7 +294,7 @@ export default function Dashboard() {
         <motion.div variants={fadeUp} custom={5} className={`${cardBase} p-6 group`}>
           <div className="flex items-center justify-between mb-6">
             <h3 className={chartTitle}>Aylık Gelir Trendi</h3>
-            <span className={`text-[0.65rem] px-2.5 py-1 rounded-lg transition-colors duration-300 ${dm ? 'bg-terracotta/10 text-terracotta/70 group-hover:bg-terracotta/15' : 'bg-terracotta/[0.06] text-terracotta/70 group-hover:bg-terracotta/[0.1]'}`}>6 ay</span>
+            <span className={`text-[0.65rem] px-2.5 py-1 rounded-lg transition-colors duration-300 ${dm ? 'bg-primary/10 text-primary/70 group-hover:bg-primary/15' : 'bg-primary/[0.06] text-primary/70 group-hover:bg-primary/[0.1]'}`}>6 ay</span>
           </div>
           <ResponsiveContainer width="100%" height={200}>
             <BarChart data={revenueData} barCategoryGap="25%">
@@ -303,8 +303,8 @@ export default function Dashboard() {
               <Tooltip {...tt} formatter={(v: number) => [`₺${v.toLocaleString('tr-TR')}`, 'Gelir']} />
               <defs>
                 <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#C2684A" />
-                  <stop offset="100%" stopColor="#C2684A" stopOpacity={0.6} />
+                  <stop offset="0%" stopColor="var(--color-primary)" />
+                  <stop offset="100%" stopColor="var(--color-primary)" stopOpacity={0.6} />
                 </linearGradient>
               </defs>
               <Bar dataKey="value" fill="url(#barGrad)" radius={[8, 8, 2, 2]} animationDuration={1200} animationEasing="ease-out" />
@@ -316,7 +316,7 @@ export default function Dashboard() {
         <motion.div variants={fadeUp} custom={6} className={`${cardBase} p-6 group`}>
           <div className="flex items-center justify-between mb-6">
             <h3 className={chartTitle}>Makro Dağılımı</h3>
-            <span className={`text-[0.65rem] px-2.5 py-1 rounded-lg transition-colors duration-300 ${dm ? 'bg-sage/10 text-sage/70 group-hover:bg-sage/15' : 'bg-sage/[0.06] text-sage/70 group-hover:bg-sage/[0.1]'}`}>bugün</span>
+            <span className={`text-[0.65rem] px-2.5 py-1 rounded-lg transition-colors duration-300 ${dm ? 'bg-secondary/10 text-secondary/70 group-hover:bg-secondary/15' : 'bg-secondary/[0.06] text-secondary/70 group-hover:bg-secondary/[0.1]'}`}>bugün</span>
           </div>
           <div className="flex items-center gap-6">
             <ResponsiveContainer width="55%" height={180}>
@@ -358,11 +358,11 @@ export default function Dashboard() {
               <Tooltip {...tt} formatter={(v: number) => [`%${v}`, 'Uyum']} />
               <defs>
                 <linearGradient id="uyumGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#7A9E82" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="#7A9E82" stopOpacity={0} />
+                  <stop offset="5%" stopColor="var(--color-secondary)" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="var(--color-secondary)" stopOpacity={0} />
                 </linearGradient>
               </defs>
-              <Area type="monotone" dataKey="score" stroke="#7A9E82" fill="url(#uyumGrad)" strokeWidth={2} dot={{ fill: '#7A9E82', r: 3, strokeWidth: 0 }} activeDot={{ r: 5, fill: '#C2684A', strokeWidth: 0 }} animationDuration={1200} />
+              <Area type="monotone" dataKey="score" stroke="var(--color-secondary)" fill="url(#uyumGrad)" strokeWidth={2} dot={{ fill: 'var(--color-secondary)', r: 3, strokeWidth: 0 }} activeDot={{ r: 5, fill: 'var(--color-primary)', strokeWidth: 0 }} animationDuration={1200} />
             </AreaChart>
           </ResponsiveContainer>
         </motion.div>
@@ -375,7 +375,7 @@ export default function Dashboard() {
               <XAxis dataKey="day" tick={axisStyle} axisLine={false} tickLine={false} />
               <YAxis tick={axisStyle} axisLine={false} tickLine={false} allowDecimals={false} width={25} />
               <Tooltip {...tt} />
-              <Line type="monotone" dataKey="count" stroke="#5e8fa8" strokeWidth={2} dot={{ fill: '#5e8fa8', r: 4, strokeWidth: 0 }} activeDot={{ r: 6, fill: '#C2684A', strokeWidth: 0 }} animationDuration={1200} />
+              <Line type="monotone" dataKey="count" stroke="var(--color-accent)" strokeWidth={2} dot={{ fill: 'var(--color-accent)', r: 4, strokeWidth: 0 }} activeDot={{ r: 6, fill: 'var(--color-primary)', strokeWidth: 0 }} animationDuration={1200} />
             </LineChart>
           </ResponsiveContainer>
         </motion.div>
@@ -501,12 +501,12 @@ export default function Dashboard() {
           <div className={`mt-6 pt-5 border-t ${dm ? 'border-white/[0.04]' : 'border-black/[0.03]'}`}>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className={`text-[0.65rem] uppercase tracking-[0.1em] mb-1 ${dm ? 'text-white/20' : 'text-[#1C1917]/20'}`}>Ortalama Ücret</p>
-                <p className="text-lg font-semibold text-terracotta tracking-[-0.02em]">₺{stats.avgPrice.toLocaleString('tr-TR')}</p>
+                <p className={`text-[0.65rem] uppercase tracking-[0.1em] mb-1 ${dm ? 'text-text-main/20' : 'text-text-main/20'}`}>Ortalama Ücret</p>
+                <p className="text-lg font-semibold text-primary tracking-[-0.02em]">₺{stats.avgPrice.toLocaleString('tr-TR')}</p>
               </div>
               <div>
-                <p className={`text-[0.65rem] uppercase tracking-[0.1em] mb-1 ${dm ? 'text-white/20' : 'text-[#1C1917]/20'}`}>Takvim Randevu</p>
-                <p className="text-lg font-semibold text-sage tracking-[-0.02em]">{calSessions.length}</p>
+                <p className={`text-[0.65rem] uppercase tracking-[0.1em] mb-1 ${dm ? 'text-text-main/20' : 'text-text-main/20'}`}>Takvim Randevu</p>
+                <p className="text-lg font-semibold text-secondary tracking-[-0.02em]">{calSessions.length}</p>
               </div>
             </div>
           </div>

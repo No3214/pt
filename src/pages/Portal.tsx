@@ -34,7 +34,7 @@ export default function Portal() {
     }, 2000)
   }
 
-  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 text-[0.88rem] focus:border-terracotta/40 focus:ring-2 focus:ring-terracotta/10 ${dm ? 'bg-white/[0.03] border-white/[0.06] text-white placeholder:text-white/25' : 'bg-white border-black/[0.05] placeholder:text-[#1C1917]/25'}`
+  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 text-[0.88rem] focus:border-primary/40 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.03] border-white/[0.06] text-text-main placeholder:text-text-main/25' : 'bg-white border-black/[0.05] text-text-main placeholder:text-text-main/25'}`
   const card = `p-6 rounded-2xl border transition-all duration-300 ${dm ? 'bg-white/[0.02] border-white/[0.04]' : 'bg-white border-black/[0.03]'}`
 
   const greeting = (() => {
@@ -58,8 +58,8 @@ export default function Portal() {
       {/* ═══ Top Bar ═══ */}
       <header className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-2xl border-b transition-all duration-500 ${dm ? 'bg-[#050505]/80 border-white/[0.04]' : 'bg-white/70 border-black/[0.03]'}`}>
         <div className="max-w-[1200px] mx-auto px-6 h-16 flex justify-between items-center">
-          <Link to="/" className={`flex items-center gap-3 font-display text-lg font-semibold no-underline tracking-[-0.02em] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sage to-sage-dark flex items-center justify-center">
+          <Link to="/" className={`flex items-center gap-3 font-display text-lg font-semibold no-underline tracking-[-0.02em] ${dm ? 'text-text-main' : 'text-text-main'}`}>
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-secondary to-secondary-dark flex items-center justify-center">
               <span className="text-white text-xs font-bold font-body">PT</span>
             </div>
             Danışan Portalı
@@ -84,7 +84,7 @@ export default function Portal() {
         <motion.div initial="hidden" animate="show" variants={stagger} className="max-w-[1200px] mx-auto">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <motion.div variants={fadeUp}>
-              <p className={`text-[0.7rem] uppercase tracking-[0.2em] mb-3 font-medium ${dm ? 'text-terracotta/70' : 'text-terracotta'}`}>Danışan Portalı</p>
+              <p className={`text-[0.7rem] uppercase tracking-[0.2em] mb-3 font-medium ${dm ? 'text-primary/70' : 'text-primary'}`}>Danışan Portalı</p>
               <h1 className={`font-display text-[clamp(2.2rem,4vw,3.2rem)] font-semibold tracking-[-0.03em] leading-[1.1] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>{greeting}</h1>
               <p className={`text-[0.92rem] mt-2 ${dm ? 'text-white/35' : 'text-[#1C1917]/35'}`}>Antrenman ve beslenme takibini buradan yapabilirsin.</p>
             </motion.div>
@@ -92,8 +92,8 @@ export default function Portal() {
             <motion.div variants={fadeUp} className="flex items-center gap-4">
               <div className="relative w-20 h-20">
                 <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="42" fill="none" stroke={dm ? 'rgba(255,255,255,0.04)' : '#f0eeec'} strokeWidth="6" />
-                  <motion.circle cx="50" cy="50" r="42" fill="none" stroke={submitted ? '#7A9E82' : '#C2684A'} strokeWidth="6" strokeLinecap="round"
+                  <circle cx="50" cy="50" r="42" fill="none" stroke={dm ? 'var(--color-surface)' : '#f0eeec'} strokeWidth="6" />
+                  <motion.circle cx="50" cy="50" r="42" fill="none" stroke={submitted ? 'var(--color-secondary)' : 'var(--color-primary)'} strokeWidth="6" strokeLinecap="round"
                     strokeDasharray={`${2 * Math.PI * 42}`}
                     initial={{ strokeDashoffset: 2 * Math.PI * 42 }}
                     animate={{ strokeDashoffset: 2 * Math.PI * 42 * (1 - doneCount / 4) }}
@@ -107,7 +107,7 @@ export default function Portal() {
               </div>
               <div>
                 <p className={`text-[0.7rem] uppercase tracking-[0.12em] font-medium ${dm ? 'text-white/25' : 'text-[#1C1917]/25'}`}>Günlük Hedef</p>
-                <p className={`text-[0.88rem] font-medium ${submitted ? 'text-sage' : 'text-terracotta'}`}>
+                <p className={`text-[0.88rem] font-medium ${submitted ? 'text-secondary' : 'text-primary'}`}>
                   {submitted ? 'Tamamlandı!' : `${4 - doneCount} kaldı`}
                 </p>
               </div>
@@ -124,8 +124,8 @@ export default function Portal() {
       >
         <div className={`relative overflow-hidden p-6 rounded-2xl border ${dm ? 'border-white/[0.04] bg-gradient-to-r from-terracotta/[0.04] to-sage/[0.03]' : 'border-black/[0.03] bg-gradient-to-r from-terracotta/[0.03] to-sage/[0.02]'}`}>
           <div className="flex items-center gap-4">
-            <div className={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center ${dm ? 'bg-terracotta/10' : 'bg-terracotta/[0.06]'}`}>
-              <svg className="w-5 h-5 text-terracotta" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <div className={`flex-shrink-0 w-10 h-10 rounded-xl flex items-center justify-center ${dm ? 'bg-primary/10' : 'bg-primary/[0.06]'}`}>
+              <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
               </svg>
             </div>
@@ -134,7 +134,7 @@ export default function Portal() {
               <p className={`font-display text-[1.05rem] font-medium italic ${dm ? 'text-white/60' : 'text-[#1C1917]/60'}`}>"{todayQuote}"</p>
             </div>
           </div>
-          <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full opacity-[0.04]" style={{ background: 'radial-gradient(circle, #C2684A, transparent)' }} />
+          <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full opacity-[0.04]" style={{ background: 'radial-gradient(circle, var(--color-primary), transparent)' }} />
         </div>
       </motion.div>
 
@@ -144,7 +144,7 @@ export default function Portal() {
           {/* Daily Quote */}
           <motion.div variants={fadeUp} className={`${card} relative overflow-hidden`}>
             <div className="absolute top-3 right-4 text-6xl font-display opacity-[0.04] leading-none select-none">"</div>
-            <p className={`text-[0.68rem] uppercase tracking-[0.2em] mb-3 font-medium ${dm ? 'text-sage/50' : 'text-sage/70'}`}>Günün Motivasyonu</p>
+            <p className={`text-[0.68rem] uppercase tracking-[0.2em] mb-3 font-medium ${dm ? 'text-secondary/50' : 'text-secondary/70'}`}>Günün Motivasyonu</p>
             <p className={`font-display text-[1.2rem] font-semibold tracking-[-0.02em] leading-relaxed italic ${dm ? 'text-white/70' : 'text-[#1C1917]/70'}`}>
               {[
                 'Bugün yapacağın seçimler, yarının bedenini inşa eder.',
@@ -160,7 +160,7 @@ export default function Portal() {
 
           {/* Weekly Streak */}
           <motion.div variants={fadeUp} className={card}>
-            <p className={`text-[0.68rem] uppercase tracking-[0.2em] mb-4 font-medium ${dm ? 'text-terracotta/50' : 'text-terracotta/70'}`}>Haftalık Seri</p>
+            <p className={`text-[0.68rem] uppercase tracking-[0.2em] mb-4 font-medium ${dm ? 'text-primary/50' : 'text-primary/70'}`}>Haftalık Seri</p>
             <div className="grid grid-cols-7 gap-2">
               {['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cts', 'Paz'].map((day, i) => {
                 const today = (new Date().getDay() + 6) % 7
@@ -174,9 +174,9 @@ export default function Portal() {
                       animate={{ scale: 1 }}
                       transition={{ delay: i * 0.06, type: 'spring', damping: 15 }}
                       className={`w-8 h-8 rounded-lg flex items-center justify-center text-[0.7rem] font-bold transition-all duration-300 ${
-                        isPast ? (dm ? 'bg-sage/15 text-sage' : 'bg-sage/10 text-sage') :
-                        isToday ? 'bg-terracotta/15 text-terracotta ring-2 ring-terracotta/20' :
-                        (dm ? 'bg-white/[0.03] text-white/15' : 'bg-black/[0.03] text-[#1C1917]/15')
+                        isPast ? (dm ? 'bg-secondary/15 text-secondary' : 'bg-secondary/10 text-secondary') :
+                        isToday ? 'bg-primary/15 text-primary ring-2 ring-primary/20' :
+                        (dm ? 'bg-white/[0.03] text-text-main/15' : 'bg-black/[0.03] text-text-main/15')
                       }`}
                     >
                       {isPast ? '✓' : isToday ? '●' : '—'}
@@ -197,8 +197,8 @@ export default function Portal() {
           <motion.div variants={fadeUp} className={card}>
             <div className="flex items-center justify-between mb-5">
               <h3 className={`font-display text-xl font-semibold tracking-[-0.02em] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>Günlük Check-in</h3>
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${dm ? 'bg-terracotta/10' : 'bg-terracotta/[0.06]'}`}>
-                <svg className="w-4 h-4 text-terracotta" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${dm ? 'bg-primary/10' : 'bg-primary/[0.06]'}`}>
+                <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
@@ -211,13 +211,13 @@ export default function Portal() {
                     : (dm ? 'bg-white/[0.02] border border-white/[0.04]' : 'bg-[#F7F5F2] border border-black/[0.03]')
                   }`}>
                   <input type="checkbox" checked={habits[i]} onChange={() => { const n = [...habits]; n[i] = !n[i]; setHabits(n) }}
-                    className="w-[18px] h-[18px] accent-sage rounded" />
+                    className="w-[18px] h-[18px] accent-secondary rounded" />
                   <span className="text-lg">{habitIcons[i]}</span>
-                  <span className={`text-[0.82rem] font-medium flex-1 ${habits[i] ? 'text-sage' : ''}`}>{h}</span>
+                  <span className={`text-[0.82rem] font-medium flex-1 ${habits[i] ? 'text-secondary' : ''}`}>{h}</span>
                   {habits[i] && (
                     <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}
-                      className="w-5 h-5 rounded-full bg-sage/20 flex items-center justify-center">
-                      <svg className="w-3 h-3 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      className="w-5 h-5 rounded-full bg-secondary/20 flex items-center justify-center">
+                      <svg className="w-3  h-3 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                       </svg>
                     </motion.div>
@@ -228,8 +228,8 @@ export default function Portal() {
               onClick={submitHabits} disabled={submitted}
               className={`w-full mt-5 py-3.5 rounded-xl font-medium text-[0.88rem] border-none cursor-pointer transition-all duration-300 ${
                 submitted
-                  ? 'bg-sage text-white'
-                  : 'bg-terracotta text-white hover:shadow-[0_10px_25px_rgba(194,104,74,0.2)]'
+                  ? 'bg-secondary text-white'
+                  : 'bg-primary text-white hover:shadow-[0_10px_25px_rgba(194,104,74,0.2)]'
               }`}>
               {submitted ? 'Gönderildi!' : 'Gönder'}
             </motion.button>
@@ -239,8 +239,8 @@ export default function Portal() {
           <motion.div variants={fadeUp} className={card}>
             <div className="flex items-center justify-between mb-5">
               <h3 className={`font-display text-xl font-semibold tracking-[-0.02em] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>Yemek Logu</h3>
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${dm ? 'bg-sage/10' : 'bg-sage/[0.06]'}`}>
-                <svg className="w-4 h-4 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${dm ? 'bg-secondary/10' : 'bg-secondary/[0.06]'}`}>
+                <svg className="w-4 h-4 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.87c1.355 0 2.697.055 4.024.165C17.155 8.51 18 9.473 18 10.608v2.513m-3-4.87v-1.5m-6 1.5v-1.5m12 9.75l-1.5.75a3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0L3 16.5m15-3.38a48.474 48.474 0 00-6-.37c-2.032 0-4.034.126-6 .37m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.17c0 .62-.504 1.124-1.125 1.124H4.125A1.125 1.125 0 013 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 016 13.12M12.265 3.11a.375.375 0 11-.53 0L12 2.845l.265.265z" />
                 </svg>
               </div>
@@ -259,9 +259,9 @@ export default function Portal() {
                       className={`flex justify-between items-center py-2.5 border-b text-[0.82rem] ${dm ? 'border-white/[0.04]' : 'border-black/[0.03]'}`}>
                       <span className={dm ? 'text-white/70' : 'text-[#1C1917]/70'}>{f.name}</span>
                       <div className="flex items-center gap-2">
-                        <span className="font-semibold text-terracotta tabular-nums">{f.cal}</span>
+                        <span className="font-semibold text-primary tabular-nums">{f.cal}</span>
                         <button onClick={() => removeFood(i)}
-                          className={`bg-transparent border-none cursor-pointer text-lg leading-none transition-colors ${dm ? 'text-white/20 hover:text-red-400' : 'text-[#1C1917]/20 hover:text-red-500'}`}>×</button>
+                          className={`bg-transparent border-none cursor-pointer text-lg leading-none transition-colors ${dm ? 'text-text-main/20 hover:text-red-400' : 'text-text-main/20 hover:text-red-500'}`}>×</button>
                       </div>
                     </motion.div>
                   ))}
@@ -274,8 +274,8 @@ export default function Portal() {
                 <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: i * 0.02 }}
                   onClick={() => addFood(f)}
                   className={`flex justify-between items-center p-3 border-b cursor-pointer text-[0.82rem] transition-all duration-200 ${dm ? 'border-white/[0.03] hover:bg-white/[0.03]' : 'border-black/[0.02] hover:bg-black/[0.01]'}`}>
-                  <span className={dm ? 'text-white/60' : 'text-[#1C1917]/60'}>{f.name}</span>
-                  <span className="text-terracotta font-semibold tabular-nums">{f.cal}</span>
+                  <span className={dm ? 'text-text-main/60' : 'text-text-main/60'}>{f.name}</span>
+                  <span className="text-primary font-semibold tabular-nums">{f.cal}</span>
                 </motion.div>
               ))}
             </div>
@@ -297,12 +297,12 @@ export default function Portal() {
                 { label: 'Yağ', value: Math.round(totals.f), unit: 'g', color: 'sand', max: 70 },
                 { label: 'Karbonhidrat', value: Math.round(totals.c), unit: 'g', color: 'coast', max: 250 },
               ].map((t, i) => {
-                const colorClass = t.color === 'terracotta' ? 'text-terracotta' : t.color === 'sage' ? 'text-sage' : t.color === 'sand' ? (dm ? 'text-sand' : 'text-sand-dark') : 'text-coast'
-                const barClass = t.color === 'terracotta' ? 'bg-terracotta' : t.color === 'sage' ? 'bg-sage' : t.color === 'sand' ? 'bg-sand' : 'bg-coast'
-                const bgClass = t.color === 'terracotta' ? (dm ? 'bg-terracotta/[0.06]' : 'bg-terracotta/[0.04]')
-                  : t.color === 'sage' ? (dm ? 'bg-sage/[0.06]' : 'bg-sage/[0.04]')
+                const colorClass = t.color === 'primary' ? 'text-primary' : t.color === 'secondary' ? 'text-secondary' : t.color === 'sand' ? 'text-sand' : 'text-accent'
+                const barClass = t.color === 'primary' ? 'bg-primary' : t.color === 'secondary' ? 'bg-secondary' : t.color === 'sand' ? 'bg-sand' : 'bg-accent'
+                const bgClass = t.color === 'primary' ? (dm ? 'bg-primary/[0.06]' : 'bg-primary/[0.04]')
+                  : t.color === 'secondary' ? (dm ? 'bg-secondary/[0.06]' : 'bg-secondary/[0.04]')
                   : t.color === 'sand' ? (dm ? 'bg-sand/[0.06]' : 'bg-sand/[0.04]')
-                  : (dm ? 'bg-coast/[0.06]' : 'bg-coast/[0.04]')
+                  : (dm ? 'bg-accent/[0.06]' : 'bg-accent/[0.04]')
                 return (
                   <div key={i} className={`p-4 rounded-xl ${bgClass}`}>
                     <div className="flex items-center justify-between mb-2.5">
@@ -342,9 +342,9 @@ export default function Portal() {
         <motion.div variants={fadeUp} className="md:col-span-3 mt-2">
           <div className={card}>
             <div className="flex items-center justify-between mb-5">
-              <h3 className={`font-display text-xl font-semibold tracking-[-0.02em] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>Haftalık Streak</h3>
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${dm ? 'bg-honey/10' : 'bg-honey/[0.06]'}`}>
-                <svg className="w-4 h-4 text-honey" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <h3 className={`font-display text-xl font-semibold tracking-[-0.02em] ${dm ? 'text-text-main' : 'text-text-main'}`}>Haftalık Streak</h3>
+              <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${dm ? 'bg-primary/10' : 'bg-primary/[0.06]'}`}>
+                <svg className="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
                 </svg>
               </div>
@@ -363,16 +363,16 @@ export default function Portal() {
                     transition={{ delay: i * 0.05, duration: 0.3 }}
                     className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-all duration-300 ${
                       isToday
-                        ? dm ? 'bg-terracotta/10 border border-terracotta/20' : 'bg-terracotta/[0.04] border border-terracotta/15'
+                        ? dm ? 'bg-primary/10 border border-primary/20' : 'bg-primary/[0.04] border border-primary/15'
                         : dm ? 'bg-white/[0.02]' : 'bg-black/[0.01]'
                     }`}
                   >
                     <span className={`text-[0.65rem] uppercase tracking-[0.1em] font-medium ${
-                      isToday ? 'text-terracotta' : dm ? 'text-white/25' : 'text-[#1C1917]/25'
+                      isToday ? 'text-primary' : dm ? 'text-text-main/25' : 'text-text-main/25'
                     }`}>{day}</span>
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 ${
                       done
-                        ? 'bg-sage text-white'
+                        ? 'bg-secondary text-white'
                         : isToday
                           ? dm ? 'bg-white/[0.06] border border-white/10' : 'bg-black/[0.03] border border-black/[0.06]'
                           : dm ? 'bg-white/[0.03]' : 'bg-black/[0.02]'
@@ -382,7 +382,7 @@ export default function Portal() {
                           <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                         </svg>
                       ) : isToday ? (
-                        <span className="text-[0.65rem] font-bold text-terracotta">{doneCount}</span>
+                        <span className="text-[0.65rem] font-bold text-primary">{doneCount}</span>
                       ) : (
                         <span className={`text-[0.5rem] ${dm ? 'text-white/10' : 'text-[#1C1917]/10'}`}>—</span>
                       )}

@@ -20,13 +20,28 @@ import ScrollToTop from './components/ScrollToTop'
 import NotFound from './pages/NotFound'
 import WhatsAppWidget from './components/WhatsAppWidget'
 import ScrollProgress from './components/ScrollProgress'
+import { tenantConfig } from './config/tenant'
 
 export default function App() {
   const darkMode = useStore(s => s.darkMode)
   const location = useLocation()
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', darkMode)
+    // Dynamic Theme Injection (God Tier SaaS Architecture)
+    const root = document.documentElement
+    const themeColors = tenantConfig.theme.colors
+    
+    // Inject brand colors
+    root.style.setProperty('--color-primary', themeColors.primary)
+    root.style.setProperty('--color-secondary', themeColors.secondary)
+    root.style.setProperty('--color-accent', themeColors.accent)
+    root.style.setProperty('--color-sand', themeColors.sand || '#D4C4AB')
+    
+    // Derived colors for premium aesthetics
+    root.style.setProperty('--color-glow', `${themeColors.primary}26`) // 15% opacity primary glow
+    root.style.setProperty('--shadow-color', darkMode ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.06)')
+    
+    root.classList.toggle('dark', darkMode)
     const meta = document.querySelector('meta[name="theme-color"]')
     if (meta) meta.setAttribute('content', darkMode ? '#050505' : '#FAF6F1')
   }, [darkMode])

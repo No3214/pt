@@ -1,0 +1,20 @@
+{
+  "name": "Ela Ebeoğlu Performance",
+  "short_name": "Ela PT",
+  "description": "Profesyonel Voleybolcu & Personal Trainer — Premium Koçluk Platformu",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAF6F1",
+  "theme_color": "#C2684A",
+  "orientation": "portrait-primary",
+  "lang": "tr",
+  "categories": ["health", "fitness", "lifestyle"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23C2684A'/><text y='.88em' x='.12em' font-size='80'>🏐</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
