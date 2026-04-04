@@ -332,19 +332,61 @@ export default function Landing() {
             <a href="#" className={`font-display text-[1.4rem] font-semibold no-underline tracking-[-0.02em] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>
               Ela Ebeoğlu
             </a>
-            <nav className={`${menuOpen ? 'flex' : 'hidden'} md:flex fixed md:static inset-0 md:inset-auto flex-col md:flex-row items-center justify-center gap-10 md:gap-10 z-[100] ${dm ? 'bg-[#0a0a0a]/98 md:bg-transparent' : 'bg-white/98 md:bg-transparent'}`}>
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center gap-10">
               {[
                 { id: 'hakkinda', label: 'Hakkında' },
                 { id: 'programlar', label: 'Programlar' },
                 { id: 'sonuclar', label: 'Sonuçlar' },
                 { id: 'iletisim', label: 'İletişim' },
               ].map(item => (
-                <a key={item.id} href={`#${item.id}`} onClick={() => setMenuOpen(false)}
-                  className={`no-underline text-[0.82rem] tracking-[0.04em] uppercase transition-all duration-300 hover:opacity-100 ${dm ? 'text-white/50 hover:text-white' : 'text-[#1C1917]/40 hover:text-[#1C1917]'} md:text-[0.82rem] text-lg`}>
+                <a key={item.id} href={`#${item.id}`}
+                  className={`no-underline text-[0.82rem] tracking-[0.04em] uppercase transition-all duration-300 hover:opacity-100 ${dm ? 'text-white/50 hover:text-white' : 'text-[#1C1917]/40 hover:text-[#1C1917]'}`}>
                   {item.label}
                 </a>
               ))}
             </nav>
+
+            {/* Mobile Fullscreen Nav */}
+            <AnimatePresence>
+              {menuOpen && (
+                <motion.nav
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className={`md:hidden fixed inset-0 flex flex-col items-center justify-center gap-8 z-[100] backdrop-blur-2xl ${dm ? 'bg-[#050505]/95' : 'bg-[#FAF6F1]/95'}`}>
+                  {[
+                    { id: 'hakkinda', label: 'Hakkında' },
+                    { id: 'programlar', label: 'Programlar' },
+                    { id: 'sonuclar', label: 'Sonuçlar' },
+                    { id: 'iletisim', label: 'İletişim' },
+                  ].map((item, i) => (
+                    <motion.a
+                      key={item.id}
+                      href={`#${item.id}`}
+                      onClick={() => setMenuOpen(false)}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ delay: i * 0.08, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                      className={`no-underline text-2xl font-display font-semibold tracking-[-0.01em] transition-colors duration-300 ${dm ? 'text-white/70 hover:text-white' : 'text-[#1C1917]/60 hover:text-[#1C1917]'}`}>
+                      {item.label}
+                    </motion.a>
+                  ))}
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <Link to="/admin" onClick={() => setMenuOpen(false)}
+                      className={`mt-4 inline-flex items-center px-6 py-3 rounded-full text-[0.82rem] tracking-[0.03em] no-underline transition-all duration-300 ${dm ? 'text-white/60 border border-white/10' : 'text-[#1C1917]/50 border border-black/8'}`}>
+                      Koç Paneli
+                    </Link>
+                  </motion.div>
+                </motion.nav>
+              )}
+            </AnimatePresence>
 
             <div className="flex gap-4 items-center">
               <button onClick={toggleDarkMode}
