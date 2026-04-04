@@ -942,6 +942,111 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* ─── Fiyatlar / Pricing ─── */}
+      <section id="fiyatlar" className={`py-32 md:py-40 ${dm ? 'bg-[#050505]' : 'bg-[#FAF6F1]'}`}>
+        <div className="max-w-[1400px] mx-auto px-8 md:px-12">
+          <RevealSection>
+            <motion.p variants={fadeUp} className="text-[0.75rem] uppercase tracking-[0.2em] font-medium text-terracotta mb-6">
+              Fiyatlar
+            </motion.p>
+            <motion.h2 variants={fadeUp} custom={1}
+              className={`font-display text-[clamp(2.2rem,4vw,3.8rem)] font-semibold leading-[1.1] tracking-[-0.02em] max-w-[700px] mb-20 ${dm ? 'text-white' : 'text-[#1C1917]'}`}>
+              Yatırımın, kendin ol.
+            </motion.h2>
+          </RevealSection>
+
+          <RevealSection>
+            <motion.div variants={fadeUp} className="grid md:grid-cols-3 gap-6">
+              {[
+                { name: 'Online Koçluk', price: '2.500', color: 'sage', features: ['Kişisel antrenman programı', 'Haftalık program güncellemesi', 'WhatsApp destek', 'Form analizi (video)'] },
+                { name: 'Voleybol Performans', price: '3.000', color: 'terracotta', popular: true, features: ['Pozisyona özel antrenman', 'Patlayıcılık & çeviklik', 'Sakatlık önleme protokolü', 'Beslenme rehberi', 'Haftalık video analiz'] },
+                { name: 'Premium Büyüme', price: '5.500', color: 'coast', features: ['Tüm Voleybol Performans özellikleri', 'Birebir online görüşme (haftalık)', 'Detaylı beslenme planı', 'Zihinsel performans koçluğu', 'Öncelikli WhatsApp destek', '7/24 soru-cevap'] },
+              ].map((plan, i) => (
+                <motion.div key={i} variants={scaleIn}
+                  className={`relative rounded-2xl border p-8 transition-all duration-500 hover:scale-[1.02] ${
+                    plan.popular
+                      ? dm ? 'bg-terracotta/5 border-terracotta/20' : 'bg-terracotta/[0.03] border-terracotta/15'
+                      : dm ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-white border-black/[0.06]'
+                  }`}>
+                  {plan.popular && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-terracotta text-white text-[0.7rem] font-medium rounded-full">
+                      En Popüler
+                    </div>
+                  )}
+                  <h3 className={`font-display text-xl font-semibold mb-2 ${dm ? 'text-white' : 'text-[#1C1917]'}`}>{plan.name}</h3>
+                  <div className="flex items-baseline gap-1 mb-6">
+                    <span className={`text-3xl font-display font-bold text-${plan.color}`}>₺{plan.price}</span>
+                    <span className={`text-[0.8rem] ${dm ? 'text-white/30' : 'text-[#1C1917]/30'}`}>/ay</span>
+                  </div>
+                  <ul className="space-y-3 mb-8">
+                    {plan.features.map((f, j) => (
+                      <li key={j} className={`flex items-start gap-2.5 text-[0.85rem] leading-relaxed ${dm ? 'text-white/50' : 'text-[#1C1917]/50'}`}>
+                        <svg className={`w-4 h-4 mt-0.5 flex-shrink-0 text-${plan.color}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                  <a href="#iletisim" className={`block text-center py-3.5 rounded-full text-[0.85rem] font-medium no-underline transition-all duration-300 ${
+                    plan.popular
+                      ? 'bg-terracotta text-white hover:shadow-[0_15px_30px_rgba(194,104,74,0.25)]'
+                      : dm ? 'border border-white/10 text-white/60 hover:text-white hover:border-white/25' : 'border border-black/10 text-[#1C1917]/50 hover:text-[#1C1917] hover:border-black/20'
+                  }`}>
+                    Başla
+                  </a>
+                </motion.div>
+              ))}
+            </motion.div>
+          </RevealSection>
+        </div>
+      </section>
+
+      {/* ─── SSS / FAQ ─── */}
+      <section className={`py-24 md:py-32 ${dm ? 'bg-[#0a0a0a]' : 'bg-white'}`}>
+        <div className="max-w-[800px] mx-auto px-8 md:px-12">
+          <RevealSection>
+            <motion.p variants={fadeUp} className="text-[0.75rem] uppercase tracking-[0.2em] font-medium text-terracotta mb-6 text-center">
+              Sık Sorulan Sorular
+            </motion.p>
+            <motion.h2 variants={fadeUp} custom={1}
+              className={`font-display text-[clamp(1.8rem,3vw,2.8rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-center mb-16 ${dm ? 'text-white' : 'text-[#1C1917]'}`}>
+              Merak ettiklerin
+            </motion.h2>
+          </RevealSection>
+
+          <RevealSection>
+            <motion.div variants={fadeUp} className="space-y-3">
+              {[
+                { q: 'Online koçluk nasıl işliyor?', a: 'Hedeflerine ve seviyene göre kişisel program hazırlıyorum. Haftalık güncellemeler, form kontrolleri ve WhatsApp üzerinden sürekli iletişimle ilerleyişini takip ediyoruz.' },
+                { q: 'Programa ne zaman başlayabilirim?', a: 'Başvurunu aldıktan sonra 24-48 saat içinde seninle iletişime geçiyorum. İlk hafta içinde programın hazır oluyor.' },
+                { q: 'Spor geçmişim yok, katılabilir miyim?', a: 'Kesinlikle! Programlar tamamen kişisel hazırlanıyor. Sıfırdan başlayanlar için özel başlangıç protokolüm var.' },
+                { q: 'Beslenme planı dahil mi?', a: 'Voleybol Performans ve Premium paketlerde beslenme rehberi/planı dahildir. Online Koçluk paketinde temel beslenme önerileri sunuyorum.' },
+                { q: 'Sakatlığım var, yine de çalışabilir miyim?', a: 'Doktor onayı aldıktan sonra sakatlığına uygun modifiye program hazırlıyorum. Rehabilitasyon sonrası spora dönüş programları da uzmanlık alanım.' },
+                { q: 'Paket süresinin sonunda ne olur?', a: 'Minimum 3 ay taahhüt öneriyorum. Süre sonunda devam, paket değişikliği veya bağımsız devam için geçiş programı seçeneklerin var.' },
+              ].map((item, i) => (
+                <motion.details key={i} variants={scaleIn}
+                  className={`group rounded-xl border overflow-hidden transition-all duration-300 ${
+                    dm ? 'border-white/[0.06] hover:border-white/10' : 'border-black/[0.06] hover:border-black/10'
+                  }`}>
+                  <summary className={`flex items-center justify-between px-6 py-4 cursor-pointer list-none text-[0.92rem] font-medium select-none ${
+                    dm ? 'text-white/70 hover:text-white' : 'text-[#1C1917]/70 hover:text-[#1C1917]'
+                  }`}>
+                    {item.q}
+                    <svg className="w-4 h-4 flex-shrink-0 ml-4 transition-transform duration-300 group-open:rotate-45 text-terracotta" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+                    </svg>
+                  </summary>
+                  <div className={`px-6 pb-5 text-[0.85rem] leading-[1.8] ${dm ? 'text-white/40' : 'text-[#1C1917]/45'}`}>
+                    {item.a}
+                  </div>
+                </motion.details>
+              ))}
+            </motion.div>
+          </RevealSection>
+        </div>
+      </section>
+
       {/* ─── İletişim / Contact ─── */}
       <section id="iletisim" className={`py-32 md:py-40 ${dm ? 'bg-[#0a0a0a]' : 'bg-[#FAF6F1]'}`}>
         <div className="max-w-[1400px] mx-auto px-8 md:px-12">
