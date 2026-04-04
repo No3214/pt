@@ -1,19 +1,63 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useRef } from 'react'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import { toPng } from 'html-to-image'
 
-const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }
-const stagger = { show: { transition: { staggerChildren: 0.06 } } }
+const fadeUp = {
+  hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
+  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+}
+const stagger = { show: { transition: { staggerChildren: 0.07 } } }
+
+/* SVG macro donut */
+function MacroDonut({ data, size = 140, dm }: { data: { label: string; pct: number; color: string }[]; size?: number; dm: boolean }) {
+  const ref = useRef<SVGSVGElement>(null)
+  const inView = useInView(ref, { once: true })
+  const r = (size - 20) / 2, cx = size / 2, cy = size / 2
+  const circ = 2 * Math.PI * r
+  let offset = 0
+  return (
+    <svg ref={ref} width={size} height={size} className="mx-auto">
+      <circle cx={cx} cy={cy} r={r} fill="none"
+        stroke={dm ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.04)'} strokeWidth="14" />
+      {data.map((d, i) => {
+        const dash = (d.pct / 100) * circ
+        const gap = 3
+        const seg = (
+          <circle key={i} cx={cx} cy={cy} r={r} fill="none"
+            stroke={d.color} strokeWidth="14" strokeLinecap="round"
+            strokeDasharray={`${Math.max(dash - gap, 0)} ${circ}`}
+            strokeDashoffset={inView ? -offset : circ}
+            style={{ transition: `stroke-dashoffset 0.8s ${i * 0.15}s cubic-bezier(0.16,1,0.3,1)` }}
+            transform={`rotate(-90 ${cx} ${cy})`} />
+        )
+        offset += dash
+        return seg
+      })}
+    </svg>
+  )
+}
+
+const activityLabels: Record<number, string> = {
+  1.2: 'Sedanter', 1.375: 'Hafif Aktif', 1.55: 'Orta Aktif', 1.725: 'Çok Aktif', 1.9: 'Profesyonel',
+}
 
 export default function Nutrition() {
   const { darkMode: dm, showToast } = useStore()
-  const [form, setForm] = useState({ gender: 'female', age: 23, weight: 65, height: 175, activity: 1.55, goal: 0 })
-  const [result, setResult] = useState<{ bmr: number; targetCals: number; proteinG: number; fatG: number; carbG: number; proteinCal: number; fatCal: number; carbCal: number } | null>(null)
+  const [form, setForm] = useState({
+    gender: 'female', age: 23, weight: 65, height: 175, activity: 1.55, goal: 0,
+  })
+  const [result, setResult] = useState<{
+    bmr: number; tdee: number; targetCals: number;
+    proteinG: number; fatG: number; carbG: number;
+    proteinCal: number; fatCal: number; carbCal: number;
+  } | null>(null)
   const [waPreview, setWaPreview] = useState('')
+  const resultRef = useRef<HTMLDivElement>(null)
+  const resultInView = useInView(resultRef, { once: true })
 
   const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
-  const card = `p-6 rounded-2xl border ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`
+  const card = `p-6 rounded-2xl border backdrop-blur-sm ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04] shadow-sm'}`
 
   const calculate = () => {
     let bmr = (10 * form.weight) + (6.25 * form.height) - (5 * form.age)
@@ -27,8 +71,8 @@ export default function Nutrition() {
     const fatG = Math.round(fatCal / 9)
     const carbCal = targetCals - proteinCal - fatCal
     const carbG = Math.round(carbCal / 4)
-    setResult({ bmr, targetCals, proteinG, fatG, carbG, proteinCal, fatCal, carbCal })
-    const wa = `🥗 *ELA EBEOĞLU — Beslenme Planı*\n━━━━━━━━━━━━━━━━━━━━\n🎯 Hedef Kalori: ${targetCals} kcal\n\n*Günlük Makro Dağılımın:*\n🥩 Protein: ${proteinG}g\n🥑 Yağ: ${fatG}g\n🍚 Karbonhidrat: ${carbG}g\n\n📌 *Antrenman Günü Notu:*\nKarbonhidratlarının %60'ını antrenman öncesi ve sonrası 2 öğüne böl.\n\n📌 *Dinlenme Günü Notu:*\nKarbonhidratı azaltıp yağ oranını artırabilirsin. Protein sabit tut.`
+    setResult({ bmr, tdee, targetCals, proteinG, fatG, carbG, proteinCal, fatCal, carbCal })
+    const wa = `🥗 *ELA EBEOĞLU — Beslenme Planı*\n━━━━━━━━━━━━━━━━━━━━\n🎯 Hedef Kalori: ${targetCals} kcal\n\n*Günlük Makro Dağılımın:*\n🥩 Protein: ${proteinG}g (${Math.round((proteinCal / targetCals) * 100)}%)\n🥑 Yağ: ${fatG}g (${Math.round((fatCal / targetCals) * 100)}%)\n🍚 Karbonhidrat: ${carbG}g (${Math.round((carbCal / targetCals) * 100)}%)\n\n📌 *Antrenman Günü Notu:*\nKarbonhidratlarının %60'ını antrenman öncesi ve sonrası 2 öğüne böl.\n\n📌 *Dinlenme Günü Notu:*\nKarbonhidratı azaltıp yağ oranını artırabilirsin. Protein sabit tut.`
     setWaPreview(wa)
   }
 
@@ -49,9 +93,9 @@ export default function Nutrition() {
   }
 
   const macroData = result ? [
-    { label: 'Protein', sub: '2.2g/kg', g: result.proteinG, cal: result.proteinCal, pct: Math.round((result.proteinCal / result.targetCals) * 100), color: 'sage' },
-    { label: 'Yağ', sub: '%25', g: result.fatG, cal: result.fatCal, pct: Math.round((result.fatCal / result.targetCals) * 100), color: 'sand' },
-    { label: 'Karbonhidrat', sub: 'kalan', g: result.carbG, cal: result.carbCal, pct: Math.round((result.carbCal / result.targetCals) * 100), color: 'terracotta' },
+    { label: 'Protein', sub: '2.2g/kg', g: result.proteinG, cal: result.proteinCal, pct: Math.round((result.proteinCal / result.targetCals) * 100), color: '#7A9E82', icon: '🥩' },
+    { label: 'Yağ', sub: '%25', g: result.fatG, cal: result.fatCal, pct: Math.round((result.fatCal / result.targetCals) * 100), color: '#D4C4AB', icon: '🥑' },
+    { label: 'Karbonhidrat', sub: 'kalan', g: result.carbG, cal: result.carbCal, pct: Math.round((result.carbCal / result.targetCals) * 100), color: '#C2684A', icon: '🍚' },
   ] : []
 
   return (
@@ -60,27 +104,40 @@ export default function Nutrition() {
       <motion.div variants={fadeUp} className="flex flex-wrap justify-between items-start mb-10 gap-4">
         <div>
           <h2 className="font-display text-3xl font-semibold tracking-tight">TDEE & Makro Hesaplayıcı</h2>
-          <p className={`mt-1 text-sm ${dm ? 'text-white/40' : 'text-stone-400'}`}>Mifflin-St Jeor algoritması ile kişiselleştirilmiş beslenme planı</p>
+          <p className={`mt-1 text-sm ${dm ? 'text-white/40' : 'text-stone-400'}`}>
+            Mifflin-St Jeor algoritması ile kişiselleştirilmiş beslenme planı
+          </p>
         </div>
-        <span className={`px-4 py-2 rounded-full text-xs font-medium ${dm ? 'bg-sky-500/10 text-sky-400' : 'bg-sky-50 text-sky-600'}`}>Mifflin-St Jeor</span>
+        <div className="flex items-center gap-2">
+          <span className={`px-3 py-1.5 rounded-full text-xs font-medium ${dm ? 'bg-sky-500/10 text-sky-400' : 'bg-sky-50 text-sky-600'}`}>Mifflin-St Jeor</span>
+          {result && (
+            <span className={`px-3 py-1.5 rounded-full text-xs font-medium ${dm ? 'bg-sage/10 text-sage' : 'bg-sage/10 text-sage'}`}>
+              {activityLabels[form.activity] || 'Aktif'}
+            </span>
+          )}
+        </div>
       </motion.div>
 
       <div className="grid md:grid-cols-2 gap-8 items-start">
         {/* Input */}
         <motion.div variants={fadeUp} className={card}>
-          <h3 className="font-display text-xl font-medium mb-6">Fiziksel Veriler</h3>
+          <div className="flex items-center gap-3 mb-6">
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg ${dm ? 'bg-terracotta/10' : 'bg-terracotta/10'}`}>📐</div>
+            <h3 className="font-display text-xl font-medium">Fiziksel Veriler</h3>
+          </div>
           <div className="grid grid-cols-2 gap-4">
-            <div>
+            <div className="col-span-2">
               <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Cinsiyet</label>
               <div className="flex gap-2">
-                {[{ v: 'female', l: 'Kadın' }, { v: 'male', l: 'Erkek' }].map(g => (
-                  <button key={g.v} onClick={() => setForm({ ...form, gender: g.v })}
-                    className={`flex-1 py-3 rounded-xl text-sm font-medium cursor-pointer transition-all border-none ${form.gender === g.v
-                      ? 'bg-terracotta text-white'
+                {[{ v: 'female', l: 'Kadın', icon: '♀' }, { v: 'male', l: 'Erkek', icon: '♂' }].map(g => (
+                  <motion.button key={g.v} whileTap={{ scale: 0.97 }}
+                    onClick={() => setForm({ ...form, gender: g.v })}
+                    className={`flex-1 py-3.5 rounded-xl text-sm font-medium cursor-pointer transition-all border-none flex items-center justify-center gap-2 ${form.gender === g.v
+                      ? 'bg-terracotta text-white shadow-lg shadow-terracotta/20'
                       : (dm ? 'bg-white/[0.06] text-white/50' : 'bg-stone-100 text-stone-500')
                     }`}>
-                    {g.l}
-                  </button>
+                    <span className="text-lg">{g.icon}</span> {g.l}
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -92,41 +149,64 @@ export default function Nutrition() {
               <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Kilo (kg)</label>
               <input type="number" step={0.1} value={form.weight} onChange={e => setForm({ ...form, weight: +e.target.value })} className={inp} />
             </div>
-            <div>
+            <div className="col-span-2">
               <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Boy (cm)</label>
               <input type="number" value={form.height} onChange={e => setForm({ ...form, height: +e.target.value })} className={inp} />
             </div>
           </div>
+
+          {/* Activity Level */}
           <div className="mt-5">
             <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Aktivite Seviyesi</label>
-            <select value={form.activity} onChange={e => setForm({ ...form, activity: +e.target.value })} className={inp}>
-              <option value={1.2}>Sedanter (masa başı)</option>
-              <option value={1.375}>Hafif Aktif (1-3 gün)</option>
-              <option value={1.55}>Orta Aktif (3-5 gün)</option>
-              <option value={1.725}>Çok Aktif (6-7 gün)</option>
-              <option value={1.9}>Profesyonel Sporcu</option>
-            </select>
-          </div>
-          <div className="mt-5">
-            <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Hedef</label>
-            <div className="flex gap-2">
-              {[{ v: -500, l: 'Yağ Yak', s: '-500' }, { v: 0, l: 'Koru', s: '±0' }, { v: 300, l: 'Kas Kazan', s: '+300' }].map(g => (
-                <button key={g.v} onClick={() => setForm({ ...form, goal: g.v })}
-                  className={`flex-1 py-3 rounded-xl text-sm font-medium cursor-pointer transition-all border-none ${form.goal === g.v
-                    ? 'bg-terracotta text-white'
-                    : (dm ? 'bg-white/[0.06] text-white/50' : 'bg-stone-100 text-stone-500')
+            <div className="grid grid-cols-5 gap-1.5">
+              {[
+                { v: 1.2, l: 'Sedanter', icon: '🪑' },
+                { v: 1.375, l: 'Hafif', icon: '🚶' },
+                { v: 1.55, l: 'Orta', icon: '🏃' },
+                { v: 1.725, l: 'Yoğun', icon: '🏋️' },
+                { v: 1.9, l: 'Pro', icon: '🏐' },
+              ].map(a => (
+                <motion.button key={a.v} whileTap={{ scale: 0.95 }}
+                  onClick={() => setForm({ ...form, activity: a.v })}
+                  className={`py-3 rounded-xl text-center cursor-pointer transition-all border-none ${form.activity === a.v
+                    ? 'bg-sage text-white shadow-lg shadow-sage/20'
+                    : (dm ? 'bg-white/[0.04] text-white/40' : 'bg-stone-50 text-stone-500')
                   }`}>
-                  <div>{g.l}</div>
-                  <div className="text-xs opacity-70 mt-0.5">{g.s} kcal</div>
-                </button>
+                  <div className="text-lg mb-0.5">{a.icon}</div>
+                  <div className="text-[0.6rem] font-medium">{a.l}</div>
+                </motion.button>
               ))}
             </div>
           </div>
+
+          {/* Goal */}
+          <div className="mt-5">
+            <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Hedef</label>
+            <div className="flex gap-2">
+              {[
+                { v: -500, l: 'Yağ Yak', s: '-500', icon: '🔥', color: 'terracotta' },
+                { v: 0, l: 'Koru', s: '±0', icon: '⚖️', color: 'coast' },
+                { v: 300, l: 'Kas Kazan', s: '+300', icon: '💪', color: 'sage' },
+              ].map(g => (
+                <motion.button key={g.v} whileTap={{ scale: 0.97 }}
+                  onClick={() => setForm({ ...form, goal: g.v })}
+                  className={`flex-1 py-3.5 rounded-xl text-center cursor-pointer transition-all border-none ${form.goal === g.v
+                    ? `bg-${g.color === 'coast' ? 'sky-500' : g.color} text-white shadow-lg`
+                    : (dm ? 'bg-white/[0.06] text-white/50' : 'bg-stone-100 text-stone-500')
+                  }`}>
+                  <div className="text-lg">{g.icon}</div>
+                  <div className="text-sm font-medium">{g.l}</div>
+                  <div className="text-xs opacity-70 mt-0.5">{g.s} kcal</div>
+                </motion.button>
+              ))}
+            </div>
+          </div>
+
           <motion.button
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
             onClick={calculate}
-            className="w-full mt-6 py-4 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer"
+            className="w-full mt-6 py-4 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer shadow-lg shadow-terracotta/20 text-sm"
           >
             Hesapla & Plan Çıkar
           </motion.button>
@@ -137,39 +217,90 @@ export default function Nutrition() {
           {result ? (
             <motion.div
               key="results"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              ref={resultRef}
+              initial={{ opacity: 0, y: 20, filter: 'blur(8px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="space-y-6"
             >
-              {/* Big Number */}
+              {/* Calorie Donut + Stats */}
               <div className={card}>
-                <div className="flex items-end justify-between mb-6">
-                  <div>
-                    <p className={`text-xs uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-400'}`}>Günlük Hedef Kalori</p>
-                    <p className="font-display text-5xl text-terracotta mt-1">{result.targetCals}</p>
-                    <p className={`text-xs mt-1 ${dm ? 'text-white/30' : 'text-stone-400'}`}>kcal / gün</p>
+                <div className="flex flex-col sm:flex-row items-center gap-6">
+                  {/* Donut */}
+                  <div className="relative">
+                    <MacroDonut data={macroData.map(m => ({ label: m.label, pct: m.pct, color: m.color }))} size={160} dm={dm} />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className={`text-xs uppercase tracking-wider ${dm ? 'text-white/30' : 'text-stone-400'}`}>Hedef</span>
+                      <span className="font-display text-3xl text-terracotta">{result.targetCals}</span>
+                      <span className={`text-[0.65rem] ${dm ? 'text-white/30' : 'text-stone-400'}`}>kcal/gün</span>
+                    </div>
                   </div>
-                  <div className="text-right">
-                    <p className={`text-xs uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-400'}`}>BMR</p>
-                    <p className="text-2xl font-semibold">{result.bmr}</p>
+
+                  {/* Side stats */}
+                  <div className="flex-1 w-full space-y-3">
+                    {/* BMR & TDEE pills */}
+                    <div className="flex gap-2 mb-4">
+                      <div className={`flex-1 p-3 rounded-xl text-center ${dm ? 'bg-white/[0.04]' : 'bg-stone-50'}`}>
+                        <div className={`text-[0.65rem] uppercase tracking-wider mb-1 ${dm ? 'text-white/30' : 'text-stone-400'}`}>BMR</div>
+                        <div className="text-lg font-semibold">{result.bmr}</div>
+                      </div>
+                      <div className={`flex-1 p-3 rounded-xl text-center ${dm ? 'bg-white/[0.04]' : 'bg-stone-50'}`}>
+                        <div className={`text-[0.65rem] uppercase tracking-wider mb-1 ${dm ? 'text-white/30' : 'text-stone-400'}`}>TDEE</div>
+                        <div className="text-lg font-semibold">{result.tdee}</div>
+                      </div>
+                      <div className={`flex-1 p-3 rounded-xl text-center ${form.goal < 0 ? (dm ? 'bg-terracotta/10' : 'bg-terracotta/5') : form.goal > 0 ? (dm ? 'bg-sage/10' : 'bg-sage/5') : (dm ? 'bg-sky-500/10' : 'bg-sky-50')}`}>
+                        <div className={`text-[0.65rem] uppercase tracking-wider mb-1 ${dm ? 'text-white/30' : 'text-stone-400'}`}>Fark</div>
+                        <div className={`text-lg font-semibold ${form.goal < 0 ? 'text-terracotta' : form.goal > 0 ? 'text-sage' : 'text-sky-500'}`}>
+                          {form.goal > 0 ? '+' : ''}{form.goal}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Macro breakdown */}
+                    {macroData.map((m, i) => (
+                      <div key={i}>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <span className="text-sm font-medium flex items-center gap-2">
+                            <span>{m.icon}</span>
+                            {m.label}
+                            <span className={`text-[0.65rem] ${dm ? 'text-white/30' : 'text-stone-400'}`}>({m.sub})</span>
+                          </span>
+                          <span className="text-sm font-semibold">{m.g}g <span className={`text-xs ${dm ? 'text-white/30' : 'text-stone-400'}`}>· {m.pct}%</span></span>
+                        </div>
+                        <div className={`h-2.5 rounded-full overflow-hidden ${dm ? 'bg-white/[0.06]' : 'bg-stone-100'}`}>
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: resultInView ? `${m.pct}%` : '0%' }}
+                            transition={{ duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                            className="h-full rounded-full"
+                            style={{ backgroundColor: m.color }}
+                          />
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                </div>                {/* Macro Bars */}
-                <div className="space-y-4">
-                  {macroData.map((m, i) => (
-                    <div key={i}>
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-sm font-medium">{m.label} <span className={`text-xs ${dm ? 'text-white/30' : 'text-stone-400'}`}>({m.sub})</span></span>
-                        <span className="text-sm font-semibold">{m.g}g <span className={`text-xs ${dm ? 'text-white/30' : 'text-stone-400'}`}>· {m.cal} kcal</span></span>
-                      </div>
-                      <div className={`h-2.5 rounded-full overflow-hidden ${dm ? 'bg-white/[0.06]' : 'bg-stone-100'}`}>
-                        <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${m.pct}%` }}
-                          transition={{ duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }}
-                          className={`h-full rounded-full ${m.color === 'sage' ? 'bg-sage' : m.color === 'sand' ? 'bg-sand' : 'bg-terracotta'}`}
-                        />
-                      </div>
+                </div>
+              </div>
+
+              {/* Meal Timing Tips */}
+              <div className={card}>
+                <h4 className="font-display text-base font-medium mb-4 flex items-center gap-2">
+                  <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm ${dm ? 'bg-sage/10' : 'bg-sage/10'}`}>⏰</span>
+                  Öğün Zamanlama Rehberi
+                </h4>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  {[
+                    { time: '07:00', meal: 'Kahvaltı', pct: '25%', icon: '🌅' },
+                    { time: '12:00', meal: 'Öğle', pct: '30%', icon: '☀️' },
+                    { time: '16:00', meal: 'Ara Öğün', pct: '15%', icon: '🍌' },
+                    { time: '19:00', meal: 'Akşam', pct: '30%', icon: '🌙' },
+                  ].map(t => (
+                    <div key={t.time} className={`p-3 rounded-xl text-center ${dm ? 'bg-white/[0.03] border border-white/[0.04]' : 'bg-stone-50 border border-stone-100'}`}>
+                      <div className="text-xl mb-1">{t.icon}</div>
+                      <div className="text-sm font-medium">{t.meal}</div>
+                      <div className={`text-[0.65rem] ${dm ? 'text-white/30' : 'text-stone-400'}`}>{t.time}</div>
+                      <div className={`text-xs font-semibold mt-1 ${dm ? 'text-sage' : 'text-sage'}`}>{t.pct}</div>
                     </div>
                   ))}
                 </div>
@@ -178,27 +309,43 @@ export default function Nutrition() {
               {/* WhatsApp Output */}
               <div className={card}>
                 <div className="flex justify-between items-center mb-4">
-                  <span className="text-sm font-medium">WhatsApp Çıktısı</span>
+                  <span className="text-sm font-medium flex items-center gap-2">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-sage"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    WhatsApp Çıktısı
+                  </span>
                   <div className="flex gap-2">
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={downloadPNG}
                       className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent' : 'border-stone-200 text-stone-600 bg-transparent'}`}>
                       PNG
                     </motion.button>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={copyText}
-                      className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-terracotta text-white border-none">
+                      className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-terracotta text-white border-none shadow-lg shadow-terracotta/20">
                       Kopyala
                     </motion.button>
                   </div>
                 </div>
-                <textarea value={waPreview} onChange={e => setWaPreview(e.target.value)} rows={8} className={`${inp} font-mono text-xs`} />
+                <textarea value={waPreview} onChange={e => setWaPreview(e.target.value)} rows={8} className={`${inp} font-mono text-xs leading-relaxed`} />
               </div>
             </motion.div>
           ) : (
             <motion.div key="placeholder" initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              className={`${card} flex flex-col items-center justify-center min-h-[400px] text-center`}>
-              <div className="text-5xl mb-4 opacity-20">🥗</div>
+              className={`${card} flex flex-col items-center justify-center min-h-[500px] text-center`}>
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+                className="text-6xl mb-6 opacity-20"
+              >🥗</motion.div>
               <p className={`font-display text-xl ${dm ? 'text-white/20' : 'text-stone-300'}`}>Sonuçlar burada görünecek</p>
-              <p className={`text-sm mt-1 ${dm ? 'text-white/10' : 'text-stone-200'}`}>Verileri girin ve hesaplayın</p>
+              <p className={`text-sm mt-2 max-w-[240px] ${dm ? 'text-white/10' : 'text-stone-200'}`}>
+                Fiziksel verileri girin ve hesaplayın
+              </p>
+              <div className={`mt-6 flex gap-3 ${dm ? 'text-white/10' : 'text-stone-200'}`}>
+                <span className="text-2xl">📐</span>
+                <span className="text-2xl">→</span>
+                <span className="text-2xl">🧮</span>
+                <span className="text-2xl">→</span>
+                <span className="text-2xl">📊</span>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
