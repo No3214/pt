@@ -207,6 +207,14 @@ a { transition: color 0.3s ease, opacity 0.3s ease; }
   h2 { font-size: clamp(1.5rem, 6vw, 2.5rem) !important; }
 }
 
+/* ═══════════════════ Shake Animation ═══════════════════ */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
+  20%, 40%, 60%, 80% { transform: translateX(4px); }
+}
+.animate-shake { animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+
 /* ═══════════════════ Skeleton Loading ═══════════════════ */
 .skeleton {
   background: linear-gradient(90deg, rgba(0,0,0,0.04) 25%, rgba(0,0,0,0.08) 50%, rgba(0,0,0,0.04) 75%);
