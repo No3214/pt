@@ -10,6 +10,7 @@ import ScrollToTop from './components/ScrollToTop'
 import NotFound from './pages/NotFound'
 import WhatsAppWidget from './components/WhatsAppWidget'
 import ScrollProgress from './components/ScrollProgress'
+import ReloadPrompt from './components/common/ReloadPrompt'
 import { tenantConfig } from './config/tenant'
 import Lenis from 'lenis'
 
@@ -94,6 +95,7 @@ export default function App() {
       <Preloader />
       <ScrollProgress />
       <ScrollToTop />
+      <ReloadPrompt />
       <Suspense fallback={<PageLoader />}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
