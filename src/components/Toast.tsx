@@ -11,6 +11,7 @@ export default function Toast() {
       const t = setTimeout(() => setVisible(false), 2800)
       return () => clearTimeout(t)
     }
+    return undefined
   }, [msg])
 
   return (

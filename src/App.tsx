@@ -11,6 +11,7 @@ import NotFound from './pages/NotFound'
 import WhatsAppWidget from './components/WhatsAppWidget'
 import ScrollProgress from './components/ScrollProgress'
 import { tenantConfig } from './config/tenant'
+import Lenis from 'lenis'
 
 // Lazy-loaded pages (reduces initial bundle by ~60%)
 const AdminLayout = lazy(() => import('./pages/admin/Layout'))
@@ -57,6 +58,26 @@ export default function App() {
     root.classList.toggle('dark', darkMode)
     const meta = document.querySelector('meta[name="theme-color"]')
     if (meta) meta.setAttribute('content', darkMode ? '#050505' : '#FAF6F1')
+
+    // Initialize ultra-smooth scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      touchMultiplier: 2,
+    })
+
+    function raf(time: number) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+    requestAnimationFrame(raf)
+
+    return () => {
+      lenis.destroy()
+    }
   }, [darkMode])
 
   return (

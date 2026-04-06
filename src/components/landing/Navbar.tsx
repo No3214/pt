@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useStore } from '../../stores/useStore';
 import { navigationLinks } from '../../data/landingData';
 import { tenantConfig } from '../../config/tenant';

@@ -5,6 +5,7 @@ import { splits, sanitize } from '../../lib/constants'
 import { exercises, categoryLabels, difficultyLabels } from '../../lib/exercises'
 import { councilQuery } from '../../lib/ai'
 import { toPng } from 'html-to-image'
+import generatePDF from 'react-to-pdf'
 
 interface WorkoutLine { exercise: string; sets: number; reps: string; note: string; muscle?: string }
 
@@ -26,7 +27,7 @@ const diffColors: Record<string, { bg: string; text: string }> = {
   advanced: { bg: 'bg-terracotta/10', text: 'text-terracotta' },
 }
 
-function ExerciseThumb({ exercise, dm }: { exercise: any, dm: boolean }) {
+function ExerciseThumb({ exercise }: { exercise: any, dm?: boolean }) {
   const [err, setErr] = useState(false)
   
   if (err) {
@@ -145,6 +146,15 @@ export default function Builder() {
       link.click()
     } catch { showToast('PNG oluşturulamadı') }
     el.style.left = '-9999px'
+  }
+
+  const downloadPDF = () => {
+    const el = document.getElementById('export-container')
+    if (!el) return
+    el.style.left = '0'
+    generatePDF(() => document.getElementById('export-container'), { filename: 'ElaEbeoglu_Program.pdf' })
+      .finally(() => { el.style.left = '-9999px' })
+      .catch(() => showToast('PDF oluşturulamadı'))
   }
 
   return (
@@ -444,6 +454,13 @@ export default function Builder() {
                 <h3 className="font-display text-lg font-medium">WhatsApp Çıktısı</h3>
               </div>
               <div className="flex gap-2">
+                <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={downloadPDF}
+                  className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
+                  <span className="flex items-center gap-1.5">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    PDF
+                  </span>
+                </motion.button>
                 <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={downloadPNG}
                   className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
                   <span className="flex items-center gap-1.5">

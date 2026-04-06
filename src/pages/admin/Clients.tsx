@@ -10,7 +10,7 @@ const stagger = { show: { transition: { staggerChildren: 0.06 } } }
 type SortKey = 'name' | 'sessions' | 'price' | 'habit'
 
 export default function Clients() {
-  const { clients, addClient, updateClient, deleteClient, useSession, resetClientSessions, markHabit, addNote, deleteNote, showToast, darkMode: dm } = useStore()
+  const { clients, addClient, updateClient, deleteClient, useSession, markHabit, addNote, deleteNote, showToast, darkMode: dm } = useStore()
   const navigate = useNavigate()
   const [form, setForm] = useState({ name: '', goal: '', sessions: 12, price: 5000, phone: '', email: '' })
   const [notesModal, setNotesModal] = useState<string | null>(null)

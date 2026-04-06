@@ -49,8 +49,6 @@ export default function CalendarPage() {
     return Object.entries(counts).find(([, v]) => v === max)?.[0] || '—'
   })()
 
-  // Hours per day for the timeline
-  const timeSlots = ['07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00']
 
   return (
     <motion.div initial="hidden" animate="show" variants={stagger}>
