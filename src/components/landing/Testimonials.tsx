@@ -16,7 +16,7 @@ export default function Testimonials() {
       setActive(prev => (prev + 1) % testimonials.length);
     }, 6000);
     return () => clearInterval(timerRef.current);
-  }, []);
+  }, [testimonials.length]);
 
   const goTo = (i: number) => {
     setActive(i);

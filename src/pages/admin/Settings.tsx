@@ -9,9 +9,9 @@ const fadeUp = {
 const stagger = { show: { transition: { staggerChildren: 0.08 } } }
 
 export default function Settings() {
-  const { clients, calSessions, measurements, progressPhotos, savedPrograms, showToast, darkMode: dm } = useStore()
+  const { clients, calSessions, measurements, progressPhotos, savedPrograms, showToast, darkMode: dm, aiConfig, setAiConfig } = useStore()
   const fileRef = useRef<HTMLInputElement>(null)
-  const [activeTab, setActiveTab] = useState<'data' | 'danger'>('data')
+  const [activeTab, setActiveTab] = useState<'data' | 'ai' | 'danger'>('data')
 
   const card = `p-6 rounded-2xl border transition-all duration-300 ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`
 
@@ -69,6 +69,7 @@ export default function Settings() {
 
   const tabs = [
     { key: 'data' as const, label: 'Veri Yönetimi', icon: '💾' },
+    { key: 'ai' as const, label: 'AI Yönetimi', icon: '🤖' },
     { key: 'danger' as const, label: 'Tehlikeli Bölge', icon: '⚠️' },
   ]
 
@@ -178,6 +179,69 @@ export default function Settings() {
                 Veriler tarayıcınızın localStorage alanında saklanır.
                 Tarayıcı verilerini temizlerseniz tüm veriler silinir — düzenli yedek almanız önerilir.
               </p>
+            </div>
+          </motion.div>
+        )}
+
+        {/* AI Configuration Tab */}
+        {activeTab === 'ai' && (
+          <motion.div key="ai" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
+            <div className={card}>
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-3xl">🔑</span>
+                <div>
+                  <h3 className="font-display text-xl font-semibold">API Anahtarları</h3>
+                  <p className={`text-sm ${dm ? 'text-white/40' : 'text-stone-400'}`}>Tüm AI analizleri ve diyet yazımları için kullanılır</p>
+                </div>
+              </div>
+
+              <div className="space-y-4 max-w-2xl">
+                <div>
+                  <label className={`block mb-1.5 text-xs font-semibold uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-500'}`}>
+                    Gemini API Key
+                  </label>
+                  <input
+                    type="password"
+                    value={aiConfig.gemini || ''}
+                    onChange={(e) => setAiConfig({ gemini: e.target.value })}
+                    placeholder="AIzaSy..."
+                    className={`w-full p-3.5 rounded-xl border outline-none text-sm font-mono tracking-wide transition-all ${
+                      dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-[#1C1917]'
+                    }`}
+                  />
+                  <p className={`text-[0.65rem] mt-1 ${dm ? 'text-white/30' : 'text-stone-400'}`}>Anahtarınız sadece tarayıcınızda (localStorage) saklanır ve güvenlik proxy'sine aktarılır.</p>
+                </div>
+
+                <div>
+                  <label className={`block mb-1.5 text-xs font-semibold uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-500'}`}>
+                    OpenRouter API Key
+                  </label>
+                  <input
+                    type="password"
+                    value={aiConfig.openrouter || ''}
+                    onChange={(e) => setAiConfig({ openrouter: e.target.value })}
+                    placeholder="sk-or-v1-..."
+                    className={`w-full p-3.5 rounded-xl border outline-none text-sm font-mono tracking-wide transition-all ${
+                      dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-[#1C1917]'
+                    }`}
+                  />
+                </div>
+
+                <div>
+                  <label className={`block mb-1.5 text-xs font-semibold uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-500'}`}>
+                    DeepSeek API Key
+                  </label>
+                  <input
+                    type="password"
+                    value={aiConfig.deepseek || ''}
+                    onChange={(e) => setAiConfig({ deepseek: e.target.value })}
+                    placeholder="sk-..."
+                    className={`w-full p-3.5 rounded-xl border outline-none text-sm font-mono tracking-wide transition-all ${
+                      dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-[#1C1917]'
+                    }`}
+                  />
+                </div>
+              </div>
             </div>
           </motion.div>
         )}

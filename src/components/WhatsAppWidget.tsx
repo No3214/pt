@@ -30,13 +30,13 @@ export default function WhatsAppWidget() {
 
   if (isAdmin || isPortal || !visible) return null
 
-  const quickMessecondarys = [
+  const quickMessages = [
     { text: 'Antrenman programı hakkında bilgi almak istiyorum', icon: '💪' },
     { text: 'Online PT hizmeti hakkında bilgi almak istiyorum', icon: '📱' },
     { text: 'Fiyat bilgisi alabilir miyim?', icon: '💰' },
   ]
 
-  const sendMessecondary = (msg: string) => {
+  const sendMessage = (msg: string) => {
     window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank')
     setOpen(false)
   }
@@ -101,7 +101,7 @@ export default function WhatsAppWidget() {
 
               {/* Quick reply buttons */}
               <div className="space-y-1.5 mt-3">
-                {quickMessecondarys.map((m, i) => (
+                {quickMessages.map((m, i) => (
                   <motion.button
                     key={i}
                     initial={{ opacity: 0, y: 5 }}
@@ -109,7 +109,7 @@ export default function WhatsAppWidget() {
                     transition={{ delay: 0.4 + i * 0.1 }}
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => sendMessecondary(m.text)}
+                    onClick={() => sendMessage(m.text)}
                     className="w-full text-left px-4 py-2.5 bg-white rounded-xl text-[0.8rem] text-stone-700 border border-[#25D366]/20 cursor-pointer hover:border-[#25D366]/50 hover:bg-[#25D366]/5 transition-all flex items-center gap-2"
                   >
                     <span>{m.icon}</span>
@@ -119,7 +119,7 @@ export default function WhatsAppWidget() {
               </div>
             </div>
 
-            {/* Custom messecondary input */}
+            {/* Custom message input */}
             <div className="bg-[#F0F0F0] px-3 py-2.5 flex gap-2 items-center">
               <input
                 type="text"
@@ -127,12 +127,12 @@ export default function WhatsAppWidget() {
                 className="flex-1 bg-white rounded-full px-4 py-2.5 text-sm border-none outline-none text-stone-700 placeholder:text-stone-400"
                 onKeyDown={e => {
                   if (e.key === 'Enter' && (e.target as HTMLInputElement).value.trim()) {
-                    sendMessecondary((e.target as HTMLInputElement).value.trim())
+                    sendMessage((e.target as HTMLInputElement).value.trim())
                   }
                 }}
               />
               <button
-                onClick={() => sendMessecondary(GREETING)}
+                onClick={() => sendMessage(GREETING)}
                 className="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center border-none cursor-pointer hover:bg-[#20BD5A] transition-colors shrink-0"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>

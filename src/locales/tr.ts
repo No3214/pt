@@ -55,7 +55,7 @@ export const tr = {
     title: "Merak ettiklerinizi hemen gönderin.",
     name: "Adınız Soyadınız *",
     email: "Dönüş yapılacak e-posta *",
-    messecondary: "Hedefleriniz, geçmişiniz ve sorunlarınız...",
+    message: "Hedefleriniz, geçmişiniz ve sorunlarınız...",
     send: "Mesajı İlet",
     sending: "İletiliyor...",
     success: "Mesajınız bana ulaştı, en kısa sürede dönüş yapacağım! 🏀",

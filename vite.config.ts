@@ -40,6 +40,8 @@ export default defineConfig({
           vendor: ['react', 'react-dom', 'react-router-dom'],
           charts: ['recharts'],
           motion: ['framer-motion'],
+          forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
+          state: ['zustand'],
         },
       },
     },

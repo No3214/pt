@@ -12,10 +12,12 @@ type SortKey = 'name' | 'sessions' | 'price' | 'habit'
 export default function Clients() {
   const { clients, addClient, updateClient, deleteClient, useSession, markHabit, addNote, deleteNote, showToast, darkMode: dm } = useStore()
   const navigate = useNavigate()
-  const [form, setForm] = useState({ name: '', goal: '', sessions: 12, price: 5000, phone: '', email: '' })
+  const [form, setForm] = useState({ name: '', goal: '', sessions: 12, price: 5000, phone: '', email: '', allergens: [] as string[] })
   const [notesModal, setNotesModal] = useState<string | null>(null)
   const [editModal, setEditModal] = useState<string | null>(null)
-  const [editForm, setEditForm] = useState({ name: '', goal: '', sessions: 0, max: 0, price: 0, phone: '', email: '' })
+  const [messageModal, setMessageModal] = useState<string | null>(null)
+  const [sessionModal, setSessionModal] = useState<string | null>(null)
+  const [editForm, setEditForm] = useState({ name: '', goal: '', sessions: 0, max: 0, price: 0, phone: '', email: '', allergens: [] as string[] })
   const [noteText, setNoteText] = useState('')
   const [showForm, setShowForm] = useState(false)
   const [search, setSearch] = useState('')
@@ -23,7 +25,7 @@ export default function Clients() {
 
   // Search + Sort
   const filteredClients = useMemo(() => {
-    let list = clients.filter(c =>
+    const list = clients.filter(c =>
       c.name.toLowerCase().includes(search.toLowerCase()) ||
       c.goal.toLowerCase().includes(search.toLowerCase())
     )
@@ -42,16 +44,25 @@ export default function Clients() {
     return list
   }, [clients, search, sortBy])
 
+  const ALLERGEN_OPTIONS = ['Gluten', 'Laktoz', 'Yumurta', 'Fıstık', 'Ceviz/Badem', 'Kabuklu Deniz', 'Balık', 'Soya', 'Kırmızı Et', 'Kereviz', 'Mantar', 'Hardal', 'Susam', 'Narenciye']
+
+  const toggleAllergen = (list: string[], item: string) =>
+    list.includes(item) ? list.filter(a => a !== item) : [...list, item]
+
   const handleAdd = () => {
     if (!form.name.trim()) { showToast('İsim giriniz.'); return }
-    addClient({ name: sanitize(form.name), goal: sanitize(form.goal), sessions: form.sessions, max: form.sessions, price: form.price, phone: form.phone, email: form.email })
-    setForm({ name: '', goal: '', sessions: 12, price: 5000, phone: '', email: '' })
+    addClient({ name: sanitize(form.name), goal: sanitize(form.goal), sessions: form.sessions, max: form.sessions, price: form.price, phone: form.phone, email: form.email, allergens: form.allergens })
+    
+    // 🔥 OTOMASYON: Yeni kayıt yapıldığında Hoşgeldin mesajını otomatik tetikle
+    handleCRMMessage(form.name, 'welcome', form.phone)
+    
+    setForm({ name: '', goal: '', sessions: 12, price: 5000, phone: '', email: '', allergens: [] })
     setShowForm(false)
-    showToast('Danışan eklendi!')
+    showToast('Danışan eklendi ve otomasyon tetiklendi!')
   }
 
   const openEdit = (c: typeof clients[0]) => {
-    setEditForm({ name: c.name, goal: c.goal, sessions: c.sessions, max: c.max, price: c.price, phone: c.phone || '', email: c.email || '' })
+    setEditForm({ name: c.name, goal: c.goal, sessions: c.sessions, max: c.max, price: c.price, phone: c.phone || '', email: c.email || '', allergens: c.allergens || [] })
     setEditModal(c.id)
   }
 
@@ -65,6 +76,7 @@ export default function Clients() {
       price: editForm.price,
       phone: editForm.phone,
       email: editForm.email,
+      allergens: editForm.allergens,
     })
     setEditModal(null)
     showToast('Danışan güncellendi!')
@@ -78,6 +90,41 @@ export default function Clients() {
   const handleReadiness = (name: string) => {
     const text = encodeURIComponent(`Günaydın ${name}! Bugünkü antrenman öncesi kısa bir rutin değerlendirme yapalım:\n\n1. Dün Geceki Uyku Puanın (1-10):\n2. Mevcut Yorgunluk Hissin (1-10):\n3. Kas Ağrın / Hamlık (1-10):\n4. Beslenme Uyumun Yüzde Kaç:\n\nLütfen rakamlarla cevapla, bugünkü yüklenmemizi ona göre optimize edelim.`)
     window.open(`https://wa.me/?text=${text}`, '_blank')
+  }
+
+  const handleCRMMessage = (name: string, type: 'welcome' | 'payment' | 'motivation', phone?: string) => {
+    let text = ''
+    if (type === 'welcome') text = `Merhaba ${name}, Ela Ebeoğlu Performance Coaching'e hoş geldin! 🎉\n\nÖdemen ulaştı ve kaydını başarıyla tamamladık. Hedeflerine ulaşmak için harika bir sürece başlıyoruz, seninle çalışmak için sabırsızlanıyorum! 💪`
+    if (type === 'payment') text = `Selam ${name}! 🌟\n\nUmarım antrenmanlar harika gidiyordur. Yeni eğitim periyodumuz yaklaşıyor (Seans bitti/azaldı), güncel seans paketini yenilemek istersen benimle iletişime geçebilirsin. Varsa sorularını da bekliyorum!`
+    if (type === 'motivation') text = `Harika iş çıkardın ${name}! 🔥\n\nSon antrenmanlarındaki disiplinin ve emeğin gerçekten takdire şayan. Aynen böyle devam ediyoruz, hedeflerimize adım adım yaklaşıyoruz!`
+    
+    // Telefon numarası varsa doğrudan sohbete yönlendir, yoksa genele.
+    const url = phone 
+      ? `https://wa.me/${phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(text)}`
+      : `https://wa.me/?text=${encodeURIComponent(text)}`
+      
+    window.open(url, '_blank')
+    setMessageModal(null)
+  }
+
+  const handleSessionAction = (id: string, action: 'deduct' | 'postpone') => {
+    if (action === 'deduct') {
+      useSession(id)
+      showToast('✓ 1 Seans Düşüldü ve Kaydedildi.')
+      
+      // 🔥 OTOMASYON: Seans bittiyse (1'den 0'a düştüyse) otomatik ödeme mesajı tetikle
+      const c = clients.find(x => x.id === id)
+      if (c && c.sessions === 1) { // 1 iken 0 oluyor
+        setTimeout(() => {
+          if (confirm('Seans tamamen bitti! 💡 Otomatik ödeme / paket yenileme mesajı göndermek ister misin?')) {
+            handleCRMMessage(c.name, 'payment', c.phone)
+          }
+        }, 500)
+      }
+    } else {
+      showToast('ℹ️ Seans ertelendi / İptal notu girildi.')
+    }
+    setSessionModal(null)
   }
 
   const handleSaveNote = () => {
@@ -199,6 +246,21 @@ export default function Clients() {
                 <div>                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Ücret (₺)</label>
                   <input type="number" value={form.price} onChange={e => setForm({ ...form, price: +e.target.value })} className={inp} />
                 </div>
+                {/* Allergen Tags */}
+                <div className="col-span-full">
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Alerjenler</label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {ALLERGEN_OPTIONS.map(a => (
+                      <button key={a} onClick={() => setForm({ ...form, allergens: toggleAllergen(form.allergens, a) })}
+                        className={`px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-all border ${form.allergens.includes(a)
+                          ? 'bg-red-500/15 border-red-500/30 text-red-500'
+                          : (dm ? 'border-white/10 text-white/40 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-400 bg-transparent hover:bg-stone-50')
+                        }`}>
+                        {form.allergens.includes(a) ? '⚠️ ' : ''}{a}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </div>
               <motion.button
                 whileHover={{ scale: 1.01 }}
@@ -278,11 +340,12 @@ export default function Clients() {
 
                   {/* Actions */}
                   <div className="flex flex-wrap gap-2 md:justify-end">
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => useSession(c.id)}
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setSessionModal(c.id)}
                       disabled={c.sessions === 0}
-                      className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${c.sessions === 0 ? 'opacity-40 cursor-not-allowed' : ''} ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
-                      Seans -1
-                    </motion.button>                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => openEdit(c)}
+                      className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${c.sessions === 0 ? 'opacity-40 cursor-not-allowed' : ''} ${dm ? 'border-primary/50 text-white bg-primary/20 hover:bg-primary/40' : 'border-primary/30 text-primary bg-primary/10 hover:bg-primary/20'}`}>
+                      Seans Yönet ({c.sessions})
+                    </motion.button>
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => openEdit(c)}
                       className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-secondary/10 text-secondary border-none">
                       Düzenle
                     </motion.button>
@@ -290,17 +353,13 @@ export default function Clients() {
                       className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-primary/10 text-primary border-none">
                       Program Yaz
                     </motion.button>
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => handleHabit(c.id)}
-                      className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
-                      Disiplin
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setMessageModal(c.id)}
+                      className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-green-500/30 text-green-400 bg-green-500/10 hover:bg-green-500/20' : 'border-green-500/30 text-green-600 bg-green-50 hover:bg-green-100'}`}>
+                      WhatsApp Hızlı Mesaj
                     </motion.button>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setNotesModal(c.id)}
                       className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
                       Not ({c.notes.length})
-                    </motion.button>
-                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => handleReadiness(c.name)}
-                      className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
-                      WA Rapor
                     </motion.button>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                       onClick={() => { if (confirm('Danışanı tamamen silmek istediğinize emin misiniz?')) deleteClient(c.id) }}
@@ -369,6 +428,21 @@ export default function Clients() {
                 <div className="col-span-2">
                   <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>E-posta</label>
                   <input value={editForm.email} onChange={e => setEditForm({ ...editForm, email: e.target.value })} className={inp} />
+                </div>
+                {/* Allergen Tags (Edit) */}
+                <div className="col-span-2">
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Alerjenler</label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {ALLERGEN_OPTIONS.map(a => (
+                      <button key={a} onClick={() => setEditForm({ ...editForm, allergens: toggleAllergen(editForm.allergens, a) })}
+                        className={`px-3 py-1.5 rounded-full text-xs font-medium cursor-pointer transition-all border ${editForm.allergens.includes(a)
+                          ? 'bg-red-500/15 border-red-500/30 text-red-500'
+                          : (dm ? 'border-white/10 text-white/40 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-400 bg-transparent hover:bg-stone-50')
+                        }`}>
+                        {editForm.allergens.includes(a) ? '⚠️ ' : ''}{a}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
               <div className="flex gap-3 mt-6">
@@ -451,6 +525,78 @@ export default function Clients() {
                   ))}
                 </div>
               )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* CRM Message Modal */}
+      <AnimatePresence>
+        {messageModal && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
+            onClick={(e) => { if (e.target === e.currentTarget) setMessageModal(null) }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              className={`rounded-2xl p-8 max-w-[500px] w-full shadow-2xl ${dm ? 'bg-[#111111]' : 'bg-white'}`}
+            >
+              <h3 className="font-display text-2xl font-semibold mb-2">Hızlı WhatsApp Mesajı</h3>
+              <p className={`text-sm mb-6 ${dm ? 'text-white/40' : 'text-stone-400'}`}>Otomatik CRM şablonlarından birini seçerek anında mesaj gönderin.</p>
+              
+              <div className="space-y-3">
+                <button onClick={() => handleCRMMessage(clients.find(c => c.id === messageModal)?.name || '', 'welcome')}
+                  className={`w-full p-4 rounded-xl text-left transition-all border ${dm ? 'bg-white/[0.03] border-white/[0.06] hover:bg-white/10' : 'bg-white border-black/[0.06] hover:bg-stone-50'}`}>
+                  <span className="font-medium text-lg block mb-1">🎉 Yeni Kayıt & Hoşgeldin</span>
+                  <span className={`text-xs ${dm ? 'text-white/40' : 'text-stone-500'}`}>Ödeme teyidi ve hedeflere başlangıç motivasyonu.</span>
+                </button>
+                <button onClick={() => handleCRMMessage(clients.find(c => c.id === messageModal)?.name || '', 'payment')}
+                  className={`w-full p-4 rounded-xl text-left transition-all border ${dm ? 'bg-white/[0.03] border-white/[0.06] hover:bg-white/10' : 'bg-white border-black/[0.06] hover:bg-stone-50'}`}>
+                  <span className="font-medium text-lg block mb-1">🗓️ Ödeme Hatırlatması</span>
+                  <span className={`text-xs ${dm ? 'text-white/40' : 'text-stone-500'}`}>Yeni eğitim periyodu için kibar bir paket yenileme mesajı.</span>
+                </button>
+                <button onClick={() => handleCRMMessage(clients.find(c => c.id === messageModal)?.name || '', 'motivation')}
+                  className={`w-full p-4 rounded-xl text-left transition-all border ${dm ? 'bg-white/[0.03] border-white/[0.06] hover:bg-white/10' : 'bg-white border-black/[0.06] hover:bg-stone-50'}`}>
+                  <span className="font-medium text-lg block mb-1">🔥 Tebrik & Motivasyon</span>
+                  <span className={`text-xs ${dm ? 'text-white/40' : 'text-stone-500'}`}>Son antrenmanlardaki disiplin için tebrik ve gaz verme.</span>
+                </button>
+                <button onClick={() => { handleReadiness(clients.find(c => c.id === messageModal)?.name || ''); setMessageModal(null) }}
+                  className={`w-full p-4 rounded-xl text-left transition-all border ${dm ? 'bg-white/[0.03] border-white/[0.06] hover:bg-white/10' : 'bg-white border-black/[0.06] hover:bg-stone-50'}`}>
+                  <span className="font-medium text-lg block mb-1">📊 Günlük Wa Raporu İsteği</span>
+                  <span className={`text-xs ${dm ? 'text-white/40' : 'text-stone-500'}`}>Uyku, yorgunluk, kas ağrısı rutin değerlendirme soruları.</span>
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Session Management Modal */}
+      <AnimatePresence>
+        {sessionModal && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
+            onClick={(e) => { if (e.target === e.currentTarget) setSessionModal(null) }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              className={`rounded-2xl p-8 max-w-[400px] w-full shadow-2xl text-center ${dm ? 'bg-[#111111]' : 'bg-white'}`}
+            >
+              <h3 className="font-display text-2xl font-semibold mb-2">Seans Yönetimi</h3>
+              <p className={`text-sm mb-6 ${dm ? 'text-white/40' : 'text-stone-400'}`}>Planlanan ders gerçekleşti mi veya iptal mi oldu?</p>
+              
+              <div className="space-y-3">
+                <button onClick={() => handleSessionAction(sessionModal, 'deduct')}
+                  className="w-full py-4 rounded-xl font-medium cursor-pointer border-none bg-primary text-white shadow-lg shadow-primary/20 transition-transform hover:scale-[1.02]">
+                  Evet, 1 Seans Düş (-1)
+                </button>
+                <button onClick={() => handleSessionAction(sessionModal, 'postpone')}
+                  className={`w-full py-4 rounded-xl font-medium cursor-pointer border transition-transform hover:scale-[1.02] ${dm ? 'bg-white/5 text-white/70 border-white/10' : 'bg-black/5 text-[#1C1917]/70 border-black/10'}`}>
+                  Hayır, İptal / Ertele
+                </button>
+              </div>
             </motion.div>
           </motion.div>
         )}

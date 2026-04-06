@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 import { useStore } from '../stores/useStore';
-import ScrollToTop from '../components/ScrollToTop';
-
 // Modular Components
 import Navbar from '../components/landing/Navbar';
 import Hero from '../components/landing/Hero';
@@ -13,7 +11,7 @@ import Testimonials from '../components/landing/Testimonials';
 import FAQ from '../components/landing/FAQ';
 import Contact from '../components/landing/Contact';
 import Footer from '../components/landing/Footer';
-import { ScrollProgress, GrainOverlay } from '../components/landing/LandingUI';
+import { GrainOverlay } from '../components/landing/LandingUI';
 
 export default function Landing() {
   const { darkMode } = useStore();
@@ -27,9 +25,7 @@ export default function Landing() {
   return (
     <div className={`font-body overflow-x-hidden min-h-screen ${darkMode ? 'dark bg-bg' : 'bg-bg'}`}>
       {/* Visual Enhancements */}
-      <ScrollProgress />
       <GrainOverlay />
-      <ScrollToTop />
 
       {/* Navigation */}
       <Navbar />

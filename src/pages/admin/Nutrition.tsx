@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import { toPng } from 'html-to-image'
+import { sanitize } from '../../lib/constants'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
@@ -43,7 +44,10 @@ const activityLabels: Record<number, string> = {
 }
 
 export default function Nutrition() {
-  const { darkMode: dm, showToast } = useStore()
+  const { darkMode: dm, showToast, clients } = useStore()
+  const [selectedClientId, setSelectedClientId] = useState('')
+  const selectedClient = clients.find(c => c.id === selectedClientId)
+  const clientAllergens = selectedClient?.allergens || []
   const [form, setForm] = useState({
     gender: 'female', age: 23, weight: 65, height: 175, activity: 1.55, goal: 0,
   })
@@ -72,7 +76,12 @@ export default function Nutrition() {
     const carbCal = targetCals - proteinCal - fatCal
     const carbG = Math.round(carbCal / 4)
     setResult({ bmr, tdee, targetCals, proteinG, fatG, carbG, proteinCal, fatCal, carbCal })
-    const wa = `🥗 *ELA EBEOĞLU — Beslenme Planı*\n━━━━━━━━━━━━━━━━━━━━\n🎯 Hedef Kalori: ${targetCals} kcal\n\n*Günlük Makro Dağılımın:*\n🥩 Protein: ${proteinG}g (${Math.round((proteinCal / targetCals) * 100)}%)\n🥑 Yağ: ${fatG}g (${Math.round((fatCal / targetCals) * 100)}%)\n🍚 Karbonhidrat: ${carbG}g (${Math.round((carbCal / targetCals) * 100)}%)\n\n📌 *Antrenman Günü Notu:*\nKarbonhidratlarının %60'ını antrenman öncesi ve sonrası 2 öğüne böl.\n\n📌 *Dinlenme Günü Notu:*\nKarbonhidratı azaltıp yağ oranını artırabilirsin. Protein sabit tut.`
+    const allergenNote = clientAllergens.length > 0
+      ? `\n\n⚠️ *ALERJEN UYARISI:*\n${clientAllergens.map(a => `❌ ${a}`).join('\n')}\nBu alerjenleri içeren besinlerden kaçınılmalıdır.`
+      : ''
+    const legalDisclaimer = `\n\n⚖️ *Yasal & Tıbbi Uyarı:*\nBu menü tıbbi bir teşhis, tedavi veya reçete niteliği taşımaz. %100 bireysel bir tıbbi diyet planı değildir; genel sporcu beslenmesi tavsiyesi amacı taşır. Herhangi bir sağlık probleminiz, kronik hastalığınız, diyabet vb. durumunuz varsa bu programı uygulamadan önce mutlaka doktorunuza veya diyetisyeninize danışınız.`
+
+    const wa = `🥗 *ELA EBEOĞLU — Beslenme Planı*\n━━━━━━━━━━━━━━━━━━━━${selectedClient ? `\n👤 ${selectedClient.name}` : ''}\n🎯 Hedef Kalori: ${targetCals} kcal\n\n*Günlük Makro Dağılımın:*\n🥩 Protein: ${proteinG}g (${Math.round((proteinCal / targetCals) * 100)}%)\n🥑 Yağ: ${fatG}g (${Math.round((fatCal / targetCals) * 100)}%)\n🍚 Karbonhidrat: ${carbG}g (${Math.round((carbCal / targetCals) * 100)}%)\n\n📌 *Antrenman Günü Notu:*\nKarbonhidratlarının %60'ını antrenman öncesi ve sonrası 2 öğüne böl.\n\n📌 *Dinlenme Günü Notu:*\nKarbonhidratı azaltıp yağ oranını artırabilirsin. Protein sabit tut.${allergenNote}${legalDisclaimer}`
     setWaPreview(wa)
   }
 
@@ -125,6 +134,29 @@ export default function Nutrition() {
             <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg ${dm ? 'bg-primary/10' : 'bg-primary/10'}`}>📐</div>
             <h3 className="font-display text-xl font-medium">Fiziksel Veriler</h3>
           </div>
+          {/* Client Selector */}
+          <div className="mb-5">
+            <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Danışan Seç (Opsiyonel)</label>
+            <select value={selectedClientId} onChange={e => setSelectedClientId(e.target.value)} className={inp}>
+              <option value="">Genel Hesaplama</option>
+              {clients.map(c => <option key={c.id} value={c.id}>{c.name}{c.allergens && c.allergens.length > 0 ? ` ⚠️` : ''}</option>)}
+            </select>
+          </div>
+          {/* Allergen Warning Banner */}
+          {clientAllergens.length > 0 && (
+            <div className={`mb-5 p-4 rounded-xl border-2 border-dashed flex items-start gap-3 ${dm ? 'border-red-500/30 bg-red-500/[0.05]' : 'border-red-400/30 bg-red-50'}`}>
+              <span className="text-2xl flex-shrink-0">⚠️</span>
+              <div>
+                <p className="text-sm font-bold text-red-500 mb-1">Alerjen Uyarısı — {selectedClient?.name}</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {clientAllergens.map(a => (
+                    <span key={a} className="px-2.5 py-1 rounded-full text-[0.7rem] font-bold bg-red-500/15 text-red-500 border border-red-500/20">❌ {a}</span>
+                  ))}
+                </div>
+                <p className={`text-xs mt-2 ${dm ? 'text-red-400/60' : 'text-red-400'}`}>Bu alerjenleri içeren besinler diyet planına dahil edilmemelidir.</p>
+              </div>
+            </div>
+          )}
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
               <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Cinsiyet</label>
@@ -184,14 +216,14 @@ export default function Nutrition() {
             <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Hedef</label>
             <div className="flex gap-2">
               {[
-                { v: -500, l: 'Yağ Yak', s: '-500', icon: '🔥', color: 'primary' },
-                { v: 0, l: 'Koru', s: '±0', icon: '⚖️', color: 'accent' },
-                { v: 300, l: 'Kas Kazan', s: '+300', icon: '💪', color: 'secondary' },
+                { v: -500, l: 'Yağ Yak', s: '-500', icon: '🔥', activeClass: 'bg-primary text-white shadow-lg' },
+                { v: 0, l: 'Koru', s: '±0', icon: '⚖️', activeClass: 'bg-sky-500 text-white shadow-lg' },
+                { v: 300, l: 'Kas Kazan', s: '+300', icon: '💪', activeClass: 'bg-secondary text-white shadow-lg' },
               ].map(g => (
                 <motion.button key={g.v} whileTap={{ scale: 0.97 }}
                   onClick={() => setForm({ ...form, goal: g.v })}
                   className={`flex-1 py-3.5 rounded-xl text-center cursor-pointer transition-all border-none ${form.goal === g.v
-                    ? `bg-${g.color === 'accent' ? 'sky-500' : g.color} text-white shadow-lg`
+                    ? g.activeClass
                     : (dm ? 'bg-white/[0.06] text-white/50' : 'bg-stone-100 text-stone-500')
                   }`}>
                   <div className="text-lg">{g.icon}</div>
@@ -358,7 +390,7 @@ export default function Nutrition() {
           <div style={{ fontSize: '0.9rem', color: '#C2684A', letterSpacing: 4, marginTop: '0.5rem', fontWeight: 600 }}>PERFORMANCE NUTRITION</div>
         </div>
         <div style={{ whiteSpace: 'pre-wrap', fontSize: '1.15rem', lineHeight: 1.7, color: '#333' }}
-          dangerouslySetInnerHTML={{ __html: waPreview.replace(/\n/g, '<br>').replace(/\*(.*?)\*/g, '<strong>$1</strong>') }} />
+          dangerouslySetInnerHTML={{ __html: sanitize(waPreview).replace(/\n/g, '<br>').replace(/\*(.*?)\*/g, '<strong>$1</strong>') }} />
         <div style={{ marginTop: '2.5rem', textAlign: 'center', fontSize: '0.85rem', color: '#57534E', opacity: 0.8 }}>📸 @ela.ebeoglu</div>
       </div>
     </motion.div>

@@ -55,10 +55,10 @@ export const en = {
     title: "Send your inquiries right away.",
     name: "Full Name *",
     email: "Return E-mail *",
-    messecondary: "Your goals, background, and questions...",
-    send: "Send Messecondary",
+    message: "Your goals, background, and questions...",
+    send: "Send Message",
     sending: "Sending...",
-    success: "Your messecondary has reached me, I will reply as soon as possible! 🏀",
+    success: "Your message has reached me, I will reply as soon as possible! 🏀",
     error: "Failed to send. Please try again."
   },
   footer: {

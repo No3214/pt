@@ -128,7 +128,7 @@ export default function Builder() {
       const best = results.find(r => r.result)
       if (best?.result) setWaPreview(best.result)
       else setWaPreview('AI Hatası: Sonuç alınamadı')
-    } catch (err: any) { setWaPreview('AI Hatası: ' + err.messecondary) }
+    } catch (err: any) { setWaPreview('AI Hatası: ' + err.message) }
     setLoading(false)
   }
 
@@ -508,7 +508,7 @@ export default function Builder() {
           <div style={{ fontSize: '0.9rem', color: '#C2684A', letterSpacing: 4, marginTop: '0.5rem', fontWeight: 600 }}>PERFORMANCE COACHING</div>
         </div>
         <div style={{ whiteSpace: 'pre-wrap', fontSize: '1.15rem', lineHeight: 1.7, color: '#333' }}
-          dangerouslySetInnerHTML={{ __html: waPreview.replace(/\n/g, '<br>').replace(/\*(.*?)\*/g, '<strong>$1</strong>') }} />
+          dangerouslySetInnerHTML={{ __html: sanitize(waPreview).replace(/\n/g, '<br>').replace(/\*(.*?)\*/g, '<strong>$1</strong>') }} />
         <div style={{ marginTop: '2.5rem', textAlign: 'center', fontSize: '0.85rem', color: '#57534E', opacity: 0.8, borderTop: '1px solid rgba(0,0,0,0.1)', paddingTop: '1rem' }}>
           📸 @ela.ebeoglu
         </div>

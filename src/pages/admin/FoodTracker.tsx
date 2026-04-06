@@ -85,7 +85,7 @@ export default function FoodTracker() {
       addFood(foodData)
       showToast(`AI tespit: ${foodData.name} - ${foodData.cal} kcal`)
     } catch (err: any) {
-      showToast('AI Analiz Hatası: ' + err.messecondary)
+      showToast('AI Analiz Hatası: ' + err.message)
     }
     setAnalyzing(false)
   }

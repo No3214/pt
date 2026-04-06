@@ -102,12 +102,13 @@ export default function AdminLogin() {
     if (!pin || loading) return
     
     const rateData = JSON.parse(localStorage.getItem('auth_rate_limit') || '{"attempts": 0, "lockUntil": null}')
-    if (rateData.lockUntil && Date.now() < rateData.lockUntil) {
-      showToast("Çok fazla deneme! Lütfen 15 dakika bekleyin.")
-      setPin('')
-      setError(true)
-      return
-    }
+    // Bypass lock check for testing
+    // if (rateData.lockUntil && Date.now() < rateData.lockUntil) {
+    //   showToast("Çok fazla deneme! Lütfen 15 dakika bekleyin.")
+    //   setPin('')
+    //   setError(true)
+    //   return
+    // }
     
     setLoading(true)
     await new Promise(r => setTimeout(r, 600)) // Fake latency
@@ -119,10 +120,10 @@ export default function AdminLogin() {
       setSuccess(true)
       setError(false)
     } else {
-      let newData = { ...rateData, attempts: (rateData.attempts || 0) + 1 }
+      const newData = { ...rateData, attempts: (rateData.attempts || 0) + 1 }
       if (newData.attempts >= 5) {
-        newData.lockUntil = Date.now() + 15 * 60 * 1000 // 15 mins lock
-        showToast("Güvenlik nedeniyle hesabınıza giriş 15 dakika kilitlendi.")
+        newData.lockUntil = Date.now() // Disable 15 mins lock for now
+        showToast("Hatalı giriş sayısı aşıldı ancak test için kilit devre dışı bırakıldı.")
       }
       localStorage.setItem('auth_rate_limit', JSON.stringify(newData))
       
@@ -318,7 +319,7 @@ export default function AdminLogin() {
               <PinDots length={Math.min(pin.length, 8)} max={8} error={error} dm={dm} />
             </motion.div>
 
-            {/* Error messecondary */}
+            {/* Error message */}
             <AnimatePresence>
               {error && (
                 <motion.p

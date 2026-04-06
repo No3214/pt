@@ -28,7 +28,7 @@ export const onRequestPost = async (context) => {
     }
 
     if (provider === 'gemini') {
-      const key = env.GEMINI_KEY;
+      const key = request.headers.get('X-Gemini-Key') || env.GEMINI_KEY;
       if (!key) return new Response(JSON.stringify({ error: 'GEMINI API anahtarı ayarlanmamış.' }), { status: 500 });
       const parts = [{ text: prompt }];
       if (imageBase64) parts.push({ inline_data: { mime_type: 'image/jpeg', data: imageBase64 } });
@@ -44,7 +44,7 @@ export const onRequestPost = async (context) => {
     }
 
     if (provider === 'openrouter') {
-      const key = env.OPENROUTER_KEY;
+      const key = request.headers.get('X-OpenRouter-Key') || env.OPENROUTER_KEY;
       if (!key) return new Response(JSON.stringify({ error: 'OPENROUTER API anahtarı ayarlanmamış.' }), { status: 500 });
       const content = imageBase64
         ? [{ type: 'text', text: prompt }, { type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + imageBase64 } }]
@@ -61,7 +61,7 @@ export const onRequestPost = async (context) => {
     }
 
     if (provider === 'deepseek') {
-      const key = env.DEEPSEEK_KEY;
+      const key = request.headers.get('X-DeepSeek-Key') || env.DEEPSEEK_KEY;
       if (!key) return new Response(JSON.stringify({ error: 'DEEPSEEK API anahtarı ayarlanmamış.' }), { status: 500 });
       
       const res = await fetch('https://api.deepseek.com/chat/completions', {
