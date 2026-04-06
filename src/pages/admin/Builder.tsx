@@ -26,6 +26,25 @@ const diffColors: Record<string, { bg: string; text: string }> = {
   advanced: { bg: 'bg-terracotta/10', text: 'text-terracotta' },
 }
 
+function ExerciseThumb({ exercise, dm }: { exercise: any, dm: boolean }) {
+  const [err, setErr] = useState(false)
+  
+  if (err) {
+    return <span className="text-xl">{muscleIcons[exercise.muscle || ''] || '●'}</span>
+  }
+
+  // Tries to load exercise.gif, fails gracefully to emoji
+  const fileName = exercise.name ? exercise.name.toLowerCase().replace(/[^a-z0-9]/g, '_') : 'unknown'
+  return (
+    <img 
+      src={`/exercises/${fileName}.gif`} 
+      alt={exercise.name}
+      onError={() => setErr(true)}
+      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+    />
+  )
+}
+
 export default function Builder() {
   const { clients, darkMode: dm, showToast, aiKeys } = useStore()
   const activeClients = clients.filter(c => c.sessions > 0)
@@ -225,9 +244,11 @@ export default function Builder() {
                       onClick={() => addExerciseToProgram(e.name, e.muscle)}
                       className={`flex items-center justify-between p-3.5 rounded-xl cursor-pointer transition-all border group ${dm ? 'border-white/[0.04] hover:border-sage/30 hover:bg-white/[0.04]' : 'border-stone-100 hover:border-sage/30 hover:bg-sage/5'}`}>
                       <div className="flex items-center gap-3">
-                        <span className="text-lg">{muscleIcons[e.muscle] || '●'}</span>
+                        <div className={`w-11 h-11 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0 ${dm ? 'bg-white/5' : 'bg-black/5'}`}>
+                          <ExerciseThumb exercise={e} dm={dm} />
+                        </div>
                         <div>
-                          <div className="font-medium text-sm">{e.name}</div>
+                          <div className="font-medium text-sm group-hover:text-sage transition-colors">{e.name}</div>
                           <div className={`text-[0.7rem] mt-0.5 ${dm ? 'text-white/30' : 'text-stone-400'}`}>{e.muscle} · {e.equipment}</div>
                         </div>
                       </div>
@@ -302,8 +323,10 @@ export default function Builder() {
                       <button onClick={() => moveLine(i, -1)} className={`text-[0.6rem] leading-none bg-transparent border-none cursor-pointer p-0 ${dm ? 'text-white/40' : 'text-stone-400'}`}>▲</button>
                       <button onClick={() => moveLine(i, 1)} className={`text-[0.6rem] leading-none bg-transparent border-none cursor-pointer p-0 ${dm ? 'text-white/40' : 'text-stone-400'}`}>▼</button>
                     </div>
-                    <span className={`text-xs w-6 h-6 rounded-lg flex items-center justify-center font-medium ${dm ? 'bg-white/[0.06] text-white/40' : 'bg-stone-100 text-stone-400'}`}>{i + 1}</span>
-                    <span className="text-base">{muscleIcons[l.muscle || ''] || '●'}</span>
+                    <span className={`text-xs w-6 h-6 rounded-lg flex items-center justify-center font-medium flex-shrink-0 ${dm ? 'bg-white/[0.06] text-white/40' : 'bg-stone-100 text-stone-400'}`}>{i + 1}</span>
+                    <div className={`w-9 h-9 rounded-md overflow-hidden flex items-center justify-center flex-shrink-0 ${dm ? 'bg-white/5' : 'bg-black/5'}`}>
+                      <ExerciseThumb exercise={l} dm={dm} />
+                    </div>
                     <span className="flex-1 font-medium text-sm truncate">{l.exercise}</span>
                     <input type="number" value={l.sets} onChange={e => updateLine(i, 'sets', +e.target.value)}
                       className={`${inp} !w-14 text-center text-sm !py-2`} min={1} max={10} />
