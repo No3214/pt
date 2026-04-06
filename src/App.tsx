@@ -24,7 +24,10 @@ const FoodTracker = lazy(() => import('./pages/admin/FoodTracker'))
 const CalendarPage = lazy(() => import('./pages/admin/Calendar'))
 const Settings = lazy(() => import('./pages/admin/Settings'))
 const Leads = lazy(() => import('./pages/admin/Leads'))
+const Progress = lazy(() => import('./pages/admin/Progress'))
 const Portal = lazy(() => import('./pages/Portal'))
+const OnboardingForm = lazy(() => import('./pages/forms/OnboardingForm'))
+const StudentMeasurementForm = lazy(() => import('./pages/forms/StudentMeasurementForm'))
 
 function PageLoader() {
   return (
@@ -38,8 +41,12 @@ function PageLoader() {
 }
 
 export default function App() {
-  const darkMode = useStore(s => s.darkMode)
+  const { darkMode, checkDailyReset } = useStore()
   const location = useLocation()
+
+  useEffect(() => {
+    checkDailyReset()
+  }, [checkDailyReset])
 
   // Theme injection — runs on darkMode change
   useEffect(() => {
@@ -101,9 +108,12 @@ export default function App() {
               <Route path="food-tracker" element={<FoodTracker />} />
               <Route path="calendar" element={<CalendarPage />} />
               <Route path="leads" element={<Leads />} />
+              <Route path="progress" element={<Progress />} />
               <Route path="settings" element={<Settings />} />
             </Route>
             <Route path="/portal" element={<Portal />} />
+            <Route path="/onboarding" element={<OnboardingForm />} />
+            <Route path="/measure/:clientId" element={<StudentMeasurementForm />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>

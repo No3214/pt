@@ -9,9 +9,17 @@ const fadeUp = {
 const stagger = { show: { transition: { staggerChildren: 0.06 } } }
 
 export default function Assessment() {
-  const { measurements, addMeasurement, progressPhotos, addProgressPhoto, deleteProgressPhoto, showToast, darkMode: dm } = useStore()
+  const { clients, measurements, addMeasurement, progressPhotos, addProgressPhoto, deleteProgressPhoto, showToast, darkMode: dm } = useStore()
+  const [selectedClientId, setSelectedClientId] = useState('')
   const [fms, setFms] = useState({ deepSquat: 2, hurdleStep: 2, inlineLunge: 3, shoulderMobility: 1, activeStraightLeg: 2, coreStability: 3 })
   const [meas, setMeas] = useState({ shoulder: '', chest: '', waist: '', hip: '', leg: '', arm: '' })
+  
+  // Filtered data for selected client
+  const clientMeasurements = useMemo(() => 
+    measurements.filter(m => m.clientId === selectedClientId), [measurements, selectedClientId])
+  const clientPhotos = useMemo(() => 
+    progressPhotos.filter(p => p.clientId === selectedClientId), [progressPhotos, selectedClientId])
+
   const [postureNotes, setPostureNotes] = useState('')
   const [postureImg, setPostureImg] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<'fms' | 'measurements' | 'posture'>('fms')
@@ -29,14 +37,15 @@ export default function Assessment() {
 
   // Measurement change comparison
   const lastTwo = useMemo(() => {
-    if (measurements.length < 2) return null
-    const cur = measurements[measurements.length - 1]
-    const prev = measurements[measurements.length - 2]
+    if (clientMeasurements.length < 2) return null
+    const cur = clientMeasurements[clientMeasurements.length - 1]
+    const prev = clientMeasurements[clientMeasurements.length - 2]
     return { cur, prev }
-  }, [measurements])
+  }, [clientMeasurements])
 
   const saveMeasurements = () => {
-    addMeasurement({ ...meas, date: new Date().toLocaleDateString('tr-TR') })
+    if (!selectedClientId) { showToast('Lütfen önce bir danışan seçin.'); return }
+    addMeasurement(selectedClientId, { ...meas, date: new Date().toLocaleDateString('tr-TR') })
     showToast('Ölçümler kaydedildi!')
   }
 
@@ -61,7 +70,8 @@ export default function Assessment() {
         canvas.width = w; canvas.height = h
         canvas.getContext('2d')!.drawImage(img, 0, 0, w, h)
         const compressed = canvas.toDataURL('image/jpeg', 0.7)
-        addProgressPhoto({ src: compressed, date: new Date().toLocaleDateString('tr-TR') })
+        if (!selectedClientId) { showToast('Önce danışan seçin.'); return }
+        addProgressPhoto(selectedClientId, { src: compressed, date: new Date().toLocaleDateString('tr-TR') })
         showToast('Fotoğraf eklendi!')
       }
       img.src = ev.target?.result as string
@@ -115,10 +125,10 @@ export default function Assessment() {
             <span className="font-semibold">{fmsTotal}/{fmsMax}</span> FMS
           </div>
           <div className={`px-4 py-2 rounded-full text-xs font-medium ${dm ? 'bg-white/[0.06] text-white/50' : 'bg-stone-100 text-stone-500'}`}>
-            {measurements.length} ölçüm
+            {clientMeasurements.length} ölçüm
           </div>
           <div className={`px-4 py-2 rounded-full text-xs font-medium ${dm ? 'bg-white/[0.06] text-white/50' : 'bg-stone-100 text-stone-500'}`}>
-            {progressPhotos.length} fotoğraf
+            {clientPhotos.length} fotoğraf
           </div>
         </div>
       </motion.div>
@@ -133,6 +143,19 @@ export default function Assessment() {
             <span className="flex items-center justify-center gap-2">{t.icon}{t.label}</span>
           </button>
         ))}
+      </motion.div>
+
+      {/* Client Selector */}
+      <motion.div variants={fadeUp} className="mb-8 p-6 rounded-2xl border transition-all bg-primary/5 border-primary/10">
+        <label className={`block mb-2 text-xs font-bold uppercase tracking-widest ${dm ? 'text-primary/70' : 'text-primary'}`}>Değerlendirilecek Danışanı Seçin</label>
+        <select 
+          value={selectedClientId} 
+          onChange={e => setSelectedClientId(e.target.value)} 
+          className={inp}
+        >
+          <option value="">Danışan Seçin...</option>
+          {clients.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
+        </select>
       </motion.div>
 
       <AnimatePresence mode="wait">
@@ -270,11 +293,11 @@ export default function Assessment() {
               </motion.button>
 
               {/* History */}
-              {measurements.length > 0 && (
+              {clientMeasurements.length > 0 && (
                 <div className="mt-8">
                   <div className="flex items-center justify-between mb-4">
                     <h4 className={`text-sm font-medium ${dm ? 'text-white/50' : 'text-stone-500'}`}>Geçmiş Ölçümler</h4>
-                    <span className={`text-xs ${dm ? 'text-white/30' : 'text-stone-300'}`}>{measurements.length} kayıt</span>
+                    <span className={`text-xs ${dm ? 'text-white/30' : 'text-stone-300'}`}>{clientMeasurements.length} kayıt</span>
                   </div>
                   <div className="overflow-x-auto rounded-xl">
                     <table className="w-full text-sm">
@@ -284,7 +307,7 @@ export default function Assessment() {
                         </tr>
                       </thead>
                       <tbody>
-                        {measurements.slice(-5).reverse().map((m, i) => (
+                        {clientMeasurements.slice(-5).reverse().map((m, i) => (
                           <tr key={i} className={`border-b transition-colors ${dm ? 'border-white/[0.04] hover:bg-white/[0.02]' : 'border-stone-50 hover:bg-stone-50/50'}`}>
                             <td className={`py-3 px-4 text-xs font-medium ${dm ? 'text-white/60' : 'text-stone-600'}`}>{m.date}</td>
                             {(['shoulder', 'chest', 'waist', 'hip', 'leg', 'arm'] as const).map(k => (
@@ -373,7 +396,7 @@ export default function Assessment() {
         </div>
         <input ref={progressInput} type="file" accept="image/png,image/jpeg,image/webp" className="hidden" onChange={handleProgressPhoto} />
 
-        {progressPhotos.length === 0 ? (
+        {clientPhotos.length === 0 ? (
           <div className={`w-full py-16 text-center border-2 border-dashed rounded-2xl ${dm ? 'border-white/[0.06]' : 'border-stone-200'}`}>
             <svg className={`w-10 h-10 mx-auto mb-3 ${dm ? 'text-white/15' : 'text-stone-200'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>
@@ -383,7 +406,7 @@ export default function Assessment() {
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-            {progressPhotos.map((p, i) => (
+            {clientPhotos.map((p, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -427,7 +450,8 @@ export default function Assessment() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
               transition={{ type: 'spring', damping: 25 }}
-              src={progressPhotos[lightbox]?.src}              alt="Büyük görünüm"
+              src={clientPhotos[lightbox]?.src}
+              alt="Büyük görünüm"
               className="max-w-full max-h-[85vh] rounded-2xl shadow-2xl object-contain"
               onClick={e => e.stopPropagation()}
             />
@@ -436,8 +460,8 @@ export default function Assessment() {
                 className="w-10 h-10 rounded-full bg-white/10 text-white border-none cursor-pointer flex items-center justify-center hover:bg-white/20 transition-colors backdrop-blur-sm">
                 ‹
               </button>
-              <span className="text-white/70 text-sm font-medium">{lightbox + 1} / {progressPhotos.length}</span>
-              <button onClick={(e) => { e.stopPropagation(); setLightbox(Math.min(progressPhotos.length - 1, lightbox + 1)) }}
+              <span className="text-white/70 text-sm font-medium">{lightbox + 1} / {clientPhotos.length}</span>
+              <button onClick={(e) => { e.stopPropagation(); setLightbox(Math.min(clientPhotos.length - 1, lightbox + 1)) }}
                 className="w-10 h-10 rounded-full bg-white/10 text-white border-none cursor-pointer flex items-center justify-center hover:bg-white/20 transition-colors backdrop-blur-sm">
                 ›
               </button>

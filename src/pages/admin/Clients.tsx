@@ -3,14 +3,13 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import { useNavigate } from 'react-router-dom'
 import { sanitize } from '../../lib/constants'
+import { encryptData } from '../../lib/crypto'
 
 const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }
 const stagger = { show: { transition: { staggerChildren: 0.06 } } }
 
-type SortKey = 'name' | 'sessions' | 'price' | 'habit'
-
 export default function Clients() {
-  const { clients, addClient, updateClient, deleteClient, useSession, markHabit, addNote, deleteNote, showToast, darkMode: dm } = useStore()
+  const { clients, addClient, updateClient, deleteClient, deductSession, addNote, deleteNote, showToast, darkMode: dm, measurements, progressPhotos, savedPrograms, whatsappTemplates } = useStore()
   const navigate = useNavigate()
   const [form, setForm] = useState({ name: '', goal: '', sessions: 12, price: 5000, phone: '', email: '', allergens: [] as string[] })
   const [notesModal, setNotesModal] = useState<string | null>(null)
@@ -21,7 +20,8 @@ export default function Clients() {
   const [noteText, setNoteText] = useState('')
   const [showForm, setShowForm] = useState(false)
   const [search, setSearch] = useState('')
-  const [sortBy, setSortBy] = useState<SortKey>('name')
+  type SortKey = 'name' | 'sessions' | 'price' | 'habit';
+  const [activeSort, setActiveSort] = useState<SortKey>('name')
 
   // Search + Sort
   const filteredClients = useMemo(() => {
@@ -30,7 +30,7 @@ export default function Clients() {
       c.goal.toLowerCase().includes(search.toLowerCase())
     )
     list.sort((a, b) => {
-      switch (sortBy) {
+      switch (activeSort) {
         case 'sessions': return b.sessions - a.sessions
         case 'price': return b.price - a.price
         case 'habit': {
@@ -42,7 +42,7 @@ export default function Clients() {
       }
     })
     return list
-  }, [clients, search, sortBy])
+  }, [clients, search, activeSort])
 
   const ALLERGEN_OPTIONS = ['Gluten', 'Laktoz', 'Yumurta', 'Fıstık', 'Ceviz/Badem', 'Kabuklu Deniz', 'Balık', 'Soya', 'Kırmızı Et', 'Kereviz', 'Mantar', 'Hardal', 'Susam', 'Narenciye']
 
@@ -53,7 +53,6 @@ export default function Clients() {
     if (!form.name.trim()) { showToast('İsim giriniz.'); return }
     addClient({ name: sanitize(form.name), goal: sanitize(form.goal), sessions: form.sessions, max: form.sessions, price: form.price, phone: form.phone, email: form.email, allergens: form.allergens })
     
-    // 🔥 OTOMASYON: Yeni kayıt yapıldığında Hoşgeldin mesajını otomatik tetikle
     handleCRMMessage(form.name, 'welcome', form.phone)
     
     setForm({ name: '', goal: '', sessions: 12, price: 5000, phone: '', email: '', allergens: [] })
@@ -82,14 +81,44 @@ export default function Clients() {
     showToast('Danışan güncellendi!')
   }
 
-  const handleHabit = (id: string) => {
-    const success = confirm('Danışan bugünkü hedeflerine (Su, Makro, Adım, Uyku) uydu mu?\n[Tamam] = Uydu\n[İptal] = Uymadı')
-    markHabit(id, success)
-  }
-
   const handleReadiness = (name: string) => {
     const text = encodeURIComponent(`Günaydın ${name}! Bugünkü antrenman öncesi kısa bir rutin değerlendirme yapalım:\n\n1. Dün Geceki Uyku Puanın (1-10):\n2. Mevcut Yorgunluk Hissin (1-10):\n3. Kas Ağrın / Hamlık (1-10):\n4. Beslenme Uyumun Yüzde Kaç:\n\nLütfen rakamlarla cevapla, bugünkü yüklenmemizi ona göre optimize edelim.`)
     window.open(`https://wa.me/?text=${text}`, '_blank')
+  }
+
+  const handleSharePortal = async (client: any) => {
+    const pin = prompt(`${client.name} için 6 haneli bir giriş PIN'i belirleyin:`, Math.floor(100000 + Math.random() * 900000).toString())
+    if (!pin || pin.length < 4) return
+
+    const bundle = {
+      client: { id: client.id, name: client.name, goal: client.goal },
+      measurements: measurements.filter(m => m.clientId === client.id).slice(-10),
+      photos: progressPhotos.filter(p => p.clientId === client.id).slice(-3),
+      programs: savedPrograms.filter(p => p.clientId === client.id),
+      timestamp: Date.now()
+    }
+
+    try {
+      const encrypted = await encryptData(JSON.stringify(bundle), pin)
+      const portalUrl = `${window.location.origin}/portal?d=${encrypted}`
+      
+      const text = encodeURIComponent(`Merhaba ${client.name}! Senin için özel hazırladığım gelişim portalı hazır.\n\n🔗 Giriş Linki: ${portalUrl}\n\n🔐 Giriş PIN: *${pin}*\n\nBu linki telefonuna 'Ana Ekrana Ekle' yaparak uygulama gibi kullanabilirsin.`)
+      window.open(`https://wa.me/${client.phone?.replace(/\D/g, '')}?text=${text}`, '_blank')
+      showToast('Portal linki WhatsApp için hazırlandı!')
+    } catch {
+      showToast('Hata: Şifreleme başarısız oldu.')
+    }
+  }
+
+  const handleShareMeasurementLink = (client: any) => {
+    const link = `${window.location.origin}/measure/${client.id}`
+    const text = whatsappTemplates.measurement
+      .replace('{{link}}', link)
+      .replace('{{name}}', client.name.split(' ')[0])
+    
+    const url = `https://wa.me/${client.phone?.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`
+    window.open(url, '_blank')
+    showToast('Ölçüm linki paylaşıldı!')
   }
 
   const handleCRMMessage = (name: string, type: 'welcome' | 'payment' | 'motivation', phone?: string) => {
@@ -109,7 +138,7 @@ export default function Clients() {
 
   const handleSessionAction = (id: string, action: 'deduct' | 'postpone') => {
     if (action === 'deduct') {
-      useSession(id)
+      deductSession(id)
       showToast('✓ 1 Seans Düşüldü ve Kaydedildi.')
       
       // 🔥 OTOMASYON: Seans bittiyse (1'den 0'a düştüyse) otomatik ödeme mesajı tetikle
@@ -199,9 +228,9 @@ export default function Clients() {
           {sortOptions.map(o => (
             <button
               key={o.key}
-              onClick={() => setSortBy(o.key)}
+              onClick={() => setActiveSort(o.key)}
               className={`px-4 py-3 rounded-xl text-xs font-medium cursor-pointer border-none transition-all ${
-                sortBy === o.key
+                activeSort === o.key
                   ? 'bg-primary text-white'
                   : (dm ? 'bg-white/[0.06] text-white/50 hover:bg-white/10' : 'bg-stone-100 text-stone-500 hover:bg-stone-200')
               }`}
@@ -349,6 +378,14 @@ export default function Clients() {
                       className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-secondary/10 text-secondary border-none">
                       Düzenle
                     </motion.button>
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => handleSharePortal(c)}
+                      className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-primary/10 text-primary border-none">
+                      Paylaş
+                    </motion.button>
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => navigate(`/admin/progress?id=${c.id}`)}
+                      className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-secondary/10 text-secondary border-none">
+                      Gelişim
+                    </motion.button>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => navigate('/admin/builder')}
                       className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-primary/10 text-primary border-none">
                       Program Yaz
@@ -356,6 +393,10 @@ export default function Clients() {
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setMessageModal(c.id)}
                       className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-green-500/30 text-green-400 bg-green-500/10 hover:bg-green-500/20' : 'border-green-500/30 text-green-600 bg-green-50 hover:bg-green-100'}`}>
                       WhatsApp Hızlı Mesaj
+                    </motion.button>
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => handleShareMeasurementLink(c)}
+                      className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-primary/30 text-primary bg-primary/10 hover:bg-primary/20' : 'border-primary/30 text-primary bg-primary/5 hover:bg-primary/10'}`}>
+                      📊 Ölçüm Linki At
                     </motion.button>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setNotesModal(c.id)}
                       className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
@@ -428,6 +469,28 @@ export default function Clients() {
                 <div className="col-span-2">
                   <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>E-posta</label>
                   <input value={editForm.email} onChange={e => setEditForm({ ...editForm, email: e.target.value })} className={inp} />
+                </div>
+                <div className="col-span-1">
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Sporcu Seviyesi</label>
+                  <select 
+                    value={clients.find(c => c.id === editModal)?.athleteLevel || 'Rookie'} 
+                    onChange={e => updateClient(editModal!, { athleteLevel: e.target.value as any })}
+                    className={inp}
+                  >
+                    <option value="Rookie">Rookie (Başlangıç)</option>
+                    <option value="Pro">Pro (İleri)</option>
+                    <option value="Elite">Elite (Şampiyon)</option>
+                  </select>
+                </div>
+                <div className="col-span-2">
+                  <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Sporcuya Özel Portal Mesajı</label>
+                  <textarea 
+                    value={clients.find(c => c.id === editModal)?.personalNote || ''} 
+                    onChange={e => updateClient(editModal!, { personalNote: e.target.value })}
+                    className={inp}
+                    rows={2}
+                    placeholder="Örn: Bu hafta harika iş çıkardın!"
+                  />
                 </div>
                 {/* Allergen Tags (Edit) */}
                 <div className="col-span-2">

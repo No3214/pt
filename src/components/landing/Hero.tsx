@@ -26,9 +26,9 @@ export default function Hero() {
   return (
     <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
       {/* Parallax Background */}
-      <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale }} className="absolute inset-0 -z-10 image-grain">
+      <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale, willChange: 'transform, opacity' }} className="absolute inset-0 -z-10 image-grain">
         <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-b from-bg via-bg/60 to-bg' : 'bg-gradient-to-b from-bg via-bg/40 to-bg'}`} />
-        <img src="/ela_real_32.png" alt="" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" />
+        <img src="/ela_real_32.png" alt="" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" loading="eager" decoding="async" />
       </motion.div>
 
       {/* Ambient glow orbs */}
@@ -101,12 +101,13 @@ export default function Hero() {
             className="relative hidden lg:block"
           >
             <div className="relative rounded-[2rem] overflow-hidden aspect-[3/4] border border-text-main/5 shadow-2xl image-grain">
-              <img src="/ela_real_30.png" alt={tenantConfig.brand.name} className="w-full h-full object-cover object-top premium-image" />
+              <img src="/ela_real_30.png" alt={tenantConfig.brand.name} className="w-full h-full object-cover object-top premium-image" loading="eager" decoding="async" />
               <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-t from-bg/50 via-transparent' : 'bg-gradient-to-t from-bg/30 via-transparent'}`} />
               <motion.div
                 initial={{ x: '-100%' }}
                 animate={{ x: '200%' }}
                 transition={{ delay: 2, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                style={{ willChange: 'transform' }}
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg]"
               />
             </div>
@@ -128,8 +129,7 @@ export default function Hero() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ delay: 1.4, duration: 0.6 }}
               viewport={{ once: true }}
-              className={`absolute -right-6 top-[15%] px-6 py-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-xl ${dm ? 'bg-white/10 border border-white/10' : 'bg-white/90 border border-black/5'}`}
-            >
+              className={`absolute -right-6 top-[15%] px-6 py-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-xl ${dm ? 'bg-white/10 border border-white/10' : 'bg-white/90 border border-black/5'}`}>
               <div className="text-3xl font-semibold text-secondary"><Counter target={5} suffix=".0" /></div>
               <div className={`text-[0.7rem] uppercase tracking-[0.12em] mt-1 ${dm ? 'text-white/50' : 'text-text-main/40'}`}>Değerlendirme</div>
             </motion.div>

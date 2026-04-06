@@ -1,31 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useInView, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
-
-export const fadeUp = {
-  hidden: { opacity: 0, y: 60 },
-  visible: (i: number = 0) => ({
-    opacity: 1, y: 0,
-    transition: { duration: 0.8, delay: i * 0.15, ease: [0.16, 1, 0.3, 1] }
-  })
-};
-
-export const staggerContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } }
-};
-
-export const scaleIn = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
-};
-
-export const letterReveal = {
-  hidden: { opacity: 0, y: 40, rotateX: -40 },
-  visible: (i: number) => ({
-    opacity: 1, y: 0, rotateX: 0,
-    transition: { duration: 0.7, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }
-  })
-};
+export { fadeUp, staggerContainer, scaleIn, letterReveal } from '../../lib/animations';
+import { staggerContainer, letterReveal } from '../../lib/animations';
 
 /* ═══════════════ Reveal Section Component ═══════════════ */
 export function RevealSection({ children, className = '' }: { children: React.ReactNode; className?: string }) {
@@ -119,11 +95,10 @@ export function ScrollProgress() {
 /* ═══════════════ Grain Overlay ═══════════════ */
 export function GrainOverlay() {
   return (
-    <div className="pointer-events-none fixed inset-0 z-[150] opacity-[0.04]"
+    <div className="pointer-events-none fixed inset-0 z-[150] opacity-[0.03] select-none"
       style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        backgroundImage: `url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXVdfX1tfX1scXFzcXF0dXV2dndtcXF3d3d1dXVtfX1ycXF0dXVzclZ0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dXV0dX")`,
         backgroundRepeat: 'repeat',
-        backgroundSize: '128px 128px'
       }}
     />
   );

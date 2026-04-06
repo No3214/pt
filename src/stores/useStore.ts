@@ -1,12 +1,14 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { FoodItem } from '../lib/constants'
+import { supabase } from '../lib/supabase'
 
 // ═══════════════ Types ═══════════════
 export interface ClientNote { id: number; text: string; date: string }
 
 export interface Lead {
-  id: string; name: string; phone: string; goal: string; notes?: string; status: 'New' | 'Contacted'; date: string;
+  id: string; name: string; phone: string; goal: string; email?: string; message?: string; notes?: string; status: 'New' | 'Contacted'; date: string;
+  height?: string; weight?: string; age?: string; healthIssues?: string; allergies?: string;
 }
 
 export interface Client {
@@ -16,16 +18,21 @@ export interface Client {
   notes: ClientNote[]
   phone?: string; email?: string; startDate?: string
   allergens?: string[]
+  athleteLevel?: 'Rookie' | 'Pro' | 'Elite'
+  personalNote?: string
 }
 
 export interface CalSession { name: string; day: string; time: string }
 
 export interface Measurement {
+  id: string
+  clientId: string
+  weight: string; bodyFat: string
   shoulder: string; chest: string; waist: string
-  hip: string; leg: string; arm: string; date: string
+  hip: string; leg: string; arm: string; date: string; notes?: string
 }
 
-export interface ProgressPhoto { src: string; date: string }
+export interface ProgressPhoto { clientId: string; src: string; date: string }
 
 export interface SavedProgram {
   id: string; name: string; clientId?: string
@@ -47,14 +54,14 @@ interface AppState {
   clearToast: () => void
   // Leads CRM
   leads: Lead[]
-  addLead: (lead: Omit<Lead, 'id' | 'date' | 'status'>) => void
+  addLead: (lead: Omit<Lead, 'id' | 'date' | 'status'>) => Promise<void>
   updateLeadStatus: (id: string, status: 'New' | 'Contacted') => void
   // CRM
   clients: Client[]
-  addClient: (c: Omit<Client, 'id' | 'habitScore' | 'habitMax' | 'notes'>) => void
+  addClient: (c: Omit<Client, 'id' | 'habitScore' | 'habitMax' | 'notes' | 'athleteLevel'>) => void
   updateClient: (id: string, data: Partial<Client>) => void
   deleteClient: (id: string) => void
-  useSession: (id: string) => void
+  deductSession: (id: string) => void
   resetClientSessions: (id: string, newMax: number) => void
   markHabit: (id: string, success: boolean) => void
   addNote: (id: string, text: string) => void
@@ -80,25 +87,32 @@ interface AppState {
   deleteCalSession: (idx: number) => void
   // Measurements
   measurements: Measurement[]
-  addMeasurement: (m: Measurement) => void
+  addMeasurement: (clientId: string, m: Omit<Measurement, 'clientId' | 'id'>) => Promise<void>
+  targetWeight: number
+  workoutLogs: { date: string; completed: boolean }[]
+  lastResetDate: string | null
+  checkDailyReset: () => void
+  generateMockData: (clientId: string) => void
   // Progress photos
   progressPhotos: ProgressPhoto[]
-  addProgressPhoto: (p: ProgressPhoto) => void
+  addProgressPhoto: (clientId: string, p: Omit<ProgressPhoto, 'clientId'>) => void
   deleteProgressPhoto: (idx: number) => void
   // Saved Programs
   savedPrograms: SavedProgram[]
   addSavedProgram: (p: Omit<SavedProgram, 'id' | 'createdAt'>) => void
   deleteSavedProgram: (id: string) => void
-  // AI Settings have been moved to environment variables and backend handlers API endpoints
   // Admin Auth
   isAdminAuth: boolean
   loginAdmin: (pin: string) => Promise<boolean>
   logoutAdmin: () => void
+  // WhatsApp Templates
+  whatsappTemplates: { onboarding: string; measurement: string }
+  updateTemplate: (key: 'onboarding' | 'measurement', value: string) => void
 }
 
 export const useStore = create<AppState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       // ─── Dark Mode ───
       darkMode: false,
       toggleDarkMode: () => set(s => ({ darkMode: !s.darkMode })),
@@ -116,16 +130,14 @@ export const useStore = create<AppState>()(
       // ─── Admin Auth (SHA-256 hashed) ───
       isAdminAuth: false,
       loginAdmin: async (pin) => {
-        // Pre-computed SHA-256 hashes of valid passwords
         const validHashes = [
-          '8a5edab1ab43871b3a2250c6ee938abb0bfab40cd3edc1968a0db58fed647a78', // ElaCoach2026!
-          'e22cf04e89fae7e5e0a0a3c888af77e2b7c2c9b4cc62e819a0ae9bc15421a4f8', // Ela2026Admin
+          '8a5edab1ab43871b3a2250c6ee938abb0bfab40cd3edc1968a0db58fed647a78',
+          'e22cf04e89fae7e5e0a0a3c888af77e2b7c2c9b4cc62e819a0ae9bc15421a4f8',
         ]
         const encoder = new TextEncoder()
         const data = encoder.encode(pin)
         
         try {
-          // Sync hash check via SubtleCrypto
           const buf = await crypto.subtle.digest('SHA-256', data)
           const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
           
@@ -143,28 +155,44 @@ export const useStore = create<AppState>()(
 
       // ─── Leads CRM ───
       leads: [],
-      addLead: (lead) => set(s => ({
-        leads: [{
+      addLead: async (lead) => {
+        const newLead = {
           ...lead,
           id: Date.now().toString(),
           date: new Date().toISOString(),
           status: 'New'
-        }, ...s.leads]
-      })),
+        } as Lead
+        
+        set(s => ({ leads: [newLead, ...s.leads] }))
+
+        // Sync to Supabase
+        await supabase.from('leads').insert([{
+           name: lead.name,
+           phone: lead.phone,
+           email: lead.email,
+           goal: lead.goal,
+           message: lead.message,
+           height: lead.height ? parseFloat(lead.height) : null,
+           weight: lead.weight ? parseFloat(lead.weight) : null,
+           age: lead.age ? parseInt(lead.age) : null,
+           health_issues: lead.healthIssues,
+           allergies: lead.allergies,
+           status: 'New'
+        }])
+      },
       updateLeadStatus: (id, status) => set(s => ({
         leads: s.leads.map(l => l.id === id ? { ...l, status } : l)
       })),
 
       // ─── CRM ───
       clients: [
-        { id: '1', name: 'Mina Aksoy', goal: 'Voleybol - Sıçrama', sessions: 8, max: 12, price: 5000, habitScore: 5, habitMax: 6, notes: [], phone: '', email: '', startDate: '2026-01-15', allergens: [] },
-        { id: '2', name: 'Burcu Yılmaz', goal: 'Kuvvet / Yağ Yakımı', sessions: 0, max: 8, price: 3500, habitScore: 2, habitMax: 5, notes: [], phone: '', email: '', startDate: '2026-02-01', allergens: ['Gluten'] },
+        { id: '1', name: 'Mina Aksoy', goal: 'Voleybol - Sıçrama', sessions: 8, max: 12, price: 5000, habitScore: 5, habitMax: 6, notes: [], phone: '', email: '', startDate: '2026-01-15', allergens: [], athleteLevel: 'Elite', personalNote: 'Sıçrama kapasiten bu hafta %15 arttı, harika gidiyorsun Mina!' },
+        { id: '2', name: 'Burcu Yılmaz', goal: 'Kuvvet / Yağ Yakımı', sessions: 0, max: 8, price: 3500, habitScore: 2, habitMax: 5, notes: [], phone: '', email: '', startDate: '2026-02-01', allergens: ['Gluten'], athleteLevel: 'Pro' },
       ],
       addClient: (c) => set(s => {
-        // Payload validation
         const nClient = { ...c, name: c.name.replace(/[<>]/g, '').slice(0,100), goal: c.goal.replace(/[<>]/g, '').slice(0, 200) };
         return {
-          clients: [...s.clients, { ...nClient, id: Date.now().toString(), habitScore: 0, habitMax: 0, notes: [], allergens: c.allergens || [], startDate: c.startDate || new Date().toISOString().split('T')[0] }]
+          clients: [...s.clients, { ...nClient, id: Date.now().toString(), habitScore: 0, habitMax: 0, notes: [], allergens: c.allergens || [], startDate: c.startDate || new Date().toISOString().split('T')[0], athleteLevel: 'Rookie' }]
         }
       }),
       updateClient: (id, data) => set(s => {
@@ -176,7 +204,7 @@ export const useStore = create<AppState>()(
         }
       }),
       deleteClient: (id) => set(s => ({ clients: s.clients.filter(c => c.id !== id) })),
-      useSession: (id) => set(s => ({
+      deductSession: (id) => set(s => ({
         clients: s.clients.map(c => c.id === id && c.sessions > 0 ? { ...c, sessions: c.sessions - 1 } : c)
       })),
       resetClientSessions: (id, newMax) => set(s => ({
@@ -188,7 +216,6 @@ export const useStore = create<AppState>()(
         )
       })),
       addNote: (id, text) => set(s => {
-        // Oversized and XSS sanitization
         if (!text || typeof text !== 'string') return s;
         const cleanText = text.replace(/[<>]/g, '').slice(0, 1000); 
         return {
@@ -216,10 +243,8 @@ export const useStore = create<AppState>()(
       lastCheckIn: null,
       doCheckIn: () => set(s => {
         const today = new Date().toISOString().split('T')[0];
-        if (s.lastCheckIn === today) return {}; // Zaten bugün check-in yapıldı
-
+        if (s.lastCheckIn === today) return {};
         const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
-        
         return {
           lastCheckIn: today,
           streak: s.lastCheckIn === yesterday ? s.streak + 1 : 1
@@ -232,11 +257,70 @@ export const useStore = create<AppState>()(
 
       // ─── Measurements ───
       measurements: [],
-      addMeasurement: (m) => set(s => ({ measurements: [...s.measurements, m] })),
+      addMeasurement: async (clientId, m) => {
+        const newM = { ...m, id: Date.now().toString(), clientId }
+        set(s => ({ measurements: [newM, ...s.measurements] }))
+
+        // Sync to Supabase
+        await supabase.from('measurements').insert([{
+          client_id: clientId,
+          date: m.date,
+          weight: parseFloat(m.weight),
+          body_fat: parseFloat(m.bodyFat),
+          shoulder: parseFloat(m.shoulder),
+          chest: parseFloat(m.chest),
+          waist: parseFloat(m.waist),
+          hip: parseFloat(m.hip),
+          leg: parseFloat(m.leg),
+          arm: parseFloat(m.arm),
+          notes: m.notes
+        }])
+      },
+      targetWeight: 75,
+      workoutLogs: [],
+      lastResetDate: null,
+      checkDailyReset: () => {
+        const today = new Date().toISOString().split('T')[0];
+        const { lastResetDate } = get();
+        if (lastResetDate !== today) {
+          set((state) => ({
+            clients: state.clients.map(c => ({ ...c, habitScore: 0, habitMax: 0 })),
+            lastResetDate: today
+          }));
+        }
+      },
+      generateMockData: (clientId: string) => {
+        const mockMeasurements: Measurement[] = [];
+        const mockLogs: { date: string; completed: boolean }[] = [];
+        const now = new Date();
+        for (let i = 90; i >= 0; i--) {
+          const d = new Date(now);
+          d.setDate(d.getDate() - i);
+          const dateStr = d.toISOString().split('T')[0];
+          if (i % 7 === 0) {
+            mockMeasurements.push({
+              id: Math.random().toString(),
+              clientId,
+              date: dateStr,
+              weight: (85 - (90 - i) * 0.1 + (Math.random() * 0.5)).toFixed(1),
+              bodyFat: (20 - (90 - i) * 0.05).toFixed(1),
+              shoulder: '120', chest: '100', waist: '90', hip: '100', leg: '60', arm: '35',
+              notes: 'Mock data'
+            });
+          }
+          if (Math.random() > 0.3) {
+            mockLogs.push({ date: dateStr, completed: true });
+          }
+        }
+        set((state) => ({
+          measurements: [...state.measurements.filter(m => m.clientId !== clientId), ...mockMeasurements],
+          workoutLogs: mockLogs
+        }));
+      },
 
       // ─── Progress Photos ───
       progressPhotos: [],
-      addProgressPhoto: (p) => set(s => ({ progressPhotos: [...s.progressPhotos, p] })),
+      addProgressPhoto: (clientId, p) => set(s => ({ progressPhotos: [...s.progressPhotos, { ...p, clientId }] })),
       deleteProgressPhoto: (idx) => set(s => ({ progressPhotos: s.progressPhotos.filter((_, i) => i !== idx) })),
 
       // ─── Saved Programs ───
@@ -249,6 +333,15 @@ export const useStore = create<AppState>()(
       // ─── AI Keys ───
       aiConfig: { gemini: '', openrouter: '', deepseek: '' },
       setAiConfig: (config) => set(s => ({ aiConfig: { ...s.aiConfig, ...config } })),
+
+      // ─── WhatsApp Templates ───
+      whatsappTemplates: {
+        onboarding: 'Merhaba! Seninle çalışmak için sabırsızlanıyoruz. Başlamadan önce seni biraz tanıyalım: {{link}}',
+        measurement: 'Merhaba {{name}}! Bu haftaki gelişim ölçümlerini girme vaktin geldi. Formu buradan doldurabilirsin: {{link}}'
+      },
+      updateTemplate: (key, value) => set(s => ({
+        whatsappTemplates: { ...s.whatsappTemplates, [key]: value }
+      }))
     }),
     { 
       name: 'ela-pt-store',

@@ -1,5 +1,7 @@
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useStore, type Lead } from '../../stores/useStore';
+import { supabase } from '../../lib/supabase';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -23,9 +25,63 @@ const statusColors: Record<string, string> = {
 };
 
 export default function Leads() {
-  const { darkMode: dm, leads, updateLeadStatus, showToast } = useStore();
+  const { darkMode: dm, updateLeadStatus, showToast, whatsappTemplates } = useStore();
+  const [dbLeads, setDbLeads] = useState<Lead[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const newCount = leads.filter(l => l.status === 'New').length;
+  const fetchLeads = useCallback(async () => {
+    setLoading(true);
+    const { data, error } = await supabase
+      .from('leads')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      showToast('Veriler çekilemedi.');
+    } else {
+      const mapped: Lead[] = (data || []).map(l => ({
+        id: l.id,
+        name: l.name,
+        phone: l.phone,
+        goal: l.goal,
+        notes: l.message,
+        date: l.created_at,
+        status: l.status
+      }));
+      setDbLeads(mapped);
+    }
+    setLoading(false);
+  }, [showToast]);
+
+  useEffect(() => {
+    fetchLeads();
+  }, [fetchLeads]);
+
+  const handleUpdateStatus = async (id: string, name: string) => {
+    const { error } = await supabase
+      .from('leads')
+      .update({ status: 'Contacted' })
+      .eq('id', id);
+
+    if (error) {
+      showToast('Durum güncellenemedi.');
+    } else {
+      updateLeadStatus(id, 'Contacted');
+      setDbLeads(prev => prev.map(l => l.id === id ? { ...l, status: 'Contacted' } : l));
+      showToast(`${name} ile iletişim durumu güncellendi ✅`);
+    }
+  };
+
+  const handleShareOnboarding = (lead: Lead) => {
+    const link = `${window.location.origin}/onboarding`
+    const text = whatsappTemplates.onboarding.replace('{{link}}', link)
+    
+    const url = `https://wa.me/${lead.phone.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`
+    window.open(url, '_blank')
+    showToast('Ön kayıt formu linki paylaşıldı!')
+  };
+
+  const newCount = dbLeads.filter(l => l.status === 'New').length;
 
   return (
     <motion.div initial="hidden" animate="visible" variants={stagger} className="space-y-10">
@@ -48,13 +104,17 @@ export default function Leads() {
           <div className={`px-5 py-2.5 rounded-2xl border text-[0.8rem] font-bold uppercase tracking-widest ${
             dm ? 'bg-white/5 border-white/10 text-white/40' : 'bg-white border-black/5 text-text-main/40 shadow-sm'
           }`}>
-            {leads.length} Toplam
+            {dbLeads.length} Toplam
           </div>
         </div>
       </motion.section>
 
-      {/* Leads Table */}
-      {leads.length === 0 ? (
+      {/* Loading State */}
+      {loading ? (
+        <div className="flex justify-center py-20">
+          <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1 }} className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full" />
+        </div>
+      ) : dbLeads.length === 0 ? (
         <motion.div variants={fadeUp}
           className={`p-16 rounded-[2.5rem] border text-center ${
             dm ? 'bg-white/[0.02] border-white/5' : 'bg-white border-black/[0.04] shadow-xl'
@@ -87,7 +147,7 @@ export default function Leads() {
                 </tr>
               </thead>
               <tbody>
-                {leads.map((lead: Lead) => (
+                {dbLeads.map((lead: Lead) => (
                   <motion.tr
                     key={lead.id}
                     initial={{ opacity: 0 }}
@@ -122,15 +182,20 @@ export default function Leads() {
                     </td>
                     <td className="px-8 py-5">
                       {lead.status === 'New' && (
-                        <button
-                          onClick={() => {
-                            updateLeadStatus(lead.id, 'Contacted');
-                            showToast(`${lead.name} ile iletişim durumu güncellendi ✅`);
-                          }}
-                          className="px-4 py-2 rounded-xl bg-primary/10 text-primary text-[0.75rem] font-bold border-none cursor-pointer hover:bg-primary/20 transition-all"
-                        >
-                          İletişim Kuruldu
-                        </button>
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => handleUpdateStatus(lead.id, lead.name)}
+                            className="px-4 py-2 rounded-xl bg-emerald-500/10 text-emerald-400 text-[0.75rem] font-bold border-none cursor-pointer hover:bg-emerald-500/20 transition-all"
+                          >
+                            İletişim Kuruldu
+                          </button>
+                          <button
+                            onClick={() => handleShareOnboarding(lead)}
+                            className="px-4 py-2 rounded-xl bg-primary/10 text-primary text-[0.75rem] font-bold border-none cursor-pointer hover:bg-primary/20 transition-all"
+                          >
+                            📝 Form Gönder
+                          </button>
+                        </div>
                       )}
                     </td>
                   </motion.tr>
@@ -142,13 +207,13 @@ export default function Leads() {
       )}
 
       {/* Lead Notes Preview */}
-      {leads.filter(l => l.notes).length > 0 && (
+      {dbLeads.filter(l => l.notes).length > 0 && (
         <motion.div variants={fadeUp}>
           <h3 className={`text-[0.75rem] font-bold uppercase tracking-[0.2em] mb-4 ${
             dm ? 'text-white/20' : 'text-text-main/20'
           }`}>Başvuru Notları</h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {leads.filter(l => l.notes).map(lead => (
+            {dbLeads.filter(l => l.notes).map(lead => (
               <div key={lead.id} className={`p-5 rounded-2xl border ${
                 dm ? 'bg-white/[0.02] border-white/5' : 'bg-stone-50 border-black/[0.04]'
               }`}>

@@ -7,6 +7,8 @@ import { useStore } from '../../stores/useStore';
 import { tenantConfig } from '../../config/tenant';
 import { contactFormSchema, type ContactFormData } from '../../lib/validations';
 
+import { supabase } from '../../lib/supabase';
+
 export default function Contact() {
   const { darkMode, addLead } = useStore();
   const dm = darkMode;
@@ -17,26 +19,48 @@ export default function Contact() {
     defaultValues: { goal: 'voleybol' }
   });
 
-  const onSubmit = (data: ContactFormData) => {
+  const onSubmit = async (data: ContactFormData) => {
     setFormStatus('sending');
     
-    // 1. Zod ile doğrulanmış veriyi Admin Paneli için CRM Repository (Store)'a kaydet
-    addLead({
-      name: data.name,
-      phone: data.phone,
-      goal: data.goal,
-      notes: data.notes || ''
-    });
+    try {
+      // 1. Supabase Insert
+      const { error: dbError } = await supabase.from('leads').insert([{
+        name: data.name,
+        phone: data.phone,
+        email: data.email || null,
+        goal: data.goal,
+        message: data.notes || '',
+        status: 'New'
+      }]);
 
-    // 2. WhatsApp entegrasyonu (Formatlayıp ilet)
-    const msg = `Merhaba! Sana sporcu portalından ulaşıyorum.\n\nAd: ${data.name}\nTelefon: ${data.phone}\nHedef: ${data.goal}\nNotlarım: ${data.notes || '-'}`;
-    const whatsappUrl = `https://wa.me/${tenantConfig.brand.contact.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`;
-    
-    setTimeout(() => {
+      if (dbError) throw dbError;
+
+      // 2. Local Store Sync (UI cache)
+      addLead({
+        name: data.name,
+        phone: data.phone,
+        goal: data.goal,
+        notes: data.notes || ''
+      });
+
+      // 3. WhatsApp Integration
+      const msg = `Merhaba! Sana sporcu portalından ulaşıyorum.\n\nAd: ${data.name}\nTelefon: ${data.phone}\nHedef: ${data.goal}\nNotlarım: ${data.notes || '-'}`;
+      const whatsappUrl = `https://wa.me/${tenantConfig.brand.contact.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`;
+      
       window.open(whatsappUrl, '_blank');
       setFormStatus('success');
       reset();
-    }, 800);
+    } catch (err: any) {
+      console.error('Lead submission failed:', err);
+      // Fallback to local store only if DB fails
+      addLead({
+        name: data.name,
+        phone: data.phone,
+        goal: data.goal,
+        notes: data.notes || ''
+      });
+      setFormStatus('success');
+    }
   };
 
   return (

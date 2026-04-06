@@ -7,24 +7,45 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'og-image.png'],
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'og-image.png', 'icon-192.png', 'icon-512.png'],
       manifest: {
         name: 'Ela Ebeoğlu Performance',
         short_name: 'Ela PT',
-        description: 'Profesyonel voleybolcu ve performans koçu.',
+        description: 'Elite Voleybol & Performans Koçluğu',
         theme_color: '#050505',
         background_color: '#FAF6F1',
         display: 'standalone',
+        orientation: 'portrait',
         icons: [
           {
             src: 'pwa-192x192.png',
             sizes: '192x192',
-            type: 'image/png'
+            type: 'image/png',
+            purpose: 'any maskable'
           },
           {
             src: 'pwa-512x512.png',
             sizes: '512x512',
-            type: 'image/png'
+            type: 'image/png',
+            purpose: 'any maskable'
+          }
+        ]
+      },
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'google-fonts-cache',
+              expiration: { maxEntries: 10, maxAgeSeconds: 60 * 60 * 24 * 365 }
+            }
+          },
+          {
+            urlPattern: /.*\.(?:png|jpg|jpeg|svg|gif|webp)/,
+            handler: 'StaleWhileRevalidate',
+            options: { cacheName: 'image-cache' }
           }
         ]
       }

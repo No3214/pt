@@ -4,8 +4,6 @@ import { useStore } from '../../stores/useStore'
 import { splits, sanitize } from '../../lib/constants'
 import { exercises, categoryLabels, difficultyLabels } from '../../lib/exercises'
 import { councilQuery } from '../../lib/ai'
-import { toPng } from 'html-to-image'
-import generatePDF from 'react-to-pdf'
 
 interface WorkoutLine { exercise: string; sets: number; reps: string; note: string; muscle?: string }
 
@@ -139,6 +137,7 @@ export default function Builder() {
     if (!el) return
     el.style.left = '0'
     try {
+      const { toPng } = await import('html-to-image')
       const url = await toPng(el, { quality: 0.95, pixelRatio: 2 })
       const link = document.createElement('a')
       link.download = 'ElaEbeoglu_Program.png'
@@ -152,9 +151,12 @@ export default function Builder() {
     const el = document.getElementById('export-container')
     if (!el) return
     el.style.left = '0'
-    generatePDF(() => document.getElementById('export-container'), { filename: 'ElaEbeoglu_Program.pdf' })
-      .finally(() => { el.style.left = '-9999px' })
+    import('react-to-pdf')
+      .then(({ default: generatePDF }) =>
+        generatePDF(() => document.getElementById('export-container'), { filename: 'ElaEbeoglu_Program.pdf' })
+      )
       .catch(() => showToast('PDF oluşturulamadı'))
+      .finally(() => { el.style.left = '-9999px' })
   }
 
   return (

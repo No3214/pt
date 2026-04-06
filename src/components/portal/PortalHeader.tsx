@@ -27,10 +27,10 @@ export default function PortalHeader() {
           </div>
           <div>
             <span className="block font-display font-bold text-lg text-text-main leading-tight">
-              {tenantConfig.brand.name}
+              {athlete?.name || tenantConfig.brand.name}
             </span>
             <span className="block text-[0.65rem] uppercase tracking-[0.2em] text-text-main/30 font-bold">
-              Sporcu Portalı
+              {decryptedData?.client?.athleteLevel || 'Rookie'} Tier · Sporcu Portalı
             </span>
           </div>
         </Link>

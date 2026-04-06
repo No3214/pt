@@ -21,6 +21,11 @@ CREATE TABLE public.leads (
     message TEXT,
     source TEXT DEFAULT 'Landing Page',
     status TEXT DEFAULT 'New', -- New, Contacted, Converted
+    height DECIMAL,
+    weight DECIMAL,
+    age INTEGER,
+    health_issues TEXT,
+    allergies TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
@@ -30,6 +35,12 @@ CREATE TABLE public.measurements (
     date DATE NOT NULL,
     weight DECIMAL,
     body_fat DECIMAL,
+    shoulder DECIMAL,
+    chest DECIMAL,
+    waist DECIMAL,
+    hip DECIMAL,
+    leg DECIMAL,
+    arm DECIMAL,
     notes TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );

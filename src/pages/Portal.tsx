@@ -10,6 +10,7 @@ import WorkoutLogger from '../components/portal/WorkoutLogger';
 import ProgressGallery from '../components/portal/ProgressGallery';
 import GamifiedExport from '../components/portal/GamifiedExport';
 import { GrainOverlay } from '../components/landing/LandingUI';
+import AchievementTracker from '../components/portal/AchievementTracker';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -20,8 +21,20 @@ const stagger = {
   show: { transition: { staggerChildren: 0.1 } }
 };
 
+import PortalLogin from './portal/PortalLogin';
+import { useStudentPortal } from '../stores/studentPortal';
+
 export default function Portal() {
   const { darkMode: dm } = useStore();
+  const { decryptedData } = useStudentPortal();
+
+  // If no decrypted data, show Login / PIN entry
+  if (!decryptedData) {
+    return <PortalLogin />;
+  }
+
+  // Use decryptedData to override or populate the view
+  // Note: For now we'll show the UI. We'll need to pass decryptedData to sub-components.
 
   return (
     <div className={`min-h-screen font-body overflow-x-hidden ${dm ? 'dark bg-bg text-white' : 'bg-bg-alt text-text-main'}`}>
@@ -68,6 +81,28 @@ export default function Portal() {
             {/* Right Column: Nutrition Log */}
             <motion.div variants={fadeUp} className="lg:col-span-4 h-full">
               <FoodLog />
+            </motion.div>
+
+            {/* Achievement Tracker & Personal Note Section */}
+            <motion.div variants={fadeUp} className="lg:col-span-12 grid md:grid-cols-2 gap-8 mt-12 pt-12 border-t border-text-main/5">
+              <div className="space-y-6">
+                 <AchievementTracker athleteLevel={decryptedData?.client?.athleteLevel || 'Rookie'} />
+              </div>
+              <div className={`p-10 rounded-[2.5rem] border flex flex-col justify-center relative overflow-hidden ${
+                dm ? 'bg-primary/5 border-primary/20' : 'bg-white border-black/[0.04] shadow-2xl'
+              }`}>
+                <div className="absolute top-0 right-0 p-4 opacity-10">
+                   <span className="text-6xl text-primary font-display font-bold">"</span>
+                </div>
+                <h4 className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-primary mb-4">Ela'dan Notun Var 💎</h4>
+                <p className="font-display text-xl md:text-2xl font-bold italic tracking-tight text-text-main leading-snug">
+                   {decryptedData?.client?.personalNote || "Yeni haftaya hazır mısın? Hedeflerin için bugün harika bir gün. Disiplin her şeydir!"}
+                </p>
+                <div className="mt-8 flex items-center gap-3">
+                   <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs">💪</div>
+                   <span className="text-[0.75rem] font-bold text-text-main/40 uppercase tracking-widest">Senin Zamanın, Senin Zaferin.</span>
+                </div>
+              </div>
             </motion.div>
             
             {/* Full Width Bottom Row: Workout Tracker */}

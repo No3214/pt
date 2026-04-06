@@ -9,9 +9,9 @@ const fadeUp = {
 const stagger = { show: { transition: { staggerChildren: 0.08 } } }
 
 export default function Settings() {
-  const { clients, calSessions, measurements, progressPhotos, savedPrograms, showToast, darkMode: dm, aiConfig, setAiConfig } = useStore()
+  const { clients, calSessions, measurements, progressPhotos, savedPrograms, showToast, darkMode: dm, aiConfig, setAiConfig, whatsappTemplates, updateTemplate } = useStore()
   const fileRef = useRef<HTMLInputElement>(null)
-  const [activeTab, setActiveTab] = useState<'data' | 'ai' | 'danger'>('data')
+  const [activeTab, setActiveTab] = useState<'data' | 'ai' | 'templates' | 'danger'>('data')
 
   const card = `p-6 rounded-2xl border transition-all duration-300 ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`
 
@@ -70,6 +70,7 @@ export default function Settings() {
   const tabs = [
     { key: 'data' as const, label: 'Veri Yönetimi', icon: '💾' },
     { key: 'ai' as const, label: 'AI Yönetimi', icon: '🤖' },
+    { key: 'templates' as const, label: 'Mesaj Şablonları', icon: '📝' },
     { key: 'danger' as const, label: 'Tehlikeli Bölge', icon: '⚠️' },
   ]
 
@@ -209,7 +210,6 @@ export default function Settings() {
                       dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-[#1C1917]'
                     }`}
                   />
-                  <p className={`text-[0.65rem] mt-1 ${dm ? 'text-white/30' : 'text-stone-400'}`}>Anahtarınız sadece tarayıcınızda (localStorage) saklanır ve güvenlik proxy'sine aktarılır.</p>
                 </div>
 
                 <div>
@@ -226,21 +226,84 @@ export default function Settings() {
                     }`}
                   />
                 </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
 
+        {/* WhatsApp Templates Tab */}
+        {activeTab === 'templates' && (
+          <motion.div key="templates" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-6">
+            <div className={card}>
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-3xl">📱</span>
                 <div>
-                  <label className={`block mb-1.5 text-xs font-semibold uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-500'}`}>
-                    DeepSeek API Key
-                  </label>
-                  <input
-                    type="password"
-                    value={aiConfig.deepseek || ''}
-                    onChange={(e) => setAiConfig({ deepseek: e.target.value })}
-                    placeholder="sk-..."
-                    className={`w-full p-3.5 rounded-xl border outline-none text-sm font-mono tracking-wide transition-all ${
-                      dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-[#1C1917]'
-                    }`}
-                  />
+                  <h3 className="font-display text-xl font-semibold">WhatsApp Şablonları</h3>
+                  <p className={`text-sm ${dm ? 'text-white/40' : 'text-stone-400'}`}>Öğrenci ve adaylara gönderilen mesajları özelleştirin</p>
                 </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {/* Onboarding Template */}
+                <div className="space-y-4">
+                  <div>
+                    <label className={`block mb-1.5 text-xs font-semibold uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-500'}`}>
+                      Ön Kayıt Formu Mesajı
+                    </label>
+                    <textarea
+                      value={whatsappTemplates.onboarding}
+                      onChange={(e) => updateTemplate('onboarding', e.target.value)}
+                      rows={6}
+                      className={`w-full p-4 rounded-xl border outline-none text-sm leading-relaxed transition-all resize-none ${
+                        dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-[#1C1917]'
+                      }`}
+                    />
+                    <p className={`text-[0.65rem] mt-2 ${dm ? 'text-white/30' : 'text-stone-400'}`}>
+                      Mevcut değişkenler: <code className="text-primary">{"{{link}}"}</code>
+                    </p>
+                  </div>
+                  
+                  <div className={`p-4 rounded-xl text-xs flex flex-col gap-2 ${dm ? 'bg-primary/10 border border-primary/20' : 'bg-primary/5 border border-primary/10'}`}>
+                    <span className="font-bold text-primary uppercase text-[0.6rem]">Önizleme</span>
+                    <p className="italic opacity-60">
+                      {whatsappTemplates.onboarding.replace('{{link}}', 'https://pt.kozbeyli.com/onboarding')}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Measurement Template */}
+                <div className="space-y-4">
+                  <div>
+                    <label className={`block mb-1.5 text-xs font-semibold uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-500'}`}>
+                      Haftalık Ölçüm Mesajı
+                    </label>
+                    <textarea
+                      value={whatsappTemplates.measurement}
+                      onChange={(e) => updateTemplate('measurement', e.target.value)}
+                      rows={6}
+                      className={`w-full p-4 rounded-xl border outline-none text-sm leading-relaxed transition-all resize-none ${
+                        dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-[#1C1917]'
+                      }`}
+                    />
+                    <p className={`text-[0.65rem] mt-2 ${dm ? 'text-white/30' : 'text-stone-400'}`}>
+                      Mevcut değişkenler: <code className="text-primary">{"{{link}}"}</code>, <code className="text-primary">{"{{name}}"}</code>
+                    </p>
+                  </div>
+
+                  <div className={`p-4 rounded-xl text-xs flex flex-col gap-2 ${dm ? 'bg-secondary/10 border border-secondary/20' : 'bg-secondary/5 border border-secondary/10'}`}>
+                    <span className="font-bold text-secondary uppercase text-[0.6rem]">Önizleme</span>
+                    <p className="italic opacity-60">
+                      {whatsappTemplates.measurement.replace('{{link}}', 'https://pt.kozbeyli.com/measure/123').replace('{{name}}', 'Mina Aksoy')}
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className={`mt-10 p-5 rounded-2xl flex items-start gap-4 ${dm ? 'bg-white/[0.02]' : 'bg-stone-50/50'}`}>
+                <span className="text-xl">💡</span>
+                <p className={`text-xs leading-relaxed ${dm ? 'text-white/30' : 'text-stone-500'}`}>
+                  Değişkenler otomatik olarak doldurulur. <code className="text-primary">{"{{link}}"}</code> öğrencinin verilerini girebileceği formu, <code className="text-primary">{"{{name}}"}</code> ise öğrencinin adını temsil eder.
+                </p>
               </div>
             </div>
           </motion.div>
