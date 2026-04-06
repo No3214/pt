@@ -23,6 +23,7 @@ const Nutrition = lazy(() => import('./pages/admin/Nutrition'))
 const FoodTracker = lazy(() => import('./pages/admin/FoodTracker'))
 const CalendarPage = lazy(() => import('./pages/admin/Calendar'))
 const Settings = lazy(() => import('./pages/admin/Settings'))
+const Leads = lazy(() => import('./pages/admin/Leads'))
 const Portal = lazy(() => import('./pages/Portal'))
 
 function PageLoader() {
@@ -69,13 +70,15 @@ export default function App() {
       touchMultiplier: 2,
     })
 
+    let rafId = 0
     function raf(time: number) {
       lenis.raf(time)
-      requestAnimationFrame(raf)
+      rafId = requestAnimationFrame(raf)
     }
-    requestAnimationFrame(raf)
+    rafId = requestAnimationFrame(raf)
 
     return () => {
+      cancelAnimationFrame(rafId)
       lenis.destroy()
     }
   }, [darkMode])
@@ -98,6 +101,7 @@ export default function App() {
               <Route path="nutrition" element={<Nutrition />} />
               <Route path="food-tracker" element={<FoodTracker />} />
               <Route path="calendar" element={<CalendarPage />} />
+              <Route path="leads" element={<Leads />} />
               <Route path="settings" element={<Settings />} />
             </Route>
             <Route path="/portal" element={<Portal />} />

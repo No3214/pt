@@ -90,7 +90,7 @@ export default function GamifiedExport() {
              </div>
 
               <div className="relative z-10 flex items-center justify-between mt-6 pt-4 border-t border-current/10">
-                <span className="font-bold text-sm tracking-wide">@{tenantConfig.brand.contact.socials.instagram}</span>
+                <span className="font-bold text-sm tracking-wide">{tenantConfig.brand.contact.socials.instagram}</span>
                 <span className="text-xs font-bold opacity-40 px-2 py-1 rounded bg-current/10">PRO</span>
               </div>
            </div>

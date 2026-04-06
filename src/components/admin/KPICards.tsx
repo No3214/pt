@@ -37,7 +37,7 @@ function KPICard({ label, value, sub, color, i, dm }: any) {
 }
 
 export default function KPICards() {
-  const { clients, darkMode: dm } = useStore();
+  const { clients, leads, darkMode: dm } = useStore();
   
   const stats = useMemo(() => {
     const active = clients.filter(c => c.sessions > 0).length;
@@ -45,15 +45,15 @@ export default function KPICards() {
     const totalMax = clients.reduce((a, c) => a + c.habitMax, 0);
     const totalScore = clients.reduce((a, c) => a + c.habitScore, 0);
     const compliance = totalMax > 0 ? Math.round((totalScore / totalMax) * 100) : 0;
-    const sessions = clients.reduce((a, c) => a + c.sessions, 0);
+    const newLeads = leads.filter(l => l.status === 'New').length;
     
     return [
       { label: 'Aktif Danışan', value: active, sub: `${clients.length} Toplam Kayıt`, color: 'primary' },
       { label: 'Aylık Gelir', value: `₺${mrr.toLocaleString('tr-TR')}`, sub: 'Aylık Tekrarlayan', color: 'secondary' },
       { label: 'Uyum Skoru', value: `%${compliance}`, sub: 'Haftalık Ortalama', color: 'accent' },
-      { label: 'Kalan Seans', value: sessions, sub: 'Paket Bazlı', color: 'sand' }
+      { label: 'Yeni Başvuru', value: newLeads, sub: `${leads.length} Toplam Lead`, color: 'sand' }
     ];
-  }, [clients]);
+  }, [clients, leads]);
 
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -5,7 +5,7 @@ const habitLabels = ['3 Litre Su', '8 Saat Uyku', 'Protein Hedefi', '10.000 Adı
 const habitIcons = ['💧', '💤', '🥩', '🚶'];
 
 export default function HabitCheckIn() {
-  const { darkMode: dm, habits, setHabits, showToast } = useStore();
+  const { darkMode: dm, habits, setHabits, showToast, doCheckIn } = useStore();
 
   const handleToggle = (i: number) => {
     const next = [...habits];
@@ -13,6 +13,11 @@ export default function HabitCheckIn() {
     setHabits(next);
     if (next[i]) {
       showToast(`${habitLabels[i]} tamamlandı! 🚀`);
+    }
+    // Tüm alışkanlıklar tamamlandığında günlük check-in tetiklenir → streak artar
+    if (next.every(Boolean)) {
+      doCheckIn();
+      showToast('Tüm hedefler tamam — günlük serin +1! 🔥');
     }
   };
 
