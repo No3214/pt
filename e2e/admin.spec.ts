@@ -4,7 +4,7 @@ test.describe('Admin Panel Tests', () => {
   test('PIN koruma ekranı görünüyor ve yanlış şifrede giriş yapılamıyor', async ({ page }) => {
     await page.goto('/admin');
 
-    const heading = page.locator('h1', { hasText: 'Gelişmiş Coach Paneli' });
+    const heading = page.locator('h1', { hasText: 'Koç Paneli' });
     const pinInput = page.locator('input[type="password"]');
 
     // Eğer zaten giriş yapılmışsa test bu adımı atlamalı (temiz context olsa da)
