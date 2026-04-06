@@ -5,11 +5,11 @@ import { useStore } from '../../stores/useStore';
 import Lightbox from '../Lightbox';
 
 const galleryImages = [
-  { src: '/voleybol_1.png', alt: 'Voleybol antrenman - Smaç tekniği', caption: 'Smaç Tekniği' },
-  { src: '/voleybol_2.png', alt: 'Voleybol antrenman - Blok çalışması', caption: 'Blok & Savunma' },
-  { src: '/voleybol_3.png', alt: 'Voleybol antrenman - Servis atışı', caption: 'Servis Atışı' },
-  { src: '/voleybol_4.png', alt: 'Voleybol antrenman - Takım çalışması', caption: 'Takım Çalışması' },
-  { src: '/ela_voleybol.png', alt: 'Ela Ebeoğlu voleybol sahası', caption: 'Sahada Güç' },
+  { src: 'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=1000&auto=format&fit=crop', alt: 'Voleybol Smaç Tekniği', caption: 'Smaç Tekniği' },
+  { src: 'https://images.unsplash.com/photo-1599586120429-48281b6f0ece?q=80&w=1000&auto=format&fit=crop', alt: 'Voleybol Blok Savunma', caption: 'Blok & Savunma' },
+  { src: 'https://images.unsplash.com/photo-1612871689353-d14ae3b9ddf9?q=80&w=1000&auto=format&fit=crop', alt: 'Voleybol Servis Atışı', caption: 'Servis Atışı' },
+  { src: 'https://images.unsplash.com/photo-1544213456-ccae4c8d20e3?q=80&w=1000&auto=format&fit=crop', alt: 'Takım Çalışması', caption: 'Kuvvet Antrenmanı' },
+  { src: '/ela_training.png', alt: 'Ela Ebeoğlu voleybol sahası', caption: 'Sahada Güç' },
 ];
 
 function GalleryCard({ image, index, onClick, dm }: {

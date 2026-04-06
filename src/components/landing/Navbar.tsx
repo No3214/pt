@@ -57,9 +57,9 @@ export default function Navbar() {
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="12" cy="12" r="5" /><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" /></svg>
               )}
             </button>
-            <Link to="/admin" className={`hidden md:inline-flex items-center px-6 py-3 rounded-full text-[0.8rem] font-bold tracking-widest uppercase no-underline transition-all duration-500 border-2 ${dm ? 'border-primary/20 text-white hover:bg-primary/10' : 'border-primary/10 text-text-main hover:bg-primary/5'}`}>
+            <a href="/admin" className={`hidden md:inline-flex items-center px-6 py-3 rounded-full text-[0.8rem] font-bold tracking-widest uppercase no-underline transition-all duration-500 border-2 ${dm ? 'border-primary/20 text-white hover:bg-primary/10' : 'border-primary/10 text-text-main hover:bg-primary/5'}`}>
               Giriş Yap
-            </Link>
+            </a>
             
             {/* Mobile Menu Button */}
             <button className="md:hidden bg-transparent border-none cursor-pointer p-2 z-[101]" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menü">
@@ -96,10 +96,10 @@ export default function Navbar() {
                 </motion.a>
               ))}
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
-                <Link to="/admin" onClick={() => setMenuOpen(false)}
-                  className="mt-10 px-10 py-5 bg-primary text-white rounded-full font-bold uppercase tracking-widest text-[0.85rem] shadow-2xl">
+                <a href="/admin" onClick={() => setMenuOpen(false)}
+                  className="mt-10 px-10 py-5 bg-primary text-white rounded-full font-bold uppercase tracking-widest text-[0.85rem] shadow-2xl inline-block no-underline">
                   Yönetim Paneli
-                </Link>
+                </a>
               </motion.div>
             </motion.nav>
           )}

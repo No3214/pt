@@ -47,8 +47,16 @@ export const daysArr = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cts', 'Paz'] as con
 
 // ═══════════════ Utility ═══════════════
 export function sanitize(str: string): string {
-  const doc = new DOMParser().parseFromString(str, 'text/html')
-  return doc.body.textContent || ''
+  if (!str) return '';
+  return str.replace(/[&<>'"]/g, 
+    tag => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[tag as string] || tag)
+  );
 }
 
 export function showToastEvent(msg: string) {

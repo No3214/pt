@@ -192,6 +192,11 @@ export const useStore = create<AppState>()(
       aiKeys: { gemini: '', openrouter: '', openrouterModel: 'anthropic/claude-sonnet-4', deepseek: '' },
       setAiKeys: (k) => set(s => ({ aiKeys: { ...s.aiKeys, ...k } })),
     }),
-    { name: 'ela-pt-store' }
+    { 
+      name: 'ela-pt-store',
+      partialize: (state) => Object.fromEntries(
+        Object.entries(state).filter(([key]) => !['isAdminAuth'].includes(key))
+      )
+    }
   )
 )
