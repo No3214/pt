@@ -18,10 +18,27 @@ export default {
         accent: 'var(--color-accent)',
         sand: 'var(--color-sand)',
         bg: { DEFAULT: 'var(--color-bg)', dark: 'var(--color-bg)' },
+        'bg-alt': 'var(--color-bg-alt)',
         'text-main': { DEFAULT: 'var(--color-text)', dark: 'var(--color-text)' },
         'text-light': { DEFAULT: 'var(--color-text-muted)', dark: 'var(--color-text-muted)' },
         card: { DEFAULT: 'var(--color-surface)', dark: 'var(--color-surface)' },
         glow: 'var(--color-glow)',
+        // Admin panel color aliases (maps to brand palette)
+        terracotta: {
+          DEFAULT: '#C2684A',
+          dark: '#A8553A',
+          light: '#D4856B',
+        },
+        sage: {
+          DEFAULT: '#7A9E82',
+          dark: '#628069',
+          light: '#96B89E',
+        },
+        coast: {
+          DEFAULT: '#5e8fa8',
+          dark: '#4A7389',
+          light: '#7EADC2',
+        },
       },
       fontFamily: {
         display: ['"Cormorant Garamond"', 'Georgia', 'serif'],

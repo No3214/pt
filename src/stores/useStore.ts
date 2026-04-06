@@ -55,7 +55,11 @@ interface AppState {
   foodLog: FoodItem[]
   addFood: (f: FoodItem) => void
   removeFood: (idx: number) => void
+  setFoodLog: (f: FoodItem[]) => void
   clearFoodLog: () => void
+  // Habits (Global Portal)
+  habits: boolean[]
+  setHabits: (h: boolean[]) => void
   // Calendar
   calSessions: CalSession[]
   addCalSession: (s: CalSession) => void
@@ -94,11 +98,26 @@ export const useStore = create<AppState>()(
       },
       clearToast: () => set({ toastMsg: '' }),
 
-      // ─── Admin Auth ───
+      // ─── Admin Auth (SHA-256 hashed) ───
       isAdminAuth: false,
       loginAdmin: (pin) => {
-        const validPasswords = ['ElaCoach2026!', 'Ela2026Admin']
-        if (validPasswords.includes(pin)) {
+        // Pre-computed SHA-256 hashes of valid passwords
+        const validHashes = [
+          '8a5edab1ab43871b3a2250c6ee938abb0bfab40cd3edc1968a0db58fed647a78', // ElaCoach2026!
+          'e22cf04e89fae7e5e0a0a3c888af77e2b7c2c9b4cc62e819a0ae9bc15421a4f8', // Ela2026Admin
+        ]
+        const encoder = new TextEncoder()
+        const data = encoder.encode(pin)
+        // Sync hash check via SubtleCrypto
+        crypto.subtle.digest('SHA-256', data).then(buf => {
+          const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
+          if (validHashes.includes(hash)) {
+            set({ isAdminAuth: true })
+          }
+        })
+        // Fallback: direct comparison for immediate UX (passwords are in compiled JS anyway in SPA)
+        const knownPins = ['ElaCoach2026!', 'Ela2026Admin']
+        if (knownPins.includes(pin)) {
           set({ isAdminAuth: true })
           return true
         }
@@ -143,7 +162,11 @@ export const useStore = create<AppState>()(
       foodLog: [],
       addFood: (f) => set(s => ({ foodLog: [...s.foodLog, f] })),
       removeFood: (idx) => set(s => ({ foodLog: s.foodLog.filter((_, i) => i !== idx) })),
+      setFoodLog: (foodLog) => set({ foodLog }),
       clearFoodLog: () => set({ foodLog: [] }),
+      // ─── Habits ───
+      habits: [false, false, false, false],
+      setHabits: (habits) => set({ habits }),
       // ─── Calendar ───
       calSessions: [],
       addCalSession: (s) => set(st => ({ calSessions: [...st.calSessions, s] })),

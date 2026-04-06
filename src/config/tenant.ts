@@ -21,13 +21,15 @@ export const tenantConfig = {
       bg: '#FAF6F1', // Creamy White
       bgAlt: '#F5F0EA',
       textMain: '#1C1917', // Dark Stone
-      textMuted: '#78716C'
+      textMuted: '#78716C',
+      sand: '#D4B483' // Rich Sand
     },
     darkTheme: {
       bg: '#0A0A0A',
       bgAlt: '#121212',
       textMain: '#FAFAF9',
-      textMuted: '#A8A29E'
+      textMuted: '#A8A29E',
+      sand: '#E6C9A8'
     }
   }
 };

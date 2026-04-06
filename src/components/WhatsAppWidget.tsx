@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
+import { tenantConfig } from '../config/tenant'
 
-const PHONE = '905XXXXXXXXX' // Ela'nın numarası
-const GREETING = 'Merhaba Ela! Antrenman hakkında bilgi almak istiyorum 🏐'
+const PHONE = tenantConfig.brand.contact.phone.replace(/[^0-9]/g, '')
+const GREETING = `Merhaba ${tenantConfig.brand.name}! Antrenman hakkında bilgi almak istiyorum 🏐`
 
 export default function WhatsAppWidget() {
   const [open, setOpen] = useState(false)

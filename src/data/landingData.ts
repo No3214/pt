@@ -81,6 +81,7 @@ export const landingStats: Stat[] = [
 
 export const navigationLinks = [
   { id: 'hakkinda', label: 'Hakkında' },
+  { id: 'galeri', label: 'Galeri' },
   { id: 'programlar', label: 'Programlar' },
   { id: 'sonuclar', label: 'Sonuçlar' },
   { id: 'faq', label: 'SSS' },

@@ -16,6 +16,7 @@ html {
   --color-primary: #C2684A;
   --color-primary-light: color-mix(in srgb, var(--color-primary), white 20%);
   --color-primary-dark: color-mix(in srgb, var(--color-primary), black 20%);
+  --color-primary-rgb: 194, 104, 74;
   --color-secondary: #7A9E82;
   --color-secondary-light: color-mix(in srgb, var(--color-secondary), white 20%);
   --color-secondary-dark: color-mix(in srgb, var(--color-secondary), black 20%);
@@ -24,6 +25,7 @@ html {
   
   /* UI Colors */
   --color-bg: #FAF6F1;
+  --color-bg-alt: #F5F0EA;
   --color-surface: #FFFFFF;
   --color-text: #1C1917;
   --color-text-muted: rgba(28, 25, 23, 0.45);
@@ -39,6 +41,7 @@ html {
 
 .dark {
   --color-bg: #050505;
+  --color-bg-alt: #0a0a0a;
   --color-surface: #0c0c0c;
   --color-text: #e6e6e6;
   --color-text-muted: rgba(230, 230, 230, 0.45);

@@ -1,0 +1,65 @@
+import { motion } from 'framer-motion';
+import { useStore } from '../../stores/useStore';
+import { useMemo } from 'react';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1, y: 0,
+    transition: { delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+  })
+};
+
+function KPICard({ label, value, sub, color, i, dm }: any) {
+  return (
+    <motion.div
+      variants={fadeUp}
+      custom={i}
+      whileHover={{ y: -5, scale: 1.02 }}
+      className={`p-10 rounded-[2.5rem] border transition-all duration-500 flex flex-col justify-between h-full ${
+        dm ? 'bg-white/[0.02] border-white/5 shadow-2xl shadow-black/20' : 'bg-white border-black/[0.04] shadow-xl'
+      }`}
+    >
+      <div>
+        <p className={`text-[0.7rem] font-bold uppercase tracking-[0.25em] mb-4 opacity-40 ${dm ? 'text-white' : 'text-text-main'}`}>
+          {label}
+        </p>
+        <div className={`text-[2.8rem] font-bold tracking-tighter leading-none text-text-main tabular-nums`}>
+          {value}
+        </div>
+      </div>
+      <div className="mt-8 flex items-end justify-between">
+        <p className="text-[0.85rem] font-medium text-text-main/30">{sub}</p>
+        <div className={`w-3 h-3 rounded-full animate-pulse`} style={{ backgroundColor: `var(--color-${color})` }} />
+      </div>
+    </motion.div>
+  );
+}
+
+export default function KPICards() {
+  const { clients, darkMode: dm } = useStore();
+  
+  const stats = useMemo(() => {
+    const active = clients.filter(c => c.sessions > 0).length;
+    const mrr = clients.reduce((a, c) => a + c.price, 0);
+    const totalMax = clients.reduce((a, c) => a + c.habitMax, 0);
+    const totalScore = clients.reduce((a, c) => a + c.habitScore, 0);
+    const compliance = totalMax > 0 ? Math.round((totalScore / totalMax) * 100) : 0;
+    const sessions = clients.reduce((a, c) => a + c.sessions, 0);
+    
+    return [
+      { label: 'Aktif Danışan', value: active, sub: `${clients.length} Toplam Kayıt`, color: 'primary' },
+      { label: 'Aylık Gelir', value: `₺${mrr.toLocaleString('tr-TR')}`, sub: 'Aylık Tekrarlayan', color: 'secondary' },
+      { label: 'Uyum Skoru', value: `%${compliance}`, sub: 'Haftalık Ortalama', color: 'accent' },
+      { label: 'Kalan Seans', value: sessions, sub: 'Paket Bazlı', color: 'sand' }
+    ];
+  }, [clients]);
+
+  return (
+    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {stats.map((s, i) => (
+        <KPICard key={i} {...s} i={i} dm={dm} />
+      ))}
+    </div>
+  );
+}

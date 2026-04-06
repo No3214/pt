@@ -7,6 +7,7 @@ import Navbar from '../components/landing/Navbar';
 import Hero from '../components/landing/Hero';
 import About from '../components/landing/About';
 import Stats from '../components/landing/Stats';
+import Gallery from '../components/landing/Gallery';
 import Programs from '../components/landing/Programs';
 import Testimonials from '../components/landing/Testimonials';
 import FAQ from '../components/landing/FAQ';
@@ -42,6 +43,9 @@ export default function Landing() {
       {/* Key Metrics */}
       <Stats />
 
+      {/* Voleybol & Spor Galerisi */}
+      <Gallery />
+
       {/* Transformation Stories */}
       <Testimonials />
 
@@ -59,3 +63,4 @@ export default function Landing() {
     </div>
   );
 }
+

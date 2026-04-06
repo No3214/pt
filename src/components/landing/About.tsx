@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 export default function About() {
   const PHILOSOPHY_CARDS = [
     { num: '01', title: 'Sporcu Disiplini', desc: 'Profesyonel voleybol tecrübesiyle kanıtlanmış antrenman metodolojisi.' },
-    { num: '02', title: 'Kadın Odaklı Güçlenme', desc: 'Bedenini tanımanı ve güçlü bir temele sahip olmanı hedefliyorum.' },
+    { num: '02', title: 'Kişiye Özel Güçlenme', desc: 'Kendi bedenini tanımanı ve hedeflerine uygun güçlü bir temele sahip olmanı hedefliyorum.' },
     { num: '03', title: 'Seçici Premium Takip', desc: 'Kaliteyi korumak için sınırlı kontenjanla, birebir odaklı çalışma.' },
   ];
 
