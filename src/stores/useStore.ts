@@ -5,6 +5,10 @@ import type { FoodItem } from '../lib/constants'
 // ═══════════════ Types ═══════════════
 export interface ClientNote { id: number; text: string; date: string }
 
+export interface Lead {
+  id: string; name: string; phone: string; goal: string; notes?: string; status: 'New' | 'Contacted'; date: string;
+}
+
 export interface Client {
   id: string; name: string; goal: string
   sessions: number; max: number; price: number
@@ -40,6 +44,10 @@ interface AppState {
   toastMsg: string
   showToast: (msg: string) => void
   clearToast: () => void
+  // Leads CRM
+  leads: Lead[]
+  addLead: (lead: Omit<Lead, 'id' | 'date' | 'status'>) => void
+  updateLeadStatus: (id: string, status: 'New' | 'Contacted') => void
   // CRM
   clients: Client[]
   addClient: (c: Omit<Client, 'id' | 'habitScore' | 'habitMax' | 'notes'>) => void
@@ -59,6 +67,9 @@ interface AppState {
   // Habits (Global Portal)
   habits: boolean[]
   setHabits: (h: boolean[]) => void
+  streak: number
+  lastCheckIn: string | null
+  doCheckIn: () => void
   // Calendar
   calSessions: CalSession[]
   addCalSession: (s: CalSession) => void
@@ -126,6 +137,20 @@ export const useStore = create<AppState>()(
       },
       logoutAdmin: () => set({ isAdminAuth: false }),
 
+      // ─── Leads CRM ───
+      leads: [],
+      addLead: (lead) => set(s => ({
+        leads: [{
+          ...lead,
+          id: Date.now().toString(),
+          date: new Date().toISOString(),
+          status: 'New'
+        }, ...s.leads]
+      })),
+      updateLeadStatus: (id, status) => set(s => ({
+        leads: s.leads.map(l => l.id === id ? { ...l, status } : l)
+      })),
+
       // ─── CRM ───
       clients: [
         { id: '1', name: 'Mina Aksoy', goal: 'Voleybol - Sıçrama', sessions: 8, max: 12, price: 5000, habitScore: 5, habitMax: 6, notes: [], phone: '', email: '', startDate: '2026-01-15' },
@@ -180,9 +205,22 @@ export const useStore = create<AppState>()(
       removeFood: (idx) => set(s => ({ foodLog: s.foodLog.filter((_, i) => i !== idx) })),
       setFoodLog: (foodLog) => set({ foodLog }),
       clearFoodLog: () => set({ foodLog: [] }),
-      // ─── Habits ───
+      // ─── Habits & Streak ───
       habits: [false, false, false, false],
       setHabits: (habits) => set({ habits }),
+      streak: 0,
+      lastCheckIn: null,
+      doCheckIn: () => set(s => {
+        const today = new Date().toISOString().split('T')[0];
+        if (s.lastCheckIn === today) return {}; // Zaten bugün check-in yapıldı
+
+        const yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+        
+        return {
+          lastCheckIn: today,
+          streak: s.lastCheckIn === yesterday ? s.streak + 1 : 1
+        };
+      }),
       // ─── Calendar ───
       calSessions: [],
       addCalSession: (s) => set(st => ({ calSessions: [...st.calSessions, s] })),

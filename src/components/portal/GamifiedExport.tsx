@@ -5,7 +5,7 @@ import * as htmlToImage from 'html-to-image';
 import { tenantConfig } from '../../config/tenant';
 
 export default function GamifiedExport() {
-  const { darkMode: dm, showToast, foodLog, habits } = useStore();
+  const { darkMode: dm, showToast, foodLog, habits, streak } = useStore();
   const cardRef = useRef<HTMLDivElement>(null);
   const [isExporting, setIsExporting] = useState(false);
 
@@ -19,7 +19,7 @@ export default function GamifiedExport() {
     try {
       const dataUrl = await htmlToImage.toPng(cardRef.current, { quality: 1, pixelRatio: 2 });
       const link = document.createElement('a');
-      link.download = `${tenantConfig.slug}-haftalik-ozet.png`;
+      link.download = `${tenantConfig.brand.name.toLowerCase()}-haftalik-ozet.png`;
       link.href = dataUrl;
       link.click();
       showToast('Kazanımların Instagram için indirildi! 🎉');
@@ -31,9 +31,11 @@ export default function GamifiedExport() {
     }
   };
 
-  // Mock calculations for the gamified card
-  const activeDayStreak = Math.floor(Math.random() * 5) + 3; // Simulated
-  const caloriesTracked = foodLog.reduce((acc, f) => acc + f.cal, 0) || 1250;
+  // Gerçek Store (CRM) metrikleri gamification kartına bağlanıyor
+  
+  // Fake veriden kurtuluyoruz.
+  const activeDayStreak = streak > 0 ? streak : 1; 
+  const caloriesTracked = foodLog.reduce((acc, f) => acc + f.cal, 0) || 0;
   const habitsDone = habits.filter(Boolean).length;
 
   return (
@@ -87,10 +89,10 @@ export default function GamifiedExport() {
                </div>
              </div>
 
-             <div className="relative z-10 flex items-center justify-between mt-6 pt-4 border-t border-current/10">
-               <span className="font-bold text-sm tracking-wide">@{tenantConfig.social.instagram}</span>
-               <span className="text-xs font-bold opacity-40 px-2 py-1 rounded bg-current/10">PRO</span>
-             </div>
+              <div className="relative z-10 flex items-center justify-between mt-6 pt-4 border-t border-current/10">
+                <span className="font-bold text-sm tracking-wide">@{tenantConfig.brand.contact.socials.instagram}</span>
+                <span className="text-xs font-bold opacity-40 px-2 py-1 rounded bg-current/10">PRO</span>
+              </div>
            </div>
          </div>
        </div>

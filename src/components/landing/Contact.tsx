@@ -1,31 +1,41 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import { RevealSection, fadeUp } from './LandingUI';
-import { sanitize } from '../../lib/constants';
 import { useStore } from '../../stores/useStore';
 import { tenantConfig } from '../../config/tenant';
+import { contactFormSchema, type ContactFormData } from '../../lib/validations';
 
 export default function Contact() {
-  const { darkMode } = useStore();
+  const { darkMode, addLead } = useStore();
   const dm = darkMode;
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success'>('idle');
 
-  const handleContact = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: { goal: 'voleybol' }
+  });
+
+  const onSubmit = (data: ContactFormData) => {
     setFormStatus('sending');
-    const form = e.currentTarget;
-    const name = sanitize((form.elements.namedItem('name') as HTMLInputElement).value);
-    const goal = sanitize((form.elements.namedItem('goal') as HTMLSelectElement).value);
-    const notes = sanitize((form.elements.namedItem('notes') as HTMLTextAreaElement).value);
     
-    // Using WhatsApp as the main conversion channel
-    const msg = `Merhaba! Sana sporcu portalından ulaşıyorum.\n\nAd: ${name}\nHedef: ${goal}\nNotlarım: ${notes}`;
+    // 1. Zod ile doğrulanmış veriyi Admin Paneli için CRM Repository (Store)'a kaydet
+    addLead({
+      name: data.name,
+      phone: data.phone,
+      goal: data.goal,
+      notes: data.notes || ''
+    });
+
+    // 2. WhatsApp entegrasyonu (Formatlayıp ilet)
+    const msg = `Merhaba! Sana sporcu portalından ulaşıyorum.\n\nAd: ${data.name}\nTelefon: ${data.phone}\nHedef: ${data.goal}\nNotlarım: ${data.notes || '-'}`;
     const whatsappUrl = `https://wa.me/${tenantConfig.brand.contact.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`;
     
     setTimeout(() => {
       window.open(whatsappUrl, '_blank');
       setFormStatus('success');
-      form.reset();
+      reset();
     }, 800);
   };
 
@@ -69,29 +79,39 @@ export default function Contact() {
 
           <RevealSection>
             <div className={`p-8 md:p-12 rounded-[2.5rem] border ${dm ? 'border-white/5 bg-white/[0.02]' : 'border-black/[0.04] bg-white shadow-2xl'}`}>
-              <form onSubmit={handleContact} className="space-y-6">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[0.8rem] font-bold uppercase tracking-widest text-text-main/40 ml-2">İsim Soyisim</label>
-                    <input name="name" type="text" required placeholder="Adınız"
-                      className={`w-full p-5 rounded-2xl border transition-all duration-300 text-[1rem] outline-none focus:border-primary focus:shadow-[0_0_0_4px_rgba(var(--color-primary-rgb),0.1)] ${dm ? 'bg-white/[0.03] border-white/10 text-white placeholder:text-white/20' : 'bg-black/[0.02] border-black/5 placeholder:text-black/20'}`} />
+                    <input {...register('name')} type="text" placeholder="Adınız"
+                      className={`w-full p-5 rounded-2xl border transition-all duration-300 text-[1rem] outline-none focus:border-primary focus:shadow-[0_0_0_4px_rgba(var(--color-primary-rgb),0.1)] ${dm ? 'bg-white/[0.03] border-white/10 text-white placeholder:text-white/20' : 'bg-black/[0.02] border-black/5 placeholder:text-black/20'} ${errors.name ? 'border-red-500' : ''}`} />
+                    {errors.name && <p className="text-red-500 text-xs ml-2 mt-1">{errors.name.message}</p>}
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[0.8rem] font-bold uppercase tracking-widest text-text-main/40 ml-2">Ana Hedef</label>
-                    <select name="goal" required
-                      className={`w-full p-5 rounded-2xl border transition-all duration-300 text-[1rem] outline-none focus:border-primary focus:shadow-[0_0_0_4px_rgba(var(--color-primary-rgb),0.1)] appearance-none ${dm ? 'bg-white/[0.03] border-white/10 text-white' : 'bg-black/[0.02] border-black/5'}`}>
-                      <option value="voleybol">Voleybol Performans</option>
-                      <option value="fitness">Genel Fitness / Güç</option>
-                      <option value="kilo-kaybi">Kilo Kaybı / Sıkılaşma</option>
-                      <option value="diger">Diğer</option>
-                    </select>
+                    <label className="text-[0.8rem] font-bold uppercase tracking-widest text-text-main/40 ml-2">Telefon</label>
+                    <input {...register('phone')} type="tel" placeholder="05XX XXX XX XX"
+                      className={`w-full p-5 rounded-2xl border transition-all duration-300 text-[1rem] outline-none focus:border-primary focus:shadow-[0_0_0_4px_rgba(var(--color-primary-rgb),0.1)] ${dm ? 'bg-white/[0.03] border-white/10 text-white placeholder:text-white/20' : 'bg-black/[0.02] border-black/5 placeholder:text-black/20'} ${errors.phone ? 'border-red-500' : ''}`} />
+                    {errors.phone && <p className="text-red-500 text-xs ml-2 mt-1">{errors.phone.message}</p>}
                   </div>
                 </div>
                 
                 <div className="space-y-2">
+                  <label className="text-[0.8rem] font-bold uppercase tracking-widest text-text-main/40 ml-2">Ana Hedef</label>
+                  <select {...register('goal')}
+                    className={`w-full p-5 rounded-2xl border transition-all duration-300 text-[1rem] outline-none focus:border-primary focus:shadow-[0_0_0_4px_rgba(var(--color-primary-rgb),0.1)] appearance-none ${dm ? 'bg-white/[0.03] border-white/10 text-white' : 'bg-black/[0.02] border-black/5'} ${errors.goal ? 'border-red-500' : ''}`}>
+                    <option value="voleybol">Voleybol Performans</option>
+                    <option value="fitness">Genel Fitness / Güç</option>
+                    <option value="kilo-kaybi">Kilo Kaybı / Sıkılaşma</option>
+                    <option value="diger">Diğer</option>
+                  </select>
+                  {errors.goal && <p className="text-red-500 text-xs ml-2 mt-1">{errors.goal.message}</p>}
+                </div>
+                
+                <div className="space-y-2">
                   <label className="text-[0.8rem] font-bold uppercase tracking-widest text-text-main/40 ml-2">Ek Notlar</label>
-                  <textarea name="notes" placeholder="Hedeflerin ve spor geçmişin..." rows={4}
-                    className={`w-full p-5 rounded-2xl border transition-all duration-300 text-[1rem] outline-none focus:border-primary focus:shadow-[0_0_0_4px_rgba(var(--color-primary-rgb),0.1)] resize-none ${dm ? 'bg-white/[0.03] border-white/10 text-white placeholder:text-white/20' : 'bg-black/[0.02] border-black/5 placeholder:text-black/20'}`} />
+                  <textarea {...register('notes')} placeholder="Hedeflerin ve spor geçmişin..." rows={4}
+                    className={`w-full p-5 rounded-2xl border transition-all duration-300 text-[1rem] outline-none focus:border-primary focus:shadow-[0_0_0_4px_rgba(var(--color-primary-rgb),0.1)] resize-none ${dm ? 'bg-white/[0.03] border-white/10 text-white placeholder:text-white/20' : 'bg-black/[0.02] border-black/5 placeholder:text-black/20'} ${errors.notes ? 'border-red-500' : ''}`} />
+                  {errors.notes && <p className="text-red-500 text-xs ml-2 mt-1">{errors.notes.message}</p>}
                 </div>
 
                 <motion.button

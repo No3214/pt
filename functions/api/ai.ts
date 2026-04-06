@@ -1,12 +1,30 @@
 export const onRequestPost = async (context) => {
   try {
     const { request, env } = context;
+
+    // 1. Dışarıdan (CURL/Postman) veya başka sitelerden gelen istekleri engelle (CORS Hardening)
+    const origin = request.headers.get('Origin') || '';
+    const referer = request.headers.get('Referer') || '';
+    
+    const isValidSource = origin.includes('localhost') || origin.includes('pages.dev') || origin.includes('elaebeoglu.com') ||
+                          referer.includes('localhost') || referer.includes('pages.dev') || referer.includes('elaebeoglu.com');
+                          
+    if (!isValidSource) {
+      return new Response(JSON.stringify({ error: 'Yetkisiz erişim kaynağı (CORS/Abuse koruması).' }), { status: 403 });
+    }
+
     const body = await request.json();
     const { prompt, provider, imageBase64 } = body;
 
-    // Rate Limiting ve Payload boyutu kontrolü
-    if (!prompt || typeof prompt !== 'string' || prompt.length > 5000) {
-      return new Response(JSON.stringify({ error: 'Geçersiz veya çok büyük payload.' }), { status: 400 });
+    // 2. Korumalı Provider Listesi (Injection Önlemi)
+    const allowedProviders = ['gemini', 'openrouter', 'deepseek'];
+    if (!allowedProviders.includes(provider)) {
+      return new Response(JSON.stringify({ error: 'Bilinmeyen veya yetkisiz AI sağlayıcısı.' }), { status: 400 });
+    }
+
+    // 3. Katı Payload Limiti (Prompt boyutu 5000'den 3000'e çekildi)
+    if (!prompt || typeof prompt !== 'string' || prompt.length > 3000) {
+      return new Response(JSON.stringify({ error: 'Geçersiz veya çok büyük payload (Max 3000 karakter).' }), { status: 400 });
     }
 
     if (provider === 'gemini') {
