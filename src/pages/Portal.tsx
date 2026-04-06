@@ -6,6 +6,9 @@ import PortalHeader from '../components/portal/PortalHeader';
 import HabitCheckIn from '../components/portal/HabitCheckIn';
 import FoodLog from '../components/portal/FoodLog';
 import MacroTracker from '../components/portal/MacroTracker';
+import WorkoutLogger from '../components/portal/WorkoutLogger';
+import ProgressGallery from '../components/portal/ProgressGallery';
+import GamifiedExport from '../components/portal/GamifiedExport';
 import { GrainOverlay } from '../components/landing/LandingUI';
 
 const fadeUp = {
@@ -46,6 +49,12 @@ export default function Portal() {
 
           {/* Grid Layout for Widgets */}
           <div className="grid lg:grid-cols-12 gap-8 items-start">
+            
+            {/* Gamified Export at Top */}
+            <motion.div variants={fadeUp} className="lg:col-span-12 mb-4">
+              <GamifiedExport />
+            </motion.div>
+
             {/* Left Column: Habits & Daily Actions */}
             <motion.div variants={fadeUp} className="lg:col-span-4 h-full">
               <HabitCheckIn />
@@ -59,6 +68,16 @@ export default function Portal() {
             {/* Right Column: Nutrition Log */}
             <motion.div variants={fadeUp} className="lg:col-span-4 h-full">
               <FoodLog />
+            </motion.div>
+            
+            {/* Full Width Bottom Row: Workout Tracker */}
+            <motion.div variants={fadeUp} className="lg:col-span-12">
+               <WorkoutLogger />
+            </motion.div>
+            
+            {/* Full Width Bottom Row 2: Progress Gallery */}
+            <motion.div variants={fadeUp} className="lg:col-span-12">
+               <ProgressGallery />
             </motion.div>
           </div>
 
