@@ -2,7 +2,7 @@ import { useState, useRef, useMemo } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import { turkishFoods, sanitize, type FoodItem } from '../../lib/constants'
-import { callGemini, callOpenRouter } from '../../lib/ai'
+import { callGemini } from '../../lib/ai'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
@@ -40,7 +40,7 @@ function MacroRing({ value, max, color, label, unit, dm }: { value: number; max:
 }
 
 export default function FoodTracker() {
-  const { foodLog, addFood, removeFood, clearFoodLog, showToast, darkMode: dm, aiKeys } = useStore()
+  const { foodLog, addFood, removeFood, clearFoodLog, showToast, darkMode: dm } = useStore()
   const [search, setSearch] = useState('')
   const [foodImg, setFoodImg] = useState<string | null>(null)
   const [analyzing, setAnalyzing] = useState(false)
@@ -48,7 +48,7 @@ export default function FoodTracker() {
 
   const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const card = `p-6 rounded-2xl border ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`
-  const hasVision = aiKeys.gemini || aiKeys.openrouter
+  const hasVision = true
 
   const filtered = search.length >= 2 ? turkishFoods.filter(f => f.name.toLowerCase().includes(search.toLowerCase())) : []
   const totals = foodLog.reduce((a, f) => ({ cal: a.cal + f.cal, p: a.p + f.p, f: a.f + f.f, c: a.c + f.c }), { cal: 0, p: 0, f: 0, c: 0 })
@@ -78,8 +78,7 @@ export default function FoodTracker() {
     const prompt = `Sen uzman bir sporcu diyetisyenisin. Fotoğraftaki ana yemeği tespit et (Türk mutfağı ise belirt). Tahmini kalori ve makro değerlerini hesapla. SADECE saf JSON döndür, markdown kullanma:\n{"name":"Yemek Adı (Miktar)","cal":250,"p":15,"f":5,"c":30}`
     try {
       let result: string | null = null
-      if (aiKeys.gemini) result = await callGemini(prompt, base64)
-      else if (aiKeys.openrouter) result = await callOpenRouter(prompt, base64)
+      result = await callGemini(prompt, base64)
       if (!result) throw new Error('Vision API yanıt vermedi')
       const cleaned = result.replace(/```json/g, '').replace(/```/g, '').trim()
       const foodData: FoodItem = JSON.parse(cleaned)

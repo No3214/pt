@@ -8,85 +8,16 @@ const fadeUp = {
 }
 const stagger = { show: { transition: { staggerChildren: 0.08 } } }
 
-const providers = [
-  {
-    key: 'gemini',
-    name: 'Gemini',
-    company: 'Google',
-    icon: '💎',
-    desc: 'Vision + Text. Ücretsiz kullanım mevcut.',
-    placeholder: 'AIzaSy...',
-    testUrl: 'https://generativelanguage.googleapis.com/v1beta/models?key=',
-  },
-  {
-    key: 'openrouter',
-    name: 'OpenRouter',
-    company: 'Multi-Provider',
-    icon: '🌐',
-    desc: '100+ model erişimi. GPT-4o, Claude, Llama.',
-    placeholder: 'sk-or-v1-...',
-    hasModel: true,
-    testUrl: 'https://openrouter.ai/api/v1/models',
-  },
-  {
-    key: 'deepseek',
-    name: 'DeepSeek',    company: 'DeepSeek AI',
-    icon: '🧠',
-    desc: 'Yüksek zeka, düşük maliyet. Reasoning odaklı.',
-    placeholder: 'sk-...',
-    testUrl: 'https://api.deepseek.com/models',
-  },
-]
-
-type TestStatus = 'idle' | 'testing' | 'success' | 'error'
-
 export default function Settings() {
-  const { aiKeys, setAiKeys, clients, calSessions, measurements, progressPhotos, savedPrograms, showToast, darkMode: dm } = useStore()
+  const { clients, calSessions, measurements, progressPhotos, savedPrograms, showToast, darkMode: dm } = useStore()
   const fileRef = useRef<HTMLInputElement>(null)
-  const [testStatus, setTestStatus] = useState<Record<string, TestStatus>>({})
-  const [activeTab, setActiveTab] = useState<'ai' | 'data' | 'danger'>('ai')
-  const [showKeyFor, setShowKeyFor] = useState<string | null>(null)
+  const [activeTab, setActiveTab] = useState<'data' | 'danger'>('data')
 
-  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const card = `p-6 rounded-2xl border transition-all duration-300 ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`
 
-  const save = () => showToast('Tüm API anahtarları kaydedildi! LLM Council aktif.')
 
-  const activeCount = [aiKeys.gemini, aiKeys.openrouter, aiKeys.deepseek].filter(Boolean).length
 
-  const testConnection = async (key: string) => {
-    const apiKey = key === 'gemini' ? aiKeys.gemini : key === 'openrouter' ? aiKeys.openrouter : aiKeys.deepseek
-    if (!apiKey) { showToast('Önce API key giriniz.'); return }
-
-    setTestStatus(s => ({ ...s, [key]: 'testing' }))
-    try {
-      const provider = providers.find(p => p.key === key)!
-      const headers: Record<string, string> = { 'Content-Type': 'application/json' }
-      let url = provider.testUrl
-
-      if (key === 'gemini') {
-        url = provider.testUrl + apiKey
-      } else if (key === 'openrouter') {
-        headers['Authorization'] = `Bearer ${apiKey}`
-      } else {
-        headers['Authorization'] = `Bearer ${apiKey}`
-      }
-
-      const res = await fetch(url, { headers, method: 'GET' })
-      if (res.ok) {
-        setTestStatus(s => ({ ...s, [key]: 'success' }))
-        showToast(`${provider.name} bağlantısı başarılı!`)
-      } else {
-        setTestStatus(s => ({ ...s, [key]: 'error' }))
-        showToast(`${provider.name} bağlantı hatası: ${res.status}`)
-      }
-    } catch {
-      setTestStatus(s => ({ ...s, [key]: 'error' }))
-      showToast('Bağlantı hatası. CORS sorunu olabilir.')
-    }
-    setTimeout(() => setTestStatus(s => ({ ...s, [key]: 'idle' })), 5000)
-  }
-  const handleExport = () => {
+    const handleExport = () => {
     const data = {
       version: '2.0',
       exportDate: new Date().toISOString(),
@@ -95,7 +26,6 @@ export default function Settings() {
       measurements,
       progressPhotos: progressPhotos.length,
       savedPrograms,
-      aiKeys: { gemini: !!aiKeys.gemini, openrouter: !!aiKeys.openrouter, deepseek: !!aiKeys.deepseek },
     }
     const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
@@ -138,7 +68,6 @@ export default function Settings() {
   }
 
   const tabs = [
-    { key: 'ai' as const, label: 'AI Ayarları', icon: '🤖' },
     { key: 'data' as const, label: 'Veri Yönetimi', icon: '💾' },
     { key: 'danger' as const, label: 'Tehlikeli Bölge', icon: '⚠️' },
   ]
@@ -171,120 +100,6 @@ export default function Settings() {
       </motion.div>
 
       <AnimatePresence mode="wait">
-        {/* AI Tab */}
-        {activeTab === 'ai' && (
-          <motion.div key="ai" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>            {/* Status Bar */}
-            <div className={`p-5 rounded-2xl border mb-8 ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`}>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center ${activeCount > 0 ? 'bg-sage/15' : (dm ? 'bg-white/[0.06]' : 'bg-stone-100')}`}>
-                    <span className={`text-sm font-bold ${activeCount > 0 ? 'text-sage' : (dm ? 'text-white/30' : 'text-stone-400')}`}>{activeCount}</span>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">{activeCount === 0 ? 'Hiçbir sağlayıcı aktif değil' : `${activeCount}/3 sağlayıcı aktif`}</p>
-                    <p className={`text-xs ${dm ? 'text-white/30' : 'text-stone-400'}`}>{activeCount >= 2 ? 'Council modu kullanılabilir' : 'En az 2 sağlayıcı ekleyin'}</p>
-                  </div>
-                </div>
-                <div className="flex gap-1.5">
-                  {[aiKeys.gemini, aiKeys.openrouter, aiKeys.deepseek].map((k, i) => (
-                    <div key={i} className={`w-3 h-3 rounded-full ${k ? 'bg-sage' : (dm ? 'bg-white/10' : 'bg-stone-200')}`} />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Provider Cards */}
-            <div className="grid md:grid-cols-3 gap-6">
-              {providers.map(p => {
-                const value = p.key === 'gemini' ? aiKeys.gemini : p.key === 'openrouter' ? aiKeys.openrouter : aiKeys.deepseek
-                const isActive = Boolean(value)
-                const status = testStatus[p.key] || 'idle'
-                return (
-                  <motion.div
-                    key={p.key}
-                    variants={fadeUp}                    whileHover={{ y: -2 }}
-                    className={`${card} ${isActive ? (dm ? 'border-sage/30 bg-sage/[0.04]' : 'border-sage/20 bg-sage/[0.02]') : ''}`}
-                  >
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-3">
-                        <span className="text-2xl">{p.icon}</span>
-                        <div>
-                          <h3 className="font-medium">{p.name}</h3>
-                          <p className={`text-xs ${dm ? 'text-white/30' : 'text-stone-400'}`}>{p.company}</p>
-                        </div>
-                      </div>
-                      <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${isActive
-                        ? 'bg-sage/15 text-sage'
-                        : (dm ? 'bg-white/[0.06] text-white/30' : 'bg-stone-100 text-stone-400')
-                      }`}>
-                        {isActive ? 'Aktif' : 'Pasif'}
-                      </span>
-                    </div>
-                    <p className={`text-xs mb-5 ${dm ? 'text-white/40' : 'text-stone-500'}`}>{p.desc}</p>
-                    <div className="space-y-3">
-                      <div>
-                        <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>API Key</label>
-                        <div className="relative">
-                          <input
-                            type={showKeyFor === p.key ? 'text' : 'password'}
-                            value={value}
-                            onChange={e => setAiKeys({ [p.key]: e.target.value })}
-                            placeholder={p.placeholder}
-                            className={inp}
-                          />
-                          <button                            onClick={() => setShowKeyFor(showKeyFor === p.key ? null : p.key)}
-                            className={`absolute right-3 top-1/2 -translate-y-1/2 bg-transparent border-none cursor-pointer text-xs ${dm ? 'text-white/30' : 'text-stone-400'}`}
-                          >
-                            {showKeyFor === p.key ? '🙈' : '👁'}
-                          </button>
-                        </div>
-                      </div>
-                      {p.hasModel && (
-                        <div>
-                          <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Model</label>
-                          <select value={aiKeys.openrouterModel} onChange={e => setAiKeys({ openrouterModel: e.target.value })} className={inp}>
-                            <option value="google/gemini-2.0-flash-001">Gemini 2.0 Flash</option>
-                            <option value="anthropic/claude-sonnet-4">Claude Sonnet 4</option>
-                            <option value="openai/gpt-4o">GPT-4o</option>
-                            <option value="meta-llama/llama-4-maverick">Llama 4 Maverick</option>
-                          </select>
-                        </div>
-                      )}
-                      {/* Test Connection */}
-                      <motion.button
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
-                        onClick={() => testConnection(p.key)}
-                        disabled={status === 'testing'}
-                        className={`w-full py-2.5 rounded-xl text-xs font-medium cursor-pointer border transition-all ${
-                          status === 'success' ? 'bg-sage/10 border-sage/30 text-sage' :
-                          status === 'error' ? 'bg-terracotta/10 border-terracotta/30 text-terracotta' :
-                          status === 'testing' ? 'bg-sand/10 border-sand/30 text-sand' :
-                          (dm ? 'border-white/10 text-white/50 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-500 bg-transparent hover:bg-stone-50')                        }`}
-                      >
-                        {status === 'testing' ? 'Test ediliyor...' :
-                         status === 'success' ? 'Bağlantı Başarılı ✓' :
-                         status === 'error' ? 'Bağlantı Hatası ✕' :
-                         'Bağlantıyı Test Et'}
-                      </motion.button>
-                    </div>
-                  </motion.div>
-                )
-              })}
-            </div>
-
-            <motion.button
-              variants={fadeUp}
-              whileHover={{ scale: 1.01 }}
-              whileTap={{ scale: 0.99 }}
-              onClick={save}
-              className="mt-8 w-full md:w-auto px-10 py-4 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer"
-            >
-              Tüm Anahtarları Kaydet
-            </motion.button>
-          </motion.div>
-        )}
-
         {/* Data Tab */}
         {activeTab === 'data' && (
           <motion.div key="data" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
@@ -390,8 +205,7 @@ export default function Settings() {
                       whileTap={{ scale: 0.98 }}
                       onClick={() => {
                         if (confirm('Tüm API anahtarları silinecek. Emin misiniz?')) {
-                          setAiKeys({ gemini: '', openrouter: '', deepseek: '' })
-                          showToast('API anahtarları sıfırlandı.')
+                                                    showToast('API anahtarları sıfırlandı.')
                         }
                       }}
                       className="px-5 py-2.5 rounded-full text-xs font-medium cursor-pointer border border-terracotta/40 text-terracotta bg-transparent hover:bg-terracotta/5"

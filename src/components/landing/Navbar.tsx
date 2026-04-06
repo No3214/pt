@@ -61,7 +61,7 @@ export default function Navbar() {
             </a>
             
             {/* Mobile Menu Button */}
-            <button className="md:hidden bg-transparent border-none cursor-pointer p-2 z-[101]" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menü">
+            <button className="md:hidden bg-transparent border-none cursor-pointer p-2 relative z-[101]" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menü">
               <div className="space-y-[6px]">
                 <span className={`block w-6 h-[2px] rounded-full transition-all duration-500 bg-text-main ${menuOpen ? 'rotate-45 translate-y-[8px]' : ''}`} />
                 <span className={`block w-4 h-[2px] rounded-full transition-all duration-500 bg-text-main ml-auto ${menuOpen ? 'opacity-0' : ''}`} />

@@ -82,7 +82,7 @@ function PinDots({ length, max, error, dm }: {
 
 /* ═══════ Main Login Component ═══════ */
 export default function AdminLogin() {
-  const { loginAdmin, darkMode } = useStore()
+  const { loginAdmin, darkMode, showToast } = useStore()
   const [pin, setPin] = useState('')
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -99,13 +99,32 @@ export default function AdminLogin() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!pin || loading) return
+    
+    const rateData = JSON.parse(localStorage.getItem('auth_rate_limit') || '{"attempts": 0, "lockUntil": null}')
+    if (rateData.lockUntil && Date.now() < rateData.lockUntil) {
+      showToast("Çok fazla deneme! Lütfen 15 dakika bekleyin.")
+      setPin('')
+      setError(true)
+      return
+    }
+    
     setLoading(true)
-    await new Promise(r => setTimeout(r, 600))
+    await new Promise(r => setTimeout(r, 600)) // Fake latency
 
-    if (loginAdmin(pin)) {
+    const isValid = await loginAdmin(pin)
+    
+    if (isValid) {
+      localStorage.setItem('auth_rate_limit', JSON.stringify({ attempts: 0, lockUntil: null }))
       setSuccess(true)
       setError(false)
     } else {
+      let newData = { ...rateData, attempts: (rateData.attempts || 0) + 1 }
+      if (newData.attempts >= 5) {
+        newData.lockUntil = Date.now() + 15 * 60 * 1000 // 15 mins lock
+        showToast("Güvenlik nedeniyle hesabınıza giriş 15 dakika kilitlendi.")
+      }
+      localStorage.setItem('auth_rate_limit', JSON.stringify(newData))
+      
       setError(true)
       setShake(true)
       setTimeout(() => { setShake(false); setPin(''); setError(false) }, 800)

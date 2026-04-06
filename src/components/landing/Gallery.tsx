@@ -5,11 +5,12 @@ import { useStore } from '../../stores/useStore';
 import Lightbox from '../Lightbox';
 
 const galleryImages = [
-  { src: 'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?q=80&w=1000&auto=format&fit=crop', alt: 'Voleybol Smaç Tekniği', caption: 'Smaç Tekniği' },
-  { src: 'https://images.unsplash.com/photo-1599586120429-48281b6f0ece?q=80&w=1000&auto=format&fit=crop', alt: 'Voleybol Blok Savunma', caption: 'Blok & Savunma' },
-  { src: 'https://images.unsplash.com/photo-1612871689353-d14ae3b9ddf9?q=80&w=1000&auto=format&fit=crop', alt: 'Voleybol Servis Atışı', caption: 'Servis Atışı' },
-  { src: 'https://images.unsplash.com/photo-1544213456-ccae4c8d20e3?q=80&w=1000&auto=format&fit=crop', alt: 'Takım Çalışması', caption: 'Kuvvet Antrenmanı' },
-  { src: '/ela_training.png', alt: 'Ela Ebeoğlu voleybol sahası', caption: 'Sahada Güç' },
+  { src: '/ela_real_21.png', alt: 'Ela Ebeoğlu Voleybol', caption: 'Smaç Tekniği' },
+  { src: '/ela_real_22.png', alt: 'Ela Ebeoğlu Voleybol', caption: 'Blok & Savunma' },
+  { src: '/ela_real_23.png', alt: 'Ela Ebeoğlu Voleybol', caption: 'Servis Atışı' },
+  { src: '/ela_real_24.png', alt: 'Ela Ebeoğlu Antrenman', caption: 'Kuvvet Antrenmanı' },
+  { src: '/ela_real_25.png', alt: 'Ela Ebeoğlu Sahada', caption: 'Sahada Güç' },
+  { src: '/ela_real_26.png', alt: 'Ela Ebeoğlu Maç', caption: 'Takım Ruhu' },
 ];
 
 function GalleryCard({ image, index, onClick, dm }: {

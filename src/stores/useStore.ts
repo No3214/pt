@@ -27,10 +27,6 @@ export interface SavedProgram {
   exercises: { name: string; sets: string; reps: string; note?: string }[]
   createdAt: string
 }
-interface AIKeys {
-  gemini: string; openrouter: string
-  openrouterModel: string; deepseek: string
-}
 
 // ═══════════════ Store ═══════════════
 interface AppState {
@@ -75,12 +71,10 @@ interface AppState {
   savedPrograms: SavedProgram[]
   addSavedProgram: (p: Omit<SavedProgram, 'id' | 'createdAt'>) => void
   deleteSavedProgram: (id: string) => void
-  // AI
-  aiKeys: AIKeys
-  setAiKeys: (k: Partial<AIKeys>) => void
+  // AI Settings have been moved to environment variables and backend handlers API endpoints
   // Admin Auth
   isAdminAuth: boolean
-  loginAdmin: (pin: string) => boolean
+  loginAdmin: (pin: string) => Promise<boolean>
   logoutAdmin: () => void
 }
 
@@ -100,7 +94,7 @@ export const useStore = create<AppState>()(
 
       // ─── Admin Auth (SHA-256 hashed) ───
       isAdminAuth: false,
-      loginAdmin: (pin) => {
+      loginAdmin: async (pin) => {
         // Pre-computed SHA-256 hashes of valid passwords
         const validHashes = [
           '8a5edab1ab43871b3a2250c6ee938abb0bfab40cd3edc1968a0db58fed647a78', // ElaCoach2026!
@@ -108,19 +102,20 @@ export const useStore = create<AppState>()(
         ]
         const encoder = new TextEncoder()
         const data = encoder.encode(pin)
-        // Sync hash check via SubtleCrypto
-        crypto.subtle.digest('SHA-256', data).then(buf => {
+        
+        try {
+          // Sync hash check via SubtleCrypto
+          const buf = await crypto.subtle.digest('SHA-256', data)
           const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
+          
           if (validHashes.includes(hash)) {
             set({ isAdminAuth: true })
+            return true
           }
-        })
-        // Fallback: direct comparison for immediate UX (passwords are in compiled JS anyway in SPA)
-        const knownPins = ['ElaCoach2026!', 'Ela2026Admin']
-        if (knownPins.includes(pin)) {
-          set({ isAdminAuth: true })
-          return true
+        } catch (e) {
+          console.error('Hash calculation failed', e)
         }
+        
         return false
       },
       logoutAdmin: () => set({ isAdminAuth: false }),
@@ -130,11 +125,21 @@ export const useStore = create<AppState>()(
         { id: '1', name: 'Mina Aksoy', goal: 'Voleybol - Sıçrama', sessions: 8, max: 12, price: 5000, habitScore: 5, habitMax: 6, notes: [], phone: '', email: '', startDate: '2026-01-15' },
         { id: '2', name: 'Burcu Yılmaz', goal: 'Kuvvet / Yağ Yakımı', sessions: 0, max: 8, price: 3500, habitScore: 2, habitMax: 5, notes: [], phone: '', email: '', startDate: '2026-02-01' },
       ],
-      addClient: (c) => set(s => ({
-        clients: [...s.clients, { ...c, id: Date.now().toString(), habitScore: 0, habitMax: 0, notes: [], startDate: c.startDate || new Date().toISOString().split('T')[0] }]
-      })),
-      updateClient: (id, data) => set(s => ({
-        clients: s.clients.map(c => c.id === id ? { ...c, ...data } : c)      })),
+      addClient: (c) => set(s => {
+        // Payload validation
+        const nClient = { ...c, name: c.name.replace(/[<>]/g, '').slice(0,100), goal: c.goal.replace(/[<>]/g, '').slice(0, 200) };
+        return {
+          clients: [...s.clients, { ...nClient, id: Date.now().toString(), habitScore: 0, habitMax: 0, notes: [], startDate: c.startDate || new Date().toISOString().split('T')[0] }]
+        }
+      }),
+      updateClient: (id, data) => set(s => {
+        const safeData = { ...data };
+        if (safeData.name) safeData.name = safeData.name.replace(/[<>]/g, '').slice(0,100);
+        if (safeData.goal) safeData.goal = safeData.goal.replace(/[<>]/g, '').slice(0,200);
+        return {
+          clients: s.clients.map(c => c.id === id ? { ...c, ...safeData } : c)
+        }
+      }),
       deleteClient: (id) => set(s => ({ clients: s.clients.filter(c => c.id !== id) })),
       useSession: (id) => set(s => ({
         clients: s.clients.map(c => c.id === id && c.sessions > 0 ? { ...c, sessions: c.sessions - 1 } : c)
@@ -147,11 +152,16 @@ export const useStore = create<AppState>()(
           c.id === id ? { ...c, habitMax: c.habitMax + 1, habitScore: c.habitScore + (success ? 1 : 0) } : c
         )
       })),
-      addNote: (id, text) => set(s => ({
-        clients: s.clients.map(c =>
-          c.id === id ? { ...c, notes: [{ id: Date.now(), text, date: new Date().toLocaleString('tr-TR') }, ...c.notes] } : c
-        )
-      })),
+      addNote: (id, text) => set(s => {
+        // Oversized and XSS sanitization
+        if (!text || typeof text !== 'string') return s;
+        const cleanText = text.replace(/[<>]/g, '').slice(0, 1000); 
+        return {
+          clients: s.clients.map(c =>
+            c.id === id ? { ...c, notes: [{ id: Date.now(), text: cleanText, date: new Date().toLocaleString('tr-TR') }, ...c.notes] } : c
+          )
+        }
+      }),
       deleteNote: (clientId, noteId) => set(s => ({
         clients: s.clients.map(c =>
           c.id === clientId ? { ...c, notes: c.notes.filter(n => n.id !== noteId) } : c
@@ -189,8 +199,7 @@ export const useStore = create<AppState>()(
       deleteSavedProgram: (id) => set(s => ({ savedPrograms: s.savedPrograms.filter(p => p.id !== id) })),
 
       // ─── AI Keys ───
-      aiKeys: { gemini: '', openrouter: '', openrouterModel: 'anthropic/claude-sonnet-4', deepseek: '' },
-      setAiKeys: (k) => set(s => ({ aiKeys: { ...s.aiKeys, ...k } })),
+      // Moved to backend environment variables securely.
     }),
     { 
       name: 'ela-pt-store',

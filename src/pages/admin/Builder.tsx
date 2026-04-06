@@ -47,7 +47,7 @@ function ExerciseThumb({ exercise }: { exercise: any, dm?: boolean }) {
 }
 
 export default function Builder() {
-  const { clients, darkMode: dm, showToast, aiKeys } = useStore()
+  const { clients, darkMode: dm, showToast } = useStore()
   const activeClients = clients.filter(c => c.sessions > 0)
   const [selectedClient, setSelectedClient] = useState('')
   const [nutritionNote, setNoteText] = useState(
@@ -68,7 +68,7 @@ export default function Builder() {
 
   const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const card = `p-6 rounded-2xl border backdrop-blur-sm ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04] shadow-sm'}`
-  const hasAI = aiKeys.gemini || aiKeys.openrouter || aiKeys.deepseek
+  const hasAI = true
 
   const filteredExercises = useMemo(() => exercises.filter(e => {
     if (exSearch && !e.name.toLowerCase().includes(exSearch.toLowerCase())) return false
