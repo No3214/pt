@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { useStore } from '../stores/useStore';
 
-// Modular Portal Components
 import PortalHeader from '../components/portal/PortalHeader';
+import { tenantConfig } from '../config/tenant';
 import HabitCheckIn from '../components/portal/HabitCheckIn';
 import FoodLog from '../components/portal/FoodLog';
 import MacroTracker from '../components/portal/MacroTracker';
@@ -98,10 +98,22 @@ export default function Portal() {
                 <p className="font-display text-xl md:text-2xl font-bold italic tracking-tight text-text-main leading-snug">
                    {decryptedData?.client?.personalNote || "Yeni haftaya hazır mısın? Hedeflerin için bugün harika bir gün. Disiplin her şeydir!"}
                 </p>
-                <div className="mt-8 flex items-center gap-3">
-                   <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs">💪</div>
-                   <span className="text-[0.75rem] font-bold text-text-main/40 uppercase tracking-widest">Senin Zamanın, Senin Zaferin.</span>
-                </div>
+                 <div className="mt-10 flex flex-wrap items-center gap-4">
+                   <div className="flex items-center gap-3">
+                     <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs">💪</div>
+                     <span className="text-[0.75rem] font-bold text-text-main/40 uppercase tracking-widest leading-none">Senin Zamanın, <br className="md:hidden" /> Senin Zaferin.</span>
+                   </div>
+                   
+                   <motion.button
+                     whileHover={{ scale: 1.05 }}
+                     whileTap={{ scale: 0.95 }}
+                     onClick={() => window.open(`https://wa.me/${tenantConfig.brand.contact.socials.whatsapp.replace('+', '')}?text=Selam Ela! Gelişim portalından yazıyorum...`, '_blank')}
+                     className="ml-auto px-6 py-2.5 rounded-full bg-primary text-white text-[0.7rem] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg shadow-primary/20"
+                   >
+                     <span>Mesaj Gönder</span>
+                     <span className="text-base">💬</span>
+                   </motion.button>
+                 </div>
               </div>
             </motion.div>
             
