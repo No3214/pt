@@ -9,9 +9,11 @@ import {
   staggerContainer 
 } from './LandingUI';
 import { tenantConfig } from '../../config/tenant';
+import { useTranslation } from '../../locales';
 
 export default function Hero() {
-  const { darkMode } = useStore();
+  const { darkMode, language } = useStore();
+  const { t } = useTranslation();
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
   
@@ -24,9 +26,9 @@ export default function Hero() {
   return (
     <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
       {/* Parallax Background */}
-      <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale }} className="absolute inset-0 -z-10">
+      <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale }} className="absolute inset-0 -z-10 image-grain">
         <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-b from-bg via-bg/60 to-bg' : 'bg-gradient-to-b from-bg via-bg/40 to-bg'}`} />
-        <img src="/ela_real_19.png" alt="" className="w-full h-full object-cover object-center opacity-20" />
+        <img src="/ela_real_32.png" alt="" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" />
       </motion.div>
 
       {/* Ambient glow orbs */}
@@ -51,28 +53,30 @@ export default function Hero() {
             <motion.div variants={fadeUp} custom={0}
               className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-[0.7rem] font-medium uppercase tracking-[0.15em] mb-10 ${dm ? 'bg-white/5 text-text-main/60 border border-text-main/10' : 'bg-black/[0.03] text-text-main/50 border border-black/[0.06]'}`}>
               <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-              {new Date().toLocaleString('tr-TR', { month: 'long', year: 'numeric' })} — Sınırlı Kontenjan
+              {language === 'tr' 
+                ? <>{new Date().toLocaleString('tr-TR', { month: 'long', year: 'numeric' })} — Sınırlı Kontenjan</>
+                : <>{new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })} — Limited Spots</>}
             </motion.div>
 
             <motion.h1 variants={staggerContainer} initial="hidden" animate="visible"
               className={`font-display text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[1.05] tracking-[-0.03em] mb-8 ${dm ? 'text-text-main' : 'text-text-main'}`}>
-              <AnimatedHeading text="Güçlü ol." />
+              <AnimatedHeading text={t.hero.title1} />
               <br />
               <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
-                <AnimatedHeading text="Kendine güven." />
+                <AnimatedHeading text={t.hero.title2} />
               </span>
             </motion.h1>
 
             <motion.p variants={fadeUp} custom={4}
               className={`text-[1.1rem] leading-[1.8] max-w-[520px] mb-12 ${dm ? 'text-text-main/45' : 'text-text-main/45'}`}>
-              Profesyonel sporcu disipliniyle, sana özel antrenman ve beslenme stratejileri. Performansını artır, hedeflerine ulaş.
+              {t.hero.desc}
             </motion.p>
 
             <motion.div variants={fadeUp} custom={5} className="flex gap-4 flex-wrap">
               <MagneticButton href="#iletisim"
                 className="group px-8 py-4 bg-primary text-white rounded-full text-[0.88rem] font-medium no-underline overflow-hidden relative">
                 <span className="relative z-10 flex items-center gap-2">
-                  Ücretsiz Görüşme
+                  {t.hero.btnStart}
                   <motion.svg
                     animate={{ x: [0, 4, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
@@ -84,7 +88,7 @@ export default function Hero() {
               </MagneticButton>
               <MagneticButton href="#programlar"
                 className={`px-8 py-4 rounded-full text-[0.88rem] font-medium no-underline border ${dm ? 'border-text-main/15 text-text-main/70 hover:text-text-main hover:border-text-main/30' : 'border-text-main/10 text-text-main/60 hover:text-text-main hover:border-text-main/25'}`}>
-                Programları İncele
+                {t.hero.btnPrograms}
               </MagneticButton>
             </motion.div>
           </motion.div>
@@ -96,8 +100,8 @@ export default function Hero() {
             transition={{ duration: 1.2, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="relative hidden lg:block"
           >
-            <div className="relative rounded-[2rem] overflow-hidden aspect-[3/4] border border-text-main/5 shadow-2xl">
-              <img src="/ela_real_20.png" alt={tenantConfig.brand.name} className="w-full h-full object-cover" />
+            <div className="relative rounded-[2rem] overflow-hidden aspect-[3/4] border border-text-main/5 shadow-2xl image-grain">
+              <img src="/ela_real_30.png" alt={tenantConfig.brand.name} className="w-full h-full object-cover object-top premium-image" />
               <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-t from-bg/50 via-transparent' : 'bg-gradient-to-t from-bg/30 via-transparent'}`} />
               <motion.div
                 initial={{ x: '-100%' }}

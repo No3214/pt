@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 
 import { useStore } from '../../stores/useStore';
 import * as htmlToImage from 'html-to-image';
+import { tenantConfig } from '../../config/tenant';
 
 export default function GamifiedExport() {
   const { darkMode: dm, showToast, foodLog, habits } = useStore();
@@ -18,7 +19,7 @@ export default function GamifiedExport() {
     try {
       const dataUrl = await htmlToImage.toPng(cardRef.current, { quality: 1, pixelRatio: 2 });
       const link = document.createElement('a');
-      link.download = 'ela-ebeoglu-haftalik-ozet.png';
+      link.download = `${tenantConfig.slug}-haftalik-ozet.png`;
       link.href = dataUrl;
       link.click();
       showToast('Kazanımların Instagram için indirildi! 🎉');
@@ -87,7 +88,7 @@ export default function GamifiedExport() {
              </div>
 
              <div className="relative z-10 flex items-center justify-between mt-6 pt-4 border-t border-current/10">
-               <span className="font-bold text-sm tracking-wide">@elaebeoglu</span>
+               <span className="font-bold text-sm tracking-wide">@{tenantConfig.social.instagram}</span>
                <span className="text-xs font-bold opacity-40 px-2 py-1 rounded bg-current/10">PRO</span>
              </div>
            </div>

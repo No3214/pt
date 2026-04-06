@@ -56,7 +56,7 @@ export default function Nutrition() {
   const resultRef = useRef<HTMLDivElement>(null)
   const resultInView = useInView(resultRef, { once: true })
 
-  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
+  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const card = `p-6 rounded-2xl border backdrop-blur-sm ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04] shadow-sm'}`
 
   const calculate = () => {
@@ -111,7 +111,7 @@ export default function Nutrition() {
         <div className="flex items-center gap-2">
           <span className={`px-3 py-1.5 rounded-full text-xs font-medium ${dm ? 'bg-sky-500/10 text-sky-400' : 'bg-sky-50 text-sky-600'}`}>Mifflin-St Jeor</span>
           {result && (
-            <span className={`px-3 py-1.5 rounded-full text-xs font-medium ${dm ? 'bg-sage/10 text-sage' : 'bg-sage/10 text-sage'}`}>
+            <span className={`px-3 py-1.5 rounded-full text-xs font-medium ${dm ? 'bg-secondary/10 text-secondary' : 'bg-secondary/10 text-secondary'}`}>
               {activityLabels[form.activity] || 'Aktif'}
             </span>
           )}
@@ -122,7 +122,7 @@ export default function Nutrition() {
         {/* Input */}
         <motion.div variants={fadeUp} className={card}>
           <div className="flex items-center gap-3 mb-6">
-            <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg ${dm ? 'bg-terracotta/10' : 'bg-terracotta/10'}`}>📐</div>
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg ${dm ? 'bg-primary/10' : 'bg-primary/10'}`}>📐</div>
             <h3 className="font-display text-xl font-medium">Fiziksel Veriler</h3>
           </div>
           <div className="grid grid-cols-2 gap-4">
@@ -133,7 +133,7 @@ export default function Nutrition() {
                   <motion.button key={g.v} whileTap={{ scale: 0.97 }}
                     onClick={() => setForm({ ...form, gender: g.v })}
                     className={`flex-1 py-3.5 rounded-xl text-sm font-medium cursor-pointer transition-all border-none flex items-center justify-center gap-2 ${form.gender === g.v
-                      ? 'bg-terracotta text-white shadow-lg shadow-terracotta/20'
+                      ? 'bg-primary text-white shadow-lg shadow-primary/20'
                       : (dm ? 'bg-white/[0.06] text-white/50' : 'bg-stone-100 text-stone-500')
                     }`}>
                     <span className="text-lg">{g.icon}</span> {g.l}
@@ -169,7 +169,7 @@ export default function Nutrition() {
                 <motion.button key={a.v} whileTap={{ scale: 0.95 }}
                   onClick={() => setForm({ ...form, activity: a.v })}
                   className={`py-3 rounded-xl text-center cursor-pointer transition-all border-none ${form.activity === a.v
-                    ? 'bg-sage text-white shadow-lg shadow-sage/20'
+                    ? 'bg-secondary text-white shadow-lg shadow-secondary/20'
                     : (dm ? 'bg-white/[0.04] text-white/40' : 'bg-stone-50 text-stone-500')
                   }`}>
                   <div className="text-lg mb-0.5">{a.icon}</div>
@@ -184,14 +184,14 @@ export default function Nutrition() {
             <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Hedef</label>
             <div className="flex gap-2">
               {[
-                { v: -500, l: 'Yağ Yak', s: '-500', icon: '🔥', color: 'terracotta' },
-                { v: 0, l: 'Koru', s: '±0', icon: '⚖️', color: 'coast' },
-                { v: 300, l: 'Kas Kazan', s: '+300', icon: '💪', color: 'sage' },
+                { v: -500, l: 'Yağ Yak', s: '-500', icon: '🔥', color: 'primary' },
+                { v: 0, l: 'Koru', s: '±0', icon: '⚖️', color: 'accent' },
+                { v: 300, l: 'Kas Kazan', s: '+300', icon: '💪', color: 'secondary' },
               ].map(g => (
                 <motion.button key={g.v} whileTap={{ scale: 0.97 }}
                   onClick={() => setForm({ ...form, goal: g.v })}
                   className={`flex-1 py-3.5 rounded-xl text-center cursor-pointer transition-all border-none ${form.goal === g.v
-                    ? `bg-${g.color === 'coast' ? 'sky-500' : g.color} text-white shadow-lg`
+                    ? `bg-${g.color === 'accent' ? 'sky-500' : g.color} text-white shadow-lg`
                     : (dm ? 'bg-white/[0.06] text-white/50' : 'bg-stone-100 text-stone-500')
                   }`}>
                   <div className="text-lg">{g.icon}</div>
@@ -206,7 +206,7 @@ export default function Nutrition() {
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
             onClick={calculate}
-            className="w-full mt-6 py-4 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer shadow-lg shadow-terracotta/20 text-sm"
+            className="w-full mt-6 py-4 rounded-full bg-primary text-white font-medium border-none cursor-pointer shadow-lg shadow-primary/20 text-sm"
           >
             Hesapla & Plan Çıkar
           </motion.button>
@@ -232,7 +232,7 @@ export default function Nutrition() {
                     <MacroDonut data={macroData.map(m => ({ label: m.label, pct: m.pct, color: m.color }))} size={160} dm={dm} />
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
                       <span className={`text-xs uppercase tracking-wider ${dm ? 'text-white/30' : 'text-stone-400'}`}>Hedef</span>
-                      <span className="font-display text-3xl text-terracotta">{result.targetCals}</span>
+                      <span className="font-display text-3xl text-primary">{result.targetCals}</span>
                       <span className={`text-[0.65rem] ${dm ? 'text-white/30' : 'text-stone-400'}`}>kcal/gün</span>
                     </div>
                   </div>
@@ -249,9 +249,9 @@ export default function Nutrition() {
                         <div className={`text-[0.65rem] uppercase tracking-wider mb-1 ${dm ? 'text-white/30' : 'text-stone-400'}`}>TDEE</div>
                         <div className="text-lg font-semibold">{result.tdee}</div>
                       </div>
-                      <div className={`flex-1 p-3 rounded-xl text-center ${form.goal < 0 ? (dm ? 'bg-terracotta/10' : 'bg-terracotta/5') : form.goal > 0 ? (dm ? 'bg-sage/10' : 'bg-sage/5') : (dm ? 'bg-sky-500/10' : 'bg-sky-50')}`}>
+                      <div className={`flex-1 p-3 rounded-xl text-center ${form.goal < 0 ? (dm ? 'bg-primary/10' : 'bg-primary/5') : form.goal > 0 ? (dm ? 'bg-secondary/10' : 'bg-secondary/5') : (dm ? 'bg-sky-500/10' : 'bg-sky-50')}`}>
                         <div className={`text-[0.65rem] uppercase tracking-wider mb-1 ${dm ? 'text-white/30' : 'text-stone-400'}`}>Fark</div>
-                        <div className={`text-lg font-semibold ${form.goal < 0 ? 'text-terracotta' : form.goal > 0 ? 'text-sage' : 'text-sky-500'}`}>
+                        <div className={`text-lg font-semibold ${form.goal < 0 ? 'text-primary' : form.goal > 0 ? 'text-secondary' : 'text-sky-500'}`}>
                           {form.goal > 0 ? '+' : ''}{form.goal}
                         </div>
                       </div>
@@ -286,7 +286,7 @@ export default function Nutrition() {
               {/* Meal Timing Tips */}
               <div className={card}>
                 <h4 className="font-display text-base font-medium mb-4 flex items-center gap-2">
-                  <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm ${dm ? 'bg-sage/10' : 'bg-sage/10'}`}>⏰</span>
+                  <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm ${dm ? 'bg-secondary/10' : 'bg-secondary/10'}`}>⏰</span>
                   Öğün Zamanlama Rehberi
                 </h4>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -300,7 +300,7 @@ export default function Nutrition() {
                       <div className="text-xl mb-1">{t.icon}</div>
                       <div className="text-sm font-medium">{t.meal}</div>
                       <div className={`text-[0.65rem] ${dm ? 'text-white/30' : 'text-stone-400'}`}>{t.time}</div>
-                      <div className={`text-xs font-semibold mt-1 ${dm ? 'text-sage' : 'text-sage'}`}>{t.pct}</div>
+                      <div className={`text-xs font-semibold mt-1 ${dm ? 'text-secondary' : 'text-secondary'}`}>{t.pct}</div>
                     </div>
                   ))}
                 </div>
@@ -310,7 +310,7 @@ export default function Nutrition() {
               <div className={card}>
                 <div className="flex justify-between items-center mb-4">
                   <span className="text-sm font-medium flex items-center gap-2">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-sage"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-secondary"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                     WhatsApp Çıktısı
                   </span>
                   <div className="flex gap-2">
@@ -319,7 +319,7 @@ export default function Nutrition() {
                       PNG
                     </motion.button>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={copyText}
-                      className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-terracotta text-white border-none shadow-lg shadow-terracotta/20">
+                      className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-primary text-white border-none shadow-lg shadow-primary/20">
                       Kopyala
                     </motion.button>
                   </div>

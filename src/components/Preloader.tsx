@@ -104,7 +104,7 @@ export default function Preloader() {
               <motion.div
                 initial={{ width: '0%' }}
                 animate={{ width: `${progress}%` }}
-                className="h-full bg-gradient-to-r from-terracotta via-sage to-coast rounded-full"
+                className="h-full bg-gradient-to-r from-primary via-secondary to-accent rounded-full"
                 style={{ transition: 'width 0.1s linear' }}
               />
             </div>

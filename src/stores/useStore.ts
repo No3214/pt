@@ -33,6 +33,9 @@ interface AppState {
   // Dark mode
   darkMode: boolean
   toggleDarkMode: () => void
+  // Language
+  language: 'tr' | 'en'
+  setLanguage: (lang: 'tr' | 'en') => void
   // Toast
   toastMsg: string
   showToast: (msg: string) => void
@@ -84,6 +87,9 @@ export const useStore = create<AppState>()(
       // ─── Dark Mode ───
       darkMode: false,
       toggleDarkMode: () => set(s => ({ darkMode: !s.darkMode })),
+      // ─── Language ───
+      language: 'tr',
+      setLanguage: (language) => set({ language }),
       // ─── Toast ───
       toastMsg: '',
       showToast: (msg) => {

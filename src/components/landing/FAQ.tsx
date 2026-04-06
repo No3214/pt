@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RevealSection, fadeUp } from './LandingUI';
-import { faqItems } from '../../data/landingData';
+import { getLandingData } from '../../data/landingData';
 import { useStore } from '../../stores/useStore';
 
 function FaqItem({ question, answer, index, dm }: { question: string; answer: string; index: number; dm: boolean }) {
@@ -50,19 +50,19 @@ function FaqItem({ question, answer, index, dm }: { question: string; answer: st
 }
 
 export default function FAQ() {
-  const { darkMode } = useStore();
+  const { darkMode, language } = useStore();
+  const { faqItems } = getLandingData(language);
   return (
     <section id="faq" className="py-32 md:py-40 bg-bg">
       <div className="max-w-[1400px] mx-auto px-8 md:px-12">
         <div className="grid lg:grid-cols-[1fr_1.5fr] gap-20">
           <RevealSection>
             <motion.p variants={fadeUp} className="text-[0.75rem] uppercase tracking-[0.2em] font-medium text-primary mb-6">
-              Soru & Cevap
+              {language === 'tr' ? 'Soru & Cevap' : 'Q & A'}
             </motion.p>
             <motion.h2 variants={fadeUp} custom={1}
               className="font-display text-[clamp(2.5rem,4vw,3.8rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-text-main">
-              Merak ettiklerin,
-              <br />bilmen gerekenler.
+              {language === 'tr' ? (<>Merak ettiklerin,<br />bilmen gerekenler.</>) : (<>Your questions,<br />answered.</>)}
             </motion.h2>
           </RevealSection>
 

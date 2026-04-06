@@ -44,7 +44,7 @@ function FloatingParticle({ delay, x, dm }: { delay: number; x: number; dm: bool
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: [0, 0.3, 0], y: [-20, -60, -100] }}
       transition={{ duration: 3, delay, repeat: Infinity, ease: 'easeOut' }}
-      className={`absolute w-1.5 h-1.5 rounded-full ${dm ? 'bg-terracotta/40' : 'bg-terracotta/25'}`}
+      className={`absolute w-1.5 h-1.5 rounded-full ${dm ? 'bg-primary/40' : 'bg-primary/25'}`}
       style={{ left: `${x}%`, bottom: '30%' }}
     />
   )
@@ -101,7 +101,7 @@ export default function NotFound() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display text-4xl font-bold text-terracotta"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-display text-4xl font-bold text-primary"
           >
             404
           </motion.span>
@@ -137,7 +137,7 @@ export default function NotFound() {
           className="flex flex-col items-center gap-4"
         >
           <Link to="/"
-            className="inline-flex items-center gap-2.5 px-8 py-4 bg-terracotta text-white rounded-full text-[0.88rem] font-medium no-underline transition-all duration-300 hover:shadow-[0_15px_30px_rgba(194,104,74,0.25)] hover:scale-[1.02]"
+            className="inline-flex items-center gap-2.5 px-8 py-4 bg-primary text-white rounded-full text-[0.88rem] font-medium no-underline transition-all duration-300 hover:shadow-[0_15px_30px_rgba(194,104,74,0.25)] hover:scale-[1.02]"
           >
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />

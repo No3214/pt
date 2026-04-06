@@ -24,7 +24,7 @@ export default function Assessment() {
   const fmsMax = Object.keys(fms).length * 3
   const fmsPercent = Math.round((fmsTotal / fmsMax) * 100)
 
-  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
+  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const card = `p-6 rounded-2xl border ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`
 
   // Measurement change comparison
@@ -96,7 +96,7 @@ export default function Assessment() {
   const scoreColors = [
     { min: 0, max: 0, bg: dm ? 'bg-red-500/10' : 'bg-red-50', text: 'text-red-500', ring: '#ef4444' },
     { min: 1, max: 1, bg: dm ? 'bg-amber-500/10' : 'bg-amber-50', text: 'text-amber-500', ring: '#f59e0b' },
-    { min: 2, max: 2, bg: dm ? 'bg-sage/10' : 'bg-sage/5', text: 'text-sage', ring: '#7A9E82' },
+    { min: 2, max: 2, bg: dm ? 'bg-secondary/10' : 'bg-secondary/5', text: 'text-secondary', ring: '#7A9E82' },
     { min: 3, max: 3, bg: dm ? 'bg-sky-500/10' : 'bg-sky-50', text: 'text-sky-500', ring: '#0ea5e9' },
   ]
   const getScoreStyle = (v: number) => scoreColors.find(s => v >= s.min && v <= s.max) || scoreColors[0]
@@ -111,7 +111,7 @@ export default function Assessment() {
         </div>
         {/* Quick Stats */}
         <div className="flex gap-3">
-          <div className={`px-4 py-2 rounded-full text-xs font-medium flex items-center gap-1.5 ${fmsPercent > 70 ? (dm ? 'bg-sage/10 text-sage' : 'bg-sage/10 text-sage') : (dm ? 'bg-terracotta/10 text-terracotta' : 'bg-terracotta/10 text-terracotta')}`}>
+          <div className={`px-4 py-2 rounded-full text-xs font-medium flex items-center gap-1.5 ${fmsPercent > 70 ? (dm ? 'bg-secondary/10 text-secondary' : 'bg-secondary/10 text-secondary') : (dm ? 'bg-primary/10 text-primary' : 'bg-primary/10 text-primary')}`}>
             <span className="font-semibold">{fmsTotal}/{fmsMax}</span> FMS
           </div>
           <div className={`px-4 py-2 rounded-full text-xs font-medium ${dm ? 'bg-white/[0.06] text-white/50' : 'bg-stone-100 text-stone-500'}`}>
@@ -163,7 +163,7 @@ export default function Assessment() {
                           {[0, 1, 2, 3].map(v => (
                             <button key={v} onClick={() => setFms({ ...fms, [f.key]: v })}
                               className={`flex-1 py-2 rounded-lg text-sm font-semibold cursor-pointer transition-all border-none ${fms[f.key] === v
-                                ? 'bg-terracotta text-white shadow-sm'
+                                ? 'bg-primary text-white shadow-sm'
                                 : (dm ? 'bg-white/[0.06] text-white/40 hover:bg-white/10 hover:text-white/60' : 'bg-white text-stone-400 hover:bg-stone-100 hover:text-stone-600')
                               }`}>
                               {v}
@@ -199,7 +199,7 @@ export default function Assessment() {
                     <span className={`text-xs ${dm ? 'text-white/40' : 'text-stone-400'}`}>/ {fmsMax}</span>
                   </div>
                 </div>
-                <p className={`text-sm font-medium ${fmsPercent > 70 ? 'text-sage' : fmsPercent > 40 ? 'text-amber-500' : 'text-terracotta'}`}>
+                <p className={`text-sm font-medium ${fmsPercent > 70 ? 'text-secondary' : fmsPercent > 40 ? 'text-amber-500' : 'text-primary'}`}>
                   {fmsPercent > 70 ? 'İyi Seviye' : fmsPercent > 40 ? 'Orta Seviye' : 'Geliştirilmeli'}
                 </p>
                 <p className={`text-xs mt-1 ${dm ? 'text-white/30' : 'text-stone-400'}`}>FMS Toplam Skor</p>
@@ -208,7 +208,7 @@ export default function Assessment() {
                 <div className={`mt-6 pt-5 border-t w-full space-y-2 ${dm ? 'border-white/[0.06]' : 'border-stone-100'}`}>
                   {[
                     { score: 3, label: 'Mükemmel', color: 'text-sky-500' },
-                    { score: 2, label: 'İyi', color: 'text-sage' },
+                    { score: 2, label: 'İyi', color: 'text-secondary' },
                     { score: 1, label: 'Sınırlı', color: 'text-amber-500' },
                     { score: 0, label: 'Ağrı', color: 'text-red-500' },
                   ].map(s => (
@@ -238,7 +238,7 @@ export default function Assessment() {
                       <p className={`text-[0.65rem] uppercase tracking-wider mb-1 ${dm ? 'text-white/40' : 'text-stone-400'}`}>{measLabels[k]}</p>
                       <p className="text-lg font-semibold">{cur || '-'}</p>
                       {diff !== 0 && cur > 0 && (
-                        <p className={`text-[0.7rem] font-medium mt-0.5 ${diff > 0 ? 'text-terracotta' : 'text-sage'}`}>
+                        <p className={`text-[0.7rem] font-medium mt-0.5 ${diff > 0 ? 'text-primary' : 'text-secondary'}`}>
                           {diff > 0 ? '+' : ''}{diff.toFixed(1)} cm
                         </p>
                       )}
@@ -264,7 +264,7 @@ export default function Assessment() {
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
                 onClick={saveMeasurements}
-                className="w-full mt-6 py-4 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer"
+                className="w-full mt-6 py-4 rounded-full bg-primary text-white font-medium border-none cursor-pointer"
               >
                 Ölçümleri Kaydet
               </motion.button>
@@ -309,7 +309,7 @@ export default function Assessment() {
               <div className={card}>
                 <h3 className="font-display text-xl font-medium mb-2">Postür Fotoğrafı</h3>
                 <p className={`text-xs mb-6 ${dm ? 'text-white/30' : 'text-stone-400'}`}>Kifoz, lordoz veya asimetri analizi</p>
-                <div onClick={() => postureInput.current?.click()}                  className={`aspect-[3/4] max-w-[400px] mx-auto border-2 border-dashed rounded-2xl flex items-center justify-center cursor-pointer overflow-hidden transition-all hover:border-terracotta/30 group ${dm ? 'border-white/10 bg-white/[0.02]' : 'border-stone-200 bg-stone-50'}`}>
+                <div onClick={() => postureInput.current?.click()}                  className={`aspect-[3/4] max-w-[400px] mx-auto border-2 border-dashed rounded-2xl flex items-center justify-center cursor-pointer overflow-hidden transition-all hover:border-primary/30 group ${dm ? 'border-white/10 bg-white/[0.02]' : 'border-stone-200 bg-stone-50'}`}>
                   {postureImg ? (
                     <img src={postureImg} alt="Postür" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   ) : (
@@ -346,7 +346,7 @@ export default function Assessment() {
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                   onClick={() => showToast('Analiz kaydedildi!')}
-                  className="w-full mt-4 py-4 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer"
+                  className="w-full mt-4 py-4 rounded-full bg-primary text-white font-medium border-none cursor-pointer"
                 >
                   Analizi Kaydet
                 </motion.button>
@@ -366,7 +366,7 @@ export default function Assessment() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}            onClick={() => progressInput.current?.click()}
-            className="px-5 py-2.5 rounded-full bg-terracotta text-white text-sm font-medium border-none cursor-pointer"
+            className="px-5 py-2.5 rounded-full bg-primary text-white text-sm font-medium border-none cursor-pointer"
           >
             + Fotoğraf
           </motion.button>
@@ -402,7 +402,7 @@ export default function Assessment() {
                 <div className={`p-2.5 flex items-center justify-between ${dm ? 'bg-white/[0.03]' : 'bg-stone-50'}`}>
                   <span className="text-xs font-medium">{p.date}</span>
                   <button onClick={(e) => { e.stopPropagation(); deleteProgressPhoto(i) }}
-                    className="bg-transparent border-none cursor-pointer text-terracotta/50 hover:text-terracotta text-xs transition-colors">
+                    className="bg-transparent border-none cursor-pointer text-primary/50 hover:text-primary text-xs transition-colors">
                     Sil
                   </button>
                 </div>

@@ -1,14 +1,17 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useStore } from '../../stores/useStore';
-import { navigationLinks } from '../../data/landingData';
+import { getLandingData } from '../../data/landingData';
+import { useTranslation } from '../../locales';
 import { tenantConfig } from '../../config/tenant';
 
 export default function Navbar() {
-  const { darkMode, toggleDarkMode } = useStore();
+  const { darkMode, toggleDarkMode, language, setLanguage } = useStore();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const dm = darkMode;
+  const { navigationLinks } = getLandingData(language);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -47,6 +50,13 @@ export default function Navbar() {
 
           {/* Actions */}
           <div className="flex gap-4 items-center">
+            {/* Language Toggle */}
+            <button
+              onClick={() => setLanguage(language === 'tr' ? 'en' : 'tr')}
+              className={`hidden md:flex items-center gap-1.5 px-3 py-2 rounded-full text-[0.75rem] font-bold tracking-wider transition-all cursor-pointer border ${dm ? 'bg-white/5 border-white/10 text-white hover:bg-white/10' : 'bg-black/[0.03] border-black/5 text-text-main hover:bg-black/5'}`}
+            >
+              🌐 {language.toUpperCase()}
+            </button>
             <button onClick={toggleDarkMode}
               className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 border-none cursor-pointer ${dm ? 'bg-white/10 text-white hover:bg-white/20' : 'bg-black/5 text-text-main hover:bg-black/10'}`}
               aria-label="Tema değiştir">
@@ -57,7 +67,7 @@ export default function Navbar() {
               )}
             </button>
             <a href="/admin" className={`hidden md:inline-flex items-center px-6 py-3 rounded-full text-[0.8rem] font-bold tracking-widest uppercase no-underline transition-all duration-500 border-2 ${dm ? 'border-primary/20 text-white hover:bg-primary/10' : 'border-primary/10 text-text-main hover:bg-primary/5'}`}>
-              Giriş Yap
+              {t.nav.portal}
             </a>
             
             {/* Mobile Menu Button */}
@@ -94,10 +104,16 @@ export default function Navbar() {
                   {item.label}
                 </motion.a>
               ))}
+              {/* Mobile Language Toggle */}
+              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.55 }}>
+                <button onClick={() => { setLanguage(language === 'tr' ? 'en' : 'tr'); }} className="px-8 py-3 rounded-full text-[0.85rem] font-bold uppercase tracking-widest border border-text-main/10 cursor-pointer bg-transparent text-text-main">
+                  🌐 {language === 'tr' ? 'English' : 'Türkçe'}
+                </button>
+              </motion.div>
               <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}>
                 <a href="/admin" onClick={() => setMenuOpen(false)}
-                  className="mt-10 px-10 py-5 bg-primary text-white rounded-full font-bold uppercase tracking-widest text-[0.85rem] shadow-2xl inline-block no-underline">
-                  Yönetim Paneli
+                  className="mt-4 px-10 py-5 bg-primary text-white rounded-full font-bold uppercase tracking-widest text-[0.85rem] shadow-2xl inline-block no-underline">
+                  {t.nav.portal}
                 </a>
               </motion.div>
             </motion.nav>

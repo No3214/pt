@@ -1,12 +1,15 @@
 import { motion } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 import { tenantConfig } from '../../config/tenant';
-import { navigationLinks } from '../../data/landingData';
+import { getLandingData } from '../../data/landingData';
+import { useTranslation } from '../../locales';
 
 export default function Footer() {
-  const { darkMode } = useStore();
+  const { darkMode, language } = useStore();
   const dm = darkMode;
   const currentYear = new Date().getFullYear();
+  const { navigationLinks } = getLandingData(language);
+  const { t } = useTranslation();
 
   const SOCIALS = [
     { name: 'Instagram', url: `https://instagram.com/${tenantConfig.brand.contact.socials.instagram.replace('@', '')}`, icon: '📸' },
@@ -22,7 +25,7 @@ export default function Footer() {
               {tenantConfig.brand.name}
             </a>
             <p className="text-[1.1rem] leading-relaxed text-text-main/40 max-w-[400px] font-medium">
-              Profesyonel sporcu disipliniyle, senin için en iyi versiyonunu inşa ediyoruz. Şimdi başla, sahada fark yarat.
+              {t.hero.desc}
             </p>
             <div className="flex gap-4">
               {SOCIALS.map(s => (
@@ -43,7 +46,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-8">
-            <h4 className="text-[0.75rem] font-bold uppercase tracking-widest text-primary">Navigasyon</h4>
+            <h4 className="text-[0.75rem] font-bold uppercase tracking-widest text-primary">{language === 'tr' ? 'Navigasyon' : 'Navigation'}</h4>
             <nav className="flex flex-col gap-5">
               {navigationLinks.map(l => (
                 <a key={l.id} href={`#${l.id}`} className="no-underline text-[1.05rem] font-bold text-text-main/40 hover:text-primary transition-all duration-300">
@@ -54,7 +57,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-8">
-            <h4 className="text-[0.75rem] font-bold uppercase tracking-widest text-primary">Iletisim</h4>
+            <h4 className="text-[0.75rem] font-bold uppercase tracking-widest text-primary">{t.nav.contact}</h4>
             <div className="flex flex-col gap-6">
               <a href={`mailto:${tenantConfig.brand.contact.email}`} className="no-underline text-[1.05rem] font-bold text-text-main/40 hover:text-primary transition-all duration-300">
                 {tenantConfig.brand.contact.email}
@@ -73,11 +76,11 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-12 border-t border-text-main/5 gap-8">
           <div className="text-[0.85rem] font-medium text-text-main/30">
-            © {currentYear} {tenantConfig.brand.name}. Tüm hakları saklıdır.
+            © {currentYear} {tenantConfig.brand.name}. {t.footer.rights}
           </div>
           <div className="flex gap-10">
-             <a href="#" className="no-underline text-[0.8rem] font-bold uppercase tracking-widest text-text-main/20 hover:text-text-main transition-colors">KVKK</a>
-             <a href="#" className="no-underline text-[0.8rem] font-bold uppercase tracking-widest text-text-main/20 hover:text-text-main transition-colors">Gizlilik Politikası</a>
+             <a href="#" className="no-underline text-[0.8rem] font-bold uppercase tracking-widest text-text-main/20 hover:text-text-main transition-colors">{t.footer.terms}</a>
+             <a href="#" className="no-underline text-[0.8rem] font-bold uppercase tracking-widest text-text-main/20 hover:text-text-main transition-colors">{t.footer.privacy}</a>
           </div>
         </div>
       </div>

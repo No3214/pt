@@ -89,7 +89,7 @@ export default function Settings() {
             onClick={() => setActiveTab(t.key)}
             className={`flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-medium cursor-pointer border-none transition-all ${
               activeTab === t.key
-                ? 'bg-terracotta text-white'
+                ? 'bg-primary text-white'
                 : (dm ? 'bg-white/[0.06] text-white/50 hover:bg-white/10' : 'bg-stone-100 text-stone-500 hover:bg-stone-200')
             }`}
           >
@@ -139,7 +139,7 @@ export default function Settings() {
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                   onClick={handleExport}
-                  className="w-full py-3.5 rounded-full bg-sage text-white font-medium border-none cursor-pointer"
+                  className="w-full py-3.5 rounded-full bg-secondary text-white font-medium border-none cursor-pointer"
                 >
                   JSON Olarak İndir
                 </motion.button>
@@ -185,46 +185,27 @@ export default function Settings() {
         {/* Danger Zone */}
         {activeTab === 'danger' && (
           <motion.div key="danger" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }}>
-            <div className={`p-8 rounded-2xl border-2 border-dashed ${dm ? 'border-terracotta/30 bg-terracotta/[0.03]' : 'border-terracotta/20 bg-terracotta/[0.02]'}`}>
+            <div className={`p-8 rounded-2xl border-2 border-dashed ${dm ? 'border-primary/30 bg-primary/[0.03]' : 'border-primary/20 bg-primary/[0.02]'}`}>
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-3xl">⚠️</span>
                 <div>
-                  <h3 className="font-display text-xl font-semibold text-terracotta">Tehlikeli Bölge</h3>
+                  <h3 className="font-display text-xl font-semibold text-primary">Tehlikeli Bölge</h3>
                   <p className={`text-sm ${dm ? 'text-white/40' : 'text-stone-400'}`}>Bu işlemler geri alınamaz</p>
                 </div>              </div>
 
               <div className="space-y-4">
-                <div className={`p-5 rounded-xl ${dm ? 'bg-white/[0.03]' : 'bg-white'}`}>
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h4 className="font-medium text-sm">API Anahtarlarını Sıfırla</h4>
-                      <p className={`text-xs mt-1 ${dm ? 'text-white/30' : 'text-stone-400'}`}>Tüm AI sağlayıcı anahtarlarını temizler</p>
-                    </div>
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => {
-                        if (confirm('Tüm API anahtarları silinecek. Emin misiniz?')) {
-                                                    showToast('API anahtarları sıfırlandı.')
-                        }
-                      }}
-                      className="px-5 py-2.5 rounded-full text-xs font-medium cursor-pointer border border-terracotta/40 text-terracotta bg-transparent hover:bg-terracotta/5"
-                    >
-                      Sıfırla
-                    </motion.button>
-                  </div>
-                </div>
+
 
                 <div className={`p-5 rounded-xl ${dm ? 'bg-white/[0.03]' : 'bg-white'}`}>
                   <div className="flex items-center justify-between">
                     <div>
-                      <h4 className="font-medium text-sm text-terracotta">Tüm Verileri Sil</h4>
+                      <h4 className="font-medium text-sm text-primary">Tüm Verileri Sil</h4>
                       <p className={`text-xs mt-1 ${dm ? 'text-white/30' : 'text-stone-400'}`}>Danışanlar, seanslar, ölçümler dahil herşeyi siler ve uygulamayı sıfırlar</p>                    </div>
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={handleResetAll}
-                      className="px-5 py-2.5 rounded-full text-xs font-medium cursor-pointer bg-terracotta text-white border-none"
+                      className="px-5 py-2.5 rounded-full text-xs font-medium cursor-pointer bg-primary text-white border-none"
                     >
                       Herşeyi Sil
                     </motion.button>

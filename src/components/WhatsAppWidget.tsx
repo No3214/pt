@@ -30,13 +30,13 @@ export default function WhatsAppWidget() {
 
   if (isAdmin || isPortal || !visible) return null
 
-  const quickMessages = [
+  const quickMessecondarys = [
     { text: 'Antrenman programı hakkında bilgi almak istiyorum', icon: '💪' },
     { text: 'Online PT hizmeti hakkında bilgi almak istiyorum', icon: '📱' },
     { text: 'Fiyat bilgisi alabilir miyim?', icon: '💰' },
   ]
 
-  const sendMessage = (msg: string) => {
+  const sendMessecondary = (msg: string) => {
     window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, '_blank')
     setOpen(false)
   }
@@ -69,11 +69,11 @@ export default function WhatsAppWidget() {
             {/* Header */}
             <div className="bg-[#075E54] px-5 py-4 flex items-center gap-3">
               <div className="relative">
-                <div className="w-11 h-11 rounded-full bg-white/20 flex items-center justify-center text-white text-lg font-display font-bold">E</div>
+                <div className="w-11 h-11 rounded-full bg-white/20 flex items-center justify-center text-white text-lg font-display font-bold">{tenantConfig.brand.name.charAt(0)}</div>
                 <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-[#25D366] border-2 border-[#075E54]" />
               </div>
               <div className="flex-1">
-                <div className="text-white font-medium text-sm">Ela Ebeoğlu</div>
+                <div className="text-white font-medium text-sm">{tenantConfig.brand.name}</div>
                 <div className="text-white/60 text-xs">Genellikle birkaç dakika içinde yanıt verir</div>
               </div>
               <button onClick={() => setOpen(false)}
@@ -93,7 +93,7 @@ export default function WhatsAppWidget() {
               >
                 <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
                   <p className="text-[0.8rem] text-stone-800 leading-relaxed">
-                    Merhaba! 👋 Ben Ela. Antrenman programları, beslenme danışmanlığı veya online PT hizmeti hakkında bilgi almak için bana yazabilirsin 🏐
+                    Merhaba! 👋 Ben {tenantConfig.brand.name.split(' ')[0]}. Sistemlerimiz veya online eğitim hizmetleri hakkında bilgi almak için iletişime geçebilirsiniz ⚡
                   </p>
                   <span className="text-[0.6rem] text-stone-400 mt-1 block text-right">şimdi</span>
                 </div>
@@ -101,7 +101,7 @@ export default function WhatsAppWidget() {
 
               {/* Quick reply buttons */}
               <div className="space-y-1.5 mt-3">
-                {quickMessages.map((m, i) => (
+                {quickMessecondarys.map((m, i) => (
                   <motion.button
                     key={i}
                     initial={{ opacity: 0, y: 5 }}
@@ -109,7 +109,7 @@ export default function WhatsAppWidget() {
                     transition={{ delay: 0.4 + i * 0.1 }}
                     whileHover={{ scale: 1.01 }}
                     whileTap={{ scale: 0.98 }}
-                    onClick={() => sendMessage(m.text)}
+                    onClick={() => sendMessecondary(m.text)}
                     className="w-full text-left px-4 py-2.5 bg-white rounded-xl text-[0.8rem] text-stone-700 border border-[#25D366]/20 cursor-pointer hover:border-[#25D366]/50 hover:bg-[#25D366]/5 transition-all flex items-center gap-2"
                   >
                     <span>{m.icon}</span>
@@ -119,7 +119,7 @@ export default function WhatsAppWidget() {
               </div>
             </div>
 
-            {/* Custom message input */}
+            {/* Custom messecondary input */}
             <div className="bg-[#F0F0F0] px-3 py-2.5 flex gap-2 items-center">
               <input
                 type="text"
@@ -127,12 +127,12 @@ export default function WhatsAppWidget() {
                 className="flex-1 bg-white rounded-full px-4 py-2.5 text-sm border-none outline-none text-stone-700 placeholder:text-stone-400"
                 onKeyDown={e => {
                   if (e.key === 'Enter' && (e.target as HTMLInputElement).value.trim()) {
-                    sendMessage((e.target as HTMLInputElement).value.trim())
+                    sendMessecondary((e.target as HTMLInputElement).value.trim())
                   }
                 }}
               />
               <button
-                onClick={() => sendMessage(GREETING)}
+                onClick={() => sendMessecondary(GREETING)}
                 className="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center border-none cursor-pointer hover:bg-[#20BD5A] transition-colors shrink-0"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>

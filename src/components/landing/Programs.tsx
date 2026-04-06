@@ -1,24 +1,27 @@
 import { useState } from 'react';
 import { RevealSection, fadeUp } from './LandingUI';
-import { programs } from '../../data/landingData';
+import { getLandingData } from '../../data/landingData';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
+import { useTranslation } from '../../locales';
 
 export default function Programs() {
-  const { darkMode } = useStore();
+  const { darkMode, language } = useStore();
   const [showComparison, setShowComparison] = useState(false);
   const dm = darkMode;
+  const { programs } = getLandingData(language);
+  const { t } = useTranslation();
 
   return (
     <section id="programlar" className="py-32 md:py-40 bg-bg">
       <div className="max-w-[1400px] mx-auto px-8 md:px-12">
         <RevealSection className="text-center mb-24">
           <motion.p variants={fadeUp} className="text-[0.75rem] uppercase tracking-[0.3em] font-bold text-primary mb-6">
-            Programlar
+            {t.programs.badge}
           </motion.p>
           <motion.h2 variants={fadeUp} custom={1}
             className="font-display text-[clamp(2.5rem,4vw,4.5rem)] font-bold leading-[1] tracking-[-0.04em] text-text-main mb-8">
-            Kendine yapacağın <br className="hidden md:block" /> en büyük yatırım.
+            {t.programs.title}
           </motion.h2>
           <motion.div variants={fadeUp} custom={2} className="w-20 h-1 bg-primary/20 mx-auto rounded-full" />
         </RevealSection>
@@ -42,7 +45,7 @@ export default function Programs() {
               >
                 {p.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-2 rounded-full bg-primary text-white text-[0.75rem] font-bold uppercase tracking-widest shadow-xl">
-                    En Popüler
+                    {language === 'tr' ? 'En Popüler' : 'Most Popular'}
                   </div>
                 )}
 
@@ -77,7 +80,7 @@ export default function Programs() {
                         ? 'bg-primary text-white shadow-lg shadow-primary/30 hover:bg-primary-dark'
                         : `border-2 border-primary/10 text-text-main/70 hover:border-primary/30 hover:text-text-main`
                     }`}>
-                    {p.popular ? 'Hemen Başla' : 'Başvur'}
+                    {p.popular ? t.hero.btnStart : t.programs.btnPurchase}
                   </a>
                 </div>
               </div>
@@ -90,7 +93,7 @@ export default function Programs() {
             onClick={() => setShowComparison(!showComparison)}
             className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-[0.85rem] font-bold uppercase tracking-widest text-text-main/50 hover:text-primary transition-all duration-300 border border-text-main/10 hover:border-primary/20 bg-text-main/[0.02]"
           >
-            {showComparison ? 'Kıyaslamayı Kapat' : 'Tüm Özellikleri Kıyasla'}
+            {showComparison ? (language === 'tr' ? 'Kıyaslamayı Kapat' : 'Close Comparison') : (language === 'tr' ? 'Tüm Özellikleri Kıyasla' : 'Compare All Features')}
             <svg className={`w-4 h-4 transition-transform duration-500 ${showComparison ? 'rotate-180' : 'group-hover:translate-y-1'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>

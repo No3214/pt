@@ -22,9 +22,9 @@ const muscleIcons: Record<string, string> = {
 }
 
 const diffColors: Record<string, { bg: string; text: string }> = {
-  beginner: { bg: 'bg-sage/10', text: 'text-sage' },
+  beginner: { bg: 'bg-secondary/10', text: 'text-secondary' },
   intermediate: { bg: 'bg-amber-500/10', text: 'text-amber-500' },
-  advanced: { bg: 'bg-terracotta/10', text: 'text-terracotta' },
+  advanced: { bg: 'bg-primary/10', text: 'text-primary' },
 }
 
 function ExerciseThumb({ exercise }: { exercise: any, dm?: boolean }) {
@@ -66,7 +66,7 @@ export default function Builder() {
   const previewRef = useRef<HTMLDivElement>(null)
   const previewInView = useInView(previewRef, { once: true })
 
-  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
+  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const card = `p-6 rounded-2xl border backdrop-blur-sm ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04] shadow-sm'}`
   const hasAI = true
 
@@ -128,7 +128,7 @@ export default function Builder() {
       const best = results.find(r => r.result)
       if (best?.result) setWaPreview(best.result)
       else setWaPreview('AI Hatası: Sonuç alınamadı')
-    } catch (err: any) { setWaPreview('AI Hatası: ' + err.message) }
+    } catch (err: any) { setWaPreview('AI Hatası: ' + err.messecondary) }
     setLoading(false)
   }
 
@@ -171,13 +171,13 @@ export default function Builder() {
           {/* Stats Pills */}
           {customProgram.length > 0 && (
             <div className="flex gap-2">
-              <span className={`px-3 py-1.5 rounded-full text-xs font-medium ${dm ? 'bg-terracotta/10 text-terracotta' : 'bg-terracotta/10 text-terracotta'}`}>
+              <span className={`px-3 py-1.5 rounded-full text-xs font-medium ${dm ? 'bg-primary/10 text-primary' : 'bg-primary/10 text-primary'}`}>
                 {programStats.exerciseCount} hareket
               </span>
-              <span className={`px-3 py-1.5 rounded-full text-xs font-medium ${dm ? 'bg-sage/10 text-sage' : 'bg-sage/10 text-sage'}`}>
+              <span className={`px-3 py-1.5 rounded-full text-xs font-medium ${dm ? 'bg-secondary/10 text-secondary' : 'bg-secondary/10 text-secondary'}`}>
                 {programStats.totalSets} set
               </span>
-              <span className={`px-3 py-1.5 rounded-full text-xs font-medium hidden sm:inline-block ${dm ? 'bg-coast/10 text-coast' : 'bg-sky-50 text-sky-600'}`}>
+              <span className={`px-3 py-1.5 rounded-full text-xs font-medium hidden sm:inline-block ${dm ? 'bg-accent/10 text-accent' : 'bg-sky-50 text-sky-600'}`}>
                 {programStats.muscles.length} kas grubu
               </span>
             </div>
@@ -187,7 +187,7 @@ export default function Builder() {
             whileTap={{ scale: 0.98 }}
             onClick={() => setShowExerciseDB(!showExerciseDB)}
             className={`px-6 py-3 rounded-full text-sm font-medium cursor-pointer transition-all ${showExerciseDB
-              ? 'bg-sage text-white border-none shadow-lg shadow-sage/20'
+              ? 'bg-secondary text-white border-none shadow-lg shadow-secondary/20'
               : (dm ? 'border border-white/10 text-white/70 bg-transparent' : 'border border-stone-200 text-stone-600 bg-transparent')
             }`}
           >
@@ -211,7 +211,7 @@ export default function Builder() {
             transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="overflow-hidden mb-8"
           >
-            <div className={`${card} border-sage/20`}>
+            <div className={`${card} border-secondary/20`}>
               {/* Search & Filters */}
               <div className="flex flex-wrap gap-3 mb-5">
                 <div className="relative flex-1 min-w-[200px]">
@@ -236,7 +236,7 @@ export default function Builder() {
 
               {/* Results count */}
               <div className={`flex items-center gap-2 mb-3 text-xs ${dm ? 'text-white/30' : 'text-stone-400'}`}>
-                <span className={`w-1.5 h-1.5 rounded-full ${filteredExercises.length > 0 ? 'bg-sage' : 'bg-red-400'}`} />
+                <span className={`w-1.5 h-1.5 rounded-full ${filteredExercises.length > 0 ? 'bg-secondary' : 'bg-red-400'}`} />
                 {filteredExercises.length} sonuç
                 {exSearch && <span>· &ldquo;{exSearch}&rdquo;</span>}
               </div>
@@ -252,19 +252,19 @@ export default function Builder() {
                       transition={{ delay: Math.min(i * 0.02, 0.3) }}
                       whileHover={{ scale: 1.01, x: 4 }}
                       onClick={() => addExerciseToProgram(e.name, e.muscle)}
-                      className={`flex items-center justify-between p-3.5 rounded-xl cursor-pointer transition-all border group ${dm ? 'border-white/[0.04] hover:border-sage/30 hover:bg-white/[0.04]' : 'border-stone-100 hover:border-sage/30 hover:bg-sage/5'}`}>
+                      className={`flex items-center justify-between p-3.5 rounded-xl cursor-pointer transition-all border group ${dm ? 'border-white/[0.04] hover:border-secondary/30 hover:bg-white/[0.04]' : 'border-stone-100 hover:border-secondary/30 hover:bg-secondary/5'}`}>
                       <div className="flex items-center gap-3">
                         <div className={`w-11 h-11 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0 ${dm ? 'bg-white/5' : 'bg-black/5'}`}>
                           <ExerciseThumb exercise={e} dm={dm} />
                         </div>
                         <div>
-                          <div className="font-medium text-sm group-hover:text-sage transition-colors">{e.name}</div>
+                          <div className="font-medium text-sm group-hover:text-secondary transition-colors">{e.name}</div>
                           <div className={`text-[0.7rem] mt-0.5 ${dm ? 'text-white/30' : 'text-stone-400'}`}>{e.muscle} · {e.equipment}</div>
                         </div>
                       </div>
                       <div className="flex items-center gap-1.5">
                         <span className={`text-[0.65rem] px-2 py-0.5 rounded-md ${dc.bg} ${dc.text}`}>{difficultyLabels[e.difficulty]?.split(' ')[0]}</span>
-                        <span className={`text-sage opacity-0 group-hover:opacity-100 transition-opacity text-lg`}>+</span>
+                        <span className={`text-secondary opacity-0 group-hover:opacity-100 transition-opacity text-lg`}>+</span>
                       </div>
                     </motion.div>
                   )
@@ -287,7 +287,7 @@ export default function Builder() {
             <div className={card}>
               <div className="flex flex-wrap justify-between items-center mb-5 gap-3">
                 <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg ${dm ? 'bg-terracotta/10' : 'bg-terracotta/10'}`}>💪</div>
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-lg ${dm ? 'bg-primary/10' : 'bg-primary/10'}`}>💪</div>
                   <div>
                     <h3 className="font-display text-lg font-medium">Özel Program</h3>
                     <p className={`text-xs ${dm ? 'text-white/30' : 'text-stone-400'}`}>{programStats.exerciseCount} hareket · {programStats.totalSets} set</p>
@@ -297,7 +297,7 @@ export default function Builder() {
                 </div>
                 <div className="flex gap-2">
                   <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={buildCustomOutput}
-                    className="px-5 py-2.5 rounded-full text-sm bg-terracotta text-white border-none cursor-pointer font-medium shadow-lg shadow-terracotta/20">
+                    className="px-5 py-2.5 rounded-full text-sm bg-primary text-white border-none cursor-pointer font-medium shadow-lg shadow-primary/20">
                     Çıktıya Aktar
                   </motion.button>
                   <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setCustomProgram([])}
@@ -409,7 +409,7 @@ export default function Builder() {
                       {hasAI && (
                         <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.97 }}
                           onClick={generateAI} disabled={loading}
-                          className="p-4 rounded-xl text-left cursor-pointer border-none bg-gradient-to-br from-sage/20 to-sky-500/20 disabled:opacity-50">
+                          className="p-4 rounded-xl text-left cursor-pointer border-none bg-gradient-to-br from-secondary/20 to-sky-500/20 disabled:opacity-50">
                           <span className="text-xl mb-1 block">{loading ? '⏳' : '🧠'}</span>
                           <span className="text-sm font-medium block">{loading ? 'Üretiliyor...' : 'AI Program'}</span>
                           <span className={`text-[0.65rem] ${dm ? 'text-white/30' : 'text-stone-400'}`}>LLM Council</span>
@@ -448,8 +448,8 @@ export default function Builder() {
           <div className={card}>
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center gap-3">
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${dm ? 'bg-sage/10' : 'bg-sage/10'}`}>
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-sage"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${dm ? 'bg-secondary/10' : 'bg-secondary/10'}`}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-secondary"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                 </div>
                 <h3 className="font-display text-lg font-medium">WhatsApp Çıktısı</h3>
               </div>

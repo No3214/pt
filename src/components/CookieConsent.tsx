@@ -15,7 +15,7 @@ function Toggle({ on, onChange, locked, dm }: { on: boolean; onChange: () => voi
       className={`relative w-10 h-[22px] rounded-full border-none cursor-pointer transition-colors duration-300 flex-shrink-0 ${
         locked ? 'opacity-60 cursor-not-allowed' : ''
       } ${on
-        ? 'bg-terracotta'
+        ? 'bg-primary'
         : dm ? 'bg-white/10' : 'bg-black/10'
       }`}
       aria-label={locked ? 'Zorunlu' : on ? 'Açık' : 'Kapalı'}
@@ -72,8 +72,8 @@ export default function CookieConsent() {
           {/* Header */}
           <div className="p-6 pb-0">
             <div className="flex items-start gap-3.5">
-              <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-terracotta/10 flex items-center justify-center mt-0.5">
-                <svg className="w-5 h-5 text-terracotta" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+              <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mt-0.5">
+                <svg className="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
                 </svg>
               </div>
@@ -121,12 +121,12 @@ export default function CookieConsent() {
           {/* Actions */}
           <div className="p-6 pt-4 flex items-center gap-3">
             <button onClick={() => accept(true)}
-              className="px-5 py-2.5 bg-terracotta text-white rounded-full text-[0.78rem] font-medium border-none cursor-pointer transition-all duration-300 hover:shadow-[0_8px_20px_rgba(194,104,74,0.25)]">
+              className="px-5 py-2.5 bg-primary text-white rounded-full text-[0.78rem] font-medium border-none cursor-pointer transition-all duration-300 hover:shadow-[0_8px_20px_rgba(194,104,74,0.25)]">
               Tümünü Kabul
             </button>
             {expanded ? (
               <button onClick={() => accept()}
-                className="px-5 py-2.5 bg-sage/20 text-sage rounded-full text-[0.78rem] font-medium border-none cursor-pointer transition-all duration-300 hover:bg-sage/30">
+                className="px-5 py-2.5 bg-secondary/20 text-secondary rounded-full text-[0.78rem] font-medium border-none cursor-pointer transition-all duration-300 hover:bg-secondary/30">
                 Seçimi Kaydet
               </button>
             ) : (

@@ -47,6 +47,6 @@ export async function councilQuery(prompt: string, imageBase64?: string): Promis
     id: p.id,
     name: p.name,
     result: results[i].status === 'fulfilled' ? (results[i] as any).value : null,
-    error: results[i].status === 'rejected' ? (results[i] as any).reason.message : null,
+    error: results[i].status === 'rejected' ? (results[i] as any).reason.messecondary : null,
   }))
 }

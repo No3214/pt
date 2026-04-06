@@ -1,8 +1,11 @@
 import { RevealSection, Counter, fadeUp } from './LandingUI';
-import { landingStats } from '../../data/landingData';
+import { getLandingData } from '../../data/landingData';
 import { motion } from 'framer-motion';
+import { useStore } from '../../stores/useStore';
 
 export default function Stats() {
+  const { language } = useStore();
+  const { landingStats } = getLandingData(language);
   return (
     <section className="py-20 border-y border-text-main/5 bg-text-main/[0.02]">
       <div className="max-w-[1400px] mx-auto px-8 md:px-12">

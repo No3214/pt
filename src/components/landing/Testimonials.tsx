@@ -1,12 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RevealSection, fadeUp } from './LandingUI';
-import { testimonials } from '../../data/landingData';
+import { getLandingData } from '../../data/landingData';
 import { useStore } from '../../stores/useStore';
 
 export default function Testimonials() {
-  const { darkMode } = useStore();
+  const { darkMode, language } = useStore();
   const dm = darkMode;
+  const { testimonials } = getLandingData(language);
   const [active, setActive] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
 
@@ -28,11 +29,11 @@ export default function Testimonials() {
       <div className="max-w-[1400px] mx-auto px-8 md:px-12">
         <RevealSection className="text-center md:text-left mb-20">
           <motion.p variants={fadeUp} className="text-[0.75rem] uppercase tracking-[0.2em] font-medium text-primary mb-6">
-            Sonuçlar
+            {language === 'tr' ? 'Sonuçlar' : 'Results'}
           </motion.p>
           <motion.h2 variants={fadeUp} custom={1}
             className="font-display text-[clamp(2.5rem,4vw,3.8rem)] font-semibold leading-[1.1] tracking-[-0.02em] max-w-[700px] text-text-main">
-            Onların hikayesi, senin motivasyonun.
+            {language === 'tr' ? 'Onların hikayesi, senin motivasyonun.' : 'Their story, your motivation.'}
           </motion.h2>
         </RevealSection>
 
@@ -82,7 +83,7 @@ export default function Testimonials() {
                       {testimonials[active].metric.split(' ')[0]}
                     </motion.div>
                     <div className="text-[0.85rem] uppercase tracking-[0.4em] mt-2 text-text-main/20 font-bold">
-                      Kanıtlanmış Sonuç
+                      {language === 'tr' ? 'Kanıtlanmış Sonuç' : 'Proven Result'}
                     </div>
                   </div>
                 </motion.div>

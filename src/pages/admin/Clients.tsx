@@ -86,7 +86,7 @@ export default function Clients() {
     setNoteText('')
     showToast('Not kaydedildi!')
   }
-  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
+  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const notesClient = notesModal ? clients.find(c => c.id === notesModal) : null
 
   // Stats
@@ -113,7 +113,7 @@ export default function Clients() {
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
-          onClick={() => setShowForm(!showForm)}          className={`px-6 py-3 rounded-full text-sm font-medium cursor-pointer transition-all ${showForm ? (dm ? 'bg-white/10 text-white border-none' : 'bg-stone-100 text-stone-700 border-none') : 'bg-terracotta text-white border-none'}`}
+          onClick={() => setShowForm(!showForm)}          className={`px-6 py-3 rounded-full text-sm font-medium cursor-pointer transition-all ${showForm ? (dm ? 'bg-white/10 text-white border-none' : 'bg-stone-100 text-stone-700 border-none') : 'bg-primary text-white border-none'}`}
         >
           {showForm ? '✕ Kapat' : '+ Yeni Danışan'}
         </motion.button>
@@ -155,7 +155,7 @@ export default function Clients() {
               onClick={() => setSortBy(o.key)}
               className={`px-4 py-3 rounded-xl text-xs font-medium cursor-pointer border-none transition-all ${
                 sortBy === o.key
-                  ? 'bg-terracotta text-white'
+                  ? 'bg-primary text-white'
                   : (dm ? 'bg-white/[0.06] text-white/50 hover:bg-white/10' : 'bg-stone-100 text-stone-500 hover:bg-stone-200')
               }`}
             >
@@ -204,7 +204,7 @@ export default function Clients() {
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
                 onClick={handleAdd}
-                className="mt-6 w-full py-4 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer"
+                className="mt-6 w-full py-4 rounded-full bg-primary text-white font-medium border-none cursor-pointer"
               >
                 Danışanı Kaydet
               </motion.button>
@@ -240,10 +240,10 @@ export default function Clients() {
                   {/* Avatar & Info */}
                   <div className="flex items-center gap-4 md:w-[240px]">
                     <div className="relative">
-                      <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold transition-transform duration-300 ${dm ? 'bg-terracotta/20 text-terracotta' : 'bg-terracotta/10 text-terracotta'}`}>
+                      <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold transition-transform duration-300 ${dm ? 'bg-primary/20 text-primary' : 'bg-primary/10 text-primary'}`}>
                         {c.name.charAt(0).toUpperCase()}
                       </div>
-                      <div className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 ${dm ? 'border-[#0c0c0c]' : 'border-white'} ${c.sessions > 2 ? 'bg-sage' : c.sessions > 0 ? 'bg-amber-400' : 'bg-red-400'}`} />
+                      <div className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 ${dm ? 'border-[#0c0c0c]' : 'border-white'} ${c.sessions > 2 ? 'bg-secondary' : c.sessions > 0 ? 'bg-amber-400' : 'bg-red-400'}`} />
                     </div>
                     <div>
                       <h4 className="font-medium text-lg leading-tight">{c.name}</h4>
@@ -259,20 +259,20 @@ export default function Clients() {
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
                       <span className={`text-xs ${dm ? 'text-white/40' : 'text-stone-400'}`}>Seans İlerlemesi</span>
-                      <span className={`text-sm font-semibold ${isLow ? 'text-terracotta' : ''}`}>{c.sessions}/{c.max}</span>
+                      <span className={`text-sm font-semibold ${isLow ? 'text-primary' : ''}`}>{c.sessions}/{c.max}</span>
                     </div>
                     <div className={`h-2 rounded-full overflow-hidden ${dm ? 'bg-white/[0.06]' : 'bg-stone-100'}`}>
                       <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: `${sessionPercent}%` }}
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                        className={`h-full rounded-full ${isLow ? 'bg-terracotta' : 'bg-sage'}`}
+                        className={`h-full rounded-full ${isLow ? 'bg-primary' : 'bg-secondary'}`}
                       />
                     </div>
                     <div className="flex items-center gap-4 mt-2">
                       <span className={`text-xs ${dm ? 'text-white/30' : 'text-stone-300'}`}>₺{c.price.toLocaleString('tr-TR')}</span>
-                      <span className={`text-xs ${comp > 70 ? 'text-sage' : 'text-terracotta'}`}>Uyum: %{comp}</span>
-                      {c.sessions === 0 && <span className="text-xs text-terracotta font-medium">Seans Bitti!</span>}
+                      <span className={`text-xs ${comp > 70 ? 'text-secondary' : 'text-primary'}`}>Uyum: %{comp}</span>
+                      {c.sessions === 0 && <span className="text-xs text-primary font-medium">Seans Bitti!</span>}
                     </div>
                   </div>
 
@@ -283,11 +283,11 @@ export default function Clients() {
                       className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${c.sessions === 0 ? 'opacity-40 cursor-not-allowed' : ''} ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
                       Seans -1
                     </motion.button>                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => openEdit(c)}
-                      className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-sage/10 text-sage border-none">
+                      className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-secondary/10 text-secondary border-none">
                       Düzenle
                     </motion.button>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => navigate('/admin/builder')}
-                      className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-terracotta/10 text-terracotta border-none">
+                      className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-primary/10 text-primary border-none">
                       Program Yaz
                     </motion.button>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => handleHabit(c.id)}
@@ -304,7 +304,7 @@ export default function Clients() {
                     </motion.button>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                       onClick={() => { if (confirm('Danışanı tamamen silmek istediğinize emin misiniz?')) deleteClient(c.id) }}
-                      className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer border border-terracotta/30 text-terracotta bg-transparent hover:bg-terracotta/5">
+                      className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer border border-primary/30 text-primary bg-transparent hover:bg-primary/5">
                       Sil
                     </motion.button>
                   </div>
@@ -376,7 +376,7 @@ export default function Clients() {
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                   onClick={handleEdit}
-                  className="flex-1 py-3.5 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer"
+                  className="flex-1 py-3.5 rounded-full bg-primary text-white font-medium border-none cursor-pointer"
                 >
                   Kaydet
                 </motion.button>
@@ -427,7 +427,7 @@ export default function Clients() {
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
                 onClick={handleSaveNote}
-                className="w-full py-3.5 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer mb-6"
+                className="w-full py-3.5 rounded-full bg-primary text-white font-medium border-none cursor-pointer mb-6"
               >
                 Not Kaydet
               </motion.button>
@@ -440,11 +440,11 @@ export default function Clients() {
                       key={n.id}
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
-                      className={`p-4 border-l-[3px] border-sage rounded-r-xl ${dm ? 'bg-white/[0.03]' : 'bg-stone-50'}`}
+                      className={`p-4 border-l-[3px] border-secondary rounded-r-xl ${dm ? 'bg-white/[0.03]' : 'bg-stone-50'}`}
                     >
                       <div className="flex justify-between items-center">
                         <span className={`text-[0.7rem] ${dm ? 'text-white/30' : 'text-stone-400'}`}>{n.date}</span>
-                        <button onClick={() => deleteNote(notesClient.id, n.id)} className="bg-transparent border-none cursor-pointer text-terracotta/60 hover:text-terracotta text-sm transition-colors">×</button>
+                        <button onClick={() => deleteNote(notesClient.id, n.id)} className="bg-transparent border-none cursor-pointer text-primary/60 hover:text-primary text-sm transition-colors">×</button>
                       </div>
                       <p className="text-sm mt-1.5 leading-relaxed">{n.text}</p>
                     </motion.div>

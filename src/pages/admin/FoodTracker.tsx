@@ -15,7 +15,7 @@ function MacroRing({ value, max, color, label, unit, dm }: { value: number; max:
   const inView = useInView(ref, { once: true })
   const pct = max > 0 ? Math.min((value / max) * 100, 100) : 0
   const r = 38, circ = 2 * Math.PI * r
-  const colors: Record<string, string> = { terracotta: '#C2684A', sage: '#7A9E82', sand: '#D4C4AB', coast: '#5e8fa8' }
+  const colors: Record<string, string> = { primary: '#C2684A', secondary: '#7A9E82', sand: '#D4C4AB', accent: '#5e8fa8' }
   return (
     <div ref={ref} className="flex flex-col items-center">
       <div className="relative w-24 h-24">
@@ -46,7 +46,7 @@ export default function FoodTracker() {
   const [analyzing, setAnalyzing] = useState(false)
   const fileInput = useRef<HTMLInputElement>(null)
 
-  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
+  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const card = `p-6 rounded-2xl border ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`
   const hasVision = true
 
@@ -85,7 +85,7 @@ export default function FoodTracker() {
       addFood(foodData)
       showToast(`AI tespit: ${foodData.name} - ${foodData.cal} kcal`)
     } catch (err: any) {
-      showToast('AI Analiz Hatası: ' + err.message)
+      showToast('AI Analiz Hatası: ' + err.messecondary)
     }
     setAnalyzing(false)
   }
@@ -117,15 +117,15 @@ export default function FoodTracker() {
       {/* Macro Rings */}
       <motion.div variants={fadeUp} className={`${card} mb-8`}>
         <div className="flex items-center justify-around flex-wrap gap-6">
-          <MacroRing value={totals.cal} max={2200} color="terracotta" label="Kalori" unit="kcal" dm={dm} />
-          <MacroRing value={totals.p} max={150} color="sage" label="Protein" unit="g" dm={dm} />
+          <MacroRing value={totals.cal} max={2200} color="primary" label="Kalori" unit="kcal" dm={dm} />
+          <MacroRing value={totals.p} max={150} color="secondary" label="Protein" unit="g" dm={dm} />
           <MacroRing value={totals.f} max={70} color="sand" label="Yağ" unit="g" dm={dm} />
-          <MacroRing value={totals.c} max={250} color="coast" label="Karbonhidrat" unit="g" dm={dm} />
+          <MacroRing value={totals.c} max={250} color="accent" label="Karbonhidrat" unit="g" dm={dm} />
         </div>
         {/* Linear summary under rings */}
         <div className={`mt-6 pt-4 border-t flex items-center justify-center gap-6 text-xs ${dm ? 'border-white/[0.06]' : 'border-stone-100'}`}>
           <span className={dm ? 'text-white/30' : 'text-stone-400'}>Hedef: 2200 kcal</span>
-          <span className={`font-medium ${totals.cal > 2200 ? 'text-terracotta' : 'text-sage'}`}>
+          <span className={`font-medium ${totals.cal > 2200 ? 'text-primary' : 'text-secondary'}`}>
             {totals.cal > 2200 ? `+${totals.cal - 2200}` : `${2200 - totals.cal} kalan`}
           </span>
         </div>
@@ -141,7 +141,7 @@ export default function FoodTracker() {
           {quickFoods.map((f, i) => (
             <motion.button key={i} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
               onClick={() => { addFood(f); showToast(`${f.name} eklendi`) }}
-              className={`flex-shrink-0 px-4 py-2.5 rounded-xl text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/[0.08] bg-white/[0.03] text-white/70 hover:bg-white/[0.06]' : 'border-black/[0.04] bg-white text-stone-600 hover:bg-stone-50'}`}>              {f.name} · <span className="text-terracotta">{f.cal}</span>
+              className={`flex-shrink-0 px-4 py-2.5 rounded-xl text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/[0.08] bg-white/[0.03] text-white/70 hover:bg-white/[0.06]' : 'border-black/[0.04] bg-white text-stone-600 hover:bg-stone-50'}`}>              {f.name} · <span className="text-primary">{f.cal}</span>
             </motion.button>
           ))}
         </div>
@@ -172,7 +172,7 @@ export default function FoodTracker() {
                 className={`flex-1 py-3 rounded-xl text-sm font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent' : 'border-stone-200 text-stone-600 bg-transparent'}`}>
                 Galeri
               </motion.button>              <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={() => fileInput.current?.click()}
-                className="flex-1 py-3 rounded-xl text-sm font-medium cursor-pointer bg-terracotta text-white border-none">
+                className="flex-1 py-3 rounded-xl text-sm font-medium cursor-pointer bg-primary text-white border-none">
                 Kamera
               </motion.button>
             </div>
@@ -182,7 +182,7 @@ export default function FoodTracker() {
                 whileTap={{ scale: 0.99 }}
                 onClick={analyzeWithAI}
                 disabled={analyzing}
-                className="w-full mt-3 py-3 rounded-xl text-sm font-medium text-white border-none cursor-pointer bg-gradient-to-r from-terracotta to-amber-500 disabled:opacity-50"
+                className="w-full mt-3 py-3 rounded-xl text-sm font-medium text-white border-none cursor-pointer bg-gradient-to-r from-primary to-amber-500 disabled:opacity-50"
               >
                 {analyzing ? (
                   <span className="flex items-center justify-center gap-2">
@@ -215,12 +215,12 @@ export default function FoodTracker() {
                     <div>
                       <span className="text-sm font-medium">{f.name}</span>
                       <div className={`text-xs mt-0.5 flex gap-2 ${dm ? 'text-white/30' : 'text-stone-400'}`}>
-                        <span className="text-sage">P:{f.p}g</span>
+                        <span className="text-secondary">P:{f.p}g</span>
                         <span className="text-sand">Y:{f.f}g</span>
                         <span>K:{f.c}g</span>
                       </div>
                     </div>
-                    <span className="font-semibold text-sm text-terracotta">{f.cal} kcal</span>
+                    <span className="font-semibold text-sm text-primary">{f.cal} kcal</span>
                   </motion.div>
                 ))}
               </AnimatePresence>
@@ -261,12 +261,12 @@ export default function FoodTracker() {
                       className={`flex justify-between items-center p-3.5 rounded-xl ${dm ? 'hover:bg-white/[0.03]' : 'hover:bg-stone-50'} transition-colors group`}
                     >
                       <div className="flex items-center gap-3">
-                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold ${dm ? 'bg-terracotta/15 text-terracotta' : 'bg-terracotta/10 text-terracotta'}`}>
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold ${dm ? 'bg-primary/15 text-primary' : 'bg-primary/10 text-primary'}`}>
                           {i + 1}                        </div>
                         <div>
                           <span className="text-sm font-medium">{f.name}</span>
                           <div className={`text-xs mt-0.5 flex gap-2 ${dm ? 'text-white/30' : 'text-stone-400'}`}>
-                            <span className="text-sage">P:{f.p}g</span>
+                            <span className="text-secondary">P:{f.p}g</span>
                             <span className="text-sand">Y:{f.f}g</span>
                             <span>K:{f.c}g</span>
                           </div>
@@ -275,7 +275,7 @@ export default function FoodTracker() {
                       <div className="flex items-center gap-3">
                         <span className="font-semibold text-sm">{f.cal} kcal</span>
                         <button onClick={() => removeFood(i)}
-                          className="bg-transparent border-none cursor-pointer text-terracotta/0 group-hover:text-terracotta/60 hover:!text-terracotta text-lg transition-all">×</button>
+                          className="bg-transparent border-none cursor-pointer text-primary/0 group-hover:text-primary/60 hover:!text-primary text-lg transition-all">×</button>
                       </div>
                     </motion.div>
                   ))}
@@ -284,7 +284,7 @@ export default function FoodTracker() {
                 {/* Total bar */}
                 <div className={`mt-3 pt-3 border-t flex items-center justify-between ${dm ? 'border-white/[0.06]' : 'border-stone-100'}`}>
                   <span className={`text-xs font-medium ${dm ? 'text-white/40' : 'text-stone-400'}`}>TOPLAM</span>
-                  <span className="text-sm font-bold text-terracotta">{totals.cal} kcal</span>
+                  <span className="text-sm font-bold text-primary">{totals.cal} kcal</span>
                 </div>
               </div>
             )}
@@ -302,7 +302,7 @@ export default function FoodTracker() {
                   </motion.button>
                   <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
                     onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent(waMsg)}`, '_blank')}
-                    className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-terracotta text-white border-none">
+                    className="px-4 py-2 rounded-full text-xs font-medium cursor-pointer bg-primary text-white border-none">
                     Gönder
                   </motion.button>
                 </div>

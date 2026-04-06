@@ -93,11 +93,11 @@ export default function AdminLayout() {
             </button>
 
             <NavLink to="/" className={`flex items-center gap-3 font-display text-lg font-semibold no-underline tracking-[-0.02em] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-terracotta to-terracotta-dark flex items-center justify-center">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
                 <span className="text-white text-xs font-bold font-body">EE</span>
               </div>
               <span className="hidden sm:inline">Ela Ebeoğlu</span>
-              <span className={`text-[0.65rem] font-body font-semibold uppercase tracking-[0.15em] px-2 py-0.5 rounded-md ${dm ? 'bg-white/[0.06] text-white/40' : 'bg-terracotta/8 text-terracotta/80'}`}>Admin</span>
+              <span className={`text-[0.65rem] font-body font-semibold uppercase tracking-[0.15em] px-2 py-0.5 rounded-md ${dm ? 'bg-white/[0.06] text-white/40' : 'bg-primary/8 text-primary/80'}`}>Admin</span>
             </NavLink>
           </div>
 
@@ -155,7 +155,7 @@ export default function AdminLayout() {
                     className={({ isActive }) =>
                       `relative flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline text-[0.8rem] transition-all duration-300 group/nav ${
                         isActive
-                          ? `font-medium ${dm ? 'bg-terracotta/10 text-terracotta' : 'bg-terracotta/[0.06] text-terracotta'}`
+                          ? `font-medium ${dm ? 'bg-primary/10 text-primary' : 'bg-primary/[0.06] text-primary'}`
                           : `${dm ? 'text-white/35 hover:text-white/60 hover:bg-white/[0.03]' : 'text-[#1C1917]/35 hover:text-[#1C1917]/65 hover:bg-black/[0.02]'}`
                       }`
                     }>
@@ -164,7 +164,7 @@ export default function AdminLayout() {
                         {isActive && (
                           <motion.div
                             layoutId="sidebar-indicator"
-                            className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-full bg-terracotta"
+                            className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-full bg-primary"
                             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
                           />
                         )}
@@ -179,8 +179,8 @@ export default function AdminLayout() {
               {/* Bottom info */}
               <div className={`mt-auto pt-4 border-t ${dm ? 'border-white/[0.04]' : 'border-black/[0.03]'}`}>
                 <div className="px-3 py-2 flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-sage/20 to-sage/5 flex items-center justify-center">
-                    <span className="text-sage text-[0.65rem] font-bold">EE</span>
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-secondary/20 to-secondary/5 flex items-center justify-center">
+                    <span className="text-secondary text-[0.65rem] font-bold">EE</span>
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className={`text-[0.75rem] font-medium truncate ${dm ? 'text-white/60' : 'text-[#1C1917]/60'}`}>Ela Ebeoğlu</p>
@@ -225,8 +225,8 @@ export default function AdminLayout() {
             }`}
           >
             <div className="flex items-center gap-2.5">
-              <div className="w-5 h-5 rounded-full bg-sage/20 flex items-center justify-center">
-                <svg className="w-3 h-3 text-sage" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <div className="w-5 h-5 rounded-full bg-secondary/20 flex items-center justify-center">
+                <svg className="w-3 h-3 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                 </svg>
               </div>

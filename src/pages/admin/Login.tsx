@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
+import { tenantConfig } from '../../config/tenant'
 
 /* ═══════ Floating orb component ═══════ */
 function FloatingOrb({ delay, size, x, y, color, dm }: {
@@ -179,7 +180,7 @@ export default function AdminLogin() {
                 initial={{ scale: 0, rotate: -180 }}
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ type: 'spring', damping: 12, delay: 0.1 }}
-                className="w-20 h-20 mx-auto mb-6 rounded-full bg-sage/15 flex items-center justify-center"
+                className="w-20 h-20 mx-auto mb-6 rounded-full bg-secondary/15 flex items-center justify-center"
               >
                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#7A9E82" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12" />
@@ -214,7 +215,7 @@ export default function AdminLogin() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="h-[1px] bg-gradient-to-r from-transparent via-terracotta/40 to-transparent"
+          className="h-[1px] bg-gradient-to-r from-transparent via-primary/40 to-transparent"
         />
 
         <div className="px-8 md:px-10 pt-10 pb-8">
@@ -250,7 +251,7 @@ export default function AdminLogin() {
                 animate={{ scale: 1, rotate: 0 }}
                 transition={{ delay: 0.4, type: 'spring', damping: 15 }}
                 className={`w-[72px] h-[72px] rounded-[22px] flex items-center justify-center relative ${
-                  dm ? 'bg-gradient-to-br from-terracotta/15 to-terracotta/5' : 'bg-gradient-to-br from-terracotta/10 to-terracotta/[0.02]'
+                  dm ? 'bg-gradient-to-br from-primary/15 to-primary/5' : 'bg-gradient-to-br from-primary/10 to-primary/[0.02]'
                 }`}
               >
                 <div className={`absolute inset-0 rounded-[22px] ${
@@ -272,7 +273,7 @@ export default function AdminLogin() {
               Koç Paneli
             </h1>
             <p className={`text-[0.8rem] tracking-wide ${dm ? 'text-white/30' : 'text-[#1C1917]/30'}`}>
-              Ela Ebeoğlu Performance Coaching
+              {tenantConfig.brand.name}
             </p>
           </motion.div>
 
@@ -300,8 +301,8 @@ export default function AdminLogin() {
                     error
                       ? 'border-red-400/40 bg-red-400/[0.03]'
                       : dm
-                        ? 'bg-white/[0.03] border-white/[0.08] focus:border-terracotta/50 focus:bg-white/[0.05]'
-                        : 'bg-black/[0.02] border-black/[0.06] focus:border-terracotta/40 focus:bg-white/60'
+                        ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 focus:bg-white/[0.05]'
+                        : 'bg-black/[0.02] border-black/[0.06] focus:border-primary/40 focus:bg-white/60'
                   } ${dm ? 'text-white placeholder:text-white/15' : 'text-[#1C1917] placeholder:text-[#1C1917]/20'}`}
                 />
                 {pin && (
@@ -310,14 +311,14 @@ export default function AdminLogin() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="absolute right-4 top-1/2 -translate-y-1/2"
                   >
-                    <div className="w-2 h-2 rounded-full bg-terracotta/60" />
+                    <div className="w-2 h-2 rounded-full bg-primary/60" />
                   </motion.div>
                 )}
               </div>
               <PinDots length={Math.min(pin.length, 8)} max={8} error={error} dm={dm} />
             </motion.div>
 
-            {/* Error message */}
+            {/* Error messecondary */}
             <AnimatePresence>
               {error && (
                 <motion.p
@@ -345,7 +346,7 @@ export default function AdminLogin() {
                   ? dm
                     ? 'bg-white/[0.04] text-white/20 cursor-not-allowed'
                     : 'bg-black/[0.04] text-[#1C1917]/20 cursor-not-allowed'
-                  : 'bg-terracotta text-white hover:shadow-[0_20px_40px_rgba(194,104,74,0.3)]'
+                  : 'bg-primary text-white hover:shadow-[0_20px_40px_rgba(194,104,74,0.3)]'
               }`}
             >
               {/* Button shine effect */}
@@ -402,7 +403,7 @@ export default function AdminLogin() {
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ delay: 0.7, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="h-[1px] bg-gradient-to-r from-transparent via-sage/30 to-transparent"
+          className="h-[1px] bg-gradient-to-r from-transparent via-secondary/30 to-transparent"
         />
       </motion.div>
     </div>

@@ -15,13 +15,13 @@ const dayNames: Record<string, string> = {
 }
 
 const dayColorMap: Record<string, { bg: string; text: string; accent: string }> = {
-  Pzt: { bg: 'bg-terracotta/10', text: 'text-terracotta', accent: 'border-terracotta' },
-  Sal: { bg: 'bg-sage/10', text: 'text-sage', accent: 'border-sage' },
-  Çar: { bg: 'bg-coast/10', text: 'text-coast', accent: 'border-coast' },
+  Pzt: { bg: 'bg-primary/10', text: 'text-primary', accent: 'border-primary' },
+  Sal: { bg: 'bg-secondary/10', text: 'text-secondary', accent: 'border-secondary' },
+  Çar: { bg: 'bg-accent/10', text: 'text-accent', accent: 'border-accent' },
   Per: { bg: 'bg-sand/10', text: 'text-sand', accent: 'border-sand' },
-  Cum: { bg: 'bg-terracotta/10', text: 'text-terracotta', accent: 'border-terracotta' },
-  Cts: { bg: 'bg-sage/10', text: 'text-sage', accent: 'border-sage' },
-  Paz: { bg: 'bg-coast/10', text: 'text-coast', accent: 'border-coast' },
+  Cum: { bg: 'bg-primary/10', text: 'text-primary', accent: 'border-primary' },
+  Cts: { bg: 'bg-secondary/10', text: 'text-secondary', accent: 'border-secondary' },
+  Paz: { bg: 'bg-accent/10', text: 'text-accent', accent: 'border-accent' },
 }
 
 export default function CalendarPage() {
@@ -30,7 +30,7 @@ export default function CalendarPage() {
   const [form, setForm] = useState({ client: '', day: 'Pzt', time: '10:00' })
   const [selectedDay, setSelectedDay] = useState<string | null>(null)
 
-  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-terracotta/50 focus:ring-2 focus:ring-terracotta/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
+  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const card = `p-6 rounded-2xl border ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`
 
   const handleAdd = () => {
@@ -60,9 +60,9 @@ export default function CalendarPage() {
         {/* Quick Stats */}
         <div className="flex gap-3">
           {[
-            { label: 'Randevu', value: totalSessions, color: 'terracotta' },
-            { label: 'Danışan', value: uniqueClients, color: 'sage' },
-            { label: 'Yoğun', value: dayNames[busiestDay] || busiestDay, color: 'coast' },
+            { label: 'Randevu', value: totalSessions, color: 'primary' },
+            { label: 'Danışan', value: uniqueClients, color: 'secondary' },
+            { label: 'Yoğun', value: dayNames[busiestDay] || busiestDay, color: 'accent' },
           ].map((s, i) => (
             <div key={i} className={`px-4 py-2 rounded-full text-xs font-medium flex items-center gap-1.5 ${dm ? `bg-${s.color}/10 text-${s.color}` : `bg-${s.color}/10 text-${s.color}`}`}>
               <span className="font-bold">{s.value}</span> {s.label}
@@ -87,7 +87,7 @@ export default function CalendarPage() {
                 {daysArr.map(d => (
                   <button key={d} onClick={() => setForm({ ...form, day: d })}
                     className={`py-2.5 rounded-lg text-xs font-semibold cursor-pointer transition-all border-none ${form.day === d
-                      ? 'bg-terracotta text-white shadow-sm'
+                      ? 'bg-primary text-white shadow-sm'
                       : (dm ? 'bg-white/[0.06] text-white/50 hover:bg-white/10' : 'bg-stone-100 text-stone-500 hover:bg-stone-200')
                     }`}>
                     {d}
@@ -103,7 +103,7 @@ export default function CalendarPage() {
               whileHover={{ scale: 1.01 }}
               whileTap={{ scale: 0.99 }}
               onClick={handleAdd}
-              className="w-full py-4 rounded-full bg-terracotta text-white font-medium border-none cursor-pointer"
+              className="w-full py-4 rounded-full bg-primary text-white font-medium border-none cursor-pointer"
             >
               Takvime Ekle
             </motion.button>
@@ -166,7 +166,7 @@ export default function CalendarPage() {
                   <div className={`py-3 px-3 text-center font-semibold text-sm flex items-center justify-center gap-2 ${dc.bg} ${dc.text}`}>
                     <span>{day}</span>
                     {daySessions.length > 0 && (
-                      <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-white text-[0.6rem] font-bold bg-terracotta`}>
+                      <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-white text-[0.6rem] font-bold bg-primary`}>
                         {daySessions.length}
                       </span>
                     )}
@@ -187,7 +187,7 @@ export default function CalendarPage() {
                         <div className={`font-bold ${dc.text}`}>{sess.time}</div>
                         <div className="mt-0.5 truncate font-medium">{sess.name}</div>
                         <button onClick={() => deleteCalSession(sess.idx)}
-                          className={`absolute top-1.5 right-1.5 w-5 h-5 rounded-full flex items-center justify-center bg-transparent border-none cursor-pointer text-sm opacity-0 group-hover:opacity-100 transition-all hover:bg-terracotta/10 ${dm ? 'text-white/40 hover:text-terracotta' : 'text-stone-300 hover:text-terracotta'}`}>
+                          className={`absolute top-1.5 right-1.5 w-5 h-5 rounded-full flex items-center justify-center bg-transparent border-none cursor-pointer text-sm opacity-0 group-hover:opacity-100 transition-all hover:bg-primary/10 ${dm ? 'text-white/40 hover:text-primary' : 'text-stone-300 hover:text-primary'}`}>
                           ×
                         </button>
                       </motion.div>
@@ -219,7 +219,7 @@ export default function CalendarPage() {
                       </div>
                       <span className="font-semibold text-sm">{dayNames[day]}</span>
                       {daySessions.length > 0 && (
-                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-terracotta text-white text-[0.6rem] font-bold">
+                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary text-white text-[0.6rem] font-bold">
                           {daySessions.length}
                         </span>
                       )}
@@ -253,7 +253,7 @@ export default function CalendarPage() {
                                 <span className="ml-2 text-sm font-medium">{sess.name}</span>
                               </div>
                               <button onClick={() => deleteCalSession(sess.idx)}
-                                className={`w-7 h-7 rounded-full flex items-center justify-center bg-transparent border-none cursor-pointer text-lg transition-colors ${dm ? 'text-white/20 hover:text-terracotta hover:bg-terracotta/10' : 'text-stone-200 hover:text-terracotta hover:bg-terracotta/5'}`}>
+                                className={`w-7 h-7 rounded-full flex items-center justify-center bg-transparent border-none cursor-pointer text-lg transition-colors ${dm ? 'text-white/20 hover:text-primary hover:bg-primary/10' : 'text-stone-200 hover:text-primary hover:bg-primary/5'}`}>
                                 ×
                               </button>
                             </motion.div>

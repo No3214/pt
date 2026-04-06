@@ -27,63 +27,96 @@ export interface Stat {
   label: string;
 }
 
-export const programs: Program[] = [
-  {
-    name: 'Online Koçluk',
-    price: '2.500',
-    period: '/ay',
-    desc: 'Kişiye özel antrenman programı ve temel beslenme takibi',
-    features: ['Kişiye özel antrenman programı', 'Haftalık program güncelleme', 'WhatsApp destek', 'Form kontrol videoları', 'Temel beslenme rehberi'],
-    color: 'secondary',
-    popular: false,
-  },
-  {
-    name: 'Voleybol Performance',
-    price: '3.000',
-    period: '/ay',
-    desc: 'Sıçrama, atletizm ve sahaya özel performans antrenmanı',
-    features: ['Online Koçluk dahil', 'Sıçrama & patlayıcılık protokolü', 'Pozisyona özel antrenman', 'Video analiz & geri bildirim', 'Sakatlık önleme programı', 'Haftalık 1:1 görüntülü görüşme'],
-    color: 'primary',
-    popular: true,
-    featured: true,
-  },
-  {
-    name: 'Premium Büyüme',
-    price: '5.500',
-    period: '/ay',
-    desc: 'TDEE destekli tam beslenme planı ile bütüncül koçluk',
-    features: ['Voleybol Performance dahil', 'TDEE bazlı beslenme planı', 'Günlük makro takibi', 'Danışan portalı erişimi', 'Supplement rehberliği', '7/24 öncelikli destek', 'Aylık vücut analizi'],
-    color: 'accent',
-    popular: false,
-  },
-];
+export const getLandingData = (lang: 'tr' | 'en') => {
+  const isTr = lang === 'tr';
 
-export const testimonials: Testimonial[] = [
-  { text: 'Sadece antrenman değil, disiplin öğreten bir süreçti. Vücudumdaki değişime inanamıyorum.', name: 'Ayşe K.', role: 'Voleybolcu', metric: '+12kg squat' },
-  { text: 'Ela\'nın programlarıyla 3 ayda dikey sıçramam 8 cm arttı. Gerçekten fark yaratan biri.', name: 'Deniz Y.', role: 'Amatör Voleybolcu', metric: '+8cm sıçrama' },
-  { text: 'Beslenme planım ve antrenmanlarım o kadar uyumluydu ki, ilk kez sürdürülebilir bir değişim yaşadım.', name: 'Selin B.', role: 'Fitness', metric: '-4kg yağ' },
-];
+  const programs: Program[] = [
+    {
+      name: isTr ? 'Online Koçluk' : 'Online Coaching',
+      price: isTr ? '2.500' : '75',
+      period: isTr ? '/ay' : '/mo',
+      desc: isTr ? 'Kişiye özel antrenman programı ve temel beslenme takibi' : 'Personalized workout plan and basic nutrition tracking',
+      features: isTr 
+        ? ['Kişiye özel antrenman programı', 'Haftalık program güncelleme', 'WhatsApp destek', 'Form kontrol videoları', 'Temel beslenme rehberi']
+        : ['Personalized workout plan', 'Weekly plan update', 'WhatsApp support', 'Form check videos', 'Basic nutrition guide'],
+      color: 'secondary',
+      popular: false,
+    },
+    {
+      name: 'Voleybol Performance',
+      price: isTr ? '3.000' : '90',
+      period: isTr ? '/ay' : '/mo',
+      desc: isTr ? 'Sıçrama, atletizm ve sahaya özel performans antrenmanı' : 'Vertical jump, athleticism and court-specific training',
+      features: isTr 
+        ? ['Online Koçluk dahil', 'Sıçrama & patlayıcılık protokolü', 'Pozisyona özel antrenman', 'Video analiz & geri bildirim', 'Sakatlık önleme programı', 'Haftalık 1:1 görüntülü görüşme']
+        : ['Online Coaching included', 'Jump & explosivity protocol', 'Position-specific training', 'Video analysis & feedback', 'Injury prevention program', 'Weekly 1:1 video call'],
+      color: 'primary',
+      popular: true,
+      featured: true,
+    },
+    {
+      name: isTr ? 'Premium Büyüme' : 'Premium Growth',
+      price: isTr ? '5.500' : '150',
+      period: isTr ? '/ay' : '/mo',
+      desc: isTr ? 'TDEE destekli tam beslenme planı ile bütüncül koçluk' : 'Holistic coaching with TDEE-backed full nutrition plan',
+      features: isTr 
+        ? ['Voleybol Performance dahil', 'TDEE bazlı beslenme planı', 'Günlük makro takibi', 'Danışan portalı erişimi', 'Supplement rehberliği', '7/24 öncelikli destek', 'Aylık vücut analizi']
+        : ['Volleyball Performance included', 'TDEE-based nutrition plan', 'Daily macro tracking', 'Client portal access', 'Supplement guidance', '24/7 priority support', 'Monthly body analysis'],
+      color: 'accent',
+      popular: false,
+    },
+  ];
 
-export const faqItems: FAQItem[] = [
-  { q: 'Programa nasıl başlarım?', a: 'Başvuru formunu doldurduktan sonra WhatsApp üzerinden iletişime geçiyorum. Ücretsiz 15 dakikalık tanışma görüşmesinde hedeflerini konuşup, sana uygun programı belirliyoruz.' },
-  { q: 'Online antrenman nasıl işliyor?', a: 'Sana özel hazırladığım program, video açıklamalı egzersizlerle uygulamanda gönderiliyor. Haftalık check-in\'lerle formu kontrol edip, programı gerektiğinde güncelliyorum.' },
-  { q: 'Beslenme planı dahil mi?', a: 'Online Koçluk paketinde temel beslenme takibi var. Premium Büyüme paketinde ise günlük TDEE hesaplı tam beslenme planı, makro takibi ve birebir beslenme danışmanlığı dahil.' },
-  { q: 'Voleybol oynamıyorum, katılabilir miyim?', a: 'Elbette! Voleybol Performance paketi sahaya özel olsa da, Online Koçluk ve Premium Büyüme paketleri her seviye için uygun. Kuvvet, postür ve genel fitness hedeflerine yönelik çalışıyoruz.' },
-  { q: 'Sonuçları ne zaman görürüm?', a: 'Disiplinli takipte ilk 4 haftada gözle görülür değişim başlıyor. 3 aylık süreçte ciddi dönüşümler yaşanıyor. Her danışanın süreci farklı, ama tutarlılık her zaman sonuç verir.' },
-];
+  const testimonials: Testimonial[] = [
+    { 
+      text: isTr ? 'Sadece antrenman değil, disiplin öğreten bir süreçti. Vücudumdaki değişime inanamıyorum.' : 'It was a process that taught discipline, not just training. I cannot believe the change in my body.', 
+      name: 'Ayşe K.', role: isTr ? 'Voleybolcu' : 'Volleyball Player', metric: isTr ? '+12kg squat' : '+12kg squat' 
+    },
+    { 
+      text: isTr ? 'Ela\'nın programlarıyla 3 ayda dikey sıçramam 8 cm arttı. Gerçekten fark yaratan biri.' : "My vertical jump increased by 8cm in 3 months with Ela's programs. A true game changer.", 
+      name: 'Deniz Y.', role: isTr ? 'Amatör Voleybolcu' : 'Amateur Volleyball Player', metric: isTr ? '+8cm sıçrama' : '+8cm jump' 
+    },
+    { 
+      text: isTr ? 'Beslenme planım ve antrenmanlarım o kadar uyumluydu ki, ilk kez sürdürülebilir bir değişim yaşadım.' : 'My nutrition plan and workouts were so in sync that I experienced a sustainable change for the first time.', 
+      name: 'Selin B.', role: 'Fitness', metric: isTr ? '-4kg yağ' : '-4kg fat' 
+    },
+  ];
 
-export const landingStats: Stat[] = [
-  { value: 20, suffix: '+', label: 'Aktif Danışan' },
-  { value: 8, suffix: '+', label: 'Yıl Voleybol' },
-  { value: 96, suffix: '', label: 'Egzersiz Kütüphanesi' },
-  { value: 100, suffix: '%', label: 'Memnuniyet' },
-];
+  const faqItems: FAQItem[] = isTr ? [
+    { q: 'Programa nasıl başlarım?', a: 'Başvuru formunu doldurduktan sonra WhatsApp üzerinden iletişime geçiyorum. Ücretsiz 15 dakikalık tanışma görüşmesinde hedeflerini konuşup, sana uygun programı belirliyoruz.' },
+    { q: 'Online antrenman nasıl işliyor?', a: 'Sana özel hazırladığım program, video açıklamalı egzersizlerle uygulamanda gönderiliyor. Haftalık check-in\'lerle formu kontrol edip, programı gerektiğinde güncelliyorum.' },
+    { q: 'Beslenme planı dahil mi?', a: 'Online Koçluk paketinde temel beslenme takibi var. Premium Büyüme paketinde ise günlük TDEE hesaplı tam beslenme planı, makro takibi ve birebir beslenme danışmanlığı dahil.' },
+    { q: 'Voleybol oynamıyorum, katılabilir miyim?', a: 'Elbette! Voleybol Performance paketi sahaya özel olsa da, Online Koçluk ve Premium Büyüme paketleri her seviye için uygun. Kuvvet, postür ve genel fitness hedeflerine yönelik çalışıyoruz.' },
+    { q: 'Sonuçları ne zaman görürüm?', a: 'Disiplinli takipte ilk 4 haftada gözle görülür değişim başlıyor. 3 aylık süreçte ciddi dönüşümler yaşanıyor. Her danışanın süreci farklı, ama tutarlılık her zaman sonuç verir.' },
+  ] : [
+    { q: 'How do I start the program?', a: 'After you fill out the application form, I contact you via WhatsApp. We discuss your goals in a free 15-minute introductory call and determine the suitable program.' },
+    { q: 'How does online training work?', a: 'Your personalized program is sent via the app with video-explained exercises. I check your form with weekly check-ins and update the program when necessary.' },
+    { q: 'Is a nutrition plan included?', a: 'Basic nutrition tracking is included in Online Coaching. The Premium Growth package includes a full TDEE-calculated nutrition plan, macro tracking, and 1-on-1 nutrition consulting.' },
+    { q: 'I don\'t play volleyball, can I join?', a: 'Of course! Although the Volleyball Performance package is court-specific, Online Coaching and Premium Growth are suitable for all levels. We target strength, posture, and general fitness goals.' },
+    { q: 'When will I see results?', a: 'With disciplined tracking, visible changes start in the first 4 weeks. Serious transformations occur over a 3-month period. Consistency always yields results.' },
+  ];
 
-export const navigationLinks = [
-  { id: 'hakkinda', label: 'Hakkında' },
-  { id: 'galeri', label: 'Galeri' },
-  { id: 'programlar', label: 'Programlar' },
-  { id: 'sonuclar', label: 'Sonuçlar' },
-  { id: 'faq', label: 'SSS' },
-  { id: 'iletisim', label: 'İletişim' },
-];
+  const landingStats: Stat[] = [
+    { value: 20, suffix: '+', label: isTr ? 'Aktif Danışan' : 'Active Clients' },
+    { value: 8, suffix: '+', label: isTr ? 'Yıl Voleybol' : 'Years Volleyball' },
+    { value: 96, suffix: '', label: isTr ? 'Egzersiz Kütüphanesi' : 'Exercise Library' },
+    { value: 100, suffix: '%', label: isTr ? 'Memnuniyet' : 'Satisfaction' },
+  ];
+
+  const navigationLinks = [
+    { id: 'hakkinda', label: isTr ? 'Hakkında' : 'System' },
+    { id: 'galeri', label: isTr ? 'Galeri' : 'Gallery' },
+    { id: 'programlar', label: isTr ? 'Programlar' : 'Programs' },
+    { id: 'sonuclar', label: isTr ? 'Sonuçlar' : 'Results' },
+    { id: 'faq', label: isTr ? 'SSS' : 'FAQ' },
+    { id: 'iletisim', label: isTr ? 'İletişim' : 'Contact' },
+  ];
+
+  return {
+    programs,
+    testimonials,
+    faqItems,
+    landingStats,
+    navigationLinks
+  };
+};
