@@ -114,6 +114,10 @@ export const en = {
     roadmap_title: "Path to Pro",
     roadmap_desc: "Championship Journey",
     roadmap_current: "Your Current League 🔥",
-    id_card_btn: "See My Elite ID Card"
+    id_card_btn: "See My Elite ID Card",
+    achievement_title: "Achievements & Badges",
+    achievement_next: "Next Level",
+    achievement_missing: "Days Remaining",
+    achievement_level_up: "Congratulations! You Leveled Up 🚀"
   }
 };
