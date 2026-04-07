@@ -305,25 +305,87 @@ export const es = {
       roadmap_coach_msg_text: "La disciplina es la clave para la liga de las reinas. Cada entrenamiento que haces hoy te acerca un paso más a la cima."
     },
     admin: {
+      dashboard_title: "Panel de Control",
+      business_summary: "Resumen del Negocio",
       analytics_title: "Analítica de Rendimiento",
-      progress_report_title: "Tarjeta de Progreso",
-      total_measurements: "Total de Mediciones",
-      habit_score: "T. Hábito",
+      progress_report_title: "Reporte de Progreso",
+      total_measurements: "Mediciones Totales",
+      habit_score: "Puntaje de Hábitos",
       data_driven_title: "Rendimiento Basado en Datos",
       data_driven_desc: "Estos gráficos están diseñados para analizar los datos biométricos y la consistencia del atleta. Cada medición nos ayuda a optimizar nuestra estrategia.",
       btn_new_measurement: "Registrar Nueva Medición",
-      chart_weight_trend: "Tendencia de Cambio de Peso",
+      chart_weight_trend: "Tendencia de Peso",
       chart_weight_subtitle: "Análisis Diario de 12 Semanas",
       chart_consistency: "Tarjeta de Disciplina",
-      chart_consistency_subtitle: "Consistencia del Entrenamiento",
+      chart_consistency_subtitle: "Consistencia de Entrenamiento",
       chart_body_comp: "Composición Corporal",
-      chart_body_comp_subtitle: "Puntuación de V-Taper y % de Grasa",
-      chart_target_label: "META",
-      heatmap_consistency_label: "Consistencia de 30 Días",
+      chart_body_comp_subtitle: "Puntaje V-Taper y % de Grasa",
+      chart_target_label: "OBJETIVO",
+      heatmap_consistency_label: "Consistencia últimos 30 días",
       heatmap_days_label: "Días de Entrenamiento",
-      heatmap_quote: "La disciplina es la suma de pequeñas decisiones diarias.",
+      heatmap_quote: "La disciplina es la suma de pequeñas elecciones diarias.",
       empty_client: "Cliente no encontrado.",
-      btn_back: "Volver"
+      btn_back: "Volver",
+      
+      // KPI Cards
+      kpi_active_clients: "Clientes Activos",
+      kpi_total_registrations: "{} Registros Totales",
+      kpi_monthly_revenue: "Ingresos Mensuales",
+      kpi_monthly_recurring: "Recurrente Mensual",
+      kpi_compliance_score: "Puntaje de Cumplimiento",
+      kpi_weekly_average: "Promedio Semanal",
+      kpi_new_applications: "Nueva Solicitud",
+      kpi_total_leads: "{} Leads Totales",
+      
+      // Leads section
+      leads_crm: "CRM · Leads Potenciales",
+      leads_title: "Solicitudes Entrantes",
+      leads_new_badge: "{} Nueva Solicitud",
+      leads_total_badge: "{} Total",
+      leads_empty_title: "No hay solicitudes aún",
+      leads_empty_desc: "Las solicitudes del formulario de contacto aparecerán aquí.",
+      leads_th_name: "Nombre",
+      leads_th_phone: "Teléfono",
+      leads_th_goal: "Objetivo",
+      leads_th_date: "Fecha",
+      leads_th_status: "Estado",
+      leads_th_action: "Acción",
+      leads_status_new: "Nuevo",
+      leads_status_contacted: "Contactado",
+      leads_btn_form: "Enviar Formulario",
+      leads_notes_title: "Notas de Solicitud",
+      leads_goal_volleyball: "Rendimiento Voleibol",
+      leads_goal_fitness: "Fitness / Fuerza General",
+      leads_goal_weight: "Pérdida de Peso / Tonificación",
+      leads_goal_other: "Otro",
+      
+      // Toasts
+      toast_leads_fetch_error: "Error al obtener datos.",
+      toast_leads_update_error: "No se pudo actualizar el estado.",
+      toast_leads_updated: "Estado de comunicación con {} actualizado ✅",
+      toast_leads_form_sent: "¡Enlace del formulario enviado!"
+    },
+    legal: {
+      kvkk_title: "GDPR y Política de Privacidad",
+      terms_title: "Términos de Uso",
+      btn_close: "Entendido, Cerrar",
+      last_update: "Última actualización: 7 de abril de 2026",
+      
+      kvkk_intro: "En {}, damos gran importancia a la seguridad de sus datos personales bajo el Reglamento General de Protección de Datos (GDPR). Esta política explica cómo se recopilan, procesan, almacenan y protegen sus datos.",
+      kvkk_sections: [
+        { title: "1. Responsable del Tratamiento", content: "Como responsable del tratamiento, {}, es responsable de todos los datos personales recopilados a través del sitio web. Contacto: {}" },
+        { title: "2. Datos Personales Recopilados", content: "Nombre, información de contacto, datos de salud y mediciones físicas, registros de entrenamiento y nutrición, fotos de progreso y datos de cookies." },
+        { title: "3. Finalidad del Tratamiento", content: "Creación de programas personalizados, seguimiento de rendimiento, gestión de citas y mejora de la calidad del servicio." },
+        { title: "4. Transferencia de Datos", content: "Sus datos no se comparten con terceros, excepto por obligaciones legales. Se almacenan en servidores seguros." },
+        { title: "5. Derechos", content: "Usted tiene derecho a acceder, rectificar, eliminar o solicitar la destrucción de sus datos personales." }
+      ],
+      terms_intro: "Al usar este sitio web, usted acepta los siguientes términos de uso. Por favor, léalos cuidadosamente.",
+      terms_sections: [
+        { title: "1. Descripción del Servicio", content: "{} ofrece programas de entrenamiento personalizados y consultoría nutricional." },
+        { title: "2. Membresía", content: "La información de la cuenta es personal y no puede compartirse con terceros." },
+        { title: "3. Advertencia de Salud", content: "Los programas no constituyen consejo médico. Consulte a su médico antes de comenzar." },
+        { title: "4. Propiedad Intelectual", content: "Todo el contenido pertenece a {} y está protegido por derechos de autor." }
+      ]
     },
     forms: {
       onboarding: {

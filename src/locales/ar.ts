@@ -305,25 +305,86 @@ export const ar = {
       roadmap_coach_msg_text: "الانضباط هو المفتاح لدوري الملكات. كل تمرين تقومين به اليوم يقربك خطوة من القمة."
     },
     admin: {
+      dashboard_title: "لوحة التحكم",
+      business_summary: "ملخص العمل",
       analytics_title: "تحليلات الأداء",
-      progress_report_title: "بطاقة التقدم",
+      progress_report_title: "تقرير التقدم",
       total_measurements: "إجمالي القياسات",
-      habit_score: "نقاط العادات",
-      data_driven_title: "الأداء القائم على البيانات",
-      data_driven_desc: "تم تصميم هذه الرسوم البيانية لتحليل البيانات البيومترية واتساق الرياضي. كل قياس يساعدنا في تحسين استراتيجيتنا.",
+      habit_score: "تقييم العادات",
+      data_driven_title: "الأداء المبني على البيانات",
+      data_driven_desc: "تم تصميم هذه الرسوم البيانية لتحليل البيانات الحيوية ومدى التزام اللاعب. كل قياس يساعدنا في تحسين استراتيجيتنا.",
       btn_new_measurement: "تسجيل قياس جديد",
-      chart_weight_trend: "اتجاه تغير الوزن",
+      chart_weight_trend: "تطور الوزن",
       chart_weight_subtitle: "تحليل يومي لمدة 12 أسبوعاً",
-      chart_consistency: "بطاقة الانضباط",
-      chart_consistency_subtitle: "اتساق التدريب",
+      chart_consistency: "بطاقة الالتزام",
+      chart_consistency_subtitle: "الالتزام بالتمارين",
       chart_body_comp: "تكوين الجسم",
-      chart_body_comp_subtitle: "درجة V-Taper ونسبة الدهون",
+      chart_body_comp_subtitle: "تقييم الـ V-Taper ونسبة الدهون",
       chart_target_label: "الهدف",
-      heatmap_consistency_label: "الاتساق خلال 30 يوماً",
-      heatmap_days_label: "أيام التدريب",
-      heatmap_quote: "الانضباط هو مجموع الخيارات اليومية الصغيرة.",
-      empty_client: "العميل غير موجود.",
-      btn_back: "رجوع"
+      heatmap_consistency_label: "الالتزام في آخر 30 يوماً",
+      heatmap_days_label: "أيام التمرين",
+      heatmap_quote: "الالتزام هو مجموع الخيارات اليومية الصغيرة.",
+      empty_client: "لم يتم العثور على العميل.",
+      btn_back: "رجوع",
+      
+      // KPI Cards
+      kpi_active_clients: "العملاء النشطون",
+      kpi_total_registrations: "إجمالي {} تسجيلات",
+      kpi_monthly_revenue: "الدخل الشهري",
+      kpi_monthly_recurring: "الدخل الشهري المتكرر",
+      kpi_compliance_score: "تقييم الالتزام",
+      kpi_weekly_average: "المتوسط الأسبوعي",
+      kpi_new_applications: "طلب جديد",
+      kpi_total_leads: "إجمالي {} طلبات",
+      
+      // Leads section
+      leads_crm: "إدارة العلاقات · الطلبات المحتملة",
+      leads_title: "الطلبات الواردة",
+      leads_new_badge: "{} طلب جديد",
+      leads_total_badge: "الإجمالي {}",
+      leads_empty_title: "لا توجد طلبات بعد",
+      leads_empty_desc: "ستظهر الطلبات من نموذج الاتصال هنا.",
+      leads_th_name: "الاسم",
+      leads_th_phone: "الهاتف",
+      leads_th_goal: "الهدف",
+      leads_th_date: "التاريخ",
+      leads_th_status: "الحالة",
+      leads_th_action: "الإجراء",
+      leads_status_new: "جديد",
+      leads_status_contacted: "تم التواصل",
+      leads_btn_form: "إرسال النموذج",
+      leads_notes_title: "ملاحظات الطلب",
+      leads_goal_volleyball: "أداء الكرة الطائرة",
+      leads_goal_fitness: "لياقة بدنية / قوة عامة",
+      leads_goal_weight: "خسارة الوزن / شد الجسم",
+      leads_goal_other: "آخر",
+      
+      // Toasts
+      toast_leads_fetch_error: "فشل الحصول على البيانات.",
+      toast_leads_update_error: "تعذر تحديث الحالة.",
+      toast_leads_updated: "تم تحديث حالة التواصل مع {} ✅",
+      toast_leads_form_sent: "تمت مشاركة رابط النموذج!"
+    },
+    legal: {
+      kvkk_title: "سياسة الخصوصية (GDPR)",
+      terms_title: "شروط الاستخدام",
+      btn_close: "فهمت، إغلاق",
+      last_update: "آخر تحديث: 7 أبريل 2026",
+      
+      kvkk_intro: "في {}، نولي أهمية كبيرة لأمن بياناتك الشخصية بموجب اللائحة العامة لحماية البيانات (GDPR).",
+      kvkk_sections: [
+        { title: "1. مراقب البيانات", content: "بصفتنا مراقب البيانات، {} مسؤولة عن جميع البيانات الشخصية التي يتم جمعها عبر الموقع. للتواصل: {}" },
+        { title: "2. البيانات التي يتم جمعها", content: "الاسم، البريد الإلكتروني، الهاتف، البيانات الصحية، القياسات البدنية، صور التقدم، وملفات تعريف الارتباط." },
+        { title: "3. الغرض", content: "إنشاء برامج مخصصة، ومراقبة الأداء، وإدارة المواعيد." },
+        { title: "4. الحقوق", content: "لديك الحق في الوصول إلى بياناتك الشخصية أو تصحيحها أو طلب مسحها." }
+      ],
+      terms_intro: "باستخدامك لهذا الموقع، فإنك توافق على شروط الاستخدام التالية. يرجى قراءتها بعناية.",
+      terms_sections: [
+        { title: "1. وصف الخدمة", content: "يقدم {} برامج تدريب مخصصة واستشارات غذائية." },
+        { title: "2. العضوية", content: "معلومات الحساب شخصية ولا يجوز مشاركتها مع أطراف ثالثة." },
+        { title: "3. تحذير صحي", content: "البرامج لا تشكل نصيحة طبية. استشر طبيبك قبل البدء." },
+        { title: "4. الملكية الفكرية", content: "جميع المحتويات مملوكة لـ {} ومحمية بموجب حقوق النشر." }
+      ]
     },
     forms: {
       onboarding: {

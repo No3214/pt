@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 import { useMemo } from 'react';
+import { useTranslation } from '../../locales';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -37,6 +38,7 @@ function KPICard({ label, value, sub, color, i, dm }: any) {
 }
 
 export default function KPICards() {
+  const { t, language } = useTranslation();
   const { clients, leads, darkMode: dm } = useStore();
   
   const stats = useMemo(() => {
@@ -47,13 +49,36 @@ export default function KPICards() {
     const compliance = totalMax > 0 ? Math.round((totalScore / totalMax) * 100) : 0;
     const newLeads = leads.filter(l => l.status === 'New').length;
     
+    const currency = language === 'tr' ? '₺' : '$';
+    const localeString = language === 'tr' ? 'tr-TR' : 'en-US';
+
     return [
-      { label: 'Aktif Danışan', value: active, sub: `${clients.length} Toplam Kayıt`, color: 'primary' },
-      { label: 'Aylık Gelir', value: `₺${mrr.toLocaleString('tr-TR')}`, sub: 'Aylık Tekrarlayan', color: 'secondary' },
-      { label: 'Uyum Skoru', value: `%${compliance}`, sub: 'Haftalık Ortalama', color: 'accent' },
-      { label: 'Yeni Başvuru', value: newLeads, sub: `${leads.length} Toplam Lead`, color: 'sand' }
+      { 
+        label: t.admin.kpi_active_clients, 
+        value: active, 
+        sub: t.admin.kpi_total_registrations.replace('{}', clients.length.toString()), 
+        color: 'primary' 
+      },
+      { 
+        label: t.admin.kpi_monthly_revenue, 
+        value: `${currency}${mrr.toLocaleString(localeString)}`, 
+        sub: t.admin.kpi_monthly_recurring, 
+        color: 'secondary' 
+      },
+      { 
+        label: t.admin.kpi_compliance_score, 
+        value: `%${compliance}`, 
+        sub: t.admin.kpi_weekly_average, 
+        color: 'accent' 
+      },
+      { 
+        label: t.admin.kpi_new_applications, 
+        value: newLeads, 
+        sub: t.admin.kpi_total_leads.replace('{}', leads.length.toString()), 
+        color: 'sand' 
+      }
     ];
-  }, [clients, leads]);
+  }, [clients, leads, t, language]);
 
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">

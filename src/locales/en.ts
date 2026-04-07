@@ -305,25 +305,147 @@ export const en = {
       roadmap_coach_msg_text: "Discipline is the key to the road to the Sultans League. Every workout you do today brings you one step closer to the top."
     },
     admin: {
+      dashboard_title: "Admin Panel",
+      business_summary: "Business Summary",
       analytics_title: "Performance Analytics",
-      progress_report_title: "Progress Card",
+      progress_report_title: "Progress Report",
       total_measurements: "Total Measurements",
-      habit_score: "T. Habit",
+      habit_score: "Habit Score",
       data_driven_title: "Data-Driven Performance",
-      data_driven_desc: "These charts are designed to analyze the athlete's bio-metric data and consistency. Every measurement helps us optimize our strategy.",
-      btn_new_measurement: "Record New Measurement",
+      data_driven_desc: "These charts are designed to analyze the biometric data and consistency of the athlete. Each measurement helps us optimize our strategy.",
+      btn_new_measurement: "Log New Measurement",
       chart_weight_trend: "Weight Change Trend",
-      chart_weight_subtitle: "Daily 12-Week Analysis",
+      chart_weight_subtitle: "12-Week Daily Analysis",
       chart_consistency: "Discipline Card",
-      chart_consistency_subtitle: "Workout Consistency",
+      chart_consistency_subtitle: "Training Consistency",
       chart_body_comp: "Body Composition",
-      chart_body_comp_subtitle: "V-Taper Score & Fat Percentage",
+      chart_body_comp_subtitle: "V-Taper Score & Body Fat %",
       chart_target_label: "TARGET",
       heatmap_consistency_label: "Last 30 Days Consistency",
-      heatmap_days_label: "Workout Days",
-      heatmap_quote: "Discipline is the sum of small choices made every day.",
+      heatmap_days_label: "Training Days",
+      heatmap_quote: "Discipline is the sum of small daily choices.",
       empty_client: "Client not found.",
-      btn_back: "Go Back"
+      btn_back: "Go Back",
+      
+      // KPI Cards
+      kpi_active_clients: "Active Client",
+      kpi_total_registrations: "{} Total Registrations",
+      kpi_monthly_revenue: "Monthly Revenue",
+      kpi_monthly_recurring: "Monthly Recurring",
+      kpi_compliance_score: "Compliance Score",
+      kpi_weekly_average: "Weekly Average",
+      kpi_new_applications: "New Application",
+      kpi_total_leads: "{} Total Leads",
+      
+      // Leads section
+      leads_crm: "CRM · Potential Leads",
+      leads_title: "Incoming Applications",
+      leads_new_badge: "{} New Application",
+      leads_total_badge: "{} Total",
+      leads_empty_title: "No applications yet",
+      leads_empty_desc: "Applications from the contact form on the landing page will appear here.",
+      leads_th_name: "Name",
+      leads_th_phone: "Phone",
+      leads_th_goal: "Goal",
+      leads_th_date: "Date",
+      leads_th_status: "Status",
+      leads_th_action: "Action",
+      leads_status_new: "New",
+      leads_status_contacted: "Contacted",
+      leads_btn_form: "Send Form",
+      leads_notes_title: "Application Notes",
+      leads_goal_volleyball: "Volleyball Performance",
+      leads_goal_fitness: "General Fitness / Strength",
+      leads_goal_weight: "Weight Loss / Toning",
+      leads_goal_other: "Other",
+      
+      // Toasts
+      toast_leads_fetch_error: "Failed to fetch data.",
+      toast_leads_update_error: "Status could not be updated.",
+      toast_leads_updated: "Communication status with {} updated ✅",
+      toast_leads_form_sent: "Onboarding form link shared!"
+    },
+    legal: {
+      kvkk_title: "GDPR & Privacy Policy",
+      terms_title: "Terms of Use",
+      btn_close: "I Understand, Close",
+      last_update: "Last update: April 7, 2026",
+      
+      kvkk_intro: "At {}, we attach great importance to the security of your personal data within the scope of the General Data Protection Regulation (GDPR). This policy explains how your personal data is collected, processed, stored, and protected.",
+      kvkk_sections: [
+        {
+          title: "1. Data Controller",
+          content: "As the data controller, {}, is responsible for all personal data collected through the pt.kozbeylikonagi.com.tr website. Contact: {}"
+        },
+        {
+          title: "2. Personal Data Collected",
+          content: "Within the scope of our services, the following personal data may be collected: Name, surname, and contact information (e-mail, telephone); health and physical measurement data (height, weight, body analysis); training and nutrition records; form approval videos and progress photos; cookie data and site usage statistics."
+        },
+        {
+          title: "3. Purpose of Processing Data",
+          content: "Your personal data is processed for the following purposes: Creating personalized training and nutrition programs; performance tracking and progress analysis; appointment and communication management; increasing service quality; fulfilling legal obligations."
+        },
+        {
+          title: "4. Transfer of Data",
+          content: "Your personal data is not shared with third parties except for legal obligations. Data is stored on secure servers within the country."
+        },
+        {
+          title: "5. Data Retention Period",
+          content: "Your personal data is kept as long as the service relationship continues and during the legal retention periods. After the service relationship ends, your data is deleted or anonymized, without prejudice to legal obligations."
+        },
+        {
+          title: "6. Your Rights",
+          content: "You have the following rights: Learning whether your personal data is processed; requesting information if processed; learning the purpose of processing and whether it is used in accordance with its purpose; requesting the correction, deletion, or destruction of data; knowing the third parties to whom the data is transferred; requesting correction if the data is processed incompletely or incorrectly."
+        },
+        {
+          title: "7. Cookie Policy",
+          content: "Our website uses cookies to improve user experience. Mandatory cookies are necessary for the site to function. Analytical cookies collect visit statistics. Marketing cookies provide personalized content presentation. You can change your cookie preferences at any time."
+        },
+        {
+          title: "8. Contact",
+          content: "For your requests within the scope of GDPR, you can reach us by sending an e-mail to {}. Your applications will be answered within 30 days at the latest."
+        }
+      ],
+
+      terms_intro: "By using this website (pt.kozbeylikonagi.com.tr), you are deemed to have accepted the following terms of use. Please read these terms carefully.",
+      terms_sections: [
+        {
+          title: "1. Service Description",
+          content: "{} provides personalized training programs, nutrition consultancy, and performance coaching services. All programs are prepared as a result of individual evaluation and are personalized."
+        },
+        {
+          title: "2. Membership and Account",
+          content: "The account information created for portal access is personal and cannot be shared with third parties. You are responsible for the security of your account. If you notice a suspicious situation, you must immediately notify {}."
+        },
+        {
+          title: "3. Payment Terms",
+          content: "Service fees are collected monthly. After payment is made, service is started for the relevant period. The refund policy is subject to the conditions specified in the service contract."
+        },
+        {
+          title: "4. Health Warning",
+          content: "The training and nutrition programs provided do not constitute medical advice. If you have any health problems, it is recommended to consult your doctor before starting the program. {} cannot be held responsible for situations arising from health problems."
+        },
+        {
+          title: "5. Intellectual Property",
+          content: "All content on this website (text, visual, design, logo, software) belongs to {} and is protected by copyright. Unauthorized copying, distribution, or commercial use of the contents is prohibited."
+        },
+        {
+          title: "6. Limitation of Liability",
+          content: "{} does not guarantee that the website will operate uninterrupted and error-free. No responsibility is accepted for data loss or access problems caused by technical glitches. Physical injuries arising from the implementation of training programs are the user's own responsibility."
+        },
+        {
+          title: "7. Right to Change",
+          content: "{} reserves the right to change these terms of use without prior notice. Current terms are always published on this page."
+        },
+        {
+          title: "8. Governing Law",
+          content: "These terms are subject to the laws of the Republic of Turkey. Istanbul courts and enforcement offices are authorized for disputes."
+        },
+        {
+          title: "9. Contact",
+          content: "For your questions, you can reach us at {}."
+        }
+      ]
     },
     forms: {
       onboarding: {

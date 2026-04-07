@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useStore, type Lead } from '../../stores/useStore';
 import { supabase } from '../../lib/supabase';
+import { useTranslation } from '../../locales';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -12,22 +13,23 @@ const stagger = {
   visible: { transition: { staggerChildren: 0.08 } }
 };
 
-const goalLabels: Record<string, string> = {
-  voleybol: 'Voleybol Performans',
-  fitness: 'Genel Fitness / Güç',
-  'kilo-kaybi': 'Kilo Kaybı / Sıkılaşma',
-  diger: 'Diğer',
-};
-
 const statusColors: Record<string, string> = {
   New: 'bg-blue-500/15 text-blue-400 border-blue-500/20',
   Contacted: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/20',
 };
 
 export default function Leads() {
+  const { t, language } = useTranslation();
   const { darkMode: dm, updateLeadStatus, showToast, whatsappTemplates } = useStore();
   const [dbLeads, setDbLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const goalLabels: Record<string, string> = {
+    voleybol: t.admin.leads_goal_volleyball,
+    fitness: t.admin.leads_goal_fitness,
+    'kilo-kaybi': t.admin.leads_goal_weight,
+    diger: t.admin.leads_goal_other,
+  };
 
   const fetchLeads = useCallback(async () => {
     setLoading(true);
@@ -37,7 +39,7 @@ export default function Leads() {
       .order('created_at', { ascending: false });
 
     if (error) {
-      showToast('Veriler çekilemedi.');
+      showToast(t.admin.toast_leads_fetch_error);
     } else {
       const mapped: Lead[] = (data || []).map(l => ({
         id: l.id,
@@ -51,7 +53,7 @@ export default function Leads() {
       setDbLeads(mapped);
     }
     setLoading(false);
-  }, [showToast]);
+  }, [showToast, t]);
 
   useEffect(() => {
     fetchLeads();
@@ -64,11 +66,11 @@ export default function Leads() {
       .eq('id', id);
 
     if (error) {
-      showToast('Durum güncellenemedi.');
+      showToast(t.admin.toast_leads_update_error);
     } else {
       updateLeadStatus(id, 'Contacted');
       setDbLeads(prev => prev.map(l => l.id === id ? { ...l, status: 'Contacted' } : l));
-      showToast(`${name} ile iletişim durumu güncellendi ✅`);
+      showToast((t.admin.toast_leads_updated || "{} ile iletişim durumu güncellendi ✅").replace('{}', name));
     }
   };
 
@@ -78,7 +80,7 @@ export default function Leads() {
     
     const url = `https://wa.me/${lead.phone.replace(/\D/g, '')}?text=${encodeURIComponent(text)}`
     window.open(url, '_blank')
-    showToast('Ön kayıt formu linki paylaşıldı!')
+    showToast(t.admin.toast_leads_form_sent)
   };
 
   const newCount = dbLeads.filter(l => l.status === 'New').length;
@@ -89,22 +91,22 @@ export default function Leads() {
       <motion.section variants={fadeUp} className="flex flex-col md:flex-row items-end justify-between gap-6">
         <div>
           <p className="text-[0.75rem] font-bold text-primary uppercase tracking-[0.3em] mb-3">
-            CRM · Potansiyel Müşteriler
+            {t.admin.leads_crm}
           </p>
           <h1 className="font-display text-[clamp(2rem,4vw,3rem)] font-bold tracking-tighter leading-none text-text-main">
-            Gelen Başvurular.
+            {t.admin.leads_title}.
           </h1>
         </div>
         <div className="flex gap-3 items-center">
           {newCount > 0 && (
             <span className="px-4 py-2 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[0.8rem] font-bold">
-              {newCount} Yeni Başvuru
+              {t.admin.leads_new_badge.replace('{}', newCount.toString())}
             </span>
           )}
           <div className={`px-5 py-2.5 rounded-2xl border text-[0.8rem] font-bold uppercase tracking-widest ${
             dm ? 'bg-white/5 border-white/10 text-white/40' : 'bg-white border-black/5 text-text-main/40 shadow-sm'
           }`}>
-            {dbLeads.length} Toplam
+            {t.admin.leads_total_badge.replace('{}', dbLeads.length.toString())}
           </div>
         </div>
       </motion.section>
@@ -121,9 +123,9 @@ export default function Leads() {
           }`}
         >
           <div className="text-6xl mb-6">📭</div>
-          <h3 className="font-display text-2xl font-bold text-text-main mb-3">Henüz başvuru yok</h3>
+          <h3 className="font-display text-2xl font-bold text-text-main mb-3">{t.admin.leads_empty_title}</h3>
           <p className="text-text-main/40 text-[0.95rem] max-w-md mx-auto">
-            Landing sayfasındaki iletişim formundan gelen başvurular burada görünecek.
+            {t.admin.leads_empty_desc}
           </p>
         </motion.div>
       ) : (
@@ -138,12 +140,12 @@ export default function Leads() {
                 <tr className={`text-[0.7rem] font-bold uppercase tracking-[0.2em] ${
                   dm ? 'text-white/20 border-b border-white/5' : 'text-text-main/20 border-b border-black/5'
                 }`}>
-                  <th className="px-8 py-5">İsim</th>
-                  <th className="px-8 py-5">Telefon</th>
-                  <th className="px-8 py-5">Hedef</th>
-                  <th className="px-8 py-5">Tarih</th>
-                  <th className="px-8 py-5">Durum</th>
-                  <th className="px-8 py-5">İşlem</th>
+                  <th className="px-8 py-5">{t.admin.leads_th_name}</th>
+                  <th className="px-8 py-5">{t.admin.leads_th_phone}</th>
+                  <th className="px-8 py-5">{t.admin.leads_th_goal}</th>
+                  <th className="px-8 py-5">{t.admin.leads_th_date}</th>
+                  <th className="px-8 py-5">{t.admin.leads_th_status}</th>
+                  <th className="px-8 py-5">{t.admin.leads_th_action}</th>
                 </tr>
               </thead>
               <tbody>
@@ -173,11 +175,11 @@ export default function Leads() {
                       </span>
                     </td>
                     <td className="px-8 py-5 text-[0.8rem] text-text-main/30 tabular-nums">
-                      {new Date(lead.date).toLocaleDateString('tr-TR', { day: 'numeric', month: 'short' })}
+                      {new Date(lead.date).toLocaleDateString(language === 'tr' ? 'tr-TR' : 'en-US', { day: 'numeric', month: 'short' })}
                     </td>
                     <td className="px-8 py-5">
                       <span className={`px-3 py-1.5 rounded-lg border text-[0.7rem] font-bold uppercase tracking-wider ${statusColors[lead.status]}`}>
-                        {lead.status === 'New' ? 'Yeni' : 'İletişim Kuruldu'}
+                        {lead.status === 'New' ? t.admin.leads_status_new : t.admin.leads_status_contacted}
                       </span>
                     </td>
                     <td className="px-8 py-5">
@@ -187,13 +189,13 @@ export default function Leads() {
                             onClick={() => handleUpdateStatus(lead.id, lead.name)}
                             className="px-4 py-2 rounded-xl bg-emerald-500/10 text-emerald-400 text-[0.75rem] font-bold border-none cursor-pointer hover:bg-emerald-500/20 transition-all"
                           >
-                            İletişim Kuruldu
+                            {t.admin.leads_status_contacted}
                           </button>
                           <button
                             onClick={() => handleShareOnboarding(lead)}
                             className="px-4 py-2 rounded-xl bg-primary/10 text-primary text-[0.75rem] font-bold border-none cursor-pointer hover:bg-primary/20 transition-all"
                           >
-                            📝 Form Gönder
+                            📝 {t.admin.leads_btn_form}
                           </button>
                         </div>
                       )}
@@ -211,7 +213,7 @@ export default function Leads() {
         <motion.div variants={fadeUp}>
           <h3 className={`text-[0.75rem] font-bold uppercase tracking-[0.2em] mb-4 ${
             dm ? 'text-white/20' : 'text-text-main/20'
-          }`}>Başvuru Notları</h3>
+          }`}>{t.admin.leads_notes_title}</h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {dbLeads.filter(l => l.notes).map(lead => (
               <div key={lead.id} className={`p-5 rounded-2xl border ${

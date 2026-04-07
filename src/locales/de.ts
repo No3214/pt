@@ -305,25 +305,86 @@ export const de = {
       roadmap_coach_msg_text: "Disziplin ist der Schlüssel zur Liga der Königinnen. Jedes Training, das du heute absolvierst, bringt dich dem Gipfel einen Schritt näher."
     },
     admin: {
-      analytics_title: "Leistungsanalyse",
-      progress_report_title: "Fortschrittskarte",
-      total_measurements: "Gesamtmessungen",
-      habit_score: "T. Gewohnheit",
+      dashboard_title: "Admin-Bereich",
+      business_summary: "Geschäftszusammenfassung",
+      analytics_title: "Performance-Analyse",
+      progress_report_title: "Fortschrittsbericht",
+      total_measurements: "Gesamt-Messungen",
+      habit_score: "Gewohnheits-Score",
       data_driven_title: "Datengetriebene Leistung",
-      data_driven_desc: "Diese Diagramme dienen zur Analyse der biometrischen Daten und der Beständigkeit des Athleten. Jede Messung hilft uns, unsere Strategie zu optimieren.",
-      btn_new_measurement: "Neue Messung aufzeichnen",
-      chart_weight_trend: "Gewichtsverlauf",
+      data_driven_desc: "Diese Diagramme dienen der Analyse der biometrischen Daten und der Konstanz des Athleten. Jede Messung hilft uns, die Strategie zu optimieren.",
+      btn_new_measurement: "Neue Messung loggen",
+      chart_weight_trend: "Gewichtstrend",
       chart_weight_subtitle: "Tägliche 12-Wochen-Analyse",
-      chart_consistency: "Disziplinkarte",
-      chart_consistency_subtitle: "Trainingsbeständigkeit",
+      chart_consistency: "Disziplin-Karte",
+      chart_consistency_subtitle: "Trainingskonstanz",
       chart_body_comp: "Körperzusammensetzung",
-      chart_body_comp_subtitle: "V-Taper Score & Fettanteil",
+      chart_body_comp_subtitle: "V-Taper Score & Körperfett %",
       chart_target_label: "ZIEL",
-      heatmap_consistency_label: "30-Tage-Beständigkeit",
+      heatmap_consistency_label: "Konstanz letzte 30 Tage",
       heatmap_days_label: "Trainingstage",
       heatmap_quote: "Disziplin ist die Summe kleiner täglicher Entscheidungen.",
-      empty_client: "Kunde nicht gefunden.",
-      btn_back: "Zurück"
+      empty_client: "Klient nicht gefunden.",
+      btn_back: "Zurück",
+      
+      // KPI Cards
+      kpi_active_clients: "Aktive Klienten",
+      kpi_total_registrations: "{} Registrierungen gesamt",
+      kpi_monthly_revenue: "Monatlicher Umsatz",
+      kpi_monthly_recurring: "Monatlich wiederkehrend",
+      kpi_compliance_score: "Compliance-Score",
+      kpi_weekly_average: "Wöchentlicher Durchschnitt",
+      kpi_new_applications: "Neue Bewerbung",
+      kpi_total_leads: "{} Leads gesamt",
+      
+      // Leads section
+      leads_crm: "CRM · Potenzielle Leads",
+      leads_title: "Eingehende Bewerbungen",
+      leads_new_badge: "{} Neue Bewerbung",
+      leads_total_badge: "{} Gesamt",
+      leads_empty_title: "Noch keine Bewerbungen",
+      leads_empty_desc: "Bewerbungen über das Kontaktformular erscheinen hier.",
+      leads_th_name: "Name",
+      leads_th_phone: "Telefon",
+      leads_th_goal: "Ziel",
+      leads_th_date: "Datum",
+      leads_th_status: "Status",
+      leads_th_action: "Aktion",
+      leads_status_new: "Neu",
+      leads_status_contacted: "Kontaktiert",
+      leads_btn_form: "Formular senden",
+      leads_notes_title: "Bewerbungsnotizen",
+      leads_goal_volleyball: "Volleyball-Leistung",
+      leads_goal_fitness: "Fitness / Kraft allgemein",
+      leads_goal_weight: "Gewichtsverlust / Definition",
+      leads_goal_other: "Sonstiges",
+      
+      // Toasts
+      toast_leads_fetch_error: "Daten konnten nicht geladen werden.",
+      toast_leads_update_error: "Status konnte nicht aktualisiert werden.",
+      toast_leads_updated: "Kommunikationsstatus mit {} aktualisiert ✅",
+      toast_leads_form_sent: "Onboarding-Link geteilt!"
+    },
+    legal: {
+      kvkk_title: "DSGVO & Datenschutz",
+      terms_title: "Nutzungsbedingungen",
+      btn_close: "Verstanden, Schließen",
+      last_update: "Letztes Update: 7. April 2026",
+      
+      kvkk_intro: "Bei {} legen wir großen Wert auf den Schutz Ihrer persönlichen Daten im Rahmen der Datenschutz-Grundverordnung (DSGVO).",
+      kvkk_sections: [
+        { title: "1. Verantwortlicher", content: "Als Verantwortlicher ist {}, für alle über die Website erhobenen Daten verantwortlich. Kontakt: {}" },
+        { title: "2. Erhobene Daten", content: "Name, E-Mail, Telefon, Gesundheitsdaten, Messwerte, Fortschrittsfotos und Cookies." },
+        { title: "3. Zweck", content: "Erstellung individueller Pläne, Leistungsanalyse und Terminmanagement." },
+        { title: "4. Rechte", content: "Sie haben das Recht auf Auskunft, Berichtigung oder Löschung Ihrer Daten." }
+      ],
+      terms_intro: "Durch die Nutzung dieser Website akzeptieren Sie die folgenden Nutzungsbedingungen. Bitte lesen Sie diese sorgfältig durch.",
+      terms_sections: [
+        { title: "1. Beschreibung des Dienstes", content: "{} bietet personalisiertes Training und Ernährungsberatung." },
+        { title: "2. Mitgliedschaft", content: "Kontoinformationen sind persönlich und dürfen nicht geteilt werden." },
+        { title: "3. Gesundheit", content: "Programme ersetzen keinen medizinischen Rat. Konsultieren Sie vorab einen Arzt." },
+        { title: "4. Eigentum", content: "Alle Inhalte gehören {} und sind urheberrechtlich geschützt." }
+      ]
     },
     forms: {
       onboarding: {

@@ -305,25 +305,86 @@ export const ja = {
       roadmap_coach_msg_text: "規律は女王たちのリーグへの鍵です。今日行うすべてのトレーニングが、あなたを頂点へと一歩近づけます。"
     },
     admin: {
+      dashboard_title: "ダッシュボード",
+      business_summary: "ビジネス概要",
       analytics_title: "パフォーマンス分析",
-      progress_report_title: "進捗カード",
+      progress_report_title: "進捗レポート",
       total_measurements: "総測定数",
       habit_score: "習慣スコア",
       data_driven_title: "データ駆動型パフォーマンス",
-      data_driven_desc: "これらのチャートは、アスリートの生体データと一貫性を分析するために設計されています。すべての測定が戦略の最適化に役立ちます。",
-      btn_new_measurement: "新しい測定値を記録",
-      chart_weight_trend: "体重変化トレンド",
+      data_driven_desc: "これらのグラフは、アスリートのバイオメトリックデータと安定性を分析するために設計されています。各測定は戦略の最適化に役立ちます。",
+      btn_new_measurement: "新しい測定を記録",
+      chart_weight_trend: "体重トレンド",
       chart_weight_subtitle: "12週間のデイリー分析",
       chart_consistency: "規律カード",
-      chart_consistency_subtitle: "トレーニングの一貫性",
+      chart_consistency_subtitle: "トレーニングの安定性",
       chart_body_comp: "身体組成",
-      chart_body_comp_subtitle: "V-Taperスコア ＆ 体脂肪率",
-      chart_target_label: "ターゲット",
-      heatmap_consistency_label: "30日間の一貫性",
+      chart_body_comp_subtitle: "V-Taperスコア & 体脂肪率",
+      chart_target_label: "目標",
+      heatmap_consistency_label: "過去30日の安定性",
       heatmap_days_label: "トレーニング日数",
       heatmap_quote: "規律とは、毎日の小さな選択の積み重ねです。",
       empty_client: "クライアントが見つかりません。",
-      btn_back: "戻る"
+      btn_back: "戻る",
+      
+      // KPI Cards
+      kpi_active_clients: "アクティブなクライアント",
+      kpi_total_registrations: "合計 {} 件の登録",
+      kpi_monthly_revenue: "月間収益",
+      kpi_monthly_recurring: "月間継続",
+      kpi_compliance_score: "コンプライアンススコア",
+      kpi_weekly_average: "週間平均",
+      kpi_new_applications: "新しい申請",
+      kpi_total_leads: "合計 {} 件の見込み客",
+      
+      // Leads section
+      leads_crm: "CRM · 見込み客",
+      leads_title: "受信した申請",
+      leads_new_badge: "{} 件の新しい申請",
+      leads_total_badge: "合計 {} 件",
+      leads_empty_title: "申請はまだありません",
+      leads_empty_desc: "お問い合わせフォームからの申請がここに表示されます。",
+      leads_th_name: "名前",
+      leads_th_phone: "電話番号",
+      leads_th_goal: "目標",
+      leads_th_date: "日付",
+      leads_th_status: "ステータス",
+      leads_th_action: "アクション",
+      leads_status_new: "新規",
+      leads_status_contacted: "連絡済み",
+      leads_btn_form: "フォームを送信",
+      leads_notes_title: "申請メモ",
+      leads_goal_volleyball: "バレーボールパフォーマンス",
+      leads_goal_fitness: "フィットネス / 筋力全般",
+      leads_goal_weight: "減量 / シェイプアップ",
+      leads_goal_other: "その他",
+      
+      // Toasts
+      toast_leads_fetch_error: "データの取得に失敗しました。",
+      toast_leads_update_error: "ステータスを更新できませんでした。",
+      toast_leads_updated: "{} との連絡ステータスを更新しました ✅",
+      toast_leads_form_sent: "フォームのリンクを共有しました！"
+    },
+    legal: {
+      kvkk_title: "GDPR & プライバシーポリシー",
+      terms_title: "利用規約",
+      btn_close: "了解して閉じる",
+      last_update: "最終更新：2026年4月7日",
+      
+      kvkk_intro: "{} では、一般データ保護規則（GDPR）に基づき、個人データの安全性を非常に重視しています。",
+      kvkk_sections: [
+        { title: "1. データ管理者", content: "データ管理者として、{} はウェブサイトを通じて収集されるすべての個人データに責任を負います。連絡先：{}" },
+        { title: "2. 収集される数据", content: "名前、メール、電話、健康データ、身体測定値、進捗写真、Cookie。" },
+        { title: "3. 目的", content: "個人メニューの作成、パフォーマンス追跡、予約管理。" },
+        { title: "4. 権利", content: "個人データへのアクセス、訂正、削除を要求する権利があります。" }
+      ],
+      terms_intro: "本ウェブサイトを利用することで、以下の利用規約に同意したものとみなされます。よくお読みください。",
+      terms_sections: [
+        { title: "1. サービス内容", content: "{} はパーソナルトレーニングと栄養アドバイスを提供します。" },
+        { title: "2. メンバーシップ", content: "アカウント情報は個人用であり、第三者と共有することはできません。" },
+        { title: "3. 健康上の注意", content: "プログラムは医療的な助言ではありません。開始前に医師に相談してください。" },
+        { title: "4. 所有権", content: "すべてのコンテンツは {} に帰属し、著作権で保護されています。" }
+      ]
     },
     forms: {
       onboarding: {

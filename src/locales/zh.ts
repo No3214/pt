@@ -305,25 +305,86 @@ export const zh = {
       roadmap_coach_msg_text: "纪律是通往巅峰的钥匙。你今天的每一次训练，都让你离目标更近一步。"
     },
     admin: {
+      dashboard_title: "管理面板",
+      business_summary: "业务摘要",
       analytics_title: "表现分析",
-      progress_report_title: "进步档案",
+      progress_report_title: "进度报告",
       total_measurements: "总测量次数",
-      habit_score: "习惯积分",
+      habit_score: "习惯评分",
       data_driven_title: "数据驱动的表现",
-      data_driven_desc: "这些图表旨在分析运动员的生物数据和一致性。每次测量都有助于我们优化策略。",
-      btn_new_measurement: "记录新测量数据",
-      chart_weight_trend: "体重趋势变化",
-      chart_weight_subtitle: "每日 12 周分析",
-      chart_consistency: "纪律记录",
+      data_driven_desc: "这些图表旨在分析运动员的生物特征数据和一致性。每次测量都有助于我们优化策略。",
+      btn_new_measurement: "记录新测量",
+      chart_weight_trend: "体重趋势",
+      chart_weight_subtitle: "12周每日分析",
+      chart_consistency: "纪律卡",
       chart_consistency_subtitle: "训练一致性",
       chart_body_comp: "身体成分",
-      chart_body_comp_subtitle: "V-Taper 分数与体脂率",
+      chart_body_comp_subtitle: "V-Taper评分与体脂率",
       chart_target_label: "目标",
-      heatmap_consistency_label: "30天坚持度",
+      heatmap_consistency_label: "过去30天的一致性",
       heatmap_days_label: "训练天数",
-      heatmap_quote: "自律是每一个微小日常选择的累加。",
+      heatmap_quote: "纪律是每天微小选择的总和。",
       empty_client: "未找到客户。",
-      btn_back: "返回"
+      btn_back: "返回",
+      
+      // KPI Cards
+      kpi_active_clients: "活跃客户",
+      kpi_total_registrations: "共 {} 个注册",
+      kpi_monthly_revenue: "月收入",
+      kpi_monthly_recurring: "每月经常性",
+      kpi_compliance_score: "合规评分",
+      kpi_weekly_average: "每周平均",
+      kpi_new_applications: "新申请",
+      kpi_total_leads: "共 {} 个潜在客户",
+      
+      // Leads section
+      leads_crm: "CRM · 潜在客户",
+      leads_title: "入站申请",
+      leads_new_badge: "{} 个新申请",
+      leads_total_badge: "共 {} 个",
+      leads_empty_title: "暂无申请",
+      leads_empty_desc: "来自联系表单的申请将显示在这里。",
+      leads_th_name: "姓名",
+      leads_th_phone: "电话",
+      leads_th_goal: "目标",
+      leads_th_date: "日期",
+      leads_th_status: "状态",
+      leads_th_action: "操作",
+      leads_status_new: "新",
+      leads_status_contacted: "已联系",
+      leads_btn_form: "发送表单",
+      leads_notes_title: "申请说明",
+      leads_goal_volleyball: "排球表现",
+      leads_goal_fitness: "健身 / 全身力量",
+      leads_goal_weight: "减重 / 塑形",
+      leads_goal_other: "其他",
+      
+      // Toasts
+      toast_leads_fetch_error: "获取数据失败。",
+      toast_leads_update_error: "无法更新状态。",
+      toast_leads_updated: "与 {} 的沟通状态已更新 ✅",
+      toast_leads_form_sent: "表单链接已分享！"
+    },
+    legal: {
+      kvkk_title: "GDPR 与隐私政策",
+      terms_title: "使用条款",
+      btn_close: "已了解，关闭",
+      last_update: "最后更新：2026年4月7日",
+      
+      kvkk_intro: "在 {}，我们非常重视依据《通用数据保护条例》（GDPR）保护您的个人数据。本政策说明了我们如何收集、处理和保护您的数据。",
+      kvkk_sections: [
+        { title: "1. 数据控制者", content: "作为数据控制者，{} 负责通过网站收集的所有个人数据。联系方式：{}" },
+        { title: "2. 收集的数据", content: "姓名、电子邮件、电话、健康数据、身体测量数据、进度照片和 Cookie。" },
+        { title: "3. 目的", content: "创建个性化计划、绩效监控和预约管理。" },
+        { title: "4. 权利", content: "您有权访问、更正或请求删除您的个人数据。" }
+      ],
+      terms_intro: "使用本网站即表示您接受以下使用条款。请仔细阅读。",
+      terms_sections: [
+        { title: "1. 服务说明", content: "{} 提供个性化的训练计划和营养咨询。" },
+        { title: "2. 会员资格", content: "账户信息仅供个人使用，不得与他人共享。" },
+        { title: "3. 健康警告", content: "项目不构成医疗建议。开始前请咨询医生。" },
+        { title: "4. 知识产权", content: "所有内容归 {} 所有，受版权保护。" }
+      ]
     },
     forms: {
       onboarding: {

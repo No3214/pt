@@ -305,6 +305,8 @@ export const tr = {
       roadmap_coach_msg_text: "Disiplin, sultanlar ligine giden yolun anahtarıdır. Bugün yaptığın her antrenman seni zirveye bir adım daha yaklaştırıyor."
     },
     admin: {
+      dashboard_title: "Yönetici Paneli",
+      business_summary: "İşletme Özeti",
       analytics_title: "Performans Analitiği",
       progress_report_title: "Gelişim Karnesi",
       total_measurements: "Toplam Ölçüm",
@@ -323,7 +325,127 @@ export const tr = {
       heatmap_days_label: "Antrenman Günü",
       heatmap_quote: "Disiplin, her gün yapılan küçük seçimlerin toplamıdır.",
       empty_client: "Danışan bulunamadı.",
-      btn_back: "Geri Dön"
+      btn_back: "Geri Dön",
+      
+      // KPI Cards
+      kpi_active_clients: "Aktif Danışan",
+      kpi_total_registrations: "{} Toplam Kayıt",
+      kpi_monthly_revenue: "Aylık Gelir",
+      kpi_monthly_recurring: "Aylık Tekrarlayan",
+      kpi_compliance_score: "Uyum Skoru",
+      kpi_weekly_average: "Haftalık Ortalama",
+      kpi_new_applications: "Yeni Başvuru",
+      kpi_total_leads: "{} Toplam Lead",
+      
+      // Leads section
+      leads_crm: "CRM · Potansiyel Müşteriler",
+      leads_title: "Gelen Başvurular",
+      leads_new_badge: "{} Yeni Başvuru",
+      leads_total_badge: "{} Toplam",
+      leads_empty_title: "Henüz başvuru yok",
+      leads_empty_desc: "Landing sayfasındaki iletişim formundan gelen başvurular burada görünecek.",
+      leads_th_name: "İsim",
+      leads_th_phone: "Telefon",
+      leads_th_goal: "Hedef",
+      leads_th_date: "Tarih",
+      leads_th_status: "Durum",
+      leads_th_action: "İşlem",
+      leads_status_new: "Yeni",
+      leads_status_contacted: "İletişim Kuruldu",
+      leads_btn_form: "Form Gönder",
+      leads_notes_title: "Başvuru Notları",
+      leads_goal_volleyball: "Voleybol Performans",
+      leads_goal_fitness: "Genel Fitness / Güç",
+      leads_goal_weight: "Kilo Kaybı / Sıkılaşma",
+      leads_goal_other: "Diğer",
+      
+      // Toasts
+      toast_leads_fetch_error: "Veriler çekilemedi.",
+      toast_leads_update_error: "Durum güncellenemedi.",
+      toast_leads_updated: "{} ile iletişim durumu güncellendi ✅",
+      toast_leads_form_sent: "Ön kayıt formu linki paylaşıldı!"
+    },
+    legal: {
+      kvkk_title: "KVKK & Gizlilik Politikası",
+      terms_title: "Kullanım Koşulları",
+      btn_close: "Anladım, Kapat",
+      last_update: "Son güncelleme: 7 Nisan 2026",
+      
+      kvkk_intro: "{} olarak, 6698 sayılı Kişisel Verilerin Korunması Kanunu (KVKK) kapsamında kişisel verilerinizin güvenliğine büyük önem vermekteyiz. Bu politika, kişisel verilerinizin nasıl toplandığını, işlendiğini, saklandığını ve korunduğunu açıklamaktadır.",
+      kvkk_sections: [
+        {
+          title: "1. Veri Sorumlusu",
+          content: "Veri sorumlusu olarak {}, pt.kozbeylikonagi.com.tr internet sitesi üzerinden toplanan tüm kişisel verilerden sorumludur. İletişim: {}"
+        },
+        {
+          title: "2. Toplanan Kişisel Veriler",
+          content: "Hizmetlerimiz kapsamında aşağıdaki kişisel veriler toplanabilmektedir: Ad, soyad ve iletişim bilgileri (e-posta, telefon); sağlık ve fiziksel ölçüm verileri (boy, kilo, vücut analizi); antrenman ve beslenme kayıtları; form onay videoları ve gelişim fotoğrafları; çerez verileri ve site kullanım istatistikleri."
+        },
+        {
+          title: "3. Verilerin İşlenme Amacı",
+          content: "Kişisel verileriniz şu amaçlarla işlenmektedir: Kişiye özel antrenman ve beslenme programı oluşturulması; performans takibi ve ilerleme analizi; randevu ve iletişim yönetimi; hizmet kalitesinin artırılması; yasal yükümlülüklerin yerine getirilmesi."
+        },
+        {
+          title: "4. Verilerin Aktarılması",
+          content: "Kişisel verileriniz, yasal zorunluluklar dışında üçüncü kişilerle paylaşılmamaktadır. Veriler yurt içindeki güvenli sunucularda saklanmaktadır."
+        },
+        {
+          title: "5. Veri Saklama Süresi",
+          content: "Kişisel verileriniz, hizmet ilişkisi devam ettiği sürece ve yasal saklama süreleri boyunca muhafaza edilir. Hizmet ilişkisi sona erdikten sonra, yasal zorunluluklar saklı kalmak kaydıyla verileriniz silinir veya anonim hale getirilir."
+        },
+        {
+          title: "6. Haklarınız (KVKK Madde 11)",
+          content: "KVKK'nın 11. maddesi uyarınca şu haklara sahipsiniz: Kişisel verilerinizin işlenip işlenmediğini öğrenme; işlenmişse bilgi talep etme; işlenme amacını ve amacına uygun kullanılıp kullanılmadığını öğrenme; verilerin düzeltilmesini, silinmesini veya yok edilmesini isteme; işlenen verilerin aktarıldığı üçüncü kişileri bilme; verilerin eksik veya yanlış işlenmesi halinde düzeltilmesini isteme."
+        },
+        {
+          title: "7. Çerez Politikası",
+          content: "Web sitemiz, kullanıcı deneyimini iyileştirmek amacıyla çerezler kullanmaktadır. Zorunlu çerezler sitenin çalışması için gereklidir. Analitik çerezler ziyaret istatistiklerini toplar. Pazarlama çerezleri kişiselleştirilmiş içerik sunumu sağlar. Çerez tercihlerinizi istediğiniz zaman değiştirebilirsiniz."
+        },
+        {
+          title: "8. İletişim",
+          content: "KVKK kapsamındaki talepleriniz için {} adresine e-posta göndererek bize ulaşabilirsiniz. Başvurularınız en geç 30 gün içinde yanıtlanacaktır."
+        }
+      ],
+
+      terms_intro: "Bu web sitesini (pt.kozbeylikonagi.com.tr) kullanarak aşağıdaki kullanım koşullarını kabul etmiş sayılırsınız. Lütfen bu koşulları dikkatlice okuyunuz.",
+      terms_sections: [
+        {
+          title: "1. Hizmet Tanımı",
+          content: "{}, kişiye özel antrenman programları, beslenme danışmanlığı ve performans koçluğu hizmetleri sunmaktadır. Tüm programlar bireysel değerlendirme sonucu hazırlanır ve kişiye özeldir."
+        },
+        {
+          title: "2. Üyelik ve Hesap",
+          content: "Portal erişimi için oluşturulan hesap bilgileri kişiye özeldir ve üçüncü kişilerle paylaşılamaz. Hesabınızın güvenliğinden siz sorumlusunuz. Şüpheli bir durum fark ettiğinizde derhal {} adresine bildirmeniz gerekmektedir."
+        },
+        {
+          title: "3. Ödeme Koşulları",
+          content: "Hizmet bedelleri aylık olarak tahsil edilir. Ödeme yapıldıktan sonra ilgili dönem için hizmet başlatılır. İade politikası hizmet sözleşmesinde belirtilen koşullara tabidir."
+        },
+        {
+          title: "4. Sağlık Uyarısı",
+          content: "Sunulan antrenman ve beslenme programları, tıbbi tavsiye niteliği taşımamaktadır. Herhangi bir sağlık sorununuz varsa programa başlamadan önce doktorunuza danışmanız önerilir. {}, sağlık sorunlarından kaynaklanan durumlardan sorumlu tutulamaz."
+        },
+        {
+          title: "5. Fikri Mülkiyet",
+          content: "Bu web sitesindeki tüm içerik (metin, görsel, tasarım, logo, yazılım) {}'a aittir ve telif hakkı ile korunmaktadır. İçeriklerin izinsiz kopyalanması, dağıtılması veya ticari amaçla kullanılması yasaktır."
+        },
+        {
+          title: "6. Sorumluluk Sınırı",
+          content: "{}, web sitesinin kesintisiz ve hatasız çalışacağını garanti etmez. Teknik aksaklıklardan kaynaklanan veri kaybı veya erişim sorunları için sorumluluk kabul edilmez. Antrenman programlarının uygulanmasından doğan fiziksel yaralanmalar kullanıcının kendi sorumluluğundadır."
+        },
+        {
+          title: "7. Değişiklik Hakkı",
+          content: "{}, bu kullanım koşullarını önceden bildirimde bulunmaksızın değiştirme hakkını saklı tutar. Güncel koşullar her zaman bu sayfada yayınlanır."
+        },
+        {
+          title: "8. Uygulanacak Hukuk",
+          content: "Bu koşullar Türkiye Cumhuriyeti kanunlarına tabidir. Uyuşmazlıklarda İstanbul mahkemeleri ve icra daireleri yetkilidir."
+        },
+        {
+          title: "9. İletişim",
+          content: "Sorularınız için {} adresinden bize ulaşabilirsiniz."
+        }
+      ]
     },
     forms: {
       onboarding: {

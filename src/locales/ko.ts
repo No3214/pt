@@ -305,25 +305,86 @@ export const ko = {
       roadmap_coach_msg_text: "훈련의 성실함이 술탄 리그로 가는 성공의 열쇠입니다. 당신의 훈련 하나하나가 당신을 정점으로 이끕니다."
     },
     admin: {
-      analytics_title: "퍼포먼스 분석",
-      progress_report_title: "진행 카드",
+      dashboard_title: "관리자 패널",
+      business_summary: "비즈니스 요약",
+      analytics_title: "성과 분석",
+      progress_report_title: "진척 보고서",
       total_measurements: "총 측정 횟수",
       habit_score: "습관 점수",
-      data_driven_title: "데이터 기반 퍼포먼스",
+      data_driven_title: "데이터 기반 성과",
       data_driven_desc: "이 차트들은 선수의 생체 데이터와 일관성을 분석하기 위해 설계되었습니다. 모든 측정값은 우리의 전략을 최적화하는 데 도움이 됩니다.",
       btn_new_measurement: "새 측정 기록",
-      chart_weight_trend: "체중 변화 추세",
-      chart_weight_subtitle: "일일 12주 분석",
+      chart_weight_trend: "체중 추세",
+      chart_weight_subtitle: "12주간의 일일 분석",
       chart_consistency: "규율 카드",
       chart_consistency_subtitle: "훈련 일관성",
-      chart_body_comp: "체성분",
+      chart_body_comp: "신체 구성",
       chart_body_comp_subtitle: "V-Taper 점수 및 체지방률",
       chart_target_label: "목표",
-      heatmap_consistency_label: "지난 30일간 일관성",
+      heatmap_consistency_label: "지난 30일간의 일관성",
       heatmap_days_label: "훈련 일수",
       heatmap_quote: "규율은 매일 이루어지는 작은 선택의 합입니다.",
       empty_client: "클라이언트를 찾을 수 없습니다.",
-      btn_back: "뒤로 가기"
+      btn_back: "뒤로 가기",
+      
+      // KPI Cards
+      kpi_active_clients: "활성 클라이언트",
+      kpi_total_registrations: "총 {}명 등록",
+      kpi_monthly_revenue: "월 매출",
+      kpi_monthly_recurring: "월 정기 매출",
+      kpi_compliance_score: "이행 점수",
+      kpi_weekly_average: "주간 평균",
+      kpi_new_applications: "새 신청",
+      kpi_total_leads: "총 {}명의 잠재 고객",
+      
+      // Leads section
+      leads_crm: "CRM · 잠재 고객",
+      leads_title: "수신된 신청",
+      leads_new_badge: "{}개의 새 신청",
+      leads_total_badge: "총 {}개",
+      leads_empty_title: "아직 신청이 없습니다",
+      leads_empty_desc: "문의 양식을 통한 신청이 여기에 표시됩니다.",
+      leads_th_name: "이름",
+      leads_th_phone: "전화번호",
+      leads_th_goal: "목표",
+      leads_th_date: "날짜",
+      leads_th_status: "상태",
+      leads_th_action: "작업",
+      leads_status_new: "신규",
+      leads_status_contacted: "연락 완료",
+      leads_btn_form: "양식 보내기",
+      leads_notes_title: "신청 메모",
+      leads_goal_volleyball: "배구 성과",
+      leads_goal_fitness: "피트니스 / 일반 근력",
+      leads_goal_weight: "체중 감량 / 셰이핑",
+      leads_goal_other: "기타",
+      
+      // Toasts
+      toast_leads_fetch_error: "데이터를 가져오지 못했습니다.",
+      toast_leads_update_error: "상태를 업데이트할 수 없습니다.",
+      toast_leads_updated: "{}님과의 연락 상태가 업데이트되었습니다 ✅",
+      toast_leads_form_sent: "양식 링크가 공유되었습니다!"
+    },
+    legal: {
+      kvkk_title: "GDPR 및 개인정보 보호정책",
+      terms_title: "이용 약관",
+      btn_close: "확인, 닫기",
+      last_update: "최종 업데이트: 2026년 4월 7일",
+      
+      kvkk_intro: "{}는 일반 데이터 보호 규정(GDPR)에 따라 귀하의 개인 데이터 보안을 매우 중요하게 생각합니다.",
+      kvkk_sections: [
+        { title: "1. 데이터 컨트롤러", content: "데이터 컨트롤러로서 {}는 웹사이트를 통해 수집되는 모든 개인 데이터에 대한 책임을 집니다. 연락처: {}" },
+        { title: "2. 수집 데이터", content: "이름, 이메일, 전화번호, 건강 데이터, 신체 측정치, 진행 사진 및 쿠키." },
+        { title: "3. 목적", content: "개인화된 프로그램 생성, 성과 모니터링 및 예약 관리." },
+        { title: "4. 권리", content: "귀하는 개인 데이터에 접근, 정정 또는 삭제를 요청할 권리가 있습니다." }
+      ],
+      terms_intro: "본 웹사이트를 사용함으로써 귀하는 다음 이용 약관에 동의하게 됩니다. 주의 깊게 읽어주시기 바랍니다.",
+      terms_sections: [
+        { title: "1. 서비스 설명", content: "{}는 개인별 맞춤 훈련 및 영양 컨설팅을 제공합니다." },
+        { title: "2. 멤버십", content: "계정 정보는 개인용이며 제3자와 공유할 수 없습니다." },
+        { title: "3. 건강상의 주의", content: "프로그램은 의학적 조언이 아닙니다. 시작 전 의사와 상담하십시오." },
+        { title: "4. 지적 재산권", content: "모든 콘텐츠는 {}의 소유이며 저작권법의 보호를 받습니다." }
+      ]
     },
     forms: {
       onboarding: {

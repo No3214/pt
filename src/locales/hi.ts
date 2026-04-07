@@ -305,25 +305,86 @@ export const hi = {
     roadmap_coach_msg_text: "सुल्तान लीग के रास्ते की कुंजी अनुशासन है। आज आप जो भी कसरत करते हैं वह आपको शीर्ष के एक कदम और करीब ले जाती है।"
   },
   admin: {
+    dashboard_title: "एडमिन पैनल",
+    business_summary: "व्यवसाय सारांश",
     analytics_title: "प्रदर्शन विश्लेषण",
-    progress_report_title: "प्रगति कार्ड",
+    progress_report_title: "प्रगति रिपोर्ट",
     total_measurements: "कुल माप",
     habit_score: "आदत स्कोर",
     data_driven_title: "डेटा-संचालित प्रदर्शन",
     data_driven_desc: "ये चार्ट एथलीट के बायोमेट्रिक डेटा और निरंतरता का विश्लेषण करने के लिए डिज़ाइन किए गए हैं। प्रत्येक माप हमारी रणनीति को अनुकूलित करने में मदद करता है।",
-    btn_new_measurement: "नया माप लॉग करें",
-    chart_weight_trend: "वजन परिवर्तन रुझान",
-    chart_weight_subtitle: "दैनिक 12 सप्ताह विश्लेषण",
+    btn_new_measurement: "नया माप दर्ज करें",
+    chart_weight_trend: "वजन का रुझान",
+    chart_weight_subtitle: "12 सप्ताह का दैनिक विश्लेषण",
     chart_consistency: "अनुशासन कार्ड",
     chart_consistency_subtitle: "प्रशिक्षण निरंतरता",
-    chart_body_comp: "शारीरिक संरचना",
-    chart_body_comp_subtitle: "V-Taper स्कोर और बॉडी फैट %",
+    chart_body_comp: "शरीर की संरचना",
+    chart_body_comp_subtitle: "V-Taper स्कोर और वसा %",
     chart_target_label: "लक्ष्य",
     heatmap_consistency_label: "पिछले 30 दिनों की निरंतरता",
-    heatmap_days_label: "कसरत के दिन",
-    heatmap_quote: "अनुशासन हर दिन किए गए छोटे चुनावों का योग है।",
+    heatmap_days_label: "प्रशिक्षण के दिन",
+    heatmap_quote: "अनुशासन दैनिक छोटे विकल्पों का योग है।",
     empty_client: "क्लाइंट नहीं मिला।",
-    btn_back: "पीछे"
+    btn_back: "वापस",
+    
+    // KPI Cards
+    kpi_active_clients: "सक्रिय क्लाइंट",
+    kpi_total_registrations: "कुल {} पंजीकरण",
+    kpi_monthly_revenue: "मासिक राजस्व",
+    kpi_monthly_recurring: "मासिक आवर्ती",
+    kpi_compliance_score: "अनुपालन स्कोर",
+    kpi_weekly_average: "साप्ताहिक औसत",
+    kpi_new_applications: "नया आवेदन",
+    kpi_total_leads: "कुल {} लीड्स",
+    
+    // Leads section
+    leads_crm: "CRM · संभावित लीड्स",
+    leads_title: "आने वाले आवेदन",
+    leads_new_badge: "{} नया आवेदन",
+    leads_total_badge: "कुल {}",
+    leads_empty_title: "अभी तक कोई आवेदन नहीं",
+    leads_empty_desc: "संपर्क फ़ॉर्म से आवेदन यहाँ दिखाई देंगे।",
+    leads_th_name: "नाम",
+    leads_th_phone: "फ़ोन",
+    leads_th_goal: "लक्ष्य",
+    leads_th_date: "तारीख",
+    leads_th_status: "स्थिति",
+    leads_th_action: "कार्रवाई",
+    leads_status_new: "नया",
+    leads_status_contacted: "संपर्क किया गया",
+    leads_btn_form: "फ़ॉर्म भेजें",
+    leads_notes_title: "आवेदन नोट्स",
+    leads_goal_volleyball: "वॉलीबॉल प्रदर्शन",
+    leads_goal_fitness: "फिटनेस / सामान्य शक्ति",
+    leads_goal_weight: "वजन घटाना / टोनिंग",
+    leads_goal_other: "अन्य",
+    
+    // Toasts
+    toast_leads_fetch_error: "डेटा प्राप्त करने में विफल।",
+    toast_leads_update_error: "स्थिति अपडेट नहीं हो सकी।",
+    toast_leads_updated: "{} के साथ संचार स्थिति अपडेट की गई ✅",
+    toast_leads_form_sent: "फ़ॉर्म लिंक साझा किया गया!"
+  },
+  legal: {
+    kvkk_title: "GDPR और गोपनीयता नीति",
+    terms_title: "उपयोग की शर्तें",
+    btn_close: "समझ गया, बंद करें",
+    last_update: "अंतिम अपडेट: 7 अप्रैल 2026",
+    
+    kvkk_intro: "{} में, हम सामान्य डेटा संरक्षण विनियमन (GDPR) के तहत आपके व्यक्तिगत डेटा की सुरक्षा को बहुत महत्व देते हैं।",
+    kvkk_sections: [
+      { title: "1. डेटा नियंत्रक", content: "डेटा नियंत्रक के रूप में, {} वेबसाइट के माध्यम से एकत्र किए गए सभी व्यक्तिगत डेटा के लिए ज़िम्मेदार है। संपर्क: {}" },
+      { title: "2. एकत्र किया गया डेटा", content: "नाम, ईमेल, फ़ोन, स्वास्थ्य डेटा, शारीरिक माप, प्रगति की फ़ोटो और कुकीज़।" },
+      { title: "3. उद्देश्य", content: "व्यक्तिगत योजना बनाना, प्रदर्शन की निगरानी और अपॉइंटमेंट प्रबंधन।" },
+      { title: "4. अधिकार", content: "आपको अपने व्यक्तिगत डेटा तक पहुँचने, सुधारने या हटाने का अनुरोध करने का अधिकार है।" }
+    ],
+    terms_intro: "इस वेबसाइट का उपयोग करके, आप निम्नलिखित उपयोग की शर्तों को स्वीकार करते हैं। कृपया उन्हें ध्यान से पढ़ें।",
+    terms_sections: [
+      { title: "1. सेवा का विवरण", content: "{} व्यक्तिगत प्रशिक्षण और पोषण परामर्श प्रदान करता है।" },
+      { title: "2. सदस्यता", content: "खाते की जानकारी व्यक्तिगत है और इसे तीसरे पक्ष के साथ साझा नहीं किया जा सकता।" },
+      { title: "3. स्वास्थ्य चेतावनी", content: "कार्यक्रम चिकित्सा सलाह नहीं देते हैं। शुरू करने से पहले अपने चिकित्सक से परामर्श करें।" },
+      { title: "4. बौद्धिक संपदा", content: "सभी सामग्री {} की है और कॉपीराइट द्वारा संरक्षित है।" }
+    ]
   },
   forms: {
     onboarding: {
