@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 import { tenantConfig } from '../../config/tenant';
 import { getLandingData } from '../../data/landingData';
 import { useTranslation } from '../../locales';
+import LegalModal from '../LegalModals';
 
 export default function Footer() {
   const { darkMode, language } = useStore();
@@ -10,6 +12,8 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   const { navigationLinks } = getLandingData(language);
   const { t } = useTranslation();
+  const isTr = language === 'tr';
+  const [legalModal, setLegalModal] = useState<'kvkk' | 'terms' | null>(null);
 
   const SOCIALS = [
     { name: 'Instagram', url: `https://instagram.com/${tenantConfig.brand.contact.socials.instagram.replace('@', '')}`, icon: '📸' },
@@ -29,13 +33,13 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               {SOCIALS.map(s => (
-                <motion.a 
+                <motion.a
                   key={s.name}
                   whileHover={{ scale: 1.1, y: -4 }}
                   href={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-14 h-14 rounded-2xl flex items-center justify-center text-xl shadow-lg border transition-all duration-500 ${
+                  className={`w-14 h-14 rounded-2xl flex items-center justify-center text-xl shadow-lg border transition-all duration-500 no-underline ${
                     dm ? 'bg-white/5 border-white/10 text-white' : 'bg-black/5 border-black/5 text-text-main'
                   }`}
                 >
@@ -46,7 +50,9 @@ export default function Footer() {
           </div>
 
           <div className="space-y-8">
-            <h4 className="text-[0.75rem] font-bold uppercase tracking-widest text-primary">{language === 'tr' ? 'Navigasyon' : 'Navigation'}</h4>
+            <h4 className="text-[0.75rem] font-bold uppercase tracking-widest text-primary">
+              {isTr ? 'Navigasyon' : 'Navigation'}
+            </h4>
             <nav className="flex flex-col gap-5">
               {navigationLinks.map(l => (
                 <a key={l.id} href={`#${l.id}`} className="no-underline text-[1.05rem] font-bold text-text-main/40 hover:text-primary transition-all duration-300">
@@ -67,7 +73,7 @@ export default function Footer() {
               </span>
               <div className="pt-2">
                 <span className={`inline-flex px-4 py-2 rounded-full text-[0.72rem] font-bold uppercase tracking-tighter ${dm ? 'bg-green-500/10 text-green-500' : 'bg-green-500/10 text-green-700'}`}>
-                  İstanbul / Online
+                  {isTr ? 'İstanbul / Online' : 'Istanbul / Online'}
                 </span>
               </div>
             </div>
@@ -79,11 +85,28 @@ export default function Footer() {
             © {currentYear} {tenantConfig.brand.name}. {t.footer.rights}
           </div>
           <div className="flex gap-10">
-             <a href="#" className="no-underline text-[0.8rem] font-bold uppercase tracking-widest text-text-main/20 hover:text-text-main transition-colors">{t.footer.terms}</a>
-             <a href="#" className="no-underline text-[0.8rem] font-bold uppercase tracking-widest text-text-main/20 hover:text-text-main transition-colors">{t.footer.privacy}</a>
+            <button
+              onClick={() => setLegalModal('terms')}
+              className="bg-transparent border-none cursor-pointer text-[0.8rem] font-bold uppercase tracking-widest text-text-main/20 hover:text-text-main transition-colors p-0"
+            >
+              {t.footer.terms}
+            </button>
+            <button
+              onClick={() => setLegalModal('kvkk')}
+              className="bg-transparent border-none cursor-pointer text-[0.8rem] font-bold uppercase tracking-widest text-text-main/20 hover:text-text-main transition-colors p-0"
+            >
+              {t.footer.privacy}
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Legal Modals */}
+      <LegalModal
+        isOpen={legalModal !== null}
+        onClose={() => setLegalModal(null)}
+        type={legalModal || 'kvkk'}
+      />
     </footer>
   );
 }

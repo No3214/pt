@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import { toPng } from 'html-to-image'
 import { sanitize } from '../../lib/constants'
+import { callGemini } from '../../lib/ai'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
@@ -57,6 +58,8 @@ export default function Nutrition() {
     proteinCal: number; fatCal: number; carbCal: number;
   } | null>(null)
   const [waPreview, setWaPreview] = useState('')
+  const [aiMenu, setAiMenu] = useState('')
+  const [loadingAi, setLoadingAi] = useState(false)
   const resultRef = useRef<HTMLDivElement>(null)
   const resultInView = useInView(resultRef, { once: true })
 
@@ -100,6 +103,23 @@ export default function Nutrition() {
     } catch { showToast('PNG oluşturulamadı') }
     el.style.left = '-9999px'
   }
+
+  const generateAiMenu = async () => {
+    if (!result) return;
+    setLoadingAi(true);
+    try {
+       const prompt = `Benim günlük kalori hedefim ${result.targetCals} kcal. 
+Makrolar: Protein: ${result.proteinG}g, Yağ: ${result.fatG}g, Karb: ${result.carbG}g.
+Alerjenler: ${clientAllergens.length > 0 ? clientAllergens.join(', ') : 'Yok'}.
+Hedef: ${form.goal < 0 ? 'Yağ Yakımı' : form.goal > 0 ? 'Kas Kazanımı' : 'Kilo Koruma'}.
+Lütfen bana profesyonel sporcu prensiplerine uygun, pratik ve lezzetli SADECE 1 GÜNLÜK tam diyet menüsü çıkar. Öğünleri (Kahvaltı, Ara Öğün, Öğle, Akşam) ve yaklaşık gramajları yaz. Ekstra hiçbir şey konuşma, sadece menüyü ver.`;
+       const plan = await callGemini(prompt);
+       if (plan) setAiMenu(plan);
+    } catch(err: any) {
+       showToast('AI Planı oluşturulamadı: ' + err.message);
+    }
+    setLoadingAi(false);
+  };
 
   const macroData = result ? [
     { label: 'Protein', sub: '2.2g/kg', g: result.proteinG, cal: result.proteinCal, pct: Math.round((result.proteinCal / result.targetCals) * 100), color: '#7A9E82', icon: '🥩' },
@@ -336,6 +356,30 @@ export default function Nutrition() {
                     </div>
                   ))}
                 </div>
+              </div>
+
+              {/* AI Meal Generator */}
+              <div className={card}>
+                 <div className="flex justify-between items-center mb-4">
+                  <h4 className="font-display text-base font-medium flex items-center gap-2">
+                    <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm ${dm ? 'bg-primary/10' : 'bg-primary/10'}`}>🤖</span>
+                    AI Örnek Menü Üretici
+                  </h4>
+                  <motion.button 
+                    whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
+                    onClick={generateAiMenu}
+                    disabled={loadingAi}
+                    className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-primary/30 text-primary hover:bg-primary/10' : 'border-primary text-primary hover:bg-primary/5'} ${loadingAi ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                    {loadingAi ? 'Üretiliyor...' : 'Menü Yarat ⚡'}
+                  </motion.button>
+                 </div>
+                 {aiMenu ? (
+                    <div className={`p-4 rounded-xl text-sm font-medium whitespace-pre-wrap ${dm ? 'bg-white/[0.02] text-white/70' : 'bg-stone-50 text-stone-600'}`}>
+                       {aiMenu}
+                    </div>
+                 ) : (
+                    <p className={`text-xs ${dm ? 'text-white/30' : 'text-stone-400'}`}>Hesaplanan makrolara özel 1 günlük örnek menü üretmek için tıklayın.</p>
+                 )}
               </div>
 
               {/* WhatsApp Output */}

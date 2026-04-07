@@ -14,6 +14,7 @@ export interface Testimonial {
   name: string;
   role: string;
   metric: string;
+  image: string;
 }
 
 export interface FAQItem {
@@ -70,15 +71,15 @@ export const getLandingData = (lang: 'tr' | 'en') => {
   const testimonials: Testimonial[] = [
     { 
       text: isTr ? 'Sadece antrenman değil, disiplin öğreten bir süreçti. Vücudumdaki değişime inanamıyorum.' : 'It was a process that taught discipline, not just training. I cannot believe the change in my body.', 
-      name: 'Ayşe K.', role: isTr ? 'Voleybolcu' : 'Volleyball Player', metric: isTr ? '+12kg squat' : '+12kg squat' 
+      name: 'Ayşe K.', role: isTr ? 'Voleybolcu' : 'Volleyball Player', metric: isTr ? '+12kg squat' : '+12kg squat', image: '/images/testimonials/ayse.png'
     },
     { 
       text: isTr ? 'Ela\'nın programlarıyla 3 ayda dikey sıçramam 8 cm arttı. Gerçekten fark yaratan biri.' : "My vertical jump increased by 8cm in 3 months with Ela's programs. A true game changer.", 
-      name: 'Deniz Y.', role: isTr ? 'Amatör Voleybolcu' : 'Amateur Volleyball Player', metric: isTr ? '+8cm sıçrama' : '+8cm jump' 
+      name: 'Deniz Y.', role: isTr ? 'Amatör Voleybolcu' : 'Amateur Volleyball Player', metric: isTr ? '+8cm sıçrama' : '+8cm jump', image: '/images/testimonials/deniz.png'
     },
     { 
       text: isTr ? 'Beslenme planım ve antrenmanlarım o kadar uyumluydu ki, ilk kez sürdürülebilir bir değişim yaşadım.' : 'My nutrition plan and workouts were so in sync that I experienced a sustainable change for the first time.', 
-      name: 'Selin B.', role: 'Fitness', metric: isTr ? '-4kg yağ' : '-4kg fat' 
+      name: 'Selin B.', role: 'Fitness', metric: isTr ? '-4kg yağ' : '-4kg fat', image: '/images/testimonials/selin.png'
     },
   ];
 

@@ -58,7 +58,6 @@ export default function CookieConsent() {
   }
 
   return (
-    <>
     <AnimatePresence>
       {show && (
         <motion.div

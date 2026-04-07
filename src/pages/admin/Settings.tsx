@@ -226,6 +226,24 @@ export default function Settings() {
                     }`}
                   />
                 </div>
+
+                <div>
+                  <label className={`block mb-1.5 text-xs font-semibold uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-500'}`}>
+                    DeepSeek API Key
+                  </label>
+                  <input
+                    type="password"
+                    value={aiConfig.deepseek || ''}
+                    onChange={(e) => setAiConfig({ deepseek: e.target.value })}
+                    placeholder="sk-..."
+                    className={`w-full p-3.5 rounded-xl border outline-none text-sm font-mono tracking-wide transition-all ${
+                      dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-[#1C1917]'
+                    }`}
+                  />
+                  <p className={`text-[0.65rem] mt-2 ${dm ? 'text-white/30' : 'text-stone-400'}`}>
+                    DeepSeek AI modeli için kullanılır. <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">API key al</a>
+                  </p>
+                </div>
               </div>
             </div>
           </motion.div>

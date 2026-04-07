@@ -1,13 +1,16 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 
 export default function ClientAlerts() {
   const { clients, darkMode: dm, showToast } = useStore();
-  
+  const [actionMenu, setActionMenu] = useState<string | null>(null);
+
   const alerts = [
     ...clients.filter(c => c.sessions > 0 && c.sessions <= 2).map(c => ({
       id: c.id,
       name: c.name,
+      phone: c.phone || '',
       type: 'warning',
       msg: 'Seans azalıyor — Paket yenileme hatırlat.',
       val: c.sessions
@@ -15,11 +18,27 @@ export default function ClientAlerts() {
     ...clients.filter(c => c.sessions === 0).map(c => ({
       id: c.id,
       name: c.name,
+      phone: c.phone || '',
       type: 'danger',
       msg: 'Seansı bitti — Yeni paket teklifi gönder.',
       val: 0
     }))
   ];
+
+  const sendWhatsApp = (name: string, phone: string, type: string) => {
+    const message = type === 'danger'
+      ? `Merhaba ${name}! 👋\n\nSenin ile olan çalışmamız çok verimliydi ve gelişimin harika gidiyordu! Yeni bir paket ile kaldığımız yerden devam etmek ister misin?\n\nSana özel bir plan hazırladım. Detayları konuşalım mı? 💪\n\nEla Ebeoğlu`
+      : `Merhaba ${name}! 👋\n\nPaketin bitmek üzere, harika bir ilerleme kaydediyorsun! Momentum'u kaybetmemek için paket yenileme planlarımıza göz atmak ister misin?\n\nSenin için en uygun seçeneği birlikte belirleyelim! 🎯\n\nEla Ebeoğlu`;
+
+    if (phone) {
+      const url = `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+      showToast(`${name} için WhatsApp mesajı hazırlandı ✅`);
+    } else {
+      showToast(`${name} için telefon numarası bulunamadı.`);
+    }
+    setActionMenu(null);
+  };
 
   return (
     <div className={`p-10 rounded-[2.5rem] border transition-all duration-500 h-full ${
@@ -49,30 +68,71 @@ export default function ClientAlerts() {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.1 }}
-              whileHover={{ x: 5 }}
-              onClick={() => showToast(`${a.name} için işlem başlatıldı.`)}
-              className={`flex items-center gap-5 p-5 rounded-2xl border cursor-pointer transition-all duration-300 group ${
+              className={`relative p-5 rounded-2xl border transition-all duration-300 group ${
                 a.type === 'danger'
-                  ? (dm ? 'bg-red-500/10 border-red-500/20 hover:bg-red-500/20' : 'bg-red-50 border-red-100 hover:bg-red-100/50')
-                  : (dm ? 'bg-amber-500/10 border-amber-500/20 hover:bg-amber-500/20' : 'bg-amber-50 border-amber-100 hover:bg-amber-100/50')
+                  ? (dm ? 'bg-red-500/10 border-red-500/20' : 'bg-red-50 border-red-100')
+                  : (dm ? 'bg-amber-500/10 border-amber-500/20' : 'bg-amber-50 border-amber-100')
               }`}
             >
-              <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold shadow-sm ${
-                a.type === 'danger' ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'
-              }`}>
-                {a.val}
+              <div className="flex items-center gap-5">
+                <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold shadow-sm ${
+                  a.type === 'danger' ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'
+                }`}>
+                  {a.val}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[1.1rem] font-bold text-text-main truncate">{a.name}</p>
+                  <p className={`text-[0.75rem] font-medium mt-1 leading-relaxed ${a.type === 'danger' ? 'text-red-500/60' : 'text-amber-500/60'}`}>
+                    {a.msg}
+                  </p>
+                </div>
+                <button
+                  onClick={() => setActionMenu(actionMenu === a.id ? null : a.id)}
+                  className={`px-4 py-2 rounded-xl text-[0.75rem] font-bold border-none cursor-pointer transition-all ${
+                    a.type === 'danger'
+                      ? 'bg-red-500/20 text-red-400 hover:bg-red-500/30'
+                      : 'bg-amber-500/20 text-amber-500 hover:bg-amber-500/30'
+                  }`}
+                >
+                  İşlem
+                </button>
               </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-[1.1rem] font-bold text-text-main truncate group-hover:text-primary transition-colors">{a.name}</p>
-                <p className={`text-[0.75rem] font-medium mt-1 leading-relaxed ${a.type === 'danger' ? 'text-red-500/60' : 'text-amber-500/60'}`}>
-                  {a.msg}
-                </p>
-              </div>
-              <div className="opacity-0 group-hover:opacity-100 transition-opacity">
-                <svg className="w-5 h-5 text-text-main/20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
-              </div>
+
+              {/* Action dropdown */}
+              <AnimatePresence>
+                {actionMenu === a.id && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden"
+                  >
+                    <div className={`mt-4 pt-4 border-t flex flex-wrap gap-2 ${
+                      dm ? 'border-white/[0.06]' : 'border-black/[0.06]'
+                    }`}>
+                      <button
+                        onClick={() => sendWhatsApp(a.name, a.phone, a.type)}
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-green-500/15 text-green-500 text-[0.75rem] font-bold border-none cursor-pointer hover:bg-green-500/25 transition-all"
+                      >
+                        💬 WhatsApp ile Hatırlat
+                      </button>
+                      <button
+                        onClick={() => {
+                          window.location.href = `/admin/clients`;
+                          showToast(`${a.name} detaylarına yönlendiriliyorsunuz...`);
+                          setActionMenu(null);
+                        }}
+                        className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-[0.75rem] font-bold border-none cursor-pointer transition-all ${
+                          dm ? 'bg-white/10 text-white/60 hover:bg-white/15' : 'bg-black/5 text-[#1C1917]/50 hover:bg-black/10'
+                        }`}
+                      >
+                        👤 Profili Görüntüle
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))
         )}

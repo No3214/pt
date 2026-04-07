@@ -1,5 +1,9 @@
 /// <reference types="vite/client" />
 
+declare module 'virtual:pwa-register/react';
+declare module '@vitejs/plugin-react';
+declare module 'react-dom/client';
+
 interface ImportMetaEnv {
   readonly VITE_SUPABASE_URL: string
   readonly VITE_SUPABASE_ANON_KEY: string

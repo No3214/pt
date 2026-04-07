@@ -17,6 +17,7 @@ export default function StudentMeasurementForm() {
   const client = useMemo(() => clients.find(c => c.id === clientId), [clients, clientId]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [step, setStep] = useState(1);
+  const [disclaimerChecked, setDisclaimerChecked] = useState(false);
 
   const [formData, setFormData] = useState({
     weight: '', bodyFat: '',
@@ -92,8 +93,8 @@ export default function StudentMeasurementForm() {
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                <Input label="Kilo (kg)" value={formData.weight} onChange={v => setFormData({...formData, weight: v})} placeholder="75.5" type="number" />
-                <Input label="Yağ Oranı %" value={formData.bodyFat} onChange={v => setFormData({...formData, bodyFat: v})} placeholder="15.2" type="number" />
+                <Input label="Kilo (kg)" value={formData.weight} onChange={(v: any) => setFormData({...formData, weight: v})} placeholder="75.5" type="number" />
+                <Input label="Yağ Oranı %" value={formData.bodyFat} onChange={(v: any) => setFormData({...formData, bodyFat: v})} placeholder="15.2" type="number" />
               </div>
 
               <Button onClick={() => setStep(2)} disabled={!formData.weight}>
@@ -114,12 +115,12 @@ export default function StudentMeasurementForm() {
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <Input label="Omuz" value={formData.shoulder} onChange={v => setFormData({...formData, shoulder: v})} placeholder="120" />
-                <Input label="Göğüs" value={formData.chest} onChange={v => setFormData({...formData, chest: v })} placeholder="105" />
-                <Input label="Bel" value={formData.waist} onChange={v => setFormData({...formData, waist: v})} placeholder="85" />
-                <Input label="Kalça" value={formData.hip} onChange={v => setFormData({...formData, hip: v})} placeholder="100" />
-                <Input label="Bacak" value={formData.leg} onChange={v => setFormData({...formData, leg: v})} placeholder="60" />
-                <Input label="Kol" value={formData.arm} onChange={v => setFormData({...formData, arm: v})} placeholder="35" />
+                <Input label="Omuz" value={formData.shoulder} onChange={(v: any) => setFormData({...formData, shoulder: v})} placeholder="120" />
+                <Input label="Göğüs" value={formData.chest} onChange={(v: any) => setFormData({...formData, chest: v })} placeholder="105" />
+                <Input label="Bel" value={formData.waist} onChange={(v: any) => setFormData({...formData, waist: v})} placeholder="85" />
+                <Input label="Kalça" value={formData.hip} onChange={(v: any) => setFormData({...formData, hip: v})} placeholder="100" />
+                <Input label="Bacak" value={formData.leg} onChange={(v: any) => setFormData({...formData, leg: v})} placeholder="60" />
+                <Input label="Kol" value={formData.arm} onChange={(v: any) => setFormData({...formData, arm: v})} placeholder="35" />
               </div>
 
               <div className="flex gap-4">
@@ -141,7 +142,7 @@ export default function StudentMeasurementForm() {
               </div>
 
               <div className="space-y-4">
-                <Input label="Ölçüm Tarihi" value={formData.date} onChange={v => setFormData({...formData, date: v})} type="date" />
+                <Input label="Ölçüm Tarihi" value={formData.date} onChange={(v: any) => setFormData({...formData, date: v})} type="date" />
                 <textarea 
                   value={formData.notes} 
                   onChange={e => setFormData({...formData, notes: e.target.value})}
@@ -151,9 +152,18 @@ export default function StudentMeasurementForm() {
                 />
               </div>
 
+              <div className="pt-6 border-t border-text-main/10">
+                 <label className="flex items-start gap-3 cursor-pointer group">
+                     <input type="checkbox" checked={disclaimerChecked} onChange={e => setDisclaimerChecked(e.target.checked)} className="mt-1 w-4 h-4 text-primary bg-text-main/5 border-text-main/20 rounded focus:ring-primary focus:ring-2 cursor-pointer" />
+                     <span className={`text-[0.65rem] font-medium leading-relaxed ${dm ? 'text-white/50' : 'text-text-main/50'}`}>
+                       Girdiğim tüm ölçüm verilerinin doğruluğunu taahhüt ederim. Antrenman ve beslenme yönergelerinin tıbbi bir tedavi veya doktor tavsiyesi yerine geçmediğini; fiziksel veya ruhsal bir sağlık sorunum varsa bunu bildirmekle ve gerekiyorsa profesyonel medikal destek almakla yükümlü olduğumu kabul beyan ederim.
+                     </span>
+                 </label>
+              </div>
+
               <div className="flex gap-4">
-                <button onClick={() => setStep(2)} className="px-8 bg-text-main/5 text-text-main/60 p-5 rounded-2xl font-bold hover:bg-text-main/10 transition-all border-none">Geri</button>
-                <Button onClick={handleSubmit}>Ölçümleri Kaydet</Button>
+                <button onClick={() => setStep(2)} className="px-8 bg-text-main/5 text-text-main/60 p-5 rounded-2xl font-bold hover:bg-text-main/10 transition-all border-none cursor-pointer">Geri</button>
+                <Button onClick={handleSubmit} disabled={!disclaimerChecked}>Ölçümleri Kaydet</Button>
               </div>
             </motion.div>
           )}
@@ -163,7 +173,7 @@ export default function StudentMeasurementForm() {
   );
 }
 
-function Input({ label, value, onChange, placeholder, type = 'text' }: any) {
+function Input({ label, value, onChange, placeholder, type = 'text' }: any): any {
   return (
     <div className="space-y-2 text-left">
       <label className="text-[0.65rem] uppercase tracking-widest font-bold opacity-40 ml-1">{label}</label>
@@ -178,7 +188,7 @@ function Input({ label, value, onChange, placeholder, type = 'text' }: any) {
   );
 }
 
-function Button({ children, onClick, disabled }: any) {
+function Button({ children, onClick, disabled }: any): any {
   return (
     <button 
       onClick={onClick}

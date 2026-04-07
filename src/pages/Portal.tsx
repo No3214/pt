@@ -11,6 +11,7 @@ import ProgressGallery from '../components/portal/ProgressGallery';
 import GamifiedExport from '../components/portal/GamifiedExport';
 import { GrainOverlay } from '../components/landing/LandingUI';
 import AchievementTracker from '../components/portal/AchievementTracker';
+import StudentWeightChart from '../components/portal/StudentWeightChart';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -84,11 +85,14 @@ export default function Portal() {
             </motion.div>
 
             {/* Achievement Tracker & Personal Note Section */}
-            <motion.div variants={fadeUp} className="lg:col-span-12 grid md:grid-cols-2 gap-8 mt-12 pt-12 border-t border-text-main/5">
-              <div className="space-y-6">
+            <motion.div variants={fadeUp} className="lg:col-span-12 grid md:grid-cols-3 gap-8 mt-12 pt-12 border-t border-text-main/5">
+              <div className="md:col-span-1 border-r border-text-main/5 pr-8 hidden md:block">
+                 <StudentWeightChart />
+              </div>
+              <div className="space-y-6 md:col-span-1">
                  <AchievementTracker athleteLevel={decryptedData?.client?.athleteLevel || 'Rookie'} />
               </div>
-              <div className={`p-10 rounded-[2.5rem] border flex flex-col justify-center relative overflow-hidden ${
+              <div className={`p-10 rounded-[2.5rem] border flex flex-col justify-center relative overflow-hidden md:col-span-1 ${
                 dm ? 'bg-primary/5 border-primary/20' : 'bg-white border-black/[0.04] shadow-2xl'
               }`}>
                 <div className="absolute top-0 right-0 p-4 opacity-10">
@@ -140,6 +144,13 @@ export default function Portal() {
               "En zor antrenman, ilk adımı atandır. Sen o adımı çoktan attın."
             </p>
           </motion.div>
+          
+          <div className={`mt-8 pt-8 border-t text-center ${dm ? 'border-text-main/10' : 'border-text-main/5'}`}>
+            <p className={`text-[0.65rem] uppercase tracking-widest font-bold opacity-30 ${dm ? 'text-white' : 'text-text-main'} mb-2`}>Yasal & Tıbbi Uyarı</p>
+            <p className={`text-[0.65rem] leading-relaxed max-w-4xl mx-auto ${dm ? 'text-white/40' : 'text-text-main/40'}`}>
+              Bu portalda sunulan beslenme makroları, antrenman programları ve asistan tavsiyeleri tamamen sportif performansı artırma amaçlıdır ve hiçbir koşulda tıbbi bir teşhis, tedavi veya reçete niteliği taşımaz. Mevcut bir sağlık probleminiz, kronik hastalığınız, devam eden fizik tedaviniz veya alerjik reaksiyonlarınız varsa programı uygulamadan önce mutlaka uzman bir hekime danışınız. Yaşanabilecek medikal/fiziksel komplikasyonlardan danışanın kendisi sorumludur.
+            </p>
+          </div>
         </motion.div>
       </main>
     </div>

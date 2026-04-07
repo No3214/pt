@@ -45,7 +45,7 @@ export default function Assessment() {
 
   const saveMeasurements = () => {
     if (!selectedClientId) { showToast('Lütfen önce bir danışan seçin.'); return }
-    addMeasurement(selectedClientId, { ...meas, date: new Date().toLocaleDateString('tr-TR') })
+    addMeasurement(selectedClientId, { ...meas, weight: '', bodyFat: '', date: new Date().toLocaleDateString('tr-TR') })
     showToast('Ölçümler kaydedildi!')
   }
 

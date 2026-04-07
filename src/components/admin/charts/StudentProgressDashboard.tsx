@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default function StudentProgressDashboard({ data, dm }: Props) {
-  const { client, measurements, workoutLogs, targetWeight } = data;
+  const { client: _client, measurements, workoutLogs, targetWeight } = data;
 
   const card = `p-8 rounded-[2.5rem] border transition-all duration-700 overflow-hidden relative ${
     dm ? 'bg-bg-alt/40 border-white/5 shadow-2xl' : 'bg-white border-black/[0.04] shadow-2xl shadow-black/[0.03]'

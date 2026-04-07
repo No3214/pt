@@ -29,7 +29,7 @@ export default function ProgressGallery() {
     reader.onload = (ev) => {
       if (ev.target?.result && typeof ev.target.result === 'string') {
         const payload = { src: ev.target.result, date: new Date().toLocaleDateString('tr-TR') };
-        addProgressPhoto(payload);
+        addProgressPhoto('', payload);
         showToast('Fotoğraf başarıyla Kasaya yüklendi! 📸');
       }
     };

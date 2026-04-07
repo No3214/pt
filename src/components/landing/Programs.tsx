@@ -112,7 +112,7 @@ export default function Programs() {
               <table className="w-full min-w-[600px] text-left text-[0.95rem]">
                 <thead>
                   <tr className="border-b border-text-main/5">
-                    <th className="p-6 font-bold text-text-main/30 uppercase tracking-[0.2em] text-[0.7rem]">Özellikler</th>
+                    <th className="p-6 font-bold text-text-main/30 uppercase tracking-[0.2em] text-[0.7rem]">{language === 'tr' ? 'Özellikler' : 'Features'}</th>
                     {programs.map(p => (
                       <th key={p.name} className={`p-6 font-bold text-[1.2rem] ${p.popular ? 'text-primary' : 'text-text-main'}`}>
                         {p.name}
@@ -121,7 +121,7 @@ export default function Programs() {
                   </tr>
                 </thead>
                 <tbody className="text-text-main/60">
-                  {[
+                  {(language === 'tr' ? [
                     { feature: 'Kişiye Özel Antrenman', v: ['check', 'check', 'check'] },
                     { feature: 'Haftalık Check-in', v: ['check', 'check', 'check'] },
                     { feature: 'WhatsApp Destek', v: ['check', 'check', 'check'] },
@@ -129,7 +129,15 @@ export default function Programs() {
                     { feature: 'Video Analiz', v: ['no', 'check', 'check'] },
                     { feature: 'Beslenme Takibi', v: ['no', 'no', 'check'] },
                     { feature: '7/24 VIP Erişim', v: ['no', 'no', 'check'] },
-                  ].map((row, i) => (
+                  ] : [
+                    { feature: 'Custom Training', v: ['check', 'check', 'check'] },
+                    { feature: 'Weekly Check-in', v: ['check', 'check', 'check'] },
+                    { feature: 'WhatsApp Support', v: ['check', 'check', 'check'] },
+                    { feature: 'Jump & Athleticism', v: ['no', 'check', 'check'] },
+                    { feature: 'Video Analysis', v: ['no', 'check', 'check'] },
+                    { feature: 'Nutrition Tracking', v: ['no', 'no', 'check'] },
+                    { feature: '24/7 VIP Access', v: ['no', 'no', 'check'] },
+                  ]).map((row, i) => (
                     <tr key={i} className="border-b border-text-main/[0.02] last:border-0 hover:bg-text-main/[0.01] transition-all">
                       <td className="p-6 font-semibold">{row.feature}</td>
                       {row.v.map((v, j) => (

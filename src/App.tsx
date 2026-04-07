@@ -12,7 +12,6 @@ import WhatsAppWidget from './components/WhatsAppWidget'
 import ScrollProgress from './components/ScrollProgress'
 import ReloadPrompt from './components/common/ReloadPrompt'
 import { tenantConfig } from './config/tenant'
-import Lenis from 'lenis'
 
 // Lazy-loaded pages (reduces initial bundle by ~60%)
 const AdminLayout = lazy(() => import('./pages/admin/Layout'))
@@ -53,41 +52,27 @@ export default function App() {
   useEffect(() => {
     const root = document.documentElement
     const themeColors = tenantConfig.theme.colors
-    
+
     root.style.setProperty('--color-primary', themeColors.primary)
     root.style.setProperty('--color-secondary', themeColors.secondary)
     root.style.setProperty('--color-accent', themeColors.accent)
     root.style.setProperty('--color-sand', themeColors.sand || '#D4C4AB')
     root.style.setProperty('--color-glow', `${themeColors.primary}26`)
     root.style.setProperty('--shadow-color', darkMode ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.06)')
-    
+
     root.classList.toggle('dark', darkMode)
     const meta = document.querySelector('meta[name="theme-color"]')
     if (meta) meta.setAttribute('content', darkMode ? '#050505' : '#FAF6F1')
   }, [darkMode])
 
-  // Lenis smooth scroll — initialize once, never destroy on theme change
+  // Native smooth scroll — clean, performant, no library conflicts
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      touchMultiplier: 2,
-    })
-
-    let rafId = 0
-    function raf(time: number) {
-      lenis.raf(time)
-      rafId = requestAnimationFrame(raf)
-    }
-    rafId = requestAnimationFrame(raf)
-
-    return () => {
-      cancelAnimationFrame(rafId)
-      lenis.destroy()
-    }
+    document.documentElement.style.scrollBehavior = 'smooth'
+    // Clean up any leftover Lenis classes from previous builds
+    document.documentElement.classList.remove('lenis', 'lenis-smooth', 'lenis-stopped')
+    document.documentElement.style.removeProperty('overflow')
+    document.body.style.removeProperty('overflow')
+    return () => { document.documentElement.style.scrollBehavior = 'auto' }
   }, [])
 
   return (
@@ -126,4 +111,3 @@ export default function App() {
     </>
   )
 }
-

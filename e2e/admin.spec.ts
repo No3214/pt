@@ -23,7 +23,8 @@ test.describe('Admin Panel Tests', () => {
         await pinInput.press('Enter');
     }
 
-    // Panel başlığı görüntülenMemeli
-    await expect(heading).not.toBeVisible();
+    // Hata mesajının görünmesini bekle
+    const errorMessage = page.locator('text=Hata'); // Or more specific: 'Hatalı şifre'
+    await expect(page.locator('text=Hatalı şifre')).toBeVisible();
   });
 });

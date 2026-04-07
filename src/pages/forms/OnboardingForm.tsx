@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 import { useNavigate } from 'react-router-dom';
 import { Activity, Heart, Target, User, ChevronRight, CheckCircle2 } from 'lucide-react';
+import LegalModal from '../../components/LegalModals';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -14,6 +15,10 @@ export default function OnboardingForm() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [kvkkChecked, setKvkkChecked] = useState(false);
+  const [termsChecked, setTermsChecked] = useState(false);
+  const [legalType, setLegalType] = useState<'kvkk' | 'terms'>('kvkk');
+  const [isLegalModalOpen, setLegalModalOpen] = useState(false);
   
   const [formData, setFormData] = useState({
     name: '', phone: '', email: '', goal: '',
@@ -64,9 +69,9 @@ export default function OnboardingForm() {
               </div>
 
               <div className="space-y-4">
-                <InputGroup icon={<User />} label="Ad Soyad" value={formData.name} onChange={v => setFormData({ ...formData, name: v })} placeholder="Adın nedir?" />
-                <InputGroup icon={<Activity />} label="Telefon" value={formData.phone} onChange={v => setFormData({ ...formData, phone: v })} placeholder="05xx xxx xx xx" />
-                <InputGroup icon={<Heart />} label="E-Posta" value={formData.email} onChange={v => setFormData({ ...formData, email: v })} placeholder="opsiyonel" />
+                <InputGroup icon={<User />} label="Ad Soyad" value={formData.name} onChange={(v: any) => setFormData({ ...formData, name: v })} placeholder="Adın nedir?" />
+                <InputGroup icon={<Activity />} label="Telefon" value={formData.phone} onChange={(v: any) => setFormData({ ...formData, phone: v })} placeholder="05xx xxx xx xx" />
+                <InputGroup icon={<Heart />} label="E-Posta" value={formData.email} onChange={(v: any) => setFormData({ ...formData, email: v })} placeholder="opsiyonel" />
               </div>
 
               <Button onClick={nextStep} disabled={!formData.name || !formData.phone}>Sonraki Adım <ChevronRight className="w-4 h-4" /></Button>
@@ -81,13 +86,13 @@ export default function OnboardingForm() {
               </div>
 
               <div className="grid grid-cols-3 gap-4">
-                <InputGroup label="Yaş" value={formData.age} onChange={v => setFormData({ ...formData, age: v })} placeholder="25" type="number" />
-                <InputGroup label="Boy" value={formData.height} onChange={v => setFormData({ ...formData, height: v })} placeholder="180" type="number" />
-                <InputGroup label="Kilo" value={formData.weight} onChange={v => setFormData({ ...formData, weight: v })} placeholder="75" type="number" />
+                <InputGroup label="Yaş" value={formData.age} onChange={(v: any) => setFormData({ ...formData, age: v })} placeholder="25" type="number" />
+                <InputGroup label="Boy" value={formData.height} onChange={(v: any) => setFormData({ ...formData, height: v })} placeholder="180" type="number" />
+                <InputGroup label="Kilo" value={formData.weight} onChange={(v: any) => setFormData({ ...formData, weight: v })} placeholder="75" type="number" />
               </div>
 
               <div className="space-y-4">
-                <InputGroup icon={<Target />} label="Hedefin Nedir?" value={formData.goal} onChange={v => setFormData({ ...formData, goal: v })} placeholder="Örn: Yağ yakımı, kas kazanımı..." />
+                <InputGroup icon={<Target />} label="Hedefin Nedir?" value={formData.goal} onChange={(v: any) => setFormData({ ...formData, goal: v })} placeholder="Örn: Yağ yakımı, kas kazanımı..." />
               </div>
 
               <div className="flex gap-4">
@@ -105,24 +110,45 @@ export default function OnboardingForm() {
               </div>
 
               <div className="space-y-4">
-                <TextArea label="Sağlık Sorunları / Sakatlıklar" value={formData.healthIssues} onChange={v => setFormData({ ...formData, healthIssues: v })} placeholder="Bel fıtığı, diz ağrısı vb." />
-                <TextArea label="Alerjiler" value={formData.allergies} onChange={v => setFormData({ ...formData, allergies: v })} placeholder="Fıstık, gluten vb." />
-                <TextArea label="Antrenöre Notun" value={formData.message} onChange={v => setFormData({ ...formData, message: v })} placeholder="Eklemek istediğin her şey..." />
+                <TextArea label="Sağlık Sorunları / Sakatlıklar" value={formData.healthIssues} onChange={(v: any) => setFormData({ ...formData, healthIssues: v })} placeholder="Bel fıtığı, diz ağrısı vb." />
+                <TextArea label="Alerjiler" value={formData.allergies} onChange={(v: any) => setFormData({ ...formData, allergies: v })} placeholder="Fıstık, gluten vb." />
+                <TextArea label="Antrenöre Notun" value={formData.message} onChange={(v: any) => setFormData({ ...formData, message: v })} placeholder="Eklemek istediğin her şey..." />
+              </div>
+
+              <div className="space-y-4 pt-6 border-t border-text-main/10">
+                 <label className="flex items-start gap-3 cursor-pointer group">
+                     <input type="checkbox" checked={kvkkChecked} onChange={e => setKvkkChecked(e.target.checked)} className="mt-1 w-4 h-4 text-primary bg-transparent border-text-main/20 rounded focus:ring-primary focus:ring-2 cursor-pointer" />
+                     <span className={`text-[0.7rem] sm:text-xs font-medium leading-relaxed ${dm ? 'text-white/60' : 'text-text-main/70'}`}>
+                       Sağlık beyanlarım dahil olmak üzere tüm "Özel Nitelikli Kişisel Verilerimin" işlenmesine ilişkin <button type="button" onClick={(e) => { e.preventDefault(); setLegalType('kvkk'); setLegalModalOpen(true); }} className="text-primary hover:underline font-bold bg-transparent border-none p-0 mx-1 cursor-pointer">KVKK Açık Rıza ve Aydınlatma Metni</button>'ni okudum, anladım ve tamamen kendi özgür irademle <strong className="text-text-main dark:text-white">açık rıza</strong> veriyorum.
+                     </span>
+                 </label>
+                 <label className="flex items-start gap-3 cursor-pointer group">
+                     <input type="checkbox" checked={termsChecked} onChange={e => setTermsChecked(e.target.checked)} className="mt-1 w-4 h-4 text-primary bg-transparent border-text-main/20 rounded focus:ring-primary focus:ring-2 cursor-pointer" />
+                     <span className={`text-[0.7rem] sm:text-xs font-medium leading-relaxed ${dm ? 'text-white/60' : 'text-text-main/70'}`}>
+                       <button type="button" onClick={(e) => { e.preventDefault(); setLegalType('terms'); setLegalModalOpen(true); }} className="text-primary hover:underline font-bold bg-transparent border-none p-0 mr-1 cursor-pointer">Kullanım Koşullarını</button> okudum, anladım ve antrenman ile diyet programlarının medikal bir tavsiye olmadığını, oluşabilecek her türlü fiziksel/sağlıksal riskin sorumluluğunun bana ait olduğunu kabul ve beyan ederim.
+                     </span>
+                 </label>
               </div>
 
               <div className="flex gap-4">
                 <SecondaryButton onClick={prevStep}>Geri</SecondaryButton>
-                <Button onClick={handleSubmit}>Başvuruyu Tamamla</Button>
+                <Button onClick={handleSubmit} disabled={!kvkkChecked || !termsChecked}>Başvuruyu Tamamla</Button>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
+
+      <LegalModal 
+        isOpen={isLegalModalOpen} 
+        onClose={() => setLegalModalOpen(false)} 
+        type={legalType} 
+      />
     </div>
   );
 }
 
-function InputGroup({ icon, label, value, onChange, placeholder, type = 'text' }: any) {
+function InputGroup({ icon, label, value, onChange, placeholder, type = 'text' }: any): any {
   return (
     <div className="space-y-2">
       <label className="text-[0.65rem] uppercase tracking-widest font-bold opacity-40 ml-1">{label}</label>
@@ -140,7 +166,7 @@ function InputGroup({ icon, label, value, onChange, placeholder, type = 'text' }
   );
 }
 
-function TextArea({ label, value, onChange, placeholder }: any) {
+function TextArea({ label, value, onChange, placeholder }: any): any {
   return (
     <div className="space-y-2">
       <label className="text-[0.65rem] uppercase tracking-widest font-bold opacity-40 ml-1">{label}</label>
@@ -155,7 +181,7 @@ function TextArea({ label, value, onChange, placeholder }: any) {
   );
 }
 
-function Button({ children, onClick, disabled }: any) {
+function Button({ children, onClick, disabled }: any): any {
   return (
     <button 
       onClick={onClick}
@@ -167,7 +193,7 @@ function Button({ children, onClick, disabled }: any) {
   );
 }
 
-function SecondaryButton({ children, onClick }: any) {
+function SecondaryButton({ children, onClick }: any): any {
   return (
     <button 
       onClick={onClick}

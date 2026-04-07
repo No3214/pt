@@ -19,6 +19,21 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // Menü açıkken scroll'u kilitle
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.touchAction = 'none';
+    } else {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.body.style.touchAction = '';
+    };
+  }, [menuOpen]);
+
   return (
     <AnimatePresence>
       <motion.header
@@ -89,7 +104,7 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className={`md:hidden fixed inset-0 flex flex-col items-center justify-center gap-10 z-[100] backdrop-blur-3xl ${dm ? 'bg-bg/95' : 'bg-bg/95'}`}
+              className={`md:hidden fixed inset-0 flex flex-col items-center justify-center gap-10 z-[100] backdrop-blur-3xl overscroll-contain touch-none ${dm ? 'bg-bg/95' : 'bg-bg/95'}`}
             >
               {navigationLinks.map((item, i) => (
                 <motion.a

@@ -1,12 +1,25 @@
 import { RevealSection, TiltCard, fadeUp, staggerContainer } from './LandingUI';
 import { motion } from 'framer-motion';
+import { useStore } from '../../stores/useStore';
+import { useTranslation } from '../../locales';
+
+const PHILOSOPHY_TR = [
+  { num: '01', title: 'Sporcu Disiplini', desc: 'Profesyonel voleybol tecrübesiyle kanıtlanmış antrenman metodolojisi.' },
+  { num: '02', title: 'Kişiye Özel Güçlenme', desc: 'Kendi bedenini tanımanı ve hedeflerine uygun güçlü bir temele sahip olmanı hedefliyorum.' },
+  { num: '03', title: 'Seçici Premium Takip', desc: 'Kaliteyi korumak için sınırlı kontenjanla, birebir odaklı çalışma.' },
+];
+
+const PHILOSOPHY_EN = [
+  { num: '01', title: 'Athlete Discipline', desc: 'Training methodology proven through professional volleyball experience.' },
+  { num: '02', title: 'Personal Strengthening', desc: 'I aim for you to know your own body and build a strong foundation aligned with your goals.' },
+  { num: '03', title: 'Selective Premium Tracking', desc: 'One-on-one focused work with limited spots to maintain quality.' },
+];
 
 export default function About() {
-  const PHILOSOPHY_CARDS = [
-    { num: '01', title: 'Sporcu Disiplini', desc: 'Profesyonel voleybol tecrübesiyle kanıtlanmış antrenman metodolojisi.' },
-    { num: '02', title: 'Kişiye Özel Güçlenme', desc: 'Kendi bedenini tanımanı ve hedeflerine uygun güçlü bir temele sahip olmanı hedefliyorum.' },
-    { num: '03', title: 'Seçici Premium Takip', desc: 'Kaliteyi korumak için sınırlı kontenjanla, birebir odaklı çalışma.' },
-  ];
+  const { darkMode, language } = useStore();
+  const { t } = useTranslation();
+  const dm = darkMode;
+  const cards = language === 'tr' ? PHILOSOPHY_TR : PHILOSOPHY_EN;
 
   return (
     <section id="hakkinda" className="py-32 md:py-40 bg-bg">
@@ -15,23 +28,48 @@ export default function About() {
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <div>
               <motion.p variants={fadeUp} className="text-[0.75rem] uppercase tracking-[0.2em] font-medium text-primary mb-6">
-                Felsefe
+                {t.about.badge}
               </motion.p>
               <motion.h2 variants={fadeUp} custom={1}
                 className="font-display text-[clamp(2.2rem,4vw,3.8rem)] font-semibold leading-[1.1] tracking-[-0.02em] mb-8 text-text-main">
-                İlham vermek değil,
-                <br />karar verdirmek.
+                {language === 'tr' ? (
+                  <>İlham vermek değil,<br />karar verdirmek.</>
+                ) : (
+                  <>Not inspiring,<br />but empowering.</>
+                )}
               </motion.h2>
               <motion.p variants={fadeUp} custom={2}
                 className="text-[1.15rem] leading-[1.85] max-w-[480px] text-text-main/40">
-                Voleybol sahasında edindiğim disiplinle, sadece kararlı ve disiplinli danışanlarla çalışıyorum. Her program bilimsel temellere dayanır, her adım ölçülür.
+                {language === 'tr'
+                  ? 'Voleybol sahasında edindiğim disiplinle, sadece kararlı ve disiplinli danışanlarla çalışıyorum. Her program bilimsel temellere dayanır, her adım ölçülür.'
+                  : 'With the discipline I gained on the volleyball court, I only work with determined and disciplined clients. Every program is science-based, every step is measured.'}
               </motion.p>
+
+              {/* Trust indicator */}
+              <motion.div variants={fadeUp} custom={3} className="mt-10 flex items-center gap-4">
+                <div className="flex -space-x-3">
+                  {[...Array(4)].map((_, i) => (
+                    <div key={i} className={`w-10 h-10 rounded-full border-2 border-bg flex items-center justify-center text-[0.65rem] font-bold ${
+                      dm ? 'bg-white/10 text-white/60' : 'bg-primary/10 text-primary/70'
+                    }`}>
+                      {['AK', 'DY', 'SB', 'MÖ'][i]}
+                    </div>
+                  ))}
+                </div>
+                <span className="text-[0.82rem] font-medium text-text-main/35">
+                  {language === 'tr' ? '20+ aktif danışan güveniyor' : '20+ active clients trust the system'}
+                </span>
+              </motion.div>
             </div>
-            
+
             <motion.div variants={staggerContainer} className="grid grid-cols-1 gap-6">
-              {PHILOSOPHY_CARDS.map((item, i) => (
+              {cards.map((item, i) => (
                 <motion.div key={i} variants={fadeUp} custom={i}>
-                  <TiltCard className="group p-8 rounded-2xl border border-text-main/5 hover:border-primary/20 bg-text-main/[0.02] transition-all duration-500 cursor-default">
+                  <TiltCard className={`group p-8 rounded-2xl border transition-all duration-500 cursor-default ${
+                    dm
+                      ? 'border-white/[0.06] bg-white/[0.02] hover:border-primary/20'
+                      : 'border-text-main/5 hover:border-primary/20 bg-text-main/[0.02]'
+                  }`}>
                     <div className="flex gap-6 items-start">
                       <span className="text-[2.5rem] font-display font-bold leading-none text-text-main/10 group-hover:text-primary transition-colors duration-500">{item.num}</span>
                       <div>

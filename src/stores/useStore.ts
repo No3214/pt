@@ -336,8 +336,8 @@ export const useStore = create<AppState>()(
 
       // ─── WhatsApp Templates ───
       whatsappTemplates: {
-        onboarding: 'Merhaba! Seninle çalışmak için sabırsızlanıyoruz. Başlamadan önce seni biraz tanıyalım: {{link}}',
-        measurement: 'Merhaba {{name}}! Bu haftaki gelişim ölçümlerini girme vaktin geldi. Formu buradan doldurabilirsin: {{link}}'
+        onboarding: 'Merhaba! 🏋️‍♀️\n\nSeninle birlikte bu yolculuğa başlamak için çok heyecanlıyım! En iyi versiyonuna ulaşman için sana özel bir program hazırlayacağım.\n\nBaşlamadan önce seni daha yakından tanımam gerekiyor. Bu kısa formu doldurarak hedeflerini ve geçmişini benimle paylaşır mısın?\n\n👉 {{link}}\n\nGörüşmek üzere! 💪\nEla Ebeoğlu',
+        measurement: 'Merhaba {{name}}! 📊\n\nBu haftaki gelişim ölçümlerini kaydetme zamanı geldi! Her adım seni hedefe bir adım daha yaklaştırıyor — verilerini takip etmek başarının anahtarı.\n\n📏 Ölçümlerini buradan girebilirsin:\n👉 {{link}}\n\nSen harikasın, devam et! 🔥\nEla Ebeoğlu'
       },
       updateTemplate: (key, value) => set(s => ({
         whatsappTemplates: { ...s.whatsappTemplates, [key]: value }
