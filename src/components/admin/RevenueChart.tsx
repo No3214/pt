@@ -1,7 +1,9 @@
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip } from 'recharts';
 import { useStore } from '../../stores/useStore';
+import { useTranslation } from '../../locales';
 
 export default function RevenueChart() {
+  const { t, language } = useTranslation();
   const { darkMode: dm } = useStore();
   
   const data = [
@@ -35,8 +37,8 @@ export default function RevenueChart() {
     }`}>
       <div className="flex items-center justify-between mb-10">
         <div>
-          <h3 className="font-display text-xl font-bold text-text-main tracking-tight">Gelir Analizi</h3>
-          <p className="text-[0.75rem] text-text-main/30 font-medium mt-1">Son 6 Aylık MRR Performansı</p>
+          <h3 className="font-display text-xl font-bold text-text-main tracking-tight">{t.admin.revenue_title}</h3>
+          <p className="text-[0.75rem] text-text-main/30 font-medium mt-1">{t.admin.revenue_subtitle}</p>
         </div>
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${dm ? 'bg-primary/20 text-primary' : 'bg-primary/10 text-primary'}`}>
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -49,13 +51,13 @@ export default function RevenueChart() {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} barCategoryGap="25%">
             <XAxis dataKey="month" tick={axisStyle} axisLine={false} tickLine={false} />
-            <YAxis tick={axisStyle} axisLine={false} tickLine={false} tickFormatter={v => `₺${(v/1000).toFixed(0)}K`} width={45} />
+            <YAxis tick={axisStyle} axisLine={false} tickLine={false} tickFormatter={v => `${language === 'tr' ? '₺' : '$'}${(v/1000).toFixed(0)}K`} width={45} />
             <Tooltip
               contentStyle={ttStyle.contentStyle}
               itemStyle={ttStyle.itemStyle}
               labelStyle={ttStyle.labelStyle}
               cursor={ttStyle.cursor}
-              formatter={(v: any) => [`₺${v.toLocaleString('tr-TR')}`, 'Aylık Gelir']}
+              formatter={(v: any) => [`${language === 'tr' ? '₺' : '$'}${v.toLocaleString(language === 'tr' ? 'tr-TR' : 'en-US')}`, t.admin.revenue_monthly]}
             />
             <defs>
               <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">

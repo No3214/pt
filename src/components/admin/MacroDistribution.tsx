@@ -1,22 +1,24 @@
 import { motion } from 'framer-motion';
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from 'recharts';
 import { useStore } from '../../stores/useStore';
+import { useTranslation } from '../../locales';
 import { useMemo } from 'react';
 
 const COLORS = ['var(--color-secondary)', 'var(--color-sand)', 'var(--color-primary)', 'var(--color-accent)'];
 
 export default function MacroDistribution() {
+  const { t } = useTranslation();
   const { darkMode: dm, foodLog } = useStore();
   
   const macroTotals = useMemo(() => {
-    const t = foodLog.reduce((a, f) => ({ p: a.p + f.p, f: a.f + f.f, c: a.c + f.c }), { p: 0, f: 0, c: 0 });
+    const totals = foodLog.reduce((a, f) => ({ p: a.p + f.p, f: a.f + f.f, c: a.c + f.c }), { p: 0, f: 0, c: 0 });
     const data = [
-      { name: 'Protein', value: Math.round(t.p) || 30 },
-      { name: 'Yağ', value: Math.round(t.f) || 20 },
-      { name: 'Karbonhidrat', value: Math.round(t.c) || 50 }
+      { name: t.admin.macro_protein, value: Math.round(totals.p) || 30 },
+      { name: t.admin.macro_fat, value: Math.round(totals.f) || 20 },
+      { name: t.admin.macro_carbs, value: Math.round(totals.c) || 50 }
     ];
     return data;
-  }, [foodLog]);
+  }, [foodLog, t]);
 
   const ttStyle = {
     contentStyle: {
@@ -36,8 +38,8 @@ export default function MacroDistribution() {
     }`}>
       <div className="flex items-center justify-between mb-10">
         <div>
-          <h3 className="font-display text-xl font-bold text-text-main tracking-tight">Makro Dağılımı</h3>
-          <p className="text-[0.75rem] text-text-main/30 font-medium mt-1">Sistem Genelindeki Ortalama</p>
+          <h3 className="font-display text-xl font-bold text-text-main tracking-tight">{t.admin.macro_distribution_title}</h3>
+          <p className="text-[0.75rem] text-text-main/30 font-medium mt-1">{t.admin.macro_distribution_subtitle}</p>
         </div>
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${dm ? 'bg-secondary/20 text-secondary' : 'bg-secondary/10 text-secondary'}`}>
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -84,7 +86,7 @@ export default function MacroDistribution() {
               <div className="w-3 h-3 rounded-full transition-transform group-hover:scale-125" style={{ backgroundColor: COLORS[i % COLORS.length] }} />
               <div className="flex-1">
                 <p className="text-[0.75rem] font-bold text-text-main/20 uppercase tracking-widest">{m.name}</p>
-                <p className="text-[1.1rem] font-bold text-text-main tabular-nums">{m.value} <span className="opacity-30 text-[0.8rem]">gram</span></p>
+                <p className="text-[1.1rem] font-bold text-text-main tabular-nums">{m.value} <span className="opacity-30 text-[0.8rem]">{t.admin.macro_unit}</span></p>
               </div>
             </motion.div>
           ))}

@@ -1,7 +1,9 @@
 import { useStore, WellnessLog } from '../../stores/useStore';
 import { motion } from 'framer-motion';
+import { useTranslation } from '../../locales';
 
 export default function WellnessFeed() {
+  const { t } = useTranslation();
   const { clients, darkMode: dm, showToast } = useStore();
 
   // Flatten and sort wellness logs from all clients
@@ -22,21 +24,21 @@ export default function WellnessFeed() {
 
   const sendWellnessMessage = (name: string, phone: string, log: any) => {
     const alert = getAlertLevel(log);
-    let message = `Merhaba ${name}! 👋 Günlük wellness verilerini inceledim. `;
+    let message = t.admin.wellness_msg_base.replace('{name}', name);
     
     if (alert === 'danger') {
-      message += `Yorgunluk ve stres seviyen oldukça yüksek görünüyor. Bugün antrenmanı pas geçip tam dinlenme (recovery) yapmanı öneriyorum. 🛑`;
+      message += t.admin.wellness_msg_danger;
     } else if (alert === 'warning') {
-      message += `Bugün biraz yorgun görünüyorsun. Antrenman yoğunluğunu %50 düşürelim veya mobiliteye odaklanalım. ⚠️`;
+      message += t.admin.wellness_msg_warning;
     } else {
-      message += `Her şey harika görünüyor! Performansını korumaya devam et. 🔥`;
+      message += t.admin.wellness_msg_safe;
     }
 
     if (phone) {
       window.open(`https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`, '_blank');
-      showToast('Wellness mesajı hazırlandı ✅');
+      showToast(t.admin.wellness_toast_success);
     } else {
-      showToast('Telefon numarası bulunamadı.');
+      showToast(t.admin.wellness_toast_error);
     }
   };
 
@@ -46,8 +48,8 @@ export default function WellnessFeed() {
     }`}>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h3 className="font-display text-xl font-bold text-text-main tracking-tight">Sporcu Wellness Akışı</h3>
-          <p className="text-[0.75rem] text-text-main/30 font-medium mt-1">Yorgunluk & Toparlanma Takibi</p>
+          <h3 className="font-display text-xl font-bold text-text-main tracking-tight">{t.admin.wellness_title}</h3>
+          <p className="text-[0.75rem] text-text-main/30 font-medium mt-1">{t.admin.wellness_subtitle}</p>
         </div>
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${dm ? 'bg-primary/20 text-primary' : 'bg-primary/10 text-primary'}`}>
           <span className="text-xl">📊</span>
@@ -57,7 +59,7 @@ export default function WellnessFeed() {
       <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
         {allLogs.length === 0 ? (
           <div className="text-center py-16 opacity-20 italic">
-            <p className="text-[0.9rem] font-medium">Henüz wellness girişi yapılmadı.</p>
+            <p className="text-[0.9rem] font-medium">{t.admin.wellness_empty}</p>
           </div>
         ) : (
           allLogs.map((log, i) => {
@@ -82,16 +84,18 @@ export default function WellnessFeed() {
                     <span className="font-bold text-[1rem] text-text-main">{log.clientName}</span>
                   </div>
                   <span className="text-[0.65rem] font-bold opacity-30">
-                    {new Date(log.date).toLocaleDateString('tr-TR', { hour: '2-digit', minute: '2-digit' })}
+                    {new Intl.DateTimeFormat(t.common.loading.includes('Yükleniyor') ? 'tr-TR' : 'en-US', { 
+                      month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' 
+                    }).format(new Date(log.date))}
                   </span>
                 </div>
 
                 <div className="grid grid-cols-4 gap-2 mb-4">
                   {[
+                    { label: t.admin.wellness_sleep, val: log.sleep, icon: '😴' },
+                    { label: t.admin.wellness_energy, val: log.energy, icon: '⚡' },
+                    { label: t.admin.wellness_stress, val: log.stress, icon: '🧠' },
                     { label: 'RPE', val: log.rpe, icon: '🔥' },
-                    { label: 'Uyku', val: log.sleep, icon: '😴' },
-                    { label: 'Enerji', val: log.energy, icon: '⚡' },
-                    { label: 'Stres', val: log.stress, icon: '🧠' },
                   ].map(s => (
                     <div key={s.label} className={`p-2 rounded-xl text-center ${dm ? 'bg-white/5' : 'bg-white shadow-sm'}`}>
                       <div className="text-[0.55rem] font-bold opacity-40 uppercase mb-1">{s.label}</div>
@@ -108,7 +112,7 @@ export default function WellnessFeed() {
                     'bg-primary/10 text-primary hover:bg-primary hover:text-white'
                   }`}
                 >
-                  Geri Bildirim Gönder 💬
+                  {t.admin.wellness_send_feedback}
                 </button>
               </motion.div>
             );

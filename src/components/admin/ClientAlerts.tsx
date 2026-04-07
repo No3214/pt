@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
+import { useTranslation } from '../../locales';
 
 export default function ClientAlerts() {
+  const { t } = useTranslation();
   const { clients, darkMode: dm, showToast } = useStore();
   const [actionMenu, setActionMenu] = useState<string | null>(null);
 
@@ -12,7 +14,7 @@ export default function ClientAlerts() {
       name: c.name,
       phone: c.phone || '',
       type: 'warning',
-      msg: 'Seans azalıyor — Paket yenileme hatırlat.',
+      msg: t.admin.alerts_msg_warning,
       val: c.sessions
     })),
     ...clients.filter(c => c.sessions === 0).map(c => ({
@@ -20,22 +22,22 @@ export default function ClientAlerts() {
       name: c.name,
       phone: c.phone || '',
       type: 'danger',
-      msg: 'Seansı bitti — Yeni paket teklifi gönder.',
+      msg: t.admin.alerts_msg_danger,
       val: 0
     }))
   ];
 
   const sendWhatsApp = (name: string, phone: string, type: string) => {
     const message = type === 'danger'
-      ? `Merhaba ${name}! 👋\n\nSenin ile olan çalışmamız çok verimliydi ve gelişimin harika gidiyordu! Yeni bir paket ile kaldığımız yerden devam etmek ister misin?\n\nSana özel bir plan hazırladım. Detayları konuşalım mı? 💪\n\nEla Ebeoğlu`
-      : `Merhaba ${name}! 👋\n\nPaketin bitmek üzere, harika bir ilerleme kaydediyorsun! Momentum'u kaybetmemek için paket yenileme planlarımıza göz atmak ister misin?\n\nSenin için en uygun seçeneği birlikte belirleyelim! 🎯\n\nEla Ebeoğlu`;
+      ? t.admin.alerts_whatsapp_danger.replace('{name}', name)
+      : t.admin.alerts_whatsapp_warning.replace('{name}', name);
 
     if (phone) {
       const url = `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
-      showToast(`${name} için WhatsApp mesajı hazırlandı ✅`);
+      showToast(t.admin.alerts_toast_whatsapp.replace('{}', name));
     } else {
-      showToast(`${name} için telefon numarası bulunamadı.`);
+      showToast(t.admin.alerts_toast_error.replace('{}', name));
     }
     setActionMenu(null);
   };
@@ -46,8 +48,8 @@ export default function ClientAlerts() {
     }`}>
       <div className="flex items-center justify-between mb-10">
         <div>
-          <h3 className="font-display text-xl font-bold text-text-main tracking-tight">Eylem Gerekli</h3>
-          <p className="text-[0.75rem] text-text-main/30 font-medium mt-1">Acil Müdahale Gerektiren Durumlar</p>
+          <h3 className="font-display text-xl font-bold text-text-main tracking-tight">{t.admin.alerts_title}</h3>
+          <p className="text-[0.75rem] text-text-main/30 font-medium mt-1">{t.admin.alerts_subtitle}</p>
         </div>
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${dm ? 'bg-amber-500/20 text-amber-500' : 'bg-amber-500/10 text-amber-500'}`}>
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -59,7 +61,7 @@ export default function ClientAlerts() {
       <div className="space-y-4 max-h-[350px] overflow-y-auto pr-2 custom-scrollbar">
         {alerts.length === 0 ? (
           <div className="text-center py-16 opacity-20 italic">
-            <p className="text-[0.9rem] font-medium">Her şey yolunda, tüm sporcular aktif!</p>
+            <p className="text-[0.9rem] font-medium">{t.admin.alerts_empty}</p>
           </div>
         ) : (
           alerts.map((a, i) => (
@@ -94,7 +96,7 @@ export default function ClientAlerts() {
                       : 'bg-amber-500/20 text-amber-500 hover:bg-amber-500/30'
                   }`}
                 >
-                  İşlem
+                  {t.admin.alerts_btn_action}
                 </button>
               </div>
 
@@ -115,7 +117,7 @@ export default function ClientAlerts() {
                         onClick={() => sendWhatsApp(a.name, a.phone, a.type)}
                         className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-green-500/15 text-green-500 text-[0.75rem] font-bold border-none cursor-pointer hover:bg-green-500/25 transition-all"
                       >
-                        💬 WhatsApp ile Hatırlat
+                        {t.admin.alerts_btn_whatsapp}
                       </button>
                       <button
                         onClick={() => {
@@ -127,7 +129,7 @@ export default function ClientAlerts() {
                           dm ? 'bg-white/10 text-white/60 hover:bg-white/15' : 'bg-black/5 text-[#1C1917]/50 hover:bg-black/10'
                         }`}
                       >
-                        👤 Profili Görüntüle
+                        {t.admin.alerts_btn_profile}
                       </button>
                     </div>
                   </motion.div>

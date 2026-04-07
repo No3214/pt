@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore, type Client } from '../../stores/useStore'
+import { useTranslation } from '../../locales'
 import { supabase } from '../../lib/supabase'
 import { encryptData } from '../../lib/crypto'
 
@@ -11,7 +12,8 @@ import { encryptData } from '../../lib/crypto'
  */
 
 export default function StudentManager() {
-  const { clients, updateClient } = useStore()
+  const { t } = useTranslation()
+  const { clients, updateClient, showToast } = useStore()
   const darkMode = useStore(s => s.darkMode)
   const [selectedClient, setSelectedClient] = useState<Client | null>(null)
   const [inviteMode, setInviteMode] = useState<'pin' | 'email'>('email')
@@ -62,11 +64,13 @@ export default function StudentManager() {
         })
         if (signUpError) throw signUpError
       }
-
-      setStatusMsg(`✅ Hesap oluşturuldu!\nE-posta: ${inviteEmail}\nGeçici Şifre: ${tempPassword}`)
+      
+      setStatusMsg(t.admin.students_toast_success
+        .replace('{email}', inviteEmail)
+        .replace('{password}', tempPassword))
       updateClient(client.id, { email: inviteEmail })
     } catch (e: any) {
-      setStatusMsg(`❌ Hata: ${e.message}`)
+      setStatusMsg(t.admin.students_toast_error.replace('{message}', e.message))
     } finally {
       setIsSending(false)
     }
@@ -78,13 +82,13 @@ export default function StudentManager() {
     <div className={`p-8 rounded-[2rem] border ${cardBg}`}>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h2 className="font-display text-xl font-bold tracking-tight">Öğrenci Portal Yönetimi 🎓</h2>
+          <h2 className="font-display text-xl font-bold tracking-tight">{t.admin.students_title}</h2>
           <p className={`text-xs mt-1 ${darkMode ? 'text-white/30' : 'text-black/30'}`}>
-            Öğrencilere portal erişimi oluştur ve yönet
+            {t.admin.students_subtitle}
           </p>
         </div>
         <span className={`px-3 py-1.5 rounded-xl text-xs font-bold ${darkMode ? 'bg-primary/20 text-primary' : 'bg-primary/10 text-primary'}`}>
-          {clients.length} Öğrenci
+          {t.admin.students_count.replace('{}', clients.length.toString())}
         </span>
       </div>
 
@@ -108,7 +112,7 @@ export default function StudentManager() {
                 <div>
                   <div className="font-bold text-sm">{client.name}</div>
                   <div className={`text-xs ${darkMode ? 'text-white/30' : 'text-black/30'}`}>
-                    {client.email || 'E-posta yok'} • {client.athleteLevel || 'Rookie'}
+                    {client.email || t.admin.students_no_email} • {client.athleteLevel || 'Rookie'}
                   </div>
                 </div>
               </div>
@@ -119,13 +123,13 @@ export default function StudentManager() {
                     ? 'bg-green-500/10 text-green-600'
                     : 'bg-red-500/10 text-red-500'
                 }`}>
-                  {client.sessions}/{client.max} Seans
+                  {t.admin.students_sessions.replace('{}', `${client.sessions}/${client.max}`)}
                 </span>
                 <button
                   onClick={() => setSelectedClient(selectedClient?.id === client.id ? null : client)}
                   className="px-3 py-1.5 rounded-lg bg-primary text-white text-xs font-bold"
                 >
-                  {selectedClient?.id === client.id ? 'Kapat' : 'Davet'}
+                  {selectedClient?.id === client.id ? t.admin.students_btn_close : t.admin.students_btn_invite}
                 </button>
               </div>
             </div>
@@ -143,8 +147,8 @@ export default function StudentManager() {
                     {/* Mode Toggle */}
                     <div className="flex gap-2">
                       {[
-                        { key: 'email' as const, label: '📧 E-posta Hesabı' },
-                        { key: 'pin' as const, label: '🔑 PIN Davet' },
+                        { key: 'email' as const, label: t.admin.students_mode_email },
+                        { key: 'pin' as const, label: t.admin.students_mode_pin },
                       ].map(m => (
                         <button
                           key={m.key}
@@ -164,7 +168,7 @@ export default function StudentManager() {
                       <div className="space-y-3">
                         <input
                           type="email"
-                          placeholder="Öğrenci e-postası"
+                          placeholder={t.admin.students_email_placeholder}
                           value={inviteEmail}
                           onChange={e => setInviteEmail(e.target.value)}
                           className={`w-full px-4 py-3 rounded-xl border text-sm outline-none focus:border-primary ${
@@ -173,7 +177,7 @@ export default function StudentManager() {
                         />
                         <input
                           type="text"
-                          placeholder="Geçici şifre (boş bırakılırsa otomatik oluşturulur)"
+                          placeholder={t.admin.students_password_placeholder}
                           value={invitePassword}
                           onChange={e => setInvitePassword(e.target.value)}
                           className={`w-full px-4 py-3 rounded-xl border text-sm outline-none focus:border-primary ${
@@ -185,7 +189,7 @@ export default function StudentManager() {
                           disabled={!inviteEmail || isSending}
                           className="w-full py-3 rounded-xl bg-primary text-white font-bold text-sm disabled:opacity-50"
                         >
-                          {isSending ? 'Oluşturuluyor...' : 'Öğrenci Hesabı Oluştur'}
+                          {isSending ? t.admin.students_btn_creating : t.admin.students_btn_create}
                         </button>
                       </div>
                     ) : (
@@ -193,7 +197,7 @@ export default function StudentManager() {
                         onClick={() => handleGenerateInvite(client)}
                         className="w-full py-3 rounded-xl bg-primary text-white font-bold text-sm"
                       >
-                        PIN & Link Oluştur
+                        {t.admin.students_btn_generate_pin}
                       </button>
                     )}
 
@@ -214,10 +218,10 @@ export default function StudentManager() {
                           {generatedLink}
                         </div>
                         <button
-                          onClick={() => { navigator.clipboard.writeText(generatedLink); setStatusMsg('✅ Link kopyalandı!') }}
+                          onClick={() => { navigator.clipboard.writeText(generatedLink); showToast(t.admin.students_toast_copy_success) }}
                           className="text-xs text-primary font-medium"
                         >
-                          📋 Linki Kopyala
+                          {t.admin.students_btn_copy_link}
                         </button>
                       </div>
                     )}
