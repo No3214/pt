@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../stores/useStore';
 
 import PortalHeader from '../components/portal/PortalHeader';
@@ -12,6 +12,10 @@ import GamifiedExport from '../components/portal/GamifiedExport';
 import { GrainOverlay } from '../components/landing/LandingUI';
 import AchievementTracker from '../components/portal/AchievementTracker';
 import StudentWeightChart from '../components/portal/StudentWeightChart';
+import AiMacroAssistant from '../components/portal/AiMacroAssistant';
+import PerformanceRadar from '../components/portal/PerformanceRadar';
+import CoachVault from '../components/portal/CoachVault';
+import WellnessTracker from '../components/portal/WellnessTracker';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -24,10 +28,20 @@ const stagger = {
 
 import PortalLogin from './portal/PortalLogin';
 import { useStudentPortal } from '../stores/studentPortal';
+import EliteIdCard from '../components/portal/EliteIdCard';
+import { useState, useEffect } from 'react';
 
 export default function Portal() {
   const { darkMode: dm } = useStore();
   const { decryptedData } = useStudentPortal();
+  const [isIdCardOpen, setIsIdCardOpen] = useState(false);
+
+  useEffect(() => {
+    (window as any).dispatchPortalEvent = (event: string) => {
+      if (event === 'open-id-card') setIsIdCardOpen(true);
+    };
+    return () => { (window as any).dispatchPortalEvent = undefined; };
+  }, []);
 
   // If no decrypted data, show Login / PIN entry
   if (!decryptedData) {
@@ -69,55 +83,60 @@ export default function Portal() {
               <GamifiedExport />
             </motion.div>
 
-            {/* Left Column: Habits & Daily Actions */}
-            <motion.div variants={fadeUp} className="lg:col-span-4 h-full">
-              <HabitCheckIn />
-            </motion.div>
-
-            {/* Middle Column: Macro Tracking */}
-            <motion.div variants={fadeUp} className="lg:col-span-4 h-full">
-              <MacroTracker />
-            </motion.div>
-
-            {/* Right Column: Nutrition Log */}
-            <motion.div variants={fadeUp} className="lg:col-span-4 h-full">
-              <FoodLog />
-            </motion.div>
-
-            {/* Achievement Tracker & Personal Note Section */}
-            <motion.div variants={fadeUp} className="lg:col-span-12 grid md:grid-cols-3 gap-8 mt-12 pt-12 border-t border-text-main/5">
-              <div className="md:col-span-1 border-r border-text-main/5 pr-8 hidden md:block">
-                 <StudentWeightChart />
-              </div>
-              <div className="space-y-6 md:col-span-1">
-                 <AchievementTracker athleteLevel={decryptedData?.client?.athleteLevel || 'Rookie'} />
-              </div>
-              <div className={`p-10 rounded-[2.5rem] border flex flex-col justify-center relative overflow-hidden md:col-span-1 ${
+            {/* Row 1: Daily Habits & Goals */}
+            <motion.div variants={fadeUp} className="lg:col-span-12 grid md:grid-cols-2 gap-8">
+               <HabitCheckIn />
+               <div className={`p-10 rounded-[2.5rem] border flex flex-col justify-center relative overflow-hidden ${
                 dm ? 'bg-primary/5 border-primary/20' : 'bg-white border-black/[0.04] shadow-2xl'
               }`}>
                 <div className="absolute top-0 right-0 p-4 opacity-10">
                    <span className="text-6xl text-primary font-display font-bold">"</span>
                 </div>
-                <h4 className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-primary mb-4">Ela'dan Notun Var 💎</h4>
+                <h4 className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-primary mb-4">Ela'an Notun Var 💎</h4>
                 <p className="font-display text-xl md:text-2xl font-bold italic tracking-tight text-text-main leading-snug">
                    {decryptedData?.client?.personalNote || "Yeni haftaya hazır mısın? Hedeflerin için bugün harika bir gün. Disiplin her şeydir!"}
                 </p>
-                 <div className="mt-10 flex flex-wrap items-center gap-4">
-                   <div className="flex items-center gap-3">
-                     <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-xs">💪</div>
-                     <span className="text-[0.75rem] font-bold text-text-main/40 uppercase tracking-widest leading-none">Senin Zamanın, <br className="md:hidden" /> Senin Zaferin.</span>
-                   </div>
-                   
-                   <motion.button
-                     whileHover={{ scale: 1.05 }}
-                     whileTap={{ scale: 0.95 }}
-                     onClick={() => window.open(`https://wa.me/${tenantConfig.brand.contact.socials.whatsapp.replace('+', '')}?text=Selam Ela! Gelişim portalından yazıyorum...`, '_blank')}
-                     className="ml-auto px-6 py-2.5 rounded-full bg-primary text-white text-[0.7rem] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg shadow-primary/20"
-                   >
-                     <span>Mesaj Gönder</span>
-                     <span className="text-base">💬</span>
-                   </motion.button>
-                 </div>
+                <div className="mt-8">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => window.open(`https://wa.me/${tenantConfig.brand.contact.socials.whatsapp.replace('+', '')}?text=Selam Ela! Gelişim portalından yazıyorum...`, '_blank')}
+                    className="px-6 py-2.5 rounded-full bg-primary text-white text-[0.7rem] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg shadow-primary/20 w-fit"
+                  >
+                    <span>Ela'ya Mesaj At</span>
+                    <span className="text-base">💬</span>
+                  </motion.button>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Row 2: Nutrition Mastery */}
+            <motion.div variants={fadeUp} className="lg:col-span-4 h-full">
+              <MacroTracker />
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="lg:col-span-4 h-full">
+              <AiMacroAssistant />
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="lg:col-span-4 h-full">
+              <FoodLog />
+            </motion.div>
+
+            {/* Row 3: Performance & Wellness Mastery */}
+            <motion.div variants={fadeUp} className="lg:col-span-12 grid md:grid-cols-3 gap-8">
+               <WellnessTracker />
+               <PerformanceRadar />
+               <CoachVault />
+            </motion.div>
+
+            {/* Row 4: Advancement & Achievements */}
+            <motion.div variants={fadeUp} className="lg:col-span-12 grid md:grid-cols-2 gap-8 mt-12 pt-12 border-t border-text-main/5">
+              <div className="md:col-span-1 border-r border-text-main/5 pr-8 hidden md:block">
+                 <StudentWeightChart />
+              </div>
+              <div className="space-y-6 md:col-span-1">
+                 <AchievementTracker athleteLevel={decryptedData?.client?.athleteLevel || 'Rookie'} />
               </div>
             </motion.div>
             
@@ -153,6 +172,40 @@ export default function Portal() {
           </div>
         </motion.div>
       </main>
+
+      {/* ID Card Modal */}
+      <AnimatePresence>
+        {isIdCardOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsIdCardOpen(false)}
+              className="fixed inset-0 z-[200] bg-black/80 backdrop-blur-md cursor-pointer"
+            />
+
+            {/* Modal */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[201] w-max max-w-[95vw]"
+            >
+               <button
+                 onClick={() => setIsIdCardOpen(false)}
+                 className="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors text-sm font-bold uppercase tracking-widest flex items-center gap-2 border-none bg-transparent cursor-pointer"
+               >
+                 <span>Kapat</span>
+                 <span className="text-xl">✕</span>
+               </button>
+               
+               <EliteIdCard />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

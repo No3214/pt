@@ -58,6 +58,13 @@ export default function AchievementTracker({ athleteLevel: _athleteLevel }: { at
           {levelUp && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-20"></span>}
           <span className="relative z-10">{currentRank} RANK</span>
         </motion.div>
+
+        <button
+          onClick={() => (window as any).dispatchPortalEvent?.('open-id-card')}
+          className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[0.65rem] font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all border border-primary/20 cursor-pointer ml-auto"
+        >
+          Dijital Kartım 🪪
+        </button>
       </div>
 
       <div className="grid md:grid-cols-2 gap-4">

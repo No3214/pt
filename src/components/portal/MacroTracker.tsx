@@ -1,9 +1,10 @@
-import { motion } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
+import { useStudentPortal } from '../../stores/studentPortal';
 import { useMemo } from 'react';
 
 export default function MacroTracker() {
   const { darkMode: dm, foodLog } = useStore();
+  const { decryptedData } = useStudentPortal();
 
   const totals = useMemo(() => 
     foodLog.reduce((a, f) => ({ 
@@ -15,7 +16,7 @@ export default function MacroTracker() {
     [foodLog]
   );
 
-  const targets = {
+  const targets = decryptedData?.client?.nutritionGoals || {
     cal: 2200,
     p: 150,
     f: 70,
@@ -63,12 +64,12 @@ export default function MacroTracker() {
             </div>
 
             <div className={`h-2.5 rounded-full overflow-hidden ${dm ? 'bg-white/5' : 'bg-black/5'}`}>
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${Math.min((m.value / m.target) * 100, 100)}%` }}
-                transition={{ duration: 1, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                className={`h-full rounded-full transition-colors duration-500`}
-                style={{ backgroundColor: `var(--color-${m.color})` }}
+              <div
+                className={`h-full rounded-full transition-all duration-1000 ease-[0.22,1,0.36,1]`}
+                style={{ 
+                  backgroundColor: `var(--color-${m.color})`,
+                  width: `${Math.min((m.value / m.target) * 100, 100)}%`
+                }}
               />
             </div>
           </div>

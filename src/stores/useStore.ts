@@ -2,9 +2,14 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { FoodItem } from '../lib/constants'
 import { supabase } from '../lib/supabase'
+import { exercises as exerciseDB } from '../lib/exercises'
 
 // ═══════════════ Types ═══════════════
 export interface ClientNote { id: number; text: string; date: string }
+
+export interface WellnessLog {
+  id: string; date: string; rpe: number; sleep: number; energy: number; stress: number; coachFeedback?: string;
+}
 
 export interface Lead {
   id: string; name: string; phone: string; goal: string; email?: string; message?: string; notes?: string; status: 'New' | 'Contacted'; date: string;
@@ -20,6 +25,9 @@ export interface Client {
   allergens?: string[]
   athleteLevel?: 'Rookie' | 'Pro' | 'Elite'
   personalNote?: string
+  nutritionGoals?: { cal: number; p: number; f: number; c: number }
+  performanceStats?: { strength: number; explosiveness: number; endurance: number; consistency: number; nutrition: number }
+  wellnessLogs?: WellnessLog[]
 }
 
 export interface CalSession { name: string; day: string; time: string }
@@ -36,7 +44,7 @@ export interface ProgressPhoto { clientId: string; src: string; date: string }
 
 export interface SavedProgram {
   id: string; name: string; clientId?: string
-  exercises: { name: string; sets: string; reps: string; note?: string }[]
+  exercises: { name: string; sets: string; reps: string; note?: string; youtubeId?: string }[]
   createdAt: string
 }
 
@@ -186,8 +194,8 @@ export const useStore = create<AppState>()(
 
       // ─── CRM ───
       clients: [
-        { id: '1', name: 'Mina Aksoy', goal: 'Voleybol - Sıçrama', sessions: 8, max: 12, price: 5000, habitScore: 5, habitMax: 6, notes: [], phone: '', email: '', startDate: '2026-01-15', allergens: [], athleteLevel: 'Elite', personalNote: 'Sıçrama kapasiten bu hafta %15 arttı, harika gidiyorsun Mina!' },
-        { id: '2', name: 'Burcu Yılmaz', goal: 'Kuvvet / Yağ Yakımı', sessions: 0, max: 8, price: 3500, habitScore: 2, habitMax: 5, notes: [], phone: '', email: '', startDate: '2026-02-01', allergens: ['Gluten'], athleteLevel: 'Pro' },
+        { id: '1', name: 'Mina Aksoy', goal: 'Voleybol - Sıçrama', sessions: 8, max: 12, price: 5000, habitScore: 5, habitMax: 6, notes: [], phone: '', email: '', startDate: '2026-01-15', allergens: [], athleteLevel: 'Elite', personalNote: 'Sıçrama kapasiten bu hafta %15 arttı, harika gidiyorsun Mina!', nutritionGoals: { cal: 2400, p: 160, f: 70, c: 280 }, performanceStats: { strength: 85, explosiveness: 92, endurance: 74, consistency: 88, nutrition: 80 } },
+        { id: '2', name: 'Burcu Yılmaz', goal: 'Kuvvet / Yağ Yakımı', sessions: 0, max: 8, price: 3500, habitScore: 2, habitMax: 5, notes: [], phone: '', email: '', startDate: '2026-02-01', allergens: ['Gluten'], athleteLevel: 'Pro', nutritionGoals: { cal: 1800, p: 130, f: 60, c: 180 }, performanceStats: { strength: 65, explosiveness: 45, endurance: 55, consistency: 72, nutrition: 60 } },
       ],
       addClient: (c) => set(s => {
         const nClient = { ...c, name: c.name.replace(/[<>]/g, '').slice(0,100), goal: c.goal.replace(/[<>]/g, '').slice(0, 200) };
@@ -236,6 +244,9 @@ export const useStore = create<AppState>()(
       removeFood: (idx) => set(s => ({ foodLog: s.foodLog.filter((_, i) => i !== idx) })),
       setFoodLog: (foodLog) => set({ foodLog }),
       clearFoodLog: () => set({ foodLog: [] }),
+      addWellnessLog: (clientId: string, log: Omit<WellnessLog, 'id'>) => set(s => ({
+        clients: s.clients.map(c => c.id === clientId ? { ...c, wellnessLogs: [...(c.wellnessLogs || []), { ...log, id: Date.now().toString() }] } : c)
+      })),
       // ─── Habits & Streak ───
       habits: [false, false, false, false],
       setHabits: (habits) => set({ habits }),
@@ -325,9 +336,15 @@ export const useStore = create<AppState>()(
 
       // ─── Saved Programs ───
       savedPrograms: [],
-      addSavedProgram: (p) => set(s => ({
-        savedPrograms: [...s.savedPrograms, { ...p, id: Date.now().toString(), createdAt: new Date().toISOString() }]
-      })),
+      addSavedProgram: (p) => set(s => {
+        const enrichedExercises = p.exercises.map(ex => {
+          const match = exerciseDB.find((dbEx: any) => dbEx.name === ex.name);
+          return { ...ex, youtubeId: match?.youtubeId || ex.youtubeId };
+        });
+        return {
+          savedPrograms: [...s.savedPrograms, { ...p, exercises: enrichedExercises, id: Date.now().toString(), createdAt: new Date().toISOString() }]
+        };
+      }),
       deleteSavedProgram: (id) => set(s => ({ savedPrograms: s.savedPrograms.filter(p => p.id !== id) })),
 
       // ─── AI Keys ───
