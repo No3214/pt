@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 import { Scale, Ruler, FileText, CheckCircle2, ChevronRight, AlertCircle } from 'lucide-react';
+import { useTranslation } from '../../locales';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -10,6 +11,7 @@ const fadeUp = {
 };
 
 export default function StudentMeasurementForm() {
+  const { t } = useTranslation();
   const { clientId } = useParams();
   const navigate = useNavigate();
   const { clients, addMeasurement, darkMode: dm, showToast } = useStore();
@@ -25,13 +27,15 @@ export default function StudentMeasurementForm() {
     notes: '', date: new Date().toISOString().split('T')[0]
   });
 
+  const m = t.forms.measurement;
+
   if (!client) {
     return (
       <div className={`min-h-screen flex items-center justify-center p-6 ${dm ? 'bg-bg text-text-main' : 'bg-[#FAF6F1]'}`}>
         <div className="text-center space-y-4">
           <AlertCircle className="w-12 h-12 text-primary mx-auto opacity-50" />
-          <h2 className="text-2xl font-bold">Geçersiz Link</h2>
-          <p className="opacity-50">Lütfen antrenörünüzden yeni bir link talep edin.</p>
+          <h2 className="text-2xl font-bold">{m.invalid_title}</h2>
+          <p className="opacity-50">{m.invalid_desc}</p>
         </div>
       </div>
     );
@@ -40,12 +44,12 @@ export default function StudentMeasurementForm() {
   const handleSubmit = () => {
     // Basic validation
     if (!formData.weight) {
-      showToast('Lütfen kilonuzu giriniz.');
+      showToast(m.toast_weight_required);
       return;
     }
     
     addMeasurement(client.id, formData);
-    showToast('Ölçümleriniz başarıyla kaydedildi!');
+    showToast(m.toast_success);
     setIsSubmitted(true);
     setTimeout(() => navigate('/'), 3000);
   };
@@ -57,8 +61,8 @@ export default function StudentMeasurementForm() {
           <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
             <CheckCircle2 className="w-12 h-12 text-primary" />
           </div>
-          <h2 className="text-3xl font-bold tracking-tight">Kayıt Başarılı!</h2>
-          <p className="opacity-60 max-w-sm mx-auto">Gelişimin harika görünüyor! Verilerin grafiklerine yansıdı bile.</p>
+          <h2 className="text-3xl font-bold tracking-tight">{m.success_title}</h2>
+          <p className="opacity-60 max-w-sm mx-auto">{m.success_desc}</p>
         </motion.div>
       </div>
     );
@@ -67,9 +71,9 @@ export default function StudentMeasurementForm() {
   return (
     <div className={`min-h-screen py-20 px-6 ${dm ? 'bg-bg text-text-main font-sans' : 'bg-[#FAF6F1] font-sans'}`}>
       <div className="max-w-xl mx-auto text-center mb-16">
-        <p className="text-[0.7rem] font-bold text-primary uppercase tracking-[0.3em] mb-4">Gelişim Takibi</p>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">Hoş Geldin, {client.name.split(' ')[0]}!</h1>
-        <p className="opacity-40 font-medium italic">"Bugün yaptığın ölçüm, yarınki başarının temelidir."</p>
+        <p className="text-[0.7rem] font-bold text-primary uppercase tracking-[0.3em] mb-4">{t.portal.gallery_title}</p>
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">{m.welcome_title}, {client.name.split(' ')[0]}!</h1>
+        <p className="opacity-40 font-medium italic">"{m.quote}"</p>
       </div>
 
       <div className="max-w-xl mx-auto">
@@ -88,17 +92,17 @@ export default function StudentMeasurementForm() {
                    <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
                       <Scale className="text-primary w-5 h-5" />
                    </div>
-                   Vücut Kompozisyonu
+                   {m.step1_title}
                 </h2>
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                <Input label="Kilo (kg)" value={formData.weight} onChange={(v: any) => setFormData({...formData, weight: v})} placeholder="75.5" type="number" />
-                <Input label="Yağ Oranı %" value={formData.bodyFat} onChange={(v: any) => setFormData({...formData, bodyFat: v})} placeholder="15.2" type="number" />
+                <Input label={m.weight_label} value={formData.weight} onChange={(v: any) => setFormData({...formData, weight: v})} placeholder="75.5" type="number" />
+                <Input label={m.fat_label} value={formData.bodyFat} onChange={(v: any) => setFormData({...formData, bodyFat: v})} placeholder="15.2" type="number" />
               </div>
 
               <Button onClick={() => setStep(2)} disabled={!formData.weight}>
-                Çevre Ölçümlerine Geç <ChevronRight className="w-4 h-4 ml-1" />
+                {m.btn_next} <ChevronRight className="w-4 h-4 ml-1" />
               </Button>
             </motion.div>
           )}
@@ -110,22 +114,22 @@ export default function StudentMeasurementForm() {
                    <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
                       <Ruler className="text-primary w-5 h-5" />
                    </div>
-                   Çevre Ölçümleri (cm)
+                   {m.step2_title}
                 </h2>
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <Input label="Omuz" value={formData.shoulder} onChange={(v: any) => setFormData({...formData, shoulder: v})} placeholder="120" />
-                <Input label="Göğüs" value={formData.chest} onChange={(v: any) => setFormData({...formData, chest: v })} placeholder="105" />
-                <Input label="Bel" value={formData.waist} onChange={(v: any) => setFormData({...formData, waist: v})} placeholder="85" />
-                <Input label="Kalça" value={formData.hip} onChange={(v: any) => setFormData({...formData, hip: v})} placeholder="100" />
-                <Input label="Bacak" value={formData.leg} onChange={(v: any) => setFormData({...formData, leg: v})} placeholder="60" />
-                <Input label="Kol" value={formData.arm} onChange={(v: any) => setFormData({...formData, arm: v})} placeholder="35" />
+                <Input label={m.shoulder_label} value={formData.shoulder} onChange={(v: any) => setFormData({...formData, shoulder: v})} placeholder="120" />
+                <Input label={m.chest_label} value={formData.chest} onChange={(v: any) => setFormData({...formData, chest: v })} placeholder="105" />
+                <Input label={m.waist_label} value={formData.waist} onChange={(v: any) => setFormData({...formData, waist: v})} placeholder="85" />
+                <Input label={m.hip_label} value={formData.hip} onChange={(v: any) => setFormData({...formData, hip: v})} placeholder="100" />
+                <Input label={m.leg_label} value={formData.leg} onChange={(v: any) => setFormData({...formData, leg: v})} placeholder="60" />
+                <Input label={m.arm_label} value={formData.arm} onChange={(v: any) => setFormData({...formData, arm: v})} placeholder="35" />
               </div>
 
               <div className="flex gap-4">
-                <button onClick={() => setStep(1)} className="px-8 bg-text-main/5 text-text-main/60 p-5 rounded-2xl font-bold hover:bg-text-main/10 transition-all border-none">Geri</button>
-                <Button onClick={() => setStep(3)}>Son Adım</Button>
+                <button onClick={() => setStep(1)} className="px-8 bg-text-main/5 text-text-main/60 p-5 rounded-2xl font-bold hover:bg-text-main/10 transition-all border-none">{m.btn_prev}</button>
+                <Button onClick={() => setStep(3)}>{m.btn_last}</Button>
               </div>
             </motion.div>
           )}
@@ -137,16 +141,16 @@ export default function StudentMeasurementForm() {
                    <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center">
                       <FileText className="text-primary w-5 h-5" />
                    </div>
-                   Notlar & Tarih
+                   {m.step3_title}
                 </h2>
               </div>
 
               <div className="space-y-4">
-                <Input label="Ölçüm Tarihi" value={formData.date} onChange={(v: any) => setFormData({...formData, date: v})} type="date" />
+                <Input label={m.date_label} value={formData.date} onChange={(v: any) => setFormData({...formData, date: v})} type="date" />
                 <textarea 
                   value={formData.notes} 
                   onChange={e => setFormData({...formData, notes: e.target.value})}
-                  placeholder="Antrenörüne eklemek istediğin bir not var mı?"
+                  placeholder={m.note_placeholder}
                   rows={4}
                   className="w-full bg-text-main/5 border border-text-main/10 rounded-2xl p-5 focus:border-primary/40 focus:ring-1 focus:ring-primary/40 transition-all outline-none font-medium placeholder:opacity-30 resize-none"
                 />
@@ -156,14 +160,14 @@ export default function StudentMeasurementForm() {
                  <label className="flex items-start gap-3 cursor-pointer group">
                      <input type="checkbox" checked={disclaimerChecked} onChange={e => setDisclaimerChecked(e.target.checked)} className="mt-1 w-4 h-4 text-primary bg-text-main/5 border-text-main/20 rounded focus:ring-primary focus:ring-2 cursor-pointer" />
                      <span className={`text-[0.65rem] font-medium leading-relaxed ${dm ? 'text-white/50' : 'text-text-main/50'}`}>
-                       Girdiğim tüm ölçüm verilerinin doğruluğunu taahhüt ederim. Antrenman ve beslenme yönergelerinin tıbbi bir tedavi veya doktor tavsiyesi yerine geçmediğini; fiziksel veya ruhsal bir sağlık sorunum varsa bunu bildirmekle ve gerekiyorsa profesyonel medikal destek almakla yükümlü olduğumu kabul beyan ederim.
+                       {m.disclaimer}
                      </span>
                  </label>
               </div>
 
               <div className="flex gap-4">
-                <button onClick={() => setStep(2)} className="px-8 bg-text-main/5 text-text-main/60 p-5 rounded-2xl font-bold hover:bg-text-main/10 transition-all border-none cursor-pointer">Geri</button>
-                <Button onClick={handleSubmit} disabled={!disclaimerChecked}>Gönder</Button>
+                <button onClick={() => setStep(2)} className="px-8 bg-text-main/5 text-text-main/60 p-5 rounded-2xl font-bold hover:bg-text-main/10 transition-all border-none cursor-pointer">{m.btn_prev}</button>
+                <Button onClick={handleSubmit} disabled={!disclaimerChecked}>{m.btn_send}</Button>
               </div>
             </motion.div>
           )}
@@ -200,4 +204,4 @@ function Button({ children, onClick, disabled }: any) {
       {children}
     </motion.button>
   );
-}
+}

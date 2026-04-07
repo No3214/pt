@@ -1,8 +1,10 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
+import { useTranslation } from '../../locales';
 
 export default function ProgressGallery() {
+  const { t, language } = useTranslation();
   const { progressPhotos, addProgressPhoto, deleteProgressPhoto, darkMode: dm, showToast } = useStore();
   const fileRef = useRef<HTMLInputElement>(null);
   
@@ -20,17 +22,18 @@ export default function ProgressGallery() {
     dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-stone-50 border-stone-200 text-stone-700 placeholder:text-stone-400 focus:bg-white'
   }`;
 
-
-
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     const reader = new FileReader();
     reader.onload = (ev) => {
       if (ev.target?.result && typeof ev.target.result === 'string') {
-        const payload = { src: ev.target.result, date: new Date().toLocaleDateString('tr-TR') };
+        const payload = { 
+          src: ev.target.result, 
+          date: new Date().toLocaleDateString(language === 'tr' ? 'tr-TR' : 'en-US') 
+        };
         addProgressPhoto('', payload);
-        showToast('Fotoğraf başarıyla Kasaya yüklendi! 📸');
+        showToast(t.portal.gallery_toast_photo_success);
       }
     };
     reader.readAsDataURL(file);
@@ -38,12 +41,16 @@ export default function ProgressGallery() {
 
   const handleAddVideo = () => {
     if(!videoLink.trim() || !videoLink.includes('http')) {
-      showToast('Lütfen geçerli bir Youtube/Vimeo linki girin.');
+      showToast(t.portal.gallery_toast_video_error);
       return;
     }
-    setVideos(prev => [{ id: Date.now().toString(), url: videoLink, date: new Date().toLocaleDateString('tr-TR') }, ...prev]);
+    setVideos(prev => [{ 
+      id: Date.now().toString(), 
+      url: videoLink, 
+      date: new Date().toLocaleDateString(language === 'tr' ? 'tr-TR' : 'en-US') 
+    }, ...prev]);
     setVideoLink('');
-    showToast('Video koç onayına gönderildi! 🎥');
+    showToast(t.portal.gallery_toast_video_success);
   };
 
   return (
@@ -51,10 +58,10 @@ export default function ProgressGallery() {
       <div className="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-8">
         <div>
           <h2 className="font-display text-3xl font-bold flex items-center gap-3">
-             Gelişim & Form <span className="opacity-50 text-2xl">📸</span>
+             {t.portal.gallery_title} <span className="opacity-50 text-2xl">📸</span>
           </h2>
           <p className={`text-sm mt-2 max-w-sm ${dm ? 'text-white/40' : 'text-stone-500'}`}>
-            İlerlemeni takip et ve teknik analizi için form videolarını buradan Ela Hoca'ya gönder.
+            {t.portal.gallery_desc}
           </p>
         </div>
         
@@ -63,13 +70,13 @@ export default function ProgressGallery() {
              onClick={() => setActiveTab('photos')}
              className={`px-5 py-2 rounded-full text-sm font-bold transition-all cursor-pointer ${activeTab === 'photos' ? 'bg-primary text-white shadow-md' : (dm ? 'text-white/40 hover:text-white' : 'text-stone-500 hover:text-stone-800')}`}
           >
-             Öncesi / Sonrası
+             {t.portal.gallery_tab_photos}
           </button>
           <button
              onClick={() => setActiveTab('videos')}
              className={`px-5 py-2 rounded-full text-sm font-bold transition-all cursor-pointer ${activeTab === 'videos' ? 'bg-primary text-white shadow-md' : (dm ? 'text-white/40 hover:text-white' : 'text-stone-500 hover:text-stone-800')}`}
           >
-             Form Onayı
+             {t.portal.gallery_tab_videos}
           </button>
         </div>
       </div>
@@ -93,7 +100,7 @@ export default function ProgressGallery() {
                    <img src={p.src} alt="Gelişim" className="w-full h-full object-cover" />
                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
                       <span className="text-white text-xs font-semibold">{p.date}</span>
-                      <button onClick={() => deleteProgressPhoto(idx)} className="text-red-400 mt-2 text-xs font-bold w-fit cursor-pointer hover:text-red-300">Sil</button>
+                      <button onClick={() => deleteProgressPhoto(idx)} className="text-red-400 mt-2 text-xs font-bold w-fit cursor-pointer hover:text-red-300">{t.portal.gallery_btn_delete}</button>
                    </div>
                  </motion.div>
               ))}
@@ -107,13 +114,13 @@ export default function ProgressGallery() {
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-3 transition-transform group-hover:scale-110 ${dm ? 'bg-white/5' : 'bg-white shadow-sm'}`}>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                 </div>
-                <span className={`text-sm font-semibold ${dm ? 'text-white/50' : 'text-stone-500'}`}>Yeni Yükle</span>
+                <span className={`text-sm font-semibold ${dm ? 'text-white/50' : 'text-stone-500'}`}>{t.portal.gallery_upload}</span>
                 <input type="file" ref={fileRef} accept="image/*" className="hidden" onChange={handleUpload} />
               </div>
             </div>
             {progressPhotos.length === 0 && (
               <p className={`text-center py-6 text-sm ${dm ? 'text-white/30' : 'text-stone-400'}`}>
-                Henüz gelişim fotoğrafı yüklemediniz. Gelişiminizi görmek için yeni bir fotoğraf ekleyin!
+                {t.portal.gallery_empty}
               </p>
             )}
           </motion.div>
@@ -128,13 +135,13 @@ export default function ProgressGallery() {
             <div className="flex gap-4">
               <input 
                 type="text" 
-                placeholder="Youtube/Drive/Vimeo video linkini buraya yapıştır..." 
+                placeholder={t.portal.gallery_video_link}
                 value={videoLink}
                 onChange={e => setVideoLink(e.target.value)}
                 className={inp}
               />
               <button onClick={handleAddVideo} className="px-6 py-3 rounded-xl bg-primary text-white font-bold whitespace-nowrap cursor-pointer hover:bg-primary/90 transition-all shadow-lg shadow-primary/20">
-                Gönder
+                {t.portal.gallery_btn_send}
               </button>
             </div>
             
@@ -146,17 +153,17 @@ export default function ProgressGallery() {
                    </div>
                    <div className="flex-1">
                      <p className={`text-xs font-semibold mb-1 ${dm ? 'text-white/40' : 'text-stone-400'}`}>{v.date}</p>
-                     <a href={v.url} target="_blank" rel="noreferrer" className="text-sm font-medium text-blue-500 hover:underline mb-3 line-clamp-1 break-all">
+                     <a href={v.url} target="_blank" rel="noreferrer" className="text-sm font-medium text-primary hover:underline mb-3 line-clamp-1 break-all">
                        {v.url}
                      </a>
                      {v.feedback ? (
                        <div className={`p-3 rounded-lg text-sm mt-3 border-l-4 border-l-primary ${dm ? 'bg-white/5' : 'bg-white shadow-sm'}`}>
-                         <span className="font-bold opacity-50 block text-xs mb-1">Koç Geri Bildirimi:</span>
+                         <span className="font-bold opacity-50 block text-xs mb-1">{t.portal.gallery_coach_feedback}</span>
                          {v.feedback}
                        </div>
                      ) : (
                        <div className={`text-xs font-medium px-3 py-1.5 rounded-full inline-block mt-2 ${dm ? 'bg-amber-500/20 text-amber-300' : 'bg-amber-100 text-amber-700'}`}>
-                         ⏱️ Onay Bekliyor
+                         ⏱️ {t.portal.gallery_waiting}
                        </div>
                      )}
                    </div>

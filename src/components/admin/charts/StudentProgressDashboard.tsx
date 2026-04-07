@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import WeightTrendChart from './WeightTrendChart';
 import BodyCompositionChart from './BodyCompositionChart';
 import ConsistencyHeatmap from './ConsistencyHeatmap';
+import { useTranslation } from '../../../locales';
 
 interface Props {
   data: {
@@ -14,6 +15,7 @@ interface Props {
 }
 
 export default function StudentProgressDashboard({ data, dm }: Props) {
+  const { t } = useTranslation();
   const { client: _client, measurements, workoutLogs, targetWeight } = data;
 
   const card = `p-8 rounded-[2.5rem] border transition-all duration-700 overflow-hidden relative ${
@@ -30,8 +32,8 @@ export default function StudentProgressDashboard({ data, dm }: Props) {
       >
         <div className="flex justify-between items-start mb-2">
           <div>
-            <h3 className="font-display text-2xl font-bold tracking-tight">Kilo Değişim Trendi</h3>
-            <p className="text-[0.7rem] uppercase tracking-widest opacity-40 font-bold mt-1">Son 12 Hafta Analizi</p>
+            <h3 className="font-display text-2xl font-bold tracking-tight">{t.admin.chart_weight_trend}</h3>
+            <p className="text-[0.7rem] uppercase tracking-widest opacity-40 font-bold mt-1">{t.admin.chart_weight_subtitle}</p>
           </div>
           <div className="text-right">
             <span className="text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">
@@ -49,8 +51,8 @@ export default function StudentProgressDashboard({ data, dm }: Props) {
         transition={{ delay: 0.1 }}
         className={`lg:col-span-4 h-full ${card}`}
       >
-        <h3 className="font-display text-2xl font-bold tracking-tight mb-2">Disiplin Karnesi</h3>
-        <p className="text-[0.7rem] uppercase tracking-widest opacity-40 font-bold mb-8">Antrenman Devamlılığı</p>
+        <h3 className="font-display text-2xl font-bold tracking-tight mb-2">{t.admin.chart_consistency}</h3>
+        <p className="text-[0.7rem] uppercase tracking-widest opacity-40 font-bold mb-8">{t.admin.chart_consistency_subtitle}</p>
         <ConsistencyHeatmap logs={workoutLogs} dm={dm} />
       </motion.div>
 
@@ -63,8 +65,8 @@ export default function StudentProgressDashboard({ data, dm }: Props) {
       >
         <div className="flex justify-between items-start mb-6">
           <div>
-            <h3 className="font-display text-2xl font-bold tracking-tight">Vücut Kompozisyonu</h3>
-            <p className="text-[0.7rem] uppercase tracking-widest opacity-40 font-bold">V-Taper Skoru & Yağ Oranı</p>
+            <h3 className="font-display text-2xl font-bold tracking-tight">{t.admin.chart_body_comp}</h3>
+            <p className="text-[0.7rem] uppercase tracking-widest opacity-40 font-bold">{t.admin.chart_body_comp_subtitle}</p>
           </div>
         </div>
         <BodyCompositionChart data={measurements} dm={dm} />

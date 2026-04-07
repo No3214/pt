@@ -4,6 +4,7 @@ import { useStore } from '../../stores/useStore';
 import { useNavigate } from 'react-router-dom';
 import { Activity, Heart, Target, User, ChevronRight, CheckCircle2 } from 'lucide-react';
 import LegalModal from '../../components/LegalModals';
+import { useTranslation } from '../../locales';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -11,6 +12,7 @@ const fadeUp = {
 };
 
 export default function OnboardingForm() {
+  const { t } = useTranslation();
   const { addLead, darkMode: dm, showToast } = useStore();
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -28,7 +30,7 @@ export default function OnboardingForm() {
 
   const handleSubmit = async () => {
     addLead(formData);
-    showToast('Başvurunuz başarıyla alındı!');
+    showToast(t.forms.onboarding.toast_success);
     setIsSubmitted(true);
     setTimeout(() => navigate('/'), 3000);
   };
@@ -43,12 +45,14 @@ export default function OnboardingForm() {
           <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
             <CheckCircle2 className="w-12 h-12 text-primary" />
           </div>
-          <h2 className="text-3xl font-bold tracking-tight">Harika! Bilgilerin Alındı.</h2>
-          <p className="opacity-60 max-w-sm mx-auto">Antrenörün en kısa sürede seninle WhatsApp üzerinden iletişime geçecek. Hazır ol!</p>
+          <h2 className="text-3xl font-bold tracking-tight">{t.forms.onboarding.success_title}</h2>
+          <p className="opacity-60 max-w-sm mx-auto">{t.forms.onboarding.success_desc}</p>
         </motion.div>
       </div>
     );
   }
+
+  const o = t.forms.onboarding;
 
   return (
     <div className={`min-h-screen py-20 px-6 ${dm ? 'bg-bg text-text-main font-sans' : 'bg-[#FAF6F1] font-sans'}`}>
@@ -64,40 +68,40 @@ export default function OnboardingForm() {
           {step === 1 && (
             <motion.div key="step1" initial="hidden" animate="visible" exit={{ opacity: 0, x: -20 }} variants={fadeUp} className="space-y-8">
               <div>
-                <h1 className="text-4xl font-bold tracking-tight mb-3">Seni Tanıyalım.</h1>
-                <p className="opacity-50 font-medium">Temel bilgilerini girerek başlayalım.</p>
+                <h1 className="text-4xl font-bold tracking-tight mb-3">{o.step1_title}</h1>
+                <p className="opacity-50 font-medium">{o.step1_desc}</p>
               </div>
 
               <div className="space-y-4">
-                <InputGroup icon={<User />} label="Ad Soyad" value={formData.name} onChange={(v: any) => setFormData({ ...formData, name: v })} placeholder="Adın nedir?" />
-                <InputGroup icon={<Activity />} label="Telefon" value={formData.phone} onChange={(v: any) => setFormData({ ...formData, phone: v })} placeholder="05xx xxx xx xx" />
-                <InputGroup icon={<Heart />} label="E-Posta" value={formData.email} onChange={(v: any) => setFormData({ ...formData, email: v })} placeholder="opsiyonel" />
+                <InputGroup icon={<User />} label={o.name_label} value={formData.name} onChange={(v: any) => setFormData({ ...formData, name: v })} placeholder={o.name_placeholder} />
+                <InputGroup icon={<Activity />} label={o.phone_label} value={formData.phone} onChange={(v: any) => setFormData({ ...formData, phone: v })} placeholder="05xx xxx xx xx" />
+                <InputGroup icon={<Heart />} label={o.email_label} value={formData.email} onChange={(v: any) => setFormData({ ...formData, email: v })} placeholder={o.email_placeholder} />
               </div>
 
-              <Button onClick={nextStep} disabled={!formData.name || !formData.phone}>Sonraki Adım <ChevronRight className="w-4 h-4" /></Button>
+              <Button onClick={nextStep} disabled={!formData.name || !formData.phone}>{o.btn_next} <ChevronRight className="w-4 h-4" /></Button>
             </motion.div>
           )}
 
           {step === 2 && (
             <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate="visible" exit={{ opacity: 0, x: -20 }} variants={fadeUp} className="space-y-8">
               <div>
-                <h1 className="text-4xl font-bold tracking-tight mb-3">Fiziksel Durum.</h1>
-                <p className="opacity-50 font-medium">Hedeflerini buna göre optimize edeceğiz.</p>
+                <h1 className="text-4xl font-bold tracking-tight mb-3">{o.step2_title}</h1>
+                <p className="opacity-50 font-medium">{o.step2_desc}</p>
               </div>
 
               <div className="grid grid-cols-3 gap-4">
-                <InputGroup label="Yaş" value={formData.age} onChange={(v: any) => setFormData({ ...formData, age: v })} placeholder="25" type="number" />
-                <InputGroup label="Boy" value={formData.height} onChange={(v: any) => setFormData({ ...formData, height: v })} placeholder="180" type="number" />
-                <InputGroup label="Kilo" value={formData.weight} onChange={(v: any) => setFormData({ ...formData, weight: v })} placeholder="75" type="number" />
+                <InputGroup label={o.age_label} value={formData.age} onChange={(v: any) => setFormData({ ...formData, age: v })} placeholder="25" type="number" />
+                <InputGroup label={o.height_label} value={formData.height} onChange={(v: any) => setFormData({ ...formData, height: v })} placeholder="180" type="number" />
+                <InputGroup label={o.weight_label} value={formData.weight} onChange={(v: any) => setFormData({ ...formData, weight: v })} placeholder="75" type="number" />
               </div>
 
               <div className="space-y-4">
-                <InputGroup icon={<Target />} label="Hedefin Nedir?" value={formData.goal} onChange={(v: any) => setFormData({ ...formData, goal: v })} placeholder="Örn: Yağ yakımı, kas kazanımı..." />
+                <InputGroup icon={<Target />} label={o.goal_label} value={formData.goal} onChange={(v: any) => setFormData({ ...formData, goal: v })} placeholder={o.goal_placeholder} />
               </div>
 
               <div className="flex gap-4">
-                <SecondaryButton onClick={prevStep}>Geri</SecondaryButton>
-                <Button onClick={nextStep} disabled={!formData.goal}>Sonraki Adım <ChevronRight className="w-4 h-4" /></Button>
+                <SecondaryButton onClick={prevStep}>{o.btn_prev}</SecondaryButton>
+                <Button onClick={nextStep} disabled={!formData.goal}>{o.btn_next} <ChevronRight className="w-4 h-4" /></Button>
               </div>
             </motion.div>
           )}
@@ -105,34 +109,34 @@ export default function OnboardingForm() {
           {step === 3 && (
             <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate="visible" variants={fadeUp} className="space-y-8">
               <div>
-                <h1 className="text-4xl font-bold tracking-tight mb-3">Son Detaylar.</h1>
-                <p className="opacity-50 font-medium">Varsa sakatlık veya sağlık durumunu belirtmelisin.</p>
+                <h1 className="text-4xl font-bold tracking-tight mb-3">{o.step3_title}</h1>
+                <p className="opacity-50 font-medium">{o.step3_desc}</p>
               </div>
 
               <div className="space-y-4">
-                <TextArea label="Sağlık Sorunları / Sakatlıklar" value={formData.healthIssues} onChange={(v: any) => setFormData({ ...formData, healthIssues: v })} placeholder="Bel fıtığı, diz ağrısı vb." />
-                <TextArea label="Alerjiler" value={formData.allergies} onChange={(v: any) => setFormData({ ...formData, allergies: v })} placeholder="Fıstık, gluten vb." />
-                <TextArea label="Antrenöre Notun" value={formData.message} onChange={(v: any) => setFormData({ ...formData, message: v })} placeholder="Eklemek istediğin her şey..." />
+                <TextArea label={o.health_label} value={formData.healthIssues} onChange={(v: any) => setFormData({ ...formData, healthIssues: v })} placeholder={o.health_placeholder} />
+                <TextArea label={o.allergy_label} value={formData.allergies} onChange={(v: any) => setFormData({ ...formData, allergies: v })} placeholder={o.allergy_placeholder} />
+                <TextArea label={o.note_label} value={formData.message} onChange={(v: any) => setFormData({ ...formData, message: v })} placeholder={o.note_placeholder} />
               </div>
 
               <div className="space-y-4 pt-6 border-t border-text-main/10">
                  <label className="flex items-start gap-3 cursor-pointer group">
                      <input type="checkbox" checked={kvkkChecked} onChange={e => setKvkkChecked(e.target.checked)} className="mt-1 w-4 h-4 text-primary bg-transparent border-text-main/20 rounded focus:ring-primary focus:ring-2 cursor-pointer" />
                      <span className={`text-[0.7rem] sm:text-xs font-medium leading-relaxed ${dm ? 'text-white/60' : 'text-text-main/70'}`}>
-                       Sağlık beyanlarım dahil olmak üzere tüm "Özel Nitelikli Kişisel Verilerimin" işlenmesine ilişkin <button type="button" onClick={(e) => { e.preventDefault(); setLegalType('kvkk'); setLegalModalOpen(true); }} className="text-primary hover:underline font-bold bg-transparent border-none p-0 mx-1 cursor-pointer">KVKK Açık Rıza ve Aydınlatma Metni</button>'ni okudum, anladım ve tamamen kendi özgür irademle <strong className="text-text-main dark:text-white">açık rıza</strong> veriyorum.
+                       {o.kvkk_label} <button type="button" onClick={(e) => { e.preventDefault(); setLegalType('kvkk'); setLegalModalOpen(true); }} className="text-primary hover:underline font-bold bg-transparent border-none p-0 mx-1 cursor-pointer">KVKK</button>
                      </span>
                  </label>
                  <label className="flex items-start gap-3 cursor-pointer group">
                      <input type="checkbox" checked={termsChecked} onChange={e => setTermsChecked(e.target.checked)} className="mt-1 w-4 h-4 text-primary bg-transparent border-text-main/20 rounded focus:ring-primary focus:ring-2 cursor-pointer" />
                      <span className={`text-[0.7rem] sm:text-xs font-medium leading-relaxed ${dm ? 'text-white/60' : 'text-text-main/70'}`}>
-                       <button type="button" onClick={(e) => { e.preventDefault(); setLegalType('terms'); setLegalModalOpen(true); }} className="text-primary hover:underline font-bold bg-transparent border-none p-0 mr-1 cursor-pointer">Kullanım Koşullarını</button> okudum, anladım ve antrenman ile diyet programlarının medikal bir tavsiye olmadığını, oluşabilecek her türlü fiziksel/sağlıksal riskin tamamen bana ait olduğunu ve <strong className="text-text-main dark:text-white">kabul</strong> ediyorum.
+                        <button type="button" onClick={(e) => { e.preventDefault(); setLegalType('terms'); setLegalModalOpen(true); }} className="text-primary hover:underline font-bold bg-transparent border-none p-0 mr-1 cursor-pointer">{o.terms_label.split(' ')[0]}</button> {o.terms_label}
                      </span>
                  </label>
               </div>
 
               <div className="flex gap-4 pt-4">
-                <SecondaryButton onClick={prevStep}>Geri</SecondaryButton>
-                <Button onClick={handleSubmit} disabled={!kvkkChecked || !termsChecked}>Tamamla</Button>
+                <SecondaryButton onClick={prevStep}>{o.btn_prev}</SecondaryButton>
+                <Button onClick={handleSubmit} disabled={!kvkkChecked || !termsChecked}>{o.btn_complete}</Button>
               </div>
             </motion.div>
           )}

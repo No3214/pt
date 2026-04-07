@@ -30,36 +30,31 @@ export default function WellnessTracker() {
 
     try {
       // AI Performance Prompt
-      const prompt = `
-        Sen Elite bir Atletik Performans Koçusun. Bir sporcu bugün için şu wellness verilerini girdi:
-        RPE (Zorluk): ${stats.rpe}/10
-        Uyku: ${stats.sleep} saat
-        Enerji: ${stats.energy}/10
-        Stres: ${stats.stress}/10
-
-        Bu verilere dayanarak, sporcunun yarınki antrenman veya toparlanma süreci için 2-3 cümlelik, profesyonel, motive edici ve bilimsel bir tavsiye ver. Tavsiyen kısa, öz ve "Elite Athlete" vizyonunda olsun.
-      `;
+      const prompt = t.portal.wellness_prompt
+        .replace('{rpe}', stats.rpe.toString())
+        .replace('{sleep}', stats.sleep.toString())
+        .replace('{energy}', stats.energy.toString())
+        .replace('{stress}', stats.stress.toString());
 
       const aiFeedback = await callOpenRouter(prompt);
       setFeedback(aiFeedback || '');
 
       addWellnessLog(decryptedData.client.id, { ...log, coachFeedback: aiFeedback || undefined });
-      showToast('Günlük Wellness Verilerin Kaydedildi! 🧠');
+      showToast(t.portal.wellness_toast_success);
     } catch (err) {
       console.error(err);
-      showToast('AI yorumu alınamadı, ama verilerin kaydedildi.');
+      showToast(t.portal.wellness_error);
       addWellnessLog(decryptedData.client.id, log);
     } finally {
       setLoading(false);
     }
   };
 
-  const sliders = [
-    { key: 'rpe', label: 'RPE (Antrenman Zorluğu)', min: 1, max: 10, icon: '🔥' },
-    { key: 'sleep', label: 'Uyku Süresi (Saat)', min: 1, max: 12, icon: '😴' },
-    { key: 'energy', label: 'Enerji Seviyesi', min: 1, max: 10, icon: '⚡' },
-    { key: 'stress', label: 'Stres Seviyesi', min: 1, max: 10, icon: '🧠' },
-  ];
+  const sliders = t.portal.wellness_sliders.map(s => ({
+    ...s,
+    min: s.key === 'sleep' ? 1 : 1,
+    max: s.key === 'sleep' ? 12 : 10
+  }));
 
   const card = `p-8 rounded-[2.5rem] border transition-all duration-500 relative overflow-hidden h-full ${
     dm ? 'bg-white/[0.02] border-white/5 shadow-2xl shadow-black/20' : 'bg-white border-black/[0.04] shadow-xl'

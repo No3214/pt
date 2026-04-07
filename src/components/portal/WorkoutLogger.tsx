@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 import VideoModal from './VideoModal';
+import { useTranslation } from '../../locales';
 
 export default function WorkoutLogger() {
+  const { t } = useTranslation();
   const { savedPrograms, darkMode: dm, showToast } = useStore();
   const activeProgram = savedPrograms.length > 0 ? savedPrograms[savedPrograms.length - 1] : null;
 
@@ -20,7 +22,7 @@ export default function WorkoutLogger() {
   };
 
   const finishWorkout = () => {
-    showToast('Antrenman başarıyla kaydedildi! 🔥');
+    showToast(t.portal.workout_toast_success);
     setCompletedSets({});
   };
 
@@ -29,8 +31,8 @@ export default function WorkoutLogger() {
       <div className={card}>
         <div className="text-center py-10">
           <span className="text-4xl mb-4 block">🏋️‍♂️</span>
-          <h3 className="font-display text-xl font-bold mb-2">Aktif Antrenman Bulunamadı</h3>
-          <p className={`text-sm ${dm ? 'text-white/40' : 'text-stone-500'}`}>Koçunuz henüz size bir program atamadı.</p>
+          <h3 className="font-display text-xl font-bold mb-2">{t.portal.workout_not_found}</h3>
+          <p className={`text-sm ${dm ? 'text-white/40' : 'text-stone-500'}`}>{t.portal.workout_not_found_desc}</p>
         </div>
       </div>
     );
@@ -48,18 +50,18 @@ export default function WorkoutLogger() {
             <div className="flex items-center gap-3 mb-2">
               <h2 className="font-display text-3xl font-bold">{activeProgram.name}</h2>
               <span className={`px-3 py-1 rounded-full text-xs font-bold ${dm ? 'bg-primary/20 text-primary' : 'bg-primary/10 text-primary'}`}>
-                Aktif Program
+                {t.portal.workout_active}
               </span>
             </div>
             <p className={`text-sm ${dm ? 'text-white/40' : 'text-stone-500'}`}>
-              {activeProgram.exercises.length} Hareket · Toplam {totalSets} Set
+              {activeProgram.exercises.length} {t.portal.workout_movements} · {t.portal.workout_sets}: {totalSets}
             </p>
           </div>
 
           <div className="flex items-center gap-4">
             <div className="text-right">
               <div className="text-xl font-bold">{Math.round(progress)}%</div>
-              <div className={`text-xs uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-400'}`}>Tamamlandı</div>
+              <div className={`text-xs uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-400'}`}>{t.portal.workout_finished}</div>
             </div>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -68,7 +70,7 @@ export default function WorkoutLogger() {
               disabled={doneSets === 0}
               className="px-6 py-3 rounded-full text-sm font-bold bg-primary text-white border-none cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-primary/20"
             >
-              Antrenmanı Bitir
+              {t.portal.workout_btn_finish}
             </motion.button>
           </div>
         </div>
@@ -100,15 +102,15 @@ export default function WorkoutLogger() {
                         <button
                           onClick={() => setVideo({ id: ex.youtubeId!, title: ex.name })}
                           className="p-1.5 rounded-full bg-primary/10 hover:bg-primary/20 text-primary transition-colors cursor-pointer border-none flex items-center justify-center"
-                          title="Videoyu İzle"
+                          title={t.portal.gallery_tab_videos}
                         >
                           <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
                         </button>
                       )}
                     </h3>
-                    {ex.note && <p className={`text-xs mt-1 max-w-sm ${dm ? 'text-white/40' : 'text-stone-500'}`}>Not: {ex.note}</p>}
+                    {ex.note && <p className={`text-xs mt-1 max-w-sm ${dm ? 'text-white/40' : 'text-stone-500'}`}>{t.portal.note_label}: {ex.note}</p>}
                   </div>
-                  <div className={`text-sm font-medium ${dm ? 'text-white/30' : 'text-stone-400'}`}>Hedef: {ex.reps} Tekrar</div>
+                  <div className={`text-sm font-medium ${dm ? 'text-white/30' : 'text-stone-400'}`}>{t.portal.workout_target}: {ex.reps}</div>
                 </div>
 
                 <div className="space-y-2">

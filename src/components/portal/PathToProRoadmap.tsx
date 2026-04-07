@@ -3,18 +3,21 @@ import { useStudentPortal } from '../../stores/studentPortal';
 import { motion } from 'framer-motion';
 import { useTranslation } from '../../locales';
 
-const milestones = [
-  { id: 1, label: 'Rookie', status: 'completed', icon: '🐣', level: 0 },
-  { id: 2, label: 'Bölgesel Lig', status: 'active', icon: '🏐', level: 1 },
-  { id: 3, label: '2. Lig', status: 'locked', icon: '🥈', level: 2 },
-  { id: 4, label: 'Sultanlar Ligi', status: 'locked', icon: '👑', level: 3 },
-  { id: 5, label: 'Elite Pro', status: 'locked', icon: '💎', level: 4 },
-];
 
 export default function PathToProRoadmap() {
   const { darkMode: dm } = useStore();
   const { decryptedData } = useStudentPortal();
   const { t } = useTranslation();
+
+  const labels = t.portal.roadmap_milestones || ['Rookie', 'Bölgesel Lig', '2. Lig', 'Sultanlar Ligi', 'Elite Pro'];
+  const icons = ['🐣', '🏐', '🥈', '👑', '💎'];
+  const milestones = labels.map((label, i) => ({
+    id: i + 1,
+    label,
+    status: i === 0 ? 'completed' : 'locked', // Logic will be handled by currentLevel
+    icon: icons[i],
+    level: i
+  }));
   
   const currentLevel = decryptedData?.client?.athleteLevel === 'Elite' ? 4 : 
                         decryptedData?.client?.athleteLevel === 'Pro' ? 2 : 1;
@@ -35,7 +38,7 @@ export default function PathToProRoadmap() {
         <div className={`px-4 py-1.5 rounded-full text-[0.65rem] font-bold uppercase tracking-wider ${
           dm ? 'bg-primary/20 text-primary border border-primary/30' : 'bg-primary/10 text-primary border border-primary/20'
         }`}>
-          {decryptedData?.client?.athleteLevel || 'Rookie'} Rank
+          {t.portal.roadmap_rank.replace('{}', decryptedData?.client?.athleteLevel || 'Rookie')}
         </div>
       </div>
 
@@ -86,9 +89,9 @@ export default function PathToProRoadmap() {
       <div className="mt-12 p-6 rounded-3xl bg-primary/5 border border-primary/10 flex items-center gap-6 group cursor-pointer hover:bg-primary/10 transition-colors">
          <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">🎓</div>
          <div className="flex-1">
-            <h4 className="text-[0.8rem] font-black uppercase tracking-wider text-text-main mb-1">Koç Ela'dan Bir Mesaj</h4>
+            <h4 className="text-[0.8rem] font-black uppercase tracking-wider text-text-main mb-1">{t.portal.roadmap_coach_msg_title}</h4>
             <p className="text-[0.85rem] font-medium opacity-60 leading-relaxed italic">
-               "Disiplin, sultanlar ligine giden yolun anahtarıdır. Bugün yaptığın her antrenman seni zirveye bir adım daha yaklaştırıyor."
+               "{t.portal.roadmap_coach_msg_text}"
             </p>
          </div>
       </div>

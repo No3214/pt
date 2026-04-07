@@ -1,6 +1,11 @@
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine } from 'recharts';
 import { format, parseISO } from 'date-fns';
-import { tr } from 'date-fns/locale';
+import { tr, enUS, es, fr, de, it, ptBR, ru, zhCN, ja, arSA, ko, hi } from 'date-fns/locale';
+import { useTranslation } from '../../../locales';
+
+const locales: Record<string, any> = {
+  tr, en: enUS, es, fr, de, it, pt: ptBR, ru, zh: zhCN, ja, ar: arSA, ko, hi
+};
 
 interface Props {
   data: any[];
@@ -9,9 +14,12 @@ interface Props {
 }
 
 export default function WeightTrendChart({ data, targetWeight, dm }: Props) {
+  const { t, language } = useTranslation();
+  const currentLocale = locales[language] || tr;
+
   const chartData = data.map(m => ({
     ...m,
-    dateLabel: format(parseISO(m.date), 'd MMM', { locale: tr }),
+    dateLabel: format(parseISO(m.date), 'd MMM', { locale: currentLocale }),
     weightNum: parseFloat(m.weight)
   })).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
@@ -48,7 +56,7 @@ export default function WeightTrendChart({ data, targetWeight, dm }: Props) {
               boxShadow: '0 10px 30px rgba(0,0,0,0.2)' 
             }}
           />
-          <ReferenceLine y={targetWeight} stroke="#6B7280" strokeDasharray="3 3" label={{ position: 'right', value: 'HEDEF', fill: '#6B7280', fontSize: 10, fontWeight: 'bold' }} />
+          <ReferenceLine y={targetWeight} stroke="#6B7280" strokeDasharray="3 3" label={{ position: 'right', value: t.admin.chart_target_label, fill: '#6B7280', fontSize: 10, fontWeight: 'bold' }} />
           <Area 
             type="monotone" 
             dataKey="weightNum" 

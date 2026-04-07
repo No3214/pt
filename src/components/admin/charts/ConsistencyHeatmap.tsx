@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { subDays, eachDayOfInterval } from 'date-fns';
+import { useTranslation } from '../../../locales';
 
 interface Props {
   logs: { date: string; completed: boolean }[];
@@ -7,6 +8,7 @@ interface Props {
 }
 
 export default function ConsistencyHeatmap({ logs, dm }: Props) {
+  const { t } = useTranslation();
   const today = new Date();
   const last30Days = eachDayOfInterval({
     start: subDays(today, 29),
@@ -21,11 +23,11 @@ export default function ConsistencyHeatmap({ logs, dm }: Props) {
       <div className="flex justify-between items-end mb-6">
         <div>
           <div className="text-3xl font-bold text-primary">{consistencyRate}%</div>
-          <div className="text-[0.65rem] uppercase tracking-widest opacity-40 font-bold">Son 30 Gün Tutarlılık</div>
+          <div className="text-[0.65rem] uppercase tracking-widest opacity-40 font-bold">{t.admin.heatmap_consistency_label}</div>
         </div>
         <div className="text-right">
           <div className="text-xl font-bold text-text-main">{completedCount}/30</div>
-          <div className="text-[0.65rem] uppercase tracking-widest opacity-40 font-bold">Antrenman Günü</div>
+          <div className="text-[0.65rem] uppercase tracking-widest opacity-40 font-bold">{t.admin.heatmap_days_label}</div>
         </div>
       </div>
 
@@ -57,7 +59,7 @@ export default function ConsistencyHeatmap({ logs, dm }: Props) {
       </div>
       
       <p className="mt-6 text-[0.7rem] text-center opacity-30 font-medium italic">
-        "Disiplin, her gün yapılan küçük seçimlerin toplamıdır."
+        "{t.admin.heatmap_quote}"
       </p>
     </div>
   );

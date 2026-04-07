@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 import confetti from 'canvas-confetti';
+import { useTranslation } from '../../locales';
 
-const habitLabels = ['3 Litre Su', '8 Saat Uyku', 'Protein Hedefi', '10.000 Adım'];
 const habitIcons = ['💧', '💤', '🥩', '🚶'];
 
 const triggerConfetti = () => {
@@ -26,6 +26,8 @@ const triggerConfetti = () => {
 };
 
 export default function HabitCheckIn() {
+  const { t } = useTranslation();
+  const habitLabels = t.portal.habit_labels;
   const { darkMode: dm, habits, setHabits, showToast, doCheckIn } = useStore();
 
   const handleToggle = (i: number) => {
@@ -33,12 +35,12 @@ export default function HabitCheckIn() {
     next[i] = !next[i];
     setHabits(next);
     if (next[i]) {
-      showToast(`${habitLabels[i]} tamamlandı! 🚀`);
+      showToast(t.portal.habit_completed_toast.replace('{}', habitLabels[i]));
     }
     // Tüm alışkanlıklar tamamlandığında günlük check-in tetiklenir → streak artar
     if (next.every(Boolean)) {
       doCheckIn();
-      showToast('Tüm hedefler tamam — günlük serin +1! 🔥');
+      showToast(t.portal.habit_all_done_toast);
       triggerConfetti();
     }
   };
@@ -54,12 +56,12 @@ export default function HabitCheckIn() {
     <div className={card}>
       <div className="flex items-center justify-between mb-10">
         <div>
-          <h3 className="font-display text-2xl font-bold text-text-main tracking-tight">Günlük Check-in</h3>
-          <p className="text-[0.85rem] text-text-main/30 font-medium mt-1">Gelişimini takip et.</p>
+          <h3 className="font-display text-2xl font-bold text-text-main tracking-tight">{t('portal.habit_title')}</h3>
+          <p className="text-[0.85rem] text-text-main/30 font-medium mt-1">{t('portal.habit_subtitle')}</p>
         </div>
         
         {/* Progress Ring */}
-        <div className="relative w-20 h-20">
+        <div className="relative w-23 h-23">
           <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
             <circle cx="50" cy="50" r="44" fill="none" stroke={dm ? 'white' : 'black'} strokeOpacity={0.05} strokeWidth="8" />
             <motion.circle

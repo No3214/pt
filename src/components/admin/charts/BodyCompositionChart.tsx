@@ -1,6 +1,11 @@
 import { ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ComposedChart, Bar, Line } from 'recharts';
 import { format, parseISO } from 'date-fns';
-import { tr } from 'date-fns/locale';
+import { tr, enUS, es, fr, de, it, ptBR, ru, zhCN, ja, arSA, ko, hi } from 'date-fns/locale';
+import { useTranslation } from '../../../locales';
+
+const locales: Record<string, any> = {
+  tr, en: enUS, es, fr, de, it, pt: ptBR, ru, zh: zhCN, ja, ar: arSA, ko, hi
+};
 
 interface Props {
   data: any[];
@@ -8,9 +13,12 @@ interface Props {
 }
 
 export default function BodyCompositionChart({ data, dm }: Props) {
+  const { language } = useTranslation();
+  const currentLocale = locales[language] || tr;
+
   const chartData = data.map(m => ({
     ...m,
-    dateLabel: format(parseISO(m.date), 'd MMM', { locale: tr }),
+    dateLabel: format(parseISO(m.date), 'd MMM', { locale: currentLocale }),
     fatNum: parseFloat(m.bodyFat || '0'),
     vTaper: (parseFloat(m.shoulder || '0') / parseFloat(m.waist || '1')).toFixed(2)
   })).sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
@@ -36,7 +44,7 @@ export default function BodyCompositionChart({ data, dm }: Props) {
           <YAxis 
             yAxisId="right" 
             orientation="right" 
-            label={{ value: 'Yağ %', angle: 90, position: 'insideRight', fontSize: 10, fill: '#82ca9d' }}
+            label={{ value: 'Yağ %', angle: 90, position: 'insideRight', fontSize: 10, fill: '#10B981' }}
             tick={{ fontSize: 10 }}
             axisLine={false} tickLine={false}
           />

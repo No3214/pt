@@ -3,8 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 import { useStudentPortal } from '../../stores/studentPortal';
 import { callGemini } from '../../lib/ai';
+import { useTranslation } from '../../locales';
 
 export default function AiMacroAssistant() {
+  const { t } = useTranslation();
   const { darkMode: dm, foodLog, setFoodLog, showToast } = useStore();
   const { decryptedData } = useStudentPortal();
   
@@ -28,19 +30,10 @@ export default function AiMacroAssistant() {
     const clientGoal = decryptedData?.client?.goal || 'Performans';
     const clientLevel = decryptedData?.client?.athleteLevel || 'Rookie';
 
-    const prompt = `Sen profesyonel bir sporcu beslenme koçusun. Kullanıcının şu mesajını analiz et: "${input}". 
-    Lütfen bu öğündeki Protein (p), Karbonhidrat (c), Yağ (f) ve toplam Kalori (cal) değerlerini tahmin et.
-    Ayrıca kullanıcının hedefi olan "${clientGoal}" ve seviyesi olan "${clientLevel}"e göre 1 cümlelik profesyonel bir koç yorumu yap.
-    
-    YANIT FORMATI SADECE ŞU JSON OLSUN (başka metin ekleme):
-    {
-      "name": "Yemek Adı",
-      "p": sayı,
-      "c": sayı,
-      "f": sayı,
-      "cal": sayı,
-      "coachComment": "Yorumun"
-    }`;
+    const prompt = t.portal.macro_ai_prompt
+      .replace('{input}', input)
+      .replace('{clientGoal}', clientGoal)
+      .replace('{clientLevel}', clientLevel);
 
     try {
       const response = await callGemini(prompt);
@@ -52,7 +45,7 @@ export default function AiMacroAssistant() {
       }
     } catch (error) {
       console.error('AI Analysis failed:', error);
-      showToast('AI analizi sırasında bir hata oluştu.');
+      showToast(t.portal.macro_ai_error);
     } finally {
       setLoading(false);
     }
@@ -69,7 +62,7 @@ export default function AiMacroAssistant() {
     }]);
     setResult(null);
     setInput('');
-    showToast('Öğün günlüğe eklendi! 🥗');
+    showToast(t.portal.macro_ai_success);
   };
 
   const card = `p-8 rounded-[2.5rem] border transition-all duration-500 relative overflow-hidden ${
@@ -83,8 +76,8 @@ export default function AiMacroAssistant() {
       
       <div className="flex items-center justify-between mb-8 relative z-10">
         <div>
-          <h3 className="font-display text-2xl font-bold text-text-main tracking-tight">Elite AI Assistant</h3>
-          <p className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-primary mt-1">Yapay Zeka Beslenme Koçu</p>
+          <h3 className="font-display text-2xl font-bold text-text-main tracking-tight">{t.portal.macro_ai_title}</h3>
+          <p className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-primary mt-1">{t.portal.macro_ai_subtitle}</p>
         </div>
         <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${dm ? 'bg-primary/20' : 'bg-primary/10'}`}>
           <span className="text-xl">🧠</span>
@@ -95,7 +88,7 @@ export default function AiMacroAssistant() {
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Örn: 2dilim tam buğday ekmeği, 3 yumurta ve bol peynirli omlet yedim."
+          placeholder={t.portal.macro_ai_placeholder}
           className={`w-full p-5 rounded-2xl border outline-none transition-all duration-300 min-h-[120px] text-[0.95rem] resize-none ${
             dm ? 'bg-white/[0.04] border-white/10 text-white placeholder:text-white/20 focus:border-primary/40' : 'bg-black/[0.02] border-black/5 text-text-main placeholder:text-black/20 focus:border-primary/40'
           }`}
@@ -109,11 +102,11 @@ export default function AiMacroAssistant() {
           {loading ? (
             <>
               <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              <span>Analiz Ediliyor...</span>
+              <span>{t.portal.macro_ai_btn_analyzing}</span>
             </>
           ) : (
             <>
-              <span>Öğünü Analiz Et</span>
+              <span>{t.portal.macro_ai_btn_analyze}</span>
               <span className="text-lg">✨</span>
             </>
           )}
@@ -148,7 +141,7 @@ export default function AiMacroAssistant() {
               </div>
 
               <div className={`p-4 rounded-2xl border-l-4 border-l-primary mb-6 ${dm ? 'bg-primary/10' : 'bg-white shadow-sm'}`}>
-                <span className="text-[0.65rem] font-bold uppercase tracking-widest text-primary opacity-60 block mb-1">Koç Geri Bildirimi:</span>
+                <span className="text-[0.65rem] font-bold uppercase tracking-widest text-primary opacity-60 block mb-1">{t.portal.macro_ai_feedback_label}</span>
                 <p className="text-[0.85rem] font-medium leading-relaxed italic text-text-main/80">
                   "{result.coachComment}"
                 </p>
@@ -158,7 +151,7 @@ export default function AiMacroAssistant() {
                 onClick={handleAdd}
                 className="w-full py-3 rounded-xl border border-primary/20 text-primary font-bold text-xs uppercase tracking-widest hover:bg-primary hover:text-white transition-all cursor-pointer bg-transparent"
               >
-                Günlüğe Ekle
+                {t.portal.food_add}
               </button>
             </motion.div>
           )}
