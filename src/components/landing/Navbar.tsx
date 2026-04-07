@@ -57,6 +57,13 @@ export default function Navbar() {
 
   return (
     <AnimatePresence>
+      {/* Skip to main content — accessibility */}
+      <a
+        href="#ana-icerik"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[200] focus:px-6 focus:py-3 focus:bg-primary focus:text-white focus:rounded-full focus:text-sm focus:font-medium focus:shadow-lg focus:outline-none"
+      >
+        {t.nav.home}
+      </a>
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}

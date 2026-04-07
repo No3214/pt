@@ -102,19 +102,20 @@ export default function AdminLogin() {
     if (!pin || loading) return
     
     const rateData = JSON.parse(localStorage.getItem('auth_rate_limit') || '{"attempts": 0, "lockUntil": null}')
-    // Bypass lock check for testing
-    // if (rateData.lockUntil && Date.now() < rateData.lockUntil) {
-    //   showToast("Çok fazla deneme! Lütfen 15 dakika bekleyin.")
-    //   setPin('')
-    //   setError(true)
-    //   return
-    // }
-    
+    if (rateData.lockUntil && Date.now() < rateData.lockUntil) {
+      const remaining = Math.ceil((rateData.lockUntil - Date.now()) / 60000)
+      showToast(`Çok fazla deneme! ${remaining} dakika bekleyin.`)
+      setPin('')
+      setError(true)
+      setLoading(false)
+      return
+    }
+
     setLoading(true)
-    await new Promise(r => setTimeout(r, 600)) // Fake latency
+    await new Promise(r => setTimeout(r, 600))
 
     const isValid = await loginAdmin(pin)
-    
+
     if (isValid) {
       localStorage.setItem('auth_rate_limit', JSON.stringify({ attempts: 0, lockUntil: null }))
       setSuccess(true)
@@ -122,8 +123,8 @@ export default function AdminLogin() {
     } else {
       const newData = { ...rateData, attempts: (rateData.attempts || 0) + 1 }
       if (newData.attempts >= 5) {
-        newData.lockUntil = Date.now() // Disable 15 mins lock for now
-        showToast("Hatalı giriş sayısı aşıldı ancak test için kilit devre dışı bırakıldı.")
+        newData.lockUntil = Date.now() + 15 * 60 * 1000 // Lock for 15 minutes
+        showToast('Çok fazla hatalı deneme! 15 dakika bekleyin.')
       }
       localStorage.setItem('auth_rate_limit', JSON.stringify(newData))
       

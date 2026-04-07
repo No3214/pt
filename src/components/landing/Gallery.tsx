@@ -1,12 +1,17 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, memo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { RevealSection, fadeUp } from './LandingUI';
 import { useStore } from '../../stores/useStore';
 import Lightbox from '../Lightbox';
 import { useTranslation } from '../../locales';
 
-function GalleryCard({ image, index, onClick, dm }: {
-  image: { src: string; caption: string };
+interface GalleryImage {
+  src: string;
+  caption: string;
+}
+
+const GalleryCard = memo(function GalleryCard({ image, index, onClick, dm }: {
+  image: GalleryImage;
   index: number;
   onClick: () => void;
   dm: boolean;
@@ -59,7 +64,7 @@ function GalleryCard({ image, index, onClick, dm }: {
       </div>
     </motion.div>
   );
-}
+});
 
 export default function Gallery() {
   const { darkMode } = useStore();
@@ -102,7 +107,7 @@ export default function Gallery() {
           </RevealSection>
 
           <RevealSection className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 auto-rows-auto">
-            {galleryItems.map((img: any, i: number) => (
+            {galleryItems.map((img: GalleryImage, i: number) => (
               <GalleryCard
                 key={i}
                 image={img}
@@ -136,7 +141,7 @@ export default function Gallery() {
       </section>
 
       <Lightbox
-        images={galleryItems.map((img: any) => img.src)}
+        images={galleryItems.map((img: GalleryImage) => img.src)}
         currentIndex={lightboxIndex}
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}

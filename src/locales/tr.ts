@@ -146,6 +146,7 @@ export const tr = {
     ]
   },
   faq: {
+    badge: "SSS",
     title1: "Merak ettiklerin,",
     title2: "bilmen gerekenler.",
     items: [
@@ -586,5 +587,11 @@ export const tr = {
         toast_weight_required: "Lütfen kilonuzu giriniz.",
         toast_success: "Ölçümleriniz başarıyla kaydedildi!"
       }
-    }
+    },
+  notFound: {
+    title: "Sayfa bulunamadı",
+    desc: "Aradığınız sayfa mevcut değil veya taşınmış olabilir.",
+    backHome: "Ana Sayfaya Dön",
+    redirect: "{count} saniye sonra yönlendirileceksiniz"
+  }
 };

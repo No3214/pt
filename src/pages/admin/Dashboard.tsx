@@ -21,7 +21,7 @@ const stagger = {
 };
 
 export default function Dashboard() {
-  const { t, language } = useTranslation();
+  const { t, locale } = useTranslation();
   const { darkMode: dm } = useStore();
 
   return (
@@ -44,7 +44,7 @@ export default function Dashboard() {
         <div className={`px-5 py-2.5 rounded-2xl border text-[0.8rem] font-bold uppercase tracking-widest ${
           dm ? 'bg-white/5 border-white/10 text-white/40' : 'bg-white border-black/5 text-text-main/40 shadow-sm'
         }`}>
-          {new Date().toLocaleDateString(language === 'tr' ? 'tr-TR' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric' })}
+          {new Date().toLocaleDateString(locale, { day: 'numeric', month: 'long', year: 'numeric' })}
         </div>
       </motion.section>
 

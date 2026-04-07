@@ -51,14 +51,19 @@ export default function Contact() {
       setFormStatus('success');
       reset();
     } catch (err: unknown) {
-      console.error('Lead submission failed:', err);
+      // Supabase failed — save lead locally as fallback & still open WhatsApp
       addLead({
         name: data.name,
         phone: data.phone,
         goal: data.goal,
         notes: data.notes || ''
       });
+      const goalLabel = t.contact.formGoalOptions[data.goal as keyof typeof t.contact.formGoalOptions] || data.goal;
+      const msg = `${t.contact.whatsappMsg}\n\n${t.contact.formName}: ${data.name}\n${t.contact.formPhone}: ${data.phone}\n${t.contact.formGoal}: ${goalLabel}\n${t.contact.formNotes}: ${data.notes || '-'}`;
+      const whatsappUrl = `https://wa.me/${tenantConfig.brand.contact.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`;
+      window.open(whatsappUrl, '_blank');
       setFormStatus('success');
+      reset();
     }
   };
 

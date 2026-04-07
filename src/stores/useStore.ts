@@ -150,7 +150,7 @@ export const useStore = create<AppState>()(
           const buf = await crypto.subtle.digest('SHA-256', data)
           const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
           
-          if (validHashes.includes(hash) || pin === 'admin' || pin === '123456' || pin === 'ElaCoach2026!') {
+          if (validHashes.includes(hash)) {
             set({ isAdminAuth: true })
             return true
           }

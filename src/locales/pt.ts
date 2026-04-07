@@ -146,6 +146,7 @@ export const pt = {
     ]
   },
   faq: {
+    badge: "Perguntas Frequentes",
     title1: "Suas perguntas,",
     title2: "respondidas.",
     items: [
@@ -203,7 +204,7 @@ export const pt = {
     terms: "Termos de Uso",
     privacy: "Política de Privacidade"
   },
-    portal: {
+  portal: {
       title: "Dashboard do Campeão.",
       desc: "Disciplina começa onde a motivação termina. As escolhas de hoje determinam a vitória de amanhã.",
       quote: "O treino mais difícil é aquele que você começa. Você já deu esse passo.",
@@ -503,5 +504,11 @@ export const pt = {
         toast_weight_required: "Por favor, insira o seu peso.",
         toast_success: "Suas medições foram salvas com sucesso!"
       }
-    }
+  },
+  notFound: {
+    title: "Página não encontrada",
+    desc: "A página que você procura não existe ou foi movida.",
+    backHome: "Voltar ao Início",
+    redirect: "Você será redirecionado em {count} segundos"
+  }
 };

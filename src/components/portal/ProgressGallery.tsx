@@ -4,7 +4,7 @@ import { useStore } from '../../stores/useStore';
 import { useTranslation } from '../../locales';
 
 export default function ProgressGallery() {
-  const { t, language } = useTranslation();
+  const { t, locale } = useTranslation();
   const { progressPhotos, addProgressPhoto, deleteProgressPhoto, darkMode: dm, showToast } = useStore();
   const fileRef = useRef<HTMLInputElement>(null);
   
@@ -28,9 +28,9 @@ export default function ProgressGallery() {
     const reader = new FileReader();
     reader.onload = (ev) => {
       if (ev.target?.result && typeof ev.target.result === 'string') {
-        const payload = { 
-          src: ev.target.result, 
-          date: new Date().toLocaleDateString(language === 'tr' ? 'tr-TR' : 'en-US') 
+        const payload = {
+          src: ev.target.result,
+          date: new Date().toLocaleDateString(locale)
         };
         addProgressPhoto('', payload);
         showToast(t.portal.gallery_toast_photo_success);
@@ -44,10 +44,10 @@ export default function ProgressGallery() {
       showToast(t.portal.gallery_toast_video_error);
       return;
     }
-    setVideos(prev => [{ 
-      id: Date.now().toString(), 
-      url: videoLink, 
-      date: new Date().toLocaleDateString(language === 'tr' ? 'tr-TR' : 'en-US') 
+    setVideos(prev => [{
+      id: Date.now().toString(),
+      url: videoLink,
+      date: new Date().toLocaleDateString(locale)
     }, ...prev]);
     setVideoLink('');
     showToast(t.portal.gallery_toast_video_success);

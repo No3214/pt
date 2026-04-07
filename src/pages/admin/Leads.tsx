@@ -19,7 +19,7 @@ const statusColors: Record<string, string> = {
 };
 
 export default function Leads() {
-  const { t, language } = useTranslation();
+  const { t, locale } = useTranslation();
   const { darkMode: dm, updateLeadStatus, showToast, whatsappTemplates } = useStore();
   const [dbLeads, setDbLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
@@ -175,7 +175,7 @@ export default function Leads() {
                       </span>
                     </td>
                     <td className="px-8 py-5 text-[0.8rem] text-text-main/30 tabular-nums">
-                      {new Date(lead.date).toLocaleDateString(language === 'tr' ? 'tr-TR' : 'en-US', { day: 'numeric', month: 'short' })}
+                      {new Date(lead.date).toLocaleDateString(locale, { day: 'numeric', month: 'short' })}
                     </td>
                     <td className="px-8 py-5">
                       <span className={`px-3 py-1.5 rounded-lg border text-[0.7rem] font-bold uppercase tracking-wider ${statusColors[lead.status]}`}>

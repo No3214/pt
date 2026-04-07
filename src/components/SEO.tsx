@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { tenantConfig } from '../config/tenant';
 import { useTranslation, LANGUAGES } from '../locales';
+import { getLandingData } from '../data/landingData';
 
 interface SEOProps {
   title?: string;
@@ -99,6 +100,7 @@ export default function SEO({
   type = 'website',
 }: SEOProps) {
   const { language } = useTranslation();
+  const { faqItems } = getLandingData(language);
   const seoData = SEO_DESCRIPTIONS[language] || SEO_DESCRIPTIONS['tr'];
 
   const finalTitle = title || seoData.title;
@@ -183,6 +185,30 @@ export default function SEO({
     const existingLd = document.querySelector('script[data-seo="ld"]');
     if (existingLd) existingLd.remove();
 
+    // FAQ Schema (FAQPage)
+    const existingFaqLd = document.querySelector('script[data-seo="faq-ld"]');
+    if (existingFaqLd) existingFaqLd.remove();
+
+    if (faqItems.length > 0) {
+      const faqScript = document.createElement('script');
+      faqScript.setAttribute('type', 'application/ld+json');
+      faqScript.setAttribute('data-seo', 'faq-ld');
+      faqScript.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqItems.map(item => ({
+          '@type': 'Question',
+          name: item.q,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: item.a,
+          },
+        })),
+      });
+      document.head.appendChild(faqScript);
+    }
+
+    // LocalBusiness Schema
     const ldScript = document.createElement('script');
     ldScript.setAttribute('type', 'application/ld+json');
     ldScript.setAttribute('data-seo', 'ld');
@@ -223,9 +249,11 @@ export default function SEO({
     return () => {
       const ld = document.querySelector('script[data-seo="ld"]');
       if (ld) ld.remove();
+      const faqLd = document.querySelector('script[data-seo="faq-ld"]');
+      if (faqLd) faqLd.remove();
       document.querySelectorAll('link[hreflang]').forEach(el => el.remove());
     };
-  }, [finalTitle, finalDesc, canonical, ogImage, type, language, seoData.locale, seoData.keywords]);
+  }, [finalTitle, finalDesc, canonical, ogImage, type, language, seoData.locale, seoData.keywords, faqItems]);
 
   return null;
 }

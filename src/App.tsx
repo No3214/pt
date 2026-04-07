@@ -3,6 +3,7 @@ import { useEffect, lazy, Suspense } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { useStore } from './stores/useStore'
 import Landing from './pages/Landing'
+import ErrorBoundary from './components/ErrorBoundary'
 import Toast from './components/Toast'
 import Preloader from './components/Preloader'
 import CookieConsent from './components/CookieConsent'
@@ -80,7 +81,7 @@ export default function App() {
   }, [])
 
   return (
-    <>
+    <ErrorBoundary>
       <Preloader />
       <ScrollProgress />
       <ScrollToTop />
@@ -114,6 +115,6 @@ export default function App() {
       <Toast />
       <CookieConsent />
       <WhatsAppWidget />
-    </>
+    </ErrorBoundary>
   )
 }

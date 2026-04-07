@@ -56,8 +56,8 @@ export default function HabitCheckIn() {
     <div className={card}>
       <div className="flex items-center justify-between mb-10">
         <div>
-          <h3 className="font-display text-2xl font-bold text-text-main tracking-tight">{t('portal.habit_title')}</h3>
-          <p className="text-[0.85rem] text-text-main/30 font-medium mt-1">{t('portal.habit_subtitle')}</p>
+          <h3 className="font-display text-2xl font-bold text-text-main tracking-tight">{t.portal.habit_title}</h3>
+          <p className="text-[0.85rem] text-text-main/30 font-medium mt-1">{t.portal.habit_subtitle}</p>
         </div>
         
         {/* Progress Ring */}

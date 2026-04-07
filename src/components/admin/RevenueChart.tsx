@@ -3,7 +3,7 @@ import { useStore } from '../../stores/useStore';
 import { useTranslation } from '../../locales';
 
 export default function RevenueChart() {
-  const { t, language } = useTranslation();
+  const { t, locale, currency } = useTranslation();
   const { darkMode: dm } = useStore();
   
   const data = [
@@ -51,13 +51,13 @@ export default function RevenueChart() {
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} barCategoryGap="25%">
             <XAxis dataKey="month" tick={axisStyle} axisLine={false} tickLine={false} />
-            <YAxis tick={axisStyle} axisLine={false} tickLine={false} tickFormatter={v => `${language === 'tr' ? '₺' : '$'}${(v/1000).toFixed(0)}K`} width={45} />
+            <YAxis tick={axisStyle} axisLine={false} tickLine={false} tickFormatter={v => `${currency}${(v/1000).toFixed(0)}K`} width={45} />
             <Tooltip
               contentStyle={ttStyle.contentStyle}
               itemStyle={ttStyle.itemStyle}
               labelStyle={ttStyle.labelStyle}
               cursor={ttStyle.cursor}
-              formatter={(v: any) => [`${language === 'tr' ? '₺' : '$'}${v.toLocaleString(language === 'tr' ? 'tr-TR' : 'en-US')}`, t.admin.revenue_monthly]}
+              formatter={(v: any) => [`${currency}${v.toLocaleString(locale)}`, t.admin.revenue_monthly]}
             />
             <defs>
               <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">

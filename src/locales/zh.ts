@@ -146,6 +146,7 @@ export const zh = {
     ]
   },
   faq: {
+    badge: "常见问题",
     title1: "您的问题，",
     title2: "已回答。",
     items: [
@@ -203,7 +204,7 @@ export const zh = {
     terms: "使用条款",
     privacy: "隐私政策"
   },
-    portal: {
+  portal: {
       title: "冠军控制面板。",
       desc: "纪律从动力结束的地方开始。今天的选择决定明天的胜利。",
       quote: "最难的训练是你开始的那一个。你已经迈出了这一步。",
@@ -503,5 +504,11 @@ export const zh = {
         toast_weight_required: "请输入您的体重。",
         toast_success: "您的测量数据已成功保存！"
       }
-    }
+  },
+  notFound: {
+    title: "页面未找到",
+    desc: "您要查找的页面不存在或已被移动。",
+    backHome: "返回首页",
+    redirect: "您将在 {count} 秒后被重定向"
+  }
 };

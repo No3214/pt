@@ -59,9 +59,22 @@ export default function Assessment() {
   const handleProgressPhoto = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
+    // Security: validate file type and size
+    const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/webp']
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      showToast('Sadece PNG, JPEG ve WebP desteklenir.')
+      e.target.value = ''
+      return
+    }
+    if (file.size > 5 * 1024 * 1024) { // 5MB limit
+      showToast('Dosya boyutu 5MB\'ı aşamaz.')
+      e.target.value = ''
+      return
+    }
     const reader = new FileReader()
     reader.onload = (ev) => {
       const img = new Image()
+      img.onerror = () => { showToast('Geçersiz görsel dosyası.') }
       img.onload = () => {
         const canvas = document.createElement('canvas')
         const MAX = 400

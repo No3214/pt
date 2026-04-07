@@ -32,7 +32,7 @@ echo [3/5] Staging all changes...
 :: Commit
 echo.
 echo [4/5] Committing...
-"C:\Program Files\Git\cmd\git.exe" commit -m "fix: complete i18n - remove all hardcoded tr/en strings, use t.xxx across all components"
+"C:\Program Files\Git\cmd\git.exe" commit -m "feat: security hardening + i18n fixes + ErrorBoundary + FAQ schema + CSP headers"
 
 :: Push
 echo.

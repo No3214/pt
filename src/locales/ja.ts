@@ -146,6 +146,7 @@ export const ja = {
     ]
   },
   faq: {
+    badge: "よくある質問",
     title1: "あなたの質問、",
     title2: "答え。",
     items: [
@@ -203,7 +204,7 @@ export const ja = {
     terms: "利用規約",
     privacy: "プライバシーポリシー"
   },
-    portal: {
+  portal: {
       title: "チャンピオンダッシュボード。",
       desc: "規律は動機が終わるところから始まります。今日の選択が明日の勝利を決めます。",
       quote: "最も難しいワークアウトは、あなたが開始するものです。あなたはすでにそのステップを踏んでいます。",
@@ -503,5 +504,11 @@ export const ja = {
         toast_weight_required: "体重を入力してください。",
         toast_success: "測定値が正常に保存されました！"
       }
-    }
+  },
+  notFound: {
+    title: "ページが見つかりません",
+    desc: "お探しのページは存在しないか、移動されています。",
+    backHome: "ホームに戻る",
+    redirect: "{count}秒後にリダイレクトされます"
+  }
 };

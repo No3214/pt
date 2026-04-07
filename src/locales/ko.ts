@@ -146,6 +146,7 @@ export const ko = {
     ]
   },
   faq: {
+    badge: "자주 묻는 질문",
     title1: "당신의 질문,",
     title2: "답변.",
     items: [
@@ -203,7 +204,7 @@ export const ko = {
     terms: "이용약관",
     privacy: "개인 정보 보호 정책"
   },
-    portal: {
+  portal: {
       title: "챔피언 대시보드.",
       desc: "규율은 동기가 끝나는 곳에서 시작됩니다. 오늘의 선택이 내일의 승리를 결정합니다.",
       quote: "가장 어려운 운동은 시작하는 운동입니다. 당신은 이미 그 단계를 밟았습니다.",
@@ -503,5 +504,11 @@ export const ko = {
         toast_weight_required: "몸무게를 입력해 주세요.",
         toast_success: "측정값이 성공적으로 저장되었습니다!"
       }
-    }
+  },
+  notFound: {
+    title: "페이지를 찾을 수 없습니다",
+    desc: "찾으시는 페이지가 존재하지 않거나 이동되었습니다.",
+    backHome: "홈으로 돌아가기",
+    redirect: "{count}초 후 리디렉션됩니다"
+  }
 };

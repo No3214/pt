@@ -38,7 +38,7 @@ function KPICard({ label, value, sub, color, i, dm }: any) {
 }
 
 export default function KPICards() {
-  const { t, language } = useTranslation();
+  const { t, language, locale, currency } = useTranslation();
   const { clients, leads, darkMode: dm } = useStore();
   
   const stats = useMemo(() => {
@@ -49,9 +49,6 @@ export default function KPICards() {
     const compliance = totalMax > 0 ? Math.round((totalScore / totalMax) * 100) : 0;
     const newLeads = leads.filter(l => l.status === 'New').length;
     
-    const currency = language === 'tr' ? '₺' : '$';
-    const localeString = language === 'tr' ? 'tr-TR' : 'en-US';
-
     return [
       { 
         label: t.admin.kpi_active_clients, 
@@ -59,11 +56,11 @@ export default function KPICards() {
         sub: t.admin.kpi_total_registrations.replace('{}', clients.length.toString()), 
         color: 'primary' 
       },
-      { 
-        label: t.admin.kpi_monthly_revenue, 
-        value: `${currency}${mrr.toLocaleString(localeString)}`, 
-        sub: t.admin.kpi_monthly_recurring, 
-        color: 'secondary' 
+      {
+        label: t.admin.kpi_monthly_revenue,
+        value: `${currency}${mrr.toLocaleString(locale)}`,
+        sub: t.admin.kpi_monthly_recurring,
+        color: 'secondary'
       },
       { 
         label: t.admin.kpi_compliance_score, 

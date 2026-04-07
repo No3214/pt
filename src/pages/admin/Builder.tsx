@@ -509,8 +509,16 @@ export default function Builder() {
           <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '2.5rem', color: '#1C1917', margin: 0 }}>ELA EBEOĞLU</h2>
           <div style={{ fontSize: '0.9rem', color: '#C2684A', letterSpacing: 4, marginTop: '0.5rem', fontWeight: 600 }}>PERFORMANCE COACHING</div>
         </div>
-        <div style={{ whiteSpace: 'pre-wrap', fontSize: '1.15rem', lineHeight: 1.7, color: '#333' }}
-          dangerouslySetInnerHTML={{ __html: sanitize(waPreview).replace(/\n/g, '<br>').replace(/\*(.*?)\*/g, '<strong>$1</strong>') }} />
+        <div style={{ whiteSpace: 'pre-wrap', fontSize: '1.15rem', lineHeight: 1.7, color: '#333' }}>
+          {waPreview.split('\n').map((line, i) => (
+            <span key={i}>
+              {line.split(/\*(.*?)\*/g).map((part, j) =>
+                j % 2 === 1 ? <strong key={j}>{part}</strong> : part
+              )}
+              {i < waPreview.split('\n').length - 1 && <br />}
+            </span>
+          ))}
+        </div>
         <div style={{ marginTop: '2.5rem', textAlign: 'center', fontSize: '0.85rem', color: '#57534E', opacity: 0.8, borderTop: '1px solid rgba(0,0,0,0.1)', paddingTop: '1rem' }}>
           📸 @ela.ebeoglu
         </div>

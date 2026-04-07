@@ -36,6 +36,7 @@ export default function Landing() {
       <Navbar />
 
       {/* Hero Section */}
+      <main id="ana-icerik">
       <Hero />
 
       {/* Infinite Scroll Trust Banner */}
@@ -67,6 +68,7 @@ export default function Landing() {
 
       {/* Footer */}
       <Footer />
+      </main>
     </div>
   );
 }

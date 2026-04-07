@@ -146,6 +146,7 @@ export const en = {
     ]
   },
   faq: {
+    badge: "FAQ",
     title1: "Your questions,",
     title2: "answered.",
     items: [
@@ -586,5 +587,11 @@ export const en = {
         toast_weight_required: "Please enter your weight.",
         toast_success: "Your measurements have been successfully saved!"
       }
-    }
+    },
+  notFound: {
+    title: "Page not found",
+    desc: "The page you are looking for does not exist or has been moved.",
+    backHome: "Back to Home",
+    redirect: "You will be redirected in {count} seconds"
+  }
 };

@@ -146,6 +146,7 @@ export const de = {
     ]
   },
   faq: {
+    badge: "FAQ",
     title1: "Deine Fragen,",
     title2: "beantwortet.",
     items: [
@@ -203,7 +204,7 @@ export const de = {
     terms: "Nutzungsbedingungen",
     privacy: "Datenschutzerklärung"
   },
-    portal: {
+  portal: {
       title: "Champion Dashboard.",
       desc: "Disziplin beginnt, wo Motivation endet. Die heutigen Entscheidungen bestimmen morgen den Sieg.",
       quote: "Das schwierigste Training ist das, das du beginnst. Du hast diesen Schritt bereits gemacht.",
@@ -503,5 +504,11 @@ export const de = {
         toast_weight_required: "Bitte geben Sie Ihr Gewicht ein.",
         toast_success: "Ihre Messungen wurden erfolgreich gespeichert!"
       }
-    }
+  },
+  notFound: {
+    title: "Seite nicht gefunden",
+    desc: "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    backHome: "Zurück zur Startseite",
+    redirect: "Sie werden in {count} Sekunden weitergeleitet"
+  }
 };

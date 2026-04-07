@@ -14,7 +14,7 @@ interface Payment {
 }
 
 export default function PaymentTracker() {
-  const { t, language } = useTranslation()
+  const { t, locale, currency } = useTranslation()
   const { clients } = useStore()
   const darkMode = useStore(s => s.darkMode)
   const [filter, setFilter] = useState<'all' | 'completed' | 'pending' | 'overdue'>('all')
@@ -83,7 +83,7 @@ export default function PaymentTracker() {
           <div key={i} className={`p-5 rounded-2xl border text-center ${darkMode ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-[#FAF6F1] border-black/[0.04]'}`}>
             <span className="text-2xl block mb-2">{stat.icon}</span>
             <div className={`font-display text-xl font-bold ${stat.color}`}>
-              {language === 'tr' ? '₺' : '$'}{stat.value.toLocaleString(language === 'tr' ? 'tr-TR' : 'en-US')}
+              {currency}{stat.value.toLocaleString(locale)}
             </div>
             <div className={`text-[0.6rem] font-bold uppercase tracking-widest mt-1 ${darkMode ? 'text-white/30' : 'text-black/30'}`}>
               {stat.label}
@@ -133,12 +133,12 @@ export default function PaymentTracker() {
               <div>
                 <div className="font-bold text-sm">{p.clientName}</div>
                 <div className={`text-xs ${darkMode ? 'text-white/30' : 'text-black/30'}`}>
-                  {p.package} • {p.method} • {new Intl.DateTimeFormat(language === 'tr' ? 'tr-TR' : 'en-US', { month: 'short', year: 'numeric' }).format(new Date(p.date))}
+                  {p.package} • {p.method} • {new Intl.DateTimeFormat(locale, { month: 'short', year: 'numeric' }).format(new Date(p.date))}
                 </div>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <span className="font-bold text-sm">{language === 'tr' ? '₺' : '$'}{p.amount.toLocaleString(language === 'tr' ? 'tr-TR' : 'en-US')}</span>
+              <span className="font-bold text-sm">{currency}{p.amount.toLocaleString(locale)}</span>
               <span className={`px-2.5 py-1 rounded-lg text-[0.6rem] font-bold border ${statusConfig[p.status].color}`}>
                 {statusConfig[p.status].icon} {statusConfig[p.status].label}
               </span>

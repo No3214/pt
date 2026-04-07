@@ -48,8 +48,24 @@ export const LANGUAGES: { code: string; name: string; nativeName: string; flag: 
   { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी', flag: '🇮🇳' },
 ];
 
+// Locale string mapping for Intl APIs (date, number, currency)
+export const LOCALE_MAP: Record<string, string> = {
+  tr: 'tr-TR', en: 'en-US', es: 'es-ES', fr: 'fr-FR', de: 'de-DE',
+  it: 'it-IT', pt: 'pt-BR', ru: 'ru-RU', zh: 'zh-CN', ja: 'ja-JP',
+  ar: 'ar-SA', ko: 'ko-KR', hi: 'hi-IN',
+};
+
+// Currency per language (admin panel)
+export const CURRENCY_MAP: Record<string, string> = {
+  tr: '₺', en: '$', es: '€', fr: '€', de: '€',
+  it: '€', pt: 'R$', ru: '₽', zh: '¥', ja: '¥',
+  ar: 'ر.س', ko: '₩', hi: '₹',
+};
+
 export function useTranslation() {
   const { language } = useStore();
   const t = dictionaries[language] || dictionaries['tr'];
-  return { t, language };
+  const locale = LOCALE_MAP[language] || 'tr-TR';
+  const currency = CURRENCY_MAP[language] || '₺';
+  return { t, language, locale, currency };
 }

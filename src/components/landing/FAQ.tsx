@@ -1,11 +1,11 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RevealSection, fadeUp } from './LandingUI';
 import { getLandingData } from '../../data/landingData';
 import { useStore } from '../../stores/useStore';
 import { useTranslation } from '../../locales';
 
-function FaqItem({ question, answer, index, dm }: { question: string; answer: string; index: number; dm: boolean }) {
+const FaqItem = memo(function FaqItem({ question, answer, index, dm }: { question: string; answer: string; index: number; dm: boolean }) {
   const [open, setOpen] = useState(false);
   return (
     <motion.div variants={fadeUp} custom={index}
@@ -48,7 +48,7 @@ function FaqItem({ question, answer, index, dm }: { question: string; answer: st
       </AnimatePresence>
     </motion.div>
   );
-}
+});
 
 export default function FAQ() {
   const { darkMode, language } = useStore();
