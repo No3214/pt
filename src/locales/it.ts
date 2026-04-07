@@ -4,6 +4,12 @@ export const it = {
     ready: "Pronto",
     limitedSpots: "Posti Limitati",
     scrollHint: "Scopri",
+    stats: [
+      { value: 20, suffix: "+", label: "Clienti Attivi" },
+      { value: 8, suffix: "+", label: "Anni Volley" },
+      { value: 96, suffix: "", label: "Libreria Esercizi" },
+      { value: 100, suffix: "%", label: "Soddisfazione" }
+    ]
   },
   nav: {
     home: "Home",
@@ -65,7 +71,21 @@ export const it = {
       u1: "Il mio salto verticale è aumentato di 12 cm in 3 mesi. Il sistema di Coach Ela è definitivamente in una categoria a parte.",
       u2: "Sto avendo una stagione infortunio-free e molto forte. L'allenamento di forza è incredibilmente efficace.",
       u3: "La mia confidenza e agilità in campo sono migliorate. Un programma completamente adattato alla mia prestazione in gara."
-    }
+    },
+    items: [
+      { 
+        text: "Il mio salto verticale è aumentato di 12 cm in 3 mesi. Il sistema di Coach Ela è definitivamente in una categoria a parte.", 
+        name: "Ayşe K.", role: "Pallavolista", metric: "+12cm salto", image: "/ela_real_30.png"
+      },
+      { 
+        text: "Sto avendo una stagione infortunio-free e molto forte. L'allenamento di forza è incredibilmente efficace.", 
+        name: "Deniz Y.", role: "Atleta Professionista", metric: "Zero Infortuni", image: "/ela_real_32.png"
+      },
+      { 
+        text: "La mia confidenza e agilità in campo sono migliorate. Un programma completamente adattato alla mia prestazione in gara.", 
+        name: "Selin B.", role: "Fitness & Volley", metric: "+8cm Mobilità", image: "/ela_real_19.png"
+      }
+    ]
   },
   programs: {
     badge: "INVESTIMENTO",
@@ -93,12 +113,48 @@ export const it = {
       p2_desc: "Domina il campo.",
       p3_name: "Uno-a-Uno",
       p3_desc: "Coaching VIP e rapporti."
-    }
+    },
+    items: [
+      {
+        name: "Coaching Online",
+        price: "75",
+        period: "/mese",
+        desc: "Piano di allenamento personalizzato e monitoraggio nutrizionale di base",
+        features: ["Piano di allenamento personalizzato", "Aggiornamento settimanale del piano", "Supporto WhatsApp", "Video di controllo forma", "Guida nutrizionale di base"],
+        color: "secondary",
+        popular: false
+      },
+      {
+        name: "Volley d'Élite",
+        price: "90",
+        period: "/mese",
+        desc: "Salto verticale, atletismo e allenamento specifico per il campo",
+        features: ["Coaching Online incluso", "Protocollo salto e esplosività", "Allenamento specifico per posizione", "Analisi video e feedback", "Programma prevenzione infortuni", "Videochiamata settimanale 1:1"],
+        color: "primary",
+        popular: true,
+        featured: true
+      },
+      {
+        name: "Crescita Premium",
+        price: "150",
+        period: "/mese",
+        desc: "Coaching olistico con piano nutrizionale completo basato su TDEE",
+        features: ["Volley d'Élite incluso", "Piano nutrizionale basato su TDEE", "Monitoraggio giornaliero macro", "Accesso al portale clienti", "Guida agli integratori", "Supporto prioritario 24/7", "Analisi corporea mensile"],
+        color: "accent",
+        popular: false
+      }
+    ]
   },
   faq: {
-    badge: "D & R",
     title1: "Le tue domande,",
-    title2: "risposte."
+    title2: "risposte.",
+    items: [
+      { q: "Come inizio il programma?", a: "Dopo aver compilato il modulo di richiesta, ti contatto tramite WhatsApp. Discutiamo i tuoi obiettivi in una chiamata introduttiva gratuita di 15 minuti e determiniamo il programma adatto." },
+      { q: "Come funziona l'allenamento online?", a: "Il tuo programma personalizzato viene inviato tramite l'app con esercizi spiegati in video. Controllo la tua forma con check-in settimanali e aggiorno il programma quando necessario." },
+      { q: "È incluso un piano nutrizionale?", a: "Il monitoraggio nutrizionale di base è incluso nel Coaching Online. Il pacchetto Crescita Premium include un piano nutrizionale completo calcolato in base al tuo TDEE, monitoraggio dei macro e consulenza nutrizionale 1-a-1." },
+      { q: "Non gioco a pallavolo, posso iscrivermi?", a: "Certamente! Anche se il pacchetto Volley d'Élite è specifico per il campo, il Coaching Online e la Crescita Premium sono adatti a tutti i livelli. Puntiamo a obiettivi di forza, postura e fitness generale." },
+      { q: "Quando vedrò i risultati?", a: "Con un tracciamento disciplinato, i cambiamenti visibili iniziano nelle prime 4 settimane. Trasformazioni serie avvengono in un periodo di 3 mesi. La costanza porta sempre risultati." }
+    ]
   },
   gallery: {
     badge: "Galleria",

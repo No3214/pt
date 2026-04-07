@@ -4,6 +4,12 @@ export const pt = {
     ready: "Pronto",
     limitedSpots: "Vagas Limitadas",
     scrollHint: "Descubra",
+    stats: [
+      { value: 20, suffix: "+", label: "Clientes Ativos" },
+      { value: 8, suffix: "+", label: "Anos de Vôlei" },
+      { value: 96, suffix: "", label: "Biblioteca de Exercícios" },
+      { value: 100, suffix: "%", label: "Satisfação" }
+    ]
   },
   nav: {
     home: "Início",
@@ -65,7 +71,21 @@ export const pt = {
       u1: "Meu salto vertical aumentou 12cm em 3 meses. O sistema da Coach Ela está definitivamente em outra liga.",
       u2: "Estou tendo uma temporada sem lesões e muito forte. O treinamento de força é incrivelmente eficaz.",
       u3: "Minha confiança e agilidade em quadra melhoraram. Um programa completamente adaptado ao meu desempenho em jogo."
-    }
+    },
+    items: [
+      { 
+        text: "Meu salto vertical aumentou 12cm em 3 meses. O sistema da Coach Ela está definitivamente em outra liga.", 
+        name: "Ayşe K.", role: "Jogadora de Vôlei", metric: "+12cm salto", image: "/ela_real_30.png"
+      },
+      { 
+        text: "Estou tendo uma temporada sem lesões e muito forte. O treinamento de força é incrivelmente eficaz.", 
+        name: "Deniz Y.", role: "Atleta Profissional", metric: "Zero Lesões", image: "/ela_real_32.png"
+      },
+      { 
+        text: "Minha confiança e agilidade em quadra melhoraram. Um programa completamente adaptado ao meu desempenho em jogo.", 
+        name: "Selin B.", role: "Fitness & Vôlei", metric: "+8cm Mobilidade", image: "/ela_real_19.png"
+      }
+    ]
   },
   programs: {
     badge: "INVESTIMENTO",
@@ -93,12 +113,48 @@ export const pt = {
       p2_desc: "Domine a quadra.",
       p3_name: "Um-a-Um",
       p3_desc: "Coaching VIP e relatórios."
-    }
+    },
+    items: [
+      {
+        name: "Coaching Online",
+        price: "75",
+        period: "/mês",
+        desc: "Plano de treino personalizado e acompanhamento nutricional básico",
+        features: ["Plano de treino personalizado", "Atualização semanal do plano", "Suporte WhatsApp", "Vídeos de verificação de forma", "Guia nutricional básico"],
+        color: "secondary",
+        popular: false
+      },
+      {
+        name: "Voleibol de Elite",
+        price: "90",
+        period: "/mês",
+        desc: "Salto vertical, atletismo e treino específico para quadra",
+        features: ["Coaching Online incluído", "Protocolo de salto e explosividade", "Treino específico por posição", "Análise de vídeo e feedback", "Programa de prevenção de lesões", "Chamada de vídeo semanal 1:1"],
+        color: "primary",
+        popular: true,
+        featured: true
+      },
+      {
+        name: "Crescimento Premium",
+        price: "150",
+        period: "/mês",
+        desc: "Coaching holístico com plano nutricional completo baseado em TDEE",
+        features: ["Voleibol de Elite incluído", "Plano nutricional baseado em TDEE", "Acompanhamento diário de macros", "Acesso ao portal do cliente", "Orientação de suplementos", "Suporte prioritário 24/7", "Análise corporal mensal"],
+        color: "accent",
+        popular: false
+      }
+    ]
   },
   faq: {
-    badge: "P & R",
     title1: "Suas perguntas,",
-    title2: "respondidas."
+    title2: "respondidas.",
+    items: [
+      { q: "Como começo o programa?", a: "Depois de preencher o formulário de inscrição, entrarei em contacto consigo via WhatsApp. Discutimos os seus objetivos numa chamada introdutória gratuita de 15 minutos e determinamos o programa adequado." },
+      { q: "Como funciona o treino online?", a: "O seu programa personalizado é enviado através da aplicação com exercícios explicados em vídeo. Verifico a sua forma com check-ins semanais e atualizo o programa quando necessário." },
+      { q: "O plano nutricional está incluído?", a: "O acompanhamento nutricional básico está incluído no Coaching Online. O pacote Crescimento Premium inclui um plano nutricional completo calculado de acordo com o seu TDEE, acompanhamento de macros e consultoria nutricional 1-a-1." },
+      { q: "Não jogo vôlei, posso inscrever-me?", a: "Claro! Embora o pacote Voleibol de Elite seja específico para a quadra, o Coaching Online e o Crescimento Premium são adequados para todos os níveis. Focamo-nos em objetivos de força, postura e fitness geral." },
+      { q: "Quando verei resultados?", a: "Com um acompanhamento disciplinado, as mudanças visíveis começam nas primeiras 4 semanas. Transformações sérias ocorrem num período de 3 meses. A consistência traz sempre resultados." }
+    ]
   },
   gallery: {
     badge: "Galeria",

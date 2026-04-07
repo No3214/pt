@@ -4,6 +4,12 @@ export const de = {
     ready: "Bereit",
     limitedSpots: "Begrenzte Plätze",
     scrollHint: "Entdecken",
+    stats: [
+      { value: 20, suffix: "+", label: "Aktive Kunden" },
+      { value: 8, suffix: "+", label: "Jahre Volleyball" },
+      { value: 96, suffix: "", label: "Übungsbibliothek" },
+      { value: 100, suffix: "%", label: "Zufriedenheit" }
+    ]
   },
   nav: {
     home: "Startseite",
@@ -65,7 +71,21 @@ export const de = {
       u1: "Mein Vertikalsprung ist in 3 Monaten um 12 cm gestiegen. Coach Elas System ist definitiv in einer anderen Liga.",
       u2: "Ich habe eine verletzungsfreie, sehr starke Saison. Das Krafttraining ist unglaublich effektiv.",
       u3: "Mein Selbstvertrauen und meine Agilität auf dem Platz haben sich verbessert. Ein Programm, das komplett auf meine Spielleistung abgestimmt ist."
-    }
+    },
+    items: [
+      { 
+        text: "Mein Vertikalsprung ist in 3 Monaten um 12 cm gestiegen. Coach Elas System ist definitiv in einer anderen Liga.", 
+        name: "Ayşe K.", role: "Volleyballspielerin", metric: "+12cm Sprung", image: "/ela_real_30.png"
+      },
+      { 
+        text: "Ich habe eine verletzungsfreie, sehr starke Saison. Das Krafttraining ist unglaublich effektiv.", 
+        name: "Deniz Y.", role: "Profisportler", metric: "Keine Verletzungen", image: "/ela_real_32.png"
+      },
+      { 
+        text: "Mein Selbstvertrauen und meine Agilität auf dem Platz haben sich verbessert. Ein Programm, das komplett auf meine Spielleistung abgestimmt ist.", 
+        name: "Selin B.", role: "Fitness & Volleyball", metric: "+8cm Mobilität", image: "/ela_real_19.png"
+      }
+    ]
   },
   programs: {
     badge: "INVESTITION",
@@ -93,12 +113,48 @@ export const de = {
       p2_desc: "Dominiere den Platz.",
       p3_name: "Eins-zu-Eins",
       p3_desc: "VIP-Coaching und Berichte."
-    }
+    },
+    items: [
+      {
+        name: "Online-Coaching",
+        price: "75",
+        period: "/Monat",
+        desc: "Maßgeschneiderter Trainingsplan und grundlegende Ernährungsverfolgung",
+        features: ["Maßgeschneiderter Trainingsplan", "Wöchentliche Planaktualisierung", "WhatsApp-Support", "Videos zur Formkontrolle", "Grundlegender Ernährungsleitfaden"],
+        color: "secondary",
+        popular: false
+      },
+      {
+        name: "Elite Volleyball",
+        price: "90",
+        period: "/Monat",
+        desc: "Vertikalsprung, Athletik und spielfeldspezifisches Training",
+        features: ["Inklusive Online-Coaching", "Sprung- & Explosivitätsprotokoll", "Positionsspezifisches Training", "Videoanalyse & Feedback", "Verletzungspräventionsprogramm", "Wöchentlicher 1:1 Videoanruf"],
+        color: "primary",
+        popular: true,
+        featured: true
+      },
+      {
+        name: "Premium-Wachstum",
+        price: "150",
+        period: "/Monat",
+        desc: "Ganzheitliches Coaching mit vollständigem TDEE-basiertem Ernährungsplan",
+        features: ["Inklusive Elite Volleyball", "TDEE-basierter Ernährungsplan", "Tägliche Makro-Verfolgung", "Zugriff auf das Kundenportal", "Beratung zu Supplementen", "Priorisierter 24/7 Support", "Monatliche Körperanalyse"],
+        color: "accent",
+        popular: false
+      }
+    ]
   },
   faq: {
-    badge: "F & A",
     title1: "Deine Fragen,",
-    title2: "beantwortet."
+    title2: "beantwortet.",
+    items: [
+      { q: "Wie starte ich das Programm?", a: "Nachdem Sie das Anmeldeformular ausgefüllt haben, kontaktiere ich Sie per WhatsApp. Wir besprechen Ihre Ziele in einem kostenlosen 15-minütigen Einführungsgespräch und bestimmen das passende Programm." },
+      { q: "Wie funktioniert Online-Training?", a: "Ihr maßgeschneidertes Programm wird über die App mit videoerklärten Übungen versendet. Ich überprüfe Ihre Form bei wöchentlichen Check-ins und aktualisiere das Programm bei Bedarf." },
+      { q: "Ist ein Ernährungsplan enthalten?", a: "Eine grundlegende Ernährungsverfolgung ist im Online-Coaching enthalten. Das Premium-Wachstum-Paket beinhaltet einen vollständigen TDEE-berechneten Ernährungsplan, Makro-Verfolgung und 1-zu-1-Ernährungsberatung." },
+      { q: "Ich spiele kein Volleyball, kann ich trotzdem teilnehmen?", a: "Natürlich! Obwohl das Elite-Volleyball-Paket spielfeldspezifisch ist, sind Online-Coaching und Premium-Wachstum für alle Level geeignet. Wir konzentrieren uns auf Kraft, Haltung und allgemeine Fitnessziele." },
+      { q: "Wann sehe ich Ergebnisse?", a: "Bei diszipliniertem Tracking beginnen sichtbare Veränderungen in den ersten 4 Wochen. Ernsthafte Transformationen erfolgen über einen Zeitraum von 3 Monaten. Beständigkeit führt immer zum Erfolg." }
+    ]
   },
   gallery: {
     badge: "Galerie",

@@ -4,6 +4,12 @@ export const fr = {
     ready: "Prêt",
     limitedSpots: "Places Limitées",
     scrollHint: "Découvrez",
+    stats: [
+      { value: 20, suffix: "+", label: "Clients Actifs" },
+      { value: 8, suffix: "+", label: "Années de Volley" },
+      { value: 96, suffix: "", label: "Bibliothèque d'Exercices" },
+      { value: 100, suffix: "%", label: "Satisfaction" }
+    ]
   },
   nav: {
     home: "Accueil",
@@ -65,7 +71,21 @@ export const fr = {
       u1: "Mon saut vertical a augmenté de 12 cm en 3 mois. Le système de Coach Ela est définitivement dans une ligue à part.",
       u2: "Je passe une saison sans blessures et très forte. L'entraînement en force est incroyablement efficace.",
       u3: "Ma confiance et mon agilité sur le terrain se sont améliorées. Un programme complètement adapté à ma performance de match."
-    }
+    },
+    items: [
+      { 
+        text: "Mon saut vertical a augmenté de 12 cm en 3 mois. Le système de Coach Ela est définitivement dans une ligue à part.", 
+        name: "Ayşe K.", role: "Joueuse de Volley", metric: "+12cm saut", image: "/ela_real_30.png"
+      },
+      { 
+        text: "Je passe une saison sans blessures et très forte. L'entraînement en force est incroyablement efficace.", 
+        name: "Deniz Y.", role: "Athlète Professionnel", metric: "Zéro Blessure", image: "/ela_real_32.png"
+      },
+      { 
+        text: "Ma confiance et mon agilité sur le terrain se sont améliorées. Un programme complètement adapté à ma performance de match.", 
+        name: "Selin B.", role: "Fitness & Volley", metric: "+8cm Mobilité", image: "/ela_real_19.png"
+      }
+    ]
   },
   programs: {
     badge: "INVESTISSEMENT",
@@ -93,12 +113,48 @@ export const fr = {
       p2_desc: "Dominez le terrain.",
       p3_name: "Un-à-Un",
       p3_desc: "Coaching VIP et rapports."
-    }
+    },
+    items: [
+      {
+        name: "Coaching en Ligne",
+        price: "75",
+        period: "/mois",
+        desc: "Programme d'entraînement personnalisé et suivi nutritionnel de base",
+        features: ["Programme d'entraînement personnalisé", "Mise à jour hebdomadaire du plan", "Support WhatsApp", "Vidéos de vérification de forme", "Guide nutritionnel de base"],
+        color: "secondary",
+        popular: false
+      },
+      {
+        name: "Volleyball d'Élite",
+        price: "90",
+        period: "/mois",
+        desc: "Saut vertical, athlétisme et entraînement spécifique au terrain",
+        features: ["Coaching en Ligne inclus", "Protocole de saut et d'explosivité", "Entraînement spécifique par position", "Analyse vidéo et retour d'information", "Programme de prévention des blessures", "Appel vidéo hebdomadaire 1:1"],
+        color: "primary",
+        popular: true,
+        featured: true
+      },
+      {
+        name: "Croissance Premium",
+        price: "150",
+        period: "/mois",
+        desc: "Coaching holistique avec plan nutritionnel complet basé sur le TDEE",
+        features: ["Volleyball d'Élite inclus", "Plan nutritionnel basé sur le TDEE", "Suivi quotidien des macros", "Accès au portail client", "Conseils en suppléments", "Support prioritaire 24/7", "Analyse corporelle mensuelle"],
+        color: "accent",
+        popular: false
+      }
+    ]
   },
   faq: {
-    badge: "Q & R",
     title1: "Vos questions,",
-    title2: "répondues."
+    title2: "répondues.",
+    items: [
+      { q: "Comment commencer le programme ?", a: "Après avoir rempli le formulaire de demande, je vous contacte via WhatsApp. Nous discutons de vos objectifs lors d'un appel d'introduction gratuit de 15 minutes et déterminons le programme approprié." },
+      { q: "Comment fonctionne l'entraînement en ligne ?", a: "Votre programme personnalisé est envoyé via l'application avec des exercices expliqués en vidéo. Je vérifie votre forme avec des check-ins hebdomadaires et mets à jour le programme si nécessaire." },
+      { q: "Un plan nutritionnel est-il inclus ?", a: "Un suivi nutritionnel de base est inclus dans le Coaching en Ligne. Le forfait Croissance Premium comprend un plan nutritionnel complet calculé selon votre TDEE, un suivi des macros et des conseils nutritionnels personnalisés." },
+      { q: "Je ne joue pas au volley-ball, puis-je m'inscrire ?", a: "Bien sûr ! Bien que le forfait Volleyball d'Élite soit spécifique au terrain, le Coaching en Ligne et la Croissance Premium conviennent à tous les niveaux. Nous visons des objectifs de force, de posture et de fitness général." },
+      { q: "Quand verrai-je des résultats ?", a: "Avec un suivi discipliné, des changements visibles commencent dès les 4 premières semaines. Des transformations sérieuses se produisent sur une période de 3 mois. La régularité donne toujours des résultats." }
+    ]
   },
   gallery: {
     badge: "Galerie",

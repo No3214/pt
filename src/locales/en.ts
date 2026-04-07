@@ -4,6 +4,12 @@ export const en = {
     ready: "Ready",
     limitedSpots: "Limited Spots",
     scrollHint: "Discover",
+    stats: [
+      { value: 20, suffix: "+", label: "Active Clients" },
+      { value: 8, suffix: "+", label: "Years Volleyball" },
+      { value: 96, suffix: "", label: "Exercise Library" },
+      { value: 100, suffix: "%", label: "Satisfaction" }
+    ]
   },
   nav: {
     home: "Home",
@@ -65,7 +71,21 @@ export const en = {
       u1: "My vertical jump increased 12cm in 3 months. Coach Ela's system is definitely in a different league.",
       u2: "I'm having an injury-free, very strong season. The strength training is incredibly effective.",
       u3: "My confidence and agility on the court leveled up. A program completely tailored to my match performance."
-    }
+    },
+    items: [
+      { 
+        text: "My vertical jump increased 12cm in 3 months. Coach Ela's system is definitely in a different league.", 
+        name: "Ayşe K.", role: "Volleyball Player", metric: "+12cm jump", image: "/ela_real_30.png"
+      },
+      { 
+        text: "I'm having an injury-free, very strong season. The strength training is incredibly effective.", 
+        name: "Deniz Y.", role: "Professional Athlete", metric: "Zero Injury", image: "/ela_real_32.png"
+      },
+      { 
+        text: "My confidence and agility on the court leveled up. A program completely tailored to my match performance.", 
+        name: "Selin B.", role: "Fitness & Volleyball", metric: "+8cm Mobility", image: "/ela_real_19.png"
+      }
+    ]
   },
   programs: {
     badge: "INVESTMENT",
@@ -93,12 +113,48 @@ export const en = {
       p2_desc: "Dominate the court.",
       p3_name: "One-on-One",
       p3_desc: "VIP coaching and reporting."
-    }
+    },
+    items: [
+      {
+        name: "Online Coaching",
+        price: "75",
+        period: "/mo",
+        desc: "Personalized workout plan and basic nutrition tracking",
+        features: ["Personalized workout plan", "Weekly plan update", "WhatsApp support", "Form check videos", "Basic nutrition guide"],
+        color: "secondary",
+        popular: false
+      },
+      {
+        name: "Volleyball Performance",
+        price: "90",
+        period: "/mo",
+        desc: "Vertical jump, athleticism and court-specific training",
+        features: ["Online Coaching included", "Jump & explosivity protocol", "Position-specific training", "Video analysis & feedback", "Injury prevention program", "Weekly 1:1 video call"],
+        color: "primary",
+        popular: true,
+        featured: true
+      },
+      {
+        name: "Premium Growth",
+        price: "150",
+        period: "/mo",
+        desc: "Holistic coaching with TDEE-backed full nutrition plan",
+        features: ["Volleyball Performance included", "TDEE-based nutrition plan", "Daily macro tracking", "Client portal access", "Supplement guidance", "24/7 priority support", "Monthly body analysis"],
+        color: "accent",
+        popular: false
+      }
+    ]
   },
   faq: {
-    badge: "Q & A",
     title1: "Your questions,",
-    title2: "answered."
+    title2: "answered.",
+    items: [
+      { q: "How do I start the program?", a: "After you fill out the application form, I contact you via WhatsApp. We discuss your goals in a free 15-minute introductory call and determine the suitable program." },
+      { q: "How does online training work?", a: "Your personalized program is sent via the app with video-explained exercises. I check your form with weekly check-ins and update the program when necessary." },
+      { q: "Is a nutrition plan included?", a: "Basic nutrition tracking is included in Online Coaching. The Premium Growth package includes a full TDEE-calculated nutrition plan, macro tracking, and 1-on-1 nutrition consulting." },
+      { q: "I don't play volleyball, can I join?", a: "Of course! Although the Volleyball Performance package is court-specific, Online Coaching and Premium Growth are suitable for all levels. We target strength, posture, and general fitness goals." },
+      { q: "When will I see results?", a: "With disciplined tracking, visible changes start in the first 4 weeks. Serious transformations occur over a 3-month period. Consistency always yields results." }
+    ]
   },
   gallery: {
     badge: "Gallery",

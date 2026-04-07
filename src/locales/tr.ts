@@ -4,6 +4,12 @@ export const tr = {
     ready: "Hazır",
     limitedSpots: "Sınırlı Kontenjan",
     scrollHint: "Keşfet",
+    stats: [
+      { value: 20, suffix: "+", label: "Aktif Danışan" },
+      { value: 8, suffix: "+", label: "Yıl Voleybol" },
+      { value: 96, suffix: "", label: "Egzersiz Kütüphanesi" },
+      { value: 100, suffix: "%", label: "Memnuniyet" }
+    ]
   },
   nav: {
     home: "Ana Sayfa",
@@ -65,7 +71,21 @@ export const tr = {
       u1: "Sıçrama yüksekliğim 3 ayda 12cm arttı. Ela hocanın sistemi kesinlikle farklı klasmanda.",
       u2: "Sakatsız, çok güçlü bir sezon geçiriyorum. Kuvvet antrenmanları inanılmaz etkili.",
       u3: "Kendime güvenim ve sahadaki çevikliğim seviye atladı. Tamamen maç performansıma özel program."
-    }
+    },
+    items: [
+      { 
+        text: "Sıçrama yüksekliğim 3 ayda 12cm arttı. Ela hocanın sistemi kesinlikle farklı klasmanda.", 
+        name: "Ayşe K.", role: "Voleybolcu", metric: "+12cm sıçrama", image: "/ela_real_30.png"
+      },
+      { 
+        text: "Sakatsız, çok güçlü bir sezon geçiriyorum. Kuvvet antrenmanları inanılmaz etkili.", 
+        name: "Deniz Y.", role: "Profesyonel Sporcu", metric: "Sıfır Sakatlık", image: "/ela_real_32.png"
+      },
+      { 
+        text: "Kendime güvenim ve sahadaki çevikliğim seviye atladı. Tamamen maç performansıma özel program.", 
+        name: "Selin B.", role: "Fitness & Voleybol", metric: "+8cm Mobilite", image: "/ela_real_19.png"
+      }
+    ]
   },
   programs: {
     badge: "YATIRIM",
@@ -93,12 +113,48 @@ export const tr = {
       p2_desc: "Kortta domine et.",
       p3_name: "Birebir Süreç",
       p3_desc: "VIP koçluk ve raporlama."
-    }
+    },
+    items: [
+      {
+        name: "Online Koçluk",
+        price: "2.500",
+        period: "/ay",
+        desc: "Kişiye özel antrenman programı ve temel beslenme takibi",
+        features: ["Kişiye özel antrenman programı", "Haftalık program güncelleme", "WhatsApp destek", "Form kontrol videoları", "Temel beslenme rehberi"],
+        color: "secondary",
+        popular: false
+      },
+      {
+        name: "Voleybol Performance",
+        price: "3.000",
+        period: "/ay",
+        desc: "Sıçrama, atletizm ve sahaya özel performans antrenmanı",
+        features: ["Online Koçluk dahil", "Sıçrama & patlayıcılık protokolü", "Pozisyona özel antrenman", "Video analiz & geri bildirim", "Sakatlık önleme programı", "Haftalık 1:1 görüntülü görüşme"],
+        color: "primary",
+        popular: true,
+        featured: true
+      },
+      {
+        name: "Premium Büyüme",
+        price: "5.500",
+        period: "/ay",
+        desc: "TDEE destekli tam beslenme planı ile bütüncül koçluk",
+        features: ["Voleybol Performance dahil", "TDEE bazlı beslenme planı", "Günlük makro takibi", "Danışan portalı erişimi", "Supplement rehberliği", "7/24 öncelikli destek", "Aylık vücut analizi"],
+        color: "accent",
+        popular: false
+      }
+    ]
   },
   faq: {
-    badge: "Soru & Cevap",
     title1: "Merak ettiklerin,",
-    title2: "bilmen gerekenler."
+    title2: "bilmen gerekenler.",
+    items: [
+      { q: "Programa nasıl başlarım?", a: "Başvuru formunu doldurduktan sonra WhatsApp üzerinden iletişime geçiyorum. Ücretsiz 15 dakikalık tanışma görüşmesinde hedeflerini konuşup, sana uygun programı belirliyoruz." },
+      { q: "Online antrenman nasıl işliyor?", a: "Sana özel hazırladığım program, video açıklamalı egzersizlerle uygulamanda gönderiliyor. Haftalık check-in'lerle formu kontrol edip, programı gerektiğinde güncelliyorum." },
+      { q: "Beslenme planı dahil mi?", a: "Online Koçluk paketinde temel beslenme takibi var. Premium Büyüme paketinde ise günlük TDEE hesaplı tam beslenme planı, makro takibi ve birebir beslenme danışmanlığı dahil." },
+      { q: "Voleybol oynamıyorum, katılabilir miyim?", a: "Elbette! Voleybol Performance paketi sahaya özel olsa da, Online Koçluk ve Premium Büyüme paketleri her seviye için uygun. Kuvvet, postür ve genel fitness hedeflerine yönelik çalışıyoruz." },
+      { q: "Sonuçları ne zaman görürüm?", a: "Disiplinli takipte ilk 4 haftada gözle görülür değişim başlıyor. 3 aylık süreçte ciddi dönüşümler yaşanıyor. Her danışanın süreci farklı, ama tutarlılık her zaman sonuç verir." }
+    ]
   },
   gallery: {
     badge: "Galeri",
