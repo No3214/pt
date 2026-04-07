@@ -106,6 +106,14 @@ export const en = {
     export_card_streak: "Keep the Streak!",
     export_card_cal: "Tracked Calories",
     export_card_habit: "Completed Habits",
-    export_card_habit_target: "Target"
+    export_card_habit_target: "Target",
+    wellness_title: "Athlete Wellness",
+    wellness_desc: "Daily Performance & Recovery",
+    wellness_btn: "Send & Analyze Data",
+    wellness_coach_wis: "Coach's Wisdom",
+    roadmap_title: "Path to Pro",
+    roadmap_desc: "Championship Journey",
+    roadmap_current: "Your Current League 🔥",
+    id_card_btn: "See My Elite ID Card"
   }
 };

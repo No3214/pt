@@ -194,8 +194,12 @@ export const useStore = create<AppState>()(
 
       // ─── CRM ───
       clients: [
-        { id: '1', name: 'Mina Aksoy', goal: 'Voleybol - Sıçrama', sessions: 8, max: 12, price: 5000, habitScore: 5, habitMax: 6, notes: [], phone: '', email: '', startDate: '2026-01-15', allergens: [], athleteLevel: 'Elite', personalNote: 'Sıçrama kapasiten bu hafta %15 arttı, harika gidiyorsun Mina!', nutritionGoals: { cal: 2400, p: 160, f: 70, c: 280 }, performanceStats: { strength: 85, explosiveness: 92, endurance: 74, consistency: 88, nutrition: 80 } },
-        { id: '2', name: 'Burcu Yılmaz', goal: 'Kuvvet / Yağ Yakımı', sessions: 0, max: 8, price: 3500, habitScore: 2, habitMax: 5, notes: [], phone: '', email: '', startDate: '2026-02-01', allergens: ['Gluten'], athleteLevel: 'Pro', nutritionGoals: { cal: 1800, p: 130, f: 60, c: 180 }, performanceStats: { strength: 65, explosiveness: 45, endurance: 55, consistency: 72, nutrition: 60 } },
+        { id: '1', name: 'Mina Aksoy', goal: 'Voleybol - Sıçrama', sessions: 8, max: 12, price: 5000, habitScore: 5, habitMax: 6, notes: [], phone: '905551234567', email: 'mina@example.com', startDate: '2026-01-15', allergens: [], athleteLevel: 'Elite', personalNote: 'Sıçrama kapasiten bu hafta %15 arttı, harika gidiyorsun Mina!', nutritionGoals: { cal: 2400, p: 160, f: 70, c: 280 }, performanceStats: { strength: 85, explosiveness: 92, endurance: 74, consistency: 88, nutrition: 80 }, wellnessLogs: [
+          { id: '1', date: new Date().toISOString(), rpe: 8, sleep: 7, energy: 9, stress: 2, coachFeedback: 'Bugün harika bir enerji seviyesindesin Mina! Antrenman zorluğu ideal.' }
+        ] },
+        { id: '2', name: 'Burcu Yılmaz', goal: 'Kuvvet / Yağ Yakımı', sessions: 0, max: 8, price: 3500, habitScore: 2, habitMax: 5, notes: [], phone: '', email: '', startDate: '2026-02-01', allergens: ['Gluten'], athleteLevel: 'Pro', nutritionGoals: { cal: 1800, p: 130, f: 60, c: 180 }, performanceStats: { strength: 65, explosiveness: 45, endurance: 55, consistency: 72, nutrition: 60 }, wellnessLogs: [
+          { id: '2', date: new Date().toISOString(), rpe: 4, sleep: 5, energy: 4, stress: 7, coachFeedback: 'Burcu, uykun düşük ve stresin yüksek görünüyor. Bugün aktif dinlenmeye odaklanalım.' }
+        ] },
       ],
       addClient: (c) => set(s => {
         const nClient = { ...c, name: c.name.replace(/[<>]/g, '').slice(0,100), goal: c.goal.replace(/[<>]/g, '').slice(0, 200) };

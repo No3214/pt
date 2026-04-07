@@ -16,6 +16,8 @@ import AiMacroAssistant from '../components/portal/AiMacroAssistant';
 import PerformanceRadar from '../components/portal/PerformanceRadar';
 import CoachVault from '../components/portal/CoachVault';
 import WellnessTracker from '../components/portal/WellnessTracker';
+import PathToProRoadmap from '../components/portal/PathToProRoadmap';
+import LevelAtmosphere from '../components/portal/LevelAtmosphere';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -52,7 +54,8 @@ export default function Portal() {
   // Note: For now we'll show the UI. We'll need to pass decryptedData to sub-components.
 
   return (
-    <div className={`min-h-screen font-body overflow-x-hidden ${dm ? 'dark bg-bg text-white' : 'bg-bg-alt text-text-main'}`}>
+    <div className={`min-h-screen font-body overflow-x-hidden relative ${dm ? 'dark bg-bg text-white' : 'bg-bg-alt text-text-main'}`}>
+      <LevelAtmosphere />
       <GrainOverlay />
       
       {/* Navigation & Header */}
@@ -73,6 +76,11 @@ export default function Portal() {
             <p className="mt-8 text-[1.1rem] font-medium text-text-main/30 max-w-[500px] leading-relaxed">
               Disiplin, motivasyonun bittiği yerde başlar. Bugünün seçimleri, yarının zaferini belirler.
             </p>
+          </motion.section>
+
+          {/* Pathway to Pro Roadmap */}
+          <motion.section variants={fadeUp}>
+             <PathToProRoadmap />
           </motion.section>
 
           {/* Grid Layout for Widgets */}

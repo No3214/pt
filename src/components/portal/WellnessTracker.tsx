@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 import { useStudentPortal } from '../../stores/studentPortal';
 import { generateAiResponse } from '../../lib/ai';
+import { useTranslation } from '../../locales';
 
 export default function WellnessTracker() {
   const { darkMode: dm, addWellnessLog, showToast } = useStore();
   const { decryptedData } = useStudentPortal();
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState<string | null>(null);
 
@@ -67,9 +67,9 @@ export default function WellnessTracker() {
     <div className={card}>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h3 className="font-display text-2xl font-bold text-text-main tracking-tight">Athlete Wellness</h3>
+          <h3 className="font-display text-2xl font-bold text-text-main tracking-tight">{t.portal.wellness_title}</h3>
           <p className={`text-[0.7rem] font-bold uppercase tracking-[0.2em] mt-1 ${dm ? 'text-primary/60' : 'text-primary/40'}`}>
-            Günlük Performans & Toparlanma
+            {t.portal.wellness_desc}
           </p>
         </div>
         <div className={`w-12 h-12 rounded-2xl flex items-center justify-center ${dm ? 'bg-primary/20 text-primary' : 'bg-primary/10 text-primary'}`}>
@@ -108,7 +108,7 @@ export default function WellnessTracker() {
           <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
         ) : (
           <>
-            <span>Verileri Gönder & Analiz Et</span>
+            <span>{t.portal.wellness_btn}</span>
             <span>🧠</span>
           </>
         )}
@@ -124,7 +124,7 @@ export default function WellnessTracker() {
           >
             <div className="flex items-center gap-3 mb-3">
                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center text-sm">🤖</div>
-               <span className="text-[0.65rem] font-black uppercase tracking-[0.2em] text-primary">Koçun Yorumu</span>
+               <span className="text-[0.65rem] font-black uppercase tracking-[0.2em] text-primary">{t.portal.wellness_coach_wis}</span>
             </div>
             <p className="text-[0.85rem] font-medium leading-relaxed italic text-text-main">
               "{feedback}"

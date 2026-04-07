@@ -6,6 +6,7 @@ import KPICards from '../../components/admin/KPICards';
 import RevenueChart from '../../components/admin/RevenueChart';
 import MacroDistribution from '../../components/admin/MacroDistribution';
 import ClientAlerts from '../../components/admin/ClientAlerts';
+import WellnessFeed from '../../components/admin/WellnessFeed';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -56,10 +57,15 @@ export default function Dashboard() {
         </motion.div>
       </div>
 
-      {/* Alerts Section */}
-      <motion.div variants={fadeUp}>
-        <ClientAlerts />
-      </motion.div>
+      {/* Alerts & Wellness Section */}
+      <div className="grid lg:grid-cols-2 gap-8">
+        <motion.div variants={fadeUp}>
+          <ClientAlerts />
+        </motion.div>
+        <motion.div variants={fadeUp}>
+          <WellnessFeed />
+        </motion.div>
+      </div>
     </motion.div>
   );
 }
