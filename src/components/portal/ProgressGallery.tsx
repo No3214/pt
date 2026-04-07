@@ -169,3 +169,13 @@ export default function ProgressGallery() {
     </div>
   );
 }
+                   </div>
+                 </div>
+               ))}
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </>
+  );
+}

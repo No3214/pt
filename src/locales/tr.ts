@@ -106,14 +106,6 @@ export const tr = {
     export_card_streak: "Sırayı Bozma!",
     export_card_cal: "Takip Edilen Kalori",
     export_card_habit: "Tamamlanan Alışkanlıklar",
-    export_card_habit_target: "Hedef",
-    wellness_title: "Sporcu Wellness",
-    wellness_desc: "Günlük Performans & Toparlanma",
-    wellness_btn: "Verileri Gönder & Analiz Et",
-    wellness_coach_wis: "Koçun Yorumu",
-    roadmap_title: "Path to Pro",
-    roadmap_desc: "Şampiyonluk Yolculuğu",
-    roadmap_current: "Şu Anki Ligin 🔥",
-    id_card_btn: "Elite ID Kartımı Gör"
+    export_card_habit_target: "Hedef"
   }
 };

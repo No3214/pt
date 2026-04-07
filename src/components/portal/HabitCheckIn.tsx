@@ -91,28 +91,12 @@ export default function HabitCheckIn() {
           >
             <div className="text-2xl">{habitIcons[i]}</div>
             <div className="flex-1 font-bold text-[0.95rem]">{h}</div>
-            <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
-              habits[i] ? 'bg-secondary border-secondary' : 'border-current opacity-20'
-            }`}>
-              {habits[i] && (
-                <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                </svg>
-              )}
+            <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${habits[i] ? (dm ? 'border-secondary bg-secondary/30' : 'border-secondary bg-secondary/20') : (dm ? 'border-white/10' : 'border-black/10')}`}>
+              {habits[i] && <div className="text-white text-sm">✓</div>}
             </div>
           </motion.div>
         ))}
       </div>
-
-      {doneCount === 4 && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-8 p-4 rounded-xl bg-secondary/10 border border-secondary/20 text-secondary text-center text-[0.85rem] font-bold uppercase tracking-widest"
-        >
-          Harika! Tüm hedefler tamam. 🎉
-        </motion.div>
-      )}
     </div>
   );
 }

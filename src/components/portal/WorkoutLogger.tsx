@@ -136,20 +136,9 @@ export default function WorkoutLogger() {
                           >
                             {checked && <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/></svg>}
                           </button>
-                          <span className={`text-sm font-semibold ${checked ? (dm ? 'text-white' : 'text-stone-800') : (dm ? 'text-white/40' : 'text-stone-400')}`}>
-                            Set {setIndex + 1}
+                          <span className={`text-sm font-semibold ${checked ? (dm ? 'text-white' : 'text-stone-800') : (dm ? 'text-white/50' : 'text-stone-400')}`}>
+                            {ex.name}
                           </span>
-                        </div>
-                        
-                        <div className="flex items-center gap-2 opacity-100">
-                          <input
-                            type="number"
-                            placeholder="kg/lbs"
-                            value={weights[key] || ''}
-                            onChange={(e) => updateWeight(exIndex, setIndex, e.target.value)}
-                            className={inp}
-                          />
-                          <span className={`text-xs ${dm ? 'text-white/30' : 'text-stone-400'}`}>Ağırlık</span>
                         </div>
                       </div>
                     );
@@ -160,13 +149,7 @@ export default function WorkoutLogger() {
           })}
         </div>
       </div>
-
-      <VideoModal
-        isOpen={!!video}
-        onClose={() => setVideo(null)}
-        youtubeId={video?.id || ''}
-        title={video?.title || ''}
-      />
+      {video && <VideoModal id={video.id} title={video.title} onClose={() => setVideo(null)} />}
     </>
   );
 }

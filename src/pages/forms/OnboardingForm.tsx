@@ -125,81 +125,85 @@ export default function OnboardingForm() {
                  <label className="flex items-start gap-3 cursor-pointer group">
                      <input type="checkbox" checked={termsChecked} onChange={e => setTermsChecked(e.target.checked)} className="mt-1 w-4 h-4 text-primary bg-transparent border-text-main/20 rounded focus:ring-primary focus:ring-2 cursor-pointer" />
                      <span className={`text-[0.7rem] sm:text-xs font-medium leading-relaxed ${dm ? 'text-white/60' : 'text-text-main/70'}`}>
-                       <button type="button" onClick={(e) => { e.preventDefault(); setLegalType('terms'); setLegalModalOpen(true); }} className="text-primary hover:underline font-bold bg-transparent border-none p-0 mr-1 cursor-pointer">Kullanım Koşullarını</button> okudum, anladım ve antrenman ile diyet programlarının medikal bir tavsiye olmadığını, oluşabilecek her türlü fiziksel/sağlıksal riskin sorumluluğunun bana ait olduğunu kabul ve beyan ederim.
+                       <button type="button" onClick={(e) => { e.preventDefault(); setLegalType('terms'); setLegalModalOpen(true); }} className="text-primary hover:underline font-bold bg-transparent border-none p-0 mr-1 cursor-pointer">Kullanım Koşullarını</button> okudum, anladım ve antrenman ile diyet programlarının medikal bir tavsiye olmadığını, oluşabilecek her türlü fiziksel/sağlıksal riskin tamamen bana ait olduğunu ve <strong className="text-text-main dark:text-white">kabul</strong> ediyorum.
                      </span>
                  </label>
               </div>
 
-              <div className="flex gap-4">
+              <div className="flex gap-4 pt-4">
                 <SecondaryButton onClick={prevStep}>Geri</SecondaryButton>
-                <Button onClick={handleSubmit} disabled={!kvkkChecked || !termsChecked}>Başvuruyu Tamamla</Button>
+                <Button onClick={handleSubmit} disabled={!kvkkChecked || !termsChecked}>Tamamla</Button>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
 
-      <LegalModal 
-        isOpen={isLegalModalOpen} 
-        onClose={() => setLegalModalOpen(false)} 
-        type={legalType} 
-      />
+        <LegalModal
+          isOpen={isLegalModalOpen}
+          legalType={legalType}
+          onClose={() => setLegalModalOpen(false)}
+        />
+      </div>
     </div>
   );
 }
 
-function InputGroup({ icon, label, value, onChange, placeholder, type = 'text' }: any): any {
+function InputGroup({ icon, label, value, onChange, placeholder, type = 'text' }: any) {
   return (
-    <div className="space-y-2">
-      <label className="text-[0.65rem] uppercase tracking-widest font-bold opacity-40 ml-1">{label}</label>
-      <div className="relative">
-        <input 
-          type={type} 
-          value={value} 
+    <div>
+      <label className="block text-sm font-semibold mb-2">{label}</label>
+      <div className="flex items-center gap-3 px-4 py-3 rounded-xl border border-text-main/10 bg-text-main/[0.02] focus-within:border-primary focus-within:ring-1 focus-within:ring-primary/30">
+        {icon && <div className="text-lg opacity-60">{icon}</div>}
+        <input
+          type={type}
+          value={value}
           onChange={e => onChange(e.target.value)}
           placeholder={placeholder}
-          className="w-full bg-text-main/5 border border-text-main/10 rounded-2xl p-4 pl-5 focus:border-primary/40 focus:ring-1 focus:ring-primary/40 transition-all outline-none font-medium placeholder:opacity-30"
+          className="flex-1 bg-transparent outline-none placeholder:opacity-30 font-medium"
         />
-        {icon && <div className="absolute right-5 top-1/2 -translate-y-1/2 opacity-20">{icon}</div>}
       </div>
     </div>
   );
 }
 
-function TextArea({ label, value, onChange, placeholder }: any): any {
+function Button({ children, onClick, disabled }: any) {
   return (
-    <div className="space-y-2">
-      <label className="text-[0.65rem] uppercase tracking-widest font-bold opacity-40 ml-1">{label}</label>
-      <textarea 
-        value={value} 
+    <motion.button
+      whileHover={{ scale: disabled ? 1 : 1.01 }}
+      whileTap={{ scale: disabled ? 1 : 0.99 }}
+      onClick={onClick}
+      disabled={disabled}
+      className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} bg-primary text-white`}
+    >
+      {children}
+    </motion.button>
+  );
+}
+
+function SecondaryButton({ children, onClick }: any) {
+  return (
+    <motion.button
+      whileHover={{ scale: 1.01 }}
+      whileTap={{ scale: 0.99 }}
+      onClick={onClick}
+      className="flex-1 py-4 rounded-2xl font-bold cursor-pointer bg-text-main/5 text-text-main/60 hover:bg-text-main/10 transition-all border-none"
+    >
+      {children}
+    </motion.button>
+  );
+}
+
+function TextArea({ label, value, onChange, placeholder }: any) {
+  return (
+    <div>
+      <label className="block text-sm font-semibold mb-2">{label}</label>
+      <textarea
+        value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         rows={3}
-        className="w-full bg-text-main/5 border border-text-main/10 rounded-2xl p-5 focus:border-primary/40 focus:ring-1 focus:ring-primary/40 transition-all outline-none font-medium placeholder:opacity-30 resize-none"
+        className="w-full px-4 py-3 rounded-xl border border-text-main/10 bg-text-main/[0.02] focus:border-primary focus:ring-1 focus:ring-primary/30 outline-none font-medium placeholder:opacity-30 resize-none"
       />
     </div>
-  );
-}
-
-function Button({ children, onClick, disabled }: any): any {
-  return (
-    <button 
-      onClick={onClick}
-      disabled={disabled}
-      className="w-full bg-primary text-white p-5 rounded-2xl font-bold flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-primary/20 disabled:opacity-30 disabled:hover:scale-100 cursor-pointer border-none"
-    >
-      {children}
-    </button>
-  );
-}
-
-function SecondaryButton({ children, onClick }: any): any {
-  return (
-    <button 
-      onClick={onClick}
-      className="px-8 bg-text-main/5 text-text-main/60 p-5 rounded-2xl font-bold hover:bg-text-main/10 transition-all border-none cursor-pointer"
-    >
-      {children}
-    </button>
   );
 }

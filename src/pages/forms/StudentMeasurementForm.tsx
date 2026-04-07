@@ -163,7 +163,7 @@ export default function StudentMeasurementForm() {
 
               <div className="flex gap-4">
                 <button onClick={() => setStep(2)} className="px-8 bg-text-main/5 text-text-main/60 p-5 rounded-2xl font-bold hover:bg-text-main/10 transition-all border-none cursor-pointer">Geri</button>
-                <Button onClick={handleSubmit} disabled={!disclaimerChecked}>Ölçümleri Kaydet</Button>
+                <Button onClick={handleSubmit} disabled={!disclaimerChecked}>Gönder</Button>
               </div>
             </motion.div>
           )}
@@ -173,29 +173,31 @@ export default function StudentMeasurementForm() {
   );
 }
 
-function Input({ label, value, onChange, placeholder, type = 'text' }: any): any {
+function Input({ label, value, onChange, placeholder, type = 'text' }: any) {
   return (
-    <div className="space-y-2 text-left">
-      <label className="text-[0.65rem] uppercase tracking-widest font-bold opacity-40 ml-1">{label}</label>
-      <input 
-        type={type} 
-        value={value} 
+    <div>
+      <label className="block text-xs font-semibold uppercase tracking-wider mb-2">{ label}</label>
+      <input
+        type={type}
+        value={value}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full bg-text-main/5 border border-text-main/10 rounded-2xl p-4 focus:border-primary/40 focus:ring-1 focus:ring-primary/40 transition-all outline-none font-medium placeholder:opacity-30"
+        className="w-full bg-text-main/5 border border-text-main/10 rounded-2xl px-4 py-3 focus:border-primary/40 focus:ring-1 focus:ring-primary/40 transition-all outline-none font-medium placeholder:opacity-30"
       />
     </div>
   );
 }
 
-function Button({ children, onClick, disabled }: any): any {
+function Button({ children, onClick, disabled }: any) {
   return (
-    <button 
+    <motion.button
+      whileHover={{ scale: disabled ? 1 : 1.01 }}
+      whileTap={{ scale: disabled ? 1 : 0.99 }}
       onClick={onClick}
       disabled={disabled}
-      className="flex-1 bg-primary text-white p-5 rounded-2xl font-bold flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-primary/20 disabled:opacity-30 border-none cursor-pointer"
+      className={`flex-1 py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} bg-primary text-white`}
     >
       {children}
-    </button>
+    </motion.button>
   );
 }

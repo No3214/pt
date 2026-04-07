@@ -7,6 +7,8 @@ import RevenueChart from '../../components/admin/RevenueChart';
 import MacroDistribution from '../../components/admin/MacroDistribution';
 import ClientAlerts from '../../components/admin/ClientAlerts';
 import WellnessFeed from '../../components/admin/WellnessFeed';
+import StudentManager from '../../components/admin/StudentManager';
+import PaymentTracker from '../../components/admin/PaymentTracker';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -57,6 +59,16 @@ export default function Dashboard() {
         </motion.div>
       </div>
 
+      {/* NEW: Payment Tracker & Student Manager */}
+      <div className="grid lg:grid-cols-2 gap-8">
+        <motion.div variants={fadeUp}>
+          <PaymentTracker />
+        </motion.div>
+        <motion.div variants={fadeUp}>
+          <StudentManager />
+        </motion.div>
+      </div>
+
       {/* Alerts & Wellness Section */}
       <div className="grid lg:grid-cols-2 gap-8">
         <motion.div variants={fadeUp}>
@@ -69,4 +81,3 @@ export default function Dashboard() {
     </motion.div>
   );
 }
-

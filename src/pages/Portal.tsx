@@ -144,76 +144,19 @@ export default function Portal() {
                  <StudentWeightChart />
               </div>
               <div className="space-y-6 md:col-span-1">
-                 <AchievementTracker athleteLevel={decryptedData?.client?.athleteLevel || 'Rookie'} />
+                 <AchievementTracker athleteLevel={decryptedData?.level || 'Athlete'} />
+                 <ProgressGallery />
               </div>
             </motion.div>
-            
-            {/* Full Width Bottom Row: Workout Tracker */}
-            <motion.div variants={fadeUp} className="lg:col-span-12">
-               <WorkoutLogger />
-            </motion.div>
-            
-            {/* Full Width Bottom Row 2: Progress Gallery */}
-            <motion.div variants={fadeUp} className="lg:col-span-12">
-               <ProgressGallery />
-            </motion.div>
-          </div>
 
-          {/* Motivation Quote Banner */}
-          <motion.div
-            variants={fadeUp}
-            className={`p-10 rounded-[2.5rem] border text-center relative overflow-hidden ${
-              dm ? 'bg-primary/5 border-primary/20' : 'bg-white border-black/[0.04] shadow-2xl'
-            }`}
-          >
-            <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none bg-[radial-gradient(circle_at_center,var(--color-primary),transparent)]" />
-            <p className="font-display text-2xl md:text-3xl font-bold italic tracking-tight text-text-main">
-              "En zor antrenman, ilk adımı atandır. Sen o adımı çoktan attın."
-            </p>
-          </motion.div>
-          
-          <div className={`mt-8 pt-8 border-t text-center ${dm ? 'border-text-main/10' : 'border-text-main/5'}`}>
-            <p className={`text-[0.65rem] uppercase tracking-widest font-bold opacity-30 ${dm ? 'text-white' : 'text-text-main'} mb-2`}>Yasal & Tıbbi Uyarı</p>
-            <p className={`text-[0.65rem] leading-relaxed max-w-4xl mx-auto ${dm ? 'text-white/40' : 'text-text-main/40'}`}>
-              Bu portalda sunulan beslenme makroları, antrenman programları ve asistan tavsiyeleri tamamen sportif performansı artırma amaçlıdır ve hiçbir koşulda tıbbi bir teşhis, tedavi veya reçete niteliği taşımaz. Mevcut bir sağlık probleminiz, kronik hastalığınız, devam eden fizik tedaviniz veya alerjik reaksiyonlarınız varsa programı uygulamadan önce mutlaka uzman bir hekime danışınız. Yaşanabilecek medikal/fiziksel komplikasyonlardan danışanın kendisi sorumludur.
-            </p>
+            {/* Row 5: Pro Coaching & Tracking */}
+            <motion.div variants={fadeUp} className="lg:col-span-12 grid md:grid-cols-2 gap-8">
+               <WorkoutLogger />
+               <EliteIdCard isOpen={isIdCardOpen} onClose={() => setIsIdCardOpen(false)} data={decryptedData} />
+            </motion.div>
           </div>
         </motion.div>
       </main>
-
-      {/* ID Card Modal */}
-      <AnimatePresence>
-        {isIdCardOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsIdCardOpen(false)}
-              className="fixed inset-0 z-[200] bg-black/80 backdrop-blur-md cursor-pointer"
-            />
-
-            {/* Modal */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[201] w-max max-w-[95vw]"
-            >
-               <button
-                 onClick={() => setIsIdCardOpen(false)}
-                 className="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors text-sm font-bold uppercase tracking-widest flex items-center gap-2 border-none bg-transparent cursor-pointer"
-               >
-                 <span>Kapat</span>
-                 <span className="text-xl">✕</span>
-               </button>
-               
-               <EliteIdCard />
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

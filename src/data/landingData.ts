@@ -105,11 +105,11 @@ export const getLandingData = (lang: 'tr' | 'en') => {
   ];
 
   const navigationLinks = [
-    { id: 'hakkinda', label: isTr ? 'Hakkında' : 'System' },
+    { id: 'hakkinda', label: isTr ? 'Hakkında' : 'About' },
     { id: 'galeri', label: isTr ? 'Galeri' : 'Gallery' },
     { id: 'programlar', label: isTr ? 'Programlar' : 'Programs' },
     { id: 'sonuclar', label: isTr ? 'Sonuçlar' : 'Results' },
-    { id: 'faq', label: isTr ? 'SSS' : 'FAQ' },
+    { id: 'faqs', label: isTr ? 'SSS' : 'FAQs' },
     { id: 'iletisim', label: isTr ? 'İletişim' : 'Contact' },
   ];
 
@@ -118,6 +118,6 @@ export const getLandingData = (lang: 'tr' | 'en') => {
     testimonials,
     faqItems,
     landingStats,
-    navigationLinks
+    navigationLinks,
   };
 };

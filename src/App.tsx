@@ -26,6 +26,7 @@ const Settings = lazy(() => import('./pages/admin/Settings'))
 const Leads = lazy(() => import('./pages/admin/Leads'))
 const Progress = lazy(() => import('./pages/admin/Progress'))
 const Portal = lazy(() => import('./pages/Portal'))
+const PortalV2 = lazy(() => import('./pages/PortalV2'))
 const OnboardingForm = lazy(() => import('./pages/forms/OnboardingForm'))
 const StudentMeasurementForm = lazy(() => import('./pages/forms/StudentMeasurementForm'))
 
@@ -98,16 +99,10 @@ export default function App() {
               <Route path="progress" element={<Progress />} />
               <Route path="settings" element={<Settings />} />
             </Route>
-            <Route path="/portal" element={<Portal />} />
+            <Route path="/portal" element={<PortalV2 />} />
+            <Route path="/portal-legacy" element={<Portal />} />
             <Route path="/onboarding" element={<OnboardingForm />} />
             <Route path="/measure/:clientId" element={<StudentMeasurementForm />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </AnimatePresence>
-      </Suspense>
-      <Toast />
-      <WhatsAppWidget />
-      <CookieConsent />
-    </>
-  )
-}
+        </AnimatePr

@@ -400,43 +400,16 @@ Lütfen bana profesyonel sporcu prensiplerine uygun, pratik ve lezzetli SADECE 1
                     </motion.button>
                   </div>
                 </div>
-                <textarea value={waPreview} onChange={e => setWaPreview(e.target.value)} rows={8} className={`${inp} font-mono text-xs leading-relaxed`} />
+                <div id="diet-export" className={`p-6 rounded-2xl ${dm ? 'bg-white/[0.03] border border-white/[0.06]' : 'bg-white border border-black/[0.04]'}`} style={{ position: 'fixed', left: '-9999px', width: '600px', fontSize: '13px' }}>
+                  <div className="font-display text-xl font-bold mb-4">🥗 ELA EBEOĞLU — Beslenme Planı</div>
+                  <div className="whitespace-pre-wrap text-sm font-medium">{waPreview}</div>
+                </div>
               </div>
             </motion.div>
-          ) : (
-            <motion.div key="placeholder" initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-              className={`${card} flex flex-col items-center justify-center min-h-[500px] text-center`}>
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-                className="text-6xl mb-6 opacity-20"
-              >🥗</motion.div>
-              <p className={`font-display text-xl ${dm ? 'text-white/20' : 'text-stone-300'}`}>Sonuçlar burada görünecek</p>
-              <p className={`text-sm mt-2 max-w-[240px] ${dm ? 'text-white/10' : 'text-stone-200'}`}>
-                Fiziksel verileri girin ve hesaplayın
-              </p>
-              <div className={`mt-6 flex gap-3 ${dm ? 'text-white/10' : 'text-stone-200'}`}>
-                <span className="text-2xl">📐</span>
-                <span className="text-2xl">→</span>
-                <span className="text-2xl">🧮</span>
-                <span className="text-2xl">→</span>
-                <span className="text-2xl">📊</span>
-              </div>
-            </motion.div>
-          )}
+          ) : null}
         </AnimatePresence>
-      </div>
-
-      {/* Hidden export */}
-      <div id="diet-export" style={{ position: 'fixed', left: '-9999px', top: '-9999px', width: 550, background: '#FAF6F1', padding: '3rem 2rem', borderRadius: 12, fontFamily: 'Outfit, sans-serif' }}>
-        <div style={{ textAlign: 'center', marginBottom: '2rem', borderBottom: '3px solid #7A9E82', paddingBottom: '1.5rem' }}>
-          <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '2.5rem', color: '#1C1917', margin: 0 }}>ELA EBEOĞLU</h2>
-          <div style={{ fontSize: '0.9rem', color: '#C2684A', letterSpacing: 4, marginTop: '0.5rem', fontWeight: 600 }}>PERFORMANCE NUTRITION</div>
-        </div>
-        <div style={{ whiteSpace: 'pre-wrap', fontSize: '1.15rem', lineHeight: 1.7, color: '#333' }}
-          dangerouslySetInnerHTML={{ __html: sanitize(waPreview).replace(/\n/g, '<br>').replace(/\*(.*?)\*/g, '<strong>$1</strong>') }} />
-        <div style={{ marginTop: '2.5rem', textAlign: 'center', fontSize: '0.85rem', color: '#57534E', opacity: 0.8 }}>📸 @ela.ebeoglu</div>
-      </div>
+      </motion.div>
     </motion.div>
-  )
+  );
 }
+              

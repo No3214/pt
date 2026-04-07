@@ -340,35 +340,26 @@ export const useStore = create<AppState>()(
 
       // ─── Saved Programs ───
       savedPrograms: [],
-      addSavedProgram: (p) => set(s => {
-        const enrichedExercises = p.exercises.map(ex => {
-          const match = exerciseDB.find((dbEx: any) => dbEx.name === ex.name);
-          return { ...ex, youtubeId: match?.youtubeId || ex.youtubeId };
-        });
-        return {
-          savedPrograms: [...s.savedPrograms, { ...p, exercises: enrichedExercises, id: Date.now().toString(), createdAt: new Date().toISOString() }]
-        };
-      }),
-      deleteSavedProgram: (id) => set(s => ({ savedPrograms: s.savedPrograms.filter(p => p.id !== id) })),
+      addSavedProgram: (p) => set(s => ({
+        savedPrograms: [...s.savedPrograms, { ...p, id: Date.now().toString(), createdAt: new Date().toISOString() }]
+      })),
+      deleteSavedProgram: (id) => set(s => ({
+        savedPrograms: s.savedPrograms.filter(p => p.id !== id)
+      })),
 
-      // ─── AI Keys ───
+      // ─── AI Config ───
       aiConfig: { gemini: '', openrouter: '', deepseek: '' },
       setAiConfig: (config) => set(s => ({ aiConfig: { ...s.aiConfig, ...config } })),
 
       // ─── WhatsApp Templates ───
       whatsappTemplates: {
-        onboarding: 'Merhaba! 🏋️‍♀️\n\nSeninle birlikte bu yolculuğa başlamak için çok heyecanlıyım! En iyi versiyonuna ulaşman için sana özel bir program hazırlayacağım.\n\nBaşlamadan önce seni daha yakından tanımam gerekiyor. Bu kısa formu doldurarak hedeflerini ve geçmişini benimle paylaşır mısın?\n\n👉 {{link}}\n\nGörüşmek üzere! 💪\nEla Ebeoğlu',
-        measurement: 'Merhaba {{name}}! 📊\n\nBu haftaki gelişim ölçümlerini kaydetme zamanı geldi! Her adım seni hedefe bir adım daha yaklaştırıyor — verilerini takip etmek başarının anahtarı.\n\n📏 Ölçümlerini buradan girebilirsin:\n👉 {{link}}\n\nSen harikasın, devam et! 🔥\nEla Ebeoğlu'
+        onboarding: 'Merhaba {name}! Ela Ebeoğlu PT ailesine hoş geldin 🎉\n\nBaşlangıç formunu doldurman gerekiyor:\n{link}\n\nSorularını bana sorabilirsin!',
+        measurement: 'Merhaba {name}! Ölçüm zamanı geldi 📏\n\nAşağıdaki linkten ölçümlerini girebilirsin:\n{link}'
       },
       updateTemplate: (key, value) => set(s => ({
         whatsappTemplates: { ...s.whatsappTemplates, [key]: value }
-      }))
+      })),
     }),
-    { 
-      name: 'ela-pt-store',
-      partialize: (state) => Object.fromEntries(
-        Object.entries(state).filter(([key]) => !['isAdminAuth'].includes(key))
-      )
-    }
+    { name: 'ela-pt-store' }
   )
 )
