@@ -1,27 +1,6 @@
 import { motion } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
-
-const BADGES_TR = [
-  '8+ Yıl Profesyonel Voleybol',
-  'Bilimsel Antrenman Metodolojisi',
-  'Kişiye Özel Program Tasarımı',
-  'TDEE Bazlı Beslenme Planları',
-  'Video Analiz & Geri Bildirim',
-  'Sıçrama & Patlayıcılık Protokolü',
-  '100% Memnuniyet Garantisi',
-  'Online & Yüz Yüze Koçluk',
-];
-
-const BADGES_EN = [
-  '8+ Years Pro Volleyball',
-  'Science-Based Training',
-  'Custom Program Design',
-  'TDEE-Based Nutrition Plans',
-  'Video Analysis & Feedback',
-  'Jump & Explosivity Protocol',
-  '100% Satisfaction Guarantee',
-  'Online & In-Person Coaching',
-];
+import { useTranslation } from '../../locales';
 
 function MarqueeRow({ badges, direction = 'left', speed = 30 }: { badges: string[]; direction?: 'left' | 'right'; speed?: number }) {
   const doubled = [...badges, ...badges];
@@ -51,8 +30,9 @@ function MarqueeRow({ badges, direction = 'left', speed = 30 }: { badges: string
 }
 
 export default function Marquee() {
-  const { darkMode, language } = useStore();
-  const badges = language === 'tr' ? BADGES_TR : BADGES_EN;
+  const { darkMode } = useStore();
+  const { t } = useTranslation();
+  const badges = t.marquee;
   const dm = darkMode;
 
   return (

@@ -12,6 +12,7 @@ import WhatsAppWidget from './components/WhatsAppWidget'
 import ScrollProgress from './components/ScrollProgress'
 import ReloadPrompt from './components/common/ReloadPrompt'
 import { tenantConfig } from './config/tenant'
+import { useTranslation } from './locales'
 
 // Lazy-loaded pages (reduces initial bundle by ~60%)
 const AdminLayout = lazy(() => import('./pages/admin/Layout'))
@@ -32,11 +33,12 @@ const OnboardingForm = lazy(() => import('./pages/forms/OnboardingForm'))
 const StudentMeasurementForm = lazy(() => import('./pages/forms/StudentMeasurementForm'))
 
 function PageLoader() {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen flex items-center justify-center bg-bg">
       <div className="text-center">
         <div className="w-10 h-10 mx-auto mb-4 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
-        <p className="text-text-main/30 text-sm font-medium">Yükleniyor...</p>
+        <p className="text-text-main/30 text-sm font-medium">{t.common.loading}</p>
       </div>
     </div>
   )

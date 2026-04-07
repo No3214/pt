@@ -7,11 +7,12 @@ import { useStore } from '../../stores/useStore';
 import { tenantConfig } from '../../config/tenant';
 import { contactFormSchema, type ContactFormData } from '../../lib/validations';
 import { supabase } from '../../lib/supabase';
+import { useTranslation } from '../../locales';
 
 export default function Contact() {
-  const { darkMode, language, addLead } = useStore();
+  const { darkMode, addLead } = useStore();
+  const { t } = useTranslation();
   const dm = darkMode;
-  const isTr = language === 'tr';
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success'>('idle');
 
   const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactFormData>({
@@ -41,9 +42,9 @@ export default function Contact() {
         notes: data.notes || ''
       });
 
-      const msg = isTr
-        ? `Merhaba! Sana sporcu portalından ulaşıyorum.\n\nAd: ${data.name}\nTelefon: ${data.phone}\nHedef: ${data.goal}\nNotlarım: ${data.notes || '-'}`
-        : `Hello! I'm reaching out from the athlete portal.\n\nName: ${data.name}\nPhone: ${data.phone}\nGoal: ${data.goal}\nNotes: ${data.notes || '-'}`;
+      const goalLabel = t.contact.formGoalOptions[data.goal as keyof typeof t.contact.formGoalOptions] || data.goal;
+
+      const msg = `${t.contact.whatsappMsg}\n\n${t.contact.formName}: ${data.name}\n${t.contact.formPhone}: ${data.phone}\n${t.contact.formGoal}: ${goalLabel}\n${t.contact.formNotes}: ${data.notes || '-'}`;
       const whatsappUrl = `https://wa.me/${tenantConfig.brand.contact.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(msg)}`;
 
       window.open(whatsappUrl, '_blank');
@@ -75,17 +76,15 @@ export default function Contact() {
         <div className="grid lg:grid-cols-[1fr_1.2fr] gap-20 lg:gap-32 items-center">
           <RevealSection>
             <motion.p variants={fadeUp} className="text-[0.75rem] uppercase tracking-[0.2em] font-medium text-primary mb-6">
-              {isTr ? 'İletişim' : 'Contact'}
+              {t.contact.badge}
             </motion.p>
             <motion.h2 variants={fadeUp} custom={1}
               className="font-display text-[clamp(2.5rem,4vw,4.5rem)] font-semibold leading-[1] tracking-[-0.04em] mb-10 text-text-main">
-              {isTr ? 'Değişime hazır mısın?' : 'Ready for change?'}
+              {t.contact.ready}
             </motion.h2>
             <motion.p variants={fadeUp} custom={2}
               className="text-[1.15rem] leading-[1.8] max-w-[480px] mb-12 text-text-main/40 font-medium">
-              {isTr
-                ? 'Sınırlı kontenjan nedeniyle başvuruları değerlendirerek alıyorum. Formu doldurduğunda 24 saat içinde seninle iletişime geçeceğim.'
-                : 'Due to limited spots, I evaluate applications carefully. After you fill out the form, I will contact you within 24 hours.'}
+              {t.contact.limitDesc}
             </motion.p>
 
             <motion.div variants={fadeUp} custom={3} className="space-y-6">
@@ -99,7 +98,7 @@ export default function Contact() {
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center ${dm ? 'bg-white/5' : 'bg-text-main/5'}`}>
                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><circle cx="12" cy="12" r="3" /></svg>
                 </div>
-                <span className="text-[1.05rem] font-medium">{isTr ? 'İstanbul / Online' : 'Istanbul / Online'}</span>
+                <span className="text-[1.05rem] font-medium">{t.contact.location}</span>
               </div>
             </motion.div>
           </RevealSection>
@@ -110,19 +109,19 @@ export default function Contact() {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-[0.8rem] font-bold uppercase tracking-widest text-text-main/40 ml-2">
-                      {isTr ? 'İsim Soyisim' : 'Full Name'}
+                      {t.contact.formName}
                     </label>
                     <input {...register('name')} type="text"
-                      placeholder={isTr ? 'Adınız' : 'Your name'}
+                      placeholder={t.contact.formNamePlaceholder}
                       className={inputCls(!!errors.name)} />
                     {errors.name && <p className="text-red-500 text-xs ml-2 mt-1">{errors.name.message}</p>}
                   </div>
                   <div className="space-y-2">
                     <label className="text-[0.8rem] font-bold uppercase tracking-widest text-text-main/40 ml-2">
-                      {isTr ? 'Telefon' : 'Phone'}
+                      {t.contact.formPhone}
                     </label>
                     <input {...register('phone')} type="tel"
-                      placeholder={isTr ? '05XX XXX XX XX' : '+90 5XX XXX XX XX'}
+                      placeholder={t.contact.formPhonePlaceholder}
                       className={inputCls(!!errors.phone)} />
                     {errors.phone && <p className="text-red-500 text-xs ml-2 mt-1">{errors.phone.message}</p>}
                   </div>
@@ -130,24 +129,24 @@ export default function Contact() {
 
                 <div className="space-y-2">
                   <label className="text-[0.8rem] font-bold uppercase tracking-widest text-text-main/40 ml-2">
-                    {isTr ? 'Ana Hedef' : 'Main Goal'}
+                    {t.contact.formGoal}
                   </label>
                   <select {...register('goal')}
                     className={`${inputCls(!!errors.goal)} appearance-none`}>
-                    <option value="voleybol">{isTr ? 'Voleybol Performans' : 'Volleyball Performance'}</option>
-                    <option value="fitness">{isTr ? 'Genel Fitness / Güç' : 'General Fitness / Strength'}</option>
-                    <option value="kilo-kaybi">{isTr ? 'Kilo Kaybı / Sıkılaşma' : 'Weight Loss / Toning'}</option>
-                    <option value="diger">{isTr ? 'Diğer' : 'Other'}</option>
+                    <option value="voleybol">{t.contact.formGoalOptions.voleybol}</option>
+                    <option value="fitness">{t.contact.formGoalOptions.fitness}</option>
+                    <option value="kilo-kaybi">{t.contact.formGoalOptions.kiloKaybi}</option>
+                    <option value="diger">{t.contact.formGoalOptions.diger}</option>
                   </select>
                   {errors.goal && <p className="text-red-500 text-xs ml-2 mt-1">{errors.goal.message}</p>}
                 </div>
 
                 <div className="space-y-2">
                   <label className="text-[0.8rem] font-bold uppercase tracking-widest text-text-main/40 ml-2">
-                    {isTr ? 'Ek Notlar' : 'Additional Notes'}
+                    {t.contact.formNotes}
                   </label>
                   <textarea {...register('notes')}
-                    placeholder={isTr ? 'Hedeflerin ve spor geçmişin...' : 'Your goals and sports history...'}
+                    placeholder={t.contact.formNotesPlaceholder}
                     rows={4}
                     className={`${inputCls(!!errors.notes)} resize-none`} />
                   {errors.notes && <p className="text-red-500 text-xs ml-2 mt-1">{errors.notes.message}</p>}
@@ -167,10 +166,10 @@ export default function Contact() {
                   }`}
                 >
                   {formStatus === 'success'
-                    ? (isTr ? 'Başvuru Gönderildi!' : 'Application Sent!')
+                    ? t.contact.success
                     : formStatus === 'sending'
-                      ? (isTr ? 'Gönderiliyor...' : 'Sending...')
-                      : (isTr ? 'WhatsApp ile Gönder' : 'Send via WhatsApp')}
+                      ? t.contact.sending
+                      : t.contact.formBtn}
                   {formStatus === 'sending' && (
                     <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1 }} className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full" />
                   )}

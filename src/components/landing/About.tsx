@@ -3,23 +3,11 @@ import { motion } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 import { useTranslation } from '../../locales';
 
-const PHILOSOPHY_TR = [
-  { num: '01', title: 'Sporcu Disiplini', desc: 'Profesyonel voleybol tecrübesiyle kanıtlanmış antrenman metodolojisi.' },
-  { num: '02', title: 'Kişiye Özel Güçlenme', desc: 'Kendi bedenini tanımanı ve hedeflerine uygun güçlü bir temele sahip olmanı hedefliyorum.' },
-  { num: '03', title: 'Seçici Premium Takip', desc: 'Kaliteyi korumak için sınırlı kontenjanla, birebir odaklı çalışma.' },
-];
-
-const PHILOSOPHY_EN = [
-  { num: '01', title: 'Athlete Discipline', desc: 'Training methodology proven through professional volleyball experience.' },
-  { num: '02', title: 'Personal Strengthening', desc: 'I aim for you to know your own body and build a strong foundation aligned with your goals.' },
-  { num: '03', title: 'Selective Premium Tracking', desc: 'One-on-one focused work with limited spots to maintain quality.' },
-];
-
 export default function About() {
-  const { darkMode, language } = useStore();
+  const { darkMode } = useStore();
   const { t } = useTranslation();
   const dm = darkMode;
-  const cards = language === 'tr' ? PHILOSOPHY_TR : PHILOSOPHY_EN;
+  const cards = t.about.cards;
 
   return (
     <section id="hakkinda" className="py-32 md:py-40 bg-bg">
@@ -32,17 +20,11 @@ export default function About() {
               </motion.p>
               <motion.h2 variants={fadeUp} custom={1}
                 className="font-display text-[clamp(2.2rem,4vw,3.8rem)] font-semibold leading-[1.1] tracking-[-0.02em] mb-8 text-text-main">
-                {language === 'tr' ? (
-                  <>İlham vermek değil,<br />karar verdirmek.</>
-                ) : (
-                  <>Not inspiring,<br />but empowering.</>
-                )}
+                <>{t.about.title1}<br />{t.about.title2}</>
               </motion.h2>
               <motion.p variants={fadeUp} custom={2}
                 className="text-[1.15rem] leading-[1.85] max-w-[480px] text-text-main/40">
-                {language === 'tr'
-                  ? 'Voleybol sahasında edindiğim disiplinle, sadece kararlı ve disiplinli danışanlarla çalışıyorum. Her program bilimsel temellere dayanır, her adım ölçülür.'
-                  : 'With the discipline I gained on the volleyball court, I only work with determined and disciplined clients. Every program is science-based, every step is measured.'}
+                {t.about.desc}
               </motion.p>
 
               {/* Trust indicator */}
@@ -57,7 +39,7 @@ export default function About() {
                   ))}
                 </div>
                 <span className="text-[0.82rem] font-medium text-text-main/35">
-                  {language === 'tr' ? '20+ aktif danışan güveniyor' : '20+ active clients trust the system'}
+                  {t.about.trust}
                 </span>
               </motion.div>
             </div>

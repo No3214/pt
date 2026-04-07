@@ -70,16 +70,16 @@ export const getLandingData = (lang: string) => {
 
   const testimonials: Testimonial[] = [
     { 
-      text: isTr ? 'Sadece antrenman değil, disiplin öğreten bir süreçti. Vücudumdaki değişime inanamıyorum.' : 'It was a process that taught discipline, not just training. I cannot believe the change in my body.', 
-      name: 'Ayşe K.', role: isTr ? 'Voleybolcu' : 'Volleyball Player', metric: isTr ? '+12kg squat' : '+12kg squat', image: '/images/testimonials/ayse.png'
+      text: isTr ? 'Sıçrama yüksekliğim 3 ayda 12cm arttı. Ela hocanın sistemi kesinlikle farklı klasmanda.' : 'My vertical jump increased 12cm in 3 months. Coach Ela\'s system is definitely in a different league.', 
+      name: 'Ayşe K.', role: isTr ? 'Voleybolcu' : 'Volleyball Player', metric: isTr ? '+12cm sıçrama' : '+12cm jump', image: '/ela_real_30.png'
     },
     { 
-      text: isTr ? 'Ela\'nın programlarıyla 3 ayda dikey sıçramam 8 cm arttı. Gerçekten fark yaratan biri.' : "My vertical jump increased by 8cm in 3 months with Ela's programs. A true game changer.", 
-      name: 'Deniz Y.', role: isTr ? 'Amatör Voleybolcu' : 'Amateur Volleyball Player', metric: isTr ? '+8cm sıçrama' : '+8cm jump', image: '/images/testimonials/deniz.png'
+      text: isTr ? 'Sakatsız, çok güçlü bir sezon geçiriyorum. Kuvvet antrenmanları inanılmaz etkili.' : 'I\'m having an injury-free, very strong season. The strength training is incredibly effective.', 
+      name: 'Deniz Y.', role: isTr ? 'Profesyonel Sporcu' : 'Professional Athlete', metric: isTr ? 'Sıfır Sakatlık' : 'Zero Injury', image: '/ela_real_32.png'
     },
     { 
-      text: isTr ? 'Beslenme planım ve antrenmanlarım o kadar uyumluydu ki, ilk kez sürdürülebilir bir değişim yaşadım.' : 'My nutrition plan and workouts were so in sync that I experienced a sustainable change for the first time.', 
-      name: 'Selin B.', role: 'Fitness', metric: isTr ? '-4kg yağ' : '-4kg fat', image: '/images/testimonials/selin.png'
+      text: isTr ? 'Kendime güvenim ve sahadaki çevikliğim seviye atladı. Tamamen maç performansıma özel program.' : 'My confidence and agility on the court leveled up. A program completely tailored to my match performance.', 
+      name: 'Selin B.', role: 'Fitness & Voleybol', metric: isTr ? '+8cm Mobilite' : '+8cm Mobility', image: '/ela_real_19.png'
     },
   ];
 

@@ -1,4 +1,10 @@
 export const tr = {
+  common: {
+    loading: "Yükleniyor...",
+    ready: "Hazır",
+    limitedSpots: "Sınırlı Kontenjan",
+    scrollHint: "Keşfet",
+  },
   nav: {
     home: "Ana Sayfa",
     about: "Sistem",
@@ -15,20 +21,46 @@ export const tr = {
     btnStart: "Hemen Başla",
     btnPrograms: "Programları Görüntüle",
     kpi: {
-      active: "Aktif Danışan",
-      rating: "Memnuniyet",
+      active: "Mutlu Danışan",
+      rating: "Değerlendirme",
       hours: "Seminer & Eğitim",
       success: "Başarı Oranı"
     }
   },
   about: {
     badge: "SİSTEM",
-    title: "İlham vermek değil, ilham verdirmek.",
-    desc: "Olimpik vizyonla yoğrulmuş modern spor bilimi. Ben sadece program yazmam, potansiyelinizin tavanını yeniden inşa ederim."
+    title1: "İlham vermek değil,",
+    title2: "karar verdirmek.",
+    desc: "Voleybol sahasında edindiğim disiplinle, sadece kararlı ve disiplinli danışanlarla çalışıyorum. Her program bilimsel temellere dayanır, her adım ölçülür.",
+    trust: "20+ aktif danışan güveniyor",
+    cards: [
+      { num: "01", title: "Sporcu Disiplini", desc: "Profesyonel voleybol tecrübesiyle kanıtlanmış antrenman metodolojisi." },
+      { num: "02", title: "Kişiye Özel Güçlenme", desc: "Kendi bedenini tanımanı ve hedeflerine uygun güçlü bir temele sahip olmanı hedefliyorum." },
+      { num: "03", title: "Seçici Premium Takip", desc: "Kaliteyi korumak için sınırlı kontenjanla, birebir odaklı çalışma." }
+    ]
   },
+  howItWorks: {
+    badge: "Nasıl Çalışır",
+    title: "Üç adımda dönüşüm.",
+    steps: [
+      { num: "01", title: "Başvuru & Tanışma", desc: "Formu doldur, 15 dakikalık ücretsiz tanışma görüşmesinde hedeflerini ve seviyeni konuşalım." },
+      { num: "02", title: "Kişisel Program", desc: "Vücut analizin, hedeflerin ve spor geçmişine göre sana özel antrenman ve beslenme programı hazırlanır." },
+      { num: "03", title: "Dönüşüm Başlasın", desc: "Haftalık check-in, video analiz ve sürekli optimizasyonla hedeflerine birlikte yürüyoruz." }
+    ]
+  },
+  marquee: [
+    "8+ Yıl Profesyonel Voleybol",
+    "Bilimsel Antrenman Metodolojisi",
+    "Kişiye Özel Program Tasarımı",
+    "TDEE Bazlı Beslenme Planları",
+    "Video Analiz & Geri Bildirim",
+    "Sıçrama & Patlayıcılık Protokolü",
+    "100% Memnuniyet Garantisi",
+    "Online & Yüz Yüze Koçluk"
+  ],
   testimonials: {
-    badge: "KANIT",
-    title: "Sahadaki gücün yansıması.",
+    badge: "Sonuçlar",
+    title: "Onların hikayesi, senin motivasyonun.",
     users: {
       u1: "Sıçrama yüksekliğim 3 ayda 12cm arttı. Ela hocanın sistemi kesinlikle farklı klasmanda.",
       u2: "Sakatsız, çok güçlü bir sezon geçiriyorum. Kuvvet antrenmanları inanılmaz etkili.",
@@ -40,6 +72,19 @@ export const tr = {
     title: "Kendine yapacağın en büyük yatırım.",
     btnPurchase: "Satın Al",
     monthly: "/ay",
+    popular: "En Popüler",
+    compare: "Tüm Özellikleri Kıyasla",
+    closeCompare: "Kıyaslamayı Kapat",
+    featuresLabel: "Özellikler",
+    comparisonRows: [
+      "Kişiye Özel Antrenman",
+      "Haftalık Check-in",
+      "WhatsApp Destek",
+      "Sıçrama & Atletizm",
+      "Video Analiz",
+      "Beslenme Takibi",
+      "7/24 VIP Erişim"
+    ],
     features: {
       included: "Dahil",
       p1_name: "Genel Fitness",
@@ -50,18 +95,54 @@ export const tr = {
       p3_desc: "VIP koçluk ve raporlama."
     }
   },
+  faq: {
+    badge: "Soru & Cevap",
+    title1: "Merak ettiklerin,",
+    title2: "bilmen gerekenler."
+  },
+  gallery: {
+    badge: "Galeri",
+    title1: "Sahada her an güçlü.",
+    desc: "Gerçek sonuçlar, gerçek insanlar.",
+    followIg: "Instagram'da Takip Et",
+    items: [
+      { src: "/ela_real_21.png", caption: "Smaç Tekniği" },
+      { src: "/ela_real_22.png", caption: "Blok & Savunma" },
+      { src: "/ela_real_23.png", caption: "Servis Atışı" },
+      { src: "/ela_real_24.png", caption: "Kuvvet Antrenmanı" },
+      { src: "/ela_real_25.png", caption: "Sahada Güç" },
+      { src: "/ela_real_26.png", caption: "Takım Ruhu" },
+      { src: "/ela_real_19.png", caption: "Profesyonel Isınma" },
+      { src: "/ela_real_30.png", caption: "Elit Performans" },
+      { src: "/ela_real_32.png", caption: "Zihinsel Hazırlık" }
+    ]
+  },
   contact: {
     badge: "BAĞLANTI",
-    title: "Merak ettiklerinizi hemen gönderin.",
-    name: "Adınız Soyadınız *",
-    email: "Dönüş yapılacak e-posta *",
-    message: "Hedefleriniz, geçmişiniz ve sorunlarınız...",
-    send: "Mesajı İlet",
+    ready: "Değişime hazır mısın?",
+    limitDesc: "Sınırlı kontenjan nedeniyle başvuruları değerlendirerek alıyorum. Formu doldurduğunda 24 saat içinde seninle iletişime geçeceğim.",
+    location: "İstanbul / Online",
+    formName: "İsim Soyisim",
+    formNamePlaceholder: "Adınız",
+    formPhone: "Telefon",
+    formPhonePlaceholder: "05XX XXX XX XX",
+    formGoal: "Ana Hedef",
+    formGoalOptions: {
+      voleybol: "Voleybol Performans",
+      fitness: "Genel Fitness / Güç",
+      kiloKaybi: "Kilo Kaybı / Sıkılaşma",
+      diger: "Diğer"
+    },
+    formNotes: "Ek Notlar",
+    formNotesPlaceholder: "Hedeflerin ve spor geçmişin...",
+    formBtn: "WhatsApp ile Gönder",
     sending: "İletiliyor...",
-    success: "Mesajınız bana ulaştı, en kısa sürede dönüş yapacağım! 🏀",
-    error: "Gönderim başarısız oldu. Lütfen tekrar deneyin."
+    success: "Başvuru Gönderildi!",
+    error: "Gönderim başarısız oldu. Lütfen tekrar deneyin.",
+    whatsappMsg: "Merhaba! Sana sporcu portalından ulaşıyorum."
   },
   footer: {
+    nav: "Navigasyon",
     rights: "Tüm hakları saklıdır.",
     terms: "Kullanım Koşulları",
     privacy: "KVKK & Gizlilik Şartları"

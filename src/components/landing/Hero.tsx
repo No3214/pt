@@ -53,9 +53,7 @@ export default function Hero() {
             <motion.div variants={fadeUp} custom={0}
               className={`inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-[0.7rem] font-medium uppercase tracking-[0.15em] mb-10 ${dm ? 'bg-white/5 text-text-main/60 border border-text-main/10' : 'bg-black/[0.03] text-text-main/50 border border-black/[0.06]'}`}>
               <span className="w-1.5 h-1.5 bg-primary rounded-full animate-pulse" />
-              {language === 'tr' 
-                ? <>{new Date().toLocaleString('tr-TR', { month: 'long', year: 'numeric' })} — Sınırlı Kontenjan</>
-                : <>{new Date().toLocaleString('en-US', { month: 'long', year: 'numeric' })} — Limited Spots</>}
+              {new Date().toLocaleString(language, { month: 'long', year: 'numeric' })} — {t.common.limitedSpots}
             </motion.div>
 
             <motion.h1 variants={staggerContainer} initial="hidden" animate="visible"
@@ -121,7 +119,7 @@ export default function Hero() {
               className={`absolute -left-8 bottom-[20%] px-6 py-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-xl ${dm ? 'bg-white/10 border border-white/10' : 'bg-white/90 border border-black/5'}`}
             >
               <div className="text-3xl font-semibold text-primary"><Counter target={20} suffix="+" /></div>
-              <div className={`text-[0.7rem] uppercase tracking-[0.12em] mt-1 ${dm ? 'text-white/50' : 'text-text-main/40'}`}>Mutlu Danışan</div>
+              <div className={`text-[0.7rem] uppercase tracking-[0.12em] mt-1 ${dm ? 'text-white/50' : 'text-text-main/40'}`}>{t.hero.kpi.active}</div>
             </motion.div>
 
             <motion.div
@@ -131,7 +129,7 @@ export default function Hero() {
               viewport={{ once: true }}
               className={`absolute -right-6 top-[15%] px-6 py-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-xl ${dm ? 'bg-white/10 border border-white/10' : 'bg-white/90 border border-black/5'}`}>
               <div className="text-3xl font-semibold text-secondary"><Counter target={5} suffix=".0" /></div>
-              <div className={`text-[0.7rem] uppercase tracking-[0.12em] mt-1 ${dm ? 'text-white/50' : 'text-text-main/40'}`}>Değerlendirme</div>
+              <div className={`text-[0.7rem] uppercase tracking-[0.12em] mt-1 ${dm ? 'text-white/50' : 'text-text-main/40'}`}>{t.hero.kpi.rating}</div>
             </motion.div>
           </motion.div>
         </div>
@@ -144,7 +142,7 @@ export default function Hero() {
         transition={{ delay: 2 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
       >
-        <span className={`text-[0.6rem] uppercase tracking-[0.25em] ${dm ? 'text-text-main/20' : 'text-text-main/20'}`}>Keşfet</span>
+        <span className={`text-[0.6rem] uppercase tracking-[0.25em] ${dm ? 'text-text-main/20' : 'text-text-main/20'}`}>{t.common.scrollHint}</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}

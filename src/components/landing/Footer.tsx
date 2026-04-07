@@ -12,7 +12,6 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
   const { navigationLinks } = getLandingData(language);
   const { t } = useTranslation();
-  const isTr = language === 'tr';
   const [legalModal, setLegalModal] = useState<'kvkk' | 'terms' | null>(null);
 
   const SOCIALS = [
@@ -51,7 +50,7 @@ export default function Footer() {
 
           <div className="space-y-8">
             <h4 className="text-[0.75rem] font-bold uppercase tracking-widest text-primary">
-              {isTr ? 'Navigasyon' : 'Navigation'}
+              {t.footer.nav}
             </h4>
             <nav className="flex flex-col gap-5">
               {navigationLinks.map(l => (
@@ -73,7 +72,7 @@ export default function Footer() {
               </span>
               <div className="pt-2">
                 <span className={`inline-flex px-4 py-2 rounded-full text-[0.72rem] font-bold uppercase tracking-tighter ${dm ? 'bg-green-500/10 text-green-500' : 'bg-green-500/10 text-green-700'}`}>
-                  {isTr ? 'İstanbul / Online' : 'Istanbul / Online'}
+                  {t.contact.location}
                 </span>
               </div>
             </div>

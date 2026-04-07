@@ -3,23 +3,16 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { RevealSection, fadeUp } from './LandingUI';
 import { useStore } from '../../stores/useStore';
 import Lightbox from '../Lightbox';
+import { useTranslation } from '../../locales';
 
-const galleryImages = [
-  { src: '/ela_real_21.png', alt: 'Ela Ebeoğlu Voleybol', captionTr: 'Smaç Tekniği', captionEn: 'Spike Technique' },
-  { src: '/ela_real_22.png', alt: 'Ela Ebeoğlu Voleybol', captionTr: 'Blok & Savunma', captionEn: 'Block & Defense' },
-  { src: '/ela_real_23.png', alt: 'Ela Ebeoğlu Voleybol', captionTr: 'Servis Atışı', captionEn: 'Serve' },
-  { src: '/ela_real_24.png', alt: 'Ela Ebeoğlu Antrenman', captionTr: 'Kuvvet Antrenmanı', captionEn: 'Strength Training' },
-  { src: '/ela_real_25.png', alt: 'Ela Ebeoğlu Sahada', captionTr: 'Sahada Güç', captionEn: 'Court Power' },
-  { src: '/ela_real_26.png', alt: 'Ela Ebeoğlu Maç', captionTr: 'Takım Ruhu', captionEn: 'Team Spirit' },
-];
-
-function GalleryCard({ image, index, onClick, dm, language }: {
-  image: typeof galleryImages[0];
+function GalleryCard({ image, index, onClick, dm }: {
+  image: { src: string; caption: string };
   index: number;
   onClick: () => void;
   dm: boolean;
-  language: string;
 }) {
+  const { t } = useTranslation();
+  
   return (
     <motion.div
       variants={fadeUp}
@@ -35,7 +28,7 @@ function GalleryCard({ image, index, onClick, dm, language }: {
       <div className={`relative overflow-hidden ${index === 0 ? 'aspect-[4/3]' : 'aspect-[3/4]'}`}>
         <motion.img
           src={image.src}
-          alt={image.alt}
+          alt={image.caption}
           loading="lazy"
           className="w-full h-full object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
         />
@@ -49,12 +42,12 @@ function GalleryCard({ image, index, onClick, dm, language }: {
 
       <motion.div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
         <p className="text-white font-display text-xl md:text-2xl font-bold tracking-tight">
-          {language === 'tr' ? image.captionTr : image.captionEn}
+          {image.caption}
         </p>
         <div className="flex items-center gap-2 mt-2">
           <div className="w-8 h-[2px] bg-primary rounded-full" />
           <span className="text-white/60 text-[0.75rem] uppercase tracking-[0.15em] font-medium">
-            {language === 'tr' ? 'Galeri' : 'Gallery'}
+            {t.gallery.badge}
           </span>
         </div>
       </motion.div>
@@ -69,7 +62,8 @@ function GalleryCard({ image, index, onClick, dm, language }: {
 }
 
 export default function Gallery() {
-  const { darkMode, language } = useStore();
+  const { darkMode } = useStore();
+  const { t } = useTranslation();
   const dm = darkMode;
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
@@ -79,6 +73,8 @@ export default function Gallery() {
     offset: ['start end', 'end start'],
   });
   const parallaxY = useTransform(scrollYProgress, [0, 1], ['0%', '-5%']);
+
+  const galleryItems = t.gallery.items || [];
 
   const openLightbox = (idx: number) => {
     setLightboxIndex(idx);
@@ -96,28 +92,23 @@ export default function Gallery() {
         <div className="max-w-[1400px] mx-auto px-8 md:px-12 relative z-10">
           <RevealSection className="text-center mb-20">
             <motion.p variants={fadeUp} className="text-[0.75rem] uppercase tracking-[0.3em] font-bold text-primary mb-6">
-              {language === 'tr' ? 'Galeri' : 'Gallery'}
+              {t.gallery.badge}
             </motion.p>
             <motion.h2 variants={fadeUp} custom={1}
               className="font-display text-[clamp(2.5rem,4vw,4.5rem)] font-bold leading-[1] tracking-[-0.04em] text-text-main mb-8">
-              {language === 'tr' ? (
-                <>Sahada <br className="hidden md:block" /> her an güçlü.</>
-              ) : (
-                <>Powerful <br className="hidden md:block" /> every moment.</>
-              )}
+              <>{t.gallery.title1}</>
             </motion.h2>
             <motion.div variants={fadeUp} custom={2} className="w-20 h-1 bg-primary/20 mx-auto rounded-full" />
           </RevealSection>
 
           <RevealSection className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 auto-rows-auto">
-            {galleryImages.map((img, i) => (
+            {galleryItems.map((img: any, i: number) => (
               <GalleryCard
                 key={i}
                 image={img}
                 index={i}
                 onClick={() => openLightbox(i)}
                 dm={dm}
-                language={language}
               />
             ))}
           </RevealSection>
@@ -135,7 +126,7 @@ export default function Gallery() {
               }`}
             >
               <span className="text-lg">📸</span>
-              {language === 'tr' ? "Instagram'da Takip Et" : 'Follow on Instagram'}
+              {t.gallery.followIg}
               <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
@@ -145,13 +136,14 @@ export default function Gallery() {
       </section>
 
       <Lightbox
-        images={galleryImages.map(img => img.src)}
+        images={galleryItems.map((img: any) => img.src)}
         currentIndex={lightboxIndex}
         isOpen={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
-        onNext={() => setLightboxIndex(prev => (prev + 1) % galleryImages.length)}
-        onPrev={() => setLightboxIndex(prev => (prev - 1 + galleryImages.length) % galleryImages.length)}
+        onNext={() => setLightboxIndex(prev => (prev + 1) % galleryItems.length)}
+        onPrev={() => setLightboxIndex(prev => (prev - 1 + galleryItems.length) % galleryItems.length)}
       />
     </>
   );
 }
+

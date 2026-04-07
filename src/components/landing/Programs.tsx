@@ -45,7 +45,7 @@ export default function Programs() {
               >
                 {p.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-2 rounded-full bg-primary text-white text-[0.75rem] font-bold uppercase tracking-widest shadow-xl">
-                    {language === 'tr' ? 'En Popüler' : 'Most Popular'}
+                    {t.programs.popular}
                   </div>
                 )}
 
@@ -93,7 +93,7 @@ export default function Programs() {
             onClick={() => setShowComparison(!showComparison)}
             className="group inline-flex items-center gap-3 px-8 py-4 rounded-full text-[0.85rem] font-bold uppercase tracking-widest text-text-main/50 hover:text-primary transition-all duration-300 border border-text-main/10 hover:border-primary/20 bg-text-main/[0.02]"
           >
-            {showComparison ? (language === 'tr' ? 'Kıyaslamayı Kapat' : 'Close Comparison') : (language === 'tr' ? 'Tüm Özellikleri Kıyasla' : 'Compare All Features')}
+            {showComparison ? t.programs.closeCompare : t.programs.compare}
             <svg className={`w-4 h-4 transition-transform duration-500 ${showComparison ? 'rotate-180' : 'group-hover:translate-y-1'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
@@ -112,7 +112,7 @@ export default function Programs() {
               <table className="w-full min-w-[600px] text-left text-[0.95rem]">
                 <thead>
                   <tr className="border-b border-text-main/5">
-                    <th className="p-6 font-bold text-text-main/30 uppercase tracking-[0.2em] text-[0.7rem]">{language === 'tr' ? 'Özellikler' : 'Features'}</th>
+                    <th className="p-6 font-bold text-text-main/30 uppercase tracking-[0.2em] text-[0.7rem]">{t.programs.featuresLabel}</th>
                     {programs.map(p => (
                       <th key={p.name} className={`p-6 font-bold text-[1.2rem] ${p.popular ? 'text-primary' : 'text-text-main'}`}>
                         {p.name}
@@ -121,23 +121,18 @@ export default function Programs() {
                   </tr>
                 </thead>
                 <tbody className="text-text-main/60">
-                  {(language === 'tr' ? [
-                    { feature: 'Kişiye Özel Antrenman', v: ['check', 'check', 'check'] },
-                    { feature: 'Haftalık Check-in', v: ['check', 'check', 'check'] },
-                    { feature: 'WhatsApp Destek', v: ['check', 'check', 'check'] },
-                    { feature: 'Sıçrama & Atletizm', v: ['no', 'check', 'check'] },
-                    { feature: 'Video Analiz', v: ['no', 'check', 'check'] },
-                    { feature: 'Beslenme Takibi', v: ['no', 'no', 'check'] },
-                    { feature: '7/24 VIP Erişim', v: ['no', 'no', 'check'] },
-                  ] : [
-                    { feature: 'Custom Training', v: ['check', 'check', 'check'] },
-                    { feature: 'Weekly Check-in', v: ['check', 'check', 'check'] },
-                    { feature: 'WhatsApp Support', v: ['check', 'check', 'check'] },
-                    { feature: 'Jump & Athleticism', v: ['no', 'check', 'check'] },
-                    { feature: 'Video Analysis', v: ['no', 'check', 'check'] },
-                    { feature: 'Nutrition Tracking', v: ['no', 'no', 'check'] },
-                    { feature: '24/7 VIP Access', v: ['no', 'no', 'check'] },
-                  ]).map((row, i) => (
+                  {t.programs.comparisonRows.map((feature, i) => {
+                    const comparisonData = [
+                      { feature, v: ['check', 'check', 'check'] },
+                      { feature, v: ['check', 'check', 'check'] },
+                      { feature, v: ['check', 'check', 'check'] },
+                      { feature, v: ['no', 'check', 'check'] },
+                      { feature, v: ['no', 'check', 'check'] },
+                      { feature, v: ['no', 'no', 'check'] },
+                      { feature, v: ['no', 'no', 'check'] },
+                    ];
+                    const row = comparisonData[i];
+                    return (
                     <tr key={i} className="border-b border-text-main/[0.02] last:border-0 hover:bg-text-main/[0.01] transition-all">
                       <td className="p-6 font-semibold">{row.feature}</td>
                       {row.v.map((v, j) => (
@@ -146,7 +141,8 @@ export default function Programs() {
                         </td>
                       ))}
                     </tr>
-                  ))}
+                    );
+                  })}
                 </tbody>
               </table>
             </motion.div>

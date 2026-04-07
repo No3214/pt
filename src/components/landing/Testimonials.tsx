@@ -3,9 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { RevealSection, fadeUp } from './LandingUI';
 import { getLandingData } from '../../data/landingData';
 import { useStore } from '../../stores/useStore';
+import { useTranslation } from '../../locales';
 
 export default function Testimonials() {
   const { darkMode, language } = useStore();
+  const { t } = useTranslation();
   const dm = darkMode;
   const { testimonials } = getLandingData(language);
   const [active, setActive] = useState(0);
@@ -29,11 +31,11 @@ export default function Testimonials() {
       <div className="max-w-[1400px] mx-auto px-8 md:px-12">
         <RevealSection className="text-center md:text-left mb-20">
           <motion.p variants={fadeUp} className="text-[0.75rem] uppercase tracking-[0.2em] font-medium text-primary mb-6">
-            {language === 'tr' ? 'Sonuçlar' : 'Results'}
+            {t.testimonials.badge}
           </motion.p>
           <motion.h2 variants={fadeUp} custom={1}
             className="font-display text-[clamp(2.5rem,4vw,3.8rem)] font-semibold leading-[1.1] tracking-[-0.02em] max-w-[700px] text-text-main">
-            {language === 'tr' ? 'Onların hikayesi, senin motivasyonun.' : 'Their story, your motivation.'}
+            {t.testimonials.title}
           </motion.h2>
         </RevealSection>
 
