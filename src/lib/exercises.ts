@@ -136,3 +136,17 @@ export const categories = [
 ];
 
 export const difficulties = ['beginner', 'intermediate', 'advanced'];
+
+export const categoryLabels: Record<string, string> = {
+  'compound': 'Compound',
+  'isolation': 'Isolation',
+  'cardio': 'Cardio',
+  'plyo': 'Plyometric',
+  'mobility': 'Mobility'
+};
+
+export const difficultyLabels: Record<string, string> = {
+  'beginner': 'Beginner',
+  'intermediate': 'Intermediate',
+  'advanced': 'Advanced'
+};

@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { FoodItem } from '../lib/constants'
 import { supabase } from '../lib/supabase'
-import { exercises as exerciseDB } from '../lib/exercises'
+import { exercises as _exerciseDB } from '../lib/exercises'
 
 // ═══════════════ Types ═══════════════
 export interface ClientNote { id: number; text: string; date: string }
@@ -54,8 +54,8 @@ interface AppState {
   darkMode: boolean
   toggleDarkMode: () => void
   // Language
-  language: 'tr' | 'en'
-  setLanguage: (lang: 'tr' | 'en') => void
+  language: string
+  setLanguage: (lang: string) => void
   // Toast
   toastMsg: string
   showToast: (msg: string) => void
@@ -83,6 +83,7 @@ interface AppState {
   removeFood: (idx: number) => void
   setFoodLog: (f: FoodItem[]) => void
   clearFoodLog: () => void
+  addWellnessLog: (clientId: string, log: Omit<WellnessLog, 'id'>) => void
   // Habits (Global Portal)
   habits: boolean[]
   setHabits: (h: boolean[]) => void

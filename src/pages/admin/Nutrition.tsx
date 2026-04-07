@@ -2,7 +2,6 @@ import { useState, useRef } from 'react'
 import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import { toPng } from 'html-to-image'
-import { sanitize } from '../../lib/constants'
 import { callGemini } from '../../lib/ai'
 
 const fadeUp = {
@@ -408,8 +407,7 @@ Lütfen bana profesyonel sporcu prensiplerine uygun, pratik ve lezzetli SADECE 1
             </motion.div>
           ) : null}
         </AnimatePresence>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
-              

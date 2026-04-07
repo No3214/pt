@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useStore } from '../stores/useStore';
 
 import PortalHeader from '../components/portal/PortalHeader';
@@ -31,19 +31,10 @@ const stagger = {
 import PortalLogin from './portal/PortalLogin';
 import { useStudentPortal } from '../stores/studentPortal';
 import EliteIdCard from '../components/portal/EliteIdCard';
-import { useState, useEffect } from 'react';
 
 export default function Portal() {
   const { darkMode: dm } = useStore();
   const { decryptedData } = useStudentPortal();
-  const [isIdCardOpen, setIsIdCardOpen] = useState(false);
-
-  useEffect(() => {
-    (window as any).dispatchPortalEvent = (event: string) => {
-      if (event === 'open-id-card') setIsIdCardOpen(true);
-    };
-    return () => { (window as any).dispatchPortalEvent = undefined; };
-  }, []);
 
   // If no decrypted data, show Login / PIN entry
   if (!decryptedData) {
@@ -152,7 +143,7 @@ export default function Portal() {
             {/* Row 5: Pro Coaching & Tracking */}
             <motion.div variants={fadeUp} className="lg:col-span-12 grid md:grid-cols-2 gap-8">
                <WorkoutLogger />
-               <EliteIdCard isOpen={isIdCardOpen} onClose={() => setIsIdCardOpen(false)} data={decryptedData} />
+               <EliteIdCard />
             </motion.div>
           </div>
         </motion.div>

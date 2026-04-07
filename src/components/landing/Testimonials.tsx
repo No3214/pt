@@ -76,43 +76,57 @@ export default function Testimonials() {
                     </div>
                   </div>
 
-                  {/* Impact Visual Side */}
-                  <div className="flex flex-col items-center justify-center text-center p-10 relative overflow-hidden">
+                  {/* Impact Visual Side — High Fidelity Result Image */}
+                  <div className="relative group/image h-full min-h-[400px] flex items-center justify-center overflow-hidden rounded-[2.5rem]">
+                    {/* Atmospheric Background Metric */}
                     <motion.div
-                      initial={{ scale: 0.5, opacity: 0 }}
+                      initial={{ scale: 0.8, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: 0.4, duration: 1, type: 'spring' }}
-                      className={`text-[clamp(5rem,15vw,12rem)] font-display font-bold tracking-tighter leading-none ${dm ? 'text-white/5' : 'text-text-main/[0.04]'}`}
+                      transition={{ delay: 0.5, duration: 1.2 }}
+                      className={`absolute inset-0 flex items-center justify-center font-display font-black tracking-tighter leading-none select-none pointer-events-none ${dm ? 'text-white/[0.03]' : 'text-text-main/[0.03]'}`}
+                      style={{ fontSize: '15rem' }}
                     >
                       {testimonials[active].metric.split(' ')[0]}
                     </motion.div>
-                    <div className="text-[0.85rem] uppercase tracking-[0.4em] mt-2 text-text-main/20 font-bold">
-                      {language === 'tr' ? 'Kanıtlanmış Sonuç' : 'Proven Result'}
-                    </div>
+
+                    {/* Primary Result Image */}
+                    <motion.div 
+                      initial={{ y: 40, opacity: 0, scale: 0.9 }}
+                      animate={{ y: 0, opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                      className="relative w-full h-full max-h-[500px] z-10"
+                    >
+                      <div className={`absolute inset-0 rounded-[2rem] border-2 ${dm ? 'border-primary/20 bg-primary/5' : 'border-primary/10 bg-primary/5'} backdrop-blur-sm -rotate-2 scale-105 transition-transform duration-700 group-hover/image:rotate-0 group-hover/image:scale-110`} />
+                      <img 
+                        src={testimonials[active].image} 
+                        alt={testimonials[active].name} 
+                        className="w-full h-full object-cover rounded-[2rem] shadow-2xl relative z-10 border border-white/10"
+                      />
+                      
+                      {/* Floating Badge */}
+                      <div className="absolute -bottom-6 -right-6 bg-primary text-white p-6 rounded-3xl shadow-xl z-20 flex flex-col items-center">
+                        <span className="text-2xl font-black">{testimonials[active].metric.split(' ')[0]}</span>
+                        <span className="text-[0.65rem] uppercase tracking-widest opacity-80 mt-1">{testimonials[active].metric.split(' ').slice(1).join(' ')}</span>
+                      </div>
+                    </motion.div>
                   </div>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            {/* Carousel Navigation */}
-            <div className="flex gap-4 justify-center mt-16">
-              {testimonials.map((_, i) => (
-                <button key={i} onClick={() => goTo(i)}
-                  className={`group relative h-2 cursor-pointer transition-all duration-700 border-none outline-none overflow-hidden ${
-                    i === active ? 'w-12 rounded-full' : 'w-2 rounded-full bg-text-main/10'
+            {/* Dots Navigation */}
+            <div className="flex justify-center gap-3 mt-16">
+              {testimonials.map((_: unknown, i: number) => (
+                <button
+                  key={i}
+                  onClick={() => goTo(i)}
+                  className={`w-3 h-3 rounded-full border-none cursor-pointer transition-all duration-500 ${
+                    i === active
+                      ? 'bg-primary scale-125 shadow-lg shadow-primary/30'
+                      : dm ? 'bg-white/10 hover:bg-white/20' : 'bg-black/10 hover:bg-black/20'
                   }`}
-                  aria-label={`Story ${i + 1}`}
-                >
-                  {i === active && (
-                    <motion.div
-                      layoutId="activeDot"
-                      className="absolute inset-0 bg-primary"
-                    />
-                  )}
-                  {i !== active && (
-                    <div className={`absolute inset-0 bg-text-main/20 group-hover:bg-primary/40 transition-colors`} />
-                  )}
-                </button>
+                  aria-label={`Testimonial ${i + 1}`}
+                />
               ))}
             </div>
           </div>
@@ -120,4 +134,4 @@ export default function Testimonials() {
       </div>
     </section>
   );
-}
+} 

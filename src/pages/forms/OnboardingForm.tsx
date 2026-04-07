@@ -140,7 +140,7 @@ export default function OnboardingForm() {
 
         <LegalModal
           isOpen={isLegalModalOpen}
-          legalType={legalType}
+          type={legalType}
           onClose={() => setLegalModalOpen(false)}
         />
       </div>

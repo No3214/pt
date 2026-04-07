@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useStudentAuth, type Notification } from '../../stores/studentAuth'
+import { useStudentAuth } from '../../stores/studentAuth'
 import { useStore } from '../../stores/useStore'
 
 const typeIcons: Record<string, string> = {

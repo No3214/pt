@@ -6,7 +6,7 @@ import { useStore } from '../../stores/useStore'
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
   const [message, setMessage] = useState('')
-  const [isTyping, setIsTyping] = useState(false)
+  const [_isTyping, _setIsTyping] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -164,7 +164,7 @@ export default function ChatWidget() {
                 </>
               )}
 
-              {isTyping && (
+              {_isTyping && (
                 <div className="flex justify-start">
                   <div className={`px-4 py-3 rounded-2xl rounded-bl-lg ${darkMode ? 'bg-white/[0.06]' : 'bg-black/[0.04]'}`}>
                     <div className="flex gap-1">

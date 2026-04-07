@@ -47,7 +47,7 @@ const equipmentOptions = [
 ]
 
 // AI-generated workout templates based on parameters
-function generateWorkout(goal: string, muscle: string, equipment: string, level: string): GeneratedWorkout {
+function generateWorkout(goal: string, muscle: string, _equipment: string, _level: string): GeneratedWorkout {
   const workouts: Record<string, GeneratedWorkout> = {
     'strength-full': {
       name: 'Full Body Kuvvet Patlaması',

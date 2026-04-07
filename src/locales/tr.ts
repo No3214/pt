@@ -106,6 +106,13 @@ export const tr = {
     export_card_streak: "Sırayı Bozma!",
     export_card_cal: "Takip Edilen Kalori",
     export_card_habit: "Tamamlanan Alışkanlıklar",
-    export_card_habit_target: "Hedef"
+    export_card_habit_target: "Hedef",
+    wellness_title: "Wellness Takibi",
+    wellness_desc: "Günlük performans metriklerini kaydet",
+    wellness_btn: "Analiz Et",
+    wellness_coach_wis: "Koçunuzun Tavsiyesi",
+    roadmap_title: "Yolun Haritası",
+    roadmap_desc: "Başarıya giden adımlar",
+    roadmap_current: "Şu Anki Aşama"
   }
 };

@@ -46,7 +46,7 @@ export default function StudentManager() {
       const tempPassword = invitePassword || `Sporcu${generatePIN()}!`
 
       // Create auth user via Supabase
-      const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+      const { error: authError } = await supabase.auth.admin.createUser({
         email: inviteEmail,
         password: tempPassword,
         email_confirm: true,
@@ -55,7 +55,7 @@ export default function StudentManager() {
 
       if (authError) {
         // Fallback: use signUp if admin API not available
-        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+        const { error: signUpError } = await supabase.auth.signUp({
           email: inviteEmail,
           password: tempPassword,
           options: { data: { name: client.name, role: 'student' } }

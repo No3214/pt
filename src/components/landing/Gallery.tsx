@@ -18,7 +18,7 @@ function GalleryCard({ image, index, onClick, dm, language }: {
   index: number;
   onClick: () => void;
   dm: boolean;
-  language: 'tr' | 'en';
+  language: string;
 }) {
   return (
     <motion.div

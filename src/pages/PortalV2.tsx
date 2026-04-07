@@ -9,7 +9,6 @@ import { tenantConfig } from '../config/tenant'
 import StudentLogin from './portal/StudentLogin'
 
 // Portal Components
-import PortalHeader from '../components/portal/PortalHeader'
 import HabitCheckIn from '../components/portal/HabitCheckIn'
 import FoodLog from '../components/portal/FoodLog'
 import MacroTracker from '../components/portal/MacroTracker'
@@ -58,6 +57,7 @@ export default function PortalV2() {
       const unsub = subscribeToRealtime()
       return unsub
     }
+    return undefined
   }, [user])
 
   // Loading state

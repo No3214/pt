@@ -8,15 +8,10 @@ export default function WorkoutLogger() {
   const activeProgram = savedPrograms.length > 0 ? savedPrograms[savedPrograms.length - 1] : null;
 
   const [completedSets, setCompletedSets] = useState<Record<string, boolean>>({});
-  const [weights, setWeights] = useState<Record<string, string>>({});
   const [video, setVideo] = useState<{ id: string; title: string } | null>(null);
 
   const card = `p-8 rounded-3xl border transition-all duration-500 overflow-hidden relative ${
     dm ? 'bg-white/[0.02] border-white/[0.05]' : 'bg-white border-black/[0.04] shadow-xl shadow-black/[0.02]'
-  }`;
-  
-  const inp = `px-3 py-1.5 w-16 text-center text-sm font-semibold rounded-lg border outline-none transition-all ${
-    dm ? 'bg-white/[0.06] border-white/10 text-white focus:border-primary' : 'bg-stone-50 border-stone-200 text-stone-700 focus:border-primary'
   }`;
 
   const toggleSet = (exIndex: number, setIndex: number) => {
@@ -24,15 +19,9 @@ export default function WorkoutLogger() {
     setCompletedSets((prev: Record<string, boolean>) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const updateWeight = (exIndex: number, setIndex: number, val: string) => {
-    const key = `${exIndex}-${setIndex}`;
-    setWeights((prev: Record<string, string>) => ({ ...prev, [key]: val }));
-  };
-
   const finishWorkout = () => {
     showToast('Antrenman başarıyla kaydedildi! 🔥');
     setCompletedSets({});
-    setWeights({});
   };
 
   if (!activeProgram) {
@@ -149,7 +138,7 @@ export default function WorkoutLogger() {
           })}
         </div>
       </div>
-      {video && <VideoModal id={video.id} title={video.title} onClose={() => setVideo(null)} />}
+      {video && <VideoModal isOpen={!!video} youtubeId={video.id} title={video.title} onClose={() => setVideo(null)} />}
     </>
   );
 }

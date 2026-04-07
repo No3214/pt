@@ -28,7 +28,7 @@ export interface Stat {
   label: string;
 }
 
-export const getLandingData = (lang: 'tr' | 'en') => {
+export const getLandingData = (lang: string) => {
   const isTr = lang === 'tr';
 
   const programs: Program[] = [

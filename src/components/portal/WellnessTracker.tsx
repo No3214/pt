@@ -1,6 +1,8 @@
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 import { useStudentPortal } from '../../stores/studentPortal';
-import { generateAiResponse } from '../../lib/ai';
+import { callOpenRouter } from '../../lib/ai';
 import { useTranslation } from '../../locales';
 
 export default function WellnessTracker() {
@@ -38,10 +40,10 @@ export default function WellnessTracker() {
         Bu verilere dayanarak, sporcunun yarınki antrenman veya toparlanma süreci için 2-3 cümlelik, profesyonel, motive edici ve bilimsel bir tavsiye ver. Tavsiyen kısa, öz ve "Elite Athlete" vizyonunda olsun.
       `;
 
-      const aiFeedback = await generateAiResponse(prompt);
-      setFeedback(aiFeedback);
-      
-      addWellnessLog(decryptedData.client.id, { ...log, coachFeedback: aiFeedback });
+      const aiFeedback = await callOpenRouter(prompt);
+      setFeedback(aiFeedback || '');
+
+      addWellnessLog(decryptedData.client.id, { ...log, coachFeedback: aiFeedback || undefined });
       showToast('Günlük Wellness Verilerin Kaydedildi! 🧠');
     } catch (err) {
       console.error(err);
@@ -92,7 +94,7 @@ export default function WellnessTracker() {
               min={s.min}
               max={s.max}
               value={(stats as any)[s.key]}
-              onChange={(e) => setStats(prev => ({ ...prev, [s.key]: parseInt(e.target.value) }))}
+              onChange={(e) => setStats((prev: any) => ({ ...prev, [s.key]: parseInt(e.target.value) }))}
               className={`w-full h-1.5 rounded-full appearance-none cursor-pointer accent-primary ${dm ? 'bg-white/10' : 'bg-black/5'}`}
             />
           </div>
