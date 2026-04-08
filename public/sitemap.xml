@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://elaebeoglu.com/</loc>
+    <loc>https://pt.kozbeylikonagi.com.tr/</loc>
+    <lastmod>2026-04-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="tr" href="https://pt.kozbeylikonagi.com.tr/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pt.kozbeylikonagi.com.tr/?lang=en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://pt.kozbeylikonagi.com.tr/" />
+  </url>
+  <url>
+    <loc>https://pt.kozbeylikonagi.com.tr/portal</loc>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://pt.kozbeylikonagi.com.tr/form/onboarding</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://pt.kozbeylikonagi.com.tr/form/measurement</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

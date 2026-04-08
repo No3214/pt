@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://elaebeoglu.com/sitemap.xml
+Sitemap: https://pt.kozbeylikonagi.com.tr/sitemap.xml
