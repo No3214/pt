@@ -28,7 +28,7 @@ export default function Hero() {
       {/* Parallax Background */}
       <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale, willChange: 'transform, opacity' }} className="absolute inset-0 -z-10 image-grain">
         <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-b from-bg via-bg/60 to-bg' : 'bg-gradient-to-b from-bg via-bg/40 to-bg'}`} />
-        <img src="/ela_real_32.png" alt="" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" loading="eager" decoding="async" />
+        <img src="/ela_real_32.png" alt="Ela antrenor arka plani" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" loading="eager" decoding="async" />
       </motion.div>
 
       {/* Ambient glow orbs */}

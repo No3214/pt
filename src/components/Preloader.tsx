@@ -117,7 +117,7 @@ export default function Preloader() {
                   dm ? 'text-white/10' : 'text-[#1C1917]/10'
                 }`}
               >
-                {phase === 'complete' ? 'Hazır' : 'Yükleniyor'}
+                {phase === 'complete' ? t.common.ready : t.common.loading}
               </motion.span>
               <motion.span
                 initial={{ opacity: 0 }}

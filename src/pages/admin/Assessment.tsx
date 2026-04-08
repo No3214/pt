@@ -347,7 +347,7 @@ export default function Assessment() {
                 <p className={`text-xs mb-6 ${dm ? 'text-white/30' : 'text-stone-400'}`}>Kifoz, lordoz veya asimetri analizi</p>
                 <div onClick={() => postureInput.current?.click()}                  className={`aspect-[3/4] max-w-[400px] mx-auto border-2 border-dashed rounded-2xl flex items-center justify-center cursor-pointer overflow-hidden transition-all hover:border-primary/30 group ${dm ? 'border-white/10 bg-white/[0.02]' : 'border-stone-200 bg-stone-50'}`}>
                   {postureImg ? (
-                    <img src={postureImg} alt="Postür" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={postureImg} alt="Danisan postur analiz fotografi" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   ) : (
                     <div className="text-center p-6">
                       <svg className={`w-12 h-12 mx-auto mb-3 ${dm ? 'text-white/20' : 'text-stone-300'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">

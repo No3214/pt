@@ -97,7 +97,7 @@ export default function ProgressGallery() {
                    layoutId={`photo-${idx}`}
                    className="relative aspect-[3/4] rounded-2xl overflow-hidden group border border-black/5"
                  >
-                   <img src={p.src} alt="Gelişim" className="w-full h-full object-cover" />
+                   <img src={p.src} alt="Gelisim fotografi" className="w-full h-full object-cover" />
                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
                       <span className="text-white text-xs font-semibold">{p.date}</span>
                       <button onClick={() => deleteProgressPhoto(idx)} className="text-red-400 mt-2 text-xs font-bold w-fit cursor-pointer hover:text-red-300">{t.portal.gallery_btn_delete}</button>

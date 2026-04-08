@@ -156,7 +156,7 @@ export default function FoodTracker() {
             <div onClick={() => fileInput.current?.click()}
               className={`aspect-video rounded-xl mb-4 flex items-center justify-center cursor-pointer overflow-hidden transition-all group ${dm ? 'bg-white/[0.04] hover:bg-white/[0.06]' : 'bg-stone-50 hover:bg-stone-100'}`}>
               {foodImg ? (
-                <img src={foodImg} alt="Yemek" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src={foodImg} alt="Secilen yemek fotografi" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
               ) : (
                 <div className="text-center">
                   <svg className={`w-10 h-10 mx-auto mb-2 ${dm ? 'text-white/15' : 'text-stone-200'}`} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
