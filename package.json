@@ -10,7 +10,19 @@
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
     "lint": "eslint src --report-unused-disable-directives --max-warnings 0",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\""
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
+    "audit:i18n": "npx tsx scripts/check-i18n.ts",
+    "audit:a11y": "npx tsx scripts/audit-a11y.ts",
+    "audit:security": "npx tsx scripts/audit-security.ts",
+    "audit:seo": "npx tsx scripts/audit-seo.ts",
+    "audit:bundle": "npx tsx scripts/audit-bundle.ts",
+    "audit:images": "npx tsx scripts/optimize-images.ts",
+    "audit:quality": "npx tsx scripts/audit-code-quality.ts",
+    "audit:all": "npx tsx scripts/pre-deploy.ts",
+    "pre-deploy": "npx tsx scripts/pre-deploy.ts",
+    "auditcodex": "npx tsx scripts/auditcodex.ts",
+    "fix:a11y": "npx tsx scripts/auto-fix-a11y.ts",
+    "fix:images": "npx tsx scripts/convert-images-webp.ts"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
