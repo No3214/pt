@@ -1,4 +1,5 @@
 import { useEffect, useCallback, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { motion, AnimatePresence, useMotionValue, useTransform } from 'framer-motion'
 
 interface LightboxProps {
@@ -24,13 +25,15 @@ export default function Lightbox({ images, currentIndex, isOpen, onClose, onNext
 
   useEffect(() => {
     if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown)
+      const prevOverflow = document.body.style.overflow
       document.body.style.overflow = 'hidden'
+      document.addEventListener('keydown', handleKeyDown)
+      return () => {
+        document.removeEventListener('keydown', handleKeyDown)
+        document.body.style.overflow = prevOverflow
+      }
     }
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown)
-      document.body.style.overflow = ''
-    }
+    return () => { document.removeEventListener('keydown', handleKeyDown) }
   }, [isOpen, handleKeyDown])
 
   const handleDragEnd = (_: any, info: { offset: { x: number; y: number }; velocity: { x: number; y: number } }) => {
@@ -44,7 +47,7 @@ export default function Lightbox({ images, currentIndex, isOpen, onClose, onNext
     setDragDir(null)
   }
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -52,11 +55,14 @@ export default function Lightbox({ images, currentIndex, isOpen, onClose, onNext
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-[200] flex items-center justify-center"
+          className="fixed inset-0 z-[9999] flex items-center justify-center"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Fotoğraf görüntüleyici"
           onClick={onClose}
         >
           {/* Backdrop */}
-          <motion.div className="absolute inset-0 backdrop-blur-xl" style={{ backgroundColor: useTransform(bgOpacity, v => `rgba(0,0,0,${v})`) }} />
+          <motion.div className="absolute inset-0 backdrop-blur-xl" style={{ backgroundColor: useTransform(bgOpacity, (v: number) => `rgba(0,0,0,${v})`) }} />
 
           {/* Close button */}
           <motion.button
@@ -146,6 +152,7 @@ export default function Lightbox({ images, currentIndex, isOpen, onClose, onNext
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   )
 }
