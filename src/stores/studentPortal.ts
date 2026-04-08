@@ -4,7 +4,7 @@ import { decryptData } from '../lib/crypto'
 
 interface StudentPortalState {
   encryptedData: string | null
-  decryptedData: any | null
+  decryptedData: Record<string, unknown> | null
   error: string | null
   lastAccess: number | null
   
@@ -40,7 +40,7 @@ export const useStudentPortal = create<StudentPortalState>()(
             lastAccess: Date.now() 
           })
           return true
-        } catch (e: any) {
+        } catch (e: unknown) {
           set({ error: e.message || 'Hatalı PIN.' })
           return false
         }

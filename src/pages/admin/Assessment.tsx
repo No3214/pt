@@ -429,7 +429,7 @@ export default function Assessment() {
                 className={`group rounded-xl overflow-hidden border cursor-pointer transition-shadow hover:shadow-lg ${dm ? 'border-white/[0.06]' : 'border-stone-200'}`}
               >
                 <div className="relative" onClick={() => setLightbox(i)}>
-                  <img src={p.src} alt={`İlerleme ${p.date}`} className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <img src={p.src} alt={`İlerleme ${p.date}`} loading="lazy" className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">                    <svg className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/>
                     </svg>

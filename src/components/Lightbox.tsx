@@ -129,7 +129,7 @@ export default function Lightbox({ images, currentIndex, isOpen, onClose, onNext
             <img
               src={images[currentIndex]}
               alt=""
-              className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl select-none pointer-events-none"
+              loading="lazy" className="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl select-none pointer-events-none"
               draggable={false}
             />
           </motion.div>

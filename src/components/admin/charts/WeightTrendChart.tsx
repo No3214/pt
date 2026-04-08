@@ -8,7 +8,7 @@ const locales: Record<string, any> = {
 };
 
 interface Props {
-  data: any[];
+  data: { date: string; weight: number }[];
   targetWeight: number;
   dm: boolean;
 }

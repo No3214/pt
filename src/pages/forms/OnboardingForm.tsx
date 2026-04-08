@@ -73,9 +73,9 @@ export default function OnboardingForm() {
               </div>
 
               <div className="space-y-4">
-                <InputGroup icon={<User />} label={o.name_label} value={formData.name} onChange={(v: any) => setFormData({ ...formData, name: v })} placeholder={o.name_placeholder} />
-                <InputGroup icon={<Activity />} label={o.phone_label} value={formData.phone} onChange={(v: any) => setFormData({ ...formData, phone: v })} placeholder="05xx xxx xx xx" />
-                <InputGroup icon={<Heart />} label={o.email_label} value={formData.email} onChange={(v: any) => setFormData({ ...formData, email: v })} placeholder={o.email_placeholder} />
+                <InputGroup icon={<User />} label={o.name_label} value={formData.name} onChange={(v: string) => setFormData({ ...formData, name: v })} placeholder={o.name_placeholder} />
+                <InputGroup icon={<Activity />} label={o.phone_label} value={formData.phone} onChange={(v: string) => setFormData({ ...formData, phone: v })} placeholder="05xx xxx xx xx" />
+                <InputGroup icon={<Heart />} label={o.email_label} value={formData.email} onChange={(v: string) => setFormData({ ...formData, email: v })} placeholder={o.email_placeholder} />
               </div>
 
               <Button onClick={nextStep} disabled={!formData.name || !formData.phone}>{o.btn_next} <ChevronRight className="w-4 h-4" /></Button>
@@ -90,13 +90,13 @@ export default function OnboardingForm() {
               </div>
 
               <div className="grid grid-cols-3 gap-4">
-                <InputGroup label={o.age_label} value={formData.age} onChange={(v: any) => setFormData({ ...formData, age: v })} placeholder="25" type="number" />
-                <InputGroup label={o.height_label} value={formData.height} onChange={(v: any) => setFormData({ ...formData, height: v })} placeholder="180" type="number" />
-                <InputGroup label={o.weight_label} value={formData.weight} onChange={(v: any) => setFormData({ ...formData, weight: v })} placeholder="75" type="number" />
+                <InputGroup label={o.age_label} value={formData.age} onChange={(v: string) => setFormData({ ...formData, age: v })} placeholder="25" type="number" />
+                <InputGroup label={o.height_label} value={formData.height} onChange={(v: string) => setFormData({ ...formData, height: v })} placeholder="180" type="number" />
+                <InputGroup label={o.weight_label} value={formData.weight} onChange={(v: string) => setFormData({ ...formData, weight: v })} placeholder="75" type="number" />
               </div>
 
               <div className="space-y-4">
-                <InputGroup icon={<Target />} label={o.goal_label} value={formData.goal} onChange={(v: any) => setFormData({ ...formData, goal: v })} placeholder={o.goal_placeholder} />
+                <InputGroup icon={<Target />} label={o.goal_label} value={formData.goal} onChange={(v: string) => setFormData({ ...formData, goal: v })} placeholder={o.goal_placeholder} />
               </div>
 
               <div className="flex gap-4">
@@ -114,9 +114,9 @@ export default function OnboardingForm() {
               </div>
 
               <div className="space-y-4">
-                <TextArea label={o.health_label} value={formData.healthIssues} onChange={(v: any) => setFormData({ ...formData, healthIssues: v })} placeholder={o.health_placeholder} />
-                <TextArea label={o.allergy_label} value={formData.allergies} onChange={(v: any) => setFormData({ ...formData, allergies: v })} placeholder={o.allergy_placeholder} />
-                <TextArea label={o.note_label} value={formData.message} onChange={(v: any) => setFormData({ ...formData, message: v })} placeholder={o.note_placeholder} />
+                <TextArea label={o.health_label} value={formData.healthIssues} onChange={(v: string) => setFormData({ ...formData, healthIssues: v })} placeholder={o.health_placeholder} />
+                <TextArea label={o.allergy_label} value={formData.allergies} onChange={(v: string) => setFormData({ ...formData, allergies: v })} placeholder={o.allergy_placeholder} />
+                <TextArea label={o.note_label} value={formData.message} onChange={(v: string) => setFormData({ ...formData, message: v })} placeholder={o.note_placeholder} />
               </div>
 
               <div className="space-y-4 pt-6 border-t border-text-main/10">
@@ -152,7 +152,7 @@ export default function OnboardingForm() {
   );
 }
 
-function InputGroup({ icon, label, value, onChange, placeholder, type = 'text' }: any) {
+function InputGroup({ icon, label, value, onChange, placeholder, type = 'text' }: { icon?: React.ReactNode; label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string }) {
   return (
     <div>
       <label className="block text-sm font-semibold mb-2">{label}</label>
@@ -170,7 +170,7 @@ function InputGroup({ icon, label, value, onChange, placeholder, type = 'text' }
   );
 }
 
-function Button({ children, onClick, disabled }: any) {
+function Button({ children, onClick, disabled }: { children: React.ReactNode; onClick: () => void; disabled?: boolean }) {
   return (
     <motion.button
       whileHover={{ scale: disabled ? 1 : 1.01 }}
@@ -184,7 +184,7 @@ function Button({ children, onClick, disabled }: any) {
   );
 }
 
-function SecondaryButton({ children, onClick }: any) {
+function SecondaryButton({ children, onClick }: { children: React.ReactNode; onClick: () => void }) {
   return (
     <motion.button
       whileHover={{ scale: 1.01 }}
@@ -197,7 +197,7 @@ function SecondaryButton({ children, onClick }: any) {
   );
 }
 
-function TextArea({ label, value, onChange, placeholder }: any) {
+function TextArea({ label, value, onChange, placeholder }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string }) {
   return (
     <div>
       <label className="block text-sm font-semibold mb-2">{label}</label>

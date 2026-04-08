@@ -157,7 +157,7 @@ export default function VideoLibrary() {
                 <img
                   src={`https://img.youtube.com/vi/${ex.youtube_id}/mqdefault.jpg`}
                   alt={ex.name_tr}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-3xl">🏋️</div>

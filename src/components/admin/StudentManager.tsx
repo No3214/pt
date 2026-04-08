@@ -69,7 +69,7 @@ export default function StudentManager() {
         .replace('{email}', inviteEmail)
         .replace('{password}', tempPassword))
       updateClient(client.id, { email: inviteEmail })
-    } catch (e: any) {
+    } catch (e: unknown) {
       setStatusMsg(t.admin.students_toast_error.replace('{message}', e.message))
     } finally {
       setIsSending(false)

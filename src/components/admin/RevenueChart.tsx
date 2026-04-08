@@ -57,7 +57,7 @@ export default function RevenueChart() {
               itemStyle={ttStyle.itemStyle}
               labelStyle={ttStyle.labelStyle}
               cursor={ttStyle.cursor}
-              formatter={(v: any) => [`${currency}${v.toLocaleString(locale)}`, t.admin.revenue_monthly]}
+              formatter={(v: number) => [`${currency}${v.toLocaleString(locale)}`, t.admin.revenue_monthly]}
             />
             <defs>
               <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">

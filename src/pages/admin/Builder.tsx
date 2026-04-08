@@ -25,7 +25,7 @@ const diffColors: Record<string, { bg: string; text: string }> = {
   advanced: { bg: 'bg-primary/10', text: 'text-primary' },
 }
 
-function ExerciseThumb({ exercise }: { exercise: any, dm?: boolean }) {
+function ExerciseThumb({ exercise }: { exercise: { name: string; [key: string]: unknown }, dm?: boolean }) {
   const [err, setErr] = useState(false)
   
   if (err) {
@@ -39,7 +39,7 @@ function ExerciseThumb({ exercise }: { exercise: any, dm?: boolean }) {
       src={`/exercises/${fileName}.gif`} 
       alt={exercise.name}
       onError={() => setErr(true)}
-      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+      loading="lazy" className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
     />
   )
 }
@@ -126,7 +126,7 @@ export default function Builder() {
       const best = results.find(r => r.result)
       if (best?.result) setWaPreview(best.result)
       else setWaPreview('AI Hatası: Sonuç alınamadı')
-    } catch (err: any) { setWaPreview('AI Hatası: ' + err.message) }
+    } catch (err: unknown) { setWaPreview('AI Hatası: ' + (err instanceof Error ? err.message : 'Unknown error')) }
     setLoading(false)
   }
 

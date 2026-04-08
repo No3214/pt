@@ -82,14 +82,14 @@ export default function WellnessTracker() {
                  <span>{s.icon}</span>
                  <span>{s.label}</span>
               </div>
-              <span className="text-primary">{(stats as any)[s.key]}</span>
+              <span className="text-primary">{(stats as Record<string, number>)[s.key]}</span>
             </div>
             <input
               type="range"
               min={s.min}
               max={s.max}
-              value={(stats as any)[s.key]}
-              onChange={(e) => setStats((prev: any) => ({ ...prev, [s.key]: parseInt(e.target.value) }))}
+              value={(stats as Record<string, number>)[s.key]}
+              onChange={(e) => setStats((prev: Record<string, number>) => ({ ...prev, [s.key]: parseInt(e.target.value) }))}
               className={`w-full h-1.5 rounded-full appearance-none cursor-pointer accent-primary ${dm ? 'bg-white/10' : 'bg-black/5'}`}
             />
           </div>

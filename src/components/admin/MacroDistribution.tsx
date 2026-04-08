@@ -68,7 +68,7 @@ export default function MacroDistribution() {
               <Tooltip
                 contentStyle={ttStyle.contentStyle}
                 itemStyle={ttStyle.itemStyle}
-                formatter={(v: any) => [`${v}g`, '']}
+                formatter={(v: number) => [`${v}g`, '']}
               />
             </PieChart>
           </ResponsiveContainer>

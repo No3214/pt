@@ -22,7 +22,7 @@ export default function WellnessFeed() {
     return 'safe';
   };
 
-  const sendWellnessMessage = (name: string, phone: string, log: any) => {
+  const sendWellnessMessage = (name: string, phone: string, log: Record<string, unknown>) => {
     const alert = getAlertLevel(log);
     let message = t.admin.wellness_msg_base.replace('{name}', name);
     

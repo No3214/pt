@@ -51,7 +51,7 @@ export async function councilQuery(prompt: string, imageBase64?: string): Promis
   return providers.map((p, i) => ({
     id: p.id,
     name: p.name,
-    result: results[i].status === 'fulfilled' ? (results[i] as any).value : null,
-    error: results[i].status === 'rejected' ? (results[i] as any).reason.message : null,
+    result: results[i].status === 'fulfilled' ? (results[i] as PromiseFulfilledResult<string | null>).value : null,
+    error: results[i].status === 'rejected' ? (results[i] as PromiseRejectedResult).reason?.message : null,
   }))
 }

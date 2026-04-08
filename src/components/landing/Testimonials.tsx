@@ -66,7 +66,7 @@ export default function Testimonials() {
                     <div className="flex items-center gap-6">
                       <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-[1.1rem] font-bold shadow-xl overflow-hidden shadow-black/20">
                         {testimonials[active].image ? (
-                          <img src={testimonials[active].image} alt={`${testimonials[active].name} - Musteri basari fotografi`} className="w-full h-full object-cover rounded-full" />
+                          <img src={testimonials[active].image} alt={`${testimonials[active].name} - Musteri basari fotografi`} loading="lazy" className="w-full h-full object-cover rounded-full" />
                         ) : (
                           testimonials[active].name.split(' ').map(w => w[0]).join('')
                         )}
@@ -102,7 +102,7 @@ export default function Testimonials() {
                       <img 
                         src={testimonials[active].image} 
                         alt={testimonials[active].name} 
-                        className="w-full h-full object-cover rounded-[2rem] shadow-2xl relative z-10 border border-white/10"
+                        loading="lazy" className="w-full h-full object-cover rounded-[2rem] shadow-2xl relative z-10 border border-white/10"
                       />
                       
                       {/* Floating Badge */}

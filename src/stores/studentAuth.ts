@@ -62,7 +62,7 @@ export interface WorkoutSession {
   plan_id?: string
   date: string
   duration_minutes?: number
-  exercises_completed: any[]
+  exercises_completed: string[]
   total_volume?: number
   calories_burned?: number
   rpe?: number
@@ -189,7 +189,7 @@ export const useStudentAuth = create<StudentAuthState>()(
 
           set({ user: data.user, session: data.session, profile, isLoading: false })
           return true
-        } catch (e: any) {
+        } catch (e: unknown) {
           const msg = e.message?.includes('Invalid login') ? 'E-posta veya şifre hatalı.' : e.message || 'Giriş başarısız.'
           set({ error: msg, isLoading: false })
           return false
@@ -226,7 +226,7 @@ export const useStudentAuth = create<StudentAuthState>()(
 
           set({ user: data.user, session: data.session, isLoading: false })
           return true
-        } catch (e: any) {
+        } catch (e: unknown) {
           const msg = e.message?.includes('already registered') ? 'Bu e-posta zaten kayıtlı.' : e.message || 'Kayıt başarısız.'
           set({ error: msg, isLoading: false })
           return false
@@ -244,8 +244,8 @@ export const useStudentAuth = create<StudentAuthState>()(
           if (error) throw error
           set({ isLoading: false })
           return true
-        } catch (e: any) {
-          set({ error: e.message || 'Bağlantı gönderilemedi.', isLoading: false })
+        } catch (e: unknown) {
+          set({ error: e instanceof Error ? e.message : "Unknown error" || 'Bağlantı gönderilemedi.', isLoading: false })
           return false
         }
       },
@@ -271,8 +271,8 @@ export const useStudentAuth = create<StudentAuthState>()(
           if (error) throw error
           set({ isLoading: false })
           return true
-        } catch (e: any) {
-          set({ error: e.message || 'Şifre sıfırlama başarısız.', isLoading: false })
+        } catch (e: unknown) {
+          set({ error: e instanceof Error ? e.message : "Unknown error" || 'Şifre sıfırlama başarısız.', isLoading: false })
           return false
         }
       },

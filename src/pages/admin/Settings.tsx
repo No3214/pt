@@ -45,7 +45,7 @@ export default function Settings() {
       try {
         const data = JSON.parse(ev.target?.result as string)
         if (data.clients) {          const store = useStore.getState()
-          data.clients.forEach((c: any) => {
+          data.clients.forEach((c: Record<string, unknown>) => {
             if (!store.clients.find(x => x.id === c.id)) {
               store.addClient(c)
             }

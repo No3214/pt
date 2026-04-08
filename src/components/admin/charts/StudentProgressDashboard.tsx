@@ -6,9 +6,9 @@ import { useTranslation } from '../../../locales';
 
 interface Props {
   data: {
-    client: any;
-    measurements: any[];
-    workoutLogs: any[];
+    client: Record<string, unknown>;
+    measurements: { date: string; weight: number; bodyFat?: number }[];
+    workoutLogs: { date: string; exercises: unknown[] }[];
     targetWeight: number;
   };
   dm: boolean;

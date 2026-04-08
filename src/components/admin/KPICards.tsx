@@ -11,7 +11,7 @@ const fadeUp = {
   })
 };
 
-function KPICard({ label, value, sub, color, i, dm }: any) {
+function KPICard({ label, value, sub, color, i, dm }: { label: string; value: string | number; sub?: string; color?: string; i?: number; dm?: boolean }) {
   return (
     <motion.div
       variants={fadeUp}

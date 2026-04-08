@@ -8,7 +8,7 @@ const locales: Record<string, any> = {
 };
 
 interface Props {
-  data: any[];
+  data: { date: string; bodyFat?: number; muscle?: number; weight?: number }[];
   dm: boolean;
 }
 

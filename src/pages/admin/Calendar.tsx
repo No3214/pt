@@ -117,7 +117,7 @@ export default function CalendarPage() {
                 {calSessions
                   .slice()
                   .sort((a, b) => {
-                    const dayOrder = daysArr.indexOf(a.day as any) - daysArr.indexOf(b.day as any)
+                    const dayOrder = daysArr.indexOf(a.day as string) - daysArr.indexOf(b.day as string)
                     return dayOrder !== 0 ? dayOrder : a.time.localeCompare(b.time)
                   })
                   .slice(0, 5)

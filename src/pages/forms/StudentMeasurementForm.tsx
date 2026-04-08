@@ -97,8 +97,8 @@ export default function StudentMeasurementForm() {
               </div>
               
               <div className="grid grid-cols-2 gap-4">
-                <Input label={m.weight_label} value={formData.weight} onChange={(v: any) => setFormData({...formData, weight: v})} placeholder="75.5" type="number" />
-                <Input label={m.fat_label} value={formData.bodyFat} onChange={(v: any) => setFormData({...formData, bodyFat: v})} placeholder="15.2" type="number" />
+                <Input label={m.weight_label} value={formData.weight} onChange={(v: string) => setFormData({...formData, weight: v})} placeholder="75.5" type="number" />
+                <Input label={m.fat_label} value={formData.bodyFat} onChange={(v: string) => setFormData({...formData, bodyFat: v})} placeholder="15.2" type="number" />
               </div>
 
               <Button onClick={() => setStep(2)} disabled={!formData.weight}>
@@ -119,12 +119,12 @@ export default function StudentMeasurementForm() {
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                <Input label={m.shoulder_label} value={formData.shoulder} onChange={(v: any) => setFormData({...formData, shoulder: v})} placeholder="120" />
-                <Input label={m.chest_label} value={formData.chest} onChange={(v: any) => setFormData({...formData, chest: v })} placeholder="105" />
-                <Input label={m.waist_label} value={formData.waist} onChange={(v: any) => setFormData({...formData, waist: v})} placeholder="85" />
-                <Input label={m.hip_label} value={formData.hip} onChange={(v: any) => setFormData({...formData, hip: v})} placeholder="100" />
-                <Input label={m.leg_label} value={formData.leg} onChange={(v: any) => setFormData({...formData, leg: v})} placeholder="60" />
-                <Input label={m.arm_label} value={formData.arm} onChange={(v: any) => setFormData({...formData, arm: v})} placeholder="35" />
+                <Input label={m.shoulder_label} value={formData.shoulder} onChange={(v: string) => setFormData({...formData, shoulder: v})} placeholder="120" />
+                <Input label={m.chest_label} value={formData.chest} onChange={(v: string) => setFormData({...formData, chest: v })} placeholder="105" />
+                <Input label={m.waist_label} value={formData.waist} onChange={(v: string) => setFormData({...formData, waist: v})} placeholder="85" />
+                <Input label={m.hip_label} value={formData.hip} onChange={(v: string) => setFormData({...formData, hip: v})} placeholder="100" />
+                <Input label={m.leg_label} value={formData.leg} onChange={(v: string) => setFormData({...formData, leg: v})} placeholder="60" />
+                <Input label={m.arm_label} value={formData.arm} onChange={(v: string) => setFormData({...formData, arm: v})} placeholder="35" />
               </div>
 
               <div className="flex gap-4">
@@ -146,7 +146,7 @@ export default function StudentMeasurementForm() {
               </div>
 
               <div className="space-y-4">
-                <Input label={m.date_label} value={formData.date} onChange={(v: any) => setFormData({...formData, date: v})} type="date" />
+                <Input label={m.date_label} value={formData.date} onChange={(v: string) => setFormData({...formData, date: v})} type="date" />
                 <textarea 
                   value={formData.notes} 
                   onChange={e => setFormData({...formData, notes: e.target.value})}
@@ -177,7 +177,7 @@ export default function StudentMeasurementForm() {
   );
 }
 
-function Input({ label, value, onChange, placeholder, type = 'text' }: any) {
+function Input({ label, value, onChange, placeholder, type = 'text' }: { label: string; value: string; onChange: (v: string) => void; placeholder?: string; type?: string }) {
   return (
     <div>
       <label className="block text-xs font-semibold uppercase tracking-wider mb-2">{ label}</label>
@@ -192,7 +192,7 @@ function Input({ label, value, onChange, placeholder, type = 'text' }: any) {
   );
 }
 
-function Button({ children, onClick, disabled }: any) {
+function Button({ children, onClick, disabled }: { children: React.ReactNode; onClick: () => void; disabled?: boolean }) {
   return (
     <motion.button
       whileHover={{ scale: disabled ? 1 : 1.01 }}

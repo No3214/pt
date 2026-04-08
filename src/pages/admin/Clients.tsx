@@ -86,7 +86,7 @@ export default function Clients() {
     window.open(`https://wa.me/?text=${text}`, '_blank')
   }
 
-  const handleSharePortal = async (client: any) => {
+  const handleSharePortal = async (client: typeof clients[0]) => {
     const pin = prompt(`${client.name} için 6 haneli bir giriş PIN'i belirleyin:`, Math.floor(100000 + Math.random() * 900000).toString())
     if (!pin || pin.length < 4) return
 
@@ -110,7 +110,7 @@ export default function Clients() {
     }
   }
 
-  const handleShareMeasurementLink = (client: any) => {
+  const handleShareMeasurementLink = (client: typeof clients[0]) => {
     const link = `${window.location.origin}/measure/${client.id}`
     const text = whatsappTemplates.measurement
       .replace('{{link}}', link)
@@ -474,7 +474,7 @@ export default function Clients() {
                   <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Sporcu Seviyesi</label>
                   <select 
                     value={clients.find(c => c.id === editModal)?.athleteLevel || 'Rookie'} 
-                    onChange={e => updateClient(editModal!, { athleteLevel: e.target.value as any })}
+                    onChange={e => updateClient(editModal!, { athleteLevel: e.target.value as "Rookie" | "Pro" | "Elite" | "Legend" })}
                     className={inp}
                   >
                     <option value="Rookie">Rookie (Başlangıç)</option>

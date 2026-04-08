@@ -100,7 +100,7 @@ function KVKKContent({ brandName, email, dm }: { brandName: string; email: strin
       <P dm={dm}>{t.legal.last_update}</P>
       <P dm={dm}>{t.legal.kvkk_intro.replace('{}', brandName)}</P>
 
-      {Array.isArray(sections) && sections.map((section: any, idx: number) => (
+      {Array.isArray(sections) && sections.map((section: { title: string; content: string }, idx: number) => (
         <div key={idx}>
           <SectionTitle dm={dm}>{section.title}</SectionTitle>
           <P dm={dm}>
@@ -123,7 +123,7 @@ function TermsContent({ brandName, email, dm }: { brandName: string; email: stri
       <P dm={dm}>{t.legal.last_update}</P>
       <P dm={dm}>{t.legal.terms_intro}</P>
 
-      {Array.isArray(sections) && sections.map((section: any, idx: number) => (
+      {Array.isArray(sections) && sections.map((section: { title: string; content: string }, idx: number) => (
         <div key={idx}>
           <SectionTitle dm={dm}>{section.title}</SectionTitle>
           <P dm={dm}>

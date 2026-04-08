@@ -114,7 +114,7 @@ Hedef: ${form.goal < 0 ? 'Yağ Yakımı' : form.goal > 0 ? 'Kas Kazanımı' : 'K
 Lütfen bana profesyonel sporcu prensiplerine uygun, pratik ve lezzetli SADECE 1 GÜNLÜK tam diyet menüsü çıkar. Öğünleri (Kahvaltı, Ara Öğün, Öğle, Akşam) ve yaklaşık gramajları yaz. Ekstra hiçbir şey konuşma, sadece menüyü ver.`;
        const plan = await callGemini(prompt);
        if (plan) setAiMenu(plan);
-    } catch(err: any) {
+    } catch(err: unknown) {
        showToast('AI Planı oluşturulamadı: ' + err.message);
     }
     setLoadingAi(false);
