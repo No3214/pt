@@ -49,9 +49,9 @@ export default function Footer() {
           </div>
 
           <div className="space-y-8">
-            <h4 className="text-[0.75rem] font-bold uppercase tracking-widest text-primary">
+            <h3 className="text-[0.75rem] font-bold uppercase tracking-widest text-primary">
               {t.footer.nav}
-            </h4>
+            </h3>
             <nav className="flex flex-col gap-5">
               {navigationLinks.map(l => (
                 <a key={l.id} href={`#${l.id}`} className="no-underline text-[1.05rem] font-bold text-text-main/40 hover:text-primary transition-all duration-300">
@@ -62,7 +62,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-8">
-            <h4 className="text-[0.75rem] font-bold uppercase tracking-widest text-primary">{t.nav.contact}</h4>
+            <h3 className="text-[0.75rem] font-bold uppercase tracking-widest text-primary">{t.nav.contact}</h3>
             <div className="flex flex-col gap-6">
               <a href={`mailto:${tenantConfig.brand.contact.email}`} className="no-underline text-[1.05rem] font-bold text-text-main/40 hover:text-primary transition-all duration-300">
                 {tenantConfig.brand.contact.email}

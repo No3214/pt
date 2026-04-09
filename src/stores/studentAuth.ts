@@ -43,7 +43,7 @@ export interface Message {
   sender_id: string
   content: string
   message_type: 'text' | 'image' | 'file' | 'workout' | 'meal_plan' | 'voice' | 'system'
-  metadata: Record<string, any>
+  metadata: Record<string, string | number | boolean | null | undefined>
   is_read: boolean
   created_at: string
 }

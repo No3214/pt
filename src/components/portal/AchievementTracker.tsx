@@ -60,7 +60,7 @@ export default function AchievementTracker({ athleteLevel: _athleteLevel }: { at
         </motion.div>
 
         <button
-          onClick={() => (window as any).dispatchPortalEvent?.('open-id-card')}
+          onClick={() => window.dispatchPortalEvent?.('open-id-card')}
           className="px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[0.65rem] font-bold uppercase tracking-widest hover:bg-primary hover:text-white transition-all border border-primary/20 cursor-pointer ml-auto"
         >
           Dijital Kartım 🪪

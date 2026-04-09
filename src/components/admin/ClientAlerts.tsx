@@ -60,7 +60,7 @@ export default function ClientAlerts() {
 
       <div className="space-y-4 max-h-[350px] overflow-y-auto pr-2 custom-scrollbar">
         {alerts.length === 0 ? (
-          <div className="text-center py-16 opacity-20 italic">
+          <div className="text-center py-16 opacity-50 italic">
             <p className="text-[0.9rem] font-medium">{t.admin.alerts_empty}</p>
           </div>
         ) : (

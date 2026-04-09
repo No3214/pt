@@ -1,9 +1,9 @@
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine } from 'recharts';
 import { format, parseISO } from 'date-fns';
-import { tr, enUS, es, fr, de, it, ptBR, ru, zhCN, ja, arSA, ko, hi } from 'date-fns/locale';
+import { tr, enUS, es, fr, de, it, ptBR, ru, zhCN, ja, arSA, ko, hi, Locale } from 'date-fns/locale';
 import { useTranslation } from '../../../locales';
 
-const locales: Record<string, any> = {
+const locales: Record<string, Locale> = {
   tr, en: enUS, es, fr, de, it, pt: ptBR, ru, zh: zhCN, ja, ar: arSA, ko, hi
 };
 
