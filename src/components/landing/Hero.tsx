@@ -28,7 +28,7 @@ export default function Hero() {
       {/* Parallax Background */}
       <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale, willChange: 'transform, opacity' }} className="absolute inset-0 -z-10 image-grain">
         <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-b from-bg via-bg/60 to-bg' : 'bg-gradient-to-b from-bg via-bg/40 to-bg'}`} />
-        <img src="/ela_real_32.png" alt="Ela antrenor arka plani" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" loading="eager" decoding="async" />
+        <img src="/ela_real_32.png" alt="Ela antrenor arka plani" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" loading="eager" decoding="async" fetchPriority="high" width={1200} height={800} />
       </motion.div>
 
       {/* Ambient glow orbs */}
@@ -99,7 +99,7 @@ export default function Hero() {
             className="relative hidden lg:block"
           >
             <div className="relative rounded-[2rem] overflow-hidden aspect-[3/4] border border-text-main/5 shadow-2xl image-grain">
-              <img src="/ela_real_30.png" alt={tenantConfig.brand.name} className="w-full h-full object-cover object-top premium-image" loading="eager" decoding="async" />
+              <img src="/ela_real_30.png" alt={tenantConfig.brand.name} className="w-full h-full object-cover object-top premium-image" loading="eager" decoding="async" fetchPriority="high" width={900} height={1200} />
               <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-t from-bg/50 via-transparent' : 'bg-gradient-to-t from-bg/30 via-transparent'}`} />
               <motion.div
                 initial={{ x: '-100%' }}
