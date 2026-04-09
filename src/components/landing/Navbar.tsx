@@ -113,7 +113,7 @@ export default function Navbar() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -8, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
-                    className={`absolute right-0 top-full mt-2 w-56 rounded-2xl shadow-2xl border overflow-hidden z-50 ${dm ? 'bg-[#1a1a2e] border-white/10' : 'bg-white border-black/5'}`}
+                    className={`absolute right-0 top-full mt-2 w-56 rounded-2xl shadow-2xl border overflow-hidden z-50 ${dm ? 'bg-surface border-white/10' : 'bg-white border-black/5'}`}
                   >
                     <div className="max-h-80 overflow-y-auto py-2">
                       {LANGUAGES.map(lang => (
@@ -209,7 +209,7 @@ export default function Navbar() {
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden mt-2"
                     >
-                      <div className={`rounded-2xl border max-h-48 overflow-y-auto ${dm ? 'bg-[#1a1a2e] border-white/10' : 'bg-white/90 border-black/5'}`}>
+                      <div className={`rounded-2xl border max-h-48 overflow-y-auto ${dm ? 'bg-surface border-white/10' : 'bg-white/90 border-black/5'}`}>
                         {LANGUAGES.map(lang => (
                           <button
                             key={lang.code}

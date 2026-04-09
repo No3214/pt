@@ -25,7 +25,7 @@ export default function ScrollToTop() {
           className={`fixed bottom-8 left-8 z-[98] w-11 h-11 rounded-full flex items-center justify-center border-none cursor-pointer transition-all duration-300 backdrop-blur-xl shadow-float ${
             dm
               ? 'bg-white/10 text-white/60 hover:bg-white/15 hover:text-white'
-              : 'bg-white/80 text-[#1C1917]/40 hover:bg-white hover:text-[#1C1917]'
+              : 'bg-white/80 text-text-main/40 hover:bg-white hover:text-text-main'
           }`}
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

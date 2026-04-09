@@ -38,7 +38,7 @@ export default function LegalModal({ isOpen, onClose, type }: LegalModalProps) {
             className={`fixed inset-4 md:inset-x-auto md:inset-y-8 md:max-w-2xl md:mx-auto z-[401] rounded-2xl border overflow-hidden flex flex-col ${
               dm
                 ? 'bg-[#111] border-white/[0.08] text-white'
-                : 'bg-white border-black/[0.06] text-[#1C1917]'
+                : 'bg-white border-black/[0.06] text-text-main'
             }`}
           >
             {/* Header */}
@@ -49,7 +49,7 @@ export default function LegalModal({ isOpen, onClose, type }: LegalModalProps) {
               <button
                 onClick={onClose}
                 className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors border-none cursor-pointer ${
-                  dm ? 'bg-white/5 text-white hover:bg-white/10' : 'bg-black/5 text-[#1C1917] hover:bg-black/10'
+                  dm ? 'bg-white/5 text-white hover:bg-white/10' : 'bg-black/5 text-text-main hover:bg-black/10'
                 }`}
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -84,11 +84,11 @@ export default function LegalModal({ isOpen, onClose, type }: LegalModalProps) {
 }
 
 function SectionTitle({ children, dm }: { children: React.ReactNode; dm: boolean }) {
-  return <h3 className={`text-[1rem] font-display font-bold mt-6 mb-2 ${dm ? 'text-white' : 'text-[#1C1917]'}`}>{children}</h3>;
+  return <h3 className={`text-[1rem] font-display font-bold mt-6 mb-2 ${dm ? 'text-white' : 'text-text-main'}`}>{children}</h3>;
 }
 
 function P({ children, dm }: { children: React.ReactNode; dm: boolean }) {
-  return <p className={`text-[0.85rem] leading-[1.8] mb-3 ${dm ? 'text-white/50' : 'text-[#1C1917]/60'}`}>{children}</p>;
+  return <p className={`text-[0.85rem] leading-[1.8] mb-3 ${dm ? 'text-white/50' : 'text-text-main/60'}`}>{children}</p>;
 }
 
 function KVKKContent({ brandName, email, dm }: { brandName: string; email: string; dm: boolean }) {
