@@ -63,7 +63,7 @@ export default function PortalV2() {
   // Loading state
   if (isLoading) {
     return (
-      <div className={`min-h-screen flex items-center justify-center ${dm ? 'bg-[#050505]' : 'bg-[#FAF6F1]'}`}>
+      <div className={`min-h-screen flex items-center justify-center ${dm ? 'bg-bg' : 'bg-bg'}`}>
         <div className="text-center">
           <div className="w-12 h-12 mx-auto mb-4 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
           <p className={`text-sm font-medium ${dm ? 'text-white/30' : 'text-black/30'}`}>Portal yükleniyor...</p>
@@ -87,13 +87,13 @@ export default function PortalV2() {
   ]
 
   return (
-    <div className={`min-h-screen font-body overflow-x-hidden relative ${dm ? 'dark bg-[#050505] text-white' : 'bg-[#FAF6F1] text-[#1C1917]'}`}>
+    <div className={`min-h-screen font-body overflow-x-hidden relative ${dm ? 'dark bg-bg text-white' : 'bg-bg text-text-main'}`}>
       <LevelAtmosphere />
       <GrainOverlay />
 
       {/* Top Navigation Bar */}
       <nav className={`fixed top-0 left-0 right-0 z-40 backdrop-blur-xl border-b ${
-        dm ? 'bg-[#050505]/80 border-white/[0.06]' : 'bg-[#FAF6F1]/80 border-black/[0.06]'
+        dm ? 'bg-bg/80 border-white/[0.06]' : 'bg-bg/80 border-black/[0.06]'
       }`}>
         <div className="max-w-[1400px] mx-auto px-6 md:px-12">
           <div className="flex items-center justify-between h-16">
@@ -353,7 +353,7 @@ export default function PortalV2() {
                       { label: 'Kalori Hedefi', value: profile?.nutrition_goals ? `${profile.nutrition_goals.cal} kcal` : '2000 kcal' },
                       { label: 'Üyelik Durumu', value: profile?.subscription_status === 'active' ? '✅ Aktif' : profile?.subscription_status || 'Belirsiz' },
                     ].map((field, i) => (
-                      <div key={i} className={`flex items-center justify-between p-4 rounded-xl ${dm ? 'bg-white/[0.02]' : 'bg-[#FAF6F1]'}`}>
+                      <div key={i} className={`flex items-center justify-between p-4 rounded-xl ${dm ? 'bg-white/[0.02]' : 'bg-bg'}`}>
                         <span className={`text-sm ${dm ? 'text-white/40' : 'text-black/40'}`}>{field.label}</span>
                         <span className="text-sm font-medium">{field.value}</span>
                       </div>
@@ -378,7 +378,7 @@ export default function PortalV2() {
 
       {/* Mobile Bottom Navigation */}
       <div className={`fixed bottom-0 left-0 right-0 z-40 md:hidden border-t backdrop-blur-xl ${
-        dm ? 'bg-[#050505]/90 border-white/[0.06]' : 'bg-[#FAF6F1]/90 border-black/[0.06]'
+        dm ? 'bg-bg/90 border-white/[0.06]' : 'bg-bg/90 border-black/[0.06]'
       }`}>
         <div className="flex items-center justify-around px-2 py-2">
           {tabs.slice(0, 5).map(tab => (

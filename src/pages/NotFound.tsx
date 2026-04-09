@@ -61,7 +61,7 @@ export default function NotFound() {
 
   return (
     <div className={`min-h-screen flex items-center justify-center font-body px-6 relative overflow-hidden ${
-      dm ? 'bg-[#050505]' : 'bg-[#FAF6F1]'
+      dm ? 'bg-bg' : 'bg-bg'
     }`}>
       <div className="absolute inset-0" style={{
         backgroundImage: dm
@@ -91,7 +91,7 @@ export default function NotFound() {
           className="relative"
         >
           <span className={`text-[8rem] font-display font-bold leading-none tracking-tight ${
-            dm ? 'text-white/[0.03]' : 'text-[#1C1917]/[0.03]'
+            dm ? 'text-white/[0.03]' : 'text-text-main/[0.03]'
           }`}>404</span>
           <motion.span
             initial={{ opacity: 0, x: -20 }}
@@ -108,7 +108,7 @@ export default function NotFound() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
           className={`font-display text-2xl font-semibold mt-2 mb-3 ${
-            dm ? 'text-white' : 'text-[#1C1917]'
+            dm ? 'text-white' : 'text-text-main'
           }`}
         >
           {t.notFound?.title ?? 'Sayfa bulunamadı'}
@@ -119,7 +119,7 @@ export default function NotFound() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
           className={`text-[0.9rem] leading-relaxed mb-8 ${
-            dm ? 'text-white/35' : 'text-[#1C1917]/40'
+            dm ? 'text-white/35' : 'text-text-main/40'
           }`}
         >
           {t.notFound?.desc ?? 'Aradığınız sayfa mevcut değil veya taşınmış olabilir.'}
@@ -139,7 +139,7 @@ export default function NotFound() {
             </svg>
             {t.notFound?.backHome ?? 'Ana Sayfaya Dön'}
           </Link>
-          <span className={`text-[0.75rem] ${dm ? 'text-white/20' : 'text-[#1C1917]/25'}`}>
+          <span className={`text-[0.75rem] ${dm ? 'text-white/20' : 'text-text-main/25'}`}>
             {(t.notFound?.redirect ?? '{count} saniye sonra yönlendirileceksiniz').replace('{count}', String(count))}
           </span>
         </motion.div>

@@ -58,6 +58,7 @@ export default function ChatWidget() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? 'Sohbeti kapat' : 'Koçunla sohbet et'}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-2xl bg-primary text-white shadow-2xl shadow-primary/30 flex items-center justify-center"
       >
         <AnimatePresence mode="wait">
@@ -90,7 +91,7 @@ export default function ChatWidget() {
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className={`fixed bottom-24 right-6 z-50 w-[380px] max-w-[calc(100vw-48px)] h-[520px] rounded-3xl border shadow-2xl flex flex-col overflow-hidden ${
               darkMode
-                ? 'bg-[#0A0A0A] border-white/[0.08] shadow-black/40'
+                ? 'bg-surface border-white/[0.08] shadow-black/40'
                 : 'bg-white border-black/[0.06] shadow-black/10'
             }`}
           >
@@ -98,13 +99,13 @@ export default function ChatWidget() {
             <div className={`px-5 py-4 border-b flex items-center gap-3 ${darkMode ? 'border-white/[0.06]' : 'border-black/[0.06]'}`}>
               <div className="relative">
                 <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary font-bold text-sm">EE</div>
-                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-white dark:border-[#0A0A0A]" />
+                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-white dark:border-surface" />
               </div>
               <div className="flex-1">
                 <div className="font-bold text-sm">Koç Ela</div>
                 <div className={`text-[0.6rem] uppercase tracking-widest ${darkMode ? 'text-green-400/70' : 'text-green-600/70'}`}>Çevrimiçi</div>
               </div>
-              <button className={`p-2 rounded-xl transition-colors ${darkMode ? 'hover:bg-white/[0.06]' : 'hover:bg-black/[0.04]'}`}>
+              <button aria-label="Sohbet seçenekleri" className={`p-2 rounded-xl transition-colors ${darkMode ? 'hover:bg-white/[0.06]' : 'hover:bg-black/[0.04]'}`}>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={darkMode ? 'text-white/30' : 'text-black/30'}>
                   <circle cx="12" cy="12" r="1" /><circle cx="19" cy="12" r="1" /><circle cx="5" cy="12" r="1" />
                 </svg>
@@ -181,7 +182,7 @@ export default function ChatWidget() {
             {/* Input Area */}
             <div className={`px-4 py-3 border-t ${darkMode ? 'border-white/[0.06]' : 'border-black/[0.06]'}`}>
               <div className="flex items-center gap-2">
-                <button className={`p-2 rounded-xl transition-colors ${darkMode ? 'hover:bg-white/[0.06] text-white/30' : 'hover:bg-black/[0.04] text-black/30'}`}>
+                <button aria-label="Sohbet seçenekleri" className={`p-2 rounded-xl transition-colors ${darkMode ? 'hover:bg-white/[0.06] text-white/30' : 'hover:bg-black/[0.04] text-black/30'}`}>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <rect width="18" height="18" x="3" y="3" rx="2" ry="2" /><circle cx="9" cy="9" r="2" /><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
                   </svg>

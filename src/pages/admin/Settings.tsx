@@ -207,7 +207,7 @@ export default function Settings() {
                     onChange={(e) => setAiConfig({ gemini: e.target.value })}
                     placeholder="AIzaSy..."
                     className={`w-full p-3.5 rounded-xl border outline-none text-sm font-mono tracking-wide transition-all ${
-                      dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-[#1C1917]'
+                      dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-text-main'
                     }`}
                   />
                 </div>
@@ -222,7 +222,7 @@ export default function Settings() {
                     onChange={(e) => setAiConfig({ openrouter: e.target.value })}
                     placeholder="sk-or-v1-..."
                     className={`w-full p-3.5 rounded-xl border outline-none text-sm font-mono tracking-wide transition-all ${
-                      dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-[#1C1917]'
+                      dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-text-main'
                     }`}
                   />
                 </div>
@@ -237,7 +237,7 @@ export default function Settings() {
                     onChange={(e) => setAiConfig({ deepseek: e.target.value })}
                     placeholder="sk-..."
                     className={`w-full p-3.5 rounded-xl border outline-none text-sm font-mono tracking-wide transition-all ${
-                      dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-[#1C1917]'
+                      dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-text-main'
                     }`}
                   />
                   <p className={`text-[0.65rem] mt-2 ${dm ? 'text-white/30' : 'text-stone-400'}`}>
@@ -273,7 +273,7 @@ export default function Settings() {
                       onChange={(e) => updateTemplate('onboarding', e.target.value)}
                       rows={6}
                       className={`w-full p-4 rounded-xl border outline-none text-sm leading-relaxed transition-all resize-none ${
-                        dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-[#1C1917]'
+                        dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-text-main'
                       }`}
                     />
                     <p className={`text-[0.65rem] mt-2 ${dm ? 'text-white/30' : 'text-stone-400'}`}>
@@ -300,7 +300,7 @@ export default function Settings() {
                       onChange={(e) => updateTemplate('measurement', e.target.value)}
                       rows={6}
                       className={`w-full p-4 rounded-xl border outline-none text-sm leading-relaxed transition-all resize-none ${
-                        dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-[#1C1917]'
+                        dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-text-main'
                       }`}
                     />
                     <p className={`text-[0.65rem] mt-2 ${dm ? 'text-white/30' : 'text-stone-400'}`}>

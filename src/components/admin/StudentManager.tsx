@@ -172,7 +172,7 @@ export default function StudentManager() {
                           value={inviteEmail}
                           onChange={e => setInviteEmail(e.target.value)}
                           className={`w-full px-4 py-3 rounded-xl border text-sm outline-none focus:border-primary ${
-                            darkMode ? 'bg-white/[0.04] border-white/[0.08] text-white' : 'bg-[#FAF6F1] border-black/[0.06]'
+                            darkMode ? 'bg-white/[0.04] border-white/[0.08] text-white' : 'bg-bg border-black/[0.06]'
                           }`}
                         />
                         <input
@@ -181,7 +181,7 @@ export default function StudentManager() {
                           value={invitePassword}
                           onChange={e => setInvitePassword(e.target.value)}
                           className={`w-full px-4 py-3 rounded-xl border text-sm outline-none focus:border-primary ${
-                            darkMode ? 'bg-white/[0.04] border-white/[0.08] text-white' : 'bg-[#FAF6F1] border-black/[0.06]'
+                            darkMode ? 'bg-white/[0.04] border-white/[0.08] text-white' : 'bg-bg border-black/[0.06]'
                           }`}
                         />
                         <button

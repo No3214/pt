@@ -334,7 +334,7 @@ export default function Clients() {
                       <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg font-semibold transition-transform duration-300 ${dm ? 'bg-primary/20 text-primary' : 'bg-primary/10 text-primary'}`}>
                         {c.name.charAt(0).toUpperCase()}
                       </div>
-                      <div className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 ${dm ? 'border-[#0c0c0c]' : 'border-white'} ${c.sessions > 2 ? 'bg-secondary' : c.sessions > 0 ? 'bg-amber-400' : 'bg-red-400'}`} />
+                      <div className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 ${dm ? 'border-surface' : 'border-white'} ${c.sessions > 2 ? 'bg-secondary' : c.sessions > 0 ? 'bg-amber-400' : 'bg-red-400'}`} />
                     </div>
                     <div>
                       <h4 className="font-medium text-lg leading-tight">{c.name}</h4>
@@ -656,7 +656,7 @@ export default function Clients() {
                   Evet, 1 Seans Düş (-1)
                 </button>
                 <button onClick={() => handleSessionAction(sessionModal, 'postpone')}
-                  className={`w-full py-4 rounded-xl font-medium cursor-pointer border transition-transform hover:scale-[1.02] ${dm ? 'bg-white/5 text-white/70 border-white/10' : 'bg-black/5 text-[#1C1917]/70 border-black/10'}`}>
+                  className={`w-full py-4 rounded-xl font-medium cursor-pointer border transition-transform hover:scale-[1.02] ${dm ? 'bg-white/5 text-white/70 border-white/10' : 'bg-black/5 text-text-main/70 border-black/10'}`}>
                   Hayır, İptal / Ertele
                 </button>
               </div>

@@ -28,7 +28,11 @@ const GalleryCard = memo(function GalleryCard({ image, index, onClick, dm }: {
       className={`group relative cursor-pointer overflow-hidden ${
         index === 0 ? 'md:col-span-2 md:row-span-2' : ''
       } rounded-[2rem] border ${dm ? 'border-white/5' : 'border-black/[0.04]'}`}
+      role="button"
+      tabIndex={0}
+      aria-label={`${image.caption} — büyütmek için tıkla`}
       onClick={onClick}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onClick(); } }}
     >
       <div className={`relative overflow-hidden ${index === 0 ? 'aspect-[4/3]' : 'aspect-[3/4]'}`}>
         <motion.img

@@ -75,9 +75,9 @@ export default function AdminLayout() {
   if (!isAdminAuth) return <AdminLogin />
 
   return (
-    <div className={`min-h-screen font-body ${dm ? 'bg-[#050505]' : 'bg-[#F7F5F2]'}`}>
+    <div className={`min-h-screen font-body ${dm ? 'bg-bg' : 'bg-bg'}`}>
       {/* ═══ Top Bar ═══ */}
-      <header className={`fixed top-0 left-0 right-0 z-[100] backdrop-blur-2xl border-b transition-all duration-500 ${dm ? 'bg-[#050505]/80 border-white/[0.04]' : 'bg-white/70 border-black/[0.03]'}`}>
+      <header className={`fixed top-0 left-0 right-0 z-[100] backdrop-blur-2xl border-b transition-all duration-500 ${dm ? 'bg-bg/80 border-white/[0.04]' : 'bg-surface/70 border-black/[0.03]'}`}>
         <div className="max-w-[1600px] mx-auto px-5 md:px-8 h-16 flex justify-between items-center">
           <div className="flex items-center gap-4">
             {/* Mobile hamburger */}
@@ -89,20 +89,20 @@ export default function AdminLayout() {
               <div className="space-y-[5px]">
                 <motion.span
                   animate={sidebarOpen ? { rotate: 45, y: 6.5 } : { rotate: 0, y: 0 }}
-                  className={`block w-5 h-[1.5px] rounded-full transition-colors ${dm ? 'bg-white/70' : 'bg-[#1C1917]/70'}`}
+                  className={`block w-5 h-[1.5px] rounded-full transition-colors ${dm ? 'bg-surface/70' : 'bg-text-main/70'}`}
                 />
                 <motion.span
                   animate={sidebarOpen ? { opacity: 0 } : { opacity: 1 }}
-                  className={`block w-5 h-[1.5px] rounded-full transition-colors ${dm ? 'bg-white/70' : 'bg-[#1C1917]/70'}`}
+                  className={`block w-5 h-[1.5px] rounded-full transition-colors ${dm ? 'bg-surface/70' : 'bg-text-main/70'}`}
                 />
                 <motion.span
                   animate={sidebarOpen ? { rotate: -45, y: -6.5 } : { rotate: 0, y: 0 }}
-                  className={`block w-5 h-[1.5px] rounded-full transition-colors ${dm ? 'bg-white/70' : 'bg-[#1C1917]/70'}`}
+                  className={`block w-5 h-[1.5px] rounded-full transition-colors ${dm ? 'bg-surface/70' : 'bg-text-main/70'}`}
                 />
               </div>
             </button>
 
-            <NavLink to="/" className={`flex items-center gap-3 font-display text-lg font-semibold no-underline tracking-[-0.02em] ${dm ? 'text-white' : 'text-[#1C1917]'}`}>
+            <NavLink to="/" className={`flex items-center gap-3 font-display text-lg font-semibold no-underline tracking-[-0.02em] ${dm ? 'text-white' : 'text-text-main'}`}>
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
                 <span className="text-white text-xs font-bold font-body">EE</span>
               </div>
@@ -117,7 +117,7 @@ export default function AdminLayout() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={toggleDarkMode}
-              className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 border-none cursor-pointer ${dm ? 'bg-white/[0.06] text-white/60 hover:text-white hover:bg-white/[0.1]' : 'bg-black/[0.04] text-[#1C1917]/50 hover:text-[#1C1917] hover:bg-black/[0.07]'}`}
+              className={`w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-300 border-none cursor-pointer ${dm ? 'bg-white/[0.06] text-white/60 hover:text-white hover:bg-white/[0.1]' : 'bg-black/[0.04] text-text-main/50 hover:text-text-main hover:bg-black/[0.07]'}`}
               aria-label="Tema">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                 {dm
@@ -129,7 +129,7 @@ export default function AdminLayout() {
 
             {/* Logout */}
             <button onClick={logoutAdmin}
-              className={`rounded-xl px-4 py-2 text-[0.75rem] font-medium border cursor-pointer bg-transparent transition-all duration-300 ${dm ? 'border-white/[0.06] text-white/40 hover:text-white/70 hover:border-white/15' : 'border-black/[0.06] text-[#1C1917]/40 hover:text-[#1C1917]/70 hover:border-black/15'}`}>
+              className={`rounded-xl px-4 py-2 text-[0.75rem] font-medium border cursor-pointer bg-transparent transition-all duration-300 ${dm ? 'border-white/[0.06] text-white/40 hover:text-white/70 hover:border-white/15' : 'border-black/[0.06] text-text-main/40 hover:text-text-main/70 hover:border-black/15'}`}>
               Çıkış
             </button>
           </div>
@@ -152,10 +152,10 @@ export default function AdminLayout() {
 
         <aside className={`${sidebarOpen ? 'translate-x-0 pointer-events-auto' : '-translate-x-full pointer-events-none md:pointer-events-auto'} md:translate-x-0 fixed md:sticky top-16 left-0 z-50 md:z-auto w-[260px] h-[calc(100vh-64px)] flex-shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] overflow-y-auto`}>
           <div className="p-4 md:p-5 h-full flex flex-col">
-            <div className={`rounded-2xl p-4 flex-1 flex flex-col ${dm ? 'bg-[#0c0c0c] border border-white/[0.04]' : 'bg-white border border-black/[0.03]'}`}>
+            <div className={`rounded-2xl p-4 flex-1 flex flex-col ${dm ? 'bg-surface border border-white/[0.04]' : 'bg-white border border-black/[0.03]'}`}>
               {/* Section label */}
               <div className="px-3 mb-4 pt-1">
-                <p className={`text-[0.68rem] uppercase tracking-[0.2em] font-medium ${dm ? 'text-white/20' : 'text-[#1C1917]/20'}`}>Yönetim</p>
+                <p className={`text-[0.68rem] uppercase tracking-[0.2em] font-medium ${dm ? 'text-white/20' : 'text-text-main/20'}`}>Yönetim</p>
               </div>
 
               {/* Nav items */}
@@ -166,7 +166,7 @@ export default function AdminLayout() {
                       `relative flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline text-[0.8rem] transition-all duration-300 group/nav ${
                         isActive
                           ? `font-medium ${dm ? 'bg-primary/10 text-primary' : 'bg-primary/[0.06] text-primary'}`
-                          : `${dm ? 'text-white/35 hover:text-white/60 hover:bg-white/[0.03]' : 'text-[#1C1917]/35 hover:text-[#1C1917]/65 hover:bg-black/[0.02]'}`
+                          : `${dm ? 'text-white/35 hover:text-white/60 hover:bg-white/[0.03]' : 'text-text-main/35 hover:text-text-main/65 hover:bg-black/[0.02]'}`
                       }`
                     }>
                     {({ isActive }) => (
@@ -193,8 +193,8 @@ export default function AdminLayout() {
                     <span className="text-secondary text-[0.65rem] font-bold">EE</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className={`text-[0.75rem] font-medium truncate ${dm ? 'text-white/60' : 'text-[#1C1917]/60'}`}>Ela Ebeoğlu</p>
-                    <p className={`text-[0.68rem] ${dm ? 'text-white/20' : 'text-[#1C1917]/20'}`}>v2.0 Performance</p>
+                    <p className={`text-[0.75rem] font-medium truncate ${dm ? 'text-white/60' : 'text-text-main/60'}`}>Ela Ebeoğlu</p>
+                    <p className={`text-[0.68rem] ${dm ? 'text-white/20' : 'text-text-main/20'}`}>v2.0 Performance</p>
                   </div>
                 </div>
               </div>
@@ -204,7 +204,7 @@ export default function AdminLayout() {
 
         {/* ═══ Main Content ═══ */}
         <main className="flex-1 min-h-[calc(100vh-64px)] p-4 md:p-6 w-full max-w-full overflow-x-hidden overflow-y-auto">
-          <div className={`rounded-2xl p-6 md:p-8 min-h-[calc(100vh-96px)] ${dm ? 'bg-[#0c0c0c] border border-white/[0.04]' : 'bg-white border border-black/[0.03]'}`}>
+          <div className={`rounded-2xl p-6 md:p-8 min-h-[calc(100vh-96px)] ${dm ? 'bg-surface border border-white/[0.04]' : 'bg-white border border-black/[0.03]'}`}>
             <AnimatePresence mode="wait">
               <motion.div
                 key={location.pathname}
@@ -230,8 +230,8 @@ export default function AdminLayout() {
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             className={`fixed bottom-8 left-1/2 -translate-x-1/2 z-[200] px-6 py-3.5 rounded-2xl shadow-2xl text-[0.82rem] font-medium backdrop-blur-xl ${
               dm
-                ? 'bg-white/95 text-[#1C1917] shadow-black/40'
-                : 'bg-[#1C1917] text-white shadow-black/20'
+                ? 'bg-white/95 text-text-main shadow-black/40'
+                : 'bg-text-main text-white shadow-black/20'
             }`}
           >
             <div className="flex items-center gap-2.5">

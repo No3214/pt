@@ -50,7 +50,7 @@ export default function WeightTrendChart({ data, targetWeight, dm }: Props) {
           <YAxis hide={true} domain={['dataMin - 5', 'dataMax + 5']} />
           <Tooltip 
             contentStyle={{ 
-              backgroundColor: dm ? '#111' : '#fff', 
+              backgroundColor: 'var(--color-surface)', 
               border: 'none', 
               borderRadius: '12px', 
               boxShadow: '0 10px 30px rgba(0,0,0,0.2)' 

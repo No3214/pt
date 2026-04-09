@@ -80,7 +80,7 @@ export default function PaymentTracker() {
           { label: t.admin.payments_pending, value: pendingAmount, color: 'text-amber-600', icon: '⏳' },
           { label: t.admin.payments_overdue, value: overdueAmount, color: 'text-red-500', icon: '⚠️' },
         ].map((stat, i) => (
-          <div key={i} className={`p-5 rounded-2xl border text-center ${darkMode ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-[#FAF6F1] border-black/[0.04]'}`}>
+          <div key={i} className={`p-5 rounded-2xl border text-center ${darkMode ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-bg border-black/[0.04]'}`}>
             <span className="text-2xl block mb-2">{stat.icon}</span>
             <div className={`font-display text-xl font-bold ${stat.color}`}>
               {currency}{stat.value.toLocaleString(locale)}

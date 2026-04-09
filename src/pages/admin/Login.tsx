@@ -70,7 +70,7 @@ function PinDots({ length, max, error, dm }: {
             backgroundColor: error
               ? '#ef4444'
               : i < length
-                ? '#C2684A'
+                ? 'var(--color-primary)'
                 : dm ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)',
           }}
           transition={{ type: 'spring', stiffness: 400, damping: 25 }}
@@ -147,13 +147,13 @@ export default function AdminLogin() {
 
   return (
     <div className={`min-h-screen flex items-center justify-center p-4 md:p-6 relative overflow-hidden ${
-      dm ? 'bg-[#050505]' : 'bg-[#F7F5F2]'
+      dm ? 'bg-bg' : 'bg-bg'
     }`}>
       {/* ═══ Background Layer ═══ */}
       <GridBackground dm={dm} />
-      <FloatingOrb delay={0} size={500} x="-10%" y="-20%" color="#C2684A" dm={dm} />
-      <FloatingOrb delay={3} size={400} x="70%" y="60%" color="#7A9E82" dm={dm} />
-      <FloatingOrb delay={6} size={300} x="50%" y="-10%" color="#5e8fa8" dm={dm} />
+      <FloatingOrb delay={0} size={500} x="-10%" y="-20%" color="var(--color-primary)" dm={dm} />
+      <FloatingOrb delay={3} size={400} x="70%" y="60%" color="var(--color-secondary)" dm={dm} />
+      <FloatingOrb delay={6} size={300} x="50%" y="-10%" color="var(--color-accent)" dm={dm} />
 
       {/* ═══ Noise texture overlay ═══ */}
       <div
@@ -170,7 +170,7 @@ export default function AdminLogin() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="absolute inset-0 z-50 flex items-center justify-center"
-            style={{ background: dm ? '#050505' : '#F7F5F2' }}
+            style={{ background: dm ? 'var(--color-bg)' : 'var(--color-bg)' }}
           >
             <motion.div
               initial={{ scale: 0 }}
@@ -184,7 +184,7 @@ export default function AdminLogin() {
                 transition={{ type: 'spring', damping: 12, delay: 0.1 }}
                 className="w-20 h-20 mx-auto mb-6 rounded-full bg-secondary/15 flex items-center justify-center"
               >
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#7A9E82" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--color-secondary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12" />
                 </svg>
               </motion.div>
@@ -192,7 +192,7 @@ export default function AdminLogin() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className={`font-display text-2xl font-semibold ${dm ? 'text-white' : 'text-[#1C1917]'}`}
+                className={`font-display text-2xl font-semibold ${dm ? 'text-white' : 'text-text-main'}`}
               >
                 Hoş Geldiniz
               </motion.p>
@@ -229,12 +229,12 @@ export default function AdminLogin() {
             className="text-center mb-8"
           >
             <p className={`text-[2.5rem] font-light tracking-tight leading-none mb-1 ${
-              dm ? 'text-white/80' : 'text-[#1C1917]/70'
+              dm ? 'text-white/80' : 'text-text-main/70'
             }`}>
               {timeStr}
             </p>
             <p className={`text-[0.78rem] tracking-wide capitalize ${
-              dm ? 'text-white/25' : 'text-[#1C1917]/25'
+              dm ? 'text-white/25' : 'text-text-main/25'
             }`}>
               {dateStr}
             </p>
@@ -260,21 +260,21 @@ export default function AdminLogin() {
                   dm ? 'ring-1 ring-inset ring-white/[0.06]' : 'ring-1 ring-inset ring-black/[0.04]'
                 }`} />
                 <svg width="30" height="30" viewBox="0 0 32 32" fill="none">
-                  <path d="M16 4L28 10V22L16 28L4 22V10L16 4Z" stroke="#C2684A" strokeWidth="1.5" fill="none" />
-                  <path d="M4 10L16 16L28 10" stroke="#C2684A" strokeWidth="0.8" opacity="0.3" />
-                  <path d="M16 16V28" stroke="#C2684A" strokeWidth="0.8" opacity="0.3" />
-                  <circle cx="16" cy="16" r="3" fill="#C2684A" opacity="0.2" />
-                  <circle cx="16" cy="16" r="1.5" fill="#C2684A" />
+                  <path d="M16 4L28 10V22L16 28L4 22V10L16 4Z" stroke="var(--color-primary)" strokeWidth="1.5" fill="none" />
+                  <path d="M4 10L16 16L28 10" stroke="var(--color-primary)" strokeWidth="0.8" opacity="0.3" />
+                  <path d="M16 16V28" stroke="var(--color-primary)" strokeWidth="0.8" opacity="0.3" />
+                  <circle cx="16" cy="16" r="3" fill="var(--color-primary)" opacity="0.2" />
+                  <circle cx="16" cy="16" r="1.5" fill="var(--color-primary)" />
                 </svg>
               </motion.div>
             </div>
 
             <h1 className={`font-display text-[1.75rem] md:text-[2rem] font-semibold tracking-[-0.02em] mb-1.5 ${
-              dm ? 'text-white' : 'text-[#1C1917]'
+              dm ? 'text-white' : 'text-text-main'
             }`}>
               Koç Paneli
             </h1>
-            <p className={`text-[0.8rem] tracking-wide ${dm ? 'text-white/30' : 'text-[#1C1917]/30'}`}>
+            <p className={`text-[0.8rem] tracking-wide ${dm ? 'text-white/30' : 'text-text-main/30'}`}>
               {tenantConfig.brand.name}
             </p>
           </motion.div>
@@ -288,7 +288,7 @@ export default function AdminLogin() {
               className={shake ? 'animate-[shake_0.5s_ease-in-out]' : ''}
             >
               <label className={`block mb-2.5 text-[0.72rem] font-medium uppercase tracking-[0.12em] ${
-                dm ? 'text-white/35' : 'text-[#1C1917]/35'
+                dm ? 'text-white/35' : 'text-text-main/35'
               }`}>
                 Şifre
               </label>
@@ -305,7 +305,7 @@ export default function AdminLogin() {
                       : dm
                         ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 focus:bg-white/[0.05]'
                         : 'bg-black/[0.02] border-black/[0.06] focus:border-primary/40 focus:bg-white/60'
-                  } ${dm ? 'text-white placeholder:text-white/15' : 'text-[#1C1917] placeholder:text-[#1C1917]/20'}`}
+                  } ${dm ? 'text-white placeholder:text-white/15' : 'text-text-main placeholder:text-text-main/20'}`}
                 />
                 {pin && (
                   <motion.div
@@ -347,7 +347,7 @@ export default function AdminLogin() {
                 loading || !pin
                   ? dm
                     ? 'bg-white/[0.04] text-white/20 cursor-not-allowed'
-                    : 'bg-black/[0.04] text-[#1C1917]/20 cursor-not-allowed'
+                    : 'bg-black/[0.04] text-text-main/20 cursor-not-allowed'
                   : 'bg-primary text-white hover:shadow-[0_20px_40px_rgba(194,104,74,0.3)]'
               }`}
             >
@@ -381,7 +381,7 @@ export default function AdminLogin() {
               <NavLink
                 to="/"
                 className={`text-[0.78rem] tracking-wide no-underline transition-all duration-300 flex items-center gap-2 py-2 ${
-                  dm ? 'text-white/25 hover:text-white/60' : 'text-[#1C1917]/25 hover:text-[#1C1917]/60'
+                  dm ? 'text-white/25 hover:text-white/60' : 'text-text-main/25 hover:text-text-main/60'
                 }`}
               >
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -389,7 +389,7 @@ export default function AdminLogin() {
                 </svg>
                 Ana Siteye Dön
               </NavLink>
-              <span className={`text-[0.65rem] flex items-center gap-1.5 ${dm ? 'text-white/15' : 'text-[#1C1917]/15'}`}>
+              <span className={`text-[0.65rem] flex items-center gap-1.5 ${dm ? 'text-white/15' : 'text-text-main/15'}`}>
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                   <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                   <path d="M7 11V7a5 5 0 0110 0v4" />

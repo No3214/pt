@@ -53,6 +53,7 @@ export default function NotificationCenter() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={() => setIsOpen(!isOpen)}
+        aria-label={`Bildirimler${unreadCount > 0 ? ` (${unreadCount} okunmamış)` : ''}`}
         className={`relative p-2.5 rounded-xl transition-colors ${
           darkMode ? 'hover:bg-white/[0.06]' : 'hover:bg-black/[0.04]'
         }`}
@@ -80,7 +81,7 @@ export default function NotificationCenter() {
               transition={{ duration: 0.2 }}
               className={`absolute right-0 top-full mt-2 w-[380px] max-w-[calc(100vw-32px)] max-h-[480px] rounded-2xl border shadow-2xl z-50 overflow-hidden flex flex-col ${
                 darkMode
-                  ? 'bg-[#0A0A0A] border-white/[0.08] shadow-black/40'
+                  ? 'bg-surface border-white/[0.08] shadow-black/40'
                   : 'bg-white border-black/[0.06] shadow-black/10'
               }`}
             >

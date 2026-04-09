@@ -101,7 +101,7 @@ export default function VideoLibrary() {
             onChange={e => setSearchQuery(e.target.value)}
             placeholder="Egzersiz ara..."
             className={`w-full pl-11 pr-4 py-3 rounded-xl border outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 text-sm ${
-              darkMode ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/20' : 'bg-[#FAF6F1] border-black/[0.06] text-black placeholder:text-black/20'
+              darkMode ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/20' : 'bg-bg border-black/[0.06] text-black placeholder:text-black/20'
             }`}
           />
         </div>
@@ -217,7 +217,7 @@ export default function VideoLibrary() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={e => e.stopPropagation()}
-              className={`w-full max-w-3xl rounded-3xl overflow-hidden ${darkMode ? 'bg-[#0A0A0A]' : 'bg-white'}`}
+              className={`w-full max-w-3xl rounded-3xl overflow-hidden ${darkMode ? 'bg-surface' : 'bg-white'}`}
             >
               {/* Video */}
               {selectedVideo.youtube_id && (

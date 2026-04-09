@@ -40,7 +40,7 @@ export default function OnboardingForm() {
 
   if (isSubmitted) {
     return (
-      <div className={`min-h-screen flex items-center justify-center p-6 ${dm ? 'bg-bg text-text-main' : 'bg-[#FAF6F1]'}`}>
+      <div className={`min-h-screen flex items-center justify-center p-6 ${dm ? 'bg-bg text-text-main' : 'bg-bg'}`}>
         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="text-center space-y-6">
           <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
             <CheckCircle2 className="w-12 h-12 text-primary" />
@@ -55,7 +55,7 @@ export default function OnboardingForm() {
   const o = t.forms.onboarding;
 
   return (
-    <div className={`min-h-screen py-20 px-6 ${dm ? 'bg-bg text-text-main font-sans' : 'bg-[#FAF6F1] font-sans'}`}>
+    <div className={`min-h-screen py-20 px-6 ${dm ? 'bg-bg text-text-main font-sans' : 'bg-bg font-sans'}`}>
       <div className="max-w-xl mx-auto">
         {/* Progress Bar */}
         <div className="flex gap-2 mb-12">

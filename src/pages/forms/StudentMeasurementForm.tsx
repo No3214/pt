@@ -31,7 +31,7 @@ export default function StudentMeasurementForm() {
 
   if (!client) {
     return (
-      <div className={`min-h-screen flex items-center justify-center p-6 ${dm ? 'bg-bg text-text-main' : 'bg-[#FAF6F1]'}`}>
+      <div className={`min-h-screen flex items-center justify-center p-6 ${dm ? 'bg-bg text-text-main' : 'bg-bg'}`}>
         <div className="text-center space-y-4">
           <AlertCircle className="w-12 h-12 text-primary mx-auto opacity-50" />
           <h2 className="text-2xl font-bold">{m.invalid_title}</h2>
@@ -56,7 +56,7 @@ export default function StudentMeasurementForm() {
 
   if (isSubmitted) {
     return (
-      <div className={`min-h-screen flex items-center justify-center p-6 ${dm ? 'bg-bg text-text-main' : 'bg-[#FAF6F1]'}`}>
+      <div className={`min-h-screen flex items-center justify-center p-6 ${dm ? 'bg-bg text-text-main' : 'bg-bg'}`}>
         <motion.div initial="hidden" animate="visible" variants={fadeUp} className="text-center space-y-6">
           <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
             <CheckCircle2 className="w-12 h-12 text-primary" />
@@ -69,7 +69,7 @@ export default function StudentMeasurementForm() {
   }
 
   return (
-    <div className={`min-h-screen py-20 px-6 ${dm ? 'bg-bg text-text-main font-sans' : 'bg-[#FAF6F1] font-sans'}`}>
+    <div className={`min-h-screen py-20 px-6 ${dm ? 'bg-bg text-text-main font-sans' : 'bg-bg font-sans'}`}>
       <div className="max-w-xl mx-auto text-center mb-16">
         <p className="text-[0.7rem] font-bold text-primary uppercase tracking-[0.3em] mb-4">{t.portal.gallery_title}</p>
         <h1 className="text-4xl md:text-5xl font-bold tracking-tighter mb-4">{m.welcome_title}, {client.name.split(' ')[0]}!</h1>
@@ -204,4 +204,4 @@ function Button({ children, onClick, disabled }: { children: React.ReactNode; on
       {children}
     </motion.button>
   );
-}
+}

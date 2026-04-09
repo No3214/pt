@@ -50,7 +50,7 @@ export default function BodyCompositionChart({ data, dm }: Props) {
           />
           <Tooltip 
             contentStyle={{ 
-              backgroundColor: dm ? '#111' : '#fff', 
+              backgroundColor: 'var(--color-surface)', 
               border: 'none', 
               borderRadius: '12px', 
               boxShadow: '0 10px 30px rgba(0,0,0,0.2)' 

@@ -90,7 +90,7 @@ export default function SubscriptionCard() {
         {/* Stats Grid */}
         <div className="grid grid-cols-3 gap-4">
           {/* Sessions */}
-          <div className={`p-5 rounded-2xl border text-center ${darkMode ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-[#FAF6F1] border-black/[0.04]'}`}>
+          <div className={`p-5 rounded-2xl border text-center ${darkMode ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-bg border-black/[0.04]'}`}>
             <div className="relative w-16 h-16 mx-auto mb-3">
               <svg className="w-16 h-16 -rotate-90" viewBox="0 0 36 36">
                 <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -111,14 +111,14 @@ export default function SubscriptionCard() {
           </div>
 
           {/* Streak */}
-          <div className={`p-5 rounded-2xl border text-center ${darkMode ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-[#FAF6F1] border-black/[0.04]'}`}>
+          <div className={`p-5 rounded-2xl border text-center ${darkMode ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-bg border-black/[0.04]'}`}>
             <div className="text-4xl mb-2">🔥</div>
             <div className="font-display text-2xl font-bold text-primary">{profile.streak}</div>
             <div className={`text-[0.6rem] font-bold uppercase tracking-widest ${darkMode ? 'text-white/30' : 'text-black/30'}`}>Gün Seri</div>
           </div>
 
           {/* Level */}
-          <div className={`p-5 rounded-2xl border text-center ${darkMode ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-[#FAF6F1] border-black/[0.04]'}`}>
+          <div className={`p-5 rounded-2xl border text-center ${darkMode ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-bg border-black/[0.04]'}`}>
             <div className="text-4xl mb-2">
               {profile.athlete_level === 'Legend' ? '👑' : profile.athlete_level === 'Elite' ? '💎' : profile.athlete_level === 'Pro' ? '⭐' : '🌱'}
             </div>
@@ -129,7 +129,7 @@ export default function SubscriptionCard() {
 
         {/* Subscription End Date */}
         {profile.subscription_end && (
-          <div className={`mt-6 p-4 rounded-xl border text-center ${darkMode ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-[#FAF6F1] border-black/[0.04]'}`}>
+          <div className={`mt-6 p-4 rounded-xl border text-center ${darkMode ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-bg border-black/[0.04]'}`}>
             <span className={`text-xs ${darkMode ? 'text-white/40' : 'text-black/40'}`}>Üyelik bitiş: </span>
             <span className="text-xs font-bold">{new Date(profile.subscription_end).toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
           </div>
