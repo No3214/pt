@@ -20,7 +20,7 @@ html {
   --color-secondary: #7A9E82;
   --color-secondary-light: color-mix(in srgb, var(--color-secondary), white 20%);
   --color-secondary-dark: color-mix(in srgb, var(--color-secondary), black 20%);
-  --color-accent: #5e8fa8;
+  --color-accent: #4A6D88;
   --color-sand: #D4C4AB;
   
   /* UI Colors */

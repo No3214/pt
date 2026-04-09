@@ -62,7 +62,7 @@ export default function Preloader() {
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center ${
-            dm ? 'bg-[#050505]' : 'bg-[#FAF6F1]'
+            'bg-bg'
           }`}
         >
           {/* Subtle grid pattern */}
@@ -118,7 +118,7 @@ export default function Preloader() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
                 className={`text-[0.6rem] tracking-[0.1em] uppercase ${
-                  dm ? 'text-white/10' : 'text-[#1C1917]/10'
+                  dm ? 'text-white/10' : 'text-text-main/10'
                 }`}
               >
                 {phase === 'complete' ? t.common.ready : t.common.loading}
@@ -128,7 +128,7 @@ export default function Preloader() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
                 className={`text-[0.65rem] tabular-nums ${
-                  dm ? 'text-white/15' : 'text-[#1C1917]/15'
+                  dm ? 'text-white/15' : 'text-text-main/15'
                 }`}
               >
                 {progress}%
