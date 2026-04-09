@@ -14,16 +14,16 @@ function VolleyballSpinner({ dm }: { dm: boolean }) {
         <circle cx="50" cy="50" r="46" fill="none"
           stroke={dm ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'} strokeWidth="2" />
         <circle cx="50" cy="50" r="46" fill="none"
-          stroke="#C2684A" strokeWidth="2.5" strokeLinecap="round"
+          stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round"
           strokeDasharray="72 217" />
         <circle cx="50" cy="50" r="46" fill="none"
-          stroke="#7A9E82" strokeWidth="2.5" strokeLinecap="round"
+          stroke="var(--color-secondary)" strokeWidth="2.5" strokeLinecap="round"
           strokeDasharray="40 249" strokeDashoffset="-90" />
         <circle cx="50" cy="50" r="46" fill="none"
-          stroke="#D4C4AB" strokeWidth="2.5" strokeLinecap="round"
+          stroke="var(--color-sand)" strokeWidth="2.5" strokeLinecap="round"
           strokeDasharray="30 259" strokeDashoffset="-180" />
         {/* Center dot */}
-        <circle cx="50" cy="50" r="4" fill="#C2684A" opacity="0.6" />
+        <circle cx="50" cy="50" r="4" fill="var(--color-primary)" opacity="0.6" />
       </svg>
     </motion.div>
   )
@@ -84,7 +84,7 @@ export default function Preloader() {
             className="relative z-10 text-center"
           >
             <h1 className={`font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold tracking-[-0.03em] ${
-              dm ? 'text-white' : 'text-[#1C1917]'
+              dm ? 'text-white' : 'text-text-main'
             }`}>
               Ela Ebeoğlu
             </h1>
@@ -93,7 +93,7 @@ export default function Preloader() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.5 }}
               className={`text-[0.7rem] uppercase tracking-[0.3em] mt-2 ${
-                dm ? 'text-white/25' : 'text-[#1C1917]/25'
+                dm ? 'text-white/25' : 'text-text-main/25'
               }`}
             >
               Performance Coach
@@ -103,7 +103,7 @@ export default function Preloader() {
           {/* Progress bar */}
           <div className="w-48 mt-10 relative">
             <div className={`h-[2px] rounded-full overflow-hidden ${
-              dm ? 'bg-white/5' : 'bg-black/5'
+              dm ? 'bg-white/5' : 'bg-text-main/5'
             }`}>
               <motion.div
                 initial={{ width: '0%' }}
