@@ -1,70 +1,61 @@
-import { useRegisterSW } from 'virtual:pwa-register/react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useStore } from '../../stores/useStore'
+
+const slideUp = {
+  hidden: { opacity: 0, y: 40, filter: 'blur(10px)' },
+  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+  exit: { opacity: 0, y: 40, filter: 'blur(10px)', transition: { duration: 0.3 } },
+}
 
 export default function ReloadPrompt() {
-  const {
-    offlineReady: [offlineReady, setOfflineReady],
-    needRefresh: [needRefresh, setNeedRefresh],
-    updateServiceWorker,
-  } = useRegisterSW({
-    onRegistered(r: ServiceWorkerRegistration | undefined) {
-      console.log('SW Registered: ' + r);
-    },
-    onRegisterError(error: unknown) {
-      console.log('SW registration error', error);
-    },
-  });
+  const { darkMode: dm } = useStore()
+  const [showReload, setShowReload] = useState(false)
 
-  const close = () => {
-    setOfflineReady(false);
-    setNeedRefresh(false);
-  };
+  useEffect(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        setShowReload(true)
+      })
+    }
+  }, [])
+
+  const handleReload = () => {
+    window.location.reload()
+  }
 
   return (
     <AnimatePresence>
-      {(offlineReady || needRefresh) && (
+      {showReload && (
         <motion.div
-          initial={{ opacity: 0, y: 50, scale: 0.9 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: 50, scale: 0.9 }}
-          className="fixed bottom-6 right-6 z-[9999] max-w-[400px] w-full"
-        >
-          <div className="bg-white dark:bg-bg-alt border border-black/[0.08] dark:border-white/[0.08] shadow-[0_20px_50px_rgba(0,0,0,0.1)] backdrop-blur-3xl p-6 rounded-[2rem] flex flex-col gap-4">
-            <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-2xl">
-                ✨
-              </div>
-              <div>
-                <h4 className="font-display font-bold text-lg text-text-main leading-tight">
-                  {offlineReady ? 'Uygulama Hazır!' : 'Yeni Sürüm Mevcut!'}
-                </h4>
-                <p className="text-[0.75rem] text-text-main/50 font-medium leading-relaxed mt-1">
-                  {offlineReady 
-                    ? 'Uygulama artık çevrimdışı çalışabilir.' 
-                    : 'Yeni özellikler ve iyileştirmeler yayınlandı.'}
-                </p>
-              </div>
+          initial="hidden"
+          animate="show"
+          exit="exit"
+          variants={slideUp}
+          className={`fixed bottom-6 left-6 right-6 md:left-auto md:right-6 md:max-w-sm z-50 p-4 rounded-xl border backdrop-blur-sm ${
+            dm
+              ? 'bg-blue-500/10 border-blue-500/30'
+              : 'bg-blue-50 border-blue-200 shadow-lg'
+          }`}>
+          <div className="flex items-center gap-3">
+            <div className={`flex-1 ${dm ? 'text-white' : 'text-blue-900'}`}>
+              <p className="text-sm font-medium">App updated</p>
+              <p className={`text-xs mt-0.5 ${dm ? 'text-white/70' : 'text-blue-700'}`}>
+                A new version is available.
+              </p>
             </div>
-            
-            <div className="flex gap-2">
-              {needRefresh && (
-                <button
-                  onClick={() => updateServiceWorker(true)}
-                  className="flex-1 bg-primary hover:bg-primary-hover text-white py-3 px-6 rounded-2xl text-[0.75rem] font-bold uppercase tracking-wider transition-all"
-                >
-                  Şimdi Güncelle
-                </button>
-              )}
-              <button
-                onClick={close}
-                className="flex-1 bg-stone-100 dark:bg-white/5 hover:bg-stone-200 dark:hover:bg-white/10 text-stone-500 dark:text-white/60 py-3 px-6 rounded-2xl text-[0.75rem] font-bold uppercase tracking-wider transition-all"
-              >
-                Kapat
-              </button>
-            </div>
+            <button
+              onClick={handleReload}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${
+                dm
+                  ? 'bg-blue-500 hover:bg-blue-600 text-white'
+                  : 'bg-blue-600 hover:bg-blue-700 text-white'
+              }`}>
+              Reload
+            </button>
           </div>
         </motion.div>
       )}
     </AnimatePresence>
-  );
+  )
 }
