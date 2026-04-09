@@ -10,7 +10,7 @@ export default function About() {
   const cards = t.about.cards;
 
   return (
-    <section id="hakkinda" className="py-32 md:py-40 bg-bg">
+    <section id="hakkinda" className="pt-20 md:pt-24 pb-32 md:pb-40 bg-bg">
       <div className="max-w-[1400px] mx-auto px-8 md:px-12">
         <RevealSection>
           <div className="grid lg:grid-cols-2 gap-20 items-center">
