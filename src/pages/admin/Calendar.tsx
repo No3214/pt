@@ -1,196 +1,435 @@
-import { useState, useMemo, useRef } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
+import { daysArr } from '../../lib/constants'
 import { useTranslation } from '../../locales'
-
-interface Event {
-  id: string
-  date: string
-  title: string
-  type: 'session' | 'birthday' | 'note'
-  color: string
-  description?: string
-}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
-  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } }
 }
-const stagger = { show: { transition: { staggerChildren: 0.07 } } }
+const stagger = { show: { transition: { staggerChildren: 0.06 } } }
 
-export default function Calendar() {
-  const { clients, darkMode: dm, showToast } = useStore()
+const dayColorMap: Record<string, { bg: string; text: string; accent: string }> = {
+  Pzt: { bg: 'bg-primary/10', text: 'text-primary', accent: 'border-primary' },
+  Sal: { bg: 'bg-secondary/10', text: 'text-secondary', accent: 'border-secondary' },
+  Çar: { bg: 'bg-accent/10', text: 'text-accent', accent: 'border-accent' },
+  Per: { bg: 'bg-sand/10', text: 'text-sand', accent: 'border-sand' },
+  Cum: { bg: 'bg-primary/10', text: 'text-primary', accent: 'border-primary' },
+  Cts: { bg: 'bg-secondary/10', text: 'text-secondary', accent: 'border-secondary' },
+  Paz: { bg: 'bg-accent/10', text: 'text-accent', accent: 'border-accent' },
+}
+
+const meetingTypeIcons: Record<string, string> = {
+  zoom: '📹',
+  teams: '🔵',
+  meet: '🎥',
+  other: '📱'
+}
+
+const meetingTypeLabels: Record<string, string> = {  zoom: 'Zoom',
+  teams: 'Microsoft Teams',
+  meet: 'Google Meet',
+  other: 'Diğer'
+}
+
+export default function CalendarPage() {
   const { t } = useTranslation()
-  const [currentDate, setCurrentDate] = useState(new Date())
-  const [events, setEvents] = useState<Event[]>([])
-  const [selectedDate, setSelectedDate] = useState<string | null>(null)
-  const [showEventForm, setShowEventForm] = useState(false)
-  const [newEvent, setNewEvent] = useState<Omit<Event, 'id'>>({
-    date: new Date().toISOString().split('T')[0],
-    title: '',
-    type: 'session',
-    color: 'bg-primary/10',
-    description: '',
+  const { clients, calSessions, addCalSession, deleteCalSession, showToast, darkMode: dm } = useStore()
+  const activeClients = clients.filter(c => c.sessions > 0)
+  const [form, setForm] = useState({
+    client: '',
+    day: 'Pzt',
+    time: '10:00',
+    isOnline: false,
+    meetingType: 'zoom' as 'zoom' | 'teams' | 'meet' | 'other',
+    meetingLink: '',
+    meetingNote: ''
   })
-  const calendarRef = useRef<HTMLDivElement>(null)
-  const calendarInView = useInView(calendarRef, { once: true })  const getDaysInMonth = (date: Date) => new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate()
-  const getFirstDayOfMonth = (date: Date) => new Date(date.getFullYear(), date.getMonth(), 1).getDay()
+  const [selectedDay, setSelectedDay] = useState<string | null>(null)
 
-  const handlePrevMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))
-  const handleNextMonth = () => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))
-
-  const handleAddEvent = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!newEvent.title) return
-    const eventWithId = { ...newEvent, id: Date.now().toString() }
-    setEvents([...events, eventWithId])
-    setNewEvent({ date: new Date().toISOString().split('T')[0], title: '', type: 'session', color: 'bg-primary/10', description: '' })
-    setShowEventForm(false)
+  const dayNames: Record<string, string> = {
+    Pzt: t.portal.admin.cal_days.mon,
+    Sal: t.portal.admin.cal_days.tue,
+    Çar: t.portal.admin.cal_days.wed,
+    Per: t.portal.admin.cal_days.thu,
+    Cum: t.portal.admin.cal_days.fri,
+    Cts: t.portal.admin.cal_days.sat,
+    Paz: t.portal.admin.cal_days.sun,
   }
-
-  const monthName = currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
-  const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }
-  const stagger = { show: { transition: { staggerChildren: 0.05 } } }
-
-  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white' : 'bg-white border-black/[0.06]'}`
+  const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const card = `p-6 rounded-2xl border ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`
 
-  const renderCalendarDays = () => {
-    const days = []
-    const daysInMonth = getDaysInMonth(currentDate)
-    const firstDay = getFirstDayOfMonth(currentDate)
+  const handleAdd = () => {
+    const name = form.client || activeClients[0]?.name
+    if (!name || !form.time) return
 
-    for (let i = 0; i < firstDay; i++) {
-      days.push(null)
+    // Validate online form
+    if (form.isOnline && !form.meetingLink) {
+      showToast('Lütfen toplantı linkini girin')
+      return
     }
 
-    for (let i = 1; i <= daysInMonth; i++) {
-      const dateStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(i).padStart(2, '0')}`
-      const dayEvents = events.filter(e => e.date === dateStr)
-      days.push({ day: i, date: dateStr, events: dayEvents })
+    const session = {
+      name,
+      day: form.day,
+      time: form.time,
+      ...(form.isOnline && {
+        isOnline: true,
+        meetingType: form.meetingType,
+        meetingLink: form.meetingLink,
+        meetingNote: form.meetingNote || undefined
+      })
     }
 
-    return days
+    addCalSession(session)
+    showToast(t.portal.admin.cal_added)
+
+    // Reset form
+    setForm({
+      client: '',      day: 'Pzt',
+      time: '10:00',
+      isOnline: false,
+      meetingType: 'zoom',
+      meetingLink: '',
+      meetingNote: ''
+    })
   }
+
+  const totalSessions = calSessions.length
+  const onlineSessions = calSessions.filter(s => s.isOnline).length
+  const uniqueClients = new Set(calSessions.map(s => s.name)).size
+  const busiestDay = (() => {
+    const counts: Record<string, number> = {}
+    calSessions.forEach(s => { counts[s.day] = (counts[s.day] || 0) + 1 })
+    const max = Math.max(...Object.values(counts), 0)
+    return Object.entries(counts).find(([, v]) => v === max)?.[0] || '—'
+  })()
+
 
   return (
     <motion.div initial="hidden" animate="show" variants={stagger}>
       {/* Header */}
-      <motion.div variants={fadeUp} className="flex justify-between items-center mb-8">
+      <motion.div variants={fadeUp} className="flex flex-wrap justify-between items-start mb-10 gap-4">
         <div>
-          <h2 className="font-display text-3xl font-semibold">{t.portal.admin.calendar_title}</h2>
-          <p className={`mt-1 text-sm ${dm ? 'text-white/40' : 'text-stone-400'}`}>{monthName}</p>
+          <h2 className="font-display text-3xl font-semibold tracking-tight">{t.portal.admin.cal_title}</h2>
+          <p className={`mt-1 text-sm ${dm ? 'text-white/40' : 'text-stone-400'}`}>{t.portal.admin.cal_subtitle}</p>
         </div>
-        <motion.button
-          onClick={() => setShowEventForm(!showEventForm)}
-          className={`px-6 py-3 rounded-full text-sm font-medium cursor-pointer transition-all ${showEventForm ? 'bg-secondary text-white shadow-lg shadow-secondary/20' : (dm ? 'border border-white/10 text-white/70' : 'border border-stone-200 text-stone-600')}`}>
-          {showEventForm ? t.portal.admin.calendar_close : t.portal.admin.calendar_add_event}
-        </motion.button>
+        {/* Quick Stats */}
+        <div className="flex gap-3 flex-wrap">          {[
+            { label: t.portal.admin.cal_appointment, value: totalSessions, color: 'primary' },
+            { label: 'Online', value: onlineSessions, color: 'secondary' },
+            { label: t.portal.admin.cal_client, value: uniqueClients, color: 'accent' },
+            { label: t.portal.admin.cal_busy, value: dayNames[busiestDay] || busiestDay, color: 'primary' },
+          ].map((s, i) => (
+            <div key={i} className={`px-4 py-2 rounded-full text-xs font-medium flex items-center gap-1.5 ${dm ? `bg-${s.color}/10 text-${s.color}` : `bg-${s.color}/10 text-${s.color}`}`}>
+              <span className="font-bold">{s.value}</span> {s.label}
+            </div>
+          ))}
+        </div>
       </motion.div>
 
-      {/* Add Event Form */}
-      <AnimatePresence>
-        {showEventForm && (
-          <motion.div variants={fadeUp} className={`${card} mb-8`}>
-            <form onSubmit={handleAddEvent} className="space-y-4">
-              <input
-                type="text"
-                value={newEvent.title}
-                onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
-                placeholder={t.portal.admin.calendar_event_title}
-                className={inp}
-                required
-              />
-              <input
-                type="date"
-                value={newEvent.date}
-                onChange={(e) => setNewEvent({ ...newEvent, date: e.target.value })}
-                className={inp}
-              />
-              <select
-                value={newEvent.type}
-                onChange={(e) => setNewEvent({ ...newEvent, type: e.target.value as 'session' | 'birthday' | 'note' })}
-                className={inp}>
-                <option value="session">{t.portal.admin.calendar_session}</option>
-                <option value="birthday">{t.portal.admin.calendar_birthday}</option>
-                <option value="note">{t.portal.admin.calendar_note}</option>
+      <div className="grid grid-cols-1 md:grid-cols-[360px_1fr] gap-8 items-start">
+        {/* Form */}
+        <motion.div variants={fadeUp} className={card}>
+          <h3 className="font-display text-xl font-medium mb-6">{t.portal.admin.cal_add_appointment}</h3>
+          <div className="space-y-5">
+            <div>
+              <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>{t.portal.admin.cal_client_label}</label>
+              <select value={form.client} onChange={e => setForm({ ...form, client: e.target.value })} className={inp}>
+                {activeClients.length === 0 ? <option>{t.portal.admin.cal_not_listed}</option> : activeClients.map(c => <option key={c.id} value={c.name}>{c.name}</option>)}
               </select>
-              <textarea
-                value={newEvent.description || ''}
-                onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
-                placeholder={t.portal.admin.calendar_description}
-                className={`${inp} h-20 resize-none`}
-              />
-              <button
-                type="submit"
-                className="w-full px-6 py-3 rounded-full bg-primary text-white font-medium cursor-pointer hover:bg-primary/90 transition-all">
-                {t.portal.admin.calendar_save}
-              </button>
-            </form>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            </div>
 
-      {/* Calendar Grid */}
-      <motion.div ref={calendarRef} variants={fadeUp} className={card}>
-        {/* Month Navigation */}
-        <div className="flex items-center justify-between mb-6 pb-4 border-b" style={{borderColor: dm ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)'}}>
-          <button onClick={handlePrevMonth} className={`p-2 rounded-lg cursor-pointer ${dm ? 'hover:bg-white/10' : 'hover:bg-stone-100'}`}>←</button>
-          <h3 className="font-semibold text-lg">{monthName}</h3>
-          <button onClick={handleNextMonth} className={`p-2 rounded-lg cursor-pointer ${dm ? 'hover:bg-white/10' : 'hover:bg-stone-100'}`}>→</button>
-        </div>
+            <div>
+              <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>{t.portal.admin.cal_day_label}</label>
+              <div className="grid grid-cols-7 gap-1.5">
+                {daysArr.map(d => (
+                  <button key={d} onClick={() => setForm({ ...form, day: d })}                    className={`py-2.5 rounded-lg text-xs font-semibold cursor-pointer transition-all border-none ${form.day === d
+                      ? 'bg-primary text-white shadow-sm'
+                      : (dm ? 'bg-white/[0.06] text-white/50 hover:bg-white/10' : 'bg-stone-100 text-stone-500 hover:bg-stone-200')
+                    }`}>
+                    {d}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-        {/* Weekday Headers */}
-        <div className="grid grid-cols-7 gap-2 mb-3">
-          {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-            <div key={day} className={`text-center text-xs font-semibold py-2 ${dm ? 'text-white/50' : 'text-stone-400'}`}>{day}</div>
-          ))}
-        </div>
+            <div>
+              <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>{t.portal.admin.cal_time_label}</label>
+              <input type="time" value={form.time} onChange={e => setForm({ ...form, time: e.target.value })} className={inp} />
+            </div>
 
-        {/* Calendar Days */}
-        <div className="grid grid-cols-7 gap-2">
-          {renderCalendarDays().map((dayObj, idx) => (
-            <motion.div
-              key={idx}
-              variants={fadeUp}
-              className={`aspect-square rounded-lg p-1.5 text-xs cursor-pointer transition-all ${
-                !dayObj
-                  ? ''
-                  : `border ${dm ? 'border-white/5 hover:border-secondary/30 hover:bg-white/[0.02]' : 'border-stone-100 hover:border-secondary/30 hover:bg-stone-50'}`
-              }`}
-              onClick={() => dayObj && setSelectedDate(dayObj.date)}>
-              {dayObj && (
-                <div>
-                  <div className={`font-semibold ${selectedDate === dayObj.date ? 'text-secondary' : ''}`}>{dayObj.day}</div>
-                  {dayObj.events.length > 0 && (
-                    <div className="mt-1 space-y-0.5">
-                      {dayObj.events.slice(0, 2).map(e => (
-                        <div key={e.id} className={`${e.color} rounded px-1 py-0.5 text-[0.6rem] truncate`}>{e.title}</div>
-                      ))}
-                      {dayObj.events.length > 2 && <div className="text-[0.6rem] text-secondary">+{dayObj.events.length - 2}</div>}
-                    </div>
-                  )}
-                </div>
+            {/* Online Lesson Toggle */}
+            <div>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setForm({ ...form, isOnline: !form.isOnline })}
+                  className={`relative inline-flex h-7 w-12 items-center rounded-full border-none cursor-pointer transition-all ${
+                    form.isOnline
+                      ? 'bg-primary shadow-sm shadow-primary/30'
+                      : (dm ? 'bg-white/[0.08]' : 'bg-stone-200')
+                  }`}
+                >
+                  <span
+                    className={`inline-block h-5 w-5 transform rounded-full bg-white transition-transform ${
+                      form.isOnline ? 'translate-x-6' : 'translate-x-1'
+                    }`}                  />
+                </button>
+                <label className={`text-sm font-medium cursor-pointer ${dm ? 'text-white/70' : 'text-stone-600'}`}>
+                  {form.isOnline ? 'Online Ders' : 'Yüz Yüze'}
+                </label>
+              </div>
+            </div>
+
+            {/* Online Meeting Fields */}
+            <AnimatePresence>
+              {form.isOnline && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="space-y-4 pt-2 border-t border-white/[0.06]"
+                >
+                  <div>
+                    <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Platform</label>
+                    <select
+                      value={form.meetingType}
+                      onChange={e => setForm({ ...form, meetingType: e.target.value as any })}
+                      className={inp}
+                    >
+                      <option value="zoom">Zoom</option>
+                      <option value="teams">Microsoft Teams</option>
+                      <option value="meet">Google Meet</option>
+                      <option value="other">Diğer</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Toplantı Linki</label>
+                    <input
+                      type="url"
+                      placeholder="https://zoom.us/j/..."
+                      value={form.meetingLink}
+                      onChange={e => setForm({ ...form, meetingLink: e.target.value })}
+                      className={inp}
+                    />
+                  </div>
+
+                  <div>
+                    <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Not (Opsiyonel)</label>
+                    <textarea
+                      placeholder="Ders hakkında notlar..."
+                      value={form.meetingNote}
+                      onChange={e => setForm({ ...form, meetingNote: e.target.value })}
+                      className={`${inp} resize-none h-20`}
+                    />
+                  </div>
+                </motion.div>
               )}
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
+            </AnimatePresence>
 
-      {/* Selected Date Events */}
-      {selectedDate && (
-        <motion.div variants={fadeUp} className={`${card} mt-8`}>
-          <h3 className="font-semibold mb-4">{new Date(selectedDate).toLocaleDateString()}</h3>
-          {events
-            .filter(e => e.date === selectedDate)
-            .map(e => (
-              <motion.div key={e.id} variants={fadeUp} className={`${e.color} p-4 rounded-lg mb-3`}>
-                <p className="font-medium">{e.title}</p>
-                {e.description && <p className={`text-sm mt-2 ${dm ? 'text-white/60' : 'text-stone-600'}`}>{e.description}</p>}
-              </motion.div>
-            ))}
+            <motion.button
+              whileHover={{ scale: 1.01 }}
+              whileTap={{ scale: 0.99 }}
+              onClick={handleAdd}
+              className="w-full py-4 rounded-full bg-primary text-white font-medium border-none cursor-pointer"            >
+              {t.portal.admin.cal_add_to_calendar}
+            </motion.button>
+            <p className={`text-xs text-center ${dm ? 'text-white/25' : 'text-stone-300'}`}>{t.portal.admin.cal_add_note}</p>
+          </div>
+
+          {/* Upcoming Sessions Quick View */}
+          {calSessions.length > 0 && (
+            <div className={`mt-6 pt-5 border-t ${dm ? 'border-white/[0.06]' : 'border-stone-100'}`}>
+              <p className={`text-xs font-medium uppercase tracking-wider mb-3 ${dm ? 'text-white/40' : 'text-stone-400'}`}>{t.portal.admin.cal_next_sessions}</p>
+              <div className="space-y-2 max-h-80 overflow-y-auto">
+                {calSessions
+                  .slice()
+                  .sort((a, b) => {
+                    const dayOrder = daysArr.indexOf(a.day as string) - daysArr.indexOf(b.day as string)
+                    return dayOrder !== 0 ? dayOrder : a.time.localeCompare(b.time)
+                  })
+                  .map((s, i) => {
+                    const dc = dayColorMap[s.day] || dayColorMap.Pzt
+                    return (
+                      <motion.div key={i}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.05 }}
+                        className={`flex items-center gap-2 p-2.5 rounded-lg transition-all hover:translate-x-1 ${dm ? 'bg-white/[0.03] hover:bg-white/[0.05]' : 'bg-stone-50 hover:bg-stone-100'}`}
+                      >
+                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-[0.6rem] font-bold flex-shrink-0 ${dc.bg} ${dc.text}`}>
+                          {s.day}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs font-medium truncate">{s.name}</p>                          <p className={`text-[0.65rem] ${dm ? 'text-white/30' : 'text-stone-400'}`}>{s.time}</p>
+                        </div>
+                        {s.isOnline && (
+                          <span className="text-sm flex-shrink-0">{meetingTypeIcons[s.meetingType || 'zoom']}</span>
+                        )}
+                      </motion.div>
+                    )
+                  })
+                }
+              </div>
+            </div>
+          )}
         </motion.div>
-      )}
+
+        {/* Weekly Grid */}
+        <motion.div variants={fadeUp}>
+          {/* Desktop View */}
+          <div className="hidden md:grid grid-cols-7 gap-2">
+            {daysArr.map((day, di) => {
+              const daySessions = calSessions
+                .map((s, idx) => ({ ...s, idx }))
+                .filter(s => s.day === day)
+                .sort((a, b) => a.time.localeCompare(b.time))
+              const dc = dayColorMap[day] || dayColorMap.Pzt
+              return (
+                <motion.div
+                  key={day}
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: di * 0.04 }}                  className={`rounded-2xl border flex flex-col min-h-[420px] overflow-hidden transition-all ${dm ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`}
+                >
+                  <div className={`py-3 px-3 text-center font-semibold text-sm flex items-center justify-center gap-2 ${dc.bg} ${dc.text}`}>
+                    <span>{day}</span>
+                    {daySessions.length > 0 && (
+                      <span className={`inline-flex items-center justify-center w-5 h-5 rounded-full text-white text-[0.6rem] font-bold bg-primary`}>
+                        {daySessions.length}
+                      </span>
+                    )}
+                  </div>
+                  <div className="p-2 flex flex-col gap-1.5 flex-1 overflow-y-auto">
+                    {daySessions.length === 0 ? (
+                      <div className={`flex-1 flex items-center justify-center`}>
+                        <span className={`text-xs ${dm ? 'text-white/10' : 'text-stone-200'}`}>—</span>
+                      </div>
+                    ) : daySessions.map((sess, si) => (
+                      <motion.div
+                        key={sess.idx}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: si * 0.05 }}
+                        whileHover={{ scale: 1.03, y: -1 }}
+                        className={`border-l-[3px] ${dc.accent} p-3 rounded-r-lg text-xs relative group cursor-default transition-shadow hover:shadow-md ${dm ? 'bg-white/[0.04]' : 'bg-stone-50'}`}
+                      >
+                        <div className={`font-bold ${dc.text}`}>{sess.time}</div>
+                        <div className="mt-0.5 truncate font-medium text-sm mb-1">{sess.name}</div>
+                        {sess.isOnline && (
+                          <div className="flex items-center gap-2 mb-2">
+                            <span className="text-sm">{meetingTypeIcons[sess.meetingType || 'zoom']}</span>
+                            {sess.meetingLink && (
+                              <motion.a                                href={sess.meetingLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="text-xs font-semibold text-primary hover:underline"
+                              >
+                                Katıl
+                              </motion.a>
+                            )}
+                          </div>
+                        )}
+                        <button onClick={() => deleteCalSession(sess.idx)}
+                          className={`absolute top-1.5 right-1.5 w-5 h-5 rounded-full flex items-center justify-center bg-transparent border-none cursor-pointer text-sm opacity-0 group-hover:opacity-100 transition-all hover:bg-primary/10 ${dm ? 'text-white/40 hover:text-primary' : 'text-stone-300 hover:text-primary'}`}>
+                          ×
+                        </button>
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )
+            })}
+          </div>
+
+          {/* Mobile View — List by Day */}
+          <div className="md:hidden space-y-3">
+            {daysArr.map(day => {
+              const daySessions = calSessions
+                .map((s, idx) => ({ ...s, idx }))
+                .filter(s => s.day === day)
+                .sort((a, b) => a.time.localeCompare(b.time))
+              const isOpen = selectedDay === day              const dc = dayColorMap[day] || dayColorMap.Pzt
+              return (
+                <motion.div key={day} layout className={`rounded-2xl border overflow-hidden ${dm ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`}>
+                  <button
+                    onClick={() => setSelectedDay(isOpen ? null : day)}
+                    className={`w-full flex items-center justify-between p-4 border-none cursor-pointer bg-transparent ${dm ? 'text-white' : 'text-text-main'}`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-[0.65rem] font-bold ${dc.bg} ${dc.text}`}>
+                        {day}
+                      </div>
+                      <span className="font-semibold text-sm">{dayNames[day]}</span>
+                      {daySessions.length > 0 && (
+                        <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-primary text-white text-[0.6rem] font-bold">
+                          {daySessions.length}
+                        </span>
+                      )}
+                    </div>
+                    <motion.span
+                      animate={{ rotate: isOpen ? 180 : 0 }}
+                      transition={{ duration: 0.2 }}
+                      className={`text-xs ${dm ? 'text-white/30' : 'text-stone-400'}`}
+                    >
+                      ▼
+                    </motion.span>
+                  </button>
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="p-3 pt-0 space-y-2">
+                          {daySessions.length === 0 ? (
+                            <p className={`text-center py-4 text-xs ${dm ? 'text-white/20' : 'text-stone-300'}`}>{t.portal.admin.cal_no_appointment}</p>
+                          ) : daySessions.map(sess => (
+                            <motion.div key={sess.idx}
+                              initial={{ opacity: 0, x: -5 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              className={`flex items-center justify-between p-3 rounded-xl border-l-[3px] ${dc.accent} ${dm ? 'bg-white/[0.04]' : 'bg-stone-50'}`}
+                            >
+                              <div className="flex-1">
+                                <span className={`font-bold text-sm ${dc.text}`}>{sess.time}</span>
+                                <span className="ml-2 text-sm font-medium">{sess.name}</span>
+                                {sess.isOnline && (
+                                  <div className="flex items-center gap-2 mt-2">
+                                    <span className="text-sm">{meetingTypeIcons[sess.meetingType || 'zoom']}</span>
+                                    {sess.meetingLink && (
+                                      <motion.a
+                                        href={sess.meetingLink}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        whileHover={{ scale: 1.05 }}
+                                        whileTap={{ scale: 0.95 }}
+                                        className="text-xs font-semibold text-primary hover:underline"
+                                      >
+                                        Katıl
+                                      </motion.a>
+                                    )}                                  </div>
+                                )}
+                              </div>
+                              <button onClick={() => deleteCalSession(sess.idx)}
+                                className={`w-7 h-7 rounded-full flex items-center justify-center bg-transparent border-none cursor-pointer text-lg transition-colors ${dm ? 'text-white/20 hover:text-primary hover:bg-primary/10' : 'text-stone-200 hover:text-primary hover:bg-primary/5'}`}>
+                                ×
+                              </button>
+                            </motion.div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              )
+            })}
+          </div>
+        </motion.div>
+      </div>
     </motion.div>
   )
 }

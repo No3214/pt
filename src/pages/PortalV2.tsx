@@ -28,6 +28,7 @@ import LevelAtmosphere from '../components/portal/LevelAtmosphere'
 import ChatWidget from '../components/portal/ChatWidget'
 import NotificationCenter from '../components/portal/NotificationCenter'
 import VideoLibrary from '../components/portal/VideoLibrary'
+import OnlineMeeting from '../components/portal/OnlineMeeting'
 import SubscriptionCard from '../components/portal/SubscriptionCard'
 import AIWorkoutGenerator from '../components/portal/AIWorkoutGenerator'
 
@@ -249,6 +250,11 @@ export default function PortalV2() {
                 <WellnessTracker />
                 <PerformanceRadar />
                 <CoachVault />
+              </motion.div>
+
+              {/* Online Meeting */}
+              <motion.div variants={fadeUp}>
+                <OnlineMeeting />
               </motion.div>
             </motion.div>
           )}

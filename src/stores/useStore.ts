@@ -30,7 +30,15 @@ export interface Client {
   wellnessLogs?: WellnessLog[]
 }
 
-export interface CalSession { name: string; day: string; time: string }
+export interface CalSession {
+  name: string
+  day: string
+  time: string
+  meetingLink?: string
+  meetingType?: 'zoom' | 'teams' | 'meet' | 'other'
+  meetingNote?: string
+  isOnline?: boolean
+}
 
 export interface Measurement {
   id: string
