@@ -57,7 +57,7 @@ export default function Hero() {
             </motion.div>
 
             <motion.h1 variants={staggerContainer} initial="hidden" animate="visible"
-              className={`font-display text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[1.05] tracking-[-0.03em] mb-8 ${dm ? 'text-text-main' : 'text-text-main'}`}>
+              className={`font-display text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[1.05] tracking-[-0.03em] mb-8 text-text-main`}>
               <AnimatedHeading text={t.hero.title1} />
               <br />
               <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
@@ -66,7 +66,7 @@ export default function Hero() {
             </motion.h1>
 
             <motion.p variants={fadeUp} custom={4}
-              className={`text-[1.1rem] leading-[1.8] max-w-[520px] mb-12 ${dm ? 'text-text-main/45' : 'text-text-main/45'}`}>
+              className={`text-[1.1rem] leading-[1.8] max-w-[520px] mb-12 text-text-main/45`}>
               {t.hero.desc}
             </motion.p>
 
@@ -142,7 +142,7 @@ export default function Hero() {
         transition={{ delay: 2 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
       >
-        <span className={`text-[0.6rem] uppercase tracking-[0.25em] ${dm ? 'text-text-main/20' : 'text-text-main/20'}`}>{t.common.scrollHint}</span>
+        <span className={`text-[0.6rem] uppercase tracking-[0.25em] text-text-main/20`}>{t.common.scrollHint}</span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}

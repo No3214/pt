@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import { useStore } from '../../stores/useStore';
 import { useTranslation } from '../../locales';
 
 function MarqueeRow({ badges, direction = 'left', speed = 30 }: { badges: string[]; direction?: 'left' | 'right'; speed?: number }) {
@@ -30,18 +29,17 @@ function MarqueeRow({ badges, direction = 'left', speed = 30 }: { badges: string
 }
 
 export default function Marquee() {
-  const { darkMode } = useStore();
   const { t } = useTranslation();
   const badges = t.marquee;
-  const dm = darkMode;
 
   return (
     <section className="relative py-6 overflow-hidden border-y border-text-main/[0.04]">
       {/* Fade edges */}
-      <div className={`absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none bg-gradient-to-r ${dm ? 'from-bg' : 'from-bg'} to-transparent`} />
-      <div className={`absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none bg-gradient-to-l ${dm ? 'from-bg' : 'from-bg'} to-transparent`} />
+      <div className="absolute left-0 top-0 bottom-0 w-32 z-10 pointer-events-none bg-gradient-to-r from-bg to-transparent" />
+      <div className="absolute right-0 top-0 bottom-0 w-32 z-10 pointer-events-none bg-gradient-to-l from-bg to-transparent" />
 
       <MarqueeRow badges={badges} direction="left" speed={35} />
+      <MarqueeRow badges={[...badges].reverse()} direction="right" speed={40} />
     </section>
   );
 }
