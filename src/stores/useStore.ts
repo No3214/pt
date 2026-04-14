@@ -40,6 +40,27 @@ export interface CalSession {
   isOnline?: boolean
 }
 
+export interface Booking {
+  id: string
+  name: string
+  email: string
+  phone: string
+  goal: string
+  message?: string
+  preferredDay?: string
+  preferredTime?: string
+  status: 'pending' | 'approved' | 'paid' | 'scheduled' | 'completed' | 'rejected'
+  sessionType: 'consultation' | 'assessment' | 'training'
+  price?: number
+  meetingLink?: string
+  meetingType?: 'zoom' | 'teams' | 'meet' | 'other'
+  scheduledDate?: string
+  scheduledTime?: string
+  adminNote?: string
+  createdAt: string
+  updatedAt?: string
+}
+
 export interface Measurement {
   id: string
   clientId: string
