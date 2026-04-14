@@ -64,13 +64,22 @@ export default function Testimonials() {
                     </p>
                     
                     <div className="flex items-center gap-6">
-                      <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-[1.1rem] font-bold shadow-xl overflow-hidden shadow-black/20">
-                        {testimonials[active].image ? (
-                          <img src={testimonials[active].image} alt={`${testimonials[active].name} - Musteri basari fotografi`} loading="lazy" className="w-full h-full object-cover rounded-full" />
-                        ) : (
-                          testimonials[active].name.split(' ').map(w => w[0]).join('')
-                        )}
-                      </div>
+                      {/* AI generated avatar for hyper realistic representation */}
+                      {testimonials[active].avatar ? (
+                        <img 
+                          src={testimonials[active].avatar} 
+                          alt={testimonials[active].name} 
+                          className="w-16 h-16 rounded-full object-cover shadow-xl shadow-black/20 border-2 border-white/10"
+                        />
+                      ) : (
+                        <div
+                          className="w-16 h-16 rounded-full flex items-center justify-center text-white text-[1.1rem] font-bold shadow-xl shadow-black/20 tracking-wider"
+                          style={{ background: 'linear-gradient(135deg, var(--color-primary), var(--color-secondary))' }}
+                          aria-hidden
+                        >
+                          {testimonials[active].name.split(' ').map(w => w[0]).join('').slice(0, 2)}
+                        </div>
+                      )}
                       <div>
                         <div className="text-[1.1rem] font-bold text-text-main">{testimonials[active].name}</div>
                         <div className="text-[0.8rem] uppercase tracking-widest text-text-main/40 mt-1">{testimonials[active].role}</div>
@@ -99,10 +108,11 @@ export default function Testimonials() {
                       className="relative w-full h-full max-h-[500px] z-10"
                     >
                       <div className={`absolute inset-0 rounded-[2rem] border-2 ${dm ? 'border-primary/20 bg-primary/5' : 'border-primary/10 bg-primary/5'} backdrop-blur-sm -rotate-2 scale-105 transition-transform duration-700 group-hover/image:rotate-0 group-hover/image:scale-110`} />
-                      <img 
-                        src={testimonials[active].image} 
-                        alt={testimonials[active].name} 
-                        loading="lazy" className="w-full h-full object-cover rounded-[2rem] shadow-2xl relative z-10 border border-white/10"
+                      <img
+                        src={testimonials[active].image}
+                        alt={`${testimonials[active].name} - Müşteri başarı fotoğrafı`}
+                        loading="lazy"
+                        className="w-full h-full object-cover rounded-[2rem] shadow-2xl relative z-10 border border-white/10"
                       />
                       
                       {/* Floating Badge */}
@@ -115,6 +125,13 @@ export default function Testimonials() {
                 </motion.div>
               </AnimatePresence>
             </div>
+
+            {/* Gizlilik notu — danışan anonimliği için AI destekli temsili görseller kullanılmıştır */}
+            <p className={`mt-10 text-center text-[0.72rem] uppercase tracking-[0.18em] ${dm ? 'text-white/30' : 'text-text-main/35'}`}>
+              {language === 'tr'
+                ? 'Gerçek danışan geri bildirimleri — gizlilik için isimler kısaltılmış ve temsili görseller kullanılmıştır.'
+                : 'Real client testimonials — names abbreviated and representative imagery used for privacy.'}
+            </p>
 
             {/* Dots Navigation */}
             <div className="flex justify-center gap-3 mt-16">

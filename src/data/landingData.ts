@@ -15,6 +15,7 @@ export interface Testimonial {
   role: string;
   metric: string;
   image: string;
+  avatar: string;
 }
 
 export interface FAQItem {
@@ -68,18 +69,21 @@ export const getLandingData = (lang: string) => {
     },
   ];
 
+  // Testimonial impact visual'ları: danışan gizliliği için Ela'nın gerçek
+  // antrenman fotoğrafları kullanılır (coach perspektifi). Yazar avatarı
+  // için hiper realistik AI üretimi temsili görseller kullanılır.
   const testimonials: Testimonial[] = [
-    { 
-      text: isTr ? 'Sıçrama yüksekliğim 3 ayda 12cm arttı. Ela hocanın sistemi kesinlikle farklı klasmanda.' : 'My vertical jump increased 12cm in 3 months. Coach Ela\'s system is definitely in a different league.', 
-      name: 'Ayşe K.', role: isTr ? 'Voleybolcu' : 'Volleyball Player', metric: isTr ? '+12cm sıçrama' : '+12cm jump', image: '/ela_real_30.png'
+    {
+      text: isTr ? 'Sıçrama yüksekliğim 3 ayda 12cm arttı. Ela hocanın sistemi kesinlikle farklı klasmanda.' : 'My vertical jump increased 12cm in 3 months. Coach Ela\'s system is definitely in a different league.',
+      name: 'Ayşe K.', role: isTr ? 'Voleybolcu' : 'Volleyball Player', metric: isTr ? '+12cm sıçrama' : '+12cm jump', image: '/ela_real_22.webp', avatar: '/images/testimonials/ayse.png'
     },
-    { 
-      text: isTr ? 'Sakatsız, çok güçlü bir sezon geçiriyorum. Kuvvet antrenmanları inanılmaz etkili.' : 'I\'m having an injury-free, very strong season. The strength training is incredibly effective.', 
-      name: 'Deniz Y.', role: isTr ? 'Profesyonel Sporcu' : 'Professional Athlete', metric: isTr ? 'Sıfır Sakatlık' : 'Zero Injury', image: '/ela_real_32.png'
+    {
+      text: isTr ? 'Sakatsız, çok güçlü bir sezon geçiriyorum. Kuvvet antrenmanları inanılmaz etkili.' : 'I\'m having an injury-free, very strong season. The strength training is incredibly effective.',
+      name: 'Deniz Y.', role: isTr ? 'Profesyonel Sporcu' : 'Professional Athlete', metric: isTr ? 'Sıfır Sakatlık' : 'Zero Injury', image: '/ela_real_25.webp', avatar: '/images/testimonials/deniz.png'
     },
-    { 
-      text: isTr ? 'Kendime güvenim ve sahadaki çevikliğim seviye atladı. Tamamen maç performansıma özel program.' : 'My confidence and agility on the court leveled up. A program completely tailored to my match performance.', 
-      name: 'Selin B.', role: 'Fitness & Voleybol', metric: isTr ? '+8cm Mobilite' : '+8cm Mobility', image: '/ela_real_19.png'
+    {
+      text: isTr ? 'Kendime güvenim ve sahadaki çevikliğim seviye atladı. Tamamen maç performansıma özel program.' : 'My confidence and agility on the court leveled up. A program completely tailored to my match performance.',
+      name: 'Selin B.', role: 'Fitness & Voleybol', metric: isTr ? '+8cm Mobilite' : '+8cm Mobility', image: '/ela_real_26.webp', avatar: '/images/testimonials/selin.png'
     },
   ];
 
