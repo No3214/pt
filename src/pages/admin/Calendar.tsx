@@ -352,7 +352,8 @@ export default function CalendarPage() {
                 .map((s, idx) => ({ ...s, idx }))
                 .filter(s => s.day === day)
                 .sort((a, b) => a.time.localeCompare(b.time))
-              const isOpen = selectedDay === day              const dc = dayColorMap[day] || dayColorMap.Pzt
+              const isOpen = selectedDay === day
+              const dc = dayColorMap[day] || dayColorMap.Pzt
               return (
                 <motion.div key={day} layout className={`rounded-2xl border overflow-hidden ${dm ? 'bg-white/[0.02] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`}>
                   <button

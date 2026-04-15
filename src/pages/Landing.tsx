@@ -11,10 +11,12 @@ import Stats from '../components/landing/Stats';
 import Gallery from '../components/landing/Gallery';
 import Testimonials from '../components/landing/Testimonials';
 import Programs from '../components/landing/Programs';
+import LeadMagnet from '../components/landing/LeadMagnet';
 import FAQ from '../components/landing/FAQ';
 import Contact from '../components/landing/Contact';
 import Footer from '../components/landing/Footer';
 import { GrainOverlay } from '../components/landing/LandingUI';
+import { VolleyballDivider, VolleyballScrollRoller, VolleyballCursorTrail } from '../components/animations/Volleyball';
 
 export default function Landing() {
   const { darkMode } = useStore();
@@ -35,6 +37,12 @@ export default function Landing() {
       {/* Navigation */}
       <Navbar />
 
+      {/* Scroll progress — voleybol topu yuvarlanarak ilerler */}
+      <VolleyballScrollRoller top={72} />
+
+      {/* Cursor trail — desktop-only premium mikroetkileşim */}
+      <VolleyballCursorTrail size={20} />
+
       {/* Hero Section */}
       <main id="ana-icerik">
       <Hero />
@@ -51,6 +59,9 @@ export default function Landing() {
       {/* Key Metrics */}
       <Stats />
 
+      {/* Voleybol divider — net + zıplayan top */}
+      <VolleyballDivider className="my-4" />
+
       {/* Voleybol & Sports Gallery */}
       <Gallery />
 
@@ -59,6 +70,9 @@ export default function Landing() {
 
       {/* Program Categories & Pricing */}
       <Programs />
+
+      {/* Lead Magnet — Free PDF email capture */}
+      <LeadMagnet />
 
       {/* FAQ */}
       <FAQ />

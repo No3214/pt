@@ -171,7 +171,7 @@ export default function OnlineMeeting() {
                 <p className={`text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-500'} mb-2`}>Not</p>
                 <p className={`text-sm ${dm ? 'text-white/70' : 'text-stone-600'}`}>{nextSession.meetingNote}</p>
               </div>
-            )
+            )}
             {/* Action Buttons */}
             <div className="flex gap-3 flex-col sm:flex-row">
               <motion.a

@@ -13,23 +13,33 @@ import { ar } from './ar';
 import { ko } from './ko';
 import { hi } from './hi';
 
-const dictionaries: Record<string, typeof tr> = {
-  tr,
-  en: en as unknown as typeof tr,
-  es: es as unknown as typeof tr,
-  fr: fr as unknown as typeof tr,
-  de: de as unknown as typeof tr,
-  it: it as unknown as typeof tr,
-  pt: pt as unknown as typeof tr,
-  ru: ru as unknown as typeof tr,
-  zh: zh as unknown as typeof tr,
-  ja: ja as unknown as typeof tr,
-  ar: ar as unknown as typeof tr,
-  ko: ko as unknown as typeof tr,
-  hi: hi as unknown as typeof tr,
+// Expose `admin` block also under `portal.admin` so components can use t.portal.admin.*
+// (admin is defined as a top-level sibling in the locale files)
+type RawDict = typeof tr
+type AdminPatched<T extends RawDict> = Omit<T, 'portal'> & { portal: T['portal'] & { admin: T['admin'] } }
+function patchAdmin<T extends RawDict>(d: T): AdminPatched<T> {
+  return { ...d, portal: { ...d.portal, admin: d.admin } } as AdminPatched<T>
+}
+
+const trFull = patchAdmin(tr)
+
+const dictionaries: Record<string, typeof trFull> = {
+  tr: trFull,
+  en: patchAdmin(en as unknown as typeof tr),
+  es: patchAdmin(es as unknown as typeof tr),
+  fr: patchAdmin(fr as unknown as typeof tr),
+  de: patchAdmin(de as unknown as typeof tr),
+  it: patchAdmin(it as unknown as typeof tr),
+  pt: patchAdmin(pt as unknown as typeof tr),
+  ru: patchAdmin(ru as unknown as typeof tr),
+  zh: patchAdmin(zh as unknown as typeof tr),
+  ja: patchAdmin(ja as unknown as typeof tr),
+  ar: patchAdmin(ar as unknown as typeof tr),
+  ko: patchAdmin(ko as unknown as typeof tr),
+  hi: patchAdmin(hi as unknown as typeof tr),
 };
 
-export type Dictionary = typeof tr;
+export type Dictionary = typeof trFull;
 export type LanguageCode = keyof typeof dictionaries;
 
 export const LANGUAGES: { code: string; name: string; nativeName: string; flag: string }[] = [

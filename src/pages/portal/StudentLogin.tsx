@@ -62,3 +62,89 @@ export default function StudentLogin() {
       setIsLoading(false)
     }
   }
+
+  return (
+    <motion.div
+      initial="hidden"
+      animate="show"
+      variants={fadeIn}
+      className={`min-h-screen flex items-center justify-center p-6 ${dm ? 'bg-stone-950 text-white' : 'bg-stone-50 text-stone-900'}`}
+    >
+      <motion.div
+        variants={slideUp}
+        className={`w-full max-w-md p-8 rounded-2xl border ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04] shadow-sm'}`}
+      >
+        <h1 className="font-display text-2xl font-semibold tracking-tight mb-2">Öğrenci Girişi</h1>
+        <p className={`text-sm mb-6 ${dm ? 'text-white/50' : 'text-stone-500'}`}>Hesabına giriş yap</p>
+
+        {!showResetForm ? (
+          <form onSubmit={handleLogin} className="space-y-4">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="E-posta"
+              className={`w-full p-3.5 rounded-xl border outline-none transition-all focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`}
+            />
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Şifre"
+                className={`w-full p-3.5 rounded-xl border outline-none transition-all focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className={`absolute right-3 top-1/2 -translate-y-1/2 text-xs ${dm ? 'text-white/50' : 'text-stone-500'}`}
+              >
+                {showPassword ? 'Gizle' : 'Göster'}
+              </button>
+            </div>
+            <div className="flex items-center justify-between text-sm">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input type="checkbox" checked={rememberMe} onChange={(e) => setRememberMe(e.target.checked)} />
+                <span className={dm ? 'text-white/60' : 'text-stone-600'}>Beni Hatırla</span>
+              </label>
+              <button type="button" onClick={() => setShowResetForm(true)} className="text-primary hover:underline">
+                Şifremi Unuttum
+              </button>
+            </div>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`w-full py-3 rounded-full font-medium text-white transition-all ${isLoading ? 'bg-primary/50 cursor-not-allowed' : 'bg-primary hover:bg-primary/90 cursor-pointer'}`}
+            >
+              {isLoading ? 'Giriş yapılıyor...' : 'Giriş Yap'}
+            </button>
+          </form>
+        ) : (
+          <form onSubmit={handlePasswordReset} className="space-y-4">
+            <input
+              type="email"
+              value={resetEmail}
+              onChange={(e) => setResetEmail(e.target.value)}
+              placeholder="E-posta adresin"
+              className={`w-full p-3.5 rounded-xl border outline-none transition-all focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`}
+            />
+            <button
+              type="submit"
+              disabled={isLoading}
+              className={`w-full py-3 rounded-full font-medium text-white transition-all ${isLoading ? 'bg-primary/50 cursor-not-allowed' : 'bg-primary hover:bg-primary/90 cursor-pointer'}`}
+            >
+              {isLoading ? 'Gönderiliyor...' : 'Sıfırlama Linki Gönder'}
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowResetForm(false)}
+              className={`w-full py-2 text-sm ${dm ? 'text-white/60' : 'text-stone-600'}`}
+            >
+              Girişe Dön
+            </button>
+          </form>
+        )}
+      </motion.div>
+    </motion.div>
+  )
+}

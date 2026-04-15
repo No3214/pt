@@ -52,7 +52,8 @@ export default function Builder() {
   const { t } = useTranslation()
   const activeClients = clients.filter(c => c.sessions > 0)
   const [selectedClient, setSelectedClient] = useState('')
-  const [nutritionNote, setNoteText] = useState(t.portal.admin.builder_default_note)  const [waPreview, setWaPreview] = useState(t.portal.admin.builder_default_wa)
+  const [nutritionNote, setNoteText] = useState(t.portal.admin.builder_default_note)
+  const [waPreview, setWaPreview] = useState(t.portal.admin.builder_default_wa)
   const [loading, setLoading] = useState(false)
   const [showExerciseDB, setShowExerciseDB] = useState(false)
   const [exSearch, setExSearch] = useState('')
@@ -105,7 +106,9 @@ export default function Builder() {
       `• ${l.exercise} ${l.sets}×${l.reps}${l.note ? ` (${l.note})` : ''}`
     ).join('\n')
     setWaPreview(`🏐 *ELA EBEOĞLU — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n💪 ${currentDay}\n\n${lines}\n\n📌 Beslenme: ${sanitize(nutritionNote)}`)
-  }  const setSplit = (type: string) => {
+  }
+
+  const setSplit = (type: string) => {
     const client = sanitize(selectedClient || 'Yeni Danışan')
     const note = sanitize(nutritionNote)
     setWaPreview(`🏐 *ELA EBEOĞLU — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n💪 Program Formatı: ${type.toUpperCase()}\n\n${splits[type]}\n\n📌 Beslenme: ${note}`)
@@ -379,7 +382,6 @@ export default function Builder() {
           </motion.button>
         </motion.div>
       )}
-        </div>
 
         {/* Right - Preview */}
         <motion.div variants={fadeUp} ref={previewRef} className="sticky top-20">
@@ -398,7 +400,6 @@ export default function Builder() {
             <pre className={`flex-1 overflow-auto text-xs font-mono p-3 rounded-lg whitespace-pre-wrap break-words ${dm ? 'bg-black/30 text-white/80' : 'bg-stone-100 text-stone-700'}`}>{waPreview}</pre>
           </div>
         </motion.div>
-      </div>
 
       {/* Hidden Export Container */}
       <div id="export-container" style={{position: 'absolute', left: '-9999px', top: 0, width: '800px'}} className={`p-8 ${dm ? 'bg-stone-950' : 'bg-white'}`}>

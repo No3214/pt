@@ -10,6 +10,8 @@ import {
 } from './LandingUI';
 import { tenantConfig } from '../../config/tenant';
 import { useTranslation } from '../../locales';
+import { VolleyballFloaters, VolleyballSpike } from '../animations/Volleyball';
+import GradientText from '../animations/GradientText';
 
 export default function Hero() {
   const { darkMode, language } = useStore();
@@ -30,6 +32,20 @@ export default function Hero() {
         <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-b from-bg via-bg/60 to-bg' : 'bg-gradient-to-b from-bg via-bg/40 to-bg'}`} />
         <img src="/ela_real_32.png" alt="Ela antrenor arka plani" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" loading="eager" decoding="async" fetchPriority="high" width={1200} height={800} />
       </motion.div>
+
+      {/* Voleybol dekoratif floaters — marka teması (Ela profesyonel voleybolcu) */}
+      <VolleyballFloaters opacity={dm ? 0.09 : 0.07} />
+
+      {/* Spike yörüngesi — hero'da tek loop dikkat çekici */}
+      <div aria-hidden className="absolute inset-0 pointer-events-none -z-[2]">
+        <VolleyballSpike
+          size={48}
+          duration={2.6}
+          delay={1.4}
+          from={{ x: '5%', y: '14%' }}
+          arc={140}
+        />
+      </div>
 
       {/* Ambient glow orbs */}
       <div className="absolute inset-0 -z-[5] overflow-hidden pointer-events-none">
@@ -60,9 +76,14 @@ export default function Hero() {
               className={`font-display text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[1.05] tracking-[-0.03em] mb-8 text-text-main`}>
               <AnimatedHeading text={t.hero.title1} />
               <br />
-              <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
+              <GradientText
+                from="var(--color-primary)"
+                via="var(--color-secondary)"
+                to="var(--color-primary)"
+                duration={7}
+              >
                 <AnimatedHeading text={t.hero.title2} />
-              </span>
+              </GradientText>
             </motion.h1>
 
             <motion.p variants={fadeUp} custom={4}

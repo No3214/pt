@@ -138,6 +138,16 @@ export const tr = {
         features: ["Voleybol Performance dahil", "TDEE bazlı beslenme planı", "Günlük makro takibi", "Danışan portalı erişimi", "Supplement rehberliği", "7/24 öncelikli destek", "Aylık vücut analizi"],
         color: "accent",
         popular: false
+      },
+      {
+        name: "Pro Athlete Concierge",
+        price: "12.500",
+        period: "/ay",
+        desc: "Profesyonel sporcu seviyesi — kapasite sınırlı (3 sporcu/sezon)",
+        features: ["Premium Büyüme dahil", "Haftalık 2 birebir görüntülü seans", "Sahada/spor salonunda fiziksel ölçüm günleri", "Maç ve turnuva periyodizasyonu", "Sakatlık geri dönüş protokolü", "Fizyoterapi & RehabFit ağına yönlendirme", "Aile/menajer raporu", "WhatsApp 7/24 doğrudan hat"],
+        color: "accent",
+        popular: false,
+        anchor: true
       }
     ]
   },
@@ -870,4 +880,4 @@ export const tr = {
     backHome: "Ana Sayfaya Dön",
     redirect: "{count} saniye sonra yönlendirileceksiniz"
   }
-}
+};

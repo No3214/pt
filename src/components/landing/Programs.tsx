@@ -26,7 +26,7 @@ export default function Programs() {
           <motion.div variants={fadeUp} custom={2} className="w-20 h-1 bg-primary/20 mx-auto rounded-full" />
         </RevealSection>
 
-        <RevealSection className="grid md:grid-cols-3 gap-8 items-stretch">
+        <RevealSection className="grid md:grid-cols-2 xl:grid-cols-4 gap-6 items-stretch">
           {programs.map((p, i) => (
             <motion.div
               key={i}
@@ -46,6 +46,11 @@ export default function Programs() {
                 {p.popular && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-2 rounded-full bg-primary text-white text-[0.75rem] font-bold uppercase tracking-widest shadow-xl">
                     {t.programs.popular}
+                  </div>
+                )}
+                {(p as { anchor?: boolean }).anchor && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-6 py-2 rounded-full bg-gradient-to-r from-amber-500 to-orange-600 text-white text-[0.7rem] font-bold uppercase tracking-widest shadow-xl flex items-center gap-1.5">
+                    <span>🏆</span> Kapasite Sınırlı · 3 Sporcu
                   </div>
                 )}
 

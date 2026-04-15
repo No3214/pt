@@ -44,7 +44,9 @@ export default function FoodTracker() {
     notes: '',
   })
   const mealPreviewRef = useRef<HTMLDivElement>(null)
-  const mealInView = useInView(mealPreviewRef, { once: true })  const [analyzing, setAnalyzing] = useState(false)
+  const mealInView = useInView(mealPreviewRef, { once: true })
+
+  const [analyzing, setAnalyzing] = useState(false)
   const fileInput = useRef<HTMLInputElement>(null)
 
   const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`

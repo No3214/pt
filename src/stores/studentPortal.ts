@@ -2,12 +2,36 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { decryptData } from '../lib/crypto'
 
+export interface StudentClientData {
+  id?: string
+  name?: string
+  startDate?: string
+  athleteLevel?: string
+  personalNote?: string
+  goal?: string
+  nutritionGoals?: { calories?: number; protein?: number; carbs?: number; fats?: number }
+  performanceStats?: {
+    strength?: number
+    explosiveness?: number
+    endurance?: number
+    consistency?: number
+    nutrition?: number
+  }
+  weightHistory?: { date: string; weight: number }[]
+  [key: string]: unknown
+}
+
+export interface StudentDecryptedData {
+  client?: StudentClientData
+  [key: string]: unknown
+}
+
 interface StudentPortalState {
   encryptedData: string | null
-  decryptedData: Record<string, unknown> | null
+  decryptedData: StudentDecryptedData | null
   error: string | null
   lastAccess: number | null
-  
+
   // Actions
   receiveData: (base64: string) => void
   unlock: (pin: string) => Promise<boolean>
@@ -41,7 +65,7 @@ export const useStudentPortal = create<StudentPortalState>()(
           })
           return true
         } catch (e: unknown) {
-          set({ error: e.message || 'Hatalı PIN.' })
+          set({ error: e instanceof Error ? e.message : 'Hatalı PIN.' })
           return false
         }
       },
