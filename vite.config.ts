@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+﻿import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
@@ -9,9 +9,9 @@ export default defineConfig({
       registerType: 'prompt',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'og-image.png', 'icon-192.png', 'icon-512.png'],
       manifest: {
-        name: 'Ela Ebeoğlu Performance',
+        name: 'Ela EbeoÄŸlu Performance',
         short_name: 'Ela PT',
-        description: 'Elite Voleybol & Performans Koçluğu',
+        description: 'Elite Voleybol & Performans KoÃ§luÄŸu',
         theme_color: '#050505',
         background_color: '#FAF6F1',
         display: 'standalone',
@@ -61,9 +61,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           vendor: ['react', 'react-dom', 'react-router-dom'],
-          charts: ['recharts'],
-          motion: ['framer-motion'],
-          forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
+          charts: ['recharts'],          forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
           state: ['zustand'],
         },
       },
