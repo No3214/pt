@@ -11,6 +11,7 @@ import {
 import { tenantConfig } from '../../config/tenant';
 import { useTranslation } from '../../locales';
 import { VolleyballFloaters, VolleyballSpike } from '../animations/Volleyball';
+import GradientText from '../animations/GradientText';
 
 export default function Hero() {
   const { darkMode, language } = useStore();
@@ -75,9 +76,14 @@ export default function Hero() {
               className={`font-display text-[clamp(2.5rem,6vw,5.5rem)] font-semibold leading-[1.05] tracking-[-0.03em] mb-8 text-text-main`}>
               <AnimatedHeading text={t.hero.title1} />
               <br />
-              <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
+              <GradientText
+                from="var(--color-primary)"
+                via="var(--color-secondary)"
+                to="var(--color-primary)"
+                duration={7}
+              >
                 <AnimatedHeading text={t.hero.title2} />
-              </span>
+              </GradientText>
             </motion.h1>
 
             <motion.p variants={fadeUp} custom={4}

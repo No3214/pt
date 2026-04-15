@@ -12,7 +12,6 @@ type Props = {
   onClick?: () => void
   href?: string
   strength?: number
-  as?: 'button' | 'a'
   target?: string
   rel?: string
   ariaLabel?: string
@@ -24,7 +23,6 @@ export default function MagneticButton({
   onClick,
   href,
   strength = 0.35,
-  as,
   target,
   rel,
   ariaLabel,
@@ -73,8 +71,8 @@ export default function MagneticButton({
       onMouseLeave={handleLeave}
       className="inline-block"
     >
-      {/* @ts-expect-error - dynamic component */}
-      <Inner {...innerProps}>{children}</Inner>
+      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+      <Inner {...(innerProps as any)}>{children}</Inner>
     </div>
   )
 }
