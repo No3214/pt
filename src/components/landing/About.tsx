@@ -1,4 +1,4 @@
-import { RevealSection, TiltCard, fadeUp, staggerContainer } from './LandingUI';
+import { RevealSection, TiltCard, BlurIn, fadeUp, staggerContainer } from './LandingUI';
 import { motion } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 import { useTranslation } from '../../locales';
