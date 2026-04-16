@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { RevealSection, fadeUp } from './LandingUI';
+import { RevealSection, MagneticButton, BlurIn, fadeUp } from './LandingUI';
 import { getLandingData } from '../../data/landingData';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../../stores/useStore';

@@ -8,11 +8,6 @@ interface ScrollWordRevealProps {
   highlightColor?: string;
 }
 
-/**
- * ScrollWordReveal — Scroll-driven word-by-word opacity reveal
- * Inspired by Mindloop mission section + Neuralyn testimonial
- * Each word transitions opacity from 0.15 → 1 based on scroll position
- */
 export default function ScrollWordReveal({
   text,
   className = '',
@@ -24,7 +19,6 @@ export default function ScrollWordReveal({
     target: containerRef,
     offset: ['start 0.85', 'end 0.3'],
   });
-
   const words = text.split(' ');
 
   return (
@@ -35,15 +29,8 @@ export default function ScrollWordReveal({
             hw => word.toLowerCase().replace(/[.,!?]/g, '') === hw.toLowerCase()
           );
           return (
-            <Word
-              key={`${word}-${i}`}
-              word={word}
-              index={i}
-              total={words.length}
-              scrollYProgress={scrollYProgress}
-              isHighlight={isHighlight}
-              highlightColor={highlightColor}
-            />
+            <Word key={`${word}-${i}`} word={word} index={i} total={words.length}
+              scrollYProgress={scrollYProgress} isHighlight={isHighlight} highlightColor={highlightColor} />
           );
         })}
       </p>
@@ -51,20 +38,10 @@ export default function ScrollWordReveal({
   );
 }
 
-function Word({
-  word,
-  index,
-  total,
-  scrollYProgress,
-  isHighlight,
-  highlightColor,
-}: {
-  word: string;
-  index: number;
-  total: number;
+function Word({ word, index, total, scrollYProgress, isHighlight, highlightColor }: {
+  word: string; index: number; total: number;
   scrollYProgress: ReturnType<typeof useScroll>['scrollYProgress'];
-  isHighlight: boolean;
-  highlightColor?: string;
+  isHighlight: boolean; highlightColor?: string;
 }) {
   const start = index / total;
   const end = Math.min((index + 1) / total + 0.05, 1);
@@ -72,14 +49,8 @@ function Word({
 
   return (
     <motion.span
-      style={{
-        opacity,
-        color: isHighlight ? (highlightColor || 'var(--color-primary)') : undefined,
-        willChange: 'opacity',
-      }}
-      className={`mr-[0.3em] inline-block transition-colors duration-300 ${
-        isHighlight ? 'font-semibold' : ''
-      }`}
+      style={{ opacity, color: isHighlight ? (highlightColor || 'var(--color-primary)') : undefined, willChange: 'opacity' }}
+      className={`mr-[0.3em] inline-block transition-colors duration-300 ${isHighlight ? 'font-semibold' : ''}`}
     >
       {word}
     </motion.span>

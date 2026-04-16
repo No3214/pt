@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 interface BlurTextProps {
@@ -11,11 +11,6 @@ interface BlurTextProps {
   highlightClass?: string;
 }
 
-/**
- * BlurText — Word-by-word blur dissolve reveal
- * Inspired by Bloom AI agency + Mindloop WordsPullUp
- * Each word transitions: blur(10px) + opacity:0 + y:20 → blur(0) + opacity:1 + y:0
- */
 export default function BlurText({
   text,
   className = '',
@@ -30,20 +25,10 @@ export default function BlurText({
   const words = text.split(' ');
 
   const wordVariants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-      filter: 'blur(10px)',
-    },
+    hidden: { opacity: 0, y: 20, filter: 'blur(10px)' },
     visible: (i: number) => ({
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: {
-        duration: 0.6,
-        delay: delay + i * staggerDelay,
-        ease: [0.16, 1, 0.3, 1],
-      },
+      opacity: 1, y: 0, filter: 'blur(0px)',
+      transition: { duration: 0.6, delay: delay + i * staggerDelay, ease: [0.16, 1, 0.3, 1] },
     }),
   };
 
