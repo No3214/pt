@@ -15,6 +15,8 @@ import LeadMagnet from '../components/landing/LeadMagnet';
 import FAQ from '../components/landing/FAQ';
 import Contact from '../components/landing/Contact';
 import Footer from '../components/landing/Footer';
+import AuthorityStrip from '../components/sprint1/AuthorityStrip';
+import PortalPreview from '../components/sprint1/PortalPreview';
 import { GrainOverlay } from '../components/landing/LandingUI';
 import { VolleyballDivider, VolleyballScrollRoller, VolleyballCursorTrail } from '../components/animations/Volleyball';
 
@@ -47,6 +49,9 @@ export default function Landing() {
       <main id="ana-icerik">
       <Hero />
 
+      {/* Authority Strip */}
+      <AuthorityStrip />
+
       {/* Infinite Scroll Trust Banner */}
       <Marquee />
 
@@ -55,6 +60,9 @@ export default function Landing() {
 
       {/* How It Works — 3 Step Process */}
       <HowItWorks />
+
+      {/* Portal Preview */}
+      <PortalPreview />
 
       {/* Key Metrics */}
       <Stats />

@@ -8,12 +8,12 @@ export default {
         primary: {
           DEFAULT: 'var(--color-primary)',
           light: 'var(--color-primary-light)',
-          dark: 'var(--color-primary-dark)',
+          dark: 'var(--color-primary-dark)'
         },
         secondary: {
           DEFAULT: 'var(--color-secondary)',
           light: 'var(--color-secondary-light)',
-          dark: 'var(--color-secondary-dark)',
+          dark: 'var(--color-secondary-dark)'
         },
         accent: 'var(--color-accent)',
         sand: 'var(--color-sand)',
@@ -27,39 +27,39 @@ export default {
         terracotta: {
           DEFAULT: '#C2684A',
           dark: '#A8553A',
-          light: '#D4856B',
+          light: '#D4856B'
         },
         sage: {
           DEFAULT: '#7A9E82',
           dark: '#628069',
-          light: '#96B89E',
+          light: '#96B89E'
         },
         coast: {
           DEFAULT: '#5e8fa8',
           dark: '#4A7389',
-          light: '#7EADC2',
-        },
+          light: '#7EADC2'
+        }
       },
       fontFamily: {
         display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        body: ['Outfit', 'system-ui', 'sans-serif'],
+        body: ['Outfit', 'system-ui', 'sans-serif']
       },
       borderRadius: {
         sm: '8px',
         md: '16px',
         lg: '32px',
         xl: '24px',
-        '2xl': '20px',
+        '2xl': '20px'
       },
       boxShadow: {
         sm: '0 1px 2px var(--shadow-color)',
         md: '0 4px 12px var(--shadow-color)',
         float: '0 20px 40px var(--shadow-color)',
         glow: '0 0 60px var(--color-glow)',
-        'glow-lg': '0 0 100px var(--color-glow)',
+        'glow-lg': '0 0 100px var(--color-glow)'
       },
       spacing: {
-        '4.5': '1.125rem',
+        '4.5': '1.125rem'
       },
       keyframes: {
         pulse: {
@@ -79,18 +79,28 @@ export default {
           '0%': { transform: 'translateY(100%)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
         },
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(20px)', filter: 'blur(4px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)', filter: 'blur(0)' },
+        },
+        'blur-in': {
+          '0%': { opacity: '0', filter: 'blur(12px)' },
+          '100%': { opacity: '1', filter: 'blur(0)' },
+        },
       },
       animation: {
         pulse: 'pulse 2.5s cubic-bezier(0.4,0,0.6,1) infinite',
         shimmer: 'shimmer 2s ease-in-out infinite',
         float: 'float 6s ease-in-out infinite',
         'slide-up': 'slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+        'fade-up': 'fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'blur-in': 'blur-in 0.6s ease-out forwards',
       },
       transitionTimingFunction: {
         apple: 'cubic-bezier(0.22, 1, 0.36, 1)',
-        'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
-      },
-    },
+        'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)'
+      }
+    }
   },
-  plugins: [],
+  plugins: []
 }

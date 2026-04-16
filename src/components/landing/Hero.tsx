@@ -105,11 +105,16 @@ export default function Hero() {
                 </span>
                 <span className="absolute inset-0 bg-primary-dark scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
               </MagneticButton>
-              <MagneticButton href="#programlar"
-                className={`px-8 py-4 rounded-full text-[0.88rem] font-medium no-underline border ${dm ? 'border-text-main/15 text-text-main/70 hover:text-text-main hover:border-text-main/30' : 'border-text-main/10 text-text-main/60 hover:text-text-main hover:border-text-main/25'}`}>
-                {t.hero.btnPrograms}
-              </MagneticButton>
+              <a href="#programlar" className={`text-[0.88rem] font-medium underline underline-offset-4 decoration-1 transition-all duration-300 hero-secondary-link ${dm ? "text-text-main/50 hover:text-text-main/80 decoration-text-main/20" : "text-text-main/40 hover:text-text-main/70 decoration-text-main/15"}`}>
+                  {t.hero.btnPrograms}
+                </a>
+            
+            <motion.div variants={fadeUp} custom={6} className="flex flex-wrap gap-4 mt-10 hero-micro-authority">
+              {["Profesyonel Voleybolcu", "Kisisel Planlama", "Portal Destekli Takip"].map((item, i) => (
+                <span key={i} className={`text-[0.72rem] uppercase tracking-[0.12em] font-medium px-3 py-1.5 rounded-full ${dm ? "bg-white/5 text-text-main/40 border border-white/10" : "bg-black/[0.03] text-text-main/35 border border-black/5"}`}>{item}</span>
+              ))}
             </motion.div>
+          </motion.div>
           </motion.div>
 
           {/* Hero Image Side */}
