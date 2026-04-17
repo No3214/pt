@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
-import { 
-  Counter, 
-  MagneticButton, 
-  AnimatedHeading, 
-  fadeUp, 
-  staggerContainer 
+import {
+  Counter,
+  AnimatedHeading,
+  fadeUp,
+  staggerContainer
 } from './LandingUI';
+import MagneticButton from '../animations/MagneticButton';
 import { tenantConfig } from '../../config/tenant';
 import { useTranslation } from '../../locales';
 import { VolleyballFloaters, VolleyballSpike } from '../animations/Volleyball';
