@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
-import { RevealSection, fadeUp } from '../landing/LandingUI';
+import { RevealSection } from '../landing/LandingUI';
+import { fadeUp } from '../../lib/animations';
 
 interface AuthorityBadge {
   icon: React.ReactNode;
