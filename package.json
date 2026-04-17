@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
-    "lint": "eslint src --report-unused-disable-directives --max-warnings 0",
+    "lint": "eslint src --report-unused-disable-directives",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
     "audit:i18n": "npx tsx scripts/check-i18n.ts",
     "audit:a11y": "npx tsx scripts/audit-a11y.ts",

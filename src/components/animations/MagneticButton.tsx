@@ -71,7 +71,6 @@ export default function MagneticButton({
       onMouseLeave={handleLeave}
       className="inline-block"
     >
-      {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
       <Inner {...(innerProps as any)}>{children}</Inner>
     </div>
   )

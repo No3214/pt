@@ -70,6 +70,6 @@ export async function decryptData(base64: string, pin: string): Promise<string> 
     return new TextDecoder().decode(decrypted);
   } catch (error) {
     console.error('Decryption failed:', error);
-    throw new Error('Geçersiz PIN veya bozuk veri.');
+    throw new Error('Geçersiz PIN veya bozuk veri.', { cause: error });
   }
 }
