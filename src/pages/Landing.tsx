@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useStore } from '../stores/useStore';
-// Modular Components
 import SEO from '../components/SEO';
 import Navbar from '../components/landing/Navbar';
 import Hero from '../components/landing/Hero';
@@ -15,10 +14,9 @@ import LeadMagnet from '../components/landing/LeadMagnet';
 import FAQ from '../components/landing/FAQ';
 import Contact from '../components/landing/Contact';
 import Footer from '../components/landing/Footer';
-import AuthorityStrip from '../components/sprint1/AuthorityStrip';
-import PortalPreview from '../components/sprint1/PortalPreview';
 import { GrainOverlay } from '../components/landing/LandingUI';
 import { VolleyballDivider, VolleyballScrollRoller, VolleyballCursorTrail } from '../components/animations/Volleyball';
+import ScrollReveal from '../components/animations/ScrollReveal';
 
 export default function Landing() {
   const { darkMode } = useStore();
@@ -30,66 +28,25 @@ export default function Landing() {
 
   return (
     <div className={`font-body overflow-x-hidden min-h-screen ${darkMode ? 'dark bg-bg' : 'bg-bg'}`}>
-      {/* SEO Meta Tags & Structured Data */}
       <SEO />
-
-      {/* Visual Enhancements */}
       <GrainOverlay />
-
-      {/* Navigation */}
       <Navbar />
-
-      {/* Scroll progress — voleybol topu yuvarlanarak ilerler */}
       <VolleyballScrollRoller top={72} />
-
-      {/* Cursor trail — desktop-only premium mikroetkileşim */}
       <VolleyballCursorTrail size={20} />
-
-      {/* Hero Section */}
       <main id="ana-icerik">
-      <Hero />
-
-      {/* Authority Strip */}
-      <AuthorityStrip />
-
-      {/* Infinite Scroll Trust Banner */}
-      <Marquee />
-
-      {/* Philosophy & About */}
-      <About />
-
-      {/* How It Works — 3 Step Process */}
-      <HowItWorks />
-
-      {/* Portal Preview */}
-      <PortalPreview />
-
-      {/* Key Metrics */}
-      <Stats />
-
-      {/* Voleybol divider — net + zıplayan top */}
-      <VolleyballDivider className="my-4" />
-
-      {/* Voleybol & Sports Gallery */}
-      <Gallery />
-
-      {/* Transformation Stories */}
-      <Testimonials />
-
-      {/* Program Categories & Pricing */}
-      <Programs />
-
-      {/* Lead Magnet — Free PDF email capture */}
-      <LeadMagnet />
-
-      {/* FAQ */}
-      <FAQ />
-
-      {/* High-Conversion Lead Form */}
-      <Contact />
-
-      {/* Footer */}
-      <Footer />
+        <Hero />
+        <Marquee />
+        <ScrollReveal preset="fadeUp"><About /></ScrollReveal>
+        <ScrollReveal preset="fadeUp"><HowItWorks /></ScrollReveal>
+        <ScrollReveal preset="scaleIn"><Stats /></ScrollReveal>
+        <VolleyballDivider className="my-4" />
+        <ScrollReveal preset="fadeUp"><Gallery /></ScrollReveal>
+        <ScrollReveal preset="fadeUp"><Testimonials /></ScrollReveal>
+        <ScrollReveal preset="fadeUp"><Programs /></ScrollReveal>
+        <ScrollReveal preset="scaleIn"><LeadMagnet /></ScrollReveal>
+        <ScrollReveal preset="fadeUp"><FAQ /></ScrollReveal>
+        <ScrollReveal preset="fadeUp"><Contact /></ScrollReveal>
+        <Footer />
       </main>
     </div>
   );
