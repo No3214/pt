@@ -84,7 +84,7 @@ export default function WhatsAppWidget() {
 
             {/* Chat Body */}
             <div className="bg-[#ECE5DD] p-4 space-y-3" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'200\' height=\'200\' viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 0h200v200H0z\' fill=\'%23ECE5DD\'/%3E%3Cpath d=\'M20 20h4v4h-4zm40 0h4v4h-4zm40 0h4v4h-4zm40 0h4v4h-4zm40 0h4v4h-4zM20 60h4v4h-4zm40 0h4v4h-4zm40 0h4v4h-4zm40 0h4v4h-4zm40 0h4v4h-4zM20 100h4v4h-4zm40 0h4v4h-4zm40 0h4v4h-4zm40 0h4v4h-4zm40 0h4v4h-4z\' fill=\'%23d5cec6\' opacity=\'.15\'/%3E%3C/svg%3E")' }}>
-              {/* Ela's greeting bubble */}
+              {/* Coach greeting bubble */}
               <motion.div
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}

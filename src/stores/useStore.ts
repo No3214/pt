@@ -2,7 +2,6 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { FoodItem } from '../lib/constants'
 import { supabase } from '../lib/supabase'
-import { exercises as _exerciseDB } from '../lib/exercises'
 
 // ═══════════════ Types ═══════════════
 export interface ClientNote { id: number; text: string; date: string }
@@ -383,13 +382,13 @@ export const useStore = create<AppState>()(
 
       // ─── WhatsApp Templates ───
       whatsappTemplates: {
-        onboarding: 'Merhaba {name}! Ela Ebeoğlu PT ailesine hoş geldin 🎉\n\nBaşlangıç formunu doldurman gerekiyor:\n{link}\n\nSorularını bana sorabilirsin!',
+        onboarding: 'Merhaba {name}! ARENA Performance ailesine hoş geldin 🎉\n\nBaşlangıç formunu doldurman gerekiyor:\n{link}\n\nSorularını bana sorabilirsin!',
         measurement: 'Merhaba {name}! Ölçüm zamanı geldi 📏\n\nAşağıdaki linkten ölçümlerini girebilirsin:\n{link}'
       },
       updateTemplate: (key, value) => set(s => ({
         whatsappTemplates: { ...s.whatsappTemplates, [key]: value }
       })),
     }),
-    { name: 'ela-pt-store' }
+    { name: 'arena-store' }
   )
 )

@@ -109,7 +109,7 @@ jobs:
 5. Review → approve
 6. Squash merge main
 7. Cloudflare auto-deploy (~2min)
-8. Smoke test https://pt.kozbeylikonagi.com.tr
+8. Smoke test https://arena.kozbeylikonagi.com.tr
 9. Monitor Sentry + Cloudflare Analytics
 
 ## n8n Automation (Self-Host)

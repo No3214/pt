@@ -53,7 +53,7 @@ export default function LoadingScreen({ onComplete, duration = 2500 }: LoadingSc
               <motion.div className="h-full rounded-full" style={{ background: 'var(--color-primary)', width: `${count}%` }} transition={{ duration: 0.05 }} />
             </div>
             <motion.p className="text-text-main/30 text-xs font-medium uppercase tracking-[0.3em] mt-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }}>
-              Ela Ebeoglu Performance
+              ARENA Performance
             </motion.p>
           </motion.div>
         </motion.div>

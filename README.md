@@ -1,7 +1,10 @@
-# Ela Ebeoğlu Performance Platform
+# ARENA Performance
 
-Premium, white-label SaaS fitness coaching platform built with **Vite + React 19 + TypeScript + Tailwind CSS**.
+Elite voleybol ve performans koçluk sistemi — **Güçlü ol. Kendine güven.**
 
+Built with **Vite 6 + React 19 + TypeScript 5 + Tailwind 3 + Zustand 5 + Supabase 2**.
+
+Live: https://arena.kozbeylikonagi.com.tr
 Deployed on **Cloudflare Pages** with edge-native AI proxy functions.
 
 ## 🏗️ Architecture
@@ -14,7 +17,7 @@ src/
 │   └── portal/       # Client portal (Habits, Food, Gamification)
 ├── config/           # Tenant branding & theme configuration
 ├── lib/              # Utilities, AI client, Supabase client, Zod schemas
-├── locales/          # i18n translations (tr/en)
+├── locales/          # i18n (13 dil: tr, en, es, fr, de, it, pt, ru, zh, ja, ko, ar, hi)
 ├── pages/            # Route-level page components
 │   └── admin/        # Admin panel pages (Dashboard, Clients, Leads, etc.)
 ├── stores/           # Zustand state management

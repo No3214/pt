@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pt.kozbeylikonagi.com.tr/sitemap.xml
+Sitemap: https://arena.kozbeylikonagi.com.tr/sitemap.xml

@@ -1,4 +1,4 @@
-# Design System — Ela Ebeoğlu Performance
+# Design System — ARENA Performance
 
 ## 1. Visual Theme & Atmosphere
 

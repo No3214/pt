@@ -14,9 +14,9 @@
 - 2026 vizyonu: AI ve otomasyon ile ölçeklenebilir iş modelleri
 
 ## Current Project
-- **PT Platform**: Ela Ebeoğlu Performance — kişiye özel online koçluk
-- Coach: Ela Ebeoğlu (profesyonel voleybolcu)
-- Domain: pt.kozbeylikonagi.com.tr
+- **ARENA Performance**: Elit voleybol & performans sistemi — kişiye özel online koçluk platformu
+- Marka: ARENA (sistem markası, kişiye bağlı değil)
+- Domain: arena.kozbeylikonagi.com.tr
 - Stack: React 19, TypeScript, Vite, Tailwind, Supabase, Cloudflare
 - 13 dil desteği, PWA, admin panel, student portal
 

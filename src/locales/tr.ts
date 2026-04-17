@@ -66,13 +66,13 @@ export const tr = {
     badge: "Sonuçlar",
     title: "Onların hikayesi, senin motivasyonun.",
     users: {
-      u1: "Sıçrama yüksekliğim 3 ayda 12cm arttı. Ela hocanın sistemi kesinlikle farklı klasmanda.",
+      u1: "Sıçrama yüksekliğim 3 ayda 12cm arttı. ARENA sistemi kesinlikle farklı klasmanda.",
       u2: "Sakatsız, çok güçlü bir sezon geçiriyorum. Kuvvet antrenmanları inanılmaz etkili.",
       u3: "Kendime güvenim ve sahadaki çevikliğim seviye atladı. Tamamen maç performansıma özel program."
     },
     items: [
       { 
-        text: "Sıçrama yüksekliğim 3 ayda 12cm arttı. Ela hocanın sistemi kesinlikle farklı klasmanda.", 
+        text: "Sıçrama yüksekliğim 3 ayda 12cm arttı. ARENA sistemi kesinlikle farklı klasmanda.", 
         name: "Ayşe K.", role: "Voleybolcu", metric: "+12cm sıçrama", image: "/ela_real_30.png"
       },
       { 
@@ -256,7 +256,7 @@ export const tr = {
       workout_target: "Hedef",
       workout_toast_success: "Antrenman başarıyla kaydedildi! 🔥",
       gallery_title: "Gelişim & Form",
-      gallery_desc: "İlerlemeni takip et ve teknik analizi için form videolarını buradan Ela Hoca'ya gönder.",
+      gallery_desc: "İlerlemeni takip et ve teknik analizi için form videolarını buradan koçuna gönder.",
       gallery_tab_photos: "Öncesi / Sonrası",
       gallery_tab_videos: "Form Onayı",
       gallery_upload: "Yeni Yükle",
@@ -302,7 +302,7 @@ export const tr = {
       roadmap_current: "Şu Anki Aşama",
       roadmap_rank: "{} Rank",
       roadmap_milestones: ["Rookie", "Bölgesel Lig", "2. Lig", "Sultanlar Ligi", "Elite Pro"],
-      roadmap_coach_msg_title: "Koç Ela'dan Bir Mesaj",
+      roadmap_coach_msg_title: "Koçundan Bir Mesaj",
       roadmap_coach_msg_text: "Disiplin, sultanlar ligine giden yolun anahtarıdır. Bugün yaptığın her antrenman seni zirveye bir adım daha yaklaştırıyor."
     },
     admin: {
@@ -466,8 +466,8 @@ export const tr = {
       alerts_btn_profile: "👤 Profili Görüntüle",
       alerts_toast_whatsapp: "{} için WhatsApp mesajı hazırlandı ✅",
       alerts_toast_error: "{} için telefon numarası bulunamadı.",
-      alerts_whatsapp_danger: "Merhaba {name}! 👋\n\nSenin ile olan çalışmamız çok verimliydi ve gelişimin harika gidiyordu! Yeni bir paket ile kaldığımız yerden devam etmek ister misin?\n\nSana özel bir plan hazırladım. Detayları konuşalım mı? 💪\n\nCoach Ela",
-      alerts_whatsapp_warning: "Merhaba ${name}! 👋\n\nPaketin bitmek üzere, harika bir ilerleme kaydediyorsun! Momentum'u kaybetmemek için paket yenileme planlarımıza göz atmak ister misin?\n\nSenin için en uygun seçeneği birlikte belirleyelim! 🎯\n\nCoach Ela",
+      alerts_whatsapp_danger: "Merhaba {name}! 👋\n\nSenin ile olan çalışmamız çok verimliydi ve gelişimin harika gidiyordu! Yeni bir paket ile kaldığımız yerden devam etmek ister misin?\n\nSana özel bir plan hazırladım. Detayları konuşalım mı? 💪\n\nARENA Coach",
+      alerts_whatsapp_warning: "Merhaba ${name}! 👋\n\nPaketin bitmek üzere, harika bir ilerleme kaydediyorsun! Momentum'u kaybetmemek için paket yenileme planlarımıza göz atmak ister misin?\n\nSenin için en uygun seçeneği birlikte belirleyelim! 🎯\n\nARENA Coach",
 
       // MacroDistribution
       macro_distribution_title: "Makro Dağılımı",
@@ -530,10 +530,10 @@ export const tr = {
       builder_ai_error: "AI Hatası: ",
       builder_png_error: "PNG oluşturulamadı",
       builder_pdf_error: "PDF oluşturulamadı",      builder_default_note: "Beslenme hedeflerine uygun makrolarını diyet listenden takip etmeyi unutma.",
-      builder_default_wa: "🏐 *ELA EBEOĞLU — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 Yeni Danışan\n💪 Lütfen Müşteri ve Split Seçin.",
-      builder_export_name: "ELA EBEOĞLU",
-      builder_export_tagline: "PERFORMANCE COACHING",
-      builder_export_footer: "📸 @ela.ebeoglu",
+      builder_default_wa: "🏐 *ARENA — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 Yeni Danışan\n💪 Lütfen Müşteri ve Split Seçin.",
+      builder_export_name: "ARENA",
+      builder_export_tagline: "PERFORMANCE PLATFORM",
+      builder_export_footer: "📸 @arenaperformance",
 
       // FoodTracker
       food_title: "Yemek Takibi",
@@ -744,7 +744,7 @@ export const tr = {
       kvkk_sections: [
         {
           title: "1. Veri Sorumlusu",
-          content: "Veri sorumlusu olarak {}, pt.kozbeylikonagi.com.tr internet sitesi üzerinden toplanan tüm kişisel verilerden sorumludur. İletişim: {}"
+          content: "Veri sorumlusu olarak {}, arena.kozbeylikonagi.com.tr internet sitesi üzerinden toplanan tüm kişisel verilerden sorumludur. İletişim: {}"
         },
         {
           title: "2. Toplanan Kişisel Veriler",
@@ -775,7 +775,7 @@ export const tr = {
         }
       ],
 
-      terms_intro: "Bu web sitesini (pt.kozbeylikonagi.com.tr) kullanarak aşağıdaki kullanım koşullarını kabul etmiş sayılırsınız. Lütfen bu koşulları dikkatlice okuyunuz.",
+      terms_intro: "Bu web sitesini (arena.kozbeylikonagi.com.tr) kullanarak aşağıdaki kullanım koşullarını kabul etmiş sayılırsınız. Lütfen bu koşulları dikkatlice okuyunuz.",
       terms_sections: [
         {
           title: "1. Hizmet Tanımı",

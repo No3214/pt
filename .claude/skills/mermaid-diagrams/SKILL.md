@@ -108,7 +108,7 @@ flowchart LR
     E --> F{Lighthouse CI}
     F -->|≥95| G[Cloudflare Deploy]
     F -->|<95| X
-    G --> H[pt.kozbeylikonagi.com.tr]
+    G --> H[arena.kozbeylikonagi.com.tr]
     G --> I[Smoke Test]
     I -->|Fail| J[Auto Rollback]
 ```

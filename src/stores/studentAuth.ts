@@ -167,7 +167,7 @@ export const useStudentAuth = create<StudentAuthState>()(
           } else {
             set({ isLoading: false })
           }
-        } catch (e) {
+        } catch {
           set({ isLoading: false, error: 'Oturum kontrol edilemedi.' })
         }
       },
@@ -245,7 +245,7 @@ export const useStudentAuth = create<StudentAuthState>()(
           set({ isLoading: false })
           return true
         } catch (e: unknown) {
-          set({ error: e instanceof Error ? e.message : "Unknown error" || 'Bağlantı gönderilemedi.', isLoading: false })
+          set({ error: e instanceof Error ? e.message : 'Bağlantı gönderilemedi.', isLoading: false })
           return false
         }
       },
@@ -272,7 +272,7 @@ export const useStudentAuth = create<StudentAuthState>()(
           set({ isLoading: false })
           return true
         } catch (e: unknown) {
-          set({ error: e instanceof Error ? e.message : "Unknown error" || 'Şifre sıfırlama başarısız.', isLoading: false })
+          set({ error: e instanceof Error ? e.message : 'Şifre sıfırlama başarısız.', isLoading: false })
           return false
         }
       },
@@ -460,7 +460,7 @@ export const useStudentAuth = create<StudentAuthState>()(
                 set(s => ({ messages: [...s.messages, msg] }))
               }
               // Play notification sound
-              try { new Audio('/notification.mp3').play().catch(() => {}) } catch {}
+              try { new Audio('/notification.mp3').play().catch(() => { /* autoplay blocked */ }) } catch { /* no audio */ }
             }
           })
           .on('postgres_changes', {
@@ -481,7 +481,7 @@ export const useStudentAuth = create<StudentAuthState>()(
       }
     }),
     {
-      name: 'ela-pt-student-auth',
+      name: 'arena-student-auth',
       partialize: (state) => ({
         // Only persist session-related data, not full data arrays
         profile: state.profile

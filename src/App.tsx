@@ -10,7 +10,6 @@ import CookieConsent from './components/CookieConsent'
 import ScrollToTop from './components/ScrollToTop'
 import NotFound from './pages/NotFound'
 import WhatsAppWidget from './components/WhatsAppWidget'
-import ScrollProgress from './components/ScrollProgress'
 import ReloadPrompt from './components/common/ReloadPrompt'
 import { tenantConfig } from './config/tenant'
 import { useTranslation } from './locales'
@@ -29,7 +28,6 @@ const FoodTracker = lazy(() => import('./pages/admin/FoodTracker'))
 const CalendarPage = lazy(() => import('./pages/admin/Calendar'))
 const Settings = lazy(() => import('./pages/admin/Settings'))
 const Leads = lazy(() => import('./pages/admin/Leads'))
-const Bookings = lazy(() => import('./pages/admin/Bookings'))
 const Progress = lazy(() => import('./pages/admin/Progress'))
 const Portal = lazy(() => import('./pages/Portal'))
 const PortalV2 = lazy(() => import('./pages/PortalV2'))

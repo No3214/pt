@@ -3,7 +3,7 @@ import { useEffect, useRef, type CSSProperties } from 'react'
 
 /**
  * Voleybol markasına özgü animasyon paketi.
- * Ela Ebeoğlu profesyonel voleybolcu — tüm bileşenler marka DNA'sına uyumlu.
+ * ARENA Performance platform DNA'sına uyumlu voleybol hareketleri.
  *
  * - VolleyballSVG:       Yüksek kaliteli, temaya duyarlı voleybol topu (SVG)
  * - VolleyballFloaters:  Arka planda parallax ile yüzen dekoratif toplar
@@ -78,11 +78,13 @@ export function VolleyballSVG({ size = 64, className = '', shadow = true, style 
 type FloaterSpec = { x: string; y: string; size: number; delay: number; duration: number; drift: number }
 
 const DEFAULT_FLOATERS: FloaterSpec[] = [
-  { x: '8%',  y: '22%', size: 56, delay: 0.0, duration: 7.2, drift: 12 },
-  { x: '86%', y: '18%', size: 40, delay: 0.6, duration: 8.4, drift: 18 },
-  { x: '14%', y: '72%', size: 72, delay: 0.3, duration: 9.0, drift: 14 },
-  { x: '78%', y: '68%', size: 48, delay: 0.9, duration: 7.8, drift: 10 },
-  { x: '48%', y: '12%', size: 32, delay: 0.2, duration: 6.6, drift: 16 },
+  { x: '8%',  y: '22%', size: 112, delay: 0.0, duration: 7.2, drift: 24 },
+  { x: '86%', y: '18%', size: 80,  delay: 0.6, duration: 8.4, drift: 36 },
+  { x: '14%', y: '72%', size: 144, delay: 0.3, duration: 9.0, drift: 28 },
+  { x: '78%', y: '68%', size: 96,  delay: 0.9, duration: 7.8, drift: 20 },
+  { x: '48%', y: '12%', size: 64,  delay: 0.2, duration: 6.6, drift: 32 },
+  { x: '36%', y: '58%', size: 88,  delay: 0.5, duration: 8.8, drift: 22 },
+  { x: '62%', y: '38%', size: 56,  delay: 0.8, duration: 7.4, drift: 18 },
 ]
 
 export function VolleyballFloaters({

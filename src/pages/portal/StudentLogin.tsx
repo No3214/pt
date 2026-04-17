@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
-import { useTranslation } from '../../locales'
 
 const fadeIn = {
   hidden: { opacity: 0, filter: 'blur(8px)' },
@@ -15,7 +14,6 @@ const slideUp = {
 
 export default function StudentLogin() {
   const { darkMode: dm, showToast } = useStore()
-  const { t } = useTranslation()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)

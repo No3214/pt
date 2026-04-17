@@ -62,7 +62,7 @@ export default function AuthorityStrip() {
         {/* Title */}
         <motion.div variants={fadeUp} custom={0} className="text-center mb-12">
           <p className="text-[0.7rem] uppercase tracking-[0.3em] font-bold text-primary/70 mb-3">
-            Neden Ela PT
+            Neden ARENA
           </p>
           <h2 className={`text-2xl md:text-3xl font-bold font-display tracking-[-0.02em] ${
             dm ? 'text-text-main' : 'text-text-main'

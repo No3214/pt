@@ -104,9 +104,9 @@ export default function AdminLayout() {
 
             <NavLink to="/" className={`flex items-center gap-3 font-display text-lg font-semibold no-underline tracking-[-0.02em] ${dm ? 'text-white' : 'text-text-main'}`}>
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
-                <span className="text-white text-xs font-bold font-body">EE</span>
+                <span className="text-white text-xs font-bold font-body">A</span>
               </div>
-              <span className="hidden sm:inline">Ela Ebeoğlu</span>
+              <span className="hidden sm:inline">ARENA</span>
               <span className={`text-[0.65rem] font-body font-semibold uppercase tracking-[0.15em] px-2 py-0.5 rounded-md ${dm ? 'bg-white/[0.06] text-white/40' : 'bg-primary/8 text-primary/80'}`}>Admin</span>
             </NavLink>
           </div>
@@ -190,10 +190,10 @@ export default function AdminLayout() {
               <div className={`mt-auto pt-4 border-t ${dm ? 'border-white/[0.04]' : 'border-black/[0.03]'}`}>
                 <div className="px-3 py-2 flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-secondary/20 to-secondary/5 flex items-center justify-center">
-                    <span className="text-secondary text-[0.65rem] font-bold">EE</span>
+                    <span className="text-secondary text-[0.65rem] font-bold">A</span>
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className={`text-[0.75rem] font-medium truncate ${dm ? 'text-white/60' : 'text-text-main/60'}`}>Ela Ebeoğlu</p>
+                    <p className={`text-[0.75rem] font-medium truncate ${dm ? 'text-white/60' : 'text-text-main/60'}`}>ARENA</p>
                     <p className={`text-[0.68rem] ${dm ? 'text-white/20' : 'text-text-main/20'}`}>v2.0 Performance</p>
                   </div>
                 </div>

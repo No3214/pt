@@ -86,7 +86,7 @@ export default function Preloader() {
             <h1 className={`font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold tracking-[-0.03em] ${
               dm ? 'text-white' : 'text-text-main'
             }`}>
-              Ela Ebeoğlu
+              ARENA
             </h1>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
@@ -96,7 +96,7 @@ export default function Preloader() {
                 dm ? 'text-white/25' : 'text-text-main/25'
               }`}
             >
-              Performance Coach
+              Performance Platform
             </motion.p>
           </motion.div>
 

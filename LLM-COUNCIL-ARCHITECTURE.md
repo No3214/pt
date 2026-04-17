@@ -1,4 +1,4 @@
-# LLM Council System — Ela Ebeoğlu PT
+# LLM Council System — ARENA Performance
 
 ## Overview
 

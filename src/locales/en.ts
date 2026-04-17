@@ -66,13 +66,13 @@ export const en = {
     badge: "Results",
     title: "Their story, your motivation.",
     users: {
-      u1: "My vertical jump increased 12cm in 3 months. Coach Ela's system is definitely in a different league.",
+      u1: "My vertical jump increased 12cm in 3 months. ARENA's system is definitely in a different league.",
       u2: "I'm having an injury-free, very strong season. The strength training is incredibly effective.",
       u3: "My confidence and agility on the court leveled up. A program completely tailored to my match performance."
     },
     items: [
       { 
-        text: "My vertical jump increased 12cm in 3 months. Coach Ela's system is definitely in a different league.", 
+        text: "My vertical jump increased 12cm in 3 months. ARENA's system is definitely in a different league.", 
         name: "Ayşe K.", role: "Volleyball Player", metric: "+12cm jump", image: "/ela_real_30.png"
       },
       { 
@@ -246,7 +246,7 @@ export const en = {
       workout_target: "Target",
       workout_toast_success: "Workout successfully saved! 🔥",
       gallery_title: "Progress & Form",
-      gallery_desc: "Track your progress and send form videos to Coach Ela for technical analysis.",
+      gallery_desc: "Track your progress and send form videos to Your Coach for technical analysis.",
       gallery_tab_photos: "Before / After",
       gallery_tab_videos: "Form Verification",
       gallery_upload: "Upload New",
@@ -292,7 +292,7 @@ export const en = {
       roadmap_current: "Current Stage",
       roadmap_rank: "{} Rank",
       roadmap_milestones: ["Rookie", "Regional League", "2nd League", "Sultans League", "Elite Pro"],
-      roadmap_coach_msg_title: "A Message from Coach Ela",
+      roadmap_coach_msg_title: "A Message from Your Coach",
       roadmap_coach_msg_text: "Discipline is the key to the road to the Sultans League. Every workout you do today brings you one step closer to the top."
     },
     admin: {
@@ -456,8 +456,8 @@ export const en = {
       alerts_btn_profile: "👤 View Profile",
       alerts_toast_whatsapp: "WhatsApp message prepared for {} ✅",
       alerts_toast_error: "Phone number not found for {}.",
-      alerts_whatsapp_danger: "Hello {name}! 👋\n\nOur work together was very productive and your progress was great! Would you like to continue where we left off with a new package?\n\nI've prepared a special plan for you. Shall we talk about the details? 💪\n\nCoach Ela",
-      alerts_whatsapp_warning: "Hello {name}! 👋\n\nYour package is about to end, you're making great progress! Would you like to check out our package renewal plans to keep the momentum going?\n\nLet's determine the most suitable option for you together! 🎯\n\nCoach Ela",
+      alerts_whatsapp_danger: "Hello {name}! 👋\n\nOur work together was very productive and your progress was great! Would you like to continue where we left off with a new package?\n\nI've prepared a special plan for you. Shall we talk about the details? 💪\n\nYour Coach",
+      alerts_whatsapp_warning: "Hello {name}! 👋\n\nYour package is about to end, you're making great progress! Would you like to check out our package renewal plans to keep the momentum going?\n\nLet's determine the most suitable option for you together! 🎯\n\nYour Coach",
 
       // MacroDistribution
       macro_distribution_title: "Macro Distribution",
@@ -520,10 +520,10 @@ export const en = {
       builder_ai_error: "AI Error: ",
       builder_png_error: "Could not generate PNG",
       builder_pdf_error: "Could not generate PDF",      builder_default_note: "Don't forget to track your macros from your diet plan to meet your nutrition goals.",
-      builder_default_wa: "🏐 *ELA EBEOĞLU — Workout*\n━━━━━━━━━━━━━━━━━━━━\n👤 New Client\n💪 Please select a Client and Split.",
-      builder_export_name: "ELA EBEOĞLU",
-      builder_export_tagline: "PERFORMANCE COACHING",
-      builder_export_footer: "📸 @ela.ebeoglu",
+      builder_default_wa: "🏐 *ARENA — Workout*\n━━━━━━━━━━━━━━━━━━━━\n👤 New Client\n💪 Please select a Client and Split.",
+      builder_export_name: "ARENA",
+      builder_export_tagline: "PERFORMANCE PLATFORM",
+      builder_export_footer: "📸 @arenaperformance",
 
       // FoodTracker
       food_title: "Food Tracker",
@@ -734,7 +734,7 @@ export const en = {
       kvkk_sections: [
         {
           title: "1. Data Controller",
-          content: "As the data controller, {}, is responsible for all personal data collected through the pt.kozbeylikonagi.com.tr website. Contact: {}"
+          content: "As the data controller, {}, is responsible for all personal data collected through the arena.kozbeylikonagi.com.tr website. Contact: {}"
         },
         {
           title: "2. Personal Data Collected",
@@ -765,7 +765,7 @@ export const en = {
           content: "For your requests within the scope of GDPR, you can reach us by sending an e-mail to {}. Your applications will be answered within 30 days at the latest."
         }
       ],
-      terms_intro: "By using this website (pt.kozbeylikonagi.com.tr), you are deemed to have accepted the following terms of use. Please read these terms carefully.",
+      terms_intro: "By using this website (arena.kozbeylikonagi.com.tr), you are deemed to have accepted the following terms of use. Please read these terms carefully.",
       terms_sections: [
         {
           title: "1. Service Description",

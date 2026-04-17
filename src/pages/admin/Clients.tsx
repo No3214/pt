@@ -123,7 +123,7 @@ export default function Clients() {
 
   const handleCRMMessage = (name: string, type: 'welcome' | 'payment' | 'motivation', phone?: string) => {
     let text = ''
-    if (type === 'welcome') text = `Merhaba ${name}, Ela Ebeoğlu Performance Coaching'e hoş geldin! 🎉\n\nÖdemen ulaştı ve kaydını başarıyla tamamladık. Hedeflerine ulaşmak için harika bir sürece başlıyoruz, seninle çalışmak için sabırsızlanıyorum! 💪`
+    if (type === 'welcome') text = `Merhaba ${name}, ARENA Performance'e hoş geldin! 🎉\n\nÖdemen ulaştı ve kaydını başarıyla tamamladık. Hedeflerine ulaşmak için harika bir sürece başlıyoruz, seninle çalışmak için sabırsızlanıyorum! 💪`
     if (type === 'payment') text = `Selam ${name}! 🌟\n\nUmarım antrenmanlar harika gidiyordur. Yeni eğitim periyodumuz yaklaşıyor (Seans bitti/azaldı), güncel seans paketini yenilemek istersen benimle iletişime geçebilirsin. Varsa sorularını da bekliyorum!`
     if (type === 'motivation') text = `Harika iş çıkardın ${name}! 🔥\n\nSon antrenmanlarındaki disiplinin ve emeğin gerçekten takdire şayan. Aynen böyle devam ediyoruz, hedeflerimize adım adım yaklaşıyoruz!`
     

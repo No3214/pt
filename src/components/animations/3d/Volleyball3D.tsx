@@ -12,7 +12,7 @@
  *   <Volleyball3D size="100%" className="h-[420px]" />
  */
 
-import { Canvas, useFrame, useLoader } from '@react-three/fiber'
+import { Canvas, useFrame } from '@react-three/fiber'
 import { Environment, ContactShadows } from '@react-three/drei'
 import { Suspense, useMemo, useRef } from 'react'
 import { useReducedMotion } from 'framer-motion'

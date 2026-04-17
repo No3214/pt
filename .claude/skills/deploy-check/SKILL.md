@@ -76,7 +76,7 @@ npm run lighthouse                   # score ≥95
 
 ## Deploy Verification
 ```bash
-curl -I https://pt.kozbeylikonagi.com.tr | grep -E "HTTP|Cache|CSP"
+curl -I https://arena.kozbeylikonagi.com.tr | grep -E "HTTP|Cache|CSP"
 # Status 200, Cache-Control, CSP present
 ```
 

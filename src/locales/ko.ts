@@ -254,7 +254,7 @@ export const ko = {
       workout_target: "목표",
       workout_toast_success: "운동이 성공적으로 저장되었습니다! 🔥",
       gallery_title: "진도 및 폼",
-      gallery_desc: "진도를 추적하고 기술 분석을 위해 폼 영상을 Ela 코치에게 보내세요.",
+      gallery_desc: "진도를 추적하고 기술 분석을 위해 폼 영상을 코치에게 보내세요.",
       gallery_tab_photos: "전 / 후",
       gallery_tab_videos: "폼 확인",
       gallery_upload: "새 항목 업로드",
@@ -302,7 +302,7 @@ export const ko = {
       roadmap_current: "현재 단계",
       roadmap_rank: "{} 랭크",
       roadmap_milestones: ["루키", "지역 리그", "2부 리그", "술탄 리그", "엘리트 프로"],
-      roadmap_coach_msg_title: "코치 Ela의 메시지",
+      roadmap_coach_msg_title: "코치의 메시지",
       roadmap_coach_msg_text: "훈련의 성실함이 술탄 리그로 가는 성공의 열쇠입니다. 당신의 훈련 하나하나가 당신을 정점으로 이끕니다."
     },
     admin: {

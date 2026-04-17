@@ -4,6 +4,7 @@ import { RevealSection, fadeUp } from './LandingUI';
 import { useStore } from '../../stores/useStore';
 import Lightbox from '../Lightbox';
 import { useTranslation } from '../../locales';
+import { tenantConfig } from '../../config/tenant';
 
 interface GalleryImage {
   src: string;
@@ -125,7 +126,7 @@ export default function Gallery() {
           <RevealSection className="mt-16 text-center">
             <motion.a
               variants={fadeUp}
-              href="https://instagram.com/elaebeoglu"
+              href={`https://instagram.com/${tenantConfig.brand.contact.socials.instagram.replace('@', '')}`}
               target="_blank"
               rel="noopener noreferrer"
               className={`group inline-flex items-center gap-3 px-8 py-4 rounded-full text-[0.85rem] font-bold uppercase tracking-widest no-underline transition-all duration-500 border ${

@@ -2,8 +2,8 @@ import { motion, useMotionValue, useSpring, useTransform, useScroll, useReducedM
 import { useEffect, useRef, type CSSProperties } from 'react'
 
 /**
- * Voleybol markasına özgü animasyon paketi.
- * Ela Ebeoğlu profesyonel voleybolcu — tüm bileşenler marka DNA'sına uyumlu.
+ * Voleybol temali animasyon paketi.
+ * ARENA Performance — tüm bileşenler marka DNA'sına uyumlu.
  *
  * - VolleyballSVG:       Yüksek kaliteli, temaya duyarlı voleybol topu (SVG)
  * - VolleyballFloaters:  Arka planda parallax ile yüzen dekoratif toplar

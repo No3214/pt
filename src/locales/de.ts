@@ -68,13 +68,13 @@ export const de = {
     badge: "Ergebnisse",
     title: "Ihre Geschichte, deine Motivation.",
     users: {
-      u1: "Mein Vertikalsprung ist in 3 Monaten um 12 cm gestiegen. Coach Elas System ist definitiv in einer anderen Liga.",
+      u1: "Mein Vertikalsprung ist in 3 Monaten um 12 cm gestiegen. deinen Coachs System ist definitiv in einer anderen Liga.",
       u2: "Ich habe eine verletzungsfreie, sehr starke Saison. Das Krafttraining ist unglaublich effektiv.",
       u3: "Mein Selbstvertrauen und meine Agilität auf dem Platz haben sich verbessert. Ein Programm, das komplett auf meine Spielleistung abgestimmt ist."
     },
     items: [
       { 
-        text: "Mein Vertikalsprung ist in 3 Monaten um 12 cm gestiegen. Coach Elas System ist definitiv in einer anderen Liga.", 
+        text: "Mein Vertikalsprung ist in 3 Monaten um 12 cm gestiegen. deinen Coachs System ist definitiv in einer anderen Liga.", 
         name: "Ayşe K.", role: "Volleyballspielerin", metric: "+12cm Sprung", image: "/ela_real_30.png"
       },
       { 
@@ -254,7 +254,7 @@ export const de = {
       workout_target: "Ziel",
       workout_toast_success: "Training erfolgreich gespeichert! 🔥",
       gallery_title: "Fortschritt und Form",
-      gallery_desc: "Verfolge deinen Fortschritt und sende Formvideos an Coach Ela zur technischen Analyse.",
+      gallery_desc: "Verfolge deinen Fortschritt und sende Formvideos an deinen Coach zur technischen Analyse.",
       gallery_tab_photos: "Vorher / Nachher",
       gallery_tab_videos: "Formprüfung",
       gallery_upload: "Neu Hochladen",
@@ -302,7 +302,7 @@ export const de = {
       roadmap_current: "Aktuelle Phase",
       roadmap_rank: "{} Rank",
       roadmap_milestones: ["Anfänger", "Regionalliga", "2. Liga", "Sultans Liga", "Elite Pro"],
-      roadmap_coach_msg_title: "Eine Nachricht von Coach Ela",
+      roadmap_coach_msg_title: "Eine Nachricht von deinen Coach",
       roadmap_coach_msg_text: "Disziplin ist der Schlüssel zur Liga der Königinnen. Jedes Training, das du heute absolvierst, bringt dich dem Gipfel einen Schritt näher."
     },
     admin: {

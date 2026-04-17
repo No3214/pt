@@ -68,13 +68,13 @@ export const zh = {
     badge: "结果",
     title: "他们的故事，您的动力。",
     users: {
-      u1: "3个月内我的垂直跳跃增加了12厘米。Ela教练的系统绝对是另一个层次。",
+      u1: "3个月内我的垂直跳跃增加了12厘米。ARENA系统绝对是另一个层次。",
       u2: "我有一个无伤且非常强大的赛季。力量训练的效果非常显著。",
       u3: "我在球场上的信心和敏捷性提升了。一个完全根据我的比赛表现定制的课程。"
     },
     items: [
       { 
-        text: "3个月内我的垂直跳跃增加了12厘米。Ela教练的系统绝对是另一个层次。", 
+        text: "3个月内我的垂直跳跃增加了12厘米。ARENA系统绝对是另一个层次。", 
         name: "Ayşe K.", role: "排球运动员", metric: "+12cm 弹跳", image: "/ela_real_30.png"
       },
       { 
@@ -254,7 +254,7 @@ export const zh = {
       workout_target: "目标",
       workout_toast_success: "训练保存成功！🔥",
       gallery_title: "进度与姿态",
-      gallery_desc: "追踪您的进度，并将动作视频发送给 Ela 教练进行技术分析。",
+      gallery_desc: "追踪您的进度，并将动作视频发送给您的教练进行技术分析。",
       gallery_tab_photos: "正面 / 侧面",
       gallery_tab_videos: "动作检查",
       gallery_upload: "上传新照片",
@@ -302,7 +302,7 @@ export const zh = {
       roadmap_current: "当前阶段",
       roadmap_rank: "{} 级",
       roadmap_milestones: ["菜鸟", "地区联赛", "乙级联赛", "顶级联赛", "职业精英"],
-      roadmap_coach_msg_title: "来自 Ela 教练的消息",
+      roadmap_coach_msg_title: "来自您的教练的消息",
       roadmap_coach_msg_text: "纪律是通往巅峰的钥匙。你今天的每一次训练，都让你离目标更近一步。"
     },
     admin: {

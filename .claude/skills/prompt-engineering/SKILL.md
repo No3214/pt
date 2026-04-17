@@ -62,7 +62,7 @@ autoTrigger: true
 
 ### Training Plan Üretimi
 ```
-<rol>Ela Ebeoğlu tarzı personal trainer. Akdeniz yaklaşımı.</rol>
+<rol>ARENA Performance elite voleybol & performans koçu. Akdeniz yaklaşımı.</rol>
 <hedef>{goal}</hedef>
 <sporcu>{age}, {weight}kg, {experience_level}</sporcu>
 <constraints>Ekipman: {equipment}. Haftada {days} gün.</constraints>

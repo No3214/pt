@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import { splits, sanitize } from '../../lib/constants'
 import { exercises, categoryLabels, difficultyLabels } from '../../lib/exercises'
@@ -48,9 +48,8 @@ function ExerciseThumb({ exercise }: { exercise: Exercise; dm?: boolean }) {
 }
 
 export default function Builder() {
-  const { clients, darkMode: dm, showToast } = useStore()
+  const { darkMode: dm, showToast } = useStore()
   const { t } = useTranslation()
-  const activeClients = clients.filter(c => c.sessions > 0)
   const [selectedClient, setSelectedClient] = useState('')
   const [nutritionNote, setNoteText] = useState(t.portal.admin.builder_default_note)
   const [waPreview, setWaPreview] = useState(t.portal.admin.builder_default_wa)
@@ -62,11 +61,9 @@ export default function Builder() {
   const [currentDay, setCurrentDay] = useState('Gün 1')
   const [activeTab, setActiveTab] = useState<'templates' | 'custom'>('templates')
   const previewRef = useRef<HTMLDivElement>(null)
-  const previewInView = useInView(previewRef, { once: true })
 
   const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const card = `p-6 rounded-2xl border backdrop-blur-sm ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04] shadow-sm'}`
-  const hasAI = true
 
   const filteredExercises = useMemo(() => exercises.filter(e => {
     if (exSearch && !e.name.toLowerCase().includes(exSearch.toLowerCase())) return false
@@ -105,13 +102,13 @@ export default function Builder() {
     const lines = customProgram.map(l =>
       `• ${l.exercise} ${l.sets}×${l.reps}${l.note ? ` (${l.note})` : ''}`
     ).join('\n')
-    setWaPreview(`🏐 *ELA EBEOĞLU — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n💪 ${currentDay}\n\n${lines}\n\n📌 Beslenme: ${sanitize(nutritionNote)}`)
+    setWaPreview(`🏐 *ARENA — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n💪 ${currentDay}\n\n${lines}\n\n📌 Beslenme: ${sanitize(nutritionNote)}`)
   }
 
   const setSplit = (type: string) => {
     const client = sanitize(selectedClient || 'Yeni Danışan')
     const note = sanitize(nutritionNote)
-    setWaPreview(`🏐 *ELA EBEOĞLU — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n💪 Program Formatı: ${type.toUpperCase()}\n\n${splits[type]}\n\n📌 Beslenme: ${note}`)
+    setWaPreview(`🏐 *ARENA — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n💪 Program Formatı: ${type.toUpperCase()}\n\n${splits[type]}\n\n📌 Beslenme: ${note}`)
   }
 
   const generateAI = async () => {
@@ -119,7 +116,7 @@ export default function Builder() {
     const note = sanitize(nutritionNote)
     setLoading(true)
     setWaPreview(t.portal.admin.builder_llm_working)
-    const prompt = `Sen profesyonel bir voleybol ve fitness antrenörüsün. Adın Ela. Danışanım ${client} için; ${note} notlarını da dikkate alarak 4 günlük hipertrofi ve performans odaklı antrenman spliti hazırla. Çıktı sadece WhatsApp mesaj formatı olsun. Başlangıcında "🏐 *ELA EBEOĞLU — AI Özel Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n" yaz. JSON kullanma sadece düz metin.`
+    const prompt = `Sen profesyonel bir voleybol ve fitness antrenörüsün. ARENA performans platformunun AI koçusun. Danışanım ${client} için; ${note} notlarını da dikkate alarak 4 günlük hipertrofi ve performans odaklı antrenman spliti hazırla. Çıktı sadece WhatsApp mesaj formatı olsun. Başlangıcında "🏐 *ARENA — AI Özel Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n" yaz. JSON kullanma sadece düz metin.`
     try {
       const results = await councilQuery(prompt)
       const best = results.find(r => r.result)
@@ -138,7 +135,7 @@ export default function Builder() {
     try {      const { toPng } = await import('html-to-image')
       const url = await toPng(el, { quality: 0.95, pixelRatio: 2 })
       const link = document.createElement('a')
-      link.download = 'ElaEbeoglu_Program.png'
+      link.download = 'ARENA_Program.png'
       link.href = url
       link.click()
     } catch { showToast(t.portal.admin.builder_png_error) }
@@ -151,7 +148,7 @@ export default function Builder() {
     el.style.left = '0'
     import('react-to-pdf')
       .then(({ default: generatePDF }) =>
-        generatePDF(() => document.getElementById('export-container'), { filename: 'ElaEbeoglu_Program.pdf' })
+        generatePDF(() => document.getElementById('export-container'), { filename: 'ARENA_Program.pdf' })
       )
       .catch(() => showToast(t.portal.admin.builder_pdf_error))
       .finally(() => { el.style.left = '-9999px' })

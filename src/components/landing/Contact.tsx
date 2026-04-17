@@ -50,7 +50,7 @@ export default function Contact() {
       window.open(whatsappUrl, '_blank');
       setFormStatus('success');
       reset();
-    } catch (err: unknown) {
+    } catch {
       // Supabase failed — save lead locally as fallback & still open WhatsApp
       addLead({
         name: data.name,

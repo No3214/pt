@@ -31,7 +31,7 @@ export default function Settings() {
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `ela-pt-backup-${new Date().toISOString().split('T')[0]}.json`
+    a.download = `arena-backup-${new Date().toISOString().split('T')[0]}.json`
     a.click()
     URL.revokeObjectURL(url)
     showToast('Yedek dosyası indirildi!')
@@ -63,7 +63,7 @@ export default function Settings() {
   const handleResetAll = () => {
     if (!confirm('TÜM VERİLERİ SİLMEK İSTEDİĞİNİZE EMİN MİSİNİZ?\n\nBu işlem geri alınamaz.')) return
     if (!confirm('Son kez: Tüm danışanlar, seanslar, ölçümler silinecek. Devam?')) return
-    localStorage.removeItem('ela-pt-store')
+    localStorage.removeItem('arena-store')
     window.location.reload()
   }
 

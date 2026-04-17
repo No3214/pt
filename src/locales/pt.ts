@@ -68,13 +68,13 @@ export const pt = {
     badge: "Resultados",
     title: "Sua história, sua motivação.",
     users: {
-      u1: "Meu salto vertical aumentou 12cm em 3 meses. O sistema da Coach Ela está definitivamente em outra liga.",
+      u1: "Meu salto vertical aumentou 12cm em 3 meses. O sistema ARENA está definitivamente em outra liga.",
       u2: "Estou tendo uma temporada sem lesões e muito forte. O treinamento de força é incrivelmente eficaz.",
       u3: "Minha confiança e agilidade em quadra melhoraram. Um programa completamente adaptado ao meu desempenho em jogo."
     },
     items: [
       { 
-        text: "Meu salto vertical aumentou 12cm em 3 meses. O sistema da Coach Ela está definitivamente em outra liga.", 
+        text: "Meu salto vertical aumentou 12cm em 3 meses. O sistema ARENA está definitivamente em outra liga.", 
         name: "Ayşe K.", role: "Jogadora de Vôlei", metric: "+12cm salto", image: "/ela_real_30.png"
       },
       { 
@@ -254,7 +254,7 @@ export const pt = {
       workout_target: "Alvo",
       workout_toast_success: "Treino salvo com sucesso! 🔥",
       gallery_title: "Progresso e Forma",
-      gallery_desc: "Acompanhe seu progresso e envie vídeos de forma para Coach Ela fazer análise técnica.",
+      gallery_desc: "Acompanhe seu progresso e envie vídeos de forma para Seu Coach fazer análise técnica.",
       gallery_tab_photos: "Antes / Depois",
       gallery_tab_videos: "Verificação de Forma",
       gallery_upload: "Enviar Novo",
@@ -302,7 +302,7 @@ export const pt = {
       roadmap_current: "Fase Atual",
       roadmap_rank: "Cargo {}",
       roadmap_milestones: ["Estreante", "Liga Regional", "2ª Liga", "Liga das Sultanas", "Pro Elite"],
-      roadmap_coach_msg_title: "Uma Mensagem da Coach Ela",
+      roadmap_coach_msg_title: "Uma Mensagem da Seu Coach",
       roadmap_coach_msg_text: "Disciplina é a chave para a liga das rainhas. Cada treino que você faz hoje te aproxima um passo do topo."
     },
     admin: {

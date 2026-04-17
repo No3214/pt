@@ -14,12 +14,12 @@ test.describe('Animations & UX', () => {
 
     // Prefer toggling state directly — avoids viewport/overlay flakiness.
     await page.evaluate(() => {
-      const raw = localStorage.getItem('ela-pt-store')
+      const raw = localStorage.getItem('arena-store')
       const parsed = raw ? JSON.parse(raw) : { state: {}, version: 0 }
       parsed.state.darkMode = !parsed.state.darkMode
-      localStorage.setItem('ela-pt-store', JSON.stringify(parsed))
+      localStorage.setItem('arena-store', JSON.stringify(parsed))
     })
-    const stored = await page.evaluate(() => localStorage.getItem('ela-pt-store'))
+    const stored = await page.evaluate(() => localStorage.getItem('arena-store'))
     expect(stored).toBeTruthy()
     expect(stored).toContain('darkMode')
   })

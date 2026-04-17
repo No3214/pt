@@ -1,13 +1,13 @@
-# Ela Ebeoglu PT — Full Project Brain
+# ARENA Performance — Full Project Brain
 
 me talk short. no filler. tool first, result first. caveman efficiency.
 
 ## Identity
-- Product: Ela Ebeoglu Performance — Elite personal training platform
+- Product: ARENA Performance — Elite volleyball & performance platform (system, not person-bound)
 - Owner: Yunuscan (yunuscanoruk@gmail.com)
-- Domain: pt.kozbeylikonagi.com.tr
+- Domain: arena.kozbeylikonagi.com.tr
 - GitHub: github.com/No3214/pt.git
-- Coach: Ela Ebeoglu — volleyball performance specialist
+- Tagline: Güçlü ol. Kendine güven.
 
 ## Stack
 React 19 + TypeScript 5.8+ + Vite 6 + Tailwind CSS 3

@@ -27,11 +27,6 @@ const meetingTypeIcons: Record<string, string> = {
   other: '📱'
 }
 
-const meetingTypeLabels: Record<string, string> = {  zoom: 'Zoom',
-  teams: 'Microsoft Teams',
-  meet: 'Google Meet',
-  other: 'Diğer'
-}
 
 export default function CalendarPage() {
   const { t } = useTranslation()

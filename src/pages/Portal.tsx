@@ -91,7 +91,7 @@ export default function Portal() {
                 <div className="absolute top-0 right-0 p-4 opacity-10">
                    <span className="text-6xl text-primary font-display font-bold">"</span>
                 </div>
-                <h4 className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-primary mb-4">Ela'an Notun Var 💎</h4>
+                <h4 className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-primary mb-4">Koçundan Not Var 💎</h4>
                 <p className="font-display text-xl md:text-2xl font-bold italic tracking-tight text-text-main leading-snug">
                    {decryptedData?.client?.personalNote || "Yeni haftaya hazır mısın? Hedeflerin için bugün harika bir gün. Disiplin her şeydir!"}
                 </p>
@@ -99,10 +99,10 @@ export default function Portal() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => window.open(`https://wa.me/${tenantConfig.brand.contact.socials.whatsapp.replace('+', '')}?text=Selam Ela! Gelişim portalından yazıyorum...`, '_blank')}
+                    onClick={() => window.open(`https://wa.me/${tenantConfig.brand.contact.socials.whatsapp.replace('+', '')}?text=Selam Koç! Gelişim portalından yazıyorum...`, '_blank')}
                     className="px-6 py-2.5 rounded-full bg-primary text-white text-[0.7rem] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg shadow-primary/20 w-fit"
                   >
-                    <span>Ela'ya Mesaj At</span>
+                    <span>Koçuna Mesaj At</span>
                     <span className="text-base">💬</span>
                   </motion.button>
                 </div>

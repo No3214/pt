@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
-import { useTranslation } from '../../locales'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -23,7 +22,6 @@ const meetingTypeLabels: Record<string, string> = {
 }
 
 export default function OnlineMeeting() {
-  const { t } = useTranslation()
   const { calSessions, darkMode: dm } = useStore()
   const [timeLeft, setTimeLeft] = useState<{ hours: number; minutes: number; seconds: number } | null>(null)
   const [copied, setCopied] = useState(false)

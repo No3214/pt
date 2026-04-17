@@ -68,13 +68,13 @@ export const fr = {
     badge: "Résultats",
     title: "Leur histoire, votre motivation.",
     users: {
-      u1: "Mon saut vertical a augmenté de 12 cm en 3 mois. Le système de Coach Ela est définitivement dans une ligue à part.",
+      u1: "Mon saut vertical a augmenté de 12 cm en 3 mois. Le système ARENA est définitivement dans une ligue à part.",
       u2: "Je passe une saison sans blessures et très forte. L'entraînement en force est incroyablement efficace.",
       u3: "Ma confiance et mon agilité sur le terrain se sont améliorées. Un programme complètement adapté à ma performance de match."
     },
     items: [
       { 
-        text: "Mon saut vertical a augmenté de 12 cm en 3 mois. Le système de Coach Ela est définitivement dans une ligue à part.", 
+        text: "Mon saut vertical a augmenté de 12 cm en 3 mois. Le système ARENA est définitivement dans une ligue à part.", 
         name: "Ayşe K.", role: "Joueuse de Volley", metric: "+12cm saut", image: "/ela_real_30.png"
       },
       { 
@@ -254,7 +254,7 @@ export const fr = {
       workout_target: "Objectif",
       workout_toast_success: "Entraînement enregistré avec succès ! 🔥",
       gallery_title: "Progrès et Forme",
-      gallery_desc: "Suivez votre progrès et envoyez des vidéos de forme à Coach Ela pour analyse technique.",
+      gallery_desc: "Suivez votre progrès et envoyez des vidéos de forme à Votre Coach pour analyse technique.",
       gallery_tab_photos: "Avant / Après",
       gallery_tab_videos: "Vérification de Forme",
       gallery_upload: "Télécharger Nouveau",
@@ -302,7 +302,7 @@ export const fr = {
       roadmap_current: "Phase Actuelle",
       roadmap_rank: "{} Rang",
       roadmap_milestones: ["Nouvelle", "Ligue Régionale", "2ème Ligue", "Ligue des Sultanes", "Elite Pro"],
-      roadmap_coach_msg_title: "Un Message de Coach Ela",
+      roadmap_coach_msg_title: "Un Message de Votre Coach",
       roadmap_coach_msg_text: "La discipline est la clé de la ligue des championnes. Chaque entraînement que tu fais aujourd'hui te rapproche d'un pas du sommet."
     },
     admin: {

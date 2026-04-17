@@ -302,7 +302,7 @@ export const ru = {
       roadmap_current: "Текущий Этап",
       roadmap_rank: "Ранг {}",
       roadmap_milestones: ["Новичок", "Региональная Лига", "2-я Лига", "Лига Султанов", "Про Элита"],
-      roadmap_coach_msg_title: "Сообщение от Тренера Ela",
+      roadmap_coach_msg_title: "Сообщение от Тренера",
       roadmap_coach_msg_text: "Дисциплина - это ключ к лиге королев. Каждая тренировка сегодня приближает тебя к вершине на шаг."
     },
     admin: {

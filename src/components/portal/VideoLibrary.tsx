@@ -66,7 +66,9 @@ export default function VideoLibrary() {
       try {
         const { data } = await supabase.from('exercise_library').select('*').order('view_count', { ascending: false })
         if (data && data.length > 0) setExercises(data)
-      } catch {}
+      } catch {
+        // silent fallback to demo data
+      }
     }
     fetchExercises()
   }, [])

@@ -82,7 +82,7 @@ export default function PortalLogin() {
         </AnimatePresence>
 
         <p className="text-[0.65rem] font-bold uppercase tracking-widest text-text-main/20 mt-10">
-          Local-First & Encrypted Access <br /> © 2026 Ela Ebeoğlu PT
+          Local-First & Encrypted Access <br /> © 2026 ARENA Performance
         </p>
       </motion.div>
     </div>

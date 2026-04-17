@@ -1,5 +1,5 @@
 /**
- * LLM COUNCIL SYSTEM — Ela Ebeoğlu PT
+ * LLM COUNCIL SYSTEM — ARENA Performance Platform
  * Multi-provider AI orchestration with adversarial critique
  * Pipeline: Parallel Drafts → Critique → Synthesis → Validation
  */
@@ -122,7 +122,7 @@ function parseCritique(reviewerId: ProviderID, targetId: ProviderID, raw: string
   if (sm) score = Math.min(10, Math.max(1, parseInt(sm[1])))
   const hallucinations: string[] = []
   const hm = raw.match(/HALÜSİNASYONLAR:\s*(.+?)(?=\n|ELEŞTİRİ:|$)/is)
-  if (hm && !hm[1].trim().toLowerCase().includes('yok')) hallucinations.push(...hm[1].split(/[,;•\-]/).map(s => s.trim()).filter(Boolean))
+  if (hm && !hm[1].trim().toLowerCase().includes('yok')) hallucinations.push(...hm[1].split(/[,;•-]/).map(s => s.trim()).filter(Boolean))
   const cm = raw.match(/ELEŞTİRİ:\s*(.+)/is)
   return { reviewerId, targetId, critique: cm ? cm[1].trim() : raw, score, hallucinations }
 }

@@ -68,13 +68,13 @@ export const ja = {
     badge: "結果",
     title: "彼らの物語、あなたの動機。",
     users: {
-      u1: "3ヶ月で垂直跳びが12cm増加しました。コーチElaのシステムは確実に別のレベルです。",
+      u1: "3ヶ月で垂直跳びが12cm増加しました。ARENAシステムは確実に別のレベルです。",
       u2: "ケガのない非常に強いシーズンを過ごしています。ストレングストレーニングは信じられないほど効果的です。",
       u3: "コート上の自信と敏捷性が向上しました。マッチパフォーマンスに完全に合わせたプログラムです。"
     },
     items: [
       { 
-        text: "3ヶ月で垂直跳びが12cm増加しました。コーチElaのシステムは確実に別のレベルです。", 
+        text: "3ヶ月で垂直跳びが12cm増加しました。ARENAシステムは確実に別のレベルです。", 
         name: "Ayşe K.", role: "バレーボール選手", metric: "+12cm ジャンプ", image: "/ela_real_30.png"
       },
       { 
@@ -254,7 +254,7 @@ export const ja = {
       workout_target: "ターゲット",
       workout_toast_success: "ワークアウトが正常に保存されました！🔥",
       gallery_title: "進捗とフォーム",
-      gallery_desc: "進捗を追跡し、技術分析のためにフォームビデオをコーチElaに送信します。",
+      gallery_desc: "進捗を追跡し、技術分析のためにフォームビデオをコーチに送信します。",
       gallery_tab_photos: "ビフォー / アフター",
       gallery_tab_videos: "フォームチェック",
       gallery_upload: "新規アップロード",
@@ -302,7 +302,7 @@ export const ja = {
       roadmap_current: "現在のフェーズ",
       roadmap_rank: "{} ランク",
       roadmap_milestones: ["初心者", "地域リーグ", "2部リーグ", "スルタンズリーグ", "プロエリート"],
-      roadmap_coach_msg_title: "コーチElaからのメッセージ",
+      roadmap_coach_msg_title: "コーチからのメッセージ",
       roadmap_coach_msg_text: "規律は女王たちのリーグへの鍵です。今日行うすべてのトレーニングが、あなたを頂点へと一歩近づけます。"
     },
     admin: {

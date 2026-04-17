@@ -6,8 +6,8 @@ export const onRequestPost = async (context) => {
     const origin = request.headers.get('Origin') || '';
     const referer = request.headers.get('Referer') || '';
     
-    const isValidSource = origin.includes('localhost') || origin.includes('pages.dev') || origin.includes('elaebeoglu.com') ||
-                          referer.includes('localhost') || referer.includes('pages.dev') || referer.includes('elaebeoglu.com');
+    const isValidSource = origin.includes('localhost') || origin.includes('pages.dev') || origin.includes('kozbeylikonagi.com.tr') ||
+                          referer.includes('localhost') || referer.includes('pages.dev') || referer.includes('kozbeylikonagi.com.tr');
                           
     if (!isValidSource) {
       return new Response(JSON.stringify({ error: 'Yetkisiz erişim kaynağı (CORS/Abuse koruması).' }), { status: 403 });

@@ -6,7 +6,7 @@ import { useStore } from '../../stores/useStore'
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false)
   const [message, setMessage] = useState('')
-  const [_isTyping, _setIsTyping] = useState(false)
+  const [_isTyping] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -98,11 +98,11 @@ export default function ChatWidget() {
             {/* Header */}
             <div className={`px-5 py-4 border-b flex items-center gap-3 ${darkMode ? 'border-white/[0.06]' : 'border-black/[0.06]'}`}>
               <div className="relative">
-                <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary font-bold text-sm">EE</div>
+                <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center text-primary font-bold text-sm">A</div>
                 <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-500 border-2 border-white dark:border-surface" />
               </div>
               <div className="flex-1">
-                <div className="font-bold text-sm">Koç Ela</div>
+                <div className="font-bold text-sm">ARENA Coach</div>
                 <div className={`text-[0.6rem] uppercase tracking-widest ${darkMode ? 'text-green-400/70' : 'text-green-600/70'}`}>Çevrimiçi</div>
               </div>
               <button aria-label="Sohbet seçenekleri" className={`p-2 rounded-xl transition-colors ${darkMode ? 'hover:bg-white/[0.06]' : 'hover:bg-black/[0.04]'}`}>

@@ -69,12 +69,12 @@ export const getLandingData = (lang: string) => {
     },
   ];
 
-  // Testimonial impact visual'ları: danışan gizliliği için Ela'nın gerçek
+  // Testimonial impact visual'ları: danışan gizliliği için ARENA arşiv
   // antrenman fotoğrafları kullanılır (coach perspektifi). Yazar avatarı
   // için hiper realistik AI üretimi temsili görseller kullanılır.
   const testimonials: Testimonial[] = [
     {
-      text: isTr ? 'Sıçrama yüksekliğim 3 ayda 12cm arttı. Ela hocanın sistemi kesinlikle farklı klasmanda.' : 'My vertical jump increased 12cm in 3 months. Coach Ela\'s system is definitely in a different league.',
+      text: isTr ? 'Sıçrama yüksekliğim 3 ayda 12cm arttı. ARENA sistemi kesinlikle farklı klasmanda.' : 'My vertical jump increased 12cm in 3 months. ARENA system is definitely in a different league.',
       name: 'Ayşe K.', role: isTr ? 'Voleybolcu' : 'Volleyball Player', metric: isTr ? '+12cm sıçrama' : '+12cm jump', image: '/ela_real_22.webp', avatar: '/images/testimonials/ayse.png'
     },
     {

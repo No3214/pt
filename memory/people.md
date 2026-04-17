@@ -1,12 +1,13 @@
 # People & Stakeholders
 
-## Ela Ebeoğlu
-- **Role**: Client / Coach — platform owner
-- **Background**: Profesyonel voleybolcu, performance coach
-- **Brand**: Elite, premium, bilim + irade + teknoloji
-- **Contact**: Via PT platform
+## ARENA Performance (Platform)
+- **Brand**: Sistem markası — kişiye bağımlı değil
+- **Tagline**: Güçlü ol. Kendine güven.
+- **Domain**: arena.kozbeylikonagi.com.tr
+- **Positioning**: Elite voleybol & performans koçluk sistemi — bilim + irade + teknoloji
 
-## Yunuscan (Self)
+## Yunuscan Oruk (Self)
 - **Role**: Developer / Founder
 - **GitHub**: No3214
-- **Focus**: Full-stack development, AI automation, SaaS
+- **Email**: yunuscanoruk@gmail.com
+- **Focus**: Full-stack development, trading bots, AI automation, SaaS

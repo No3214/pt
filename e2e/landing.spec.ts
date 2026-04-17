@@ -5,7 +5,7 @@ test.describe('Landing Page Tests', () => {
     await page.goto('/');
     
     // Header logomuz veya text
-    await expect(page.locator('header').getByText('Ela Ebeoğlu')).toBeVisible();
+    await expect(page.locator('header').getByText('ARENA')).toBeVisible();
 
     // Ana manşet animasyonlu olduğu için H1 kontrolü yapıyoruz
     await expect(page.locator('h1').first()).toBeVisible();

@@ -1,4 +1,4 @@
-# Ela Ebeoğlu PT — Claude Configuration
+# ARENA Performance — Claude Configuration
 
 > Caveman Mode: ON. Token-efficient, precise, no fluff.
 

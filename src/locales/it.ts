@@ -68,13 +68,13 @@ export const it = {
     badge: "Risultati",
     title: "La loro storia, la tua motivazione.",
     users: {
-      u1: "Il mio salto verticale è aumentato di 12 cm in 3 mesi. Il sistema di Coach Ela è definitivamente in una categoria a parte.",
+      u1: "Il mio salto verticale è aumentato di 12 cm in 3 mesi. Il sistema ARENA è definitivamente in una categoria a parte.",
       u2: "Sto avendo una stagione infortunio-free e molto forte. L'allenamento di forza è incredibilmente efficace.",
       u3: "La mia confidenza e agilità in campo sono migliorate. Un programma completamente adattato alla mia prestazione in gara."
     },
     items: [
       { 
-        text: "Il mio salto verticale è aumentato di 12 cm in 3 mesi. Il sistema di Coach Ela è definitivamente in una categoria a parte.", 
+        text: "Il mio salto verticale è aumentato di 12 cm in 3 mesi. Il sistema ARENA è definitivamente in una categoria a parte.", 
         name: "Ayşe K.", role: "Pallavolista", metric: "+12cm salto", image: "/ela_real_30.png"
       },
       { 
@@ -254,7 +254,7 @@ export const it = {
       workout_target: "Obiettivo",
       workout_toast_success: "Allenamento salvato con successo! 🔥",
       gallery_title: "Progresso e Forma",
-      gallery_desc: "Traccia il tuo progresso e invia video di forma a Coach Ela per analisi tecnica.",
+      gallery_desc: "Traccia il tuo progresso e invia video di forma a il tuo Coach per analisi tecnica.",
       gallery_tab_photos: "Prima / Dopo",
       gallery_tab_videos: "Verifica Forma",
       gallery_upload: "Carica Nuovo",
@@ -302,7 +302,7 @@ export const it = {
       roadmap_current: "Fase Attuale",
       roadmap_rank: "Grado {}",
       roadmap_milestones: ["Esordiente", "Lega Regionale", "2ª Lega", "Lega delle Sultane", "Pro Elite"],
-      roadmap_coach_msg_title: "Un Messaggio da Coach Ela",
+      roadmap_coach_msg_title: "Un Messaggio da il tuo Coach",
       roadmap_coach_msg_text: "La disciplina è la chiave per la lega delle regine. Ogni allenamento che fai oggi ti porta un passo più vicino alla cima."
     },
     admin: {

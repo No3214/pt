@@ -1,15 +1,15 @@
 export const tenantConfig = {
   brand: {
-    name: 'Ela Ebeoğlu',
-    fullName: 'Ela Ebeoğlu Performance',
+    name: 'ARENA',
+    fullName: 'ARENA Performance',
     tagline: 'Güçlü ol. Kendine güven.',
-    logo: '/ela_hero.png',
+    logo: '/arena-logo.svg',
     contact: {
-      email: 'iletisim@elaebeoglu.com',
-      phone: '+90 536 248 68 49',
+      email: 'iletisim@arena-performance.com',
+      phone: '+90 000 000 00 00',
       socials: {
-        instagram: '@elaebeoglu',
-        whatsapp: '+905362486849'
+        instagram: '@arenaperformance',
+        whatsapp: ''
       }
     }
   },

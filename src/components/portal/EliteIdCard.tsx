@@ -56,7 +56,7 @@ export default function EliteIdCard() {
           
           {/* Logo / Brand */}
           <div className="relative z-10 mb-8 mt-4">
-             <div className="text-[0.65rem] font-black uppercase tracking-[0.4em] text-white/50 mb-1">Ela Ebeoğlu</div>
+             <div className="text-[0.65rem] font-black uppercase tracking-[0.4em] text-white/50 mb-1">ARENA</div>
              <div className="text-xl font-display font-black italic tracking-tighter text-white">ELITE ATHLETE</div>
           </div>
 

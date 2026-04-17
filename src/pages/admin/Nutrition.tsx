@@ -83,7 +83,7 @@ export default function Nutrition() {
       : ''
     const legalDisclaimer = `\n\n⚖️ *Yasal & Tıbbi Uyarı:*\nBu menü tıbbi bir teşhis, tedavi veya reçete niteliği taşımaz. %100 bireysel bir tıbbi diyet planı değildir; genel sporcu beslenmesi tavsiyesi amacı taşır. Herhangi bir sağlık probleminiz, kronik hastalığınız, diyabet vb. durumunuz varsa bu programı uygulamadan önce mutlaka doktorunuza veya diyetisyeninize danışınız.`
 
-    const wa = `🥗 *ELA EBEOĞLU — Beslenme Planı*\n━━━━━━━━━━━━━━━━━━━━${selectedClient ? `\n👤 ${selectedClient.name}` : ''}\n🎯 Hedef Kalori: ${targetCals} kcal\n\n*Günlük Makro Dağılımın:*\n🥩 Protein: ${proteinG}g (${Math.round((proteinCal / targetCals) * 100)}%)\n🥑 Yağ: ${fatG}g (${Math.round((fatCal / targetCals) * 100)}%)\n🍚 Karbonhidrat: ${carbG}g (${Math.round((carbCal / targetCals) * 100)}%)\n\n📌 *Antrenman Günü Notu:*\nKarbonhidratlarının %60'ını antrenman öncesi ve sonrası 2 öğüne böl.\n\n📌 *Dinlenme Günü Notu:*\nKarbonhidratı azaltıp yağ oranını artırabilirsin. Protein sabit tut.${allergenNote}${legalDisclaimer}`
+    const wa = `🥗 *ARENA — Beslenme Planı*\n━━━━━━━━━━━━━━━━━━━━${selectedClient ? `\n👤 ${selectedClient.name}` : ''}\n🎯 Hedef Kalori: ${targetCals} kcal\n\n*Günlük Makro Dağılımın:*\n🥩 Protein: ${proteinG}g (${Math.round((proteinCal / targetCals) * 100)}%)\n🥑 Yağ: ${fatG}g (${Math.round((fatCal / targetCals) * 100)}%)\n🍚 Karbonhidrat: ${carbG}g (${Math.round((carbCal / targetCals) * 100)}%)\n\n📌 *Antrenman Günü Notu:*\nKarbonhidratlarının %60'ını antrenman öncesi ve sonrası 2 öğüne böl.\n\n📌 *Dinlenme Günü Notu:*\nKarbonhidratı azaltıp yağ oranını artırabilirsin. Protein sabit tut.${allergenNote}${legalDisclaimer}`
     setWaPreview(wa)
   }
 
@@ -96,7 +96,7 @@ export default function Nutrition() {
     try {
       const url = await toPng(el, { quality: 0.95, pixelRatio: 2 })
       const link = document.createElement('a')
-      link.download = 'ElaEbeoglu_Diyet.png'
+      link.download = 'ARENA_Diyet.png'
       link.href = url
       link.click()
     } catch { showToast('PNG oluşturulamadı') }
@@ -400,7 +400,7 @@ Lütfen bana profesyonel sporcu prensiplerine uygun, pratik ve lezzetli SADECE 1
                   </div>
                 </div>
                 <div id="diet-export" className={`p-6 rounded-2xl ${dm ? 'bg-white/[0.03] border border-white/[0.06]' : 'bg-white border border-black/[0.04]'}`} style={{ position: 'fixed', left: '-9999px', width: '600px', fontSize: '13px' }}>
-                  <div className="font-display text-xl font-bold mb-4">🥗 ELA EBEOĞLU — Beslenme Planı</div>
+                  <div className="font-display text-xl font-bold mb-4">🥗 ARENA — Beslenme Planı</div>
                   <div className="whitespace-pre-wrap text-sm font-medium">{waPreview}</div>
                 </div>
               </div>

@@ -31,18 +31,25 @@ export default function Hero() {
       {/* Parallax Background */}
       <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale, willChange: 'transform, opacity' }} className="absolute inset-0 -z-10 image-grain">
         <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-b from-bg via-bg/60 to-bg' : 'bg-gradient-to-b from-bg via-bg/40 to-bg'}`} />
-        <img src="/ela_real_32.png" alt="Ela antrenor arka plani" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" loading="eager" decoding="async" fetchPriority="high" width={1200} height={800} />
+        <img src="/ela_real_32.png" alt="ARENA koc arkaplan" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" loading="eager" decoding="async" fetchPriority="high" width={1200} height={800} />
       </motion.div>
 
       {/* Premium Spotlight — Aceternity/Magic UI tarzi */}
       <Spotlight
         className="absolute -top-40 left-0 md:-top-20 md:left-60 -z-[4]"
         color={dm ? '#D4A574' : '#C8A97E'}
-        opacity={dm ? 0.18 : 0.12}
+        opacity={dm ? 0.48 : 0.38}
       />
 
-      {/* Voleybol dekoratif floaters — marka teması (Ela profesyonel voleybolcu) */}
-      <VolleyballFloaters opacity={dm ? 0.09 : 0.07} />
+      {/* Ikinci spotlight — sag alt, sicak akcent */}
+      <Spotlight
+        className="absolute top-[30%] right-0 md:top-[20%] md:right-40 -z-[4]"
+        color={dm ? '#C8A97E' : '#D4A574'}
+        opacity={dm ? 0.32 : 0.24}
+      />
+
+      {/* Voleybol dekoratif floaters — marka teması (ARENA voleybol koduna bagli) */}
+      <VolleyballFloaters opacity={dm ? 0.22 : 0.18} />
 
       {/* Spike yörüngesi — hero'da tek loop dikkat çekici */}
       <div aria-hidden className="absolute inset-0 pointer-events-none -z-[2]">
@@ -133,7 +140,20 @@ export default function Hero() {
             className="relative hidden lg:block"
           >
             <div className="relative rounded-[2rem] overflow-hidden aspect-[3/4] border border-text-main/5 shadow-2xl image-grain">
-              <img src="/ela_real_30.png" alt={tenantConfig.brand.name} className="w-full h-full object-cover object-top premium-image" loading="eager" decoding="async" fetchPriority="high" width={900} height={1200} />
+              <motion.img
+                src="/ela_real_30.png"
+                alt={tenantConfig.brand.name}
+                className="w-full h-full object-cover object-top premium-image"
+                loading="eager"
+                decoding="async"
+                fetchPriority="high"
+                width={900}
+                height={1200}
+                initial={{ scale: 1.08, y: 0 }}
+                animate={{ scale: [1.08, 1.15, 1.1, 1.12, 1.08], y: [0, -8, -4, -10, 0] }}
+                transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+                style={{ willChange: 'transform' }}
+              />
               <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-t from-bg/50 via-transparent' : 'bg-gradient-to-t from-bg/30 via-transparent'}`} />
               <motion.div
                 initial={{ x: '-100%' }}
@@ -164,6 +184,16 @@ export default function Hero() {
               className={`absolute -right-6 top-[15%] px-6 py-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-xl ${dm ? 'bg-white/10 border border-white/10' : 'bg-white/90 border border-black/5'}`}>
               <div className="text-3xl font-semibold text-secondary"><Counter target={5} suffix=".0" /></div>
               <div className={`text-[0.7rem] uppercase tracking-[0.12em] mt-1 ${dm ? 'text-white/50' : 'text-text-main/40'}`}>{t.hero.kpi.rating}</div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.6, duration: 0.6 }}
+              viewport={{ once: true }}
+              className={`absolute -right-10 top-[52%] px-6 py-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] backdrop-blur-xl ${dm ? 'bg-white/10 border border-white/10' : 'bg-white/90 border border-black/5'}`}>
+              <div className="text-3xl font-semibold text-primary"><Counter target={98} suffix="%" /></div>
+              <div className={`text-[0.7rem] uppercase tracking-[0.12em] mt-1 ${dm ? 'text-white/50' : 'text-text-main/40'}`}>{t.hero.kpi.success}</div>
             </motion.div>
           </motion.div>
         </div>

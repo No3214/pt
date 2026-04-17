@@ -1,5 +1,5 @@
 -- ============================================================================
--- Bookings table for the Ela Ebeoğlu PT booking flow
+-- Bookings table for the ARENA Performance booking flow
 -- Creates the table, RLS policies (admin full access, public insert-only),
 -- enables realtime, and sets up updated_at trigger.
 -- ============================================================================

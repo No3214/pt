@@ -30,10 +30,10 @@ export default function Hero() {
       {/* Parallax Background */}
       <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale, willChange: 'transform, opacity' }} className="absolute inset-0 -z-10 image-grain">
         <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-b from-bg via-bg/60 to-bg' : 'bg-gradient-to-b from-bg via-bg/40 to-bg'}`} />
-        <img src="/ela_real_32.png" alt="Ela antrenor arka plani" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" loading="eager" decoding="async" fetchPriority="high" width={1200} height={800} />
+        <img src="/ela_real_32.png" alt="ARENA koc arka plani" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" loading="eager" decoding="async" fetchPriority="high" width={1200} height={800} />
       </motion.div>
 
-      {/* Voleybol dekoratif floaters — marka teması (Ela profesyonel voleybolcu) */}
+      {/* Voleybol dekoratif floaters — ARENA marka temasi */}
       <VolleyballFloaters opacity={dm ? 0.09 : 0.07} />
 
       {/* Spike yörüngesi — hero'da tek loop dikkat çekici */}

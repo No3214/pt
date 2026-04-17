@@ -1,5 +1,5 @@
-import { useState, useMemo, useRef } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import { useTranslation } from '../../locales'
 
@@ -13,12 +13,6 @@ interface Assessment {
   performance: { benchPress: number; deadlift: number; squat: number }
   notes: string
 }
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
-  show: { opacity: 1, y: 0, filter: 'blur(0px)', transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
-}
-const stagger = { show: { transition: { staggerChildren: 0.07 } } }
 
 export default function Assessment() {
   const { clients, darkMode: dm, showToast } = useStore()
@@ -35,8 +29,6 @@ export default function Assessment() {
     performance: { benchPress: 0, deadlift: 0, squat: 0 },
     notes: '',
   })
-  const assessmentRef = useRef<HTMLDivElement>(null)
-  const assessmentInView = useInView(assessmentRef, { once: true })
 
   const inp = `w-full p-3.5 rounded-xl border outline-none transition-all duration-300 focus:border-primary/50 focus:ring-2 focus:ring-primary/10 ${dm ? 'bg-white/[0.04] border-white/[0.08] text-white placeholder:text-white/30' : 'bg-white border-black/[0.06] placeholder:text-stone-400'}`
   const card = `p-6 rounded-2xl border ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`
@@ -254,7 +246,7 @@ export default function Assessment() {
         <motion.div variants={fadeUp} className={`${card} mt-8`}>
           <h3 className="font-semibold mb-4">{t.portal.admin.assessment_history}</h3>
           <div className="space-y-3">
-            {clientAssessments.map((a, idx) => (
+            {clientAssessments.map((a) => (
               <motion.div key={a.id} variants={fadeUp} className={`p-4 rounded-lg border ${dm ? 'border-white/5' : 'border-stone-100'}`}>
                 <div className="flex justify-between items-start">
                   <div>

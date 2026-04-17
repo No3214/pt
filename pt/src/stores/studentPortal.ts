@@ -72,6 +72,6 @@ export const useStudentPortal = create<StudentPortalState>()(
 
       logout: () => set({ decryptedData: null, encryptedData: null, error: null, lastAccess: null }),
     }),
-    { name: 'ela-pt-student-portal' }
+    { name: 'arena-student-portal' }
   )
 )

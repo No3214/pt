@@ -105,13 +105,13 @@ export default function Builder() {
     const lines = customProgram.map(l =>
       `• ${l.exercise} ${l.sets}×${l.reps}${l.note ? ` (${l.note})` : ''}`
     ).join('\n')
-    setWaPreview(`🏐 *ELA EBEOĞLU — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n💪 ${currentDay}\n\n${lines}\n\n📌 Beslenme: ${sanitize(nutritionNote)}`)
+    setWaPreview(`🏐 *ARENA — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n💪 ${currentDay}\n\n${lines}\n\n📌 Beslenme: ${sanitize(nutritionNote)}`)
   }
 
   const setSplit = (type: string) => {
     const client = sanitize(selectedClient || 'Yeni Danışan')
     const note = sanitize(nutritionNote)
-    setWaPreview(`🏐 *ELA EBEOĞLU — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n💪 Program Formatı: ${type.toUpperCase()}\n\n${splits[type]}\n\n📌 Beslenme: ${note}`)
+    setWaPreview(`🏐 *ARENA — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n💪 Program Formatı: ${type.toUpperCase()}\n\n${splits[type]}\n\n📌 Beslenme: ${note}`)
   }
 
   const generateAI = async () => {
@@ -119,7 +119,7 @@ export default function Builder() {
     const note = sanitize(nutritionNote)
     setLoading(true)
     setWaPreview(t.portal.admin.builder_llm_working)
-    const prompt = `Sen profesyonel bir voleybol ve fitness antrenörüsün. Adın Ela. Danışanım ${client} için; ${note} notlarını da dikkate alarak 4 günlük hipertrofi ve performans odaklı antrenman spliti hazırla. Çıktı sadece WhatsApp mesaj formatı olsun. Başlangıcında "🏐 *ELA EBEOĞLU — AI Özel Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n" yaz. JSON kullanma sadece düz metin.`
+    const prompt = `Sen ARENA performans platformunun AI koçusun. Profesyonel bir voleybol ve fitness antrenörü gibi cevap ver. Danışanım ${client} için; ${note} notlarını da dikkate alarak 4 günlük hipertrofi ve performans odaklı antrenman spliti hazırla. Çıktı sadece WhatsApp mesaj formatı olsun. Başlangıcında "🏐 *ARENA — AI Özel Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n" yaz. JSON kullanma sadece düz metin.`
     try {
       const results = await councilQuery(prompt)
       const best = results.find(r => r.result)
@@ -138,7 +138,7 @@ export default function Builder() {
     try {      const { toPng } = await import('html-to-image')
       const url = await toPng(el, { quality: 0.95, pixelRatio: 2 })
       const link = document.createElement('a')
-      link.download = 'ElaEbeoglu_Program.png'
+      link.download = 'ARENA_Program.png'
       link.href = url
       link.click()
     } catch { showToast(t.portal.admin.builder_png_error) }
@@ -151,7 +151,7 @@ export default function Builder() {
     el.style.left = '0'
     import('react-to-pdf')
       .then(({ default: generatePDF }) =>
-        generatePDF(() => document.getElementById('export-container'), { filename: 'ElaEbeoglu_Program.pdf' })
+        generatePDF(() => document.getElementById('export-container'), { filename: 'ARENA_Program.pdf' })
       )
       .catch(() => showToast(t.portal.admin.builder_pdf_error))
       .finally(() => { el.style.left = '-9999px' })
