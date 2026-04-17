@@ -1,4 +1,4 @@
-import { RevealSection, Counter, BlurIn, fadeUp } from './LandingUI';
+import { RevealSection, Counter, fadeUp } from './LandingUI';
 import { getLandingData } from '../../data/landingData';
 import { motion } from 'framer-motion';
 import { useStore } from '../../stores/useStore';

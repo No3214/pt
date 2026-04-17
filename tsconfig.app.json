@@ -23,5 +23,9 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": [
+    "src/components/animations/3d/Volleyball3D.tsx",
+    "src/components/animations/3d/ParallaxScene3D.tsx"
+  ]
 }

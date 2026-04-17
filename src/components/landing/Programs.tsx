@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { RevealSection, MagneticButton, BlurIn, fadeUp } from './LandingUI';
+import { RevealSection, fadeUp } from './LandingUI';
 import { getLandingData } from '../../data/landingData';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useStore } from '../../stores/useStore';
 import { useTranslation } from '../../locales';
+import ShineBorder from '../animations/3d/ShineBorder';
 
 export default function Programs() {
   const { darkMode, language } = useStore();
@@ -36,6 +37,13 @@ export default function Programs() {
               transition={{ type: 'spring', stiffness: 400, damping: 10 }}
               className="flex h-full"
             >
+              <ShineBorder
+                borderRadius={40}
+                borderWidth={p.popular ? 1.6 : 0}
+                duration={p.popular ? 10 : 20}
+                color={p.popular ? ['#C8A97E', '#D4A574', '#8B7355'] : 'transparent'}
+                className="w-full h-full"
+              >
               <div
                 className={`relative flex flex-col p-10 rounded-[2.5rem] border transition-all duration-500 h-full w-full ${
                   p.popular
@@ -89,6 +97,7 @@ export default function Programs() {
                   </a>
                 </div>
               </div>
+              </ShineBorder>
             </motion.div>
           ))}
         </RevealSection>

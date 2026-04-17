@@ -41,6 +41,10 @@
     "react-router-dom": "^7.0.0",
     "react-to-pdf": "^3.2.2",
     "recharts": "^2.15.0",
+    "three": "^0.171.0",
+    "@react-three/fiber": "^9.0.0",
+    "@react-three/drei": "^10.0.0",
+    "@react-three/postprocessing": "^3.0.0",
     "vite-plugin-pwa": "^1.2.0",
     "zod": "^4.3.6",
     "zustand": "^5.0.0"
@@ -50,6 +54,7 @@
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.5.2",
     "@types/react": "^19.0.0",
+    "@types/three": "^0.171.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.0",
     "autoprefixer": "^10.4.0",

@@ -12,6 +12,7 @@ import { tenantConfig } from '../../config/tenant';
 import { useTranslation } from '../../locales';
 import { VolleyballFloaters, VolleyballSpike } from '../animations/Volleyball';
 import GradientText from '../animations/GradientText';
+import Spotlight from '../animations/3d/Spotlight';
 
 export default function Hero() {
   const { darkMode, language } = useStore();
@@ -32,6 +33,13 @@ export default function Hero() {
         <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-b from-bg via-bg/60 to-bg' : 'bg-gradient-to-b from-bg via-bg/40 to-bg'}`} />
         <img src="/ela_real_32.png" alt="Ela antrenor arka plani" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" loading="eager" decoding="async" fetchPriority="high" width={1200} height={800} />
       </motion.div>
+
+      {/* Premium Spotlight — Aceternity/Magic UI tarzi */}
+      <Spotlight
+        className="absolute -top-40 left-0 md:-top-20 md:left-60 -z-[4]"
+        color={dm ? '#D4A574' : '#C8A97E'}
+        opacity={dm ? 0.18 : 0.12}
+      />
 
       {/* Voleybol dekoratif floaters — marka teması (Ela profesyonel voleybolcu) */}
       <VolleyballFloaters opacity={dm ? 0.09 : 0.07} />

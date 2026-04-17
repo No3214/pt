@@ -4,6 +4,7 @@ import { useStore } from '../../stores/useStore'
 import { supabase } from '../../lib/supabase'
 import { useTranslation } from '../../locales'
 import { fadeUp, shake, successPop } from '../../lib/motion'
+import { Card3D, Card3DLayer, Card3DShine } from '../animations/3d/Card3D'
 
 type FormErrors = Partial<Record<'name' | 'email' | 'phone', string>>
 
@@ -120,23 +121,26 @@ export default function BookingCTA() {
               className="grid md:grid-cols-3 gap-6"
             >
               {sessionTypes.map((type) => (
-                <motion.div
-                  key={type.value}
-                  whileHover={{ scale: 1.02, y: -4 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => { setSelectedType(type.value); setStep('form') }}
-                  className={`p-8 rounded-2xl border cursor-pointer transition-all ${
-                    dm ? 'bg-white/[0.03] border-white/[0.06] hover:border-primary/30' : 'bg-white border-black/[0.04] hover:border-primary/30'
-                  } hover:shadow-xl`}
-                >
-                  <span className="text-4xl block mb-4">{type.icon}</span>
-                  <h3 className="text-xl font-display font-bold mb-2">{type.label}</h3>
-                  <p className={`text-sm mb-4 ${dm ? 'text-white/40' : 'text-stone-500'}`}>{type.desc}</p>
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-bold text-primary">{type.price}</span>
-                    <span className={`text-xs font-medium ${dm ? 'text-white/30' : 'text-stone-400'}`}>{type.duration}</span>
-                  </div>
-                </motion.div>
+                <Card3D key={type.value} intensity={8} className="h-full">
+                  <motion.div
+                    whileTap={{ scale: 0.98 }}
+                    onClick={() => { setSelectedType(type.value); setStep('form') }}
+                    className={`relative p-8 rounded-2xl border cursor-pointer transition-all h-full ${
+                      dm ? 'bg-white/[0.03] border-white/[0.06] hover:border-primary/30' : 'bg-white border-black/[0.04] hover:border-primary/30'
+                    } hover:shadow-xl`}
+                  >
+                    <Card3DShine className="rounded-2xl" />
+                    <Card3DLayer depth={32}>
+                      <span className="text-4xl block mb-4">{type.icon}</span>
+                      <h3 className="text-xl font-display font-bold mb-2">{type.label}</h3>
+                      <p className={`text-sm mb-4 ${dm ? 'text-white/40' : 'text-stone-500'}`}>{type.desc}</p>
+                      <div className="flex items-center justify-between">
+                        <span className="text-2xl font-bold text-primary">{type.price}</span>
+                        <span className={`text-xs font-medium ${dm ? 'text-white/30' : 'text-stone-400'}`}>{type.duration}</span>
+                      </div>
+                    </Card3DLayer>
+                  </motion.div>
+                </Card3D>
               ))}
             </motion.div>
           )}
