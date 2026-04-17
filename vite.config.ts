@@ -10,9 +10,9 @@ export default defineConfig({
       injectRegister: 'auto',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'og-image.png', 'icon-192.png', 'icon-512.png'],
       manifest: {
-        name: 'Ela EbeoÄŸlu Performance',
+        name: 'Ela Ebeoğlu Performance',
         short_name: 'Ela PT',
-        description: 'Elite Voleybol & Performans KoÃ§luÄŸu',
+        description: 'Elite Voleybol & Performans Koçluğu',
         theme_color: '#050505',
         background_color: '#FAF6F1',
         display: 'standalone',

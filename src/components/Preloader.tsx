@@ -30,7 +30,7 @@ function VolleyballSpinner({ dm }: { dm: boolean }) {
 }
 
 export default function Preloader() {
-  // Only show on first visit per session â€” skip on route changes
+  // Only show on first visit per session — skip on route changes
   const alreadyShown = sessionStorage.getItem('ela-preloader-shown') === '1'
   const [show, setShow] = useState(!alreadyShown)
   const [progress, setProgress] = useState(alreadyShown ? 100 : 0)
@@ -86,7 +86,7 @@ export default function Preloader() {
             <h1 className={`font-display text-[clamp(2rem,5vw,3.5rem)] font-semibold tracking-[-0.03em] ${
               dm ? 'text-white' : 'text-text-main'
             }`}>
-              Ela EbeoÄŸlu
+              Ela Ebeoğlu
             </h1>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
