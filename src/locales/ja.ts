@@ -162,16 +162,17 @@ export const ja = {
     title1: "変身ギャラリー。",
     desc: "実際の結果、実際の人々。",
     followIg: "Instagramでフォロー",
+    soon: "ギャラリー近日更新 — 新しい写真がまもなく。",
     items: [
-      { src: "/ela_real_21.png", caption: "スパイク技術" },
-      { src: "/ela_real_22.png", caption: "ブロック & レシーブ" },
-      { src: "/ela_real_23.png", caption: "サーブ" },
-      { src: "/ela_real_24.png", caption: "筋力トレーニング" },
-      { src: "/ela_real_25.png", caption: "コート上のパワー" },
-      { src: "/ela_real_26.png", caption: "チームスピリット" },
-      { src: "/ela_real_19.png", caption: "プロフェッショナルなウォーミングアップ" },
-      { src: "/ela_real_30.png", caption: "エリートパフォーマンス" },
-      { src: "/ela_real_32.png", caption: "メンタル準備" }
+      { icon: "spike", accent: "primary", caption: "スパイク技術" },
+      { icon: "block", accent: "accent", caption: "ブロック & レシーブ" },
+      { icon: "serve", accent: "secondary", caption: "サーブ" },
+      { icon: "strength", accent: "sand", caption: "筋力トレーニング" },
+      { icon: "power", accent: "primary", caption: "コート上のパワー" },
+      { icon: "team", accent: "secondary", caption: "チームスピリット" },
+      { icon: "warmup", accent: "accent", caption: "プロフェッショナルなウォーミングアップ" },
+      { icon: "elite", accent: "primary", caption: "エリートパフォーマンス" },
+      { icon: "mental", accent: "accent", caption: "メンタル準備" }
     ]
   },
   contact: {

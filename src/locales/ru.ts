@@ -162,16 +162,17 @@ export const ru = {
     title1: "Галерея трансформации.",
     desc: "Реальные результаты, реальные люди.",
     followIg: "Подписаться в Instagram",
+    soon: "Галерея скоро обновится — новые снимки в пути.",
     items: [
-      { src: "/ela_real_21.png", caption: "Техника нападающего удара" },
-      { src: "/ela_real_22.png", caption: "Блок и защита" },
-      { src: "/ela_real_23.png", caption: "Подача" },
-      { src: "/ela_real_24.png", caption: "Силовая тренировка" },
-      { src: "/ela_real_25.png", caption: "Мощь на площадке" },
-      { src: "/ela_real_26.png", caption: "Командный дух" },
-      { src: "/ela_real_19.png", caption: "Профессиональная разминка" },
-      { src: "/ela_real_30.png", caption: "Элитная производительность" },
-      { src: "/ela_real_32.png", caption: "Ментальная подготовка" }
+      { icon: "spike", accent: "primary", caption: "Техника нападающего удара" },
+      { icon: "block", accent: "accent", caption: "Блок и защита" },
+      { icon: "serve", accent: "secondary", caption: "Подача" },
+      { icon: "strength", accent: "sand", caption: "Силовая тренировка" },
+      { icon: "power", accent: "primary", caption: "Мощь на площадке" },
+      { icon: "team", accent: "secondary", caption: "Командный дух" },
+      { icon: "warmup", accent: "accent", caption: "Профессиональная разминка" },
+      { icon: "elite", accent: "primary", caption: "Элитная производительность" },
+      { icon: "mental", accent: "accent", caption: "Ментальная подготовка" }
     ]
   },
   contact: {

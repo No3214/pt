@@ -162,16 +162,17 @@ export const hi = {
     title1: "रूपांतरण गैलरी।",
     desc: "वास्तविक परिणाम, वास्तविक लोग।",
     followIg: "Instagram पर फॉलो करें",
+    soon: "गैलरी जल्द ही अपडेट होगी — नई तस्वीरें आ रही हैं।",
     items: [
-      { src: "/ela_real_21.png", caption: "स्पाइक तकनीक" },
-      { src: "/ela_real_22.png", caption: "ब्लॉक और रक्षा" },
-      { src: "/ela_real_23.png", caption: "सर्विस" },
-      { src: "/ela_real_24.png", caption: "स्ट्रेंथ ट्रेनिंग" },
-      { src: "/ela_real_25.png", caption: "कोर्ट पावर" },
-      { src: "/ela_real_26.png", caption: "टीम भावना" },
-      { src: "/ela_real_19.png", caption: "पेशेवर वार्म-अप" },
-      { src: "/ela_real_30.png", caption: "एलीट प्रदर्शन" },
-      { src: "/ela_real_32.png", caption: "मानसिक तैयारी" }
+      { icon: "spike", accent: "primary", caption: "स्पाइक तकनीक" },
+      { icon: "block", accent: "accent", caption: "ब्लॉक और रक्षा" },
+      { icon: "serve", accent: "secondary", caption: "सर्विस" },
+      { icon: "strength", accent: "sand", caption: "स्ट्रेंथ ट्रेनिंग" },
+      { icon: "power", accent: "primary", caption: "कोर्ट पावर" },
+      { icon: "team", accent: "secondary", caption: "टीम भावना" },
+      { icon: "warmup", accent: "accent", caption: "पेशेवर वार्म-अप" },
+      { icon: "elite", accent: "primary", caption: "एलीट प्रदर्शन" },
+      { icon: "mental", accent: "accent", caption: "मानसिक तैयारी" }
     ]
   },
   contact: {

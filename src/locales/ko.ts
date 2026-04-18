@@ -162,16 +162,17 @@ export const ko = {
     title1: "변신 갤러리.",
     desc: "실제 결과, 실제 사람들.",
     followIg: "Instagram에서 팔로우하기",
+    soon: "갤러리 곧 업데이트 — 새로운 사진이 곧 공개됩니다.",
     items: [
-      { src: "/ela_real_21.png", caption: "스파이크 기술" },
-      { src: "/ela_real_22.png", caption: "블로킹과 수비" },
-      { src: "/ela_real_23.png", caption: "서브" },
-      { src: "/ela_real_24.png", caption: "근력 트레이닝" },
-      { src: "/ela_real_25.png", caption: "코트 위의 힘" },
-      { src: "/ela_real_26.png", caption: "팀 스피릿" },
-      { src: "/ela_real_19.png", caption: "전문적인 웜업" },
-      { src: "/ela_real_30.png", caption: "엘리트 퍼포먼스" },
-      { src: "/ela_real_32.png", caption: "정신 수양" }
+      { icon: "spike", accent: "primary", caption: "스파이크 기술" },
+      { icon: "block", accent: "accent", caption: "블로킹과 수비" },
+      { icon: "serve", accent: "secondary", caption: "서브" },
+      { icon: "strength", accent: "sand", caption: "근력 트레이닝" },
+      { icon: "power", accent: "primary", caption: "코트 위의 힘" },
+      { icon: "team", accent: "secondary", caption: "팀 스피릿" },
+      { icon: "warmup", accent: "accent", caption: "전문적인 웜업" },
+      { icon: "elite", accent: "primary", caption: "엘리트 퍼포먼스" },
+      { icon: "mental", accent: "accent", caption: "정신 수양" }
     ]
   },
   contact: {

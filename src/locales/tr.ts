@@ -167,16 +167,17 @@ export const tr = {
     title1: "Sahada her an güçlü.",
     desc: "Gerçek sonuçlar, gerçek insanlar.",
     followIg: "Instagram'da Takip Et",
+    soon: "Galeri yakında güncellenecek — yeni çekimler geliyor.",
     items: [
-      { src: "/ela_real_21.png", caption: "Smaç Tekniği" },
-      { src: "/ela_real_22.png", caption: "Blok & Savunma" },
-      { src: "/ela_real_23.png", caption: "Servis Atışı" },
-      { src: "/ela_real_24.png", caption: "Kuvvet Antrenmanı" },
-      { src: "/ela_real_25.png", caption: "Sahada Güç" },
-      { src: "/ela_real_26.png", caption: "Takım Ruhu" },
-      { src: "/ela_real_19.png", caption: "Profesyonel Isınma" },
-      { src: "/ela_real_30.png", caption: "Elit Performans" },
-      { src: "/ela_real_32.png", caption: "Zihinsel Hazırlık" }
+      { icon: "spike", accent: "primary", caption: "Smaç Tekniği" },
+      { icon: "block", accent: "accent", caption: "Blok & Savunma" },
+      { icon: "serve", accent: "secondary", caption: "Servis Atışı" },
+      { icon: "strength", accent: "sand", caption: "Kuvvet Antrenmanı" },
+      { icon: "power", accent: "primary", caption: "Sahada Güç" },
+      { icon: "team", accent: "secondary", caption: "Takım Ruhu" },
+      { icon: "warmup", accent: "accent", caption: "Profesyonel Isınma" },
+      { icon: "elite", accent: "primary", caption: "Elit Performans" },
+      { icon: "mental", accent: "accent", caption: "Zihinsel Hazırlık" }
     ]
   },
   contact: {

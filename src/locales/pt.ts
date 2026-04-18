@@ -162,16 +162,17 @@ export const pt = {
     title1: "Galeria de transformação.",
     desc: "Resultados reais, pessoas reais.",
     followIg: "Siga no Instagram",
+    soon: "Galeria em breve — novas imagens a caminho.",
     items: [
-      { src: "/ela_real_21.png", caption: "Técnica de Cortada" },
-      { src: "/ela_real_22.png", caption: "Bloqueio e Defesa" },
-      { src: "/ela_real_23.png", caption: "Saque" },
-      { src: "/ela_real_24.png", caption: "Treino de Força" },
-      { src: "/ela_real_25.png", caption: "Poder em Quadra" },
-      { src: "/ela_real_26.png", caption: "Espírito de Equipe" },
-      { src: "/ela_real_19.png", caption: "Aquecimento Profissional" },
-      { src: "/ela_real_30.png", caption: "Performance Elite" },
-      { src: "/ela_real_32.png", caption: "Prep Mental" }
+      { icon: "spike", accent: "primary", caption: "Técnica de Cortada" },
+      { icon: "block", accent: "accent", caption: "Bloqueio e Defesa" },
+      { icon: "serve", accent: "secondary", caption: "Saque" },
+      { icon: "strength", accent: "sand", caption: "Treino de Força" },
+      { icon: "power", accent: "primary", caption: "Poder em Quadra" },
+      { icon: "team", accent: "secondary", caption: "Espírito de Equipe" },
+      { icon: "warmup", accent: "accent", caption: "Aquecimento Profissional" },
+      { icon: "elite", accent: "primary", caption: "Performance Elite" },
+      { icon: "mental", accent: "accent", caption: "Prep Mental" }
     ]
   },
   contact: {

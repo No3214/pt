@@ -157,16 +157,17 @@ export const en = {
     title1: "Powerful every moment.",
     desc: "Real results, real people.",
     followIg: "Follow on Instagram",
+    soon: "Gallery coming soon — new shots on the way.",
     items: [
-      { src: "/ela_real_21.png", caption: "Spike Technique" },
-      { src: "/ela_real_22.png", caption: "Block & Defense" },
-      { src: "/ela_real_23.png", caption: "Serving" },
-      { src: "/ela_real_24.png", caption: "Strength Training" },
-      { src: "/ela_real_25.png", caption: "Court Power" },
-      { src: "/ela_real_26.png", caption: "Team Spirit" },
-      { src: "/ela_real_19.png", caption: "Professional Warm-up" },
-      { src: "/ela_real_30.png", caption: "Elite Performance" },
-      { src: "/ela_real_32.png", caption: "Mental Prep" }
+      { icon: "spike", accent: "primary", caption: "Spike Technique" },
+      { icon: "block", accent: "accent", caption: "Block & Defense" },
+      { icon: "serve", accent: "secondary", caption: "Serving" },
+      { icon: "strength", accent: "sand", caption: "Strength Training" },
+      { icon: "power", accent: "primary", caption: "Court Power" },
+      { icon: "team", accent: "secondary", caption: "Team Spirit" },
+      { icon: "warmup", accent: "accent", caption: "Professional Warm-up" },
+      { icon: "elite", accent: "primary", caption: "Elite Performance" },
+      { icon: "mental", accent: "accent", caption: "Mental Prep" }
     ]
   },
   contact: {

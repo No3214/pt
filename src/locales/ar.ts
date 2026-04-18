@@ -162,16 +162,17 @@ export const ar = {
     title1: "معرض التحول.",
     desc: "نتائج حقيقية، أشخاص حقيقيون.",
     followIg: "متابعة على Instagram",
+    soon: "المعرض قيد التحديث قريبا — صور جديدة قادمة.",
     items: [
-      { src: "/ela_real_21.png", caption: "تقنية السحق" },
-      { src: "/ela_real_22.png", caption: "الصد والدفاع" },
-      { src: "/ela_real_23.png", caption: "الإرسال" },
-      { src: "/ela_real_24.png", caption: "تدريب القوة" },
-      { src: "/ela_real_25.png", caption: "القوة في الملعب" },
-      { src: "/ela_real_26.png", caption: "روح الفريق" },
-      { src: "/ela_real_19.png", caption: "إحماء احترافي" },
-      { src: "/ela_real_30.png", caption: "أداء النخبة" },
-      { src: "/ela_real_32.png", caption: "التحضير الذهني" }
+      { icon: "spike", accent: "primary", caption: "تقنية السحق" },
+      { icon: "block", accent: "accent", caption: "الصد والدفاع" },
+      { icon: "serve", accent: "secondary", caption: "الإرسال" },
+      { icon: "strength", accent: "sand", caption: "تدريب القوة" },
+      { icon: "power", accent: "primary", caption: "القوة في الملعب" },
+      { icon: "team", accent: "secondary", caption: "روح الفريق" },
+      { icon: "warmup", accent: "accent", caption: "إحماء احترافي" },
+      { icon: "elite", accent: "primary", caption: "أداء النخبة" },
+      { icon: "mental", accent: "accent", caption: "التحضير الذهني" }
     ]
   },
   contact: {

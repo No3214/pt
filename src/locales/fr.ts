@@ -162,16 +162,17 @@ export const fr = {
     title1: "Galerie de transformation.",
     desc: "Vrais résultats, vraies personnes.",
     followIg: "Suivez sur Instagram",
+    soon: "Galerie bientôt mise à jour — nouvelles prises de vue à venir.",
     items: [
-      { src: "/ela_real_21.png", caption: "Technique de Smash" },
-      { src: "/ela_real_22.png", caption: "Bloc & Défense" },
-      { src: "/ela_real_23.png", caption: "Service" },
-      { src: "/ela_real_24.png", caption: "Entraînement de Force" },
-      { src: "/ela_real_25.png", caption: "Puissance sur le Terrain" },
-      { src: "/ela_real_26.png", caption: "Esprit d'Équipe" },
-      { src: "/ela_real_19.png", caption: "Échauffement Professionnel" },
-      { src: "/ela_real_30.png", caption: "Performance Élite" },
-      { src: "/ela_real_32.png", caption: "Préparation Mentale" }
+      { icon: "spike", accent: "primary", caption: "Technique de Smash" },
+      { icon: "block", accent: "accent", caption: "Bloc & Défense" },
+      { icon: "serve", accent: "secondary", caption: "Service" },
+      { icon: "strength", accent: "sand", caption: "Entraînement de Force" },
+      { icon: "power", accent: "primary", caption: "Puissance sur le Terrain" },
+      { icon: "team", accent: "secondary", caption: "Esprit d'Équipe" },
+      { icon: "warmup", accent: "accent", caption: "Échauffement Professionnel" },
+      { icon: "elite", accent: "primary", caption: "Performance Élite" },
+      { icon: "mental", accent: "accent", caption: "Préparation Mentale" }
     ]
   },
   contact: {

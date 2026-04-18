@@ -162,16 +162,17 @@ export const de = {
     title1: "Transformations-Galerie.",
     desc: "Echte Ergebnisse, echte Menschen.",
     followIg: "Auf Instagram folgen",
+    soon: "Galerie wird bald aktualisiert — neue Aufnahmen in Kürze.",
     items: [
-      { src: "/ela_real_21.png", caption: "Schmetterschlag-Technik" },
-      { src: "/ela_real_22.png", caption: "Block & Abwehr" },
-      { src: "/ela_real_23.png", caption: "Aufschlag" },
-      { src: "/ela_real_24.png", caption: "Krafttraining" },
-      { src: "/ela_real_25.png", caption: "Power auf dem Spielfeld" },
-      { src: "/ela_real_26.png", caption: "Teamgeist" },
-      { src: "/ela_real_19.png", caption: "Professionelles Aufwärmen" },
-      { src: "/ela_real_30.png", caption: "Elite-Performance" },
-      { src: "/ela_real_32.png", caption: "Mentale Vorbereitung" }
+      { icon: "spike", accent: "primary", caption: "Schmetterschlag-Technik" },
+      { icon: "block", accent: "accent", caption: "Block & Abwehr" },
+      { icon: "serve", accent: "secondary", caption: "Aufschlag" },
+      { icon: "strength", accent: "sand", caption: "Krafttraining" },
+      { icon: "power", accent: "primary", caption: "Power auf dem Spielfeld" },
+      { icon: "team", accent: "secondary", caption: "Teamgeist" },
+      { icon: "warmup", accent: "accent", caption: "Professionelles Aufwärmen" },
+      { icon: "elite", accent: "primary", caption: "Elite-Performance" },
+      { icon: "mental", accent: "accent", caption: "Mentale Vorbereitung" }
     ]
   },
   contact: {

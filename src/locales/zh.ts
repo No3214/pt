@@ -162,16 +162,17 @@ export const zh = {
     title1: "蜕变画廊",
     desc: "真实结果，真实见证",
     followIg: "在 Instagram 上关注",
+    soon: "画廊即将更新 — 新作品正在路上。",
     items: [
-      { src: "/ela_real_21.png", caption: "扣球技术" },
-      { src: "/ela_real_22.png", caption: "拦网控制" },
-      { src: "/ela_real_23.png", caption: "发球练习" },
-      { src: "/ela_real_24.png", caption: "力量训练" },
-      { src: "/ela_real_25.png", caption: "球场爆发力" },
-      { src: "/ela_real_26.png", caption: "团队精神" },
-      { src: "/ela_real_19.png", caption: "专业热身" },
-      { src: "/ela_real_30.png", caption: "精英表现" },
-      { src: "/ela_real_32.png", caption: "心理准备" }
+      { icon: "spike", accent: "primary", caption: "扣球技术" },
+      { icon: "block", accent: "accent", caption: "拦网控制" },
+      { icon: "serve", accent: "secondary", caption: "发球练习" },
+      { icon: "strength", accent: "sand", caption: "力量训练" },
+      { icon: "power", accent: "primary", caption: "球场爆发力" },
+      { icon: "team", accent: "secondary", caption: "团队精神" },
+      { icon: "warmup", accent: "accent", caption: "专业热身" },
+      { icon: "elite", accent: "primary", caption: "精英表现" },
+      { icon: "mental", accent: "accent", caption: "心理准备" }
     ]
   },
   contact: {
