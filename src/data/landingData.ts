@@ -14,8 +14,9 @@ export interface Testimonial {
   name: string;
   role: string;
   metric: string;
-  image: string;
+  image?: string;
   avatar: string;
+  accent?: 'primary' | 'secondary' | 'accent' | 'sand';
 }
 
 export interface FAQItem {
@@ -75,15 +76,15 @@ export const getLandingData = (lang: string) => {
   const testimonials: Testimonial[] = [
     {
       text: isTr ? 'Sıçrama yüksekliğim 3 ayda 12cm arttı. ARENA sistemi kesinlikle farklı klasmanda.' : 'My vertical jump increased 12cm in 3 months. ARENA system is definitely in a different league.',
-      name: 'Ayşe K.', role: isTr ? 'Voleybolcu' : 'Volleyball Player', metric: isTr ? '+12cm sıçrama' : '+12cm jump', image: '/ela_real_22.webp', avatar: '/images/testimonials/ayse.png'
+      name: 'Ayşe K.', role: isTr ? 'Voleybolcu' : 'Volleyball Player', metric: isTr ? '+12cm sıçrama' : '+12cm jump', avatar: '/images/testimonials/ayse.png', accent: 'primary'
     },
     {
       text: isTr ? 'Sakatsız, çok güçlü bir sezon geçiriyorum. Kuvvet antrenmanları inanılmaz etkili.' : 'I\'m having an injury-free, very strong season. The strength training is incredibly effective.',
-      name: 'Deniz Y.', role: isTr ? 'Profesyonel Sporcu' : 'Professional Athlete', metric: isTr ? 'Sıfır Sakatlık' : 'Zero Injury', image: '/ela_real_25.webp', avatar: '/images/testimonials/deniz.png'
+      name: 'Deniz Y.', role: isTr ? 'Profesyonel Sporcu' : 'Professional Athlete', metric: isTr ? 'Sıfır Sakatlık' : 'Zero Injury', avatar: '/images/testimonials/deniz.png', accent: 'secondary'
     },
     {
       text: isTr ? 'Kendime güvenim ve sahadaki çevikliğim seviye atladı. Tamamen maç performansıma özel program.' : 'My confidence and agility on the court leveled up. A program completely tailored to my match performance.',
-      name: 'Selin B.', role: 'Fitness & Voleybol', metric: isTr ? '+8cm Mobilite' : '+8cm Mobility', image: '/ela_real_26.webp', avatar: '/images/testimonials/selin.png'
+      name: 'Selin B.', role: 'Fitness & Voleybol', metric: isTr ? '+8cm Mobilite' : '+8cm Mobility', avatar: '/images/testimonials/selin.png', accent: 'accent'
     },
   ];
 

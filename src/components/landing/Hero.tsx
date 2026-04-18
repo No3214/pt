@@ -28,10 +28,28 @@ export default function Hero() {
 
   return (
     <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Parallax Background */}
-      <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale, willChange: 'transform, opacity' }} className="absolute inset-0 -z-10 image-grain">
+      {/* Parallax Background — ARENA branded animated scene */}
+      <motion.div style={{ y: heroY, opacity: heroOpacity, scale: heroScale, willChange: 'transform, opacity' }} className="absolute inset-0 -z-10 image-grain overflow-hidden">
+        {/* rotating conic brand gradient */}
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 60, repeat: Infinity, ease: 'linear' }}
+          className="absolute -inset-[20%] opacity-[0.22]"
+          style={{
+            background: 'conic-gradient(from 0deg at 50% 50%, rgba(194,104,74,0.6), rgba(122,158,130,0.4), rgba(74,109,136,0.5), rgba(212,180,131,0.35), rgba(194,104,74,0.6))',
+            filter: 'blur(60px)',
+          }}
+        />
+        {/* sweeping diagonal line */}
+        <motion.div
+          initial={{ x: '-30%' }}
+          animate={{ x: '120%' }}
+          transition={{ duration: 14, repeat: Infinity, ease: [0.45, 0.05, 0.55, 0.95], repeatDelay: 2 }}
+          className="absolute top-0 left-0 w-[40%] h-full opacity-[0.08]"
+          style={{ background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.6) 50%, transparent 60%)' }}
+        />
+        {/* brand gradient veil */}
         <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-b from-bg via-bg/60 to-bg' : 'bg-gradient-to-b from-bg via-bg/40 to-bg'}`} />
-        <img src="/ela_real_32.png" alt="ARENA koc arkaplan" className="w-full h-full object-cover object-top opacity-[0.15] premium-image" loading="eager" decoding="async" fetchPriority="high" width={1200} height={800} />
       </motion.div>
 
       {/* Premium Spotlight — Aceternity/Magic UI tarzi */}
@@ -140,19 +158,118 @@ export default function Hero() {
             className="relative hidden lg:block"
           >
             <div className="relative rounded-[2rem] overflow-hidden aspect-[3/4] border border-text-main/5 shadow-2xl image-grain">
-              <motion.img
-                src="/ela_real_30.png"
-                alt={tenantConfig.brand.name}
-                className="w-full h-full object-cover object-top premium-image"
-                loading="eager"
-                decoding="async"
-                fetchPriority="high"
-                width={900}
-                height={1200}
-                initial={{ scale: 1.08, y: 0 }}
-                animate={{ scale: [1.08, 1.15, 1.1, 1.12, 1.08], y: [0, -8, -4, -10, 0] }}
-                transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
-                style={{ willChange: 'transform' }}
+              {/* rotating conic brand background */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 45, repeat: Infinity, ease: 'linear' }}
+                className="absolute -inset-[30%]"
+                style={{
+                  background: 'conic-gradient(from 0deg at 50% 50%, #C2684A, #7A9E82, #4A6D88, #D4B483, #C2684A)',
+                  filter: 'blur(12px)',
+                }}
+              />
+              {/* solid tint overlay */}
+              <div
+                className="absolute inset-0"
+                style={{
+                  background: 'linear-gradient(165deg, rgba(194,104,74,0.55) 0%, rgba(122,158,130,0.35) 45%, rgba(74,109,136,0.6) 100%)',
+                }}
+              />
+              {/* grid texture */}
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-[0.09] mix-blend-overlay"
+                style={{
+                  backgroundImage: 'linear-gradient(rgba(255,255,255,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.9) 1px, transparent 1px)',
+                  backgroundSize: '36px 36px',
+                }}
+              />
+              {/* floating particles */}
+              {[...Array(7)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute rounded-full bg-white/60"
+                  style={{
+                    width: `${4 + (i % 3) * 2}px`,
+                    height: `${4 + (i % 3) * 2}px`,
+                    left: `${12 + i * 12}%`,
+                    top: `${18 + (i * 11) % 70}%`,
+                    filter: 'blur(0.5px)',
+                  }}
+                  animate={{
+                    y: [0, -24, 0],
+                    opacity: [0.3, 0.85, 0.3],
+                  }}
+                  transition={{
+                    duration: 5 + (i % 4),
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                    delay: i * 0.55,
+                  }}
+                />
+              ))}
+              {/* center pulsing spotlight */}
+              <motion.div
+                animate={{
+                  scale: [1, 1.25, 1],
+                  opacity: [0.35, 0.6, 0.35],
+                }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70%] h-[70%] rounded-full"
+                style={{
+                  background: 'radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(194,104,74,0.15) 40%, transparent 70%)',
+                  filter: 'blur(24px)',
+                }}
+              />
+              {/* orbiting volleyball */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 16, repeat: Infinity, ease: 'linear' }}
+                className="absolute top-1/2 left-1/2 w-[62%] h-[62%] -translate-x-1/2 -translate-y-1/2"
+              >
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-5 h-5 rounded-full bg-white shadow-[0_0_24px_rgba(255,255,255,0.8)]">
+                  <div className="absolute inset-0 rounded-full" style={{ background: 'radial-gradient(circle at 30% 30%, #fff, #D4B483)' }} />
+                </div>
+              </motion.div>
+              {/* central ARENA monogram with motion */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 1.4, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="absolute inset-0 flex flex-col items-center justify-center"
+              >
+                <motion.div
+                  animate={{ y: [0, -6, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                  className="relative flex flex-col items-center"
+                >
+                  <div className="relative">
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+                      className="absolute -inset-6 rounded-full border border-white/30 border-dashed"
+                    />
+                    <div className="w-28 h-28 rounded-full bg-white/10 backdrop-blur-md border border-white/25 flex items-center justify-center shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
+                      <span className="font-display text-5xl font-semibold text-white tracking-tight">A</span>
+                    </div>
+                  </div>
+                  <span className="mt-5 text-white/90 text-[0.68rem] uppercase tracking-[0.4em] font-medium">
+                    {tenantConfig.brand.name}
+                  </span>
+                  <span className="mt-1.5 text-white/60 text-[0.6rem] uppercase tracking-[0.3em]">
+                    Performance System
+                  </span>
+                </motion.div>
+              </motion.div>
+              {/* corner radial accent */}
+              <motion.div
+                animate={{ opacity: [0.4, 0.75, 0.4] }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+                className="absolute -top-24 -right-24 w-80 h-80 rounded-full"
+                style={{
+                  background: 'radial-gradient(circle, rgba(212,180,131,0.55) 0%, transparent 70%)',
+                  filter: 'blur(40px)',
+                }}
               />
               <div className={`absolute inset-0 ${dm ? 'bg-gradient-to-t from-bg/50 via-transparent' : 'bg-gradient-to-t from-bg/30 via-transparent'}`} />
               <motion.div
@@ -161,6 +278,14 @@ export default function Hero() {
                 transition={{ delay: 2, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
                 style={{ willChange: 'transform' }}
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg]"
+              />
+              {/* recurring shimmer sweep */}
+              <motion.div
+                initial={{ x: '-100%' }}
+                animate={{ x: '200%' }}
+                transition={{ duration: 3, repeat: Infinity, ease: [0.16, 1, 0.3, 1], repeatDelay: 4 }}
+                style={{ willChange: 'transform' }}
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-[-20deg]"
               />
             </div>
             

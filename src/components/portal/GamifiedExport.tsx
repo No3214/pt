@@ -57,11 +57,33 @@ export default function GamifiedExport() {
 
          {/* The exportable preview card that actually gets turned into image */}
          <div className="shrink-0 w-full max-w-[320px]">
-           <div 
-             ref={cardRef} 
+           <div
+             ref={cardRef}
              className={`p-6 rounded-3xl aspect-[9/16] flex flex-col justify-between overflow-hidden relative shadow-2xl ${dm ? 'bg-bg text-white' : 'bg-stone-50 text-stone-900 border border-stone-200'}`}
-             style={{ backgroundImage: `url('/ela_real_19.png')`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+             style={{
+               backgroundImage: `linear-gradient(145deg, #C2684A 0%, #7A9E82 45%, #4A6D88 100%)`,
+               backgroundSize: 'cover',
+               backgroundPosition: 'center',
+             }}
            >
+             {/* animated conic brand layer (visible in UI, captured by html-to-image as final rasterized frame) */}
+             <div
+               aria-hidden
+               className="absolute -inset-[20%] opacity-60 animate-[spin_40s_linear_infinite] pointer-events-none"
+               style={{
+                 background: 'conic-gradient(from 0deg at 50% 50%, #C2684A, #D4B483, #7A9E82, #4A6D88, #C2684A)',
+                 filter: 'blur(40px)',
+               }}
+             />
+             {/* grid texture */}
+             <div
+               aria-hidden
+               className="absolute inset-0 opacity-[0.08] mix-blend-overlay pointer-events-none"
+               style={{
+                 backgroundImage: 'linear-gradient(rgba(255,255,255,0.9) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.9) 1px, transparent 1px)',
+                 backgroundSize: '28px 28px',
+               }}
+             />
              {/* Gradient Overlay for text readability */}
              <div className={`absolute inset-0 ${dm ? 'bg-black/60' : 'bg-white/80'}`} />
 
