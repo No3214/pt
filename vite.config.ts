@@ -69,15 +69,29 @@ export default defineConfig({
             if (id.includes('react-router')) return 'router'
             if (id.includes('react-dom') || id.includes('scheduler')) return 'react-dom'
             if (/\/react\/|\/react$/.test(id)) return 'react-vendor'
-            if (id.includes('framer-motion')) return 'framer'
-            if (id.includes('@supabase')) return 'supabase'
+            if (
+              id.includes('framer-motion') ||
+              id.includes('motion-dom') ||
+              id.includes('motion-utils')
+            )
+              return 'framer'
+            if (id.includes('@supabase') || id.includes('iceberg-js')) return 'supabase'
             if (id.includes('recharts') || id.includes('d3-')) return 'charts'
             if (id.includes('react-hook-form') || id.includes('@hookform') || id.includes('/zod/')) return 'forms'
             if (id.includes('zustand')) return 'state'
             if (id.includes('lucide-react')) return 'icons'
+            if (id.includes('date-fns')) return 'date-fns'
+            if (id.includes('lenis')) return 'scroll'
+            if (id.includes('html-to-image') || id.includes('html2canvas')) return 'image-export'
+            if (id.includes('canvas-confetti')) return 'confetti'
+            if (id.includes('react-to-pdf') || id.includes('jspdf')) return 'pdf-export'
+            if (id.includes('@emailjs')) return 'email'
+            if (id.includes('three') || id.includes('@react-three')) return 'three'
             return 'vendor'
           }
-          if (id.includes('/src/locales/')) return 'i18n'
+          // TR and EN baked into index (needed synchronously at first paint).
+          // Other locales are dynamic imports — Vite emits one chunk per file.
+          if (/\/src\/locales\/(tr|en)\.ts$/.test(id)) return 'i18n-base'
           if (id.includes('/src/pages/admin/') || id.includes('/src/components/admin/')) return 'admin'
           if (id.includes('/src/pages/Portal') || id.includes('/src/components/portal/')) return 'portal'
           return undefined
