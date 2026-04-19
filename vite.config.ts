@@ -75,8 +75,25 @@ export default defineConfig({
               id.includes('motion-utils')
             )
               return 'framer'
-            if (id.includes('@supabase') || id.includes('iceberg-js')) return 'supabase'
-            if (id.includes('recharts') || id.includes('d3-')) return 'charts'
+            if (
+              id.includes('@supabase') ||
+              id.includes('iceberg-js') ||
+              id.includes('/ws/') ||
+              id.includes('whatwg-url') ||
+              id.includes('tr46') ||
+              id.includes('punycode')
+            )
+              return 'supabase'
+            if (
+              id.includes('recharts') ||
+              id.includes('d3-') ||
+              id.includes('react-smooth') ||
+              id.includes('react-transition-group') ||
+              id.includes('fast-equals') ||
+              id.includes('/lodash/') ||
+              id.includes('/lodash.')
+            )
+              return 'charts'
             if (id.includes('react-hook-form') || id.includes('@hookform') || id.includes('/zod/')) return 'forms'
             if (id.includes('zustand')) return 'state'
             if (id.includes('lucide-react')) return 'icons'
@@ -84,7 +101,15 @@ export default defineConfig({
             if (id.includes('lenis')) return 'scroll'
             if (id.includes('html-to-image') || id.includes('html2canvas')) return 'image-export'
             if (id.includes('canvas-confetti')) return 'confetti'
-            if (id.includes('react-to-pdf') || id.includes('jspdf')) return 'pdf-export'
+            if (
+              id.includes('react-to-pdf') ||
+              id.includes('jspdf') ||
+              id.includes('dompurify') ||
+              id.includes('canvg') ||
+              id.includes('fflate') ||
+              id.includes('fast-png')
+            )
+              return 'pdf-export'
             if (id.includes('@emailjs')) return 'email'
             if (id.includes('three') || id.includes('@react-three')) return 'three'
             return 'vendor'
