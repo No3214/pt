@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useInView, useMotionValue, useSpring, useTransform, useScroll } from 'framer-motion';
+// eslint-disable-next-line react-refresh/only-export-components
 export { fadeUp, staggerContainer, scaleIn, letterReveal } from '../../lib/animations';
 import { staggerContainer, letterReveal } from '../../lib/animations';
 

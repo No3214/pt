@@ -5,10 +5,26 @@ export const hi = {
     limitedSpots: "सीमित सीटें",
     scrollHint: "खोजें",
     stats: [
-      { value: 20, suffix: "+", label: "सक्रिय ग्राहक" },
-      { value: 8, suffix: "+", label: "वर्ष वॉलीबॉल" },
-      { value: 96, suffix: "", label: "व्यायाम लाइब्रेरी" },
-      { value: 100, suffix: "%", label: "संतुष्टि" }
+      {
+        value: 20,
+        suffix: "+",
+        label: "सक्रिय ग्राहक"
+      },
+      {
+        value: 8,
+        suffix: "+",
+        label: "वर्ष वॉलीबॉल"
+      },
+      {
+        value: 96,
+        suffix: "",
+        label: "व्यायाम लाइब्रेरी"
+      },
+      {
+        value: 100,
+        suffix: "%",
+        label: "संतुष्टि"
+      }
     ]
   },
   nav: {
@@ -40,18 +56,42 @@ export const hi = {
     desc: "वॉलीबॉल कोर्ट पर प्राप्त अनुशासन के साथ, मैं केवल दृढ़ और अनुशासित ग्राहकों के साथ काम करता हूं। प्रत्येक कार्यक्रम विज्ञान-आधारित है, प्रत्येक कदम मापा जाता है।",
     trust: "20+ सक्रिय ग्राहक सिस्टम पर विश्वास करते हैं",
     cards: [
-      { num: "01", title: "एथलीट अनुशासन", desc: "पेशेवर वॉलीबॉल अनुभव के माध्यम से साबित प्रशिक्षण पद्धति।" },
-      { num: "02", title: "व्यक्तिगत सशक्तिकरण", desc: "मेरा लक्ष्य यह है कि आप अपने शरीर को जानें और अपने लक्ष्यों के साथ संरेखित एक मजबूत आधार बनाएं।" },
-      { num: "03", title: "चयनात्मक प्रीमियम ट्रैकिंग", desc: "गुणवत्ता बनाए रखने के लिए सीमित सीटों के साथ एक-से-एक केंद्रित कार्य।" }
+      {
+        num: "01",
+        title: "एथलीट अनुशासन",
+        desc: "पेशेवर वॉलीबॉल अनुभव के माध्यम से साबित प्रशिक्षण पद्धति।"
+      },
+      {
+        num: "02",
+        title: "व्यक्तिगत सशक्तिकरण",
+        desc: "मेरा लक्ष्य यह है कि आप अपने शरीर को जानें और अपने लक्ष्यों के साथ संरेखित एक मजबूत आधार बनाएं।"
+      },
+      {
+        num: "03",
+        title: "चयनात्मक प्रीमियम ट्रैकिंग",
+        desc: "गुणवत्ता बनाए रखने के लिए सीमित सीटों के साथ एक-से-एक केंद्रित कार्य।"
+      }
     ]
   },
   howItWorks: {
     badge: "यह कैसे काम करता है",
     title: "तीन चरणों में परिवर्तन करें।",
     steps: [
-      { num: "01", title: "आवेदन करें और मिलें", desc: "फॉर्म भरें। एक मुफ्त 15 मिनट की परिचयात्मक कॉल में, हम आपके लक्ष्यों और वर्तमान स्तर पर चर्चा करते हैं।" },
-      { num: "02", title: "कस्टम प्रोग्राम", desc: "आपके शरीर विश्लेषण, लक्ष्यों और प्रशिक्षण इतिहास के आधार पर, आपके लिए एक व्यक्तिगत योजना तैयार की जाती है।" },
-      { num: "03", title: "रूपांतरित करें", desc: "साप्ताहिक जांच, वीडियो विश्लेषण और निरंतर अनुकूलन — हम आपके लक्ष्यों की ओर एक साथ चलते हैं।" }
+      {
+        num: "01",
+        title: "आवेदन करें और मिलें",
+        desc: "फॉर्म भरें। एक मुफ्त 15 मिनट की परिचयात्मक कॉल में, हम आपके लक्ष्यों और वर्तमान स्तर पर चर्चा करते हैं।"
+      },
+      {
+        num: "02",
+        title: "कस्टम प्रोग्राम",
+        desc: "आपके शरीर विश्लेषण, लक्ष्यों और प्रशिक्षण इतिहास के आधार पर, आपके लिए एक व्यक्तिगत योजना तैयार की जाती है।"
+      },
+      {
+        num: "03",
+        title: "रूपांतरित करें",
+        desc: "साप्ताहिक जांच, वीडियो विश्लेषण और निरंतर अनुकूलन — हम आपके लक्ष्यों की ओर एक साथ चलते हैं।"
+      }
     ]
   },
   marquee: [
@@ -73,17 +113,26 @@ export const hi = {
       u3: "कोर्ट पर मेरा आत्मविश्वास और चपलता में सुधार हुआ। एक कार्यक्रम जो मेरे मैच प्रदर्शन के साथ पूरी तरह से संरेखित है।"
     },
     items: [
-      { 
-        text: "मेरी ऊर्ध्वाधर कूद 3 महीने में 12 सेमी बढ़ गई। कोच एला की प्रणाली निश्चित रूप से एक अलग लीग में है।", 
-        name: "आयशे के.", role: "वॉलीबॉल खिलाड़ी", metric: "+12 सेमी जंप", image: "/ela_real_30.png"
+      {
+        text: "मेरी ऊर्ध्वाधर कूद 3 महीने में 12 सेमी बढ़ गई। कोच एला की प्रणाली निश्चित रूप से एक अलग लीग में है।",
+        name: "आयशे के.",
+        role: "वॉलीबॉल खिलाड़ी",
+        metric: "+12 सेमी जंप",
+        image: "/ela_real_30.png"
       },
-      { 
-        text: "मैं एक चोट मुक्त, बहुत मजबूत सीजन ले रहा हूं। ताकत प्रशिक्षण अविश्वसनीय रूप से प्रभावी है।", 
-        name: "डेनिज वाई.", role: "पेशेवर एथलीट", metric: "जीरो इंजरी", image: "/ela_real_32.png"
+      {
+        text: "मैं एक चोट मुक्त, बहुत मजबूत सीजन ले रहा हूं। ताकत प्रशिक्षण अविश्वसनीय रूप से प्रभावी है।",
+        name: "डेनिज वाई.",
+        role: "पेशेवर एथलीट",
+        metric: "जीरो इंजरी",
+        image: "/ela_real_32.png"
       },
-      { 
-        text: "कोर्ट पर मेरा आत्मविश्वास और चपलता में सुधार हुआ। एक कार्यक्रम जो मेरे मैच प्रदर्शन के साथ पूरी तरह से संरेखित है।", 
-        name: "सेलिन बी.", role: "फिटनेस और वॉलीबॉल", metric: "+8 सेमी लचीलापन", image: "/ela_real_19.png"
+      {
+        text: "कोर्ट पर मेरा आत्मविश्वास और चपलता में सुधार हुआ। एक कार्यक्रम जो मेरे मैच प्रदर्शन के साथ पूरी तरह से संरेखित है।",
+        name: "सेलिन बी.",
+        role: "फिटनेस और वॉलीबॉल",
+        metric: "+8 सेमी लचीलापन",
+        image: "/ela_real_19.png"
       }
     ]
   },
@@ -116,32 +165,72 @@ export const hi = {
     },
     items: [
       {
-        name: "ऑनलाइन कोचिंग",
-        price: "75",
-        period: "/महीना",
-        desc: "व्यक्तिगत प्रशिक्षण योजना और बुनियादी पोषण ट्रैकिंग",
-        features: ["व्यक्तिगत प्रशिक्षण योजना", "साप्ताहिक योजना अपडेट", "WhatsApp सहायता", "फॉर्म चेक वीडियो", "बुनियादी पोषण गाइड"],
+        name: "Online Koçluk",
+        price: "2.500",
+        period: "/ay",
+        desc: "Kişiye özel antrenman programı ve temel beslenme takibi",
+        features: [
+          "Kişiye özel antrenman programı",
+          "Haftalık program güncelleme",
+          "WhatsApp destek",
+          "Form kontrol videoları",
+          "Temel beslenme rehberi"
+        ],
         color: "secondary",
         popular: false
       },
       {
-        name: "एलीट वॉलीबॉल",
-        price: "90",
-        period: "/महीना",
-        desc: "ऊर्ध्वाधर कूद, एथलेटिक्स और कोर्ट-विशिष्ट प्रदर्शन प्रशिक्षण",
-        features: ["ऑनलाइन कोचिंग शामिल", "जंप और विस्फोटकता प्रोटोकॉल", "पोजीशन-विशिष्ट प्रशिक्षण", "वीडियो विश्लेषण और फीडबैक", "इंजरी प्रिवेंशन प्रोग्राम", "साप्ताहिक 1:1 वीडियो कॉल"],
+        name: "Voleybol Performance",
+        price: "3.000",
+        period: "/ay",
+        desc: "Sıçrama, atletizm ve sahaya özel performans antrenmanı",
+        features: [
+          "Online Koçluk dahil",
+          "Sıçrama & patlayıcılık protokolü",
+          "Pozisyona özel antrenman",
+          "Video analiz & geri bildirim",
+          "Sakatlık önleme programı",
+          "Haftalık 1:1 görüntülü görüşme"
+        ],
         color: "primary",
         popular: true,
         featured: true
       },
       {
-        name: "प्रीमियम ग्रोथ",
-        price: "150",
-        period: "/महीना",
-        desc: "TDEE आधारित पूर्ण पोषण योजना के साथ समग्र कोचिंग",
-        features: ["एलीट वॉलीबॉल शामिल", "TDEE आधारित पोषण योजना", "दैनिक मैक्रो ट्रैकिंग", "क्लाइंट पोर्टल एक्सेस", "सप्लीमेंट गाइड", "24/7 प्राथमिकता सहायता", "मासिक शारीरिक विश्लेषण"],
+        name: "Premium Büyüme",
+        price: "5.500",
+        period: "/ay",
+        desc: "TDEE destekli tam beslenme planı ile bütüncül koçluk",
+        features: [
+          "Voleybol Performance dahil",
+          "TDEE bazlı beslenme planı",
+          "Günlük makro takibi",
+          "Danışan portalı erişimi",
+          "Supplement rehberliği",
+          "7/24 öncelikli destek",
+          "Aylık vücut analizi"
+        ],
         color: "accent",
         popular: false
+      },
+      {
+        name: "Pro Athlete Concierge",
+        price: "12.500",
+        period: "/ay",
+        desc: "Profesyonel sporcu seviyesi — kapasite sınırlı (3 sporcu/sezon)",
+        features: [
+          "Premium Büyüme dahil",
+          "Haftalık 2 birebir görüntülü seans",
+          "Sahada/spor salonunda fiziksel ölçüm günleri",
+          "Maç ve turnuva periyodizasyonu",
+          "Sakatlık geri dönüş protokolü",
+          "Fizyoterapi & RehabFit ağına yönlendirme",
+          "Aile/menajer raporu",
+          "WhatsApp 7/24 doğrudan hat"
+        ],
+        color: "accent",
+        popular: false,
+        anchor: true
       }
     ]
   },
@@ -150,11 +239,26 @@ export const hi = {
     title1: "आपके प्रश्न,",
     title2: "उत्तर दिए गए।",
     items: [
-      { q: "मैं यह कार्यक्रम कैसे शुरू करूँ?", a: "आवेदन फॉर्म भरने के बाद, मैं आपसे WhatsApp के माध्यम से संपर्क करूँगा। हम मुफ्त 15 मिनट की परिच्यात्मक कॉल में आपके लक्ष्यों पर चर्चा करेंगे और एक उपयुक्त कार्यक्रम तय करेंगे।" },
-      { q: "ऑनलाइन प्रशिक्षण कैसे काम करता है?", a: "आपका व्यक्तिगत कार्यक्रम ऐप के माध्यम से वीडियो-समर्थित अभ्यासों के साथ भेजा जाता. मैं साप्ताहिक चेक-इन के साथ आपके फॉर्म की जाँच करता हूँ और आवश्यकतानुसार कार्यक्रम को अपडेट करता हूँ।" },
-      { q: "क्या पोषण योजना इसमें शामिल है?", a: "ऑनलाइन कोचिंग पैकेज में बुनियादी पोषण ट्रैकिंग शामिल है। प्रीमियम ग्रोथ पैकेज में आपके TDEE के आधार पर गणना की गई पूर्ण पोषण योजना, मैक्रो ट्रैकिंग और 1-टू-1 पोषण परामर्श शामिल है।" },
-      { q: "मैं वॉलीबॉल नहीं खेलता, क्या मैं इसमें शामिल हो सकता हूँ?", a: "बिल्कुल! हालाँकि एलीट वॉलीबॉल पैकेज कोर्ट-विशिष्ट है, ऑनलाइन कोचिंग और प्रीमियम ग्रोथ सभी स्तरों के लिए उपयुक्त हैं। हम शक्ति, मुद्रा और सामान्य फिटनेस लक्ष्यों पर ध्यान केंद्रित करते हैं।" },
-      { q: "मुझे परिणाम कब दिखेंगे?", a: "अनुशासित ट्रैकिंग के साथ, पहले 4 हफ्तों में दृश्यमान परिवर्तन शुरू हो जाते हैं। गंभीर परिवर्तन 3 महीने की अवधि में होते हैं। निरंतरता हमेशा परिणाम लाती है।" }
+      {
+        q: "मैं यह कार्यक्रम कैसे शुरू करूँ?",
+        a: "आवेदन फॉर्म भरने के बाद, मैं आपसे WhatsApp के माध्यम से संपर्क करूँगा। हम मुफ्त 15 मिनट की परिच्यात्मक कॉल में आपके लक्ष्यों पर चर्चा करेंगे और एक उपयुक्त कार्यक्रम तय करेंगे।"
+      },
+      {
+        q: "ऑनलाइन प्रशिक्षण कैसे काम करता है?",
+        a: "आपका व्यक्तिगत कार्यक्रम ऐप के माध्यम से वीडियो-समर्थित अभ्यासों के साथ भेजा जाता. मैं साप्ताहिक चेक-इन के साथ आपके फॉर्म की जाँच करता हूँ और आवश्यकतानुसार कार्यक्रम को अपडेट करता हूँ।"
+      },
+      {
+        q: "क्या पोषण योजना इसमें शामिल है?",
+        a: "ऑनलाइन कोचिंग पैकेज में बुनियादी पोषण ट्रैकिंग शामिल है। प्रीमियम ग्रोथ पैकेज में आपके TDEE के आधार पर गणना की गई पूर्ण पोषण योजना, मैक्रो ट्रैकिंग और 1-टू-1 पोषण परामर्श शामिल है।"
+      },
+      {
+        q: "मैं वॉलीबॉल नहीं खेलता, क्या मैं इसमें शामिल हो सकता हूँ?",
+        a: "बिल्कुल! हालाँकि एलीट वॉलीबॉल पैकेज कोर्ट-विशिष्ट है, ऑनलाइन कोचिंग और प्रीमियम ग्रोथ सभी स्तरों के लिए उपयुक्त हैं। हम शक्ति, मुद्रा और सामान्य फिटनेस लक्ष्यों पर ध्यान केंद्रित करते हैं।"
+      },
+      {
+        q: "मुझे परिणाम कब दिखेंगे?",
+        a: "अनुशासित ट्रैकिंग के साथ, पहले 4 हफ्तों में दृश्यमान परिवर्तन शुरू हो जाते हैं। गंभीर परिवर्तन 3 महीने की अवधि में होते हैं। निरंतरता हमेशा परिणाम लाती है।"
+      }
     ]
   },
   gallery: {
@@ -164,15 +268,51 @@ export const hi = {
     followIg: "Instagram पर फॉलो करें",
     soon: "गैलरी जल्द ही अपडेट होगी — नई तस्वीरें आ रही हैं।",
     items: [
-      { icon: "spike", accent: "primary", caption: "स्पाइक तकनीक" },
-      { icon: "block", accent: "accent", caption: "ब्लॉक और रक्षा" },
-      { icon: "serve", accent: "secondary", caption: "सर्विस" },
-      { icon: "strength", accent: "sand", caption: "स्ट्रेंथ ट्रेनिंग" },
-      { icon: "power", accent: "primary", caption: "कोर्ट पावर" },
-      { icon: "team", accent: "secondary", caption: "टीम भावना" },
-      { icon: "warmup", accent: "accent", caption: "पेशेवर वार्म-अप" },
-      { icon: "elite", accent: "primary", caption: "एलीट प्रदर्शन" },
-      { icon: "mental", accent: "accent", caption: "मानसिक तैयारी" }
+      {
+        icon: "spike",
+        accent: "primary",
+        caption: "स्पाइक तकनीक"
+      },
+      {
+        icon: "block",
+        accent: "accent",
+        caption: "ब्लॉक और रक्षा"
+      },
+      {
+        icon: "serve",
+        accent: "secondary",
+        caption: "सर्विस"
+      },
+      {
+        icon: "strength",
+        accent: "sand",
+        caption: "स्ट्रेंथ ट्रेनिंग"
+      },
+      {
+        icon: "power",
+        accent: "primary",
+        caption: "कोर्ट पावर"
+      },
+      {
+        icon: "team",
+        accent: "secondary",
+        caption: "टीम भावना"
+      },
+      {
+        icon: "warmup",
+        accent: "accent",
+        caption: "पेशेवर वार्म-अप"
+      },
+      {
+        icon: "elite",
+        accent: "primary",
+        caption: "एलीट प्रदर्शन"
+      },
+      {
+        icon: "mental",
+        accent: "accent",
+        caption: "मानसिक तैयारी"
+      }
     ]
   },
   contact: {
@@ -213,7 +353,12 @@ export const hi = {
     habit_subtitle: "अपनी प्रगति को ट्रैक करें।",
     habit_completed_toast: "{} पूरा हुआ! 🚀",
     habit_all_done_toast: "सारे लक्ष्य प्राप्त किए — दैनिक स्ट्रीक +1! 🔥",
-    habit_labels: ["3 लीटर पानी", "8 घंटे की नींद", "प्रोटीन लक्ष्य", "10,000 कदम"],
+    habit_labels: [
+      "3 लीटर पानी",
+      "8 घंटे की नींद",
+      "प्रोटीन लक्ष्य",
+      "10,000 कदम"
+    ],
     food_title: "पोषण लॉग",
     food_search: "भोजन खोजें (उदा. चावल, चिकन)...",
     food_add: "जोड़ें",
@@ -230,19 +375,7 @@ export const hi = {
     macro_ai_error: "AI विश्लेषण के दौरान त्रुटि हुई।",
     macro_ai_success: "भोजन लॉग में जोड़ दिया गया! 🥗",
     macro_ai_feedback_label: "कोच की प्रतिक्रिया:",
-    macro_ai_prompt: `आप एक पेशेवर खेल पोषण कोच हैं। उपयोगकर्ता के संदेश का विश्लेषण करें: "{input}"।
-    कृपया इस भोजन में प्रोटीन (p), कार्बोहाइड्रेट (c), वसा (f) और कुल कैलोरी (cal) का अनुमान लगाएं।
-    साथ ही, उपयोगकर्ता के लक्ष्य "{clientGoal}" और स्तर "{clientLevel}" के आधार पर 1 वाक्य की पेशेवर कोच टिप्पणी प्रदान करें।
-    
-    प्रतिक्रिया प्रारूप केवल यही JSON होना चाहिए (कोई अन्य टेक्स्ट न जोड़ें):
-    {{
-      "name": "भोजन का नाम",
-      "p": संख्या,
-      "c": संख्या,
-      "f": संख्या,
-      "cal": संख्या,
-      "coachComment": "आपकी टिप्पणी"
-    }}`,
+    macro_ai_prompt: "आप एक पेशेवर खेल पोषण कोच हैं। उपयोगकर्ता के संदेश का विश्लेषण करें: \"{input}\"।\n    कृपया इस भोजन में प्रोटीन (p), कार्बोहाइड्रेट (c), वसा (f) और कुल कैलोरी (cal) का अनुमान लगाएं।\n    साथ ही, उपयोगकर्ता के लक्ष्य \"{clientGoal}\" और स्तर \"{clientLevel}\" के आधार पर 1 वाक्य की पेशेवर कोच टिप्पणी प्रदान करें।\n    \n    प्रतिक्रिया प्रारूप केवल यही JSON होना चाहिए (कोई अन्य टेक्स्ट न जोड़ें):\n    {{\n      \"name\": \"भोजन का नाम\",\n      \"p\": संख्या,\n      \"c\": संख्या,\n      \"f\": संख्या,\n      \"cal\": संख्या,\n      \"coachComment\": \"आपकी टिप्पणी\"\n    }}",
     workout_not_found: "कोई सक्रिय कसरत नहीं मिली",
     workout_not_found_desc: "आपके कोच ने अभी तक कोई प्रोग्राम असाइन नहीं किया है।",
     workout_active: "सक्रिय प्रोग्राम",
@@ -283,26 +416,40 @@ export const hi = {
     wellness_coach_wis: "कोच की सलाह",
     wellness_toast_success: "दैनिक स्वास्थ्य डेटा सुरक्षित किया गया! 🧠",
     wellness_error: "AI टिप्पणी प्राप्त नहीं हो सकी, लेकिन डेटा सहेज लिया गया है।",
-    wellness_prompt: `
-      आप एक एलीट स्पोर्ट्स परफॉरमेंस कोच हैं। एक एथलीट ने आज के लिए निम्नलिखित स्वास्थ्य डेटा दर्ज किया है:
-      RPE (कठिनाई): {rpe}/10
-      नींद: {sleep} घंटे
-      ऊर्जा: {energy}/10
-      तनाव: {stress}/10
-
-      इस डेटा के आधार पर, एथलीट के कल के प्रशिक्षण या रिकवरी प्रक्रिया के लिए 2-3 वाक्यों में पेशेवर, प्रेरणादायक और वैज्ञानिक सलाह दें। आपकी सलाह संक्षिप्त, पेशेवर और "एलीट एथलीट" की दृष्टि के अनुरूप होनी चाहिए।
-    `,
+    wellness_prompt: "\n      आप एक एलीट स्पोर्ट्स परफॉरमेंस कोच हैं। एक एथलीट ने आज के लिए निम्नलिखित स्वास्थ्य डेटा दर्ज किया है:\n      RPE (कठिनाई): {rpe}/10\n      नींद: {sleep} घंटे\n      ऊर्जा: {energy}/10\n      तनाव: {stress}/10\n\n      इस डेटा के आधार पर, एथलीट के कल के प्रशिक्षण या रिकवरी प्रक्रिया के लिए 2-3 वाक्यों में पेशेवर, प्रेरणादायक और वैज्ञानिक सलाह दें। आपकी सलाह संक्षिप्त, पेशेवर और \"एलीट एथलीट\" की दृष्टि के अनुरूप होनी चाहिए।\n    ",
     wellness_sliders: [
-      { key: "rpe", label: "RPE (कसरत कठिनाई)", icon: "🔥" },
-      { key: "sleep", label: "नींद की अवधि (घंटे)", icon: "😴" },
-      { key: "energy", label: "ऊर्जा का स्तर", icon: "⚡" },
-      { key: "stress", label: "तनाव का स्तर", icon: "🧠" }
+      {
+        key: "rpe",
+        label: "RPE (कसरत कठिनाई)",
+        icon: "🔥"
+      },
+      {
+        key: "sleep",
+        label: "नींद की अवधि (घंटे)",
+        icon: "😴"
+      },
+      {
+        key: "energy",
+        label: "ऊर्जा का स्तर",
+        icon: "⚡"
+      },
+      {
+        key: "stress",
+        label: "तनाव का स्तर",
+        icon: "🧠"
+      }
     ],
     roadmap_title: "प्रो की ओर पथ",
     roadmap_desc: "सफलता के कदम",
     roadmap_current: "वर्तमान चरण",
     roadmap_rank: "{} रैंक",
-    roadmap_milestones: ["रूकी", "क्षेत्रीय लीग", "द्वितीय लीग", "सुल्तान लीग", "एलीट प्रो"],
+    roadmap_milestones: [
+      "रूकी",
+      "क्षेत्रीय लीग",
+      "द्वितीय लीग",
+      "सुल्तान लीग",
+      "एलीट प्रो"
+    ],
     roadmap_coach_msg_title: "कोच एला का संदेश",
     roadmap_coach_msg_text: "सुल्तान लीग के रास्ते की कुंजी अनुशासन है। आज आप जो भी कसरत करते हैं वह आपको शीर्ष के एक कदम और करीब ले जाती है।"
   },
@@ -328,8 +475,6 @@ export const hi = {
     heatmap_quote: "अनुशासन दैनिक छोटे विकल्पों का योग है।",
     empty_client: "क्लाइंट नहीं मिला।",
     btn_back: "वापस",
-    
-    // KPI Cards
     kpi_active_clients: "सक्रिय क्लाइंट",
     kpi_total_registrations: "कुल {} पंजीकरण",
     kpi_monthly_revenue: "मासिक राजस्व",
@@ -338,8 +483,6 @@ export const hi = {
     kpi_weekly_average: "साप्ताहिक औसत",
     kpi_new_applications: "नया आवेदन",
     kpi_total_leads: "कुल {} लीड्स",
-    
-    // Leads section
     leads_crm: "CRM · संभावित लीड्स",
     leads_title: "आने वाले आवेदन",
     leads_new_badge: "{} नया आवेदन",
@@ -360,14 +503,46 @@ export const hi = {
     leads_goal_fitness: "फिटनेस / सामान्य शक्ति",
     leads_goal_weight: "वजन घटाना / टोनिंग",
     leads_goal_other: "अन्य",
-    
-    // Toasts
     toast_leads_fetch_error: "डेटा प्राप्त करने में विफल।",
     toast_leads_update_error: "स्थिति अपडेट नहीं हो सकी।",
     toast_leads_updated: "{} के साथ संचार स्थिति अपडेट की गई ✅",
     toast_leads_form_sent: "फ़ॉर्म लिंक साझा किया गया!",
-
-    // Wellness Feed
+    clients_portal_link_success: "Portal link prepared for WhatsApp!",
+    clients_portal_link_error: "Error: Encryption failed.",
+    clients_measurement_link_success: "Measurement link shared!",
+    clients_session_deducted: "✓ 1 Session Deducted and Saved.",
+    clients_added: "Client added and automation triggered!",
+    clients_updated: "Client updated!",
+    clients_session_finished: "Session complete! 💡 Would you like to send an auto payment / package renewal message?",
+    clients_session_postponed: "ℹ️ Session postponed / Cancellation noted.",
+    clients_session_label: "Session",
+    clients_close: "✕ Close",
+    clients_new: "+ New Client",
+    clients_total: "Total Clients",
+    clients_search_placeholder: "Search clients...",
+    clients_add_title: "Add New Client",
+    clients_name_placeholder: "Jane Doe",
+    clients_goal_placeholder: "Strength / Volleyball",
+    clients_phone_placeholder: "+1 xxx xxx xxxx",
+    clients_email_placeholder: "mail@example.com",
+    clients_save: "Save Client",
+    clients_no_results: "No results found",
+    clients_empty: "No clients added yet",
+    clients_no_results_hint: "Try a different search",
+    clients_empty_hint: "Use the button above to add a new client",
+    clients_edit_btn: "Edit",
+    clients_delete_confirm: "Are you sure you want to permanently delete this client?",
+    clients_delete_btn: "Delete",
+    clients_edit_title: "Edit Client",
+    clients_note_placeholder: "E.g. Great work this week!",
+    clients_save_btn: "Save",
+    clients_cancel_btn: "Cancel",
+    clients_notes_title: "Client Notes",
+    clients_add_note_placeholder: "Add a new note...",
+    clients_save_note: "Save Note",
+    clients_no_notes: "No notes yet.",
+    clients_deduct_session: "Yes, Deduct 1 Session (-1)",
+    clients_cancel_session: "No, Cancel / Postpone",
     wellness_title: "Athlete Wellness Feed",
     wellness_subtitle: "Fatigue & Recovery Tracking",
     wellness_empty: "No wellness entries yet.",
@@ -381,8 +556,6 @@ export const hi = {
     wellness_msg_danger: "Your fatigue and stress levels seem quite high. I recommend skipping training today and doing full recovery. 🛑",
     wellness_msg_warning: "You look a bit tired today. Let's reduce training intensity by 50% or focus on mobility. ⚠️",
     wellness_msg_safe: "Everything looks great! Keep up the performance. 🔥",
-
-    // Student Manager
     students_title: "Student Portal Management 🎓",
     students_subtitle: "Create and manage portal access for students",
     students_count: "{} Students",
@@ -403,8 +576,6 @@ export const hi = {
     students_toast_error: "Error: {message}",
     students_toast_copy_success: "✅ Link copied!",
     students_btn_copy_link: "📋 Copy Link",
-
-    // Revenue & Payments
     revenue_title: "Revenue Analysis",
     revenue_subtitle: "Last 6 Months MRR Performance",
     revenue_monthly: "Monthly Revenue",
@@ -421,27 +592,357 @@ export const hi = {
     payments_status_pending: "Pending",
     payments_status_overdue: "Overdue",
     payments_method_transfer: "Transfer",
-    payments_method_cash: "Cash"
+    payments_method_cash: "Cash",
+    alerts_title: "Action Required",
+    alerts_subtitle: "Cases Requiring Urgent Intervention",
+    alerts_empty: "Everything is on track, all athletes are active!",
+    alerts_msg_warning: "Sessions running low — Remind to renew package.",
+    alerts_msg_danger: "Sessions exhausted — Send new package offer.",
+    alerts_btn_action: "Action",
+    alerts_btn_whatsapp: "💬 Remind via WhatsApp",
+    alerts_btn_profile: "👤 View Profile",
+    alerts_toast_whatsapp: "WhatsApp message prepared for {} ✅",
+    alerts_toast_error: "Phone number not found for {}.",
+    alerts_whatsapp_danger: "Hello {name}! 👋\n\nOur work together was very productive and your progress was great! Would you like to continue where we left off with a new package?\n\nI've prepared a special plan for you. Shall we talk about the details? 💪\n\nYour Coach",
+    alerts_whatsapp_warning: "Hello {name}! 👋\n\nYour package is about to end, you're making great progress! Would you like to check out our package renewal plans to keep the momentum going?\n\nLet's determine the most suitable option for you together! 🎯\n\nYour Coach",
+    macro_distribution_title: "Macro Distribution",
+    macro_distribution_subtitle: "Average Across the System",
+    macro_protein: "Protein",
+    macro_fat: "Fat",
+    macro_carbs: "Carbohydrate",
+    macro_unit: "gram",
+    builder_title: "Program Builder",
+    builder_subtitle: "Exercise database, templates & WhatsApp output",
+    builder_moves: "moves",
+    builder_sets: "sets",
+    builder_muscle_groups: "muscle groups",
+    builder_close: "✕ Close",
+    builder_exercise_db: "Exercise DB",
+    builder_search_placeholder: "Search exercises...",
+    builder_all_muscles: "All Muscles",
+    builder_all_categories: "All Categories",
+    builder_all_equipment: "All Equipment",
+    builder_results: "results",
+    builder_export: "Export",
+    builder_clear: "Clear",
+    builder_reps_placeholder: "10",
+    builder_note_placeholder: "Note...",
+    builder_templates_tab: "Templates",
+    builder_custom_tab: "Custom Settings",
+    builder_client_label: "Client",
+    builder_no_client: "No Client",
+    builder_sessions_suffix: "Sessions",
+    builder_ready_templates: "Ready Templates",
+    builder_3day: "3 Day",
+    builder_3day_desc: "Full Body",
+    builder_4day: "4 Day",
+    builder_4day_desc: "Upper/Lower",
+    builder_volleyball: "Volleyball",
+    builder_volleyball_desc: "Sport Specific",
+    builder_generating: "Generating...",
+    builder_ai_program: "AI Program",
+    builder_ai_desc: "LLM Council",
+    builder_program_note: "Program Note",
+    builder_quick_notes: "Quick Notes",
+    builder_tag_warmup: "Warm-up 10min",
+    builder_tag_cooldown: "Cool-down 5min",
+    builder_tag_superset: "Superset",
+    builder_tag_dropset: "Drop Set",
+    builder_tag_rpe: "RPE 8-9",
+    builder_tag_rest60: "60s rest",
+    builder_tag_rest90: "90s rest",
+    builder_tag_tempo: "Tempo 3-1-2",
+    builder_wa_output: "WhatsApp Output",
+    builder_pdf: "PDF",
+    builder_png: "PNG",
+    builder_copy: "Copy",
+    builder_copied: "Copied!",
+    builder_send: "Send",
+    builder_chars: "characters",
+    builder_lines: "lines",
+    builder_llm_working: "🧠 LLM Council working...",
+    builder_ai_error_empty: "AI Error: No result returned",
+    builder_ai_error: "AI Error: ",
+    builder_png_error: "Could not generate PNG",
+    builder_pdf_error: "Could not generate PDF",
+    builder_default_note: "Don't forget to track your macros from your diet plan to meet your nutrition goals.",
+    builder_default_wa: "🏐 *ARENA — Workout*\n━━━━━━━━━━━━━━━━━━━━\n👤 New Client\n💪 Please select a Client and Split.",
+    builder_export_name: "ARENA",
+    builder_export_tagline: "PERFORMANCE PLATFORM",
+    builder_export_footer: "📸 @arenaperformance",
+    food_title: "Food Tracker",
+    food_subtitle: "Photo analysis & nutrition database",
+    food_ai_vision: "AI Vision",
+    food_meals: "meals",
+    food_calorie: "Calories",
+    food_protein: "Protein",
+    food_fat: "Fat",
+    food_carb: "Carbs",
+    food_target: "Target: 2200 kcal",
+    food_remaining: "remaining",
+    food_quick_add: "Quick Add",
+    food_added: "added",
+    food_photo_label: "Food Photo",
+    food_photo_alt: "Selected food photo",
+    food_photo_placeholder: "Take or upload a photo",
+    food_gallery: "Gallery",
+    food_camera: "Camera",
+    food_analyzing: "Analyzing...",
+    food_ai_detect: "Detect Calories with AI",
+    food_add_nutrition: "Add Nutrition",
+    food_search_placeholder: "Search food... (chicken, rice, egg...)",
+    food_search_results: "results",
+    food_daily_log: "Daily Log",
+    food_clear: "Clear",
+    food_empty: "No food added yet",
+    food_empty_hint: "Search or analyze a photo",
+    food_total: "TOTAL",
+    food_wa_title: "WhatsApp Food Log",
+    food_copy: "Copy",
+    food_copied: "Copied!",
+    food_send: "Send",
+    food_upload_first: "Please upload a photo first.",
+    food_vision_error: "Vision API did not respond",
+    food_ai_detect_toast: "AI detected: ",
+    food_ai_error: "AI Analysis Error: ",
+    cal_title: "Session Calendar",
+    cal_subtitle: "Weekly session plan & appointment management",
+    cal_appointment: "Appointment",
+    cal_client: "Client",
+    cal_busy: "Busy",
+    cal_add_appointment: "Add Appointment",
+    cal_client_label: "Client",
+    cal_not_listed: "Not Listed",
+    cal_day_label: "Day",
+    cal_time_label: "Time",
+    cal_add_to_calendar: "Add to Calendar",
+    cal_add_note: "Added sessions don't deduct from CRM.",
+    cal_next_sessions: "Next Sessions",
+    cal_no_appointment: "No appointments",
+    cal_added: "Appointment added!",
+    cal_days: {
+      mon: "Monday",
+      tue: "Tuesday",
+      wed: "Wednesday",
+      thu: "Thursday",
+      fri: "Friday",
+      sat: "Saturday",
+      sun: "Sunday"
+    },
+    assess_title: "Physical Assessment",
+    assess_subtitle: "FMS scoring, body measurements & posture analysis",
+    assess_measurements: "measurements",
+    assess_photos: "photos",
+    assess_select_client: "Select Client to Assess",
+    assess_select_placeholder: "Select Client...",
+    assess_tab_fms: "FMS Scoring",
+    assess_tab_measurements: "Measurements",
+    assess_tab_posture: "Posture Analysis",
+    assess_fms_title: "Functional Movement Screen",
+    assess_fms_hint: "Score each movement from 0 to 3",
+    assess_fms_total: "FMS Total Score",
+    assess_fms_good: "Good Level",
+    assess_fms_moderate: "Moderate Level",
+    assess_fms_improve: "Needs Improvement",
+    assess_fms_legend_perfect: "Perfect",
+    assess_fms_legend_good: "Good",
+    assess_fms_legend_limited: "Limited",
+    assess_fms_legend_pain: "Pain",
+    assess_fms_deep_squat: "Deep Squat",
+    assess_fms_deep_squat_desc: "Bilateral mobility & stability",
+    assess_fms_hurdle: "Hurdle Step",
+    assess_fms_hurdle_desc: "Single leg balance",
+    assess_fms_lunge: "Inline Lunge",
+    assess_fms_lunge_desc: "Hip flexor flexibility",
+    assess_fms_shoulder: "Shoulder Mobility",
+    assess_fms_shoulder_desc: "Upper body flexibility",
+    assess_fms_leg_raise: "Active Straight Leg",
+    assess_fms_leg_raise_desc: "Hamstring flexibility",
+    assess_fms_core: "Core Stability",
+    assess_fms_core_desc: "Trunk anti-extension",
+    assess_body_title: "Body Measurements (cm)",
+    assess_body_hint: "Track progress with weekly measurements",
+    assess_body_shoulder: "Shoulders",
+    assess_body_chest: "Chest",
+    assess_body_waist: "Waist",
+    assess_body_hip: "Hips",
+    assess_body_leg: "Right Leg",
+    assess_body_arm: "Right Arm",
+    assess_save_measurements: "Save Measurements",
+    assess_history: "Past Measurements",
+    assess_history_count: "records",
+    assess_history_date: "Date",
+    assess_posture_title: "Posture Photo",
+    assess_posture_hint: "Kyphosis, lordosis or asymmetry analysis",
+    assess_photo_upload: "Upload photo",
+    assess_photo_formats: "PNG, JPG or WebP",
+    assess_notes_title: "Assessment Notes",
+    assess_notes_hint: "Corrective exercise goals and observations",
+    assess_tag_anterior: "Anterior Pelvic Tilt",
+    assess_tag_posterior: "Posterior Pelvic Tilt",
+    assess_tag_kyphosis: "Kyphosis",
+    assess_tag_lordosis: "Lordosis",
+    assess_tag_scoliosis: "Scoliosis",
+    assess_tag_shoulder_asym: "Shoulder Asymmetry",
+    assess_tag_knee_valgus: "Knee Valgus",
+    assess_notes_placeholder: "E.g.: Anterior pelvic tilt observed...",
+    assess_analysis_saved: "Analysis saved!",
+    assess_save_analysis: "Save Analysis",
+    assess_progress_title: "Progress Photos",
+    assess_progress_subtitle: "Before / After comparison",
+    assess_add_photo: "+ Photo",
+    assess_no_photos: "No photos added yet",
+    assess_no_photos_hint: "Add a new photo to track your progress!",
+    assess_delete: "Delete",
+    assess_lightbox_alt: "Full view",
+    assess_select_first: "Please select a client first.",
+    assess_saved: "Measurements saved!",
+    assess_photo_type_error: "Only PNG, JPEG and WebP are supported.",
+    assess_photo_size_error: "File size cannot exceed 5MB.",
+    assess_photo_invalid: "Invalid image file.",
+    assess_photo_select_first: "Select a client first.",
+    assess_photo_added: "Photo added!",
+    login_hero_title1: "Your Growth",
+    login_hero_title2: "Starts Here.",
+    login_hero_desc: "Welcome to your personal training portal. Your workout plans, nutrition tracking, and progress analysis await you here.",
+    login_stat_athlete: "Active Athletes",
+    login_stat_plan: "Training Plan",
+    login_stat_success: "Success Rate",
+    login_testimonial_name: "Mina Aksoy",
+    login_testimonial_role: "Elite Athlete",
+    login_testimonial_text: "Thanks to the portal, I can track my progress much more clearly. My training plans are always up to date and personalized.",
+    login_tab_login: "Sign In",
+    login_tab_register: "Sign Up",
+    login_mode_login_title: "Welcome Back 👋",
+    login_mode_register_title: "Create Account 🚀",
+    login_mode_magic_title: "Passwordless Login ✨",
+    login_mode_reset_title: "Reset Password 🔑",
+    login_mode_login_subtitle: "Sign in to your training portal",
+    login_mode_register_subtitle: "Create a new account and start your training journey",
+    login_mode_magic_subtitle: "We'll send a one-time login link to your email",
+    login_mode_reset_subtitle: "We'll send a password reset link to your email",
+    login_name_label: "Full Name",
+    login_name_placeholder: "Your Full Name",
+    login_email_label: "Email",
+    login_email_placeholder: "example@email.com",
+    login_phone_label: "Phone",
+    login_phone_optional: "(Optional)",
+    login_phone_placeholder: "+90 5XX XXX XX XX",
+    login_password_label: "Password",
+    login_password_placeholder: "Min. 8 characters",
+    login_magic_link: "Passwordless login →",
+    login_forgot_password: "Forgot password",
+    login_btn_login: "Sign In",
+    login_btn_register: "Create Account",
+    login_btn_magic: "Send Link",
+    login_btn_reset: "Send Reset Link",
+    login_back: "← Back to login",
+    login_divider: "or",
+    login_magic_button: "Passwordless email login",
+    login_footer_security: "End-to-End Encrypted • GDPR Compliant",
+    login_register_success: "Registration successful! Check your email.",
+    login_magic_success: "Login link sent to your email!",
+    login_reset_success: "Password reset link sent!",
+    cookie_title: "Privacy & Cookies",
+    cookie_text: "We use cookies to improve your experience.",
+    cookie_kvkk_link: "Under GDPR",
+    cookie_required: "Required",
+    cookie_required_desc: "Essential for site operation",
+    cookie_analytics: "Analytics",
+    cookie_analytics_desc: "Visit statistics",
+    cookie_marketing: "Marketing",
+    cookie_marketing_desc: "Personalized content",
+    cookie_required_aria: "Required",
+    cookie_on: "On",
+    cookie_off: "Off",
+    cookie_accept_all: "Accept All",
+    cookie_save: "Save Selection",
+    cookie_customize: "Customize",
+    reload_ready_title: "App Ready!",
+    reload_update_title: "New Version Available!",
+    reload_ready_text: "App can now work offline.",
+    reload_update_text: "New features and improvements have been released.",
+    reload_update_btn: "Update Now",
+    reload_close: "Close"
   },
   legal: {
     kvkk_title: "GDPR और गोपनीयता नीति",
     terms_title: "उपयोग की शर्तें",
     btn_close: "समझ गया, बंद करें",
     last_update: "अंतिम अपडेट: 7 अप्रैल 2026",
-    
     kvkk_intro: "{} में, हम सामान्य डेटा संरक्षण विनियमन (GDPR) के तहत आपके व्यक्तिगत डेटा की सुरक्षा को बहुत महत्व देते हैं।",
     kvkk_sections: [
-      { title: "1. डेटा नियंत्रक", content: "डेटा नियंत्रक के रूप में, {} वेबसाइट के माध्यम से एकत्र किए गए सभी व्यक्तिगत डेटा के लिए ज़िम्मेदार है। संपर्क: {}" },
-      { title: "2. एकत्र किया गया डेटा", content: "नाम, ईमेल, फ़ोन, स्वास्थ्य डेटा, शारीरिक माप, प्रगति की फ़ोटो और कुकीज़।" },
-      { title: "3. उद्देश्य", content: "व्यक्तिगत योजना बनाना, प्रदर्शन की निगरानी और अपॉइंटमेंट प्रबंधन।" },
-      { title: "4. अधिकार", content: "आपको अपने व्यक्तिगत डेटा तक पहुँचने, सुधारने या हटाने का अनुरोध करने का अधिकार है।" }
+      {
+        title: "1. Data Controller",
+        content: "As the data controller, {}, is responsible for all personal data collected through the arena.kozbeylikonagi.com.tr website. Contact: {}"
+      },
+      {
+        title: "2. Personal Data Collected",
+        content: "Within the scope of our services, the following personal data may be collected: Name, surname, and contact information (e-mail, telephone); health and physical measurement data (height, weight, body analysis); training and nutrition records; form approval videos and progress photos; cookie data and site usage statistics."
+      },
+      {
+        title: "3. Purpose of Processing Data",
+        content: "Your personal data is processed for the following purposes: Creating personalized training and nutrition programs; performance tracking and progress analysis; appointment and communication management; increasing service quality; fulfilling legal obligations."
+      },
+      {
+        title: "4. Transfer of Data",
+        content: "Your personal data is not shared with third parties except for legal obligations. Data is stored on secure servers within the country."
+      },
+      {
+        title: "5. Data Retention Period",
+        content: "Your personal data is kept as long as the service relationship continues and during the legal retention periods. After the service relationship ends, your data is deleted or anonymized, without prejudice to legal obligations."
+      },
+      {
+        title: "6. Your Rights",
+        content: "You have the following rights: Learning whether your personal data is processed; requesting information if processed; learning the purpose of processing and whether it is used in accordance with its purpose; requesting the correction, deletion, or destruction of data; knowing the third parties to whom the data is transferred; requesting correction if the data is processed incompletely or incorrectly."
+      },
+      {
+        title: "7. Cookie Policy",
+        content: "Our website uses cookies to improve user experience. Mandatory cookies are necessary for the site to function. Analytical cookies collect visit statistics. Marketing cookies provide personalized content presentation. You can change your cookie preferences at any time."
+      },
+      {
+        title: "8. Contact",
+        content: "For your requests within the scope of GDPR, you can reach us by sending an e-mail to {}. Your applications will be answered within 30 days at the latest."
+      }
     ],
     terms_intro: "इस वेबसाइट का उपयोग करके, आप निम्नलिखित उपयोग की शर्तों को स्वीकार करते हैं। कृपया उन्हें ध्यान से पढ़ें।",
     terms_sections: [
-      { title: "1. सेवा का विवरण", content: "{} व्यक्तिगत प्रशिक्षण और पोषण परामर्श प्रदान करता है।" },
-      { title: "2. सदस्यता", content: "खाते की जानकारी व्यक्तिगत है और इसे तीसरे पक्ष के साथ साझा नहीं किया जा सकता।" },
-      { title: "3. स्वास्थ्य चेतावनी", content: "कार्यक्रम चिकित्सा सलाह नहीं देते हैं। शुरू करने से पहले अपने चिकित्सक से परामर्श करें।" },
-      { title: "4. बौद्धिक संपदा", content: "सभी सामग्री {} की है और कॉपीराइट द्वारा संरक्षित है।" }
+      {
+        title: "1. Service Description",
+        content: "{} provides personalized training programs, nutrition consultancy, and performance coaching services. All programs are prepared as a result of individual evaluation and are personalized."
+      },
+      {
+        title: "2. Membership and Account",
+        content: "The account information created for portal access is personal and cannot be shared with third parties. You are responsible for the security of your account. If you notice a suspicious situation, you must immediately notify {}."
+      },
+      {
+        title: "3. Payment Terms",
+        content: "Service fees are collected monthly. After payment is made, service is started for the relevant period. The refund policy is subject to the conditions specified in the service contract."
+      },
+      {
+        title: "4. Health Warning",
+        content: "The training and nutrition programs provided do not constitute medical advice. If you have any health problems, it is recommended to consult your doctor before starting the program. {} cannot be held responsible for situations arising from health problems."
+      },
+      {
+        title: "5. Intellectual Property",
+        content: "All content on this website (text, visual, design, logo, software) belongs to {} and is protected by copyright. Unauthorized copying, distribution, or commercial use of the contents is prohibited."
+      },
+      {
+        title: "6. Limitation of Liability",
+        content: "{} does not guarantee that the website will operate uninterrupted and error-free. No responsibility is accepted for data loss or access problems caused by technical glitches. Physical injuries arising from the implementation of training programs are the user's own responsibility."
+      },
+      {
+        title: "7. Right to Change",
+        content: "{} reserves the right to change these terms of use without prior notice. Current terms are always published on this page."
+      },
+      {
+        title: "8. Governing Law",
+        content: "These terms are subject to the laws of the Republic of Turkey. Istanbul courts and enforcement offices are authorized for disputes."
+      },
+      {
+        title: "9. Contact",
+        content: "For your questions, you can reach us at {}."
+      }
     ]
   },
   forms: {
