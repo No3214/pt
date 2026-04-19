@@ -116,7 +116,15 @@ export default defineConfig({
           // TR and EN baked into index (needed synchronously at first paint).
           // Other locales are dynamic imports — Vite emits one chunk per file.
           if (/\/src\/locales\/(tr|en)\.ts$/.test(id)) return 'i18n-base'
-          if (id.includes('/src/pages/admin/') || id.includes('/src/components/admin/')) return 'admin'
+          // Each admin page gets its own chunk so only the active route loads.
+          // Layout (shell) and shared /components/admin/ stay in `admin`.
+          if (id.includes('/src/pages/admin/')) {
+            const m = id.match(/\/src\/pages\/admin\/([A-Za-z0-9_-]+)\.tsx?$/)
+            const page = m?.[1]
+            if (page && page !== 'Layout') return `admin-${page.toLowerCase()}`
+            return 'admin'
+          }
+          if (id.includes('/src/components/admin/')) return 'admin'
           if (id.includes('/src/pages/Portal') || id.includes('/src/components/portal/')) return 'portal'
           return undefined
         },
