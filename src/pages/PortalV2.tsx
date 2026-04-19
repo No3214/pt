@@ -1,36 +1,48 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense, lazy } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStudentAuth } from '../stores/studentAuth'
 import { useStore } from '../stores/useStore'
 import { GrainOverlay } from '../components/landing/LandingUI'
 import { tenantConfig } from '../config/tenant'
 
-// Auth
+// Auth (must be eager for the unauth branch)
 import StudentLogin from './portal/StudentLogin'
 
-// Portal Components
+// Always-visible globals (chrome + dashboard-atmosphere)
+import LevelAtmosphere from '../components/portal/LevelAtmosphere'
+import NotificationCenter from '../components/portal/NotificationCenter'
+import ChatWidget from '../components/portal/ChatWidget'
+
+// Dashboard is the default tab on entry — keep its heavy children eager so the
+// first paint after login is instant. Other tabs pay their own download cost.
+import SubscriptionCard from '../components/portal/SubscriptionCard'
+import PathToProRoadmap from '../components/portal/PathToProRoadmap'
 import HabitCheckIn from '../components/portal/HabitCheckIn'
-import FoodLog from '../components/portal/FoodLog'
-import MacroTracker from '../components/portal/MacroTracker'
-import WorkoutLogger from '../components/portal/WorkoutLogger'
-import ProgressGallery from '../components/portal/ProgressGallery'
 import GamifiedExport from '../components/portal/GamifiedExport'
-import AchievementTracker from '../components/portal/AchievementTracker'
-import StudentWeightChart from '../components/portal/StudentWeightChart'
-import AiMacroAssistant from '../components/portal/AiMacroAssistant'
+import WellnessTracker from '../components/portal/WellnessTracker'
 import PerformanceRadar from '../components/portal/PerformanceRadar'
 import CoachVault from '../components/portal/CoachVault'
-import WellnessTracker from '../components/portal/WellnessTracker'
-import PathToProRoadmap from '../components/portal/PathToProRoadmap'
-import LevelAtmosphere from '../components/portal/LevelAtmosphere'
-
-// NEW V2 Components
-import ChatWidget from '../components/portal/ChatWidget'
-import NotificationCenter from '../components/portal/NotificationCenter'
-import VideoLibrary from '../components/portal/VideoLibrary'
 import OnlineMeeting from '../components/portal/OnlineMeeting'
-import SubscriptionCard from '../components/portal/SubscriptionCard'
-import AIWorkoutGenerator from '../components/portal/AIWorkoutGenerator'
+
+// Off-tab content — code-split so switching tabs loads that tab's chunk only.
+const AIWorkoutGenerator = lazy(() => import('../components/portal/AIWorkoutGenerator'))
+const WorkoutLogger = lazy(() => import('../components/portal/WorkoutLogger'))
+const MacroTracker = lazy(() => import('../components/portal/MacroTracker'))
+const AiMacroAssistant = lazy(() => import('../components/portal/AiMacroAssistant'))
+const FoodLog = lazy(() => import('../components/portal/FoodLog'))
+const VideoLibrary = lazy(() => import('../components/portal/VideoLibrary'))
+const StudentWeightChart = lazy(() => import('../components/portal/StudentWeightChart'))
+const AchievementTracker = lazy(() => import('../components/portal/AchievementTracker'))
+const ProgressGallery = lazy(() => import('../components/portal/ProgressGallery'))
+
+// Centered skeleton for tab-switch loading state — avoids layout shift.
+function TabSkeleton({ h = 400 }: { h?: number }) {
+  return (
+    <div className="flex items-center justify-center" style={{ minHeight: h }} aria-hidden>
+      <div className="w-8 h-8 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
+    </div>
+  )
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -267,13 +279,15 @@ export default function PortalV2() {
                 <p className={`mt-2 text-sm ${dm ? 'text-white/30' : 'text-black/30'}`}>AI destekli programlar, antrenman kaydı ve gelişim takibi.</p>
               </motion.section>
 
-              <motion.div variants={fadeUp}>
-                <AIWorkoutGenerator />
-              </motion.div>
+              <Suspense fallback={<TabSkeleton h={600} />}>
+                <motion.div variants={fadeUp}>
+                  <AIWorkoutGenerator />
+                </motion.div>
 
-              <motion.div variants={fadeUp}>
-                <WorkoutLogger />
-              </motion.div>
+                <motion.div variants={fadeUp}>
+                  <WorkoutLogger />
+                </motion.div>
+              </Suspense>
             </motion.div>
           )}
 
@@ -285,11 +299,13 @@ export default function PortalV2() {
                 <p className={`mt-2 text-sm ${dm ? 'text-white/30' : 'text-black/30'}`}>Makro takibi, AI besin asistanı ve günlük kayıt.</p>
               </motion.section>
 
-              <motion.div variants={fadeUp} className="grid lg:grid-cols-3 gap-8">
-                <MacroTracker />
-                <AiMacroAssistant />
-                <FoodLog />
-              </motion.div>
+              <Suspense fallback={<TabSkeleton h={500} />}>
+                <motion.div variants={fadeUp} className="grid lg:grid-cols-3 gap-8">
+                  <MacroTracker />
+                  <AiMacroAssistant />
+                  <FoodLog />
+                </motion.div>
+              </Suspense>
             </motion.div>
           )}
 
@@ -301,9 +317,11 @@ export default function PortalV2() {
                 <p className={`mt-2 text-sm ${dm ? 'text-white/30' : 'text-black/30'}`}>Video rehberli egzersizler, teknik ipuçları.</p>
               </motion.section>
 
-              <motion.div variants={fadeUp}>
-                <VideoLibrary />
-              </motion.div>
+              <Suspense fallback={<TabSkeleton h={500} />}>
+                <motion.div variants={fadeUp}>
+                  <VideoLibrary />
+                </motion.div>
+              </Suspense>
             </motion.div>
           )}
 
@@ -315,14 +333,16 @@ export default function PortalV2() {
                 <p className={`mt-2 text-sm ${dm ? 'text-white/30' : 'text-black/30'}`}>Kilo takibi, başarılar ve fotoğraf galerisi.</p>
               </motion.section>
 
-              <motion.div variants={fadeUp} className="grid md:grid-cols-2 gap-8">
-                <StudentWeightChart />
-                <AchievementTracker athleteLevel={profile?.athlete_level || 'Rookie'} />
-              </motion.div>
+              <Suspense fallback={<TabSkeleton h={600} />}>
+                <motion.div variants={fadeUp} className="grid md:grid-cols-2 gap-8">
+                  <StudentWeightChart />
+                  <AchievementTracker athleteLevel={profile?.athlete_level || 'Rookie'} />
+                </motion.div>
 
-              <motion.div variants={fadeUp}>
-                <ProgressGallery />
-              </motion.div>
+                <motion.div variants={fadeUp}>
+                  <ProgressGallery />
+                </motion.div>
+              </Suspense>
             </motion.div>
           )}
 

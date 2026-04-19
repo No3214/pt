@@ -125,7 +125,10 @@ export default defineConfig({
             return 'admin'
           }
           if (id.includes('/src/components/admin/')) return 'admin'
-          if (id.includes('/src/pages/Portal') || id.includes('/src/components/portal/')) return 'portal'
+          // Portal shell (Portal.tsx / PortalV2.tsx / StudentLogin) stays in `portal`;
+          // individual /components/portal/* components are chunked per dynamic
+          // import by Rollup so off-tab payloads don't bloat first-load.
+          if (/\/src\/pages\/Portal(V2)?\.tsx$/.test(id) || id.includes('/src/pages/portal/')) return 'portal'
           return undefined
         },
       },
