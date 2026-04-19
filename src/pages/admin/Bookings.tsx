@@ -320,7 +320,7 @@ export default function Bookings() {
 
               <div>
                 <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Platform</label>
-                <select value={scheduleForm.meetingType} onChange={e => setScheduleForm({ ...scheduleForm, meetingType: e.target.value as any })} className={inp}>
+                <select value={scheduleForm.meetingType} onChange={e => setScheduleForm({ ...scheduleForm, meetingType: e.target.value as 'zoom' | 'teams' | 'meet' | 'other' })} className={inp}>
                   <option value="zoom">Zoom</option>
                   <option value="teams">Microsoft Teams</option>
                   <option value="meet">Google Meet</option>

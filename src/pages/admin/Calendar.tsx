@@ -190,7 +190,7 @@ export default function CalendarPage() {
                     <label className={`block mb-2 text-xs font-medium uppercase tracking-wider ${dm ? 'text-white/50' : 'text-stone-500'}`}>Platform</label>
                     <select
                       value={form.meetingType}
-                      onChange={e => setForm({ ...form, meetingType: e.target.value as any })}
+                      onChange={e => setForm({ ...form, meetingType: e.target.value as 'zoom' | 'teams' | 'meet' | 'other' })}
                       className={inp}
                     >
                       <option value="zoom">Zoom</option>

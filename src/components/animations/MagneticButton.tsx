@@ -1,5 +1,8 @@
-import { motion, useMotionValue, useSpring, useReducedMotion } from 'framer-motion'
-import { useRef, type ReactNode, type MouseEvent } from 'react'
+import { motion, useMotionValue, useSpring, useReducedMotion, type HTMLMotionProps } from 'framer-motion'
+import { useRef, type ReactNode, type MouseEvent, type ComponentType } from 'react'
+
+type AnchorMotionProps = HTMLMotionProps<'a'>
+type ButtonMotionProps = HTMLMotionProps<'button'>
 
 /**
  * Magnetic CTA — Apple/Linear seviyesinde mikroetkileşim.
@@ -48,20 +51,14 @@ export default function MagneticButton({
     y.set(0)
   }
 
-  const Inner = href ? motion.a : motion.button
-  const innerProps: Record<string, unknown> = {
+  const common = {
     className,
     style: { x: sx, y: sy },
     onClick,
     'aria-label': ariaLabel,
     whileHover: reduce ? undefined : { scale: 1.04 },
     whileTap: reduce ? undefined : { scale: 0.97 },
-    transition: { type: 'spring', stiffness: 320, damping: 22 },
-  }
-  if (href) {
-    innerProps.href = href
-    if (target) innerProps.target = target
-    if (rel) innerProps.rel = rel
+    transition: { type: 'spring' as const, stiffness: 320, damping: 22 },
   }
 
   return (
@@ -71,7 +68,21 @@ export default function MagneticButton({
       onMouseLeave={handleLeave}
       className="inline-block"
     >
-      <Inner {...(innerProps as any)}>{children}</Inner>
+      {href ? (
+        (() => {
+          const A = motion.a as ComponentType<AnchorMotionProps>
+          return (
+            <A {...common} href={href} target={target} rel={rel}>
+              {children}
+            </A>
+          )
+        })()
+      ) : (
+        (() => {
+          const B = motion.button as ComponentType<ButtonMotionProps>
+          return <B {...common}>{children}</B>
+        })()
+      )}
     </div>
   )
 }

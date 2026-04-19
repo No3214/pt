@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion, useReducedMotion, type MotionProps } from 'framer-motion'
+import { createElement, type ComponentType, type ElementType } from 'react'
 
 interface Props {
   text: string
@@ -8,16 +9,18 @@ interface Props {
   as?: 'h1' | 'h2' | 'h3' | 'p' | 'span'
 }
 
+type MotionByTag = Record<'h1' | 'h2' | 'h3' | 'p' | 'span', ComponentType<MotionProps & { className?: string }>>
+
 export default function SplitText({ text, className = '', delay = 0, stagger = 0.03, as = 'h1' }: Props) {
   const reduce = useReducedMotion()
   const words = text.split(' ')
 
   if (reduce) {
-    const Tag = as as any
-    return <Tag className={className}>{text}</Tag>
+    const Tag: ElementType = as
+    return createElement(Tag, { className }, text)
   }
 
-  const MotionTag: any = (motion as any)[as]
+  const MotionTag = (motion as unknown as MotionByTag)[as]
 
   return (
     <MotionTag

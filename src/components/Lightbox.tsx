@@ -36,7 +36,7 @@ export default function Lightbox({ images, currentIndex, isOpen, onClose, onNext
     return () => { document.removeEventListener('keydown', handleKeyDown) }
   }, [isOpen, handleKeyDown])
 
-  const handleDragEnd = (_: any, info: { offset: { x: number; y: number }; velocity: { x: number; y: number } }) => {
+  const handleDragEnd = (_: unknown, info: { offset: { x: number; y: number }; velocity: { x: number; y: number } }) => {
     const { offset, velocity } = info
     if (dragDir === 'y' && (Math.abs(offset.y) > 100 || Math.abs(velocity.y) > 500)) {
       onClose()

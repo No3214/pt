@@ -78,13 +78,16 @@ export function Card3DShine({ className = '' }: { className?: string }) {
   if (!ctx) return null
   const mx = useTransform(ctx.ry, [-12, 12], ['30%', '70%'])
   const my = useTransform(ctx.rx, [-12, 12], ['30%', '70%'])
+  const background = useTransform<string | number, string>(
+    [mx, my],
+    ([x, y]) =>
+      `radial-gradient(circle at ${x} ${y}, rgba(255,255,255,0.22), transparent 55%)`,
+  )
   return (
     <motion.div
       className={`pointer-events-none absolute inset-0 rounded-[inherit] ${className}`}
       style={{
-        background: useTransform([mx, my] as any, ([x, y]: any) =>
-          `radial-gradient(circle at ${x} ${y}, rgba(255,255,255,0.22), transparent 55%)`,
-        ) as any,
+        background,
         mixBlendMode: 'overlay',
       }}
       aria-hidden
