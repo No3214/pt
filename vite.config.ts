@@ -91,7 +91,10 @@ export default defineConfig({
               id.includes('react-transition-group') ||
               id.includes('fast-equals') ||
               id.includes('/lodash/') ||
-              id.includes('/lodash.')
+              id.includes('/lodash.') ||
+              id.includes('decimal.js') ||
+              id.includes('victory-vendor') ||
+              id.includes('/eventemitter3')
             )
               return 'charts'
             if (id.includes('react-hook-form') || id.includes('@hookform') || id.includes('/zod/')) return 'forms'
