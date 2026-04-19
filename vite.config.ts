@@ -111,7 +111,6 @@ export default defineConfig({
             )
               return 'pdf-export'
             if (id.includes('@emailjs')) return 'email'
-            if (id.includes('three') || id.includes('@react-three')) return 'three'
             return 'vendor'
           }
           // TR and EN baked into index (needed synchronously at first paint).
