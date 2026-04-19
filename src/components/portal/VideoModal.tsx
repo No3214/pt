@@ -19,7 +19,7 @@ export default function VideoModal({ isOpen, onClose, youtubeId, title }: Props)
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 z-[200] bg-black/60 backdrop-blur-sm cursor-pointer"
+            role="dialog" aria-modal="true" className="fixed inset-0 z-[200] bg-black/60 backdrop-blur-sm cursor-pointer"
           />
 
           {/* Modal */}

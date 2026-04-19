@@ -421,7 +421,7 @@ export default function Clients() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
+            role="dialog" aria-modal="true" className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
             onClick={(e) => { if (e.target === e.currentTarget) setEditModal(null) }}
           >
             <motion.div
@@ -537,7 +537,7 @@ export default function Clients() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
+            exit={{ opacity: 0 }}            role="dialog" aria-modal="true" className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
             onClick={(e) => { if (e.target === e.currentTarget) setNotesModal(null) }}
           >
             <motion.div
@@ -598,7 +598,7 @@ export default function Clients() {
         {messageModal && (
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
+            role="dialog" aria-modal="true" className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
             onClick={(e) => { if (e.target === e.currentTarget) setMessageModal(null) }}
           >
             <motion.div
@@ -640,7 +640,7 @@ export default function Clients() {
         {sessionModal && (
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
+            role="dialog" aria-modal="true" className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
             onClick={(e) => { if (e.target === e.currentTarget) setSessionModal(null) }}
           >
             <motion.div
