@@ -61,12 +61,26 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     minify: 'esbuild',
+    chunkSizeWarningLimit: 700,
     rollupOptions: {
       output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          charts: ['recharts'],          forms: ['react-hook-form', '@hookform/resolvers', 'zod'],
-          state: ['zustand'],
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react-router')) return 'router'
+            if (id.includes('react-dom') || id.includes('scheduler')) return 'react-dom'
+            if (/\/react\/|\/react$/.test(id)) return 'react-vendor'
+            if (id.includes('framer-motion')) return 'framer'
+            if (id.includes('@supabase')) return 'supabase'
+            if (id.includes('recharts') || id.includes('d3-')) return 'charts'
+            if (id.includes('react-hook-form') || id.includes('@hookform') || id.includes('/zod/')) return 'forms'
+            if (id.includes('zustand')) return 'state'
+            if (id.includes('lucide-react')) return 'icons'
+            return 'vendor'
+          }
+          if (id.includes('/src/locales/')) return 'i18n'
+          if (id.includes('/src/pages/admin/') || id.includes('/src/components/admin/')) return 'admin'
+          if (id.includes('/src/pages/Portal') || id.includes('/src/components/portal/')) return 'portal'
+          return undefined
         },
       },
     },
