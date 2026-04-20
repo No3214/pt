@@ -14,10 +14,10 @@ Premium site/app'lerin satir satir analizi + ARENA'ya port edilecek somut kod.
 | `linear-pricing.md` | linear.app/pricing | Pricing + plan card + Stripe entegrasyonu |
 | `whoop-hero-video.md` | whoop.com | Hero video loop + athlete story + data viz ring |
 | `nike-training-club-pwa.md` | nike.com/ntc-app | Workout player + streak + offline PWA |
+| `tb12-program-funnel.md` | tb12sports.com | Assessment quiz -> plan onerisi -> checkout funnel |
 
 ## Siradaki (backlog)
 
-- `tb12-program-funnel.md` — Tom Brady's funnel ile assessment -> plan satisi
 - `alo-yoga-product-grid.md` — product grid pattern + lookbook
 - `tonal-tech-onboarding.md` — quiz-style onboarding flow
 - `superhuman-feature-demo.md` — animated feature reveal section
