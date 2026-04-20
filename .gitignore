@@ -15,3 +15,4 @@ dist-test/
 .claude/skills/.agents/
 .claude/skills/.claude/
 dist-verify/
+dist-verify2/

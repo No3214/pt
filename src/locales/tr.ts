@@ -882,6 +882,13 @@ export const tr = {
     redirect: "{count} saniye sonra yönlendirileceksiniz"
   },
   assessment: {
+    landingCTA: {
+      badge: "2 DAKİKA",
+      title: "Sana en uygun programı bulalım",
+      desc: "Voleybol pozisyonun, hedefin ve takviminin haritasını çıkaralım. 7 soru sonunda Starter, Pro veya Elite programlarından biri sana özel önerilir.",
+      cta: "Ücretsiz Değerlendirmeyi Başlat",
+      meta: "Kart gerekmez · 2 dakika · kişisel plan"
+    },
     title: "ARENA Değerlendirme",
     subtitle: "2 dakikada sana en uygun programı önerelim. Başarı hikayeni birlikte yazalım.",
     progress: "{current} / {total}",

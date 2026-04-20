@@ -875,6 +875,13 @@ export const en = {
     redirect: "You will be redirected in {count} seconds"
   },
   assessment: {
+    landingCTA: {
+      badge: "2 MINUTES",
+      title: "Find your best-fit program",
+      desc: "Map your volleyball position, goal, and schedule. In 7 questions we recommend one of Starter, Pro, or Elite — personally tailored.",
+      cta: "Start Free Assessment",
+      meta: "No card required · 2 minutes · personal plan"
+    },
     title: "ARENA Assessment",
     subtitle: "2 minutes to find your best-fit program. Let's write your performance story together.",
     progress: "{current} / {total}",

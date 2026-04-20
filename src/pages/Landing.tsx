@@ -18,6 +18,7 @@ const Gallery = lazy(() => import(/* webpackChunkName: "landing-gallery" */ '../
 const Testimonials = lazy(() => import(/* webpackChunkName: "landing-testimonials" */ '../components/landing/Testimonials'));
 const Programs = lazy(() => import(/* webpackChunkName: "landing-programs" */ '../components/landing/Programs'));
 const LeadMagnet = lazy(() => import(/* webpackChunkName: "landing-lead" */ '../components/landing/LeadMagnet'));
+const AssessmentCTA = lazy(() => import(/* webpackChunkName: "landing-assessment-cta" */ '../components/landing/AssessmentCTA'));
 const FAQ = lazy(() => import(/* webpackChunkName: "landing-faq" */ '../components/landing/FAQ'));
 const Contact = lazy(() => import(/* webpackChunkName: "landing-contact" */ '../components/landing/Contact'));
 const Footer = lazy(() => import(/* webpackChunkName: "landing-footer" */ '../components/landing/Footer'));
@@ -60,6 +61,9 @@ export default function Landing() {
         </Suspense>
         <Suspense fallback={<Placeholder h={500} />}>
           <ScrollReveal preset="fadeUp"><Testimonials /></ScrollReveal>
+        </Suspense>
+        <Suspense fallback={<Placeholder h={420} />}>
+          <ScrollReveal preset="scaleIn"><AssessmentCTA /></ScrollReveal>
         </Suspense>
         <Suspense fallback={<Placeholder h={700} />}>
           <ScrollReveal preset="fadeUp"><Programs /></ScrollReveal>
