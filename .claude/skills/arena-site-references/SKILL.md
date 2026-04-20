@@ -484,3 +484,54 @@ Sifirdan baslamak aptalca. 30+ yil deney edilmis patterns var. Biz akilli olanla
 - Cuma: Awwwards top pick (motion + design)
 
 Her hafta 1 pattern -> ARENA implement.
+
+## 16) Varnan-Tech/opendirectory (MIT) — Skill Marketplace
+
+**URL:** https://github.com/Varnan-Tech/opendirectory
+**Lisans:** MIT (ARENA SaaS icin uyumlu)
+**Star:** 55+ (Apr 2026)
+**Dil:** TypeScript %25 + JS %36 + Python %39
+**Kullanim:** `npx skills add Varnan-Tech/opendirectory@<skill-name> -g -y`
+
+30+ GTM/marketing/SEO/lead-gen odakli skill registry'si. ARENA tarafinda 9 tanesini iter 18'de yukledik:
+
+### Yuklenen (ARENA icin kritik)
+| Skill | ARENA kullanimi |
+|---|---|
+| pricing-page-psychology-audit | Starter/Pro/Elite/Enterprise kart pattern audit'i |
+| brand-alchemy | Akdeniz sicakligi + sporcu enerjisi messaging refine |
+| linkedin-post-generator | Kulup/akademi sahiplerine B2B satis |
+| outreach-sequence-builder | 5-step cold email to 1000+ TR kulupleri |
+| newsletter-digest | Haftalik "ARENA Inside" email digest |
+| meeting-brief-generator | Demo call oncesi 1-pager |
+| reddit-icp-monitor | r/volleyball, r/parenting, r/turkey signal monitoring |
+| cook-the-blog | Coach notlari -> publish-ready blog post |
+| human-tone | AI-generated TR metni insanilestirme (robotik ton kirma) |
+
+### Atlanan (ARENA icin uygun degil)
+- kill-the-standup (dev team process) — voleybol akademisi icin relevant degil
+- pr-description-writer (sadece git) — teknik ekip mikrodan yonetimi
+- yc-intent-radar-skill (B2B startup-odakli) — ICP farkli
+- producthunt-launch-kit — ARENA consumer+B2B hibrit, PH eslesmiyor
+- show-hn-writer — hacker news audience ICP disi
+- twitter-GTM-find-skill — LinkedIn + Instagram oncelikli
+
+### Nasil entegre ettik
+1. `npx skills add Varnan-Tech/opendirectory@<name> -g -y` ile `~/.agents/skills/`'e yukledik
+2. Her birini `.claude/skills/`'e kopyaladik ki proje repo'sunda commit olsun
+3. SKILL-INDEX'e "Community Growth/GTM" bolumu olarak ekledik (tetikleyici + amac)
+
+### Onemli not
+Opendirectory skill'leri **bizim 15 ARENA-specific skill'imizin yerine gecmez** — yardimci kutuphane olarak kullanilir. Ornek:
+- arena-analytics-growth (ana funnel + CAC/LTV stratejisi) + pricing-page-psychology-audit (spesifik pricing audit)
+- arena-content-automation (pipeline) + cook-the-blog (tekil blog post refine)
+- arena-prompt-library (master prompt template) + human-tone (AI metin insanilastirma)
+
+## 17) Skill Ekosistemi Ozet (Apr 20, 2026)
+
+- **Toplam proje skill:** 88 (iter 18 sonrasi)
+- **ARENA-specific:** 17 (15 eski + arena-site-references + arena-competitor-teardowns)
+- **Community design:** 23 (frontend-design, frontend-slides, web-design-guidelines, ui-animation, figma-implement-design, impeccable + 17 sub)
+- **Community GTM (opendirectory):** 9
+- **Mevcut mixed:** 39 (emil-kowalski-motion, taste, ai-council, stitch-loop, vb.)
+

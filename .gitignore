@@ -10,3 +10,7 @@ reports/
 test-results/
 playwright-report/
 .playwright/
+dist-test/
+.agents/
+.claude/skills/.agents/
+.claude/skills/.claude/

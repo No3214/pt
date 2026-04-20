@@ -19,6 +19,53 @@
 | arena-ai-video | ai video, veo, flow, imagen, sadtalker, avatar | AI video: Veo 3, Higgsfield, SadTalker, HY-Motion, champ, DECA |
 | arena-prompt-library | prompt, template, headline, caption, copy | Kanitlanmis prompt kutuphanesi: video/image/copy/code/design |
 | arena-content-automation | automation, pipeline, n8n, batch, calendar | Uctan uca icerik: brief -> generate -> review -> publish |
+| arena-site-references | teardown, referans, benzer site, copy site | 30+ premium site teardown + OSS repo listesi + lisans matrisi |
+| arena-competitor-teardowns | competitor, teardown, linear gibi, whoop gibi | Satir satir competitor analizi + ARENA'ya port edilecek kod |
+
+## Community Skills (Iter 17-18 Installed)
+
+### Design & UI (anthropics / vercel / figma / mblode / zarazhangrui)
+| Skill | Kaynak | Tetikleyici |
+|---|---|---|
+| frontend-design | anthropics/skills | premium UI, design review, visual hierarchy |
+| frontend-slides | zarazhangrui | deck, sunum, slide |
+| web-design-guidelines | vercel-labs/agent-skills | web design principles, layout, typography |
+| ui-animation | mblode/agent-skills | animation, motion, micro-interaction |
+| figma-implement-design | figma/mcp-server-guide | figma to code, design handoff |
+
+### Impeccable Design Suite (pbakaus)
+| Skill | Amac |
+|---|---|
+| impeccable | Ana orkestra: overall design polish |
+| impeccable-adapt | Responsive adaptation |
+| impeccable-animate | Animation polish |
+| impeccable-audit | Design audit pass |
+| impeccable-bolder | Boldness enhancement |
+| impeccable-clarify | Content clarity |
+| impeccable-colorize | Color palette optimization |
+| impeccable-critique | Design critique |
+| impeccable-delight | Micro-delight additions |
+| impeccable-distill | Essence distillation |
+| impeccable-layout | Layout composition |
+| impeccable-optimize | Performance optimization |
+| impeccable-overdrive | Premium polish mode |
+| impeccable-polish | Final polish pass |
+| impeccable-quieter | Reduce visual noise |
+| impeccable-shape | Shape language refinement |
+| impeccable-typeset | Typography set-up |
+
+### Growth / GTM (Varnan-Tech/opendirectory — MIT)
+| Skill | Tetikleyici | Amac |
+|---|---|---|
+| pricing-page-psychology-audit | pricing, plan card, conversion | Pricing page psikolojik audit (ARENA Starter/Pro/Elite/Ent icin) |
+| brand-alchemy | brand identity, messaging | Marka tonu + mesajlasma stratejisi |
+| linkedin-post-generator | linkedin, B2B post | Akademi B2B satis icin LinkedIn posts |
+| outreach-sequence-builder | cold email, B2B outreach | Kulupler/akademiler icin cold email seq |
+| newsletter-digest | newsletter, digest, email | Haftalik ARENA newsletter otomasyonu |
+| meeting-brief-generator | meeting prep, call brief | Demo call oncesi brief (satis karsi) |
+| reddit-icp-monitor | reddit, icp, icerik fikri | r/volleyball, r/parenting, r/turkey monitoring |
+| cook-the-blog | blog post, content polish | Raw not -> publish-ready blog post |
+| human-tone | tone fix, jargon, robotic | AI-generated metin'i insanilestir |
 
 ## General-Purpose Skills
 
