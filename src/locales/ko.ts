@@ -104,6 +104,12 @@ export const ko = {
     "100% 만족도 보장",
     "온라인 및 대면 코칭"
   ],
+  mission: {
+    badge: "ARENA 철학",
+    line1: "선수는 태어나는 것이 아니라 만들어진다.",
+    line2: "모든 훈련은 더 강한 내일의 씨앗이다.",
+    tagline: "체계적인 발전 · 측정 가능한 결과"
+  },
   testimonials: {
     badge: "결과",
     title: "그들의 이야기, 당신의 동기.",

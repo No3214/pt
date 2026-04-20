@@ -62,6 +62,12 @@ export const en = {
     "100% Satisfaction Guarantee",
     "Online & In-Person Coaching"
   ],
+  mission: {
+    badge: "ARENA PHILOSOPHY",
+    line1: "Athletes aren't born — they're built.",
+    line2: "Every session plants the seed of a stronger tomorrow.",
+    tagline: "Systematic progress · Measurable results"
+  },
   testimonials: {
     badge: "Results",
     title: "Their story, your motivation.",

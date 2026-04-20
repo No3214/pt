@@ -62,6 +62,12 @@ export const tr = {
     "100% Memnuniyet Garantisi",
     "Online & Yüz Yüze Koçluk"
   ],
+  mission: {
+    badge: "ARENA FELSEFESİ",
+    line1: "Sporcu doğmaz, sporcu olunur.",
+    line2: "Her antrenman, daha güçlü bir yarının tohumudur.",
+    tagline: "Sistemli ilerleme · Ölçülebilir sonuç"
+  },
   testimonials: {
     badge: "Sonuçlar",
     title: "Onların hikayesi, senin motivasyonun.",

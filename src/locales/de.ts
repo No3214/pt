@@ -104,6 +104,12 @@ export const de = {
     "100% Zufriedenheitsgarantie",
     "Online- und Präsenz-Coaching"
   ],
+  mission: {
+    badge: "ARENA PHILOSOPHIE",
+    line1: "Athleten werden gemacht, nicht geboren.",
+    line2: "Jedes Training legt den Grundstein für ein stärkeres Morgen.",
+    tagline: "Systematischer Fortschritt · Messbare Ergebnisse"
+  },
   testimonials: {
     badge: "Ergebnisse",
     title: "Ihre Geschichte, deine Motivation.",

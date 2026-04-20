@@ -11,6 +11,7 @@ import ScrollReveal from '../components/animations/ScrollReveal';
 // Below-the-fold sections — lazy-loaded so the initial `index` chunk only
 // carries above-the-fold UI (Navbar + Hero + Marquee). Chunks are named so
 // the bundle audit can recognise them as opt-in on-demand payloads.
+const MissionStatement = lazy(() => import(/* webpackChunkName: "landing-mission" */ '../components/landing/MissionStatement'));
 const About = lazy(() => import(/* webpackChunkName: "landing-about" */ '../components/landing/About'));
 const HowItWorks = lazy(() => import(/* webpackChunkName: "landing-how" */ '../components/landing/HowItWorks'));
 const Stats = lazy(() => import(/* webpackChunkName: "landing-stats" */ '../components/landing/Stats'));
@@ -46,6 +47,9 @@ export default function Landing() {
       <main id="ana-icerik">
         <Hero />
         <Marquee />
+        <Suspense fallback={<Placeholder h={700} />}>
+          <MissionStatement />
+        </Suspense>
         <Suspense fallback={<Placeholder h={600} />}>
           <ScrollReveal preset="fadeUp"><About /></ScrollReveal>
         </Suspense>

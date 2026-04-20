@@ -104,6 +104,12 @@ export const zh = {
     "100%满意度保证",
     "在线和现场教练"
   ],
+  mission: {
+    badge: "ARENA 理念",
+    line1: "运动员不是天生的，而是造就的。",
+    line2: "每一次训练都是更强未来的种子。",
+    tagline: "系统性进步 · 可量化结果"
+  },
   testimonials: {
     badge: "结果",
     title: "他们的故事，您的动力。",

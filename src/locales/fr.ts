@@ -104,6 +104,12 @@ export const fr = {
     "Garantie de Satisfaction 100%",
     "Coaching en Ligne et en Personne"
   ],
+  mission: {
+    badge: "PHILOSOPHIE ARENA",
+    line1: "Les athlètes ne naissent pas, ils se construisent.",
+    line2: "Chaque entraînement plante la graine d'un lendemain plus fort.",
+    tagline: "Progrès systématique · Résultats mesurables"
+  },
   testimonials: {
     badge: "Résultats",
     title: "Leur histoire, votre motivation.",
