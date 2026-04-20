@@ -895,7 +895,7 @@ export const fr = {
     kvkk_sections: [
       {
         title: "1. Data Controller",
-        content: "As the data controller, {}, is responsible for all personal data collected through the arena.kozbeylikonagi.com.tr website. Contact: {}"
+        content: "As the data controller, {}, is responsible for all personal data collected through the pt.kozbeylikonagi.com.tr website. Contact: {}"
       },
       {
         title: "2. Personal Data Collected",

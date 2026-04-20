@@ -756,7 +756,7 @@ export const en = {
       kvkk_sections: [
         {
           title: "1. Data Controller",
-          content: "As the data controller, {}, is responsible for all personal data collected through the arena.kozbeylikonagi.com.tr website. Contact: {}"
+          content: "As the data controller, {}, is responsible for all personal data collected through the pt.kozbeylikonagi.com.tr website. Contact: {}"
         },
         {
           title: "2. Personal Data Collected",
@@ -787,7 +787,7 @@ export const en = {
           content: "For your requests within the scope of GDPR, you can reach us by sending an e-mail to {}. Your applications will be answered within 30 days at the latest."
         }
       ],
-      terms_intro: "By using this website (arena.kozbeylikonagi.com.tr), you are deemed to have accepted the following terms of use. Please read these terms carefully.",
+      terms_intro: "By using this website (pt.kozbeylikonagi.com.tr), you are deemed to have accepted the following terms of use. Please read these terms carefully.",
       terms_sections: [
         {
           title: "1. Service Description",
