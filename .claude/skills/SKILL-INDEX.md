@@ -23,6 +23,7 @@
 | arena-competitor-teardowns | competitor, teardown, linear gibi, whoop gibi | Satir satir competitor analizi + ARENA'ya port edilecek kod |
 | arena-gen-ai-stack | gen ai, generative, higgsfield, comfyui, sadtalker, veo, mochi, f5-tts | OSS gen-AI repo degerlendirme + lisans matrisi + ARENA port plani |
 | arena-opus-4-7-ops | opus 4.7, auto mode, effort, verification, focus mode, recap, fewer-permission-prompts | Opus 4.7 + ARENA auto-elevate icin operasyon rehberi (Boris Cherny tips) |
+| arena-creative-inspiration | creative tool, string tune, astrodither, smooothy, particles, casberry, webgpu, tsl, dither, chromatic aberration, lerp carousel, particle swarm, creative coding | 4 yuksek-sinyalli creative-coding toolkit teardown + ARENA port planlari (DitherOverlay, LerpCarousel, ScrollScrub, ParticleField) |
 
 ## Community Skills (Iter 17-18 Installed)
 
