@@ -4,6 +4,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useTranslation } from '../../locales'
+import DitherOverlay from '../premium/DitherOverlay'
 
 type LandingCTADict = {
   badge?: string
@@ -56,6 +57,9 @@ export default function AssessmentCTA() {
           ].join(' ')}
         >
           <div className="absolute -inset-px -z-10 bg-gradient-to-br from-primary/25 via-accent/10 to-secondary/20 blur-2xl" />
+
+          {/* Cinematic Astrodither-inspired texture on glass card */}
+          <DitherOverlay intensity={0.12} tile={4} blend="soft-light" />
 
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[0.65rem] font-semibold tracking-[0.22em] uppercase bg-primary/15 text-primary">
             {badge}

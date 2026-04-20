@@ -4,6 +4,7 @@ import { RevealSection, fadeUp } from './LandingUI';
 import { useStore } from '../../stores/useStore';
 import { useTranslation } from '../../locales';
 import { tenantConfig } from '../../config/tenant';
+import DitherOverlay from '../premium/DitherOverlay';
 
 interface GalleryItem {
   caption: string;
@@ -143,6 +144,9 @@ const GalleryCard = memo(function GalleryCard({ item, index, dm }: {
           className="absolute -top-1/3 -right-1/3 w-2/3 h-2/3 rounded-full blur-3xl opacity-30 group-hover:opacity-50 transition-opacity duration-700"
           style={{ background: palette.fg }}
         />
+
+        {/* Cinematic dither — Astrodither-inspired Bayer 4x4 matrix */}
+        <DitherOverlay intensity={0.18} tile={4} blend="overlay" />
 
         <div className="relative z-10 flex-1 flex items-center justify-center">
           <GalleryIcon name={item.icon} fg={palette.fg} />
