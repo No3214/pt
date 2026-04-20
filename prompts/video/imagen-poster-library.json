@@ -1,0 +1,52 @@
+{
+  "$schema": "./schema.json",
+  "version": "1.0.0",
+  "owner": "ARENA Performance",
+  "description": "Imagen 4 / Midjourney / Flux hero poster prompt library. Still image uretimi.",
+  "shared_suffix": "color graded for warm Mediterranean athleticism, terracotta #C2684A, sage #7A9E82, coastal blue #4A6D88, rich sand #D4B483, natural skin with high-detail pores, no watermarks, no text overlays, no third-party logos, no brand names visible, proportional anatomy.",
+  "items": [
+    {
+      "id": "poster-hero-portrait-v1",
+      "kind": "imagen4",
+      "aspect": "4:5",
+      "prompt": "A dramatic cinematic portrait of a 17-year-old Turkish female volleyball player, three-quarter profile looking confidently off-camera, soft rim lighting from warm Mediterranean sunset, unbranded terracotta and sage training kit, natural freckled skin with subtle sweat sheen, shallow depth of field, background gymnasium bokeh in sage and sand tones, shot on Hasselblad X2D medium format, 80mm lens f/2.0.",
+      "target_placement": ["landing_hero_fallback", "opengraph_card"]
+    },
+    {
+      "id": "poster-coach-portrait-v1",
+      "kind": "imagen4",
+      "aspect": "4:5",
+      "prompt": "Documentary portrait of a 42-year-old Turkish male volleyball coach, mid-conversation with an off-camera student, warm natural window light, unbranded terracotta polo, salt-and-pepper short hair, three-day stubble, calm authoritative eyes, indoor academy background out-of-focus, shot on Leica SL3 50mm f/1.4, editorial sports magazine aesthetic.",
+      "target_placement": ["coach_section_card"]
+    },
+    {
+      "id": "poster-academy-space-v1",
+      "kind": "imagen4",
+      "aspect": "16:9",
+      "prompt": "Wide architectural photograph of an empty indoor volleyball academy at golden hour, warm terracotta accent walls, sage-green court lines on polished wood floor, sand-cream ceiling with skylight washing golden light across center court, two volleyballs resting in foreground, zero people, aspirational calm atmosphere, shot on Sony A7RV 16-35mm f/2.8, architectural digest style.",
+      "target_placement": ["facility_hero", "about_section"]
+    },
+    {
+      "id": "poster-duo-training-v1",
+      "kind": "imagen4",
+      "aspect": "3:2",
+      "prompt": "Two teenage Turkish volleyball players, one male one female, mid-pass practice on a beach court at late afternoon, wide-stance athletic posture, wind-blown hair, coastal Aegean horizon behind, warm side-lit by setting sun, natural laughter captured between reps, unbranded sage-green and terracotta kits.",
+      "target_placement": ["community_section", "blog_thumbnail"]
+    },
+    {
+      "id": "poster-brand-mark-v1",
+      "kind": "flux_pro",
+      "aspect": "1:1",
+      "prompt": "Minimalist sports brand poster design: clean sans-serif wordmark 'ARENA' in terracotta color #C2684A on sand-cream textured background #FAF6F1, small sage green tagline below reads 'Guclu Ol. Kendine Guven.', generous negative space, editorial magazine cover aesthetic, subtle paper grain, centered composition.",
+      "notes": "Flux is better than Imagen for accurate text rendering. Use when text is essential.",
+      "target_placement": ["brand_identity", "social_avatar"]
+    },
+    {
+      "id": "poster-stats-infographic-bg-v1",
+      "kind": "imagen4",
+      "aspect": "16:9",
+      "prompt": "Abstract warm-toned background for a sports data dashboard: soft gradient from terracotta to sand, subtle geometric court-line patterns faintly visible, Mediterranean light leak top-right corner, clean spacious composition optimized for white text and chart overlays, editorial magazine background aesthetic, no people.",
+      "target_placement": ["dashboard_hero", "stats_section_bg"]
+    }
+  ]
+}

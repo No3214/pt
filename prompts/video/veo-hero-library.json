@@ -1,0 +1,89 @@
+{
+  "$schema": "./schema.json",
+  "version": "1.0.0",
+  "owner": "ARENA Performance",
+  "description": "Veo 3 + Runway + Higgsfield hero video prompt library. Her item'in ayri bir prompt_id'si var. Batch render scripts/ai-video/generate-hero.ts bunu okur.",
+  "shared_suffix": "color palette: terracotta #C2684A, sage #7A9E82, coastal blue #4A6D88, rich sand #D4B483, cinematic 35mm film aesthetic, shallow depth of field, photorealistic, natural skin texture, Mediterranean atmosphere, no watermarks, no text overlays, no third-party logos, no copyrighted team jerseys, proportional body, five fingers per hand.",
+  "items": [
+    {
+      "id": "hero-spike-action-v1",
+      "kind": "veo3",
+      "aspect": "16:9",
+      "duration": 8,
+      "audio": true,
+      "prompt": "A 17-year-old Turkish female volleyball player mid-air executing a powerful spike, slow-motion 120fps, dramatic side-angle medium-close shot with a subtle dolly-in, rim-lit by golden afternoon Mediterranean sun filtering through an open gymnasium, warm terracotta walls and sage-green floor lines in background, sweat droplets visible in the light, determined expression.",
+      "use_shared_suffix": true,
+      "target_placement": ["landing_hero_desktop", "hero_section"]
+    },
+    {
+      "id": "hero-spike-action-v1-mobile",
+      "kind": "veo3",
+      "aspect": "9:16",
+      "duration": 8,
+      "audio": true,
+      "prompt": "Vertical 9:16 portrait composition: A 17-year-old Turkish female volleyball player mid-air executing a powerful spike, slow-motion 120fps, close-up to medium framing, rim-lit by golden afternoon Mediterranean sun, warm terracotta and sage-green background, sweat droplets visible, determined focus.",
+      "use_shared_suffix": true,
+      "target_placement": ["landing_hero_mobile", "story_reel"]
+    },
+    {
+      "id": "hero-serve-beach-v1",
+      "kind": "veo3",
+      "aspect": "16:9",
+      "duration": 8,
+      "audio": true,
+      "prompt": "Wide aerial drone shot orbiting slowly around a young Turkish volleyball player serving on an outdoor beach court at golden hour, Aegean Sea behind, sand kicking up from her feet, camera rises 2 meters as ball launches, warm amber lighting with long shadows, calm determined face, Mediterranean coastal breeze moving her hair naturally.",
+      "use_shared_suffix": true,
+      "target_placement": ["brand_reel", "about_hero"]
+    },
+    {
+      "id": "hero-team-highfive-v1",
+      "kind": "veo3",
+      "aspect": "16:9",
+      "duration": 8,
+      "audio": true,
+      "prompt": "Medium close-up shot, six diverse young athletes in terracotta and sage training kits high-fiving in slow-motion after winning a point, indoor academy with wooden accents and warm sand-colored walls, backlit by soft daylight through large windows, camera locked-off steady, joyful authentic emotion, natural skin tones.",
+      "use_shared_suffix": true,
+      "target_placement": ["community_section", "testimonials_bg"]
+    },
+    {
+      "id": "hero-coach-teaching-v1",
+      "kind": "veo3",
+      "aspect": "16:9",
+      "duration": 8,
+      "audio": true,
+      "prompt": "A 42-year-old Turkish male volleyball coach demonstrating a block technique to two teenage athletes on an indoor academy court, tracking shot from behind at chest-height, warm natural lighting through skylights, walls in warm terracotta and sand tones, sage-green court lines, coach wears an unbranded terracotta polo, students focused and respectful, cinematic calm pace, documentary style.",
+      "use_shared_suffix": true,
+      "target_placement": ["coach_section", "methodology_section"]
+    },
+    {
+      "id": "hero-dig-dive-v1",
+      "kind": "veo3",
+      "aspect": "16:9",
+      "duration": 6,
+      "audio": true,
+      "prompt": "A teenage female volleyball player diving horizontally to dig a hard-driven ball, freeze-frame moment of full extension, extreme low-angle tracking shot, indoor court with sage lines, dust particles in golden side-light, determined pre-contact face, pads visible, authentic effort, slow-motion 120fps feel.",
+      "use_shared_suffix": true,
+      "target_placement": ["performance_section"]
+    },
+    {
+      "id": "hero-training-mirror-v1",
+      "kind": "veo3",
+      "aspect": "9:16",
+      "duration": 6,
+      "audio": false,
+      "prompt": "Vertical shot of a young Turkish female athlete in training kit performing a lateral band walk in front of a gym mirror, focused expression, warm gym lighting with terracotta accent walls, reflection fades slightly, camera glides left-to-right parallel, clean editorial sports feel, 60fps cinematic.",
+      "use_shared_suffix": true,
+      "target_placement": ["training_reel", "preparation_section"]
+    },
+    {
+      "id": "hero-community-tunnel-v1",
+      "kind": "veo3",
+      "aspect": "16:9",
+      "duration": 8,
+      "audio": true,
+      "prompt": "Locker-room tunnel shot: eight teenage volleyball players walking toward the court at dusk, shot from behind at eye-level, warm orange rim-light from tunnel end, silhouettes with glimpses of terracotta kits, anticipatory pace, sound of cheers muffled, Mediterranean pre-match atmosphere.",
+      "use_shared_suffix": true,
+      "target_placement": ["brand_manifesto", "opening_shot"]
+    }
+  ]
+}

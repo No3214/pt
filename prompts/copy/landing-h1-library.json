@@ -1,0 +1,14 @@
+{
+  "$schema": "./schema.json",
+  "version": "1.0.0",
+  "description": "Landing H1 + subheading variants for ARENA. A/B test candidates.",
+  "items": [
+    { "id": "h1-tagline-v1", "locale": "tr", "h1": "Guclu Ol. Kendine Guven.", "sub": "Akdeniz sicakliginda, disiplinli bir gelisim yolculugu. Sporcu olmak degil — kendine inanan insan olmak.", "cta": "Deneme Dersi Al", "notes": "Brand tagline, tescilli. Default bu olmali." },
+    { "id": "h1-variant-b-v1", "locale": "tr", "h1": "Sahada Guc, Hayatta Guven.", "sub": "13-17 yas sporcu gelismek istiyorsa, arkasinda duran bir system olmali. ARENA tam olarak bu.", "cta": "Akademiyi Gor", "notes": "A/B test kazanani candidate." },
+    { "id": "h1-variant-c-v1", "locale": "tr", "h1": "Sporcu Degil, Insan Yetistiriyoruz.", "sub": "Teknik ve fiziksel gelisim kadar karakter. Hem sahada hem disinda farki hissedin.", "cta": "Baslangic Randevusu", "notes": "Degerli konum: karakter vurgusu." },
+    { "id": "h1-variant-d-v1", "locale": "tr", "h1": "Gelecek Burada Sekilleniyor.", "sub": "Genc sporcular icin Turkiye'nin en kapsamli voleybol + performans sistemi. Veri, bilim, Akdeniz kulturu.", "cta": "Nasil Calisir", "notes": "Aspirational, sistem vurgusu." },
+    { "id": "h1-variant-e-v1", "locale": "tr", "h1": "Her Servis Bir Karar.", "sub": "Teknik beceri, zihinsel dayaniklilik, takim ruhu. Her antrenman bir gelisim kararina donusur.", "cta": "Antrenmanlara Bak", "notes": "Metaforik, duygusal." },
+    { "id": "h1-en-v1", "locale": "en", "h1": "Be Strong. Trust Yourself.", "sub": "A Mediterranean-rooted development system for young athletes. Not just better on the court — more confident in life.", "cta": "Book a Trial", "notes": "English localization of tagline." },
+    { "id": "h1-ar-v1", "locale": "ar", "h1": "كن قوياً. ثق بنفسك.", "sub": "نظام تطوير متوسطي الجذور للرياضيين الشباب. ليس فقط أفضل على الملعب — بل أكثر ثقة في الحياة.", "cta": "احجز تجربة", "notes": "RTL, Arabic localization." }
+  ]
+}
