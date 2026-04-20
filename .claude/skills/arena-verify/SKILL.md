@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write, Edit, Glob, Grep
 
 # ARENA Verify — Otomatik Live-Site Dogrulama
 
-Her deploy'dan sonra otomatik devreye girer. Playwright ile `arena.kozbeylikonagi.com.tr` ve `pt.kozbeylikonagi.com.tr` domainlerini tarar, hatalari rapor eder, kritikleri otomatik duzeltir.
+Her deploy'dan sonra otomatik devreye girer. Playwright ile `pt.kozbeylikonagi.com.tr` ve `pt.kozbeylikonagi.com.tr` domainlerini tarar, hatalari rapor eder, kritikleri otomatik duzeltir.
 
 ## Amac
 
@@ -78,7 +78,7 @@ node scripts/arena-verify.mjs
 ```json
 {
   "timestamp": "2026-04-18T...",
-  "targets": ["https://arena.kozbeylikonagi.com.tr"],
+  "targets": ["https://pt.kozbeylikonagi.com.tr"],
   "routes": [
     {
       "path": "/",

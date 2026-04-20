@@ -1,6 +1,6 @@
 ---
 name: arena-supabase-master
-description: ARENA Performance (arena.kozbeylikonagi.com.tr) projesi icin Supabase 2 tam oyun kitabi. RLS politikalari, migration safety, edge functions, realtime subscriptions, storage bucket patterns, auth flows (magic link / password / OAuth), typed client generation ve production debugging. Tetikleyici anahtarlar: "supabase", "RLS", "migration", "edge function", "realtime", "storage", "auth flow", "policy", "row level security", "postgrest", "rpc".
+description: ARENA Performance (pt.kozbeylikonagi.com.tr) projesi icin Supabase 2 tam oyun kitabi. RLS politikalari, migration safety, edge functions, realtime subscriptions, storage bucket patterns, auth flows (magic link / password / OAuth), typed client generation ve production debugging. Tetikleyici anahtarlar: "supabase", "RLS", "migration", "edge function", "realtime", "storage", "auth flow", "policy", "row level security", "postgrest", "rpc".
 version: 1.0.0
 owner: ARENA Performance
 model_preference: claude-opus-4-7
@@ -8,7 +8,7 @@ model_preference: claude-opus-4-7
 
 # ARENA × Supabase Master Playbook
 
-Bu skill, `arena.kozbeylikonagi.com.tr` icin Supabase 2.x uzerinde production-grade islem yapmak icin tam referanstir.
+Bu skill, `pt.kozbeylikonagi.com.tr` icin Supabase 2.x uzerinde production-grade islem yapmak icin tam referanstir.
 
 ## 0) Proje Baglami
 - Client: `src/lib/supabase.ts` (tek singleton, ESM import edin)
@@ -307,7 +307,7 @@ const { data, error } = await supabase.rpc('record_workout', {
 ARENA'da 3 ortam:
 - Local: `supabase start` (Docker)
 - Preview: CF Pages preview → staging Supabase project
-- Prod: `arena.kozbeylikonagi.com.tr` → prod project
+- Prod: `pt.kozbeylikonagi.com.tr` → prod project
 
 Env dosya sirasi: `.env.local` > `.env.production.local` > `.env.production` > `.env`
 

@@ -314,7 +314,7 @@ URL: https://awwwards.com (filter: sports + site of day)
 
 ### Outside Online (outsideonline.com)
 - Kopya-uygun: Longform + typography + photo-led
-- ARENA: Tum content.arena.kozbeylikonagi.com.tr alt domain
+- ARENA: Tum content.pt.kozbeylikonagi.com.tr alt domain
 
 ## 8) TR-Spesifik Rakipler
 

@@ -238,12 +238,12 @@ Charts (recharts) icin `role="img"` + `aria-label`. Data table fallback eklenmel
 
 ### axe-core CLI
 ```bash
-npx @axe-core/cli https://arena.kozbeylikonagi.com.tr
+npx @axe-core/cli https://pt.kozbeylikonagi.com.tr
 ```
 
 ### pa11y
 ```bash
-npx pa11y https://arena.kozbeylikonagi.com.tr --standard WCAG2AA
+npx pa11y https://pt.kozbeylikonagi.com.tr --standard WCAG2AA
 ```
 
 ### Playwright + axe
