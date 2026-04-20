@@ -14,3 +14,4 @@ dist-test/
 .agents/
 .claude/skills/.agents/
 .claude/skills/.claude/
+dist-verify/

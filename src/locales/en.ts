@@ -873,5 +873,133 @@ export const en = {
     desc: "The page you are looking for does not exist or has been moved.",
     backHome: "Back to Home",
     redirect: "You will be redirected in {count} seconds"
+  },
+  assessment: {
+    title: "ARENA Assessment",
+    subtitle: "2 minutes to find your best-fit program. Let's write your performance story together.",
+    progress: "{current} / {total}",
+    cta: {
+      start: "Start",
+      next: "Next",
+      back: "Back",
+      submit: "Show My Plan",
+      restart: "Retake",
+      book: "Book a Call"
+    },
+    email: {
+      title: "Get your plan",
+      subtitle: "We'll send the result and personalized recommendations to your email.",
+      placeholder: "you@example.com",
+      consent: "I consent to ARENA processing my personal data and have read the privacy policy.",
+      privacy: "Privacy Policy",
+      submit: "Show My Plan",
+      required: "Email is required",
+      invalid: "Enter a valid email address"
+    },
+    questions: {
+      goal: {
+        label: "What's your primary goal?",
+        choices: {
+          performance: "Improve my volleyball performance",
+          national: "National team / professional career",
+          rehab: "Return safely after injury",
+          fitness: "General fitness + strength + confidence"
+        }
+      },
+      age: {
+        label: "Your age range?",
+        choices: {
+          u14: "Under 14",
+          u18: "15–18",
+          adult: "19–29",
+          over30: "30+"
+        }
+      },
+      position: {
+        label: "Your volleyball position?",
+        choices: {
+          outside: "Outside hitter",
+          opposite: "Opposite",
+          setter: "Setter",
+          middle: "Middle blocker",
+          libero: "Libero",
+          none: "I don't play volleyball"
+        }
+      },
+      experience: {
+        label: "Your experience level?",
+        choices: {
+          beginner: "Beginner",
+          recreational: "Recreational / amateur",
+          club: "Club / school team",
+          elite: "Pro league / national / academy"
+        }
+      },
+      frequency: {
+        label: "How many days per week can you train?",
+        choices: {
+          lt2: "Less than 2 days",
+          "2to3": "2–3 days",
+          "4to5": "4–5 days",
+          "6plus": "6+ days"
+        }
+      },
+      injury: {
+        label: "Current injury status?",
+        choices: {
+          none: "No injury",
+          past: "Past injury, now recovered",
+          current: "Currently injured"
+        }
+      },
+      commitment: {
+        label: "How many months can you commit?",
+        choices: {
+          "1to3": "1–3 months",
+          "4to6": "4–6 months",
+          "6plus": "6+ months"
+        }
+      }
+    },
+    result: {
+      title: "Your best-fit plan",
+      starter: {
+        name: "ARENA Starter",
+        desc: "Strong foundation — safe for rehab or first steps into structured training.",
+        price: "₺4,990 / month",
+        features: [
+          "3-day weekly training program",
+          "Basic movement assessment",
+          "Nutrition guide",
+          "1 monthly 1-on-1 call",
+          "WhatsApp support"
+        ]
+      },
+      pro: {
+        name: "ARENA Pro",
+        desc: "Club/school team performance — strength + power + endurance.",
+        price: "₺8,990 / month",
+        features: [
+          "Personalized 5-day program",
+          "Position-specific drill library",
+          "Detailed nutrition plan + macro tracking",
+          "Weekly 1-on-1 call",
+          "Measurement + progress report"
+        ]
+      },
+      elite: {
+        name: "ARENA Elite",
+        desc: "Most intensive 360° performance system for athletes on a pro / national path.",
+        price: "₺17,990 / month",
+        features: [
+          "6-day periodized training",
+          "1-on-1 technical + tactical analysis",
+          "Monthly biomechanical video analysis",
+          "2 weekly 1-on-1s + unlimited support",
+          "Sports nutrition + supplementation plan",
+          "Mental performance coaching"
+        ]
+      }
+    }
   }
 }

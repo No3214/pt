@@ -34,6 +34,7 @@ const PortalV2 = lazy(() => import('./pages/PortalV2'))
 const AdminLogin = lazy(() => import('./pages/admin/Login'))
 const OnboardingForm = lazy(() => import('./pages/forms/OnboardingForm'))
 const StudentMeasurementForm = lazy(() => import('./pages/forms/StudentMeasurementForm'))
+const AssessmentPage = lazy(() => import('./pages/AssessmentPage'))
 
 function PageLoader() {
   const { t } = useTranslation();
@@ -114,6 +115,8 @@ export default function App() {
             <Route path="/portal-legacy" element={<Portal />} />
             <Route path="/onboarding" element={<OnboardingForm />} />
             <Route path="/measure/:clientId" element={<StudentMeasurementForm />} />
+            <Route path="/assessment" element={<AssessmentPage />} />
+            <Route path="/assessment/result" element={<AssessmentPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>

@@ -880,5 +880,133 @@ export const tr = {
     desc: "Aradığınız sayfa mevcut değil veya taşınmış olabilir.",
     backHome: "Ana Sayfaya Dön",
     redirect: "{count} saniye sonra yönlendirileceksiniz"
+  },
+  assessment: {
+    title: "ARENA Değerlendirme",
+    subtitle: "2 dakikada sana en uygun programı önerelim. Başarı hikayeni birlikte yazalım.",
+    progress: "{current} / {total}",
+    cta: {
+      start: "Başla",
+      next: "Devam",
+      back: "Geri",
+      submit: "Planımı Göster",
+      restart: "Tekrar Değerlendir",
+      book: "Randevu Al"
+    },
+    email: {
+      title: "Planını al",
+      subtitle: "Sonucu ve kişisel önerileri e-posta adresine göndereceğiz.",
+      placeholder: "ornek@mail.com",
+      consent: "Kişisel verilerimin ARENA tarafından işlenmesine onay veriyorum ve gizlilik politikasını okudum.",
+      privacy: "Gizlilik Politikası",
+      submit: "Planımı Göster",
+      required: "E-posta adresi zorunludur",
+      invalid: "Geçerli bir e-posta adresi gir"
+    },
+    questions: {
+      goal: {
+        label: "Birincil hedefin nedir?",
+        choices: {
+          performance: "Voleybolda performansımı yükseltmek",
+          national: "Milli takım / profesyonel kariyer",
+          rehab: "Sakatlıktan döndüm, güvenle ilerlemek",
+          fitness: "Genel fitness + güç + güven"
+        }
+      },
+      age: {
+        label: "Yaş aralığın?",
+        choices: {
+          u14: "14 ve altı",
+          u18: "15–18",
+          adult: "19–29",
+          over30: "30+"
+        }
+      },
+      position: {
+        label: "Voleybolda pozisyonun?",
+        choices: {
+          outside: "Pasör çaprazı / Smaçör",
+          opposite: "Pasör çapraz (Opposite)",
+          setter: "Pasör",
+          middle: "Orta oyuncu",
+          libero: "Libero",
+          none: "Voleybol oynamıyorum"
+        }
+      },
+      experience: {
+        label: "Deneyim seviyen?",
+        choices: {
+          beginner: "Yeni başlıyorum",
+          recreational: "Hobi / amatör",
+          club: "Kulüp / okul takımı",
+          elite: "Süperlig / milli / akademi"
+        }
+      },
+      frequency: {
+        label: "Haftada kaç gün antrenman yapabilirsin?",
+        choices: {
+          lt2: "2 günden az",
+          "2to3": "2–3 gün",
+          "4to5": "4–5 gün",
+          "6plus": "6+ gün"
+        }
+      },
+      injury: {
+        label: "Şu anki sakatlık durumun?",
+        choices: {
+          none: "Sakatlığım yok",
+          past: "Geçmişte sakatlığım oldu, şu an iyiyim",
+          current: "Şu an aktif sakatlığım var"
+        }
+      },
+      commitment: {
+        label: "Kaç ay boyunca taahhütte bulunabilirsin?",
+        choices: {
+          "1to3": "1–3 ay",
+          "4to6": "4–6 ay",
+          "6plus": "6+ ay"
+        }
+      }
+    },
+    result: {
+      title: "Sana en uygun plan",
+      starter: {
+        name: "ARENA Starter",
+        desc: "Temelleri sağlam at, rehabilitasyon veya ilk adımlar için güvenli program.",
+        price: "Aylık ₺4.990",
+        features: [
+          "Haftalık 3 antrenman programı",
+          "Temel hareket değerlendirmesi",
+          "Beslenme rehberi",
+          "Aylık 1 birebir görüşme",
+          "WhatsApp desteği"
+        ]
+      },
+      pro: {
+        name: "ARENA Pro",
+        desc: "Kulüp / okul takımı seviyesinde performans yükseltme — güç + patlayıcılık + dayanıklılık.",
+        price: "Aylık ₺8.990",
+        features: [
+          "Kişiye özel 5 günlük antrenman programı",
+          "Pozisyona özgü drill kütüphanesi",
+          "Detaylı beslenme planı + makro takibi",
+          "Haftalık 1 birebir görüşme",
+          "Ölçüm + ilerleme raporu"
+        ]
+      },
+      elite: {
+        name: "ARENA Elite",
+        desc: "Profesyonel ve milli takım yolundaki sporcular için en yoğun, 360° performans sistemi.",
+        price: "Aylık ₺17.990",
+        features: [
+          "6 günlük periodize antrenman programı",
+          "Birebir teknik + taktik analiz",
+          "Biyomekanik video analizi (aylık)",
+          "Haftalık 2 birebir + sınırsız destek",
+          "Sporcu beslenmesi + takviye planı",
+          "Zihinsel performans koçluğu"
+        ]
+      }
+    }
   }
 };
