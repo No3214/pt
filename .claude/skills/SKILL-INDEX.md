@@ -22,6 +22,7 @@
 | arena-site-references | teardown, referans, benzer site, copy site | 30+ premium site teardown + OSS repo listesi + lisans matrisi |
 | arena-competitor-teardowns | competitor, teardown, linear gibi, whoop gibi | Satir satir competitor analizi + ARENA'ya port edilecek kod |
 | arena-gen-ai-stack | gen ai, generative, higgsfield, comfyui, sadtalker, veo, mochi, f5-tts | OSS gen-AI repo degerlendirme + lisans matrisi + ARENA port plani |
+| arena-opus-4-7-ops | opus 4.7, auto mode, effort, verification, focus mode, recap, fewer-permission-prompts | Opus 4.7 + ARENA auto-elevate icin operasyon rehberi (Boris Cherny tips) |
 
 ## Community Skills (Iter 17-18 Installed)
 
