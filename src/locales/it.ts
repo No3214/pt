@@ -110,6 +110,21 @@ export const it = {
     line2: "Ogni allenamento pianta il seme di un domani più forte.",
     tagline: "Progresso sistematico · Risultati misurabili"
   },
+  trainingScenes: {
+    badge: "RITMO QUOTIDIANO",
+    title: "Momenti di allenamento",
+    desc: "Dal riscaldamento mattutino al recupero serale — il ritmo di 24 ore di un atleta d'élite.",
+    scenes: [
+      { caption: "Riscaldamento",      time: "06:30" },
+      { caption: "Forza",              time: "08:00" },
+      { caption: "Serie di sprint",    time: "10:00" },
+      { caption: "Allenamento salti",  time: "11:30" },
+      { caption: "Allenamento schiacciata", time: "14:00" },
+      { caption: "Focus mentale",      time: "16:00" },
+      { caption: "Recupero",           time: "18:00" },
+      { caption: "Analisi squadra",    time: "20:00" }
+    ]
+  },
   testimonials: {
     badge: "Risultati",
     title: "La loro storia, la tua motivazione.",

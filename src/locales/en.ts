@@ -68,6 +68,21 @@ export const en = {
     line2: "Every session plants the seed of a stronger tomorrow.",
     tagline: "Systematic progress · Measurable results"
   },
+  trainingScenes: {
+    badge: "DAILY RHYTHM",
+    title: "Training Moments",
+    desc: "From dawn warm-up to evening recovery — the 24-hour rhythm of an elite athlete.",
+    scenes: [
+      { caption: "Morning Warm-up",    time: "06:30" },
+      { caption: "Strength Training",  time: "08:00" },
+      { caption: "Sprint Series",      time: "10:00" },
+      { caption: "Jump Practice",      time: "11:30" },
+      { caption: "Hitting Drills",     time: "14:00" },
+      { caption: "Mental Focus",       time: "16:00" },
+      { caption: "Recovery",           time: "18:00" },
+      { caption: "Team Analysis",      time: "20:00" }
+    ]
+  },
   testimonials: {
     badge: "Results",
     title: "Their story, your motivation.",

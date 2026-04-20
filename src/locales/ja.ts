@@ -110,6 +110,21 @@ export const ja = {
     line2: "すべての練習は、より強い明日の種となる。",
     tagline: "体系的な進歩 · 測定可能な結果"
   },
+  trainingScenes: {
+    badge: "1日のリズム",
+    title: "トレーニングの瞬間",
+    desc: "朝のウォームアップから夜のリカバリーまで — エリートアスリートの24時間のリズム。",
+    scenes: [
+      { caption: "朝のウォームアップ",  time: "06:30" },
+      { caption: "筋力トレーニング",    time: "08:00" },
+      { caption: "スプリントセット",    time: "10:00" },
+      { caption: "ジャンプ練習",        time: "11:30" },
+      { caption: "アタック練習",        time: "14:00" },
+      { caption: "メンタルフォーカス",  time: "16:00" },
+      { caption: "リカバリー",          time: "18:00" },
+      { caption: "チーム分析",          time: "20:00" }
+    ]
+  },
   testimonials: {
     badge: "結果",
     title: "彼らの物語、あなたの動機。",

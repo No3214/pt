@@ -110,6 +110,21 @@ export const es = {
     line2: "Cada entrenamiento siembra un mañana más fuerte.",
     tagline: "Progreso sistemático · Resultados medibles"
   },
+  trainingScenes: {
+    badge: "RITMO DIARIO",
+    title: "Momentos de entrenamiento",
+    desc: "Del calentamiento matutino a la recuperación nocturna — el ritmo de 24 horas de un atleta de élite.",
+    scenes: [
+      { caption: "Calentamiento",      time: "06:30" },
+      { caption: "Entrenamiento de fuerza", time: "08:00" },
+      { caption: "Serie de sprints",   time: "10:00" },
+      { caption: "Práctica de saltos", time: "11:30" },
+      { caption: "Entrenamiento de ataque", time: "14:00" },
+      { caption: "Enfoque mental",     time: "16:00" },
+      { caption: "Recuperación",       time: "18:00" },
+      { caption: "Análisis de equipo", time: "20:00" }
+    ]
+  },
   testimonials: {
     badge: "Resultados",
     title: "Su historia, tu motivación.",

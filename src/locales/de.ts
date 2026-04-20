@@ -110,6 +110,21 @@ export const de = {
     line2: "Jedes Training legt den Grundstein für ein stärkeres Morgen.",
     tagline: "Systematischer Fortschritt · Messbare Ergebnisse"
   },
+  trainingScenes: {
+    badge: "TAGESRHYTHMUS",
+    title: "Trainingsmomente",
+    desc: "Vom morgendlichen Warm-up bis zur abendlichen Erholung — der 24-Stunden-Rhythmus eines Spitzenathleten.",
+    scenes: [
+      { caption: "Morgen Warm-up",     time: "06:30" },
+      { caption: "Krafttraining",      time: "08:00" },
+      { caption: "Sprint-Serie",       time: "10:00" },
+      { caption: "Sprungtraining",     time: "11:30" },
+      { caption: "Schlagtraining",     time: "14:00" },
+      { caption: "Mentaler Fokus",     time: "16:00" },
+      { caption: "Regeneration",       time: "18:00" },
+      { caption: "Teamanalyse",        time: "20:00" }
+    ]
+  },
   testimonials: {
     badge: "Ergebnisse",
     title: "Ihre Geschichte, deine Motivation.",

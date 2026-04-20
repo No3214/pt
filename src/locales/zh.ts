@@ -110,6 +110,21 @@ export const zh = {
     line2: "每一次训练都是更强未来的种子。",
     tagline: "系统性进步 · 可量化结果"
   },
+  trainingScenes: {
+    badge: "每日节奏",
+    title: "训练瞬间",
+    desc: "从清晨热身到夜间恢复 — 精英运动员的 24 小时节奏。",
+    scenes: [
+      { caption: "晨间热身",  time: "06:30" },
+      { caption: "力量训练",  time: "08:00" },
+      { caption: "冲刺组",    time: "10:00" },
+      { caption: "跳跃练习",  time: "11:30" },
+      { caption: "扣球训练",  time: "14:00" },
+      { caption: "心理专注",  time: "16:00" },
+      { caption: "恢复",      time: "18:00" },
+      { caption: "团队分析",  time: "20:00" }
+    ]
+  },
   testimonials: {
     badge: "结果",
     title: "他们的故事，您的动力。",

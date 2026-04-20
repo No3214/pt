@@ -110,6 +110,21 @@ export const pt = {
     line2: "Cada treino planta a semente de um amanhã mais forte.",
     tagline: "Progresso sistemático · Resultados mensuráveis"
   },
+  trainingScenes: {
+    badge: "RITMO DIÁRIO",
+    title: "Momentos de treino",
+    desc: "Do aquecimento matinal à recuperação noturna — o ritmo de 24 horas de um atleta de elite.",
+    scenes: [
+      { caption: "Aquecimento",        time: "06:30" },
+      { caption: "Treino de força",    time: "08:00" },
+      { caption: "Série de sprints",   time: "10:00" },
+      { caption: "Treino de salto",    time: "11:30" },
+      { caption: "Treino de ataque",   time: "14:00" },
+      { caption: "Foco mental",        time: "16:00" },
+      { caption: "Recuperação",        time: "18:00" },
+      { caption: "Análise de equipe",  time: "20:00" }
+    ]
+  },
   testimonials: {
     badge: "Resultados",
     title: "Sua história, sua motivação.",

@@ -110,6 +110,21 @@ export const ko = {
     line2: "모든 훈련은 더 강한 내일의 씨앗이다.",
     tagline: "체계적인 발전 · 측정 가능한 결과"
   },
+  trainingScenes: {
+    badge: "일일 리듬",
+    title: "훈련의 순간",
+    desc: "아침 워밍업부터 저녁 회복까지 — 엘리트 선수의 24시간 리듬.",
+    scenes: [
+      { caption: "아침 워밍업",  time: "06:30" },
+      { caption: "근력 트레이닝", time: "08:00" },
+      { caption: "스프린트 세트", time: "10:00" },
+      { caption: "점프 연습",    time: "11:30" },
+      { caption: "스파이크 훈련", time: "14:00" },
+      { caption: "멘탈 포커스",   time: "16:00" },
+      { caption: "회복",          time: "18:00" },
+      { caption: "팀 분석",       time: "20:00" }
+    ]
+  },
   testimonials: {
     badge: "결과",
     title: "그들의 이야기, 당신의 동기.",

@@ -16,6 +16,7 @@ const About = lazy(() => import(/* webpackChunkName: "landing-about" */ '../comp
 const HowItWorks = lazy(() => import(/* webpackChunkName: "landing-how" */ '../components/landing/HowItWorks'));
 const Stats = lazy(() => import(/* webpackChunkName: "landing-stats" */ '../components/landing/Stats'));
 const Gallery = lazy(() => import(/* webpackChunkName: "landing-gallery" */ '../components/landing/Gallery'));
+const TrainingScenes = lazy(() => import(/* webpackChunkName: "landing-scenes" */ '../components/landing/TrainingScenes'));
 const Testimonials = lazy(() => import(/* webpackChunkName: "landing-testimonials" */ '../components/landing/Testimonials'));
 const Programs = lazy(() => import(/* webpackChunkName: "landing-programs" */ '../components/landing/Programs'));
 const LeadMagnet = lazy(() => import(/* webpackChunkName: "landing-lead" */ '../components/landing/LeadMagnet'));
@@ -62,6 +63,9 @@ export default function Landing() {
         <VolleyballDivider className="my-4" />
         <Suspense fallback={<Placeholder h={500} />}>
           <ScrollReveal preset="fadeUp"><Gallery /></ScrollReveal>
+        </Suspense>
+        <Suspense fallback={<Placeholder h={520} />}>
+          <ScrollReveal preset="fadeUp"><TrainingScenes /></ScrollReveal>
         </Suspense>
         <Suspense fallback={<Placeholder h={500} />}>
           <ScrollReveal preset="fadeUp"><Testimonials /></ScrollReveal>

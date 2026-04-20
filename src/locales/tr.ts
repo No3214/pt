@@ -68,6 +68,21 @@ export const tr = {
     line2: "Her antrenman, daha güçlü bir yarının tohumudur.",
     tagline: "Sistemli ilerleme · Ölçülebilir sonuç"
   },
+  trainingScenes: {
+    badge: "GÜNLÜK RİTİM",
+    title: "Antrenman Anları",
+    desc: "Sabah ısınmadan akşam toparlanmasına — elit sporcunun 24 saatlik ritmi.",
+    scenes: [
+      { caption: "Sabah Isınma",       time: "06:30" },
+      { caption: "Güç Antrenmanı",     time: "08:00" },
+      { caption: "Sprint Serisi",      time: "10:00" },
+      { caption: "Sıçrama Çalışması",  time: "11:30" },
+      { caption: "Vuruş Antrenmanı",   time: "14:00" },
+      { caption: "Mental Odak",        time: "16:00" },
+      { caption: "Toparlanma",         time: "18:00" },
+      { caption: "Takım Analizi",      time: "20:00" }
+    ]
+  },
   testimonials: {
     badge: "Sonuçlar",
     title: "Onların hikayesi, senin motivasyonun.",

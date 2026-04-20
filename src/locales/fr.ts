@@ -110,6 +110,21 @@ export const fr = {
     line2: "Chaque entraînement plante la graine d'un lendemain plus fort.",
     tagline: "Progrès systématique · Résultats mesurables"
   },
+  trainingScenes: {
+    badge: "RYTHME QUOTIDIEN",
+    title: "Moments d'entraînement",
+    desc: "De l'échauffement du matin à la récupération du soir — le rythme 24 heures d'un athlète d'élite.",
+    scenes: [
+      { caption: "Échauffement",       time: "06:30" },
+      { caption: "Musculation",        time: "08:00" },
+      { caption: "Série de sprints",   time: "10:00" },
+      { caption: "Entraînement de saut", time: "11:30" },
+      { caption: "Travail de frappe",  time: "14:00" },
+      { caption: "Concentration mentale", time: "16:00" },
+      { caption: "Récupération",       time: "18:00" },
+      { caption: "Analyse d'équipe",   time: "20:00" }
+    ]
+  },
   testimonials: {
     badge: "Résultats",
     title: "Leur histoire, votre motivation.",
