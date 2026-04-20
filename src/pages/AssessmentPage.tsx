@@ -8,7 +8,15 @@ import { useTranslation } from '../locales'
 import { useAssessment } from '../stores/useAssessment'
 import { QUIZ, type PlanKey } from '../data/assessmentQuiz'
 import FadeUpSection from '../components/premium/FadeUpSection'
+import ParticleField from '../components/premium/ParticleField'
+import DitherOverlay from '../components/premium/DitherOverlay'
 import SEO from '../components/SEO'
+
+const PLAN_PARTICLE_COLOR: Record<PlanKey, string> = {
+  starter: '#D4B483',
+  pro: '#7A9E82',
+  elite: '#C2684A',
+}
 
 // ───────────────────────── helpers ─────────────────────────
 
@@ -278,26 +286,32 @@ function Result({
       >
         <div className={`absolute -inset-px -z-10 bg-gradient-to-br ${accent.grad} blur-2xl`} />
 
+        {/* Casberry Particles-inspired ambient swarm, plan rengine gore */}
+        <ParticleField count={320} color={PLAN_PARTICLE_COLOR[plan]} size={1.4} speed={0.25} opacity={0.45} />
+
+        {/* Astrodither texture — filmic grain */}
+        <DitherOverlay intensity={0.14} tile={4} blend="soft-light" />
+
         <span
-          className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase ${accent.badge}`}
+          className={`relative z-10 inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase ${accent.badge}`}
         >
           {plan}
         </span>
 
-        <h2 className="mt-4 text-3xl md:text-5xl font-bold text-text-main tracking-tight">
+        <h2 className="relative z-10 mt-4 text-3xl md:text-5xl font-bold text-text-main tracking-tight">
           {planName}
         </h2>
 
         {planPrice && (
-          <p className="mt-2 text-text-main/70 tabular-nums text-lg">{planPrice}</p>
+          <p className="relative z-10 mt-2 text-text-main/70 tabular-nums text-lg">{planPrice}</p>
         )}
 
         {planDesc && (
-          <p className="mt-4 text-text-main/70 leading-relaxed">{planDesc}</p>
+          <p className="relative z-10 mt-4 text-text-main/70 leading-relaxed">{planDesc}</p>
         )}
 
         {features.length > 0 && (
-          <ul className="mt-6 grid gap-2.5">
+          <ul className="relative z-10 mt-6 grid gap-2.5">
             {features.map((f, i) => (
               <li key={i} className="flex items-start gap-3 text-sm text-text-main/80">
                 <span className="mt-1 w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
@@ -307,7 +321,7 @@ function Result({
           </ul>
         )}
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+        <div className="relative z-10 mt-8 flex flex-col sm:flex-row gap-3">
           <a
             href="/#programs"
             className="flex-1 px-6 py-3.5 rounded-xl font-semibold text-center bg-primary text-white shadow-[0_10px_30px_rgba(194,104,74,0.35)] hover:-translate-y-0.5 hover:shadow-[0_14px_40px_rgba(194,104,74,0.45)] transition-all"
