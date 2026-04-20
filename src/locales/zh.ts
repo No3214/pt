@@ -1033,5 +1033,103 @@ export const zh = {
     desc: "您要查找的页面不存在或已被移动。",
     backHome: "返回首页",
     redirect: "您将在 {count} 秒后被重定向"
+  },
+  assessment: {
+    landingCTA: {
+      badge: "2 分钟",
+      title: "找到你的最佳方案",
+      desc: "确定你的排球位置、目标和训练时间。7 个问题推荐 Starter、Pro 或 Elite — 为你量身定制。",
+      cta: "开始免费评估",
+      meta: "无需信用卡 · 2 分钟 · 个人计划"
+    },
+    title: "ARENA 评估",
+    subtitle: "2 分钟找到最适合你的方案。让我们一起书写你的表现故事。",
+    progress: "{current} / {total}",
+    cta: {
+      start: "开始",
+      next: "下一步",
+      back: "返回",
+      submit: "显示我的方案",
+      restart: "重新评估",
+      book: "预约通话"
+    },
+    email: {
+      title: "获取你的方案",
+      subtitle: "我们会将结果和个性化建议发送到你的邮箱。",
+      placeholder: "you@example.com",
+      consent: "我同意 ARENA 处理我的个人数据并已阅读隐私政策。",
+      privacy: "隐私政策",
+      submit: "显示我的方案",
+      required: "邮箱为必填项",
+      invalid: "请输入有效的邮箱地址"
+    },
+    questions: {
+      goal: {
+        label: "你的主要目标是什么?",
+        choices: {
+          performance: "提升排球表现",
+          national: "国家队 / 职业生涯",
+          rehab: "伤后安全回归",
+          fitness: "全面健身 + 力量 + 信心"
+        }
+      },
+      age: {
+        label: "你的年龄段?",
+        choices: { u14: "14 岁以下", u18: "15–18", adult: "19–29", over30: "30+" }
+      },
+      position: {
+        label: "你的排球位置?",
+        choices: {
+          outside: "主攻",
+          opposite: "接应",
+          setter: "二传",
+          middle: "副攻",
+          libero: "自由人",
+          none: "我不打排球"
+        }
+      },
+      experience: {
+        label: "你的经验水平?",
+        choices: {
+          beginner: "初学者",
+          recreational: "业余爱好",
+          club: "俱乐部 / 校队",
+          elite: "职业联赛 / 国家队 / 学院"
+        }
+      },
+      frequency: {
+        label: "每周可以训练几天?",
+        choices: { lt2: "少于 2 天", "2to3": "2–3 天", "4to5": "4–5 天", "6plus": "6+ 天" }
+      },
+      injury: {
+        label: "当前伤病状态?",
+        choices: { none: "无伤", past: "既往伤病,已恢复", current: "当前受伤" }
+      },
+      commitment: {
+        label: "你可以坚持几个月?",
+        choices: { "1to3": "1–3 个月", "4to6": "4–6 个月", "6plus": "6+ 个月" }
+      }
+    },
+    result: {
+      title: "你的最佳方案",
+      starter: {
+        name: "ARENA Starter",
+        desc: "扎实基础 — 适合康复或初入结构化训练。",
+        price: "₺4,990 / 月",
+        features: ["每周 3 天训练计划", "基础动作评估", "营养指南", "每月 1 次 1-对-1 通话", "WhatsApp 支持"]
+      },
+      pro: {
+        name: "ARENA Pro",
+        desc: "俱乐部/校队水平表现 — 力量 + 爆发 + 耐力。",
+        price: "₺8,990 / 月",
+        features: ["个性化 5 天计划", "位置专属动作库", "详细营养计划 + 宏量追踪", "每周 1-对-1 通话", "测量 + 进度报告"]
+      },
+      elite: {
+        name: "ARENA Elite",
+        desc: "面向职业/国家队路径运动员的最全面 360° 表现系统。",
+        price: "₺17,990 / 月",
+        features: ["6 天周期化训练", "1-对-1 技术 + 战术分析", "每月生物力学视频分析", "每周 2 次 1-对-1 + 无限支持", "运动营养 + 补剂计划", "心理表现辅导"]
+      }
+    }
   }
 };

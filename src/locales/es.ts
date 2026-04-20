@@ -1033,5 +1033,103 @@ export const es = {
     desc: "La página que buscas no existe o ha sido movida.",
     backHome: "Volver al Inicio",
     redirect: "Serás redirigido en {count} segundos"
+  },
+  assessment: {
+    landingCTA: {
+      badge: "2 MINUTOS",
+      title: "Encuentra tu programa ideal",
+      desc: "Mapea tu posición, objetivo y horario de voleibol. En 7 preguntas te recomendamos Starter, Pro o Elite — hecho a tu medida.",
+      cta: "Comienza tu Evaluación Gratis",
+      meta: "Sin tarjeta · 2 minutos · plan personal"
+    },
+    title: "Evaluación ARENA",
+    subtitle: "2 minutos para encontrar tu programa ideal. Escribamos juntos tu historia de rendimiento.",
+    progress: "{current} / {total}",
+    cta: {
+      start: "Comenzar",
+      next: "Siguiente",
+      back: "Atrás",
+      submit: "Mostrar Mi Plan",
+      restart: "Reintentar",
+      book: "Reservar Llamada"
+    },
+    email: {
+      title: "Obtén tu plan",
+      subtitle: "Enviaremos el resultado y recomendaciones personalizadas a tu email.",
+      placeholder: "tu@ejemplo.com",
+      consent: "Consiento que ARENA procese mis datos personales y he leído la política de privacidad.",
+      privacy: "Política de Privacidad",
+      submit: "Mostrar Mi Plan",
+      required: "El email es obligatorio",
+      invalid: "Ingresa una dirección de email válida"
+    },
+    questions: {
+      goal: {
+        label: "¿Cuál es tu objetivo principal?",
+        choices: {
+          performance: "Mejorar mi rendimiento en voleibol",
+          national: "Selección nacional / carrera profesional",
+          rehab: "Volver con seguridad tras una lesión",
+          fitness: "Fitness general + fuerza + confianza"
+        }
+      },
+      age: {
+        label: "¿Tu rango de edad?",
+        choices: { u14: "Menor de 14", u18: "15–18", adult: "19–29", over30: "30+" }
+      },
+      position: {
+        label: "¿Tu posición en voleibol?",
+        choices: {
+          outside: "Punta receptor",
+          opposite: "Opuesto",
+          setter: "Armador",
+          middle: "Central",
+          libero: "Líbero",
+          none: "No juego voleibol"
+        }
+      },
+      experience: {
+        label: "¿Tu nivel de experiencia?",
+        choices: {
+          beginner: "Principiante",
+          recreational: "Recreativo / aficionado",
+          club: "Club / equipo escolar",
+          elite: "Liga profesional / nacional / academia"
+        }
+      },
+      frequency: {
+        label: "¿Cuántos días por semana puedes entrenar?",
+        choices: { lt2: "Menos de 2 días", "2to3": "2–3 días", "4to5": "4–5 días", "6plus": "6+ días" }
+      },
+      injury: {
+        label: "¿Estado actual de lesión?",
+        choices: { none: "Sin lesión", past: "Lesión pasada, ya recuperado", current: "Lesionado actualmente" }
+      },
+      commitment: {
+        label: "¿Cuántos meses puedes comprometerte?",
+        choices: { "1to3": "1–3 meses", "4to6": "4–6 meses", "6plus": "6+ meses" }
+      }
+    },
+    result: {
+      title: "Tu plan ideal",
+      starter: {
+        name: "ARENA Starter",
+        desc: "Base sólida — seguro para rehabilitación o primeros pasos en entrenamiento estructurado.",
+        price: "₺4.990 / mes",
+        features: ["Programa semanal de 3 días", "Evaluación básica de movimiento", "Guía nutricional", "1 llamada 1-a-1 mensual", "Soporte por WhatsApp"]
+      },
+      pro: {
+        name: "ARENA Pro",
+        desc: "Rendimiento de club/escuela — fuerza + potencia + resistencia.",
+        price: "₺8.990 / mes",
+        features: ["Programa personalizado de 5 días", "Biblioteca de ejercicios por posición", "Plan nutricional detallado + macros", "Llamada 1-a-1 semanal", "Medición + informe de progreso"]
+      },
+      elite: {
+        name: "ARENA Elite",
+        desc: "Sistema de rendimiento 360° más intensivo para atletas en ruta profesional/nacional.",
+        price: "₺17.990 / mes",
+        features: ["Entrenamiento periodizado de 6 días", "Análisis técnico + táctico 1-a-1", "Análisis biomecánico mensual en video", "2 llamadas semanales + soporte ilimitado", "Plan de nutrición deportiva + suplementación", "Coaching de rendimiento mental"]
+      }
+    }
   }
 };

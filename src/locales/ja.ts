@@ -1033,5 +1033,103 @@ export const ja = {
     desc: "お探しのページは存在しないか、移動されています。",
     backHome: "ホームに戻る",
     redirect: "{count}秒後にリダイレクトされます"
+  },
+  assessment: {
+    landingCTA: {
+      badge: "2 分",
+      title: "あなたに最適なプログラムを見つけよう",
+      desc: "バレーボールのポジション、目標、スケジュールをマッピング。7 問で Starter、Pro、Elite を推薦 — あなた専用に。",
+      cta: "無料アセスメントを開始",
+      meta: "カード不要 · 2 分 · 個人プラン"
+    },
+    title: "ARENA アセスメント",
+    subtitle: "最適なプログラムを見つけるために 2 分。一緒にあなたのパフォーマンスの物語を書きましょう。",
+    progress: "{current} / {total}",
+    cta: {
+      start: "開始",
+      next: "次へ",
+      back: "戻る",
+      submit: "マイプランを表示",
+      restart: "やり直す",
+      book: "通話を予約"
+    },
+    email: {
+      title: "プランを受け取る",
+      subtitle: "結果とパーソナライズされた推奨事項をメールでお送りします。",
+      placeholder: "you@example.com",
+      consent: "ARENA による個人情報の処理に同意し、プライバシーポリシーを読みました。",
+      privacy: "プライバシーポリシー",
+      submit: "マイプランを表示",
+      required: "メールアドレスは必須です",
+      invalid: "有効なメールアドレスを入力してください"
+    },
+    questions: {
+      goal: {
+        label: "主な目標は?",
+        choices: {
+          performance: "バレーボールのパフォーマンスを向上",
+          national: "ナショナルチーム / プロのキャリア",
+          rehab: "怪我から安全に復帰",
+          fitness: "総合フィットネス + 筋力 + 自信"
+        }
+      },
+      age: {
+        label: "年齢層は?",
+        choices: { u14: "14 歳未満", u18: "15–18", adult: "19–29", over30: "30+" }
+      },
+      position: {
+        label: "バレーボールのポジションは?",
+        choices: {
+          outside: "アウトサイドヒッター",
+          opposite: "オポジット",
+          setter: "セッター",
+          middle: "ミドルブロッカー",
+          libero: "リベロ",
+          none: "バレーボールはしない"
+        }
+      },
+      experience: {
+        label: "経験レベルは?",
+        choices: {
+          beginner: "初心者",
+          recreational: "レクリエーション / アマチュア",
+          club: "クラブ / 学校チーム",
+          elite: "プロリーグ / ナショナル / アカデミー"
+        }
+      },
+      frequency: {
+        label: "週に何日トレーニングできる?",
+        choices: { lt2: "2 日未満", "2to3": "2–3 日", "4to5": "4–5 日", "6plus": "6+ 日" }
+      },
+      injury: {
+        label: "現在の怪我の状態は?",
+        choices: { none: "怪我なし", past: "過去の怪我、現在回復", current: "現在負傷中" }
+      },
+      commitment: {
+        label: "何ヶ月コミットできる?",
+        choices: { "1to3": "1–3 ヶ月", "4to6": "4–6 ヶ月", "6plus": "6+ ヶ月" }
+      }
+    },
+    result: {
+      title: "あなたに最適なプラン",
+      starter: {
+        name: "ARENA Starter",
+        desc: "しっかりとした土台 — リハビリや構造化トレーニングの第一歩に安全。",
+        price: "₺4,990 / 月",
+        features: ["週 3 日のトレーニングプログラム", "基本の動作評価", "栄養ガイド", "月 1 回の 1 対 1 通話", "WhatsApp サポート"]
+      },
+      pro: {
+        name: "ARENA Pro",
+        desc: "クラブ/学校チームのパフォーマンス — 筋力 + パワー + 持久力。",
+        price: "₺8,990 / 月",
+        features: ["パーソナライズされた 5 日プログラム", "ポジション別ドリルライブラリ", "詳細な栄養計画 + マクロ追跡", "週 1 回の 1 対 1 通話", "計測 + 進捗レポート"]
+      },
+      elite: {
+        name: "ARENA Elite",
+        desc: "プロ/ナショナルパスにいるアスリート向けの最も集中的な 360° パフォーマンスシステム。",
+        price: "₺17,990 / 月",
+        features: ["6 日のピリオダイゼーショントレーニング", "1 対 1 の技術 + 戦術分析", "毎月のバイオメカニクスビデオ分析", "週 2 回の 1 対 1 + 無制限サポート", "スポーツ栄養 + サプリメント計画", "メンタルパフォーマンスコーチング"]
+      }
+    }
   }
 };

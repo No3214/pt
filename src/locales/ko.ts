@@ -1033,5 +1033,103 @@ export const ko = {
     desc: "찾으시는 페이지가 존재하지 않거나 이동되었습니다.",
     backHome: "홈으로 돌아가기",
     redirect: "{count}초 후 리디렉션됩니다"
+  },
+  assessment: {
+    landingCTA: {
+      badge: "2분",
+      title: "당신에게 맞는 프로그램 찾기",
+      desc: "배구 포지션, 목표, 일정을 매핑하세요. 7개 질문으로 Starter, Pro, Elite 중 맞춤 추천합니다.",
+      cta: "무료 평가 시작하기",
+      meta: "카드 불필요 · 2분 · 개인 플랜"
+    },
+    title: "ARENA 평가",
+    subtitle: "최적의 프로그램을 찾는 데 2분. 당신의 퍼포먼스 스토리를 함께 써봅시다.",
+    progress: "{current} / {total}",
+    cta: {
+      start: "시작",
+      next: "다음",
+      back: "뒤로",
+      submit: "내 플랜 보기",
+      restart: "다시하기",
+      book: "통화 예약"
+    },
+    email: {
+      title: "플랜 받기",
+      subtitle: "결과와 맞춤 추천을 이메일로 보내드립니다.",
+      placeholder: "you@example.com",
+      consent: "ARENA의 개인정보 처리에 동의하며 개인정보 처리방침을 읽었습니다.",
+      privacy: "개인정보 처리방침",
+      submit: "내 플랜 보기",
+      required: "이메일이 필요합니다",
+      invalid: "올바른 이메일 주소를 입력하세요"
+    },
+    questions: {
+      goal: {
+        label: "주요 목표는 무엇인가요?",
+        choices: {
+          performance: "배구 퍼포먼스 향상",
+          national: "국가대표 / 프로 커리어",
+          rehab: "부상 후 안전한 복귀",
+          fitness: "전반적인 체력 + 근력 + 자신감"
+        }
+      },
+      age: {
+        label: "연령대는?",
+        choices: { u14: "14세 미만", u18: "15–18", adult: "19–29", over30: "30+" }
+      },
+      position: {
+        label: "배구 포지션은?",
+        choices: {
+          outside: "아웃사이드 히터",
+          opposite: "오포짓",
+          setter: "세터",
+          middle: "미들 블로커",
+          libero: "리베로",
+          none: "배구를 하지 않습니다"
+        }
+      },
+      experience: {
+        label: "경험 수준은?",
+        choices: {
+          beginner: "초보자",
+          recreational: "취미 / 아마추어",
+          club: "클럽 / 학교팀",
+          elite: "프로 리그 / 국가대표 / 아카데미"
+        }
+      },
+      frequency: {
+        label: "주당 훈련 가능한 일수는?",
+        choices: { lt2: "2일 미만", "2to3": "2–3일", "4to5": "4–5일", "6plus": "6일 이상" }
+      },
+      injury: {
+        label: "현재 부상 상태는?",
+        choices: { none: "부상 없음", past: "과거 부상, 현재 회복", current: "현재 부상 중" }
+      },
+      commitment: {
+        label: "몇 개월간 전념할 수 있나요?",
+        choices: { "1to3": "1–3개월", "4to6": "4–6개월", "6plus": "6개월 이상" }
+      }
+    },
+    result: {
+      title: "최적의 플랜",
+      starter: {
+        name: "ARENA Starter",
+        desc: "탄탄한 기초 — 재활이나 구조화된 훈련 시작에 안전합니다.",
+        price: "₺4,990 / 월",
+        features: ["주 3일 훈련 프로그램", "기본 움직임 평가", "영양 가이드", "월 1회 1:1 통화", "WhatsApp 지원"]
+      },
+      pro: {
+        name: "ARENA Pro",
+        desc: "클럽/학교팀 퍼포먼스 — 근력 + 파워 + 지구력.",
+        price: "₺8,990 / 월",
+        features: ["맞춤형 5일 프로그램", "포지션별 드릴 라이브러리", "상세 영양 플랜 + 매크로 추적", "주 1회 1:1 통화", "측정 + 진척 리포트"]
+      },
+      elite: {
+        name: "ARENA Elite",
+        desc: "프로/국가대표 경로 선수를 위한 가장 집중적인 360° 퍼포먼스 시스템.",
+        price: "₺17,990 / 월",
+        features: ["6일 주기화 훈련", "1:1 기술 + 전술 분석", "월간 생체역학 영상 분석", "주 2회 1:1 + 무제한 지원", "스포츠 영양 + 보조제 플랜", "멘탈 퍼포먼스 코칭"]
+      }
+    }
   }
 };
