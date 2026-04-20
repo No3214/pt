@@ -83,6 +83,34 @@ tailwind.config = {
   }
   .chip { display: inline-flex; align-items: center; gap: .5rem; padding: .375rem .875rem; border-radius: 9999px; font-size: .75rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; }
   .kbd { font-family: ui-monospace, Menlo, monospace; font-size: .7rem; padding: .15rem .45rem; background: #FAF6F1; border: 1px solid rgba(26,26,26,.12); border-radius: 6px; box-shadow: 0 1px 0 rgba(26,26,26,.08); }
+
+  /* Floating deck HUD — progress dots + print button. Hidden in print. */
+  .hud { position: fixed; right: 1.25rem; top: 50%; transform: translateY(-50%); z-index: 45; display: flex; flex-direction: column; gap: .55rem; }
+  .hud-dot { width: 9px; height: 9px; border-radius: 9999px; background: rgba(26,26,26,.18); cursor: pointer; transition: background .2s, transform .2s; border: 0; padding: 0; }
+  .hud-dot:hover { background: rgba(26,26,26,.45); transform: scale(1.15); }
+  .hud-dot.is-active { background: #C2684A; transform: scale(1.35); }
+  .hud-dot:focus-visible { outline: 2px solid #C2684A; outline-offset: 3px; }
+
+  .counter { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 45; font-family: ui-monospace, Menlo, monospace; font-size: .75rem; color: rgba(26,26,26,.55); background: rgba(255,255,255,.7); backdrop-filter: blur(8px); padding: .4rem .7rem; border-radius: 9999px; border: 1px solid rgba(26,26,26,.08); }
+  .counter.on-dark { color: rgba(250,246,241,.75); background: rgba(26,26,26,.55); border-color: rgba(250,246,241,.12); }
+
+  .print-btn { position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 45; display: inline-flex; align-items: center; gap: .5rem; padding: .6rem 1rem; border-radius: 9999px; background: rgba(255,255,255,.85); backdrop-filter: blur(8px); border: 1px solid rgba(26,26,26,.1); color: #1A1A1A; font-size: .75rem; font-weight: 500; cursor: pointer; transition: transform .2s, background .2s; box-shadow: 0 8px 24px -12px rgba(26,26,26,.25); }
+  .print-btn:hover { transform: translateY(-1px); background: #fff; }
+  .print-btn:focus-visible { outline: 2px solid #C2684A; outline-offset: 3px; }
+  .print-btn.on-dark { background: rgba(26,26,26,.65); color: #FAF6F1; border-color: rgba(250,246,241,.12); }
+
+  /* Print: each slide on its own A4-landscape page, flattened layout, no UI chrome. */
+  @media print {
+    @page { size: A4 landscape; margin: 0; }
+    html, body { background: #FAF6F1 !important; }
+    nav, .hud, .counter, .print-btn { display: none !important; }
+    .deck { height: auto !important; overflow: visible !important; scroll-snap-type: none !important; }
+    .slide { page-break-after: always; break-after: page; min-height: 0 !important; height: 100vh; box-shadow: none !important; }
+    .slide:last-child { page-break-after: auto; }
+    * { animation: none !important; transition: none !important; }
+    .gradient-text { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .grain::before { display: none !important; }
+  }
 </style>
 </head>
 <body class="antialiased">
@@ -98,6 +126,16 @@ tailwind.config = {
   <a href="#market" class="text-ink/70 hover:text-primary transition">Pazar</a>
   <a href="#ask" class="text-ink/70 hover:text-primary transition">Talep</a>
 </nav>
+
+<!-- Side progress dots (hydrated in script) -->
+<aside class="hud" role="tablist" aria-label="Slide navigation" id="hud"></aside>
+
+<!-- Slide counter + print button -->
+<button type="button" class="print-btn" id="printBtn" aria-label="Save as PDF (opens print dialog)">
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Save as PDF
+</button>
+<div class="counter" id="counter" aria-live="polite" aria-atomic="true">01 / 07</div>
 
 <main class="deck">
 
@@ -452,24 +490,63 @@ tailwind.config = {
   // Keyboard nav: j/k, arrows, space, home/end
   const slides = [...document.querySelectorAll('.slide')];
   const deck = document.querySelector('.deck');
+  const hud = document.getElementById('hud');
+  const counter = document.getElementById('counter');
+  const printBtn = document.getElementById('printBtn');
+  const total = slides.length;
   let i = 0;
-  const go = (n) => {
-    i = Math.max(0, Math.min(slides.length - 1, n));
-    slides[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Hydrate progress dots — clickable tablist for pointer users, arrow-nav for keyboard
+  const dots = slides.map((s, idx) => {
+    const d = document.createElement('button');
+    d.type = 'button';
+    d.className = 'hud-dot';
+    d.role = 'tab';
+    d.setAttribute('aria-label', `Go to slide ${idx + 1}: ${s.querySelector('[data-slide-title]')?.textContent?.trim() || s.id}`);
+    d.setAttribute('aria-controls', s.id);
+    d.addEventListener('click', () => go(idx));
+    hud.appendChild(d);
+    return d;
+  });
+
+  const pad = (n) => String(n).padStart(2, '0');
+  const darkSlides = new Set(['solution','ask']); // sections with dark bg — switch HUD contrast
+  const update = () => {
+    dots.forEach((d, idx) => d.classList.toggle('is-active', idx === i));
+    counter.textContent = `${pad(i + 1)} / ${pad(total)}`;
+    const onDark = darkSlides.has(slides[i]?.id);
+    counter.classList.toggle('on-dark', onDark);
+    printBtn.classList.toggle('on-dark', onDark);
   };
+
+  const go = (n) => {
+    i = Math.max(0, Math.min(total - 1, n));
+    slides[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    update();
+  };
+
   addEventListener('keydown', (e) => {
     if (['ArrowDown','j',' ','PageDown'].includes(e.key)) { go(i+1); e.preventDefault(); }
     else if (['ArrowUp','k','PageUp'].includes(e.key)) { go(i-1); e.preventDefault(); }
     else if (e.key === 'Home') { go(0); e.preventDefault(); }
-    else if (e.key === 'End') { go(slides.length-1); e.preventDefault(); }
+    else if (e.key === 'End') { go(total-1); e.preventDefault(); }
+    else if (e.key === 'p' && (e.metaKey || e.ctrlKey)) { /* native Cmd/Ctrl+P handled by browser */ }
   });
-  // Track current slide on scroll
+
+  // Track current slide on scroll (sync with manual scroll + snap)
   const io = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
-      if (en.isIntersecting) i = slides.indexOf(en.target);
+      if (en.isIntersecting) {
+        i = slides.indexOf(en.target);
+        update();
+      }
     });
   }, { threshold: 0.55 });
   slides.forEach(s => io.observe(s));
+
+  printBtn.addEventListener('click', () => window.print());
+
+  update();
 </script>
 </body>
 </html>
