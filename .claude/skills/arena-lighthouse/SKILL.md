@@ -14,15 +14,15 @@ Hedef: 4x mobile Lighthouse ≥ 95 (Perf / A11y / BP / SEO). Core Web Vitals yes
 
 ```bash
 # Lokal audit
-npx lighthouse https://pt.kozbeylikonagi.com.tr --preset=desktop --view
-npx lighthouse https://pt.kozbeylikonagi.com.tr --form-factor=mobile --view
+npx lighthouse https://arena-performance.com --preset=desktop --view
+npx lighthouse https://arena-performance.com --form-factor=mobile --view
 
 # Throttled network (slow 4G) mobile CWV proxy
 ```
 
 Chrome DevTools > Lighthouse > Mobile + Performance + Accessibility.
 
-PageSpeed Insights (field data): https://pagespeed.web.dev/report?url=https://pt.kozbeylikonagi.com.tr
+PageSpeed Insights (field data): https://pagespeed.web.dev/report?url=https://arena-performance.com
 
 ## 1) LCP (Largest Contentful Paint) ≤ 2.5s
 
@@ -175,7 +175,7 @@ Router navigation tahmini: mouse hover link → prefetch chunk.
 
 CF Pages default HTTP/3 + Brotli. Kontrol:
 ```bash
-curl -I --http3 https://pt.kozbeylikonagi.com.tr
+curl -I --http3 https://arena-performance.com
 ```
 
 Response: `alt-svc: h3=":443"`, `content-encoding: br`.
@@ -216,7 +216,7 @@ Lighthouse SEO 100:
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "ARENA Performance",
-  "url": "https://pt.kozbeylikonagi.com.tr",
+  "url": "https://arena-performance.com",
   "address": { "@type": "PostalAddress", "addressLocality": "Turkey" }
 }
 </script>

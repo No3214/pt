@@ -45,7 +45,7 @@
    - "Designed with Tom Brady's trainers" — isim + yuz + NFL yillari
    - "Applied by 2000+ pro athletes"
    - "NIH-published recovery protocols"
-   - ARENA: "Mehmet Kozbeyli Akademisi ortakligi" + "Milli Takim oyunculari kullandi" + "Saglik Bakanligi icin onayli" (gelecek)
+   - ARENA: "Elit Performans Akademisi ortakligi" + "Milli Takim oyunculari kullandi" + "Saglik Bakanligi onayli protokoller" (gelecek)
 
 6. **Email capture BEFORE result**
    - Quiz son sorunun ardindan: "Get your personalized plan — enter email"

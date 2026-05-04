@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -15,10 +15,21 @@ export default function Contact() {
   const dm = darkMode;
   const [formStatus, setFormStatus] = useState<'idle' | 'sending' | 'success'>('idle');
 
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactFormData>({
+  const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: { goal: 'voleybol' }
   });
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === '#partner') {
+        setValue('goal', 'hoca');
+      }
+    };
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, [setValue]);
 
   const onSubmit = async (data: ContactFormData) => {
     setFormStatus('sending');

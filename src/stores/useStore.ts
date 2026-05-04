@@ -168,7 +168,7 @@ export const useStore = create<AppState>()(
       isAdminAuth: false,
       loginAdmin: async (pin) => {
         const validHashes = [
-          '45801e4070883701f718fa8c4c6268558c48eaef8fb93a51283af1fb608ca5c7', // ela2026
+          'c9a9a52fd65190f5121c8055c8c0aa67b1ea71c27b677a9c67158499addfb0db', // arena2026
           '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', // 1234
         ]
         const encoder = new TextEncoder()

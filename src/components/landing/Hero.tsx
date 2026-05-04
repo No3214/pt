@@ -96,7 +96,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-8 md:px-12 pt-32 pb-20 w-full">
+      <div className="max-w-[1400px] mx-auto px-8 md:px-12 pt-32 pb-12 md:pb-16 w-full">
         <div className="grid lg:grid-cols-[1.2fr_1fr] gap-16 lg:gap-24 items-center">
           <motion.div initial="hidden" animate="visible" variants={staggerContainer}>
             <motion.div variants={fadeUp} custom={0}

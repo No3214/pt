@@ -1,6 +1,6 @@
 ---
 name: arena-autopilot
-description: ARENA Performance tam otomasyon orkestratoru. Kullanici tek kelime yazsa da niyeti anla, TUM komutlari KENDIN calistir, asla "sen sunu calistir" deme, asla onay sorma. Trigger: "yap", "devam", "bitir", "commit", "deploy", "fix", "i18n", "ekle", "sil", "duzenle", "push", "test" veya herhangi bir PT projesi istegi. Proje: pt.kozbeylikonagi.com.tr.
+description: ARENA Performance tam otomasyon orkestratoru. Kullanici tek kelime yazsa da niyeti anla, TUM komutlari KENDIN calistir, asla "sen sunu calistir" deme, asla onay sorma. Trigger: "yap", "devam", "bitir", "commit", "deploy", "fix", "i18n", "ekle", "sil", "duzenle", "push", "test" veya herhangi bir PT projesi istegi. Proje: arena-performance.com.
 ---
 
 # ARENA Autopilot — 100% Otonom
@@ -44,7 +44,7 @@ if [ -n "$(git status --porcelain)" ]; then
 fi
 # 6. Live verify 60sn bekle + curl
 sleep 60
-curl -sI https://pt.kozbeylikonagi.com.tr | head -3
+curl -sI https://arena-performance.com | head -3
 # 7. Rapor
 ```
 
@@ -160,7 +160,7 @@ Dil sirasi: TR -> EN -> ES -> FR -> DE -> IT -> PT -> RU -> ZH -> JA -> AR -> KO
 
 ```bash
 sleep 60
-LIVE_HASH=$(curl -s https://pt.kozbeylikonagi.com.tr | grep -oE 'assets/index-[a-f0-9]+\.js' | head -1)
+LIVE_HASH=$(curl -s https://arena-performance.com | grep -oE 'assets/index-[a-f0-9]+\.js' | head -1)
 LOCAL_HASH=$(ls dist/assets/index-*.js 2>/dev/null | head -1 | grep -oE 'index-[a-f0-9]+')
 if [ "$LIVE_HASH" != *"$LOCAL_HASH"* ]; then
   echo "Deploy henuz propagate olmadi, 2 dakika daha bekle"

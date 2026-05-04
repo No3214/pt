@@ -89,17 +89,17 @@ export const getLandingData = (lang: string) => {
   ];
 
   const faqItems: FAQItem[] = isTr ? [
-    { q: 'Programa nasıl başlarım?', a: 'Başvuru formunu doldurduktan sonra WhatsApp üzerinden iletişime geçiyorum. Ücretsiz 15 dakikalık tanışma görüşmesinde hedeflerini konuşup, sana uygun programı belirliyoruz.' },
-    { q: 'Online antrenman nasıl işliyor?', a: 'Sana özel hazırladığım program, video açıklamalı egzersizlerle uygulamanda gönderiliyor. Haftalık check-in\'lerle formu kontrol edip, programı gerektiğinde güncelliyorum.' },
-    { q: 'Beslenme planı dahil mi?', a: 'Online Koçluk paketinde temel beslenme takibi var. Premium Büyüme paketinde ise günlük TDEE hesaplı tam beslenme planı, makro takibi ve birebir beslenme danışmanlığı dahil.' },
-    { q: 'Voleybol oynamıyorum, katılabilir miyim?', a: 'Elbette! Voleybol Performance paketi sahaya özel olsa da, Online Koçluk ve Premium Büyüme paketleri her seviye için uygun. Kuvvet, postür ve genel fitness hedeflerine yönelik çalışıyoruz.' },
-    { q: 'Sonuçları ne zaman görürüm?', a: 'Disiplinli takipte ilk 4 haftada gözle görülür değişim başlıyor. 3 aylık süreçte ciddi dönüşümler yaşanıyor. Her danışanın süreci farklı, ama tutarlılık her zaman sonuç verir.' },
+    { q: 'Programa nasıl başlarım?', a: 'Başvuru formunu doldurduktan sonra uzman ekibimiz WhatsApp üzerinden iletişime geçer. Ücretsiz 15 dakikalık tanışma görüşmesinde hedeflerini konuşup, sana en uygun programı ve antrenörü belirliyoruz.' },
+    { q: 'Online antrenman nasıl işliyor?', a: 'Sana özel hazırlanan program, video açıklamalı egzersizlerle mobil uygulama üzerinden iletilir. Haftalık check-in\'lerle formun kontrol edilir ve programın ihtiyaca göre güncellenir.' },
+    { q: 'Beslenme planı dahil mi?', a: 'Online Koçluk paketinde temel beslenme takibi sunulur. Premium Büyüme paketinde ise günlük TDEE hesaplı tam beslenme planı, makro takibi ve birebir beslenme danışmanlığı dahildir.' },
+    { q: 'Voleybol oynamıyorum, katılabilir miyim?', a: 'Elbette! Voleybol Performance paketi sahaya özel olsa da, Online Koçluk ve Premium Büyüme paketleri her seviye ve branş için uygundur. Kuvvet, postür ve genel fitness hedeflerine yönelik çalışıyoruz.' },
+    { q: 'Sonuçları ne zaman görürüm?', a: 'Disiplinli takipte ilk 4 haftada gözle görülür değişim başlıyor. 3 aylık süreçte ciddi dönüşümler yaşanıyor. Her sporcunun süreci farklıdır, ancak tutarlılık her zaman sonuç verir.' },
   ] : [
-    { q: 'How do I start the program?', a: 'After you fill out the application form, I contact you via WhatsApp. We discuss your goals in a free 15-minute introductory call and determine the suitable program.' },
-    { q: 'How does online training work?', a: 'Your personalized program is sent via the app with video-explained exercises. I check your form with weekly check-ins and update the program when necessary.' },
-    { q: 'Is a nutrition plan included?', a: 'Basic nutrition tracking is included in Online Coaching. The Premium Growth package includes a full TDEE-calculated nutrition plan, macro tracking, and 1-on-1 nutrition consulting.' },
-    { q: 'I don\'t play volleyball, can I join?', a: 'Of course! Although the Volleyball Performance package is court-specific, Online Coaching and Premium Growth are suitable for all levels. We target strength, posture, and general fitness goals.' },
-    { q: 'When will I see results?', a: 'With disciplined tracking, visible changes start in the first 4 weeks. Serious transformations occur over a 3-month period. Consistency always yields results.' },
+    { q: 'How do I start the program?', a: 'After you fill out the application form, our expert team contacts you via WhatsApp. We discuss your goals in a free 15-minute introductory call and determine the most suitable program and coach for you.' },
+    { q: 'How does online training work?', a: 'Your personalized program is sent via the mobile app with video-explained exercises. Your form is checked with weekly check-ins, and the program is updated as needed.' },
+    { q: 'Is a nutrition plan included?', a: 'Basic nutrition tracking is provided in Online Coaching. The Premium Growth package includes a full TDEE-calculated nutrition plan, macro tracking, and 1-on-1 nutrition consulting.' },
+    { q: 'I don\'t play volleyball, can I join?', a: 'Of course! Although the Volleyball Performance package is court-specific, Online Coaching and Premium Growth are suitable for all levels and disciplines. We target strength, posture, and general fitness goals.' },
+    { q: 'When will I see results?', a: 'With disciplined tracking, visible changes start in the first 4 weeks. Serious transformations occur over a 3-month period. Every athlete\'s journey is unique, but consistency always yields results.' },
   ];
 
   const landingStats: Stat[] = [

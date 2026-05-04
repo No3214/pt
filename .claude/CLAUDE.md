@@ -5,7 +5,7 @@ me talk short. no filler. tool first, result first. caveman efficiency.
 ## Identity
 - Product: ARENA Performance — Elite volleyball & performance platform (system, not person-bound)
 - Owner: Yunuscan (yunuscanoruk@gmail.com)
-- Domain: pt.kozbeylikonagi.com.tr (live) — arena.kozbeylikonagi.com.tr (rezerv)
+- Domain: arena-performance.com (live) — arena.arena-performance.com (rezerv)
 - GitHub: github.com/No3214/pt.git
 - Tagline: Güçlü ol. Kendine güven.
 

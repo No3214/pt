@@ -1,0 +1,15 @@
+
+> arena-performance@2.0.0 dev
+> vite
+
+Port 3000 is in use, trying another one...
+Port 3001 is in use, trying another one...
+
+  VITE v6.4.2  ready in 1006 ms
+
+  ➜  Local:   http://localhost:3002/
+  ➜  Network: use --host to expose
+4:01:18 PM [vite] (client) hmr update /src/index.css, /src/App.tsx, /src/pages/NotFound.tsx, /src/components/SEO.tsx, /src/components/landing/Hero.tsx, /src/components/landing/Navbar.tsx, /src/components/landing/Marquee.tsx, /src/components/landing/MissionStatement.tsx, /src/components/landing/About.tsx, /src/components/landing/HowItWorks.tsx, /src/components/landing/Gallery.tsx, /src/components/landing/TrainingScenes.tsx, /src/components/landing/Testimonials.tsx, /src/components/landing/AssessmentCTA.tsx, /src/components/landing/FAQ.tsx, /src/components/landing/Contact.tsx, /src/components/landing/Footer.tsx, /src/components/LegalModals.tsx
+4:01:28 PM [vite] (client) hmr update /src/components/landing/Hero.tsx, /src/index.css
+4:01:42 PM [vite] (client) hmr update /src/index.css, /src/App.tsx, /src/pages/NotFound.tsx, /src/components/SEO.tsx, /src/components/landing/Hero.tsx, /src/components/landing/Navbar.tsx, /src/components/landing/Marquee.tsx, /src/components/landing/MissionStatement.tsx, /src/components/landing/About.tsx, /src/components/landing/HowItWorks.tsx, /src/components/landing/Gallery.tsx, /src/components/landing/TrainingScenes.tsx, /src/components/landing/Testimonials.tsx, /src/components/landing/AssessmentCTA.tsx, /src/components/landing/FAQ.tsx, /src/components/landing/Contact.tsx, /src/components/landing/Footer.tsx, /src/components/LegalModals.tsx
+4:01:46 PM [vite] (client) hmr update /src/pages/Landing.tsx, /src/index.css

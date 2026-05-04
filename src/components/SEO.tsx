@@ -95,7 +95,7 @@ const SEO_DESCRIPTIONS: Record<string, { title: string; description: string; key
 export default function SEO({
   title,
   description,
-  canonical = 'https://pt.kozbeylikonagi.com.tr',
+  canonical = 'https://arena-performance.com',
   ogImage = '/og-image.png',
   type = 'website',
 }: SEOProps) {

@@ -26,7 +26,7 @@ npx playwright codegen              # record
 
 ### Critical Flow
 1. Landing loads + nav works
-2. Admin PIN login (`ela2026`)
+2. Admin PIN login (`arena2026`)
 3. Portal access (student)
 4. AI chat query + response
 5. Form submit (lead, contact, booking)
@@ -46,7 +46,7 @@ test.describe('Admin auth', () => {
     await page.waitForLoadState('networkidle')
 
     // Semantic query (accessibility-first)
-    await page.getByRole('textbox', { name: /pin/i }).fill('ela2026')
+    await page.getByRole('textbox', { name: /pin/i }).fill('arena2026')
     await page.getByRole('button', { name: /giriş/i }).click()
 
     await expect(page).toHaveURL(/admin\/dashboard/)

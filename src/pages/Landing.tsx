@@ -54,8 +54,10 @@ export default function Landing() {
       <VolleyballCursorTrail size={20} />
       <main id="ana-icerik">
         <Hero />
-        <Marquee />
-        <Suspense fallback={<Placeholder h={700} />}>
+        <div className="-mt-12 md:-mt-16">
+          <Marquee />
+        </div>
+        <Suspense fallback={<Placeholder h={600} />}>
           <MissionStatement />
         </Suspense>
         <Suspense fallback={<Placeholder h={160} />}>

@@ -58,6 +58,9 @@ export default function Footer() {
                   {l.label}
                 </a>
               ))}
+              <a href="#partner" className="no-underline text-[1.05rem] font-bold text-primary hover:opacity-80 transition-all duration-300">
+                {language === 'tr' ? 'Hoca Olarak Katıl' : 'Become a Partner'}
+              </a>
             </nav>
           </div>
 

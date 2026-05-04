@@ -99,15 +99,15 @@ export const tr = {
     items: [
       { 
         text: "Sıçrama yüksekliğim 3 ayda 12cm arttı. ARENA sistemi kesinlikle farklı klasmanda.", 
-        name: "Ayşe K.", role: "Voleybolcu", metric: "+12cm sıçrama", image: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=200&h=200"
+        name: "Ayşe K.", role: "Voleybolcu", metric: "+12cm sıçrama", avatar: "/images/testimonials/ayse.png"
       },
       { 
         text: "Sakatsız, çok güçlü bir sezon geçiriyorum. Kuvvet antrenmanları inanılmaz etkili.", 
-        name: "Deniz Y.", role: "Profesyonel Sporcu", metric: "Sıfır Sakatlık", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=200&h=200"
+        name: "Deniz Y.", role: "Profesyonel Sporcu", metric: "Sıfır Sakatlık", avatar: "/images/testimonials/deniz.png"
       },
       { 
         text: "Kendime güvenim ve sahadaki çevikliğim seviye atladı. Tamamen maç performansıma özel program.", 
-        name: "Selin B.", role: "Fitness & Voleybol", metric: "+8cm Mobilite", image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=200&h=200"
+        name: "Selin B.", role: "Fitness & Voleybol", metric: "+8cm Mobilite", avatar: "/images/testimonials/selin.png"
       }
     ]
   },  programs: {
@@ -772,7 +772,7 @@ export const tr = {
       kvkk_sections: [
         {
           title: "1. Veri Sorumlusu",
-          content: "Veri sorumlusu olarak {}, pt.kozbeylikonagi.com.tr internet sitesi üzerinden toplanan tüm kişisel verilerden sorumludur. İletişim: {}"
+          content: "Veri sorumlusu olarak {}, arena-performance.com internet sitesi üzerinden toplanan tüm kişisel verilerden sorumludur. İletişim: {}"
         },
         {
           title: "2. Toplanan Kişisel Veriler",
@@ -803,7 +803,7 @@ export const tr = {
         }
       ],
 
-      terms_intro: "Bu web sitesini (pt.kozbeylikonagi.com.tr) kullanarak aşağıdaki kullanım koşullarını kabul etmiş sayılırsınız. Lütfen bu koşulları dikkatlice okuyunuz.",
+      terms_intro: "Bu web sitesini (arena-performance.com) kullanarak aşağıdaki kullanım koşullarını kabul etmiş sayılırsınız. Lütfen bu koşulları dikkatlice okuyunuz.",
       terms_sections: [
         {
           title: "1. Hizmet Tanımı",
@@ -867,8 +867,8 @@ export const tr = {
         allergy_placeholder: "Fıstık, gluten vb.",
         note_label: "Antrenöre Notun",
         note_placeholder: "Eklemek istediğin her şey...",
-        kvkk_label: "Sağlık beyanlarım dahil olmak üzere tüm \"Özel Nitelikli Kişisel Verilerimin\" işlenmesine ilişkin KVKK Açık Rıza ve Aydınlatma Metni'ni okudum, anladım ve tamamen kendi özgür irademle açık rıza veriyorum.",
-        terms_label: "Kullanım Koşullarını okudum, anladım ve antrenman ile diyet programlarının medikal bir tavsiye olmadığını, oluşabilecek her türlü fiziksel/sağlıksal riskin tamamen bana ait olduğunu ve kabul ediyorum.",
+        kvkk_label: "Sağlık beyanlarım dahil olmak üzere tüm \"Özel Nitelikli Kişisel Verilerimin\" işlenmesine ilişkin KVKK Açık Rıza ve Aydınlatma Metni'ni okundu, anlaşıldı ve açık rıza verilmektedir.",
+        terms_label: "Kullanım Koşullarını okundu, anlaşıldı ve antrenman ile diyet programlarının medikal bir tavsiye olmadığını, oluşabilecek her türlü fiziksel/sağlıksal riskin kullanıcıya ait olduğu kabul edilmektedir.",
         btn_next: "Sonraki Adım",
         btn_prev: "Geri",
         btn_complete: "Tamamla",

@@ -52,7 +52,7 @@
 - Starter: `price_starter_monthly` / `price_starter_annual`
 - Pro: `price_pro_monthly` / `price_pro_annual`
 - Elite: `price_elite_monthly` / `price_elite_annual`
-- Enterprise: CTA mailto'ya sales@pt.kozbeylikonagi.com.tr
+- Enterprise: CTA mailto'ya sales@arena-performance.com
 
 **Design tokens:**
 - Seçili plan karti: `border-2 border-primary shadow-xl`
