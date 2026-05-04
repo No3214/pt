@@ -141,6 +141,7 @@ export default function Contact() {
                     <option value="voleybol">{t.contact.formGoalOptions.voleybol}</option>
                     <option value="fitness">{t.contact.formGoalOptions.fitness}</option>
                     <option value="kilo-kaybi">{t.contact.formGoalOptions.kiloKaybi}</option>
+                    <option value="hoca">{t.contact.formGoalOptions.hoca}</option>
                     <option value="diger">{t.contact.formGoalOptions.diger}</option>
                   </select>
                   {errors.goal && <p className="text-red-500 text-xs ml-2 mt-1">{errors.goal.message}</p>}

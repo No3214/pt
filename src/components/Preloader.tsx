@@ -31,10 +31,13 @@ function VolleyballSpinner({ dm }: { dm: boolean }) {
 
 export default function Preloader() {
   // Only show on first visit per session — skip on route changes
-  const alreadyShown = sessionStorage.getItem('ela-preloader-shown') === '1'
-  const [show, setShow] = useState(!alreadyShown)
-  const [progress, setProgress] = useState(alreadyShown ? 100 : 0)
-  const [phase, setPhase] = useState<'loading' | 'complete'>(alreadyShown ? 'complete' : 'loading')
+  const alreadyShown = typeof window !== 'undefined' && sessionStorage.getItem('arena-preloader-shown') === '1'
+
+  if (alreadyShown) return null
+
+  const [show, setShow] = useState(true)
+  const [progress, setProgress] = useState(0)
+  const [phase, setPhase] = useState<'loading' | 'complete'>('loading')
   const dm = useStore(s => s.darkMode)
 
   useEffect(() => {
@@ -48,7 +51,7 @@ export default function Preloader() {
       if (p < 1) requestAnimationFrame(tick)
       else {
         setPhase('complete')
-        sessionStorage.setItem('ela-preloader-shown', '1')
+        sessionStorage.setItem('arena-preloader-shown', '1')
         setTimeout(() => setShow(false), 400)
       }
     }

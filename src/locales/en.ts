@@ -2,6 +2,11 @@ export const en = {
   common: {
     loading: "Loading...",
     ready: "Ready",
+    whyArena: "Why ARENA",
+    premiumStandards: "Premium Coaching Standards",
+    coachingPlatform: "Coaching Platform",
+    premiumExperience: "Premium Coaching Experience",
+    portalDesc: "Track your workouts, manage nutrition goals, and analyze progress in real-time through your private portal.",
     limitedSpots: "Limited Spots",
     scrollHint: "Discover",
     stats: [
@@ -20,10 +25,10 @@ export const en = {
     portal: "Portal / Login"
   },
   hero: {
-    badge: "TURN YOUR VISION INTO REALITY",
-    title1: "Be strong.",
-    title2: "Believe in yourself.",
-    desc: "The choice of elite athletes and leaders: Reach your best version with the perfect blend of science, willpower and technology.",
+    badge: "ELITE COACHING ECOSYSTEM",
+    title1: "The New Era",
+    title2: "of Performance.",
+    desc: "World-class coaches, AI-powered analytics, and elite athletes in one place. Break your limits or scale your own academy globally.",
     btnStart: "Get Started",
     btnPrograms: "View Programs",
     kpi: {
@@ -36,12 +41,12 @@ export const en = {
     badge: "SYSTEM",
     title1: "Not inspiring,",
     title2: "but empowering.",
-    desc: "With the discipline I gained on the volleyball court, I only work with determined and disciplined clients. Every program is science-based, every step is measured.",
+    desc: "With the athlete discipline gained on the volleyball court, we only work with determined and disciplined clients. Every program is science-based, and every step is meticulously measured.",
     trust: "20+ active clients trust the system",
     cards: [
-      { num: "01", title: "Athlete Discipline", desc: "Training methodology proven through professional volleyball experience." },
-      { num: "02", title: "Personal Strengthening", desc: "I aim for you to know your own body and build a strong foundation aligned with your goals." },
-      { num: "03", title: "Selective Premium Tracking", desc: "One-on-one focused work with limited spots to maintain quality." }
+      { num: "01", title: "Athlete Discipline", desc: "Global training methodology proven through professional volleyball experience." },
+      { num: "02", title: "Personal Strengthening", desc: "We aim for athletes to know their own bodies and build a strong foundation aligned with their goals." },
+      { num: "03", title: "Selective Premium Tracking", desc: "Elite one-on-one focused work with limited spots to maintain absolute quality." }
     ]
   },
   howItWorks: {
@@ -87,22 +92,22 @@ export const en = {
     badge: "Results",
     title: "Their story, your motivation.",
     users: {
-      u1: "My vertical jump increased 12cm in 3 months. ARENA's system is definitely in a different league.",
-      u2: "I'm having an injury-free, very strong season. The strength training is incredibly effective.",
-      u3: "My confidence and agility on the court leveled up. A program completely tailored to my match performance."
+      u1: "Vertical jump increased 12cm in 3 months. ARENA's system is definitely in a different league.",
+      u2: "An injury-free, very strong season. The strength training is incredibly effective.",
+      u3: "Confidence and agility on the court leveled up. A program completely tailored to match performance."
     },
     items: [
       { 
-        text: "My vertical jump increased 12cm in 3 months. ARENA's system is definitely in a different league.", 
-        name: "Ayşe K.", role: "Volleyball Player", metric: "+12cm jump", image: "/ela_real_30.png"
+        text: "Vertical jump increased 12cm in 3 months. ARENA's system is definitely in a different league.",
+        name: "Ayşe K.", role: "Volleyball Player", metric: "+12cm jump", image: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=200&h=200"
       },
       { 
-        text: "I'm having an injury-free, very strong season. The strength training is incredibly effective.", 
-        name: "Deniz Y.", role: "Professional Athlete", metric: "Zero Injury", image: "/ela_real_32.png"
+        text: "An injury-free, very strong season. The strength training is incredibly effective.",
+        name: "Deniz Y.", role: "Professional Athlete", metric: "Zero Injury", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=200&h=200"
       },
       { 
-        text: "My confidence and agility on the court leveled up. A program completely tailored to my match performance.", 
-        name: "Selin B.", role: "Fitness & Volleyball", metric: "+8cm Mobility", image: "/ela_real_19.png"
+        text: "Confidence and agility on the court leveled up. A program completely tailored to match performance.",
+        name: "Selin B.", role: "Fitness & Volleyball", metric: "+8cm Mobility", image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=200&h=200"
       }
     ]
   },  programs: {
@@ -166,8 +171,8 @@ export const en = {
     badge: "FAQ",    title1: "Your questions,",
     title2: "answered.",
     items: [
-      { q: "How do I start the program?", a: "After you fill out the application form, I contact you via WhatsApp. We discuss your goals in a free 15-minute introductory call and determine the suitable program." },
-      { q: "How does online training work?", a: "Your personalized program is sent via the app with video-explained exercises. I check your form with weekly check-ins and update the program when necessary." },
+      { q: "How do I start the program?", a: "After you fill out the application form, our expert team contacts you via WhatsApp. We discuss your goals in a free 15-minute introductory call and determine the most suitable program." },
+      { q: "How does online training work?", a: "Your personalized program is sent via the athlete portal with video-explained exercises. We check your form with weekly check-ins and update the program based on data." },
       { q: "Is a nutrition plan included?", a: "Basic nutrition tracking is included in Online Coaching. The Premium Growth package includes a full TDEE-calculated nutrition plan, macro tracking, and 1-on-1 nutrition consulting." },
       { q: "I don't play volleyball, can I join?", a: "Of course! Although the Volleyball Performance package is court-specific, Online Coaching and Premium Growth are suitable for all levels. We target strength, posture, and general fitness goals." },
       { q: "When will I see results?", a: "With disciplined tracking, visible changes start in the first 4 weeks. Serious transformations occur over a 3-month period. Consistency always yields results." }
@@ -193,8 +198,8 @@ export const en = {
   },
   contact: {
     badge: "CONTACT",
-    ready: "Ready for change?",    limitDesc: "Due to limited spots, I evaluate applications carefully. After you fill out the form, I will contact you within 24 hours.",
-    location: "Istanbul / Online",
+    ready: "Ready for change?",    limitDesc: "Due to limited spots, we evaluate applications carefully. After you fill out the form, our team will contact you within 24 hours.",
+    location: "Global / Online",
     formName: "Full Name",
     formNamePlaceholder: "Your name",
     formPhone: "Phone",
@@ -204,6 +209,7 @@ export const en = {
       voleybol: "Volleyball Performance",
       fitness: "General Fitness / Strength",
       kiloKaybi: "Weight Loss / Toning",
+      hoca: "I want to join as a Coach",
       diger: "Other"
     },
     formNotes: "Additional Notes",
@@ -424,8 +430,8 @@ export const en = {
       wellness_toast_success: "Wellness message prepared ✅",
       wellness_toast_error: "Phone number not found.",
       wellness_msg_base: "Hello {name}! 👋 I've reviewed your daily wellness data. ",
-      wellness_msg_danger: "Your fatigue and stress levels seem quite high. I recommend skipping training today and doing full recovery. 🛑",
-      wellness_msg_warning: "You look a bit tired today. Let's reduce training intensity by 50% or focus on mobility. ⚠️",      wellness_msg_safe: "Everything looks great! Keep up the performance. 🔥",
+      wellness_msg_danger: "Fatigue and stress levels seem quite high. We recommend skipping training today and doing full recovery. 🛑",
+      wellness_msg_warning: "Fatigue detected. Let's reduce training intensity by 50% or focus on mobility. ⚠️",      wellness_msg_safe: "Everything looks great! Keep up the performance. 🔥",
 
       // Student Manager
       students_title: "Student Portal Management 🎓",
