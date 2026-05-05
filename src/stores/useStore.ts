@@ -76,6 +76,33 @@ export interface SavedProgram {
   createdAt: string
 }
 
+export interface TrainingPackage {
+  id: string
+  name: string
+  price: number
+  currency: string
+  sessions: number
+  durationDays: number
+  features: string[]
+  isActive: boolean
+}
+
+export interface PaymentRecord {
+  id: string
+  clientId: string
+  packageId: string
+  amount: number
+  status: 'pending' | 'completed' | 'failed'
+  date: string
+}
+
+export interface TenantBranding {
+  logo?: string
+  primaryColor?: string
+  secondaryColor?: string
+  gymName?: string
+}
+
 // ═══════════════ Store ═══════════════
 interface AppState {
   // Dark mode
@@ -138,6 +165,16 @@ interface AppState {
   savedPrograms: SavedProgram[]
   addSavedProgram: (p: Omit<SavedProgram, 'id' | 'createdAt'>) => void
   deleteSavedProgram: (id: string) => void
+  // Packages & Payments
+  packages: TrainingPackage[]
+  addPackage: (p: Omit<TrainingPackage, 'id'>) => void
+  updatePackage: (id: string, p: Partial<TrainingPackage>) => void
+  deletePackage: (id: string) => void
+  payments: PaymentRecord[]
+  addPayment: (p: Omit<PaymentRecord, 'id' | 'date'>) => void
+  // Branding
+  branding: TenantBranding
+  updateBranding: (b: Partial<TenantBranding>) => void
   // Admin Auth
   isAdminAuth: boolean
   loginAdmin: (pin: string) => Promise<boolean>
@@ -173,11 +210,11 @@ export const useStore = create<AppState>()(
         ]
         const encoder = new TextEncoder()
         const data = encoder.encode(pin)
-        
+
         try {
           const buf = await crypto.subtle.digest('SHA-256', data)
           const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
-          
+
           if (validHashes.includes(hash)) {
             set({ isAdminAuth: true })
             return true
@@ -185,7 +222,7 @@ export const useStore = create<AppState>()(
         } catch (e) {
           console.error('Hash calculation failed', e)
         }
-        
+
         return false
       },
       logoutAdmin: () => set({ isAdminAuth: false }),
@@ -199,7 +236,7 @@ export const useStore = create<AppState>()(
           date: new Date().toISOString(),
           status: 'New'
         } as Lead
-        
+
         set(s => ({ leads: [newLead, ...s.leads] }))
 
         // Sync to Supabase
@@ -258,7 +295,7 @@ export const useStore = create<AppState>()(
       })),
       addNote: (id, text) => set(s => {
         if (!text || typeof text !== 'string') return s;
-        const cleanText = text.replace(/[<>]/g, '').slice(0, 1000); 
+        const cleanText = text.replace(/[<>]/g, '').slice(0, 1000);
         return {
           clients: s.clients.map(c =>
             c.id === id ? { ...c, notes: [{ id: Date.now(), text: cleanText, date: new Date().toLocaleString('tr-TR') }, ...c.notes] } : c
@@ -375,6 +412,26 @@ export const useStore = create<AppState>()(
       deleteSavedProgram: (id) => set(s => ({
         savedPrograms: s.savedPrograms.filter(p => p.id !== id)
       })),
+
+      // ─── Packages & Payments ───
+      packages: [
+        { id: '1', name: 'Başlangıç Paketi', price: 1500, currency: 'TRY', sessions: 4, durationDays: 30, features: ['4 Özel Seans', 'Temel Beslenme Rehberi', 'WhatsApp Desteği'], isActive: true },
+        { id: '2', name: 'Pro Performans', price: 4000, currency: 'TRY', sessions: 12, durationDays: 30, features: ['12 Özel Seans', 'Kişiselleştirilmiş Diyet', 'Gelişmiş Analizler', '7/24 Öncelikli Destek'], isActive: true },
+        { id: '3', name: 'Elite Athlete', price: 7500, currency: 'TRY', sessions: 24, durationDays: 60, features: ['24 Özel Seans', 'VIP Takip', 'Sıçrama Analizi', 'Mental Koçluk'], isActive: true }
+      ],
+      addPackage: (p) => set(s => ({ packages: [...s.packages, { ...p, id: Date.now().toString() }] })),
+      updatePackage: (id, p) => set(s => ({ packages: s.packages.map(pkg => pkg.id === id ? { ...pkg, ...p } : pkg) })),
+      deletePackage: (id) => set(s => ({ packages: s.packages.filter(pkg => pkg.id !== id) })),
+      payments: [],
+      addPayment: (p) => set(s => ({ payments: [{ ...p, id: Date.now().toString(), date: new Date().toISOString() }, ...s.payments] })),
+
+      // ─── Branding ───
+      branding: {
+        gymName: 'ARENA Performance',
+        primaryColor: '#C2684A',
+        secondaryColor: '#7A9E82'
+      },
+      updateBranding: (b) => set(s => ({ branding: { ...s.branding, ...b } })),
 
       // ─── AI Config ───
       aiConfig: { gemini: '', openrouter: '', deepseek: '' },

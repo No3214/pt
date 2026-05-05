@@ -26,6 +26,7 @@ const Builder = lazy(() => import('./pages/admin/Builder'))
 const Nutrition = lazy(() => import('./pages/admin/Nutrition'))
 const FoodTracker = lazy(() => import('./pages/admin/FoodTracker'))
 const CalendarPage = lazy(() => import('./pages/admin/Calendar'))
+const PackageBuilder = lazy(() => import('./pages/admin/PackageBuilder'))
 const Settings = lazy(() => import('./pages/admin/Settings'))
 const Leads = lazy(() => import('./pages/admin/Leads'))
 const Progress = lazy(() => import('./pages/admin/Progress'))
@@ -53,7 +54,7 @@ function PageLoader() {
 }
 
 export default function App() {
-  const { darkMode, checkDailyReset } = useStore()
+  const { darkMode, checkDailyReset, branding } = useStore()
   const location = useLocation()
 
   useEffect(() => {
@@ -65,17 +66,20 @@ export default function App() {
     const root = document.documentElement
     const themeColors = tenantConfig.theme.colors
 
-    root.style.setProperty('--color-primary', themeColors.primary)
-    root.style.setProperty('--color-secondary', themeColors.secondary)
+    const primary = branding?.primaryColor || themeColors.primary
+    const secondary = branding?.secondaryColor || themeColors.secondary
+
+    root.style.setProperty('--color-primary', primary)
+    root.style.setProperty('--color-secondary', secondary)
     root.style.setProperty('--color-accent', themeColors.accent)
     root.style.setProperty('--color-sand', themeColors.sand || '#D4C4AB')
-    root.style.setProperty('--color-glow', `${themeColors.primary}26`)
+    root.style.setProperty('--color-glow', `${primary}26`)
     root.style.setProperty('--shadow-color', darkMode ? 'rgba(0,0,0,0.4)' : 'rgba(0,0,0,0.06)')
 
     root.classList.toggle('dark', darkMode)
     const meta = document.querySelector('meta[name="theme-color"]')
     if (meta) meta.setAttribute('content', darkMode ? '#050505' : '#FAF6F1')
-  }, [darkMode])
+  }, [darkMode, branding])
 
   // Native smooth scroll — clean, performant, no library conflicts
   useEffect(() => {
@@ -108,6 +112,7 @@ export default function App() {
               <Route path="calendar" element={<CalendarPage />} />
               <Route path="leads" element={<Leads />} />
               <Route path="progress" element={<Progress />} />
+              <Route path="packages" element={<PackageBuilder />} />
               <Route path="settings" element={<Settings />} />
             </Route>
             <Route path="/login" element={<AdminLogin />} />
