@@ -1,8 +1,8 @@
 ---
 name: seo-optimizer
-description: 2026 SEO + schema + Core Web Vitals v4 for PT. Triggers on SEO, google, ranking, meta, schema.
+description: 2026 SEO + schema + Core Web Vitals v4 for ARENA. Triggers on SEO, google, ranking, meta, schema.
 ---
-# SEO Optimizer — 2026 PT
+# SEO Optimizer — 2026 ARENA
 
 ## On-Page (2026)
 - **Title** ≤60 char, primary kw near start
@@ -15,47 +15,45 @@ description: 2026 SEO + schema + Core Web Vitals v4 for PT. Triggers on SEO, goo
 - **Canonical** set correctly
 - **text-wrap: balance** h1/h2 (2026 native)
 - **E-E-A-T**: Experience, Expertise, Authoritativeness, Trustworthiness
-- **Author schema** + bio (Ela 12y + sertifika)
+- **Author schema** + expert bio (Elite Coaches 12y+ + certifications)
 
 ## Technical SEO
 - **Schema.org JSON-LD**:
   - `Article` + `Author` + `DatePublished`
   - `FAQPage` + `Question/Answer`
-  - `LocalBusiness` + `Service` (Ela PT)
+  - `LocalBusiness` + `Service` (ARENA Performance)
   - `BreadcrumbList`
   - `Review` + `AggregateRating`
   - `VideoObject` for Reels embed
 - **robots.txt**: Disallow /admin/, /api/; Allow /*
 - **sitemap.xml** lastmod ISO
-- **llms.txt** (2026 new!) — AI crawler (ChatGPT, Claude, Gemini) için content guide
+- **llms.txt** (2026 new!) — AI crawler (ChatGPT, Claude, Gemini) guide
 - **Canonical** tag duplicate prevent
-- **hreflang** 13 dil alternate
 - **Open Graph** + **Twitter Card**
 - **Favicon** SVG + PNG fallback
 
 ## Core Web Vitals v4 (Ranking Factor)
-- **LCP** ≤2.0s (2026 aggressive target)
-- **INP** ≤150ms (FID deprecated)
+- **LCP** ≤2.0s
+- **INP** ≤150ms
 - **CLS** ≤0.05
-- **TTFB** ≤600ms (Cloudflare edge)
+- **TTFB** ≤600ms
 
 ## Image SEO
 - WebP/AVIF format
 - Descriptive filename (`voleybol-sicrama-antrenmani.webp` not `IMG_001.jpg`)
 - Alt text full sentence
 - Width + height explicit (CLS prevent)
-- `loading="lazy"` fold dışı
-- `fetchpriority="high"` LCP image
+- `loading="lazy"` for below-the-fold
+- `fetchpriority="high"` for LCP image
 - Structured data `ImageObject`
 
 ## Multilingual SEO
 - `<link rel="alternate" hreflang="tr" href="...">`
 - `<link rel="alternate" hreflang="x-default" href="...">` (TR)
-- Content localized (not just translation — cultural)
-- hreflang 13 dil matrix
+- Content localized (cultural + semantic)
 
-## Local SEO (Akdeniz region)
-- Google Business Profile optimize
+## Local SEO
+- Google Business Profile optimization
 - NAP consistency (Name, Address, Phone)
 - Local schema: `address`, `geo`, `areaServed`
 - Turkish content primary
@@ -72,20 +70,19 @@ description: 2026 SEO + schema + Core Web Vitals v4 for PT. Triggers on SEO, goo
 - **Long-form** 1500-2500 word
 - **Featured snippet** target (H2 question + concise answer)
 - **Video content** (YouTube + Reels)
-- **AI-assisted research** — Claude 4.7 long-form + GPT-5 keyword
 
 ## Monitoring
-- **Google Search Console** — query, impression, CTR, position
+- **Google Search Console**
 - **Bing Webmaster Tools**
-- **Cloudflare Web Analytics** — privacy-friendly RUM
-- **Lighthouse CI** — CWV gate
-- **Schema validator** — schema.org tester
+- **Cloudflare Web Analytics**
+- **Lighthouse CI**
+- **Schema validator**
 
 ## AI Crawler (2026 New)
 - **llms.txt** — content index for LLM crawler
 - **User-Agent allowlist**: GPTBot, ClaudeBot, Google-Extended, PerplexityBot
-- **Schema AI-friendly** — structured answer to common query
-- **Conversational Q&A** page format
+- **Schema AI-friendly**
+- **Conversational Q&A** format
 
 ## Checklist PR Gate
 - [ ] Title ≤60 char
@@ -93,7 +90,6 @@ description: 2026 SEO + schema + Core Web Vitals v4 for PT. Triggers on SEO, goo
 - [ ] H1 unique + kw
 - [ ] Alt text every image
 - [ ] Schema JSON-LD valid
-- [ ] hreflang 13 dil
 - [ ] Canonical present
 - [ ] Lighthouse SEO ≥95
 - [ ] LCP/INP/CLS green

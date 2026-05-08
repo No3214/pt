@@ -3,7 +3,7 @@
 ## ARENA Performance (Platform)
 - **Brand**: Sistem markası — kişiye bağımlı değil
 - **Tagline**: Güçlü ol. Kendine güven.
-- **Domain**: pt.kozbeylikonagi.com.tr
+- **Domain**: arena-performance.com
 - **Positioning**: Elite voleybol & performans koçluk sistemi — bilim + irade + teknoloji
 
 ## Yunuscan Oruk (Self)

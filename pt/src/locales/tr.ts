@@ -744,7 +744,7 @@ export const tr = {
       kvkk_sections: [
         {
           title: "1. Veri Sorumlusu",
-          content: "Veri sorumlusu olarak {}, pt.kozbeylikonagi.com.tr internet sitesi üzerinden toplanan tüm kişisel verilerden sorumludur. İletişim: {}"
+          content: "Veri sorumlusu olarak {}, arena-performance.com internet sitesi üzerinden toplanan tüm kişisel verilerden sorumludur. İletişim: {}"
         },
         {
           title: "2. Toplanan Kişisel Veriler",
@@ -775,7 +775,7 @@ export const tr = {
         }
       ],
 
-      terms_intro: "Bu web sitesini (pt.kozbeylikonagi.com.tr) kullanarak aşağıdaki kullanım koşullarını kabul etmiş sayılırsınız. Lütfen bu koşulları dikkatlice okuyunuz.",
+      terms_intro: "Bu web sitesini (arena-performance.com) kullanarak aşağıdaki kullanım koşullarını kabul etmiş sayılırsınız. Lütfen bu koşulları dikkatlice okuyunuz.",
       terms_sections: [
         {
           title: "1. Hizmet Tanımı",

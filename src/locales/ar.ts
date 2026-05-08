@@ -139,21 +139,21 @@ export const ar = {
         name: "عائشة ك.",
         role: "لاعبة كرة طائرة",
         metric: "+12 سم قفز",
-        image: "/ela_real_30.png"
+        image: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=200&h=200"
       },
       {
         text: "أنا أمر بموسم خالٍ من الإصابات وقوي جداً. التدريب على القوة فعال بشكل لا يصدق.",
         name: "دنيز ي.",
         role: "رياضي محترف",
         metric: "صفر إصابات",
-        image: "/ela_real_32.png"
+        image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=200&h=200"
       },
       {
         text: "تحسنت ثقتي وخفتي على الملعب. برنامج مخصص تماماً لأدائي في المباراة.",
         name: "سيلين ب.",
         role: "لياقة وكرة طائرة",
         metric: "+8 سم مرونة",
-        image: "/ela_real_19.png"
+        image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=200&h=200"
       }
     ]
   },
@@ -895,7 +895,7 @@ export const ar = {
     kvkk_sections: [
       {
         title: "1. Data Controller",
-        content: "As the data controller, {}, is responsible for all personal data collected through the pt.kozbeylikonagi.com.tr website. Contact: {}"
+        content: "As the data controller, {}, is responsible for all personal data collected through the arena-performance.com website. Contact: {}"
       },
       {
         title: "2. Personal Data Collected",

@@ -93,6 +93,9 @@ export default function Navbar() {
 
           {/* Actions */}
           <div className="flex gap-4 items-center">
+            <a href="#partner" className="hidden lg:inline-flex px-5 py-2 rounded-full border border-primary/20 text-[0.65rem] font-black uppercase tracking-widest text-primary hover:bg-primary hover:text-white transition-all no-underline">
+               Akademi Kur
+            </a>
             {/* Language Dropdown - Desktop */}
             <div ref={langRef} className="relative hidden md:block">
               <button

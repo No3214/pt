@@ -76,7 +76,7 @@ npm run lighthouse                   # score ≥95
 
 ## Deploy Verification
 ```bash
-curl -I https://pt.kozbeylikonagi.com.tr | grep -E "HTTP|Cache|CSP"
+curl -I https://arena-performance.com | grep -E "HTTP|Cache|CSP"
 # Status 200, Cache-Control, CSP present
 ```
 
@@ -85,7 +85,7 @@ Cloudflare Pages dashboard → Deployments → previous → Promote
 
 ## Smoke Test Post-Deploy
 - Landing load
-- Admin PIN login (ela2026)
+- Admin PIN login (arena2026)
 - Portal access
 - AI chat basic query
 - Language switcher TR→EN

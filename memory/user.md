@@ -16,7 +16,7 @@
 ## Current Project
 - **ARENA Performance**: Elit voleybol & performans sistemi — kişiye özel online koçluk platformu
 - Marka: ARENA (sistem markası, kişiye bağlı değil)
-- Domain: pt.kozbeylikonagi.com.tr
+- Domain: arena-performance.com
 - Stack: React 19, TypeScript, Vite, Tailwind, Supabase, Cloudflare
 - 13 dil desteği, PWA, admin panel, student portal
 

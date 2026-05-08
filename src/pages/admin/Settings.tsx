@@ -284,7 +284,7 @@ export default function Settings() {
                   <div className={`p-4 rounded-xl text-xs flex flex-col gap-2 ${dm ? 'bg-primary/10 border border-primary/20' : 'bg-primary/5 border border-primary/10'}`}>
                     <span className="font-bold text-primary uppercase text-[0.6rem]">Önizleme</span>
                     <p className="italic opacity-60">
-                      {whatsappTemplates.onboarding.replace('{{link}}', 'https://pt.kozbeyli.com/onboarding')}
+                      {whatsappTemplates.onboarding.replace('{{link}}', 'https://arena-performance.com/onboarding')}
                     </p>
                   </div>
                 </div>
@@ -311,7 +311,7 @@ export default function Settings() {
                   <div className={`p-4 rounded-xl text-xs flex flex-col gap-2 ${dm ? 'bg-secondary/10 border border-secondary/20' : 'bg-secondary/5 border border-secondary/10'}`}>
                     <span className="font-bold text-secondary uppercase text-[0.6rem]">Önizleme</span>
                     <p className="italic opacity-60">
-                      {whatsappTemplates.measurement.replace('{{link}}', 'https://pt.kozbeyli.com/measure/123').replace('{{name}}', 'Mina Aksoy')}
+                      {whatsappTemplates.measurement.replace('{{link}}', 'https://arena-performance.com/measure/123').replace('{{name}}', 'Mina Aksoy')}
                     </p>
                   </div>
                 </div>

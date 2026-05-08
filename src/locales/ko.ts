@@ -139,21 +139,21 @@ export const ko = {
         name: "Ayşe K.",
         role: "배구 선수",
         metric: "+12cm 점프",
-        image: "/ela_real_30.png"
+        image: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=200&h=200"
       },
       {
         text: "부상 없는 매우 강한 시즌을 보내고 있습니다. 근력 운동은 놀라울 정도로 효과적입니다.",
         name: "Deniz Y.",
         role: "전문 운동선수",
         metric: "부상 제로",
-        image: "/ela_real_32.png"
+        image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=200&h=200"
       },
       {
         text: "코트에서의 자신감과 민첩성이 향상되었습니다. 제 경기 성능에 완전히 맞춘 프로그램입니다.",
         name: "Selin B.",
         role: "피트니스 & 배구",
         metric: "+8cm 가동성",
-        image: "/ela_real_19.png"
+        image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=200&h=200"
       }
     ]
   },
@@ -895,7 +895,7 @@ export const ko = {
     kvkk_sections: [
       {
         title: "1. Data Controller",
-        content: "As the data controller, {}, is responsible for all personal data collected through the pt.kozbeylikonagi.com.tr website. Contact: {}"
+        content: "As the data controller, {}, is responsible for all personal data collected through the arena-performance.com website. Contact: {}"
       },
       {
         title: "2. Personal Data Collected",

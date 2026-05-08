@@ -11,7 +11,7 @@ import path from 'node:path';
 import { execSync } from 'node:child_process';
 
 const TARGETS = [
-  'https://pt.kozbeylikonagi.com.tr',
+  'https://arena-performance.com',
 ];
 
 const ROUTES = [

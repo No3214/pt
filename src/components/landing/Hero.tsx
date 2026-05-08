@@ -19,11 +19,11 @@ export default function Hero() {
   const { t } = useTranslation();
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] });
-  
+
   const heroY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
-  
+
   const dm = darkMode;
 
   return (
@@ -96,7 +96,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-8 md:px-12 pt-32 pb-20 w-full">
+      <div className="max-w-[1400px] mx-auto px-8 md:px-12 pt-32 pb-12 md:pb-16 w-full">
         <div className="grid lg:grid-cols-[1.2fr_1fr] gap-16 lg:gap-24 items-center">
           <motion.div initial="hidden" animate="visible" variants={staggerContainer}>
             <motion.div variants={fadeUp} custom={0}
@@ -124,30 +124,31 @@ export default function Hero() {
               {t.hero.desc}
             </motion.p>
 
-            <motion.div variants={fadeUp} custom={5} className="flex gap-4 flex-wrap">
-              <MagneticButton href="#iletisim"
-                className="group px-8 py-4 bg-primary text-white rounded-full text-[0.88rem] font-medium no-underline overflow-hidden relative">
-                <span className="relative z-10 flex items-center gap-2">
-                  {t.hero.btnStart}
-                  <motion.svg
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-                    className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </motion.svg>
-                </span>
-                <span className="absolute inset-0 bg-primary-dark scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
-              </MagneticButton>
-              <a href="#programlar" className={`text-[0.88rem] font-medium underline underline-offset-4 decoration-1 transition-all duration-300 hero-secondary-link ${dm ? "text-text-main/50 hover:text-text-main/80 decoration-text-main/20" : "text-text-main/40 hover:text-text-main/70 decoration-text-main/15"}`}>
-                  {t.hero.btnPrograms}
-                </a>
-            
-            <motion.div variants={fadeUp} custom={6} className="flex flex-wrap gap-4 mt-10 hero-micro-authority">
-              {["Profesyonel Voleybolcu", "Kisisel Planlama", "Portal Destekli Takip"].map((item, i) => (
-                <span key={i} className={`text-[0.72rem] uppercase tracking-[0.12em] font-medium px-3 py-1.5 rounded-full ${dm ? "bg-white/5 text-text-main/40 border border-white/10" : "bg-black/[0.03] text-text-main/35 border border-black/5"}`}>{item}</span>
-              ))}
+            <motion.div variants={fadeUp} custom={5} className="flex flex-col gap-10">
+              <div className="flex items-center gap-8 flex-wrap">
+                <MagneticButton href="#iletisim"
+                  className="group px-8 py-4 bg-primary text-white rounded-full text-[0.88rem] font-medium no-underline overflow-hidden relative">
+                  <span className="relative z-10 flex items-center gap-2">
+                    {t.hero.btnStart}
+                    <motion.svg
+                      animate={{ x: [0, 4, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+                      className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </motion.svg>
+                  </span>
+                  <span className="absolute inset-0 bg-primary-dark scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                </MagneticButton>
+
+                <motion.div variants={fadeUp} custom={6} className="flex flex-wrap gap-x-6 gap-y-2 hero-micro-authority">
+                  {["Marketplace", "Elite Network", "AI Powered"].map((item, i) => (
+                    <span key={i} className={`text-[0.68rem] uppercase tracking-[0.15em] font-bold flex items-center gap-3 ${dm ? "text-text-main/30" : "text-text-main/30"}`}>
+                      {item} {i < 2 && <span className="w-1 h-1 rounded-full bg-primary/40" />}
+                    </span>
+                  ))}
+                </motion.div>
+              </div>
             </motion.div>
-          </motion.div>
           </motion.div>
 
           {/* Hero Image Side */}
@@ -288,7 +289,7 @@ export default function Hero() {
                 className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent skew-x-[-20deg]"
               />
             </div>
-            
+
             {/* Floating Metric Badges */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}

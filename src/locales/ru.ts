@@ -139,21 +139,21 @@ export const ru = {
         name: "Айше К.",
         role: "Волейболистка",
         metric: "+12см прыжок",
-        image: "/ela_real_30.png"
+        image: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=200&h=200"
       },
       {
         text: "У меня здоровый и очень сильный сезон. Силовая подготовка невероятно эффективна.",
         name: "Дениз Й.",
         role: "Профессиональный атлет",
         metric: "Без травм",
-        image: "/ela_real_32.png"
+        image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=200&h=200"
       },
       {
         text: "Мои уверенность и ловкость на площадке улучшились. Программа полностью адаптирована к моему игровому мастерству.",
         name: "Селин Б.",
         role: "Фитнес и Волейбол",
         metric: "+8см Мобильность",
-        image: "/ela_real_19.png"
+        image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=200&h=200"
       }
     ]
   },
@@ -895,7 +895,7 @@ export const ru = {
     kvkk_sections: [
       {
         title: "1. Data Controller",
-        content: "As the data controller, {}, is responsible for all personal data collected through the pt.kozbeylikonagi.com.tr website. Contact: {}"
+        content: "As the data controller, {}, is responsible for all personal data collected through the arena-performance.com website. Contact: {}"
       },
       {
         title: "2. Personal Data Collected",
@@ -926,7 +926,7 @@ export const ru = {
         content: "For your requests within the scope of GDPR, you can reach us by sending an e-mail to {}. Your applications will be answered within 30 days at the latest."
       }
     ],
-    terms_intro: "By using this website (pt.kozbeylikonagi.com.tr), you are deemed to have accepted the following terms of use. Please read these terms carefully.",
+    terms_intro: "By using this website (arena-performance.com), you are deemed to have accepted the following terms of use. Please read these terms carefully.",
     terms_sections: [
       {
         title: "1. Service Description",

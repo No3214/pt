@@ -2,6 +2,11 @@ export const tr = {
   common: {
     loading: "Yükleniyor...",
     ready: "Hazır",
+    whyArena: "Neden ARENA",
+    premiumStandards: "Premium Koçluk Standartları",
+    coachingPlatform: "Coaching Platform",
+    premiumExperience: "Premium Coaching Deneyimi",
+    portalDesc: "Özel portal üzerinden antrenmanlarını takip et, beslenme hedeflerini yönet ve ilerlemeyi gerçek zamanlı analiz et.",
     limitedSpots: "Sınırlı Kontenjan",
     scrollHint: "Keşfet",
     stats: [
@@ -13,17 +18,17 @@ export const tr = {
   },
   nav: {
     home: "Ana Sayfa",
-    about: "Sistem",
-    programs: "Paketler",
+    about: "Hakkımızda",
+    programs: "Programlar",
     faq: "SSS",
     contact: "İletişim",
     portal: "Portal / Giriş"
   },
   hero: {
-    badge: "VİZYONUNU GERÇEĞE DÖNÜŞTÜR",
-    title1: "Güçlü ol.",
-    title2: "Kendine güven.",
-    desc: "Elit sporcuların ve liderlerin tercihi: Bilim, irade ve teknolojinin kusursuz birleşimi ile en iyi versiyonuna ulaş.",
+    badge: "ELİT KOÇLUK EKOSİSTEMİ",
+    title1: "Performansın",
+    title2: "Yeni Merkezi.",
+    desc: "Dünya standartlarında koçlar, yapay zeka destekli analizler ve elit sporcular bir arada. Kendi sınırlarını aş veya kendi akademini global boyuta taşı.",
     btnStart: "Hemen Başla",
     btnPrograms: "Programları Görüntüle",
     kpi: {
@@ -36,12 +41,12 @@ export const tr = {
     badge: "SİSTEM",
     title1: "İlham vermek değil,",
     title2: "karar verdirmek.",
-    desc: "Voleybol sahasında edindiğim disiplinle, sadece kararlı ve disiplinli danışanlarla çalışıyorum. Her program bilimsel temellere dayanır, her adım ölçülür.",
-    trust: "20+ aktif danışan güveniyor",
+    desc: "Voleybol sahasında edinilen sporcu disipliniyle, sadece kararlı ve disiplinli danışanlarla çalışıyoruz. Her program bilimsel temellere dayanır, her adım titizlikle ölçülür.",
+    trust: "20+ aktif danışan sisteme güveniyor",
     cards: [
-      { num: "01", title: "Sporcu Disiplini", desc: "Profesyonel voleybol tecrübesiyle kanıtlanmış antrenman metodolojisi." },
-      { num: "02", title: "Kişiye Özel Güçlenme", desc: "Kendi bedenini tanımanı ve hedeflerine uygun güçlü bir temele sahip olmanı hedefliyorum." },
-      { num: "03", title: "Seçici Premium Takip", desc: "Kaliteyi korumak için sınırlı kontenjanla, birebir odaklı çalışma." }
+      { num: "01", title: "Sporcu Disiplini", desc: "Profesyonel voleybol tecrübesiyle kanıtlanmış global antrenman metodolojisi." },
+      { num: "02", title: "Kişiye Özel Güçlenme", desc: "Sporcuların kendi bedenlerini tanımalarını ve hedeflerine uygun güçlü bir temele sahip olmalarını hedefliyoruz." },
+      { num: "03", title: "Seçici Premium Takip", desc: "Kaliteyi korumak için sınırlı kontenjanla, tamamen birebir odaklı elit çalışma." }
     ]
   },
   howItWorks: {
@@ -87,22 +92,22 @@ export const tr = {
     badge: "Sonuçlar",
     title: "Onların hikayesi, senin motivasyonun.",
     users: {
-      u1: "Sıçrama yüksekliğim 3 ayda 12cm arttı. ARENA sistemi kesinlikle farklı klasmanda.",
-      u2: "Sakatsız, çok güçlü bir sezon geçiriyorum. Kuvvet antrenmanları inanılmaz etkili.",
-      u3: "Kendime güvenim ve sahadaki çevikliğim seviye atladı. Tamamen maç performansıma özel program."
+      u1: "ARENA sistemiyle sıçrama kapasitem inanılmaz arttı. Kesinlikle farklı bir lig.",
+      u2: "Sakatsız ve her zamankinden daha güçlüyüm. Programlar gerçekten sonuç odaklı.",
+      u3: "Performansım ve oyun vizyonum seviye atladı. Tamamen sporcuya özel yaklaşım."
     },
     items: [
       { 
         text: "Sıçrama yüksekliğim 3 ayda 12cm arttı. ARENA sistemi kesinlikle farklı klasmanda.", 
-        name: "Ayşe K.", role: "Voleybolcu", metric: "+12cm sıçrama", image: "/ela_real_30.png"
+        name: "Ayşe K.", role: "Voleybolcu", metric: "+12cm sıçrama", avatar: "/images/testimonials/ayse.png"
       },
       { 
         text: "Sakatsız, çok güçlü bir sezon geçiriyorum. Kuvvet antrenmanları inanılmaz etkili.", 
-        name: "Deniz Y.", role: "Profesyonel Sporcu", metric: "Sıfır Sakatlık", image: "/ela_real_32.png"
+        name: "Deniz Y.", role: "Profesyonel Sporcu", metric: "Sıfır Sakatlık", avatar: "/images/testimonials/deniz.png"
       },
       { 
         text: "Kendime güvenim ve sahadaki çevikliğim seviye atladı. Tamamen maç performansıma özel program.", 
-        name: "Selin B.", role: "Fitness & Voleybol", metric: "+8cm Mobilite", image: "/ela_real_19.png"
+        name: "Selin B.", role: "Fitness & Voleybol", metric: "+8cm Mobilite", avatar: "/images/testimonials/selin.png"
       }
     ]
   },  programs: {
@@ -176,8 +181,8 @@ export const tr = {
     badge: "SSS",    title1: "Merak ettiklerin,",
     title2: "bilmen gerekenler.",
     items: [
-      { q: "Programa nasıl başlarım?", a: "Başvuru formunu doldurduktan sonra WhatsApp üzerinden iletişime geçiyorum. Ücretsiz 15 dakikalık tanışma görüşmesinde hedeflerini konuşup, sana uygun programı belirliyoruz." },
-      { q: "Online antrenman nasıl işliyor?", a: "Sana özel hazırladığım program, video açıklamalı egzersizlerle uygulamanda gönderiliyor. Haftalık check-in'lerle formu kontrol edip, programı gerektiğinde güncelliyorum." },
+      { q: "Programa nasıl başlarım?", a: "Başvuru formunu doldurduktan sonra uzman ekibimiz WhatsApp üzerinden iletişime geçiyor. Ücretsiz 15 dakikalık tanışma görüşmesinde hedeflerini konuşup, sana en uygun programı belirliyoruz." },
+      { q: "Online antrenman nasıl işliyor?", a: "Sana özel hazırlanan program, video açıklamalı egzersizlerle sporcu portalına gönderiliyor. Haftalık check-in'lerle formu kontrol edip, programı veriye dayalı olarak güncelliyoruz." },
       { q: "Beslenme planı dahil mi?", a: "Online Koçluk paketinde temel beslenme takibi var. Premium Büyüme paketinde ise günlük TDEE hesaplı tam beslenme planı, makro takibi ve birebir beslenme danışmanlığı dahil." },
       { q: "Voleybol oynamıyorum, katılabilir miyim?", a: "Elbette! Voleybol Performance paketi sahaya özel olsa da, Online Koçluk ve Premium Büyüme paketleri her seviye için uygun. Kuvvet, postür ve genel fitness hedeflerine yönelik çalışıyoruz." },
       { q: "Sonuçları ne zaman görürüm?", a: "Disiplinli takipte ilk 4 haftada gözle görülür değişim başlıyor. 3 aylık süreçte ciddi dönüşümler yaşanıyor. Her danışanın süreci farklı, ama tutarlılık her zaman sonuç verir." }
@@ -203,8 +208,8 @@ export const tr = {
   },
   contact: {
     badge: "BAĞLANTI",
-    ready: "Değişime hazır mısın?",    limitDesc: "Sınırlı kontenjan nedeniyle başvuruları değerlendirerek alıyorum. Formu doldurduğunda 24 saat içinde seninle iletişime geçeceğim.",
-    location: "İstanbul / Online",
+    ready: "Değişime hazır mısın?",    limitDesc: "Sınırlı kontenjan nedeniyle başvuruları değerlendirerek kabul ediyoruz. Formu doldurduğunuzda 24 saat içinde ekibimiz sizinle iletişime geçecektir.",
+    location: "Global / Online",
     formName: "İsim Soyisim",
     formNamePlaceholder: "Adınız",
     formPhone: "Telefon",
@@ -214,6 +219,7 @@ export const tr = {
       voleybol: "Voleybol Performans",
       fitness: "Genel Fitness / Güç",
       kiloKaybi: "Kilo Kaybı / Sıkılaşma",
+      hoca: "Hoca Olarak Katılmak İstiyorum",
       diger: "Diğer"
     },
     formNotes: "Ek Notlar",
@@ -766,7 +772,7 @@ export const tr = {
       kvkk_sections: [
         {
           title: "1. Veri Sorumlusu",
-          content: "Veri sorumlusu olarak {}, pt.kozbeylikonagi.com.tr internet sitesi üzerinden toplanan tüm kişisel verilerden sorumludur. İletişim: {}"
+          content: "Veri sorumlusu olarak {}, arena-performance.com internet sitesi üzerinden toplanan tüm kişisel verilerden sorumludur. İletişim: {}"
         },
         {
           title: "2. Toplanan Kişisel Veriler",
@@ -797,7 +803,7 @@ export const tr = {
         }
       ],
 
-      terms_intro: "Bu web sitesini (pt.kozbeylikonagi.com.tr) kullanarak aşağıdaki kullanım koşullarını kabul etmiş sayılırsınız. Lütfen bu koşulları dikkatlice okuyunuz.",
+      terms_intro: "Bu web sitesini (arena-performance.com) kullanarak aşağıdaki kullanım koşullarını kabul etmiş sayılırsınız. Lütfen bu koşulları dikkatlice okuyunuz.",
       terms_sections: [
         {
           title: "1. Hizmet Tanımı",
@@ -861,8 +867,8 @@ export const tr = {
         allergy_placeholder: "Fıstık, gluten vb.",
         note_label: "Antrenöre Notun",
         note_placeholder: "Eklemek istediğin her şey...",
-        kvkk_label: "Sağlık beyanlarım dahil olmak üzere tüm \"Özel Nitelikli Kişisel Verilerimin\" işlenmesine ilişkin KVKK Açık Rıza ve Aydınlatma Metni'ni okudum, anladım ve tamamen kendi özgür irademle açık rıza veriyorum.",
-        terms_label: "Kullanım Koşullarını okudum, anladım ve antrenman ile diyet programlarının medikal bir tavsiye olmadığını, oluşabilecek her türlü fiziksel/sağlıksal riskin tamamen bana ait olduğunu ve kabul ediyorum.",
+        kvkk_label: "Sağlık beyanlarım dahil olmak üzere tüm \"Özel Nitelikli Kişisel Verilerimin\" işlenmesine ilişkin KVKK Açık Rıza ve Aydınlatma Metni'ni okundu, anlaşıldı ve açık rıza verilmektedir.",
+        terms_label: "Kullanım Koşullarını okundu, anlaşıldı ve antrenman ile diyet programlarının medikal bir tavsiye olmadığını, oluşabilecek her türlü fiziksel/sağlıksal riskin kullanıcıya ait olduğu kabul edilmektedir.",
         btn_next: "Sonraki Adım",
         btn_prev: "Geri",
         btn_complete: "Tamamla",

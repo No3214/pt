@@ -139,21 +139,21 @@ export const zh = {
         name: "Ayşe K.",
         role: "排球运动员",
         metric: "+12cm 弹跳",
-        image: "/ela_real_30.png"
+        image: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=200&h=200"
       },
       {
         text: "我有一个无伤且非常强大的赛季。力量训练的效果非常显著。",
         name: "Deniz Y.",
         role: "职业运动员",
         metric: "零伤病",
-        image: "/ela_real_32.png"
+        image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=200&h=200"
       },
       {
         text: "我在球场上的信心和敏捷性提升了。一个完全根据我的比赛表现定制的课程。",
         name: "Selin B.",
         role: "健身与排球",
         metric: "+8cm 灵活性",
-        image: "/ela_real_19.png"
+        image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=200&h=200"
       }
     ]
   },
@@ -895,7 +895,7 @@ export const zh = {
     kvkk_sections: [
       {
         title: "1. Data Controller",
-        content: "As the data controller, {}, is responsible for all personal data collected through the pt.kozbeylikonagi.com.tr website. Contact: {}"
+        content: "As the data controller, {}, is responsible for all personal data collected through the arena-performance.com website. Contact: {}"
       },
       {
         title: "2. Personal Data Collected",

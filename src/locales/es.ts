@@ -139,21 +139,21 @@ export const es = {
         name: "Ayşe K.",
         role: "Voleibolista",
         metric: "+12cm salto",
-        image: "/ela_real_30.png"
+        image: "https://images.unsplash.com/photo-1594381898411-846e7d193883?auto=format&fit=crop&q=80&w=200&h=200"
       },
       {
         text: "Estoy teniendo una temporada sin lesiones y muy fuerte. El entrenamiento de fuerza es increíblemente efectivo.",
         name: "Deniz Y.",
         role: "Atleta Profesional",
         metric: "Cero Lesiones",
-        image: "/ela_real_32.png"
+        image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=200&h=200"
       },
       {
         text: "Mi confianza y agilidad en la cancha mejoraron. Un programa completamente adaptado a mi desempeño en los partidos.",
         name: "Selin B.",
         role: "Fitness & Voleibol",
         metric: "+8cm Movilidad",
-        image: "/ela_real_19.png"
+        image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&q=80&w=200&h=200"
       }
     ]
   },
@@ -895,7 +895,7 @@ export const es = {
     kvkk_sections: [
       {
         title: "1. Data Controller",
-        content: "As the data controller, {}, is responsible for all personal data collected through the pt.kozbeylikonagi.com.tr website. Contact: {}"
+        content: "As the data controller, {}, is responsible for all personal data collected through the arena-performance.com website. Contact: {}"
       },
       {
         title: "2. Personal Data Collected",

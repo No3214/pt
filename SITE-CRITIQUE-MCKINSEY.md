@@ -1,6 +1,6 @@
 # Site Eleştirisi — McKinsey / L99 / God-Mode Lens
 
-**Site:** pt.kozbeylikonagi.com (Ela Ebeoğlu PT brand)
+**Site:** arena-performance.com (ARENA Marketplace)
 **Tarih:** 2026-04-14
 **Çerçeve:** Strategic Consulting + Product Growth + Conversion Science
 
@@ -8,9 +8,9 @@
 
 ## TL;DR (Executive Summary)
 
-Site **teknik olarak premium**, ama **iş değeri (conversion + retention + brand equity)** tarafında 8 kritik gedik var. Ela'nın "profesyonel voleybolcu + PT" pozisyonu altın değerinde bir niche ama site bunu **price-leverage** ve **authority stack** olarak monetize etmiyor. Mevcut site tasarım ödülü alır, dönüşüm oranı %1-2 seviyesinde sıkışır. Hedef %4-6.
+Site **teknik olarak premium**, ama **iş değeri (conversion + retention + brand equity)** tarafında 8 kritik gedik var. Platformun "profesyonel sporcu + performans" pozisyonu altın değerinde bir niche ama site bunu **price-leverage** ve **authority stack** olarak monetize etmiyor. Mevcut site tasarım ödülü alır, dönüşüm oranı %1-2 seviyesinde sıkışır. Hedef %4-6.
 
-**One-line:** _"Beautiful portfolio, under-weaponized sales asset."_
+**One-line:** _"Beautiful marketplace, under-weaponized sales asset."_
 
 ---
 
@@ -21,10 +21,10 @@ Site **teknik olarak premium**, ama **iş değeri (conversion + retention + bran
 | **Strategy** | Belirsiz ICP — "herkese hitap eden" riskine düşmüş | Niche daraltma: voleybolcu + performans sporcu ana segment olmalı |
 | **Structure** | Landing → Form → WhatsApp tek funnel | İkinci funnel yok (blog/YouTube → email → satış) |
 | **Systems** | Supabase + Vercel/CF Pages + PWA | Analytics event tracking eksik, A/B test yok |
-| **Shared Values** | "Bilimsel + kişisel" teması var | Proof noktaları zayıf — sertifika/lisans/bilimsel referans göster |
+| **Shared Values** | "Bilimsel + sistem" teması var | Proof noktaları zayıf — sertifika/lisans/bilimsel referans göster |
 | **Style** | Lüks + warm | Tutarsız CTA yerleşimi (sticky + section + nav) |
-| **Staff** | Tek kişi (Ela) | Ölçeklenme yok → premium price anchor yapmalı |
-| **Skills** | Voleybol + PT hybrid unique | "Voleybol Performance" yalnız bir paket, brand DNA olmalı |
+| **Staff** | Ekosistem | Ölçeklenme odağı → premium marketplace price anchor yapmalı |
+| **Skills** | Performans hibrit unique | "Performance" yalnız bir paket, platform DNA olmalı |
 
 ---
 
@@ -45,7 +45,7 @@ Site **teknik olarak premium**, ama **iş değeri (conversion + retention + bran
 **3. Social proof orta seviyede**
 - 3 testimonial, sahte isimli, AI yüzleri yerine gradient avatar (DÜZELTİLDİ — gizlilik + dürüstlük)
 - Eksik: gerçek danışan video testimonialı, Instagram embed carousel, basında adı geçen yerler
-- Fix: Ela'nın profesyonel voleybol kariyerinden medya logoları ("görsel proof" banner)
+- Fix: Marka otoritesi için sporcu kariyerlerinden medya logoları ("görsel proof" banner)
 
 **4. Lead capture tek kanal**
 - Sadece form + WhatsApp. Email list yok.
@@ -64,7 +64,7 @@ Site **teknik olarak premium**, ama **iş değeri (conversion + retention + bran
 
 **7. Galeri sekmesi "portfolio" gibi — fitness için before/after shot eksik**
 - Fitness sektöründe **visual proof = dönüşüm**
-- Fix: "Danışan Dönüşümleri" bölümü + Ela'nın gerçek voleybol sahası foto'ları
+- Fix: "Danışan Dönüşümleri" bölümü + gerçek voleybol sahası foto'ları
 
 **8. Mobil deneyim "iyi" ama "wow" değil**
 - Floating CTA var ama hero'da scroll-to-form CTA yok
@@ -73,7 +73,7 @@ Site **teknik olarak premium**, ama **iş değeri (conversion + retention + bran
 ### P2 — Brand equity + long-term
 
 **9. Blog/İçerik yok**
-- SEO organik traffic sıfır (elaebeoglu.com sitemap'te sadece /)
+- SEO organik traffic sıfır (arena-performance.com sitemap'te sadece /)
 - Fix: content-skill-graph pattern uygula → haftada 2-3 konu, 10 platform dağılım
 - Effort: 1-2 hafta setup, compound ROI
 
@@ -86,8 +86,8 @@ Site **teknik olarak premium**, ama **iş değeri (conversion + retention + bran
 - Fix: "Portalı Keşfet" sanal tur / screenshot section
 
 **12. Voleybol authority stack eksik**
-- Ela'nın profesyonel kariyeri = moat, ama site "Genç bir antrenör" enerjisinde
-- Fix: "Oynadığım takımlar / ligler", basına çıkan haberler, milli takım sayfasında varsa o — explicit authority signal
+- Marka otoritesi = moat, ama site "Genç bir antrenör" enerjisinde
+- Fix: "Başarı hikayeleri / ligler", basına çıkan haberler, milli takım sayfasında varsa o — explicit authority signal
 
 ---
 
@@ -118,7 +118,7 @@ Testimonials yerine Instagram Reel'leri live embed. "Sahte görünmez, gerçek k
 - Mobil admin sidebar z-index bug (kritik UX hatası) — FIX
 - Voleybol tema animasyonları (brand DNA marker) — EKLENDİ
   - VolleyballFloaters, VolleyballSpike, VolleyballDivider, VolleyballCursorTrail, VolleyballScrollRoller
-- Testimonial fake photos kaldırıldı → initial-gradient avatar + Ela real photos impact visual — FIX + DÜRÜSTLÜK
+- Testimonial fake photos kaldırıldı → initial-gradient avatar + real athlete photos impact visual — FIX + DÜRÜSTLÜK
 - Gizlilik disclaimer testimonials altında — legal + etik
 - CursorFollow premium interaction — EKLENDİ
 - PageTransition Apple-quality blur-fade — EKLENDİ
@@ -129,7 +129,7 @@ Testimonials yerine Instagram Reel'leri live embed. "Sahte görünmez, gerçek k
 **Bu hafta:**
 1. Plausible analytics event tracking kur (2 saat)
 2. Hero'yu tek primary CTA'ya indir + sub-headline "Voleybol + Fonksiyonel Fitness" (1 saat)
-3. Ela'nın sertifikalarını/lisansını About section'a ekle (30 dk)
+3. Marka sertifikalarını/lisansını About section'a ekle (30 dk)
 4. Lead magnet PDF hazırla: "7-Günlük Sıçrama Protokolü" (1 gün)
 
 **Önümüzdeki 2 hafta:**

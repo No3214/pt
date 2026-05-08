@@ -5,7 +5,7 @@ import Navbar from '../components/landing/Navbar';
 import Hero from '../components/landing/Hero';
 import Marquee from '../components/landing/Marquee';
 import { GrainOverlay } from '../components/landing/LandingUI';
-import { VolleyballDivider, VolleyballScrollRoller, VolleyballCursorTrail } from '../components/animations/Volleyball';
+import { VolleyballScrollRoller, VolleyballCursorTrail } from '../components/animations/Volleyball';
 import ScrollReveal from '../components/animations/ScrollReveal';
 
 // Below-the-fold sections — lazy-loaded so the initial `index` chunk only
@@ -24,6 +24,13 @@ const AssessmentCTA = lazy(() => import(/* webpackChunkName: "landing-assessment
 const FAQ = lazy(() => import(/* webpackChunkName: "landing-faq" */ '../components/landing/FAQ'));
 const Contact = lazy(() => import(/* webpackChunkName: "landing-contact" */ '../components/landing/Contact'));
 const Footer = lazy(() => import(/* webpackChunkName: "landing-footer" */ '../components/landing/Footer'));
+
+// Sprint 1 Components
+const AuthorityStrip = lazy(() => import(/* webpackChunkName: "sprint1-authority" */ '../components/sprint1/AuthorityStrip'));
+const PortalPreview = lazy(() => import(/* webpackChunkName: "sprint1-portal" */ '../components/sprint1/PortalPreview'));
+const PricingAnchor = lazy(() => import(/* webpackChunkName: "sprint1-pricing" */ '../components/sprint1/PricingAnchor'));
+const SystemBenefits = lazy(() => import(/* webpackChunkName: "landing-benefits" */ '../components/landing/SystemBenefits'));
+const PartnerSection = lazy(() => import(/* webpackChunkName: "landing-partner" */ '../components/landing/PartnerSection'));
 
 // Min-height placeholder keeps CLS near zero while the section chunk streams in.
 function Placeholder({ h = 400 }: { h?: number }) {
@@ -47,9 +54,14 @@ export default function Landing() {
       <VolleyballCursorTrail size={20} />
       <main id="ana-icerik">
         <Hero />
-        <Marquee />
-        <Suspense fallback={<Placeholder h={700} />}>
+        <div className="-mt-12 md:-mt-16">
+          <Marquee />
+        </div>
+        <Suspense fallback={<Placeholder h={600} />}>
           <MissionStatement />
+        </Suspense>
+        <Suspense fallback={<Placeholder h={160} />}>
+          <ScrollReveal preset="fadeUp"><AuthorityStrip /></ScrollReveal>
         </Suspense>
         <Suspense fallback={<Placeholder h={600} />}>
           <ScrollReveal preset="fadeUp"><About /></ScrollReveal>
@@ -60,12 +72,14 @@ export default function Landing() {
         <Suspense fallback={<Placeholder h={400} />}>
           <ScrollReveal preset="scaleIn"><Stats /></ScrollReveal>
         </Suspense>
-        <VolleyballDivider className="my-4" />
         <Suspense fallback={<Placeholder h={500} />}>
           <ScrollReveal preset="fadeUp"><Gallery /></ScrollReveal>
         </Suspense>
         <Suspense fallback={<Placeholder h={520} />}>
           <ScrollReveal preset="fadeUp"><TrainingScenes /></ScrollReveal>
+        </Suspense>
+        <Suspense fallback={<Placeholder h={600} />}>
+          <ScrollReveal preset="fadeUp"><PortalPreview /></ScrollReveal>
         </Suspense>
         <Suspense fallback={<Placeholder h={500} />}>
           <ScrollReveal preset="fadeUp"><Testimonials /></ScrollReveal>
@@ -74,7 +88,18 @@ export default function Landing() {
           <ScrollReveal preset="scaleIn"><AssessmentCTA /></ScrollReveal>
         </Suspense>
         <Suspense fallback={<Placeholder h={700} />}>
-          <ScrollReveal preset="fadeUp"><Programs /></ScrollReveal>
+          <ScrollReveal preset="fadeUp">
+            <Programs />
+            <div className="max-w-[1400px] mx-auto px-8 md:px-12 mt-12">
+              <PricingAnchor />
+            </div>
+          </ScrollReveal>
+        </Suspense>
+        <Suspense fallback={<Placeholder h={400} />}>
+          <ScrollReveal preset="fadeUp"><SystemBenefits /></ScrollReveal>
+        </Suspense>
+        <Suspense fallback={<Placeholder h={600} />}>
+          <ScrollReveal preset="fadeUp"><PartnerSection /></ScrollReveal>
         </Suspense>
         <Suspense fallback={<Placeholder h={400} />}>
           <ScrollReveal preset="scaleIn"><LeadMagnet /></ScrollReveal>

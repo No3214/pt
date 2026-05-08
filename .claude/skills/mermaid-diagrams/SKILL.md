@@ -1,8 +1,8 @@
 ---
 name: mermaid-diagrams
-description: 2026 Mermaid architecture/flow diagrams for PT. Triggers on diagram, şema, mermaid, flow, mimari.
+description: 2026 Mermaid architecture/flow diagrams for ARENA. Triggers on diagram, şema, mermaid, flow, mimari.
 ---
-# Mermaid Diagrams — 2026 PT
+# Mermaid Diagrams — 2026 ARENA
 
 ## Version
 Mermaid 11.x (2026 — sequenceDiagram, c4Context, requirement, sankey destek).
@@ -11,10 +11,10 @@ Mermaid 11.x (2026 — sequenceDiagram, c4Context, requirement, sankey destek).
 ```mermaid
 flowchart TD
     A[Landing] --> B{İlgilenir mi?}
-    B -->|Evet| C[Programlar]
-    C --> D[İletişim]
-    D --> E[Ücretsiz Görüşme]
-    E --> F[Program Başlat]
+    B -->|Evet| C[Marketplace]
+    C --> D[Program Seçimi]
+    D --> E[İletişim/Satın Al]
+    E --> F[Kayıt]
     B -->|Hayır| G[Çıkış]
     F --> H[Portal]
     H --> I{Hedef}
@@ -25,15 +25,15 @@ flowchart TD
 ## System Architecture (C4 Container)
 ```mermaid
 C4Context
-    title PT Platform Architecture
+    title ARENA Platform Architecture
     Person(user, "Sporcu")
-    Person(coach, "Ela (Coach)")
-    System_Boundary(pt, "PT Platform") {
-        Container(spa, "React 19 SPA", "Cloudflare Pages")
-        Container(api, "Edge Functions", "Cloudflare Workers")
+    Person(coach, "Elite Coach")
+    System_Boundary(pt, "ARENA Platform") {
+        Container(spa, "React 19 SPA", "Vite/Vercel")
+        Container(api, "Edge Functions", "Supabase Functions")
         ContainerDb(db, "Supabase", "PostgreSQL + RLS")
     }
-    System_Ext(ai, "AI Council", "Claude 4.7 / GPT-5 / Gemini 3")
+    System_Ext(ai, "AI Council", "Claude / GPT / Gemini")
     Rel(user, spa, "HTTPS")
     Rel(coach, spa, "HTTPS")
     Rel(spa, api, "JSON/REST")
@@ -48,8 +48,8 @@ stateDiagram-v2
     Landing --> AdminLogin: /admin
     AdminLogin --> Dashboard: PIN valid
     Dashboard --> Clients
-    Dashboard --> Bookings
-    Dashboard --> AIChat
+    Dashboard --> Leads
+    Dashboard --> AIBuilder
     Dashboard --> Assessment
     AdminLogin --> RateLimited: 5 fail
     RateLimited --> AdminLogin: 15min
@@ -65,9 +65,9 @@ stateDiagram-v2
 sequenceDiagram
     participant U as User
     participant C as Council
-    participant A as Claude 4.7
-    participant G as GPT-5
-    participant M as Gemini 3
+    participant A as Claude
+    participant G as GPT
+    participant M as Gemini
     U->>C: Query (domain + prompt)
     par Parallel drafts
         C->>A: Draft request
@@ -80,37 +80,6 @@ sequenceDiagram
     C->>C: Adversarial critique
     C->>C: Consensus synthesis
     C-->>U: Best answer + sources
-```
-
-## Booking Lifecycle
-```mermaid
-stateDiagram-v2
-    [*] --> Pending: submit form
-    Pending --> Approved: coach confirm
-    Pending --> Rejected: coach decline
-    Approved --> Paid: payment
-    Paid --> Scheduled: date assign
-    Scheduled --> Completed: session done
-    Scheduled --> NoShow: missed
-    NoShow --> Rescheduled: new date
-    Completed --> [*]
-    Rejected --> [*]
-```
-
-## Deploy Pipeline
-```mermaid
-flowchart LR
-    A[Git push main] --> B[GitHub Actions]
-    B --> C{Typecheck}
-    C -->|Pass| D{Lint}
-    C -->|Fail| X[Block]
-    D -->|Pass| E{Build}
-    E --> F{Lighthouse CI}
-    F -->|≥95| G[Cloudflare Deploy]
-    F -->|<95| X
-    G --> H[pt.kozbeylikonagi.com.tr]
-    G --> I[Smoke Test]
-    I -->|Fail| J[Auto Rollback]
 ```
 
 ## Usage
@@ -126,9 +95,9 @@ flowchart LR
 ## Theme
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': {
-  'primaryColor': '#C8A97E',
-  'primaryTextColor': '#1a1a1a',
-  'primaryBorderColor': '#8B7355',
-  'lineColor': '#D4A574'
+  'primaryColor': '#C2684A',
+  'primaryTextColor': '#FAF6F1',
+  'primaryBorderColor': '#1C1917',
+  'lineColor': '#D4B483'
 }}}%%
 ```

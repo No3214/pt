@@ -4,7 +4,7 @@ Elite voleybol ve performans koçluk sistemi — **Güçlü ol. Kendine güven.*
 
 Built with **Vite 6 + React 19 + TypeScript 5 + Tailwind 3 + Zustand 5 + Supabase 2**.
 
-Live: https://pt.kozbeylikonagi.com.tr
+Live: https://arena-performance.com
 Deployed on **Cloudflare Pages** with edge-native AI proxy functions.
 
 ## 🏗️ Architecture

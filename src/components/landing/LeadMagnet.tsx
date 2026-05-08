@@ -22,9 +22,9 @@ export default function LeadMagnet() {
     setLoading(true)
     try {
       // LocalStorage'a kaydet (backend hazır olana dek)
-      const leads = JSON.parse(localStorage.getItem('ela-leads') || '[]')
+      const leads = JSON.parse(localStorage.getItem('arena-leads') || '[]')
       leads.push({ email, date: new Date().toISOString(), source: 'lead-magnet-pdf' })
-      localStorage.setItem('ela-leads', JSON.stringify(leads))
+      localStorage.setItem('arena-leads', JSON.stringify(leads))
 
       // Plausible/CF analytics event
       if (typeof window !== 'undefined' && (window as unknown as { plausible?: (e: string, o?: unknown) => void }).plausible) {

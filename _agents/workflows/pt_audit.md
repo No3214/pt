@@ -1,7 +1,7 @@
 ---
 description: [Antigravity PT Sistem Check-Up ve Kalite Kontrolü]
 ---
-Bu workflow, Ela'nın PT uygulamasının kod kalitesini, mobil duyarlılığını (responsive) ve sistem hatalarını denetler:
+Bu workflow, ARENA PT uygulamasının kod kalitesini, mobil duyarlılığını (responsive) ve sistem hatalarını denetler:
 
 1. `src/pages` ve `src/components` altındaki dosyaların ES/TSLINT uyumluluğunu kontrol et.
 2. Form verilerinde ve CRM Input alanlarında mobil uyumlu olmayan paddings, text sizes (özellikle iOS zoom sorunlarını önlemek için font-size altında 16px olup olmadığı) denetlemesini yap.

@@ -197,9 +197,9 @@ Landing'de `<head>` icine:
 
 ```tsx
 {LOCALES.map(l => (
-  <link key={l} rel="alternate" hrefLang={l} href={`https://pt.kozbeylikonagi.com.tr/${l}/`} />
+  <link key={l} rel="alternate" hrefLang={l} href={`https://arena-performance.com/${l}/`} />
 ))}
-<link rel="alternate" hrefLang="x-default" href="https://pt.kozbeylikonagi.com.tr/" />
+<link rel="alternate" hrefLang="x-default" href="https://arena-performance.com/" />
 ```
 
 URL stratejisi: `tr` default (root); digerleri `/<lang>/...`. Router config'te `/:lang?/...`.
