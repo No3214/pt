@@ -9,9 +9,9 @@ const fadeUp = {
 const stagger = { show: { transition: { staggerChildren: 0.08 } } }
 
 export default function Settings() {
-  const { clients, calSessions, measurements, progressPhotos, savedPrograms, showToast, darkMode: dm, aiConfig, setAiConfig, whatsappTemplates, updateTemplate } = useStore()
+  const { clients, calSessions, measurements, progressPhotos, savedPrograms, showToast, darkMode: dm, aiConfig, setAiConfig, whatsappTemplates, updateTemplate, branding, updateBranding } = useStore()
   const fileRef = useRef<HTMLInputElement>(null)
-  const [activeTab, setActiveTab] = useState<'data' | 'ai' | 'templates' | 'danger'>('data')
+  const [activeTab, setActiveTab] = useState<'data' | 'ai' | 'templates' | 'branding' | 'danger'>('data')
 
   const card = `p-6 rounded-2xl border transition-all duration-300 ${dm ? 'bg-white/[0.03] border-white/[0.06]' : 'bg-white border-black/[0.04]'}`
 
@@ -71,6 +71,7 @@ export default function Settings() {
     { key: 'data' as const, label: 'Veri Yönetimi', icon: '💾' },
     { key: 'ai' as const, label: 'AI Yönetimi', icon: '🤖' },
     { key: 'templates' as const, label: 'Mesaj Şablonları', icon: '📝' },
+    { key: 'branding' as const, label: 'Branding & Tema', icon: '🎨' },
     { key: 'danger' as const, label: 'Tehlikeli Bölge', icon: '⚠️' },
   ]
 
@@ -280,7 +281,7 @@ export default function Settings() {
                       Mevcut değişkenler: <code className="text-primary">{"{{link}}"}</code>
                     </p>
                   </div>
-                  
+
                   <div className={`p-4 rounded-xl text-xs flex flex-col gap-2 ${dm ? 'bg-primary/10 border border-primary/20' : 'bg-primary/5 border border-primary/10'}`}>
                     <span className="font-bold text-primary uppercase text-[0.6rem]">Önizleme</span>
                     <p className="italic opacity-60">
@@ -322,6 +323,126 @@ export default function Settings() {
                 <p className={`text-xs leading-relaxed ${dm ? 'text-white/30' : 'text-stone-500'}`}>
                   Değişkenler otomatik olarak doldurulur. <code className="text-primary">{"{{link}}"}</code> öğrencinin verilerini girebileceği formu, <code className="text-primary">{"{{name}}"}</code> ise öğrencinin adını temsil eder.
                 </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* Branding Tab */}
+        {activeTab === 'branding' && (
+          <motion.div key="branding" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-6">
+            <div className={card}>
+              <div className="flex items-center gap-3 mb-8">
+                <span className="text-3xl">🎨</span>
+                <div>
+                  <h3 className="font-display text-xl font-semibold">Branding & Özelleştirme</h3>
+                  <p className={`text-sm ${dm ? 'text-white/40' : 'text-stone-400'}`}>Platformun görünümünü kendi markanıza göre uyarlayın</p>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-6">
+                  <div>
+                    <label className={`block mb-1.5 text-xs font-semibold uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-500'}`}>
+                      Spor Salonu / Antrenör Adı
+                    </label>
+                    <input
+                      type="text"
+                      value={branding.gymName || ''}
+                      onChange={(e) => updateBranding({ gymName: e.target.value })}
+                      className={`w-full p-3.5 rounded-xl border outline-none text-sm transition-all ${
+                        dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-text-main'
+                      }`}
+                    />
+                  </div>
+
+                  <div>
+                    <label className={`block mb-1.5 text-xs font-semibold uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-500'}`}>
+                      Logo URL
+                    </label>
+                    <input
+                      type="text"
+                      value={branding.logo || ''}
+                      onChange={(e) => updateBranding({ logo: e.target.value })}
+                      placeholder="https://..."
+                      className={`w-full p-3.5 rounded-xl border outline-none text-sm transition-all ${
+                        dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-text-main'
+                      }`}
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  <div>
+                    <label className={`block mb-1.5 text-xs font-semibold uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-500'}`}>
+                      Ana Renk (Primary)
+                    </label>
+                    <div className="flex gap-3">
+                      <input
+                        type="color"
+                        value={branding.primaryColor || '#C2684A'}
+                        onChange={(e) => updateBranding({ primaryColor: e.target.value })}
+                        className="w-12 h-12 rounded-lg border-none cursor-pointer bg-transparent"
+                      />
+                      <input
+                        type="text"
+                        value={branding.primaryColor || '#C2684A'}
+                        onChange={(e) => updateBranding({ primaryColor: e.target.value })}
+                        className={`flex-1 p-3.5 rounded-xl border outline-none text-sm font-mono transition-all ${
+                          dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-text-main'
+                        }`}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className={`block mb-1.5 text-xs font-semibold uppercase tracking-wider ${dm ? 'text-white/40' : 'text-stone-500'}`}>
+                      İkincil Renk (Secondary)
+                    </label>
+                    <div className="flex gap-3">
+                      <input
+                        type="color"
+                        value={branding.secondaryColor || '#7A9E82'}
+                        onChange={(e) => updateBranding({ secondaryColor: e.target.value })}
+                        className="w-12 h-12 rounded-lg border-none cursor-pointer bg-transparent"
+                      />
+                      <input
+                        type="text"
+                        value={branding.secondaryColor || '#7A9E82'}
+                        onChange={(e) => updateBranding({ secondaryColor: e.target.value })}
+                        className={`flex-1 p-3.5 rounded-xl border outline-none text-sm font-mono transition-all ${
+                          dm ? 'bg-white/[0.03] border-white/[0.08] focus:border-primary/50 text-white' : 'bg-stone-50 border-black/[0.06] focus:border-primary/50 text-text-main'
+                        }`}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className={`mt-10 p-6 rounded-[2.5rem] border ${dm ? 'bg-white/[0.02] border-white/5' : 'bg-stone-50 border-black/5'}`}>
+                 <h4 className="font-bold text-sm mb-4">Önizleme (Canlı)</h4>
+                 <div className="flex items-center gap-4">
+                    <div
+                      className="px-6 py-2.5 rounded-full text-white text-xs font-bold shadow-lg"
+                      style={{ backgroundColor: branding.primaryColor }}
+                    >
+                      Ana Buton
+                    </div>
+                    <div
+                      className="px-6 py-2.5 rounded-full text-white text-xs font-bold shadow-lg"
+                      style={{ backgroundColor: branding.secondaryColor }}
+                    >
+                      İkincil Buton
+                    </div>
+                    <div className="flex items-center gap-2 ml-4">
+                       {branding.logo ? (
+                         <img src={branding.logo} alt="Logo" className="w-8 h-8 object-contain" />
+                       ) : (
+                         <div className="w-8 h-8 rounded bg-primary/20" />
+                       )}
+                       <span className="font-bold text-sm">{branding.gymName}</span>
+                    </div>
+                 </div>
               </div>
             </div>
           </motion.div>

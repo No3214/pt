@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
+import { useStudentAuth } from '../../stores/studentAuth'
 import { supabase } from '../../lib/supabase'
+import { Lock, Crown, Search } from 'lucide-react'
 
 interface ExerciseVideo {
   id: string
@@ -15,6 +17,7 @@ interface ExerciseVideo {
   equipment: string[]
   category_name?: string
   view_count: number
+  is_premium?: boolean
 }
 
 const categories = [
@@ -45,10 +48,10 @@ const demoExercises: ExerciseVideo[] = [
   { id: '5', name: 'Overhead Press', name_tr: 'Overhead Press', difficulty: 'intermediate', muscle_groups: ['shoulders', 'arms'], equipment: ['barbell'], youtube_id: '_RlRDWO2jfg', view_count: 650, description_tr: 'Omuz ve triceps geliştirme için temel bileşik hareket.' },
   { id: '6', name: 'Romanian Deadlift', name_tr: 'Romanian Deadlift', difficulty: 'intermediate', muscle_groups: ['legs', 'back'], equipment: ['barbell'], youtube_id: '7j-2w4-P14I', view_count: 720, description_tr: 'Hamstring ve glute odaklı çekme hareketi.' },
   { id: '7', name: 'Plank', name_tr: 'Plank', difficulty: 'beginner', muscle_groups: ['core'], equipment: [], youtube_id: 'ASdvN_XEl_c', view_count: 1500, description_tr: 'Core stabilizasyonu için temel izometrik egzersiz.' },
-  { id: '8', name: 'Box Jump', name_tr: 'Kutu Atlama', difficulty: 'advanced', muscle_groups: ['legs', 'cardio'], equipment: ['box'], youtube_id: '52r_Ul5k03g', view_count: 430, description_tr: 'Patlayıcı güç ve atletizm geliştirme.' },
+  { id: '8', name: 'Box Jump', name_tr: 'Kutu Atlama', difficulty: 'advanced', muscle_groups: ['legs', 'cardio'], equipment: ['box'], youtube_id: '52r_Ul5k03g', view_count: 430, description_tr: 'Patlayıcı güç ve atletizm geliştirme.', is_premium: true },
   { id: '9', name: 'Hip Thrust', name_tr: 'Hip Thrust', difficulty: 'intermediate', muscle_groups: ['legs', 'core'], equipment: ['barbell', 'bench'], youtube_id: 'SEdqd1n0cvg', view_count: 890, description_tr: 'Glute aktivasyonu ve güçlendirme için en etkili hareket.' },
   { id: '10', name: 'Face Pull', name_tr: 'Face Pull', difficulty: 'beginner', muscle_groups: ['shoulders', 'back'], equipment: ['cable'], youtube_id: 'rep-qVOkqgk', view_count: 560, description_tr: 'Arka omuz ve rotator cuff sağlığı için kritik hareket.' },
-  { id: '11', name: 'Bulgarian Split Squat', name_tr: 'Bulgar Split Squat', difficulty: 'advanced', muscle_groups: ['legs'], equipment: ['dumbbell'], youtube_id: '2C-uNgKwPLE', view_count: 670, description_tr: 'Tek bacak gücü ve denge geliştirme.' },
+  { id: '11', name: 'Bulgarian Split Squat', name_tr: 'Bulgar Split Squat', difficulty: 'advanced', muscle_groups: ['legs'], equipment: ['dumbbell'], youtube_id: '2C-uNgKwPLE', view_count: 670, description_tr: 'Tek bacak gücü ve denge geliştirme.', is_premium: true },
   { id: '12', name: 'Cable Crunch', name_tr: 'Cable Crunch', difficulty: 'intermediate', muscle_groups: ['core'], equipment: ['cable'], youtube_id: 'AV5PmrIHsCY', view_count: 340, description_tr: 'Karın kasları için ağırlıklı izolasyon hareketi.' },
 ]
 
@@ -59,6 +62,9 @@ export default function VideoLibrary() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedVideo, setSelectedVideo] = useState<ExerciseVideo | null>(null)
   const darkMode = useStore(s => s.darkMode)
+  const { profile } = useStudentAuth()
+
+  const isLegend = profile?.athlete_level === 'Legend' || profile?.athlete_level === 'Elite'
 
   useEffect(() => {
     // Try to fetch from Supabase, fall back to demo data
@@ -94,9 +100,7 @@ export default function VideoLibrary() {
         </div>
         {/* Search */}
         <div className="relative w-full md:w-72">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={`absolute left-4 top-1/2 -translate-y-1/2 ${darkMode ? 'text-white/20' : 'text-black/20'}`}>
-            <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
-          </svg>
+          <Search size={16} className={`absolute left-4 top-1/2 -translate-y-1/2 ${darkMode ? 'text-white/20' : 'text-black/20'}`} />
           <input
             type="text"
             value={searchQuery}
@@ -116,7 +120,7 @@ export default function VideoLibrary() {
             key={cat.key}
             onClick={() => setSelectedCategory(cat.key)}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-all ${
-              selectedCategory === cat.key
+              selectedCategory ===_key(cat.key)
                 ? 'bg-primary text-white shadow-lg shadow-primary/20'
                 : darkMode ? 'bg-white/[0.04] text-white/50 hover:bg-white/[0.08]' : 'bg-black/[0.03] text-black/50 hover:bg-black/[0.06]'
             }`}
@@ -124,6 +128,8 @@ export default function VideoLibrary() {
             <span>{cat.icon}</span>
             <span>{cat.label}</span>
           </button>
+        )).map((btn, i) => (
+          <div key={i}>{btn}</div>
         ))}
       </div>
 
@@ -150,8 +156,13 @@ export default function VideoLibrary() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
-            onClick={() => setSelectedVideo(ex)}
-            className={`text-left p-5 rounded-2xl border transition-all group cursor-pointer ${cardBg}`}
+            onClick={() => {
+              if (ex.is_premium && !isLegend) return
+              setSelectedVideo(ex)
+            }}
+            className={`text-left p-5 rounded-2xl border transition-all group cursor-pointer relative overflow-hidden ${cardBg} ${
+              ex.is_premium && !isLegend ? 'opacity-70 grayscale' : ''
+            }`}
           >
             {/* Thumbnail */}
             <div className="relative w-full aspect-video rounded-xl overflow-hidden mb-4 bg-black/10">
@@ -165,16 +176,29 @@ export default function VideoLibrary() {
                 <div className="w-full h-full flex items-center justify-center text-3xl">🏋️</div>
               )}
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors flex items-center justify-center">
-                <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-black ml-1">
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                </div>
+                {ex.is_premium && !isLegend ? (
+                  <div className="w-12 h-12 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center shadow-lg text-white">
+                    <Lock size={20} />
+                  </div>
+                ) : (
+                  <div className="w-12 h-12 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" className="text-black ml-1">
+                      <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                  </div>
+                )}
               </div>
               {/* Difficulty Badge */}
-              <span className={`absolute top-2 right-2 px-2 py-1 rounded-lg text-[0.55rem] font-bold ${difficultyLabels[ex.difficulty].color}`}>
-                {difficultyLabels[ex.difficulty].label}
-              </span>
+              <div className="absolute top-2 right-2 flex flex-col gap-1 items-end">
+                <span className={`px-2 py-1 rounded-lg text-[0.55rem] font-bold ${difficultyLabels[ex.difficulty].color}`}>
+                  {difficultyLabels[ex.difficulty].label}
+                </span>
+                {ex.is_premium && (
+                  <span className="px-2 py-1 rounded-lg text-[0.55rem] font-bold bg-amber-500/20 text-amber-500 flex items-center gap-1">
+                    <Crown size={8} /> PREMIUM
+                  </span>
+                )}
+              </div>
             </div>
 
             {/* Info */}
@@ -268,4 +292,8 @@ export default function VideoLibrary() {
       </AnimatePresence>
     </div>
   )
+}
+
+function _key(key: string) {
+  return key;
 }

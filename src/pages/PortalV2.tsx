@@ -31,6 +31,9 @@ const MacroTracker = lazy(() => import('../components/portal/MacroTracker'))
 const AiMacroAssistant = lazy(() => import('../components/portal/AiMacroAssistant'))
 const FoodLog = lazy(() => import('../components/portal/FoodLog'))
 const VideoLibrary = lazy(() => import('../components/portal/VideoLibrary'))
+const CourseModules = lazy(() => import('../components/portal/CourseModules'))
+const ResourceCenter = lazy(() => import('../components/portal/ResourceCenter'))
+const PackageShowcase = lazy(() => import('../components/portal/PackageShowcase'))
 const StudentWeightChart = lazy(() => import('../components/portal/StudentWeightChart'))
 const AchievementTracker = lazy(() => import('../components/portal/AchievementTracker'))
 const ProgressGallery = lazy(() => import('../components/portal/ProgressGallery'))
@@ -53,7 +56,7 @@ const stagger = {
   show: { transition: { staggerChildren: 0.08 } }
 }
 
-type PortalTab = 'dashboard' | 'workouts' | 'nutrition' | 'library' | 'progress' | 'profile'
+type PortalTab = 'dashboard' | 'workouts' | 'nutrition' | 'library' | 'education' | 'progress' | 'profile'
 
 export default function PortalV2() {
   const { user, profile, isLoading, initialize, subscribeToRealtime, logout } = useStudentAuth()
@@ -94,7 +97,8 @@ export default function PortalV2() {
     { key: 'dashboard', label: 'Dashboard', icon: '🏠' },
     { key: 'workouts', label: 'Antrenman', icon: '💪' },
     { key: 'nutrition', label: 'Beslenme', icon: '🥗' },
-    { key: 'library', label: 'Kütüphane', icon: '📚' },
+    { key: 'library', label: 'Kütüphane', icon: '🏋️' },
+    { key: 'education', label: 'Eğitim', icon: '🎓' },
     { key: 'progress', label: 'Gelişim', icon: '📈' },
     { key: 'profile', label: 'Profil', icon: '👤' },
   ]
@@ -181,7 +185,7 @@ export default function PortalV2() {
               exit={{ height: 0, opacity: 0 }}
               className={`md:hidden border-t overflow-hidden ${dm ? 'border-white/[0.06]' : 'border-black/[0.06]'}`}
             >
-              <div className="p-4 grid grid-cols-3 gap-2">
+              <div className="p-4 grid grid-cols-4 gap-2">
                 {tabs.map(tab => (
                   <button
                     key={tab.key}
@@ -264,6 +268,15 @@ export default function PortalV2() {
                 <CoachVault />
               </motion.div>
 
+              {/* Package Purchase (If Rookie/Expired) */}
+              {(profile?.subscription_status === 'expired' || profile?.athlete_level === 'Rookie') && (
+                <motion.div variants={fadeUp}>
+                   <Suspense fallback={<TabSkeleton />}>
+                      <PackageShowcase />
+                   </Suspense>
+                </motion.div>
+              )}
+
               {/* Online Meeting */}
               <motion.div variants={fadeUp}>
                 <OnlineMeeting />
@@ -313,7 +326,7 @@ export default function PortalV2() {
           {activeTab === 'library' && (
             <motion.div key="library" initial="hidden" animate="show" exit="hidden" variants={stagger} className="space-y-8">
               <motion.section variants={fadeUp}>
-                <h1 className="font-display text-3xl font-bold tracking-tighter">Egzersiz Kütüphanesi 📚</h1>
+                <h1 className="font-display text-3xl font-bold tracking-tighter">Egzersiz Kütüphanesi 🏋️</h1>
                 <p className={`mt-2 text-sm ${dm ? 'text-white/30' : 'text-black/30'}`}>Video rehberli egzersizler, teknik ipuçları.</p>
               </motion.section>
 
@@ -321,6 +334,27 @@ export default function PortalV2() {
                 <motion.div variants={fadeUp}>
                   <VideoLibrary />
                 </motion.div>
+              </Suspense>
+            </motion.div>
+          )}
+
+          {/* ═══════ EDUCATION TAB ═══════ */}
+          {activeTab === 'education' && (
+            <motion.div key="education" initial="hidden" animate="show" exit="hidden" variants={stagger} className="space-y-8">
+              <motion.section variants={fadeUp}>
+                <h1 className="font-display text-3xl font-bold tracking-tighter">Online Akademi 🎓</h1>
+                <p className={`mt-2 text-sm ${dm ? 'text-white/30' : 'text-black/30'}`}>Yapılandırılmış programlar ve kaynak merkezi.</p>
+              </motion.section>
+
+              <Suspense fallback={<TabSkeleton h={500} />}>
+                <div className="grid lg:grid-cols-2 gap-8">
+                  <motion.div variants={fadeUp}>
+                    <CourseModules />
+                  </motion.div>
+                  <motion.div variants={fadeUp}>
+                    <ResourceCenter />
+                  </motion.div>
+                </div>
               </Suspense>
             </motion.div>
           )}
@@ -407,7 +441,7 @@ export default function PortalV2() {
         dm ? 'bg-bg/90 border-white/[0.06]' : 'bg-bg/90 border-black/[0.06]'
       }`}>
         <div className="flex items-center justify-around px-2 py-2">
-          {tabs.slice(0, 5).map(tab => (
+          {tabs.slice(0, 6).map(tab => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
