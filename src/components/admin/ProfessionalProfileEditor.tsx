@@ -150,6 +150,31 @@ export default function ProfessionalProfileEditor() {
           </div>
         </div>
 
+        {/* Certifications & Badges */}
+        <div className="pt-8 border-t border-black/5">
+          <h4 className="font-bold mb-4 text-sm uppercase tracking-widest opacity-40">Sertifika & Belge Doğrulama</h4>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className={`p-6 rounded-2xl border-2 border-dashed ${dm ? 'border-white/10' : 'border-black/10'} flex flex-col items-center justify-center text-center`}>
+              <span className="text-3xl mb-3">🎓</span>
+              <h5 className="font-bold text-xs uppercase tracking-wider mb-2">GSB / Federasyon Belgesi</h5>
+              <p className="text-[0.6rem] opacity-40 mb-4 italic">Belgenizi yükleyin, "Doğrulanmış" rozeti kazanın.</p>
+              <button className="px-4 py-2 rounded-lg bg-black text-white text-[0.6rem] font-black">DOSYA SEÇ</button>
+            </div>
+            <div className={`p-6 rounded-2xl bg-secondary/5 border border-secondary/20`}>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-full bg-secondary/20 flex items-center justify-center text-secondary">🛡️</div>
+                <div>
+                  <h5 className="font-bold text-xs">Doğrulama Durumu</h5>
+                  <p className="text-[0.6rem] text-secondary font-bold">Beklemede</p>
+                </div>
+              </div>
+              <p className="text-[0.6rem] opacity-60 leading-relaxed italic">
+                Belgeleriniz ARENA SuperAdmin ekibi tarafından 24-48 saat içinde incelenir ve onaylanır.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <button
           onClick={handleSave}
           className="w-full h-16 rounded-2xl bg-primary text-white font-black uppercase tracking-widest shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all"

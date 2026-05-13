@@ -3,10 +3,25 @@ import { motion } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import LandingPageBuilder from '../../components/admin/LandingPageBuilder'
 import ProfessionalProfileEditor from '../../components/admin/ProfessionalProfileEditor'
+import MarketingKit from '../../components/admin/MarketingKit'
+import { supabase } from '../../lib/supabase'
+import { useEffect } from 'react'
 
 export default function Marketing() {
   const { darkMode: dm } = useStore()
-  const [activeTab, setActiveTab] = useState<'landing' | 'pro' | 'seo' | 'leads'>('landing')
+  const [activeTab, setActiveTab] = useState<'landing' | 'pro' | 'kit' | 'seo' | 'leads'>('landing')
+  const [slug, setSlug] = useState('')
+
+  useEffect(() => {
+    fetchSlug()
+  }, [])
+
+  const fetchSlug = async () => {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return
+    const { data } = await supabase.from('coach_landings').select('slug').eq('coach_id', user.id).single()
+    if (data) setSlug(data.slug)
+  }
 
   return (
     <div className="space-y-10">
@@ -21,6 +36,7 @@ export default function Marketing() {
         {[
           { id: 'landing', label: 'Tanıtım Sayfası', icon: '🎨' },
           { id: 'pro', label: 'Kariyer & CV', icon: '🎖️' },
+          { id: 'kit', label: 'Pazarlama Kiti', icon: '🛠️' },
           { id: 'seo', label: 'SEO & Analytics', icon: '🔍' },
           { id: 'leads', label: 'Dönüşümler', icon: '🎯' }
         ].map(tab => (
@@ -46,6 +62,12 @@ export default function Marketing() {
       {activeTab === 'pro' && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <ProfessionalProfileEditor />
+        </motion.div>
+      )}
+
+      {activeTab === 'kit' && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+          <MarketingKit slug={slug} />
         </motion.div>
       )}
 

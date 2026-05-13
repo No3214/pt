@@ -58,6 +58,38 @@ export default function GymDashboard() {
         ))}
       </div>
 
+      {/* Performance Analytics / Leaderboard */}
+      <div className={`p-10 rounded-[2.5rem] border ${dm ? 'bg-white/[0.02] border-white/5' : 'bg-white border-black/5 shadow-2xl'}`}>
+        <h2 className="font-display text-2xl font-bold mb-8">Eğitmen Performans Analizi 📈</h2>
+        <div className="grid md:grid-cols-2 gap-10">
+          <div className="space-y-6">
+            <h4 className="text-[0.65rem] font-black uppercase tracking-widest opacity-40">En Çok Danışan Kazananlar</h4>
+            <div className="space-y-4">
+              {staff.slice(0, 3).map((s, i) => (
+                <div key={i} className="flex items-center justify-between p-4 rounded-2xl bg-black/5">
+                  <div className="flex items-center gap-3">
+                    <span className="w-6 h-6 rounded-full bg-primary text-white text-[0.6rem] flex items-center justify-center font-black">{i+1}</span>
+                    <span className="text-sm font-bold">{s.coach_name}</span>
+                  </div>
+                  <span className="text-xs font-black text-primary">+{Math.floor(Math.random() * 10) + 5} Bu Ay</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="space-y-6">
+            <h4 className="text-[0.65rem] font-black uppercase tracking-widest opacity-40">Müşteri Memnuniyeti (Ort.)</h4>
+            <div className="space-y-4">
+              {staff.slice(0, 3).map((s, i) => (
+                <div key={i} className="flex items-center justify-between p-4 rounded-2xl bg-black/5">
+                  <span className="text-sm font-bold">{s.coach_name}</span>
+                  <span className="text-xs font-black text-secondary">⭐ {(4.5 + Math.random() * 0.5).toFixed(1)}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Staff Management */}
       <div className={`p-10 rounded-[2.5rem] border ${dm ? 'bg-white/[0.02] border-white/5' : 'bg-white border-black/5 shadow-2xl'}`}>
         <div className="flex justify-between items-center mb-8">
