@@ -31,8 +31,10 @@ const Leads = lazy(() => import('./pages/admin/Leads'))
 const Progress = lazy(() => import('./pages/admin/Progress'))
 const Portal = lazy(() => import('./pages/Portal'))
 const Courses = lazy(() => import('./pages/admin/Courses'))
+const Marketing = lazy(() => import('./pages/admin/Marketing'))
 const SuperAdminDashboard = lazy(() => import('./pages/admin/SuperAdminDashboard'))
 const PortalV2 = lazy(() => import('./pages/PortalV2'))
+const PublicCoachLanding = lazy(() => import('./pages/PublicCoachLanding'))
 const AdminLogin = lazy(() => import('./pages/admin/Login'))
 const OnboardingForm = lazy(() => import('./pages/forms/OnboardingForm'))
 const StudentMeasurementForm = lazy(() => import('./pages/forms/StudentMeasurementForm'))
@@ -107,6 +109,7 @@ export default function App() {
               <Route path="assessment" element={<Assessment />} />
               <Route path="builder" element={<Builder />} />
               <Route path="courses" element={<Courses />} />
+              <Route path="marketing" element={<Marketing />} />
               <Route path="nutrition" element={<Nutrition />} />
               <Route path="food-tracker" element={<FoodTracker />} />
               <Route path="calendar" element={<CalendarPage />} />
@@ -117,6 +120,7 @@ export default function App() {
             <Route path="/login" element={<AdminLogin />} />
             <Route path="/portal" element={<PortalV2 />} />
             <Route path="/portal-legacy" element={<Portal />} />
+            <Route path="/p/:slug" element={<PublicCoachLanding />} />
             <Route path="/onboarding" element={<OnboardingForm />} />
             <Route path="/measure/:clientId" element={<StudentMeasurementForm />} />
             <Route path="/assessment" element={<AssessmentPage />} />
