@@ -23,6 +23,7 @@ import WellnessTracker from '../components/portal/WellnessTracker'
 import PerformanceRadar from '../components/portal/PerformanceRadar'
 import CoachVault from '../components/portal/CoachVault'
 import OnlineMeeting from '../components/portal/OnlineMeeting'
+import Marketplace from '../components/portal/Marketplace'
 
 // Off-tab content — code-split so switching tabs loads that tab's chunk only.
 const AIWorkoutGenerator = lazy(() => import('../components/portal/AIWorkoutGenerator'))
@@ -34,6 +35,8 @@ const VideoLibrary = lazy(() => import('../components/portal/VideoLibrary'))
 const StudentWeightChart = lazy(() => import('../components/portal/StudentWeightChart'))
 const AchievementTracker = lazy(() => import('../components/portal/AchievementTracker'))
 const ProgressGallery = lazy(() => import('../components/portal/ProgressGallery'))
+const CourseCatalog = lazy(() => import('./portal/CourseCatalog'))
+const CoursePlayer = lazy(() => import('./portal/CoursePlayer'))
 
 // Centered skeleton for tab-switch loading state — avoids layout shift.
 function TabSkeleton({ h = 400 }: { h?: number }) {
@@ -53,12 +56,13 @@ const stagger = {
   show: { transition: { staggerChildren: 0.08 } }
 }
 
-type PortalTab = 'dashboard' | 'workouts' | 'nutrition' | 'library' | 'progress' | 'profile'
+type PortalTab = 'dashboard' | 'workouts' | 'nutrition' | 'library' | 'courses' | 'progress' | 'profile'
 
 export default function PortalV2() {
   const { user, profile, isLoading, initialize, subscribeToRealtime, logout } = useStudentAuth()
   const { darkMode: dm } = useStore()
   const [activeTab, setActiveTab] = useState<PortalTab>('dashboard')
+  const [selectedCourseId, setSelectedCourseId] = useState<string | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -95,6 +99,7 @@ export default function PortalV2() {
     { key: 'workouts', label: 'Antrenman', icon: '💪' },
     { key: 'nutrition', label: 'Beslenme', icon: '🥗' },
     { key: 'library', label: 'Kütüphane', icon: '📚' },
+    { key: 'courses', label: 'Eğitimler', icon: '🎓' },
     { key: 'progress', label: 'Gelişim', icon: '📈' },
     { key: 'profile', label: 'Profil', icon: '👤' },
   ]
@@ -265,8 +270,9 @@ export default function PortalV2() {
               </motion.div>
 
               {/* Online Meeting */}
-              <motion.div variants={fadeUp}>
+              <motion.div variants={fadeUp} className="grid md:grid-cols-2 gap-8">
                 <OnlineMeeting />
+                <Marketplace />
               </motion.div>
             </motion.div>
           )}
@@ -321,6 +327,24 @@ export default function PortalV2() {
                 <motion.div variants={fadeUp}>
                   <VideoLibrary />
                 </motion.div>
+              </Suspense>
+            </motion.div>
+          )}
+
+          {/* ═══════ COURSES TAB ═══════ */}
+          {activeTab === 'courses' && (
+            <motion.div key="courses" initial="hidden" animate="show" exit="hidden" variants={stagger} className="space-y-8">
+              <motion.section variants={fadeUp}>
+                <h1 className="font-display text-3xl font-bold tracking-tighter">Online Eğitimler 🎓</h1>
+                <p className={`mt-2 text-sm ${dm ? 'text-white/30' : 'text-black/30'}`}>Udemy tarzı kapsamlı dersler ve gelişim programları.</p>
+              </motion.section>
+
+              <Suspense fallback={<TabSkeleton h={600} />}>
+                {selectedCourseId ? (
+                  <CoursePlayer courseId={selectedCourseId} onBack={() => setSelectedCourseId(null)} />
+                ) : (
+                  <CourseCatalog onSelectCourse={setSelectedCourseId} />
+                )}
               </Suspense>
             </motion.div>
           )}
@@ -407,7 +431,7 @@ export default function PortalV2() {
         dm ? 'bg-bg/90 border-white/[0.06]' : 'bg-bg/90 border-black/[0.06]'
       }`}>
         <div className="flex items-center justify-around px-2 py-2">
-          {tabs.slice(0, 5).map(tab => (
+          {tabs.slice(0, 6).map(tab => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}

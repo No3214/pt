@@ -4,9 +4,9 @@ import { useTranslation } from '../../locales';
 
 // Modular Admin Components
 import KPICards from '../../components/admin/KPICards';
+import ClientAlerts from '../../components/admin/ClientAlerts'
 import RevenueChart from '../../components/admin/RevenueChart';
 import MacroDistribution from '../../components/admin/MacroDistribution';
-import ClientAlerts from '../../components/admin/ClientAlerts';
 import WellnessFeed from '../../components/admin/WellnessFeed';
 import StudentManager from '../../components/admin/StudentManager';
 import PaymentTracker from '../../components/admin/PaymentTracker';

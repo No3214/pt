@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useStore, type Lead } from '../../stores/useStore';
 import { supabase } from '../../lib/supabase';
 import { useTranslation } from '../../locales';
+import LeadsKanban from '../../components/admin/LeadsKanban'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -21,6 +22,7 @@ const statusColors: Record<string, string> = {
 export default function Leads() {
   const { t, locale } = useTranslation();
   const { darkMode: dm, updateLeadStatus, showToast, whatsappTemplates } = useStore();
+  const [view, setView] = useState<'list' | 'kanban'>('kanban');
   const [dbLeads, setDbLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -111,11 +113,31 @@ export default function Leads() {
         </div>
       </motion.section>
 
+      {/* View Toggle */}
+      <div className="flex gap-2 p-1.5 rounded-2xl bg-black/5 w-fit">
+        <button
+          onClick={() => setView('kanban')}
+          className={`px-6 py-3 rounded-xl text-xs font-bold transition-all ${view === 'kanban' ? 'bg-white shadow-lg text-black' : 'opacity-40 hover:opacity-100'}`}
+        >
+          Kanban Görünümü
+        </button>
+        <button
+          onClick={() => setView('list')}
+          className={`px-6 py-3 rounded-xl text-xs font-bold transition-all ${view === 'list' ? 'bg-white shadow-lg text-black' : 'opacity-40 hover:opacity-100'}`}
+        >
+          Liste Görünümü
+        </button>
+      </div>
+
       {/* Loading State */}
       {loading ? (
         <div className="flex justify-center py-20">
           <motion.div animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 1 }} className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full" />
         </div>
+      ) : view === 'kanban' ? (
+        <motion.div variants={fadeUp}>
+          <LeadsKanban />
+        </motion.div>
       ) : dbLeads.length === 0 ? (
         <motion.div variants={fadeUp}
           className={`p-16 rounded-[2.5rem] border text-center ${

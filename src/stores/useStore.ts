@@ -140,11 +140,18 @@ interface AppState {
   deleteSavedProgram: (id: string) => void
   // Admin Auth
   isAdminAuth: boolean
+  adminRole: 'coach' | 'super_admin' | null
   loginAdmin: (pin: string) => Promise<boolean>
   logoutAdmin: () => void
+  // Course Management
+  activeCourseId: string | null
+  setActiveCourse: (id: string | null) => void
   // WhatsApp Templates
   whatsappTemplates: { onboarding: string; measurement: string }
   updateTemplate: (key: 'onboarding' | 'measurement', value: string) => void
+  // Branding (B2B / White-label)
+  branding: { name: string; colors: { primary: string; secondary: string; accent: string } }
+  fetchBranding: () => Promise<void>
 }
 
 export const useStore = create<AppState>()(
@@ -166,29 +173,40 @@ export const useStore = create<AppState>()(
 
       // ─── Admin Auth (SHA-256 hashed) ───
       isAdminAuth: false,
+      adminRole: null,
       loginAdmin: async (pin) => {
-        const validHashes = [
+        const superAdminHashes = [
           '45801e4070883701f718fa8c4c6268558c48eaef8fb93a51283af1fb608ca5c7', // ela2026
+        ]
+        const coachHashes = [
           '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', // 1234
+          '45801e4070883701f718fa8c4c6268558c48eaef8fb93a51283af1fb608ca5c7', // superadmin can also log in as coach
         ]
         const encoder = new TextEncoder()
         const data = encoder.encode(pin)
-        
+
         try {
           const buf = await crypto.subtle.digest('SHA-256', data)
           const hash = Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
-          
-          if (validHashes.includes(hash)) {
-            set({ isAdminAuth: true })
+
+          if (superAdminHashes.includes(hash)) {
+            set({ isAdminAuth: true, adminRole: 'super_admin' })
+            return true
+          } else if (coachHashes.includes(hash)) {
+            set({ isAdminAuth: true, adminRole: 'coach' })
             return true
           }
         } catch (e) {
           console.error('Hash calculation failed', e)
         }
-        
+
         return false
       },
-      logoutAdmin: () => set({ isAdminAuth: false }),
+      logoutAdmin: () => set({ isAdminAuth: false, adminRole: null }),
+
+      // ─── Course Management ───
+      activeCourseId: null,
+      setActiveCourse: (activeCourseId) => set({ activeCourseId }),
 
       // ─── Leads CRM ───
       leads: [],
@@ -199,7 +217,7 @@ export const useStore = create<AppState>()(
           date: new Date().toISOString(),
           status: 'New'
         } as Lead
-        
+
         set(s => ({ leads: [newLead, ...s.leads] }))
 
         // Sync to Supabase
@@ -258,7 +276,7 @@ export const useStore = create<AppState>()(
       })),
       addNote: (id, text) => set(s => {
         if (!text || typeof text !== 'string') return s;
-        const cleanText = text.replace(/[<>]/g, '').slice(0, 1000); 
+        const cleanText = text.replace(/[<>]/g, '').slice(0, 1000);
         return {
           clients: s.clients.map(c =>
             c.id === id ? { ...c, notes: [{ id: Date.now(), text: cleanText, date: new Date().toLocaleString('tr-TR') }, ...c.notes] } : c
@@ -388,6 +406,29 @@ export const useStore = create<AppState>()(
       updateTemplate: (key, value) => set(s => ({
         whatsappTemplates: { ...s.whatsappTemplates, [key]: value }
       })),
+
+      // ─── Branding ───
+      branding: {
+        name: 'ARENA Performance',
+        colors: { primary: '#C2684A', secondary: '#7A9E82', accent: '#4A6D88' }
+      },
+      fetchBranding: async () => {
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) return
+
+        const { data: profile } = await supabase.from('profiles').select('tenant_id').eq('id', user.id).single()
+        if (profile?.tenant_id) {
+          const { data: tenant } = await supabase.from('tenants').select('*').eq('id', profile.tenant_id).single()
+          if (tenant && tenant.brand) {
+            set({
+              branding: {
+                name: tenant.brand.name || tenant.name,
+                colors: tenant.brand.colors || get().branding.colors
+              }
+            })
+          }
+        }
+      }
     }),
     { name: 'arena-store' }
   )

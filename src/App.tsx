@@ -17,7 +17,7 @@ import SmoothScroll from './components/premium/SmoothScroll'
 import CustomCursor from './components/premium/CustomCursor'
 import ScrollProgressBar from './components/premium/ScrollProgress'
 
-// Lazy-loaded pages (reduces initial bundle by ~60%)
+// Lazy-loaded pages
 const AdminLayout = lazy(() => import('./pages/admin/Layout'))
 const Dashboard = lazy(() => import('./pages/admin/Dashboard'))
 const Clients = lazy(() => import('./pages/admin/Clients'))
@@ -30,7 +30,13 @@ const Settings = lazy(() => import('./pages/admin/Settings'))
 const Leads = lazy(() => import('./pages/admin/Leads'))
 const Progress = lazy(() => import('./pages/admin/Progress'))
 const Portal = lazy(() => import('./pages/Portal'))
+const Courses = lazy(() => import('./pages/admin/Courses'))
+const Marketing = lazy(() => import('./pages/admin/Marketing'))
+const GymDashboard = lazy(() => import('./pages/admin/GymDashboard'))
+const SuperAdminDashboard = lazy(() => import('./pages/admin/SuperAdminDashboard'))
 const PortalV2 = lazy(() => import('./pages/PortalV2'))
+const PublicCoachLanding = lazy(() => import('./pages/PublicCoachLanding'))
+const CoachDiscovery = lazy(() => import('./pages/CoachDiscovery'))
 const AdminLogin = lazy(() => import('./pages/admin/Login'))
 const OnboardingForm = lazy(() => import('./pages/forms/OnboardingForm'))
 const StudentMeasurementForm = lazy(() => import('./pages/forms/StudentMeasurementForm'))
@@ -53,17 +59,18 @@ function PageLoader() {
 }
 
 export default function App() {
-  const { darkMode, checkDailyReset } = useStore()
+  const { darkMode, checkDailyReset, branding, fetchBranding } = useStore()
   const location = useLocation()
 
   useEffect(() => {
     checkDailyReset()
-  }, [checkDailyReset])
+    fetchBranding()
+  }, [checkDailyReset, fetchBranding])
 
-  // Theme injection — runs on darkMode change
+  // Theme injection
   useEffect(() => {
     const root = document.documentElement
-    const themeColors = tenantConfig.theme.colors
+    const themeColors = branding.colors
 
     root.style.setProperty('--color-primary', themeColors.primary)
     root.style.setProperty('--color-secondary', themeColors.secondary)
@@ -75,12 +82,10 @@ export default function App() {
     root.classList.toggle('dark', darkMode)
     const meta = document.querySelector('meta[name="theme-color"]')
     if (meta) meta.setAttribute('content', darkMode ? '#050505' : '#FAF6F1')
-  }, [darkMode])
+  }, [darkMode, branding])
 
-  // Native smooth scroll — clean, performant, no library conflicts
   useEffect(() => {
     document.documentElement.style.scrollBehavior = 'smooth'
-    // Clean up any leftover Lenis classes from previous builds
     document.documentElement.classList.remove('lenis', 'lenis-smooth', 'lenis-stopped')
     document.documentElement.style.removeProperty('overflow')
     document.body.style.removeProperty('overflow')
@@ -100,9 +105,13 @@ export default function App() {
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Navigate to="dashboard" replace />} />
               <Route path="dashboard" element={<Dashboard />} />
+              <Route path="super-admin" element={<SuperAdminDashboard />} />
               <Route path="clients" element={<Clients />} />
               <Route path="assessment" element={<Assessment />} />
               <Route path="builder" element={<Builder />} />
+              <Route path="courses" element={<Courses />} />
+              <Route path="marketing" element={<Marketing />} />
+              <Route path="gym-dashboard" element={<GymDashboard />} />
               <Route path="nutrition" element={<Nutrition />} />
               <Route path="food-tracker" element={<FoodTracker />} />
               <Route path="calendar" element={<CalendarPage />} />
@@ -113,6 +122,8 @@ export default function App() {
             <Route path="/login" element={<AdminLogin />} />
             <Route path="/portal" element={<PortalV2 />} />
             <Route path="/portal-legacy" element={<Portal />} />
+            <Route path="/p/:slug" element={<PublicCoachLanding />} />
+            <Route path="/explore" element={<CoachDiscovery />} />
             <Route path="/onboarding" element={<OnboardingForm />} />
             <Route path="/measure/:clientId" element={<StudentMeasurementForm />} />
             <Route path="/assessment" element={<AssessmentPage />} />

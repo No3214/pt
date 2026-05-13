@@ -4,6 +4,7 @@ import { useStore } from '../../stores/useStore'
 import { useNavigate } from 'react-router-dom'
 import { sanitize } from '../../lib/constants'
 import { encryptData } from '../../lib/crypto'
+import AIWeeklyReport from '../../components/admin/AIWeeklyReport'
 
 const fadeUp = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } }
 const stagger = { show: { transition: { staggerChildren: 0.06 } } }
@@ -18,6 +19,7 @@ export default function Clients() {
   const [sessionModal, setSessionModal] = useState<string | null>(null)
   const [editForm, setEditForm] = useState({ name: '', goal: '', sessions: 0, max: 0, price: 0, phone: '', email: '', allergens: [] as string[] })
   const [noteText, setNoteText] = useState('')
+  const [aiReportModal, setAIReportModal] = useState<string | null>(null)
   const [showForm, setShowForm] = useState(false)
   const [search, setSearch] = useState('')
   type SortKey = 'name' | 'sessions' | 'price' | 'habit';
@@ -398,6 +400,10 @@ export default function Clients() {
                       className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-primary/30 text-primary bg-primary/10 hover:bg-primary/20' : 'border-primary/30 text-primary bg-primary/5 hover:bg-primary/10'}`}>
                       📊 Ölçüm Linki At
                     </motion.button>
+                    <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setAIReportModal(c.id)}
+                      className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-primary/50 text-primary bg-primary/10 hover:bg-primary/20' : 'border-primary/30 text-primary bg-primary/5 hover:bg-primary/10'}`}>
+                      AI Raporu 🤖
+                    </motion.button>
                     <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={() => setNotesModal(c.id)}
                       className={`px-4 py-2 rounded-full text-xs font-medium cursor-pointer border transition-all ${dm ? 'border-white/10 text-white/70 bg-transparent hover:bg-white/5' : 'border-stone-200 text-stone-600 bg-transparent hover:bg-stone-50'}`}>
                       Not ({c.notes.length})
@@ -630,6 +636,24 @@ export default function Clients() {
                   <span className={`text-xs ${dm ? 'text-white/40' : 'text-stone-500'}`}>Uyku, yorgunluk, kas ağrısı rutin değerlendirme soruları.</span>
                 </button>
               </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* AI Weekly Report Modal */}
+      <AnimatePresence>
+        {aiReportModal && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
+            onClick={(e) => { if (e.target === e.currentTarget) setAIReportModal(null) }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              className="max-w-2xl w-full"
+            >
+              <AIWeeklyReport clientId={aiReportModal} />
             </motion.div>
           </motion.div>
         )}
