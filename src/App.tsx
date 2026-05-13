@@ -35,6 +35,7 @@ const Marketing = lazy(() => import('./pages/admin/Marketing'))
 const SuperAdminDashboard = lazy(() => import('./pages/admin/SuperAdminDashboard'))
 const PortalV2 = lazy(() => import('./pages/PortalV2'))
 const PublicCoachLanding = lazy(() => import('./pages/PublicCoachLanding'))
+const CoachDiscovery = lazy(() => import('./pages/CoachDiscovery'))
 const AdminLogin = lazy(() => import('./pages/admin/Login'))
 const OnboardingForm = lazy(() => import('./pages/forms/OnboardingForm'))
 const StudentMeasurementForm = lazy(() => import('./pages/forms/StudentMeasurementForm'))
@@ -121,6 +122,7 @@ export default function App() {
             <Route path="/portal" element={<PortalV2 />} />
             <Route path="/portal-legacy" element={<Portal />} />
             <Route path="/p/:slug" element={<PublicCoachLanding />} />
+            <Route path="/explore" element={<CoachDiscovery />} />
             <Route path="/onboarding" element={<OnboardingForm />} />
             <Route path="/measure/:clientId" element={<StudentMeasurementForm />} />
             <Route path="/assessment" element={<AssessmentPage />} />

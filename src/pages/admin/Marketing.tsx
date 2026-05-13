@@ -2,10 +2,11 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
 import LandingPageBuilder from '../../components/admin/LandingPageBuilder'
+import ProfessionalProfileEditor from '../../components/admin/ProfessionalProfileEditor'
 
 export default function Marketing() {
   const { darkMode: dm } = useStore()
-  const [activeTab, setActiveTab] = useState<'landing' | 'seo' | 'leads'>('landing')
+  const [activeTab, setActiveTab] = useState<'landing' | 'pro' | 'seo' | 'leads'>('landing')
 
   return (
     <div className="space-y-10">
@@ -19,6 +20,7 @@ export default function Marketing() {
       <div className="flex gap-2 p-1.5 rounded-2xl bg-black/5 w-fit">
         {[
           { id: 'landing', label: 'Tanıtım Sayfası', icon: '🎨' },
+          { id: 'pro', label: 'Kariyer & CV', icon: '🎖️' },
           { id: 'seo', label: 'SEO & Analytics', icon: '🔍' },
           { id: 'leads', label: 'Dönüşümler', icon: '🎯' }
         ].map(tab => (
@@ -38,6 +40,12 @@ export default function Marketing() {
       {activeTab === 'landing' && (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <LandingPageBuilder />
+        </motion.div>
+      )}
+
+      {activeTab === 'pro' && (
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
+          <ProfessionalProfileEditor />
         </motion.div>
       )}
 

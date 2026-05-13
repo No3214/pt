@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { ProTheme } from '../components/branding/themes/ProTheme'
 import { AthleteTheme } from '../components/branding/themes/AthleteTheme'
+import { MinimalistTheme } from '../components/branding/themes/MinimalistTheme'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../stores/useStore'
 
@@ -61,14 +62,15 @@ export default function PublicCoachLanding() {
 
   const themeProps = {
     content: landing.content,
-    onContactClick: () => setShowContact(true)
+    onContactClick: () => setShowContact(true),
+    coach: landing.coach_profiles
   }
 
   return (
     <div className="relative">
       {landing.theme === 'pro' && <ProTheme {...themeProps} />}
       {landing.theme === 'athlete' && <AthleteTheme {...themeProps} />}
-      {landing.theme === 'minimalist' && <ProTheme {...themeProps} />} {/* Fallback to Pro for now */}
+      {landing.theme === 'minimalist' && <MinimalistTheme {...themeProps} />}
 
       {/* Contact Modal */}
       <AnimatePresence>
