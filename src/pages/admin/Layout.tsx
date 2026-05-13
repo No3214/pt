@@ -26,6 +26,11 @@ const tabs = [
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
     </svg>
   ), label: 'Program Builder' },
+  { to: 'courses', icon: (
+    <svg className="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18c-2.305 0-4.408.867-6 2.292m0-14.25v14.25" />
+    </svg>
+  ), label: 'Kurslarım' },
   { to: 'nutrition', icon: (
     <svg className="w-[18px] h-[18px]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
@@ -67,7 +72,7 @@ const pageVariants = {
 }
 
 export default function AdminLayout() {
-  const { darkMode, toggleDarkMode, isAdminAuth, logoutAdmin, toastMsg } = useStore()
+  const { darkMode, toggleDarkMode, isAdminAuth, adminRole, logoutAdmin, toastMsg } = useStore()
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const location = useLocation()
   const dm = darkMode
@@ -160,6 +165,19 @@ export default function AdminLayout() {
 
               {/* Nav items */}
               <nav className="flex flex-col gap-0.5 flex-1">
+                {adminRole === 'super_admin' && (
+                  <NavLink to="super-admin" onClick={() => setSidebarOpen(false)}
+                    className={({ isActive }) =>
+                      `relative flex items-center gap-3 px-3 py-2.5 rounded-xl no-underline text-[0.8rem] transition-all duration-300 group/nav ${
+                        isActive
+                          ? `font-medium ${dm ? 'bg-secondary/10 text-secondary' : 'bg-secondary/[0.06] text-secondary'}`
+                          : `${dm ? 'text-white/35 hover:text-white/60 hover:bg-white/[0.03]' : 'text-text-main/35 hover:text-text-main/65 hover:bg-black/[0.02]'}`
+                      }`
+                    }>
+                    <span className="flex-shrink-0 opacity-80">🛡️</span>
+                    <span>Super Admin</span>
+                  </NavLink>
+                )}
                 {tabs.map(t => (
                   <NavLink key={t.to} to={t.to} onClick={() => setSidebarOpen(false)}
                     className={({ isActive }) =>

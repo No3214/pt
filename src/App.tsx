@@ -30,6 +30,8 @@ const Settings = lazy(() => import('./pages/admin/Settings'))
 const Leads = lazy(() => import('./pages/admin/Leads'))
 const Progress = lazy(() => import('./pages/admin/Progress'))
 const Portal = lazy(() => import('./pages/Portal'))
+const Courses = lazy(() => import('./pages/admin/Courses'))
+const SuperAdminDashboard = lazy(() => import('./pages/admin/SuperAdminDashboard'))
 const PortalV2 = lazy(() => import('./pages/PortalV2'))
 const AdminLogin = lazy(() => import('./pages/admin/Login'))
 const OnboardingForm = lazy(() => import('./pages/forms/OnboardingForm'))
@@ -100,9 +102,11 @@ export default function App() {
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<Navigate to="dashboard" replace />} />
               <Route path="dashboard" element={<Dashboard />} />
+              <Route path="super-admin" element={<SuperAdminDashboard />} />
               <Route path="clients" element={<Clients />} />
               <Route path="assessment" element={<Assessment />} />
               <Route path="builder" element={<Builder />} />
+              <Route path="courses" element={<Courses />} />
               <Route path="nutrition" element={<Nutrition />} />
               <Route path="food-tracker" element={<FoodTracker />} />
               <Route path="calendar" element={<CalendarPage />} />

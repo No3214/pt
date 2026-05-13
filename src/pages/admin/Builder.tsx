@@ -105,10 +105,26 @@ export default function Builder() {
     setWaPreview(`🏐 *ARENA — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n💪 ${currentDay}\n\n${lines}\n\n📌 Beslenme: ${sanitize(nutritionNote)}`)
   }
 
+  const [availableCourses, setAvailableCourses] = useState<{id: string, title: string}[]>([])
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      const { data } = await supabase.from('courses').select('id, title')
+      if (data) setAvailableCourses(data)
+    }
+    fetchCourses()
+  }, [])
+
   const setSplit = (type: string) => {
     const client = sanitize(selectedClient || 'Yeni Danışan')
     const note = sanitize(nutritionNote)
     setWaPreview(`🏐 *ARENA — Antrenman*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n💪 Program Formatı: ${type.toUpperCase()}\n\n${splits[type]}\n\n📌 Beslenme: ${note}`)
+  }
+
+  const handleCoursePackage = (courseId: string) => {
+    const course = availableCourses.find(c => c.id === courseId)
+    const client = sanitize(selectedClient || 'Danışan')
+    setWaPreview(`🎓 *ARENA — Kurs Erişimi*\n━━━━━━━━━━━━━━━━━━━━\n👤 ${client}\n📚 Kurs: ${course?.title}\n\n✅ Bu paketi satın aldığınızda yukarıdaki kursa sınırsız erişim hakkı kazanırsınız.`)
   }
 
   const generateAI = async () => {
@@ -333,6 +349,27 @@ export default function Builder() {
       {/* Templates Section */}
       {activeTab === 'templates' && (
         <motion.div variants={fadeUp} className="space-y-4">
+          {/* Course Links */}
+          {availableCourses.length > 0 && (
+            <div className="mb-8">
+              <h4 className="text-[0.65rem] font-bold uppercase tracking-widest opacity-40 mb-4">Kurs Paketleri</h4>
+              <div className="grid grid-cols-2 gap-3">
+                {availableCourses.map(course => (
+                  <button
+                    key={course.id}
+                    onClick={() => handleCoursePackage(course.id)}
+                    className={`p-3 rounded-xl border text-left text-xs font-bold transition-all ${
+                      dm ? 'border-primary/20 bg-primary/5 hover:bg-primary/10' : 'border-primary/10 bg-primary/5 hover:bg-primary/10'
+                    }`}
+                  >
+                    🎓 {course.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <h4 className="text-[0.65rem] font-bold uppercase tracking-widest opacity-40 mb-4">Antrenman Şablonları</h4>
           {Object.entries(splits).map(([key, value]) => (
             <motion.button key={key} whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
               onClick={() => setSplit(key)}
