@@ -109,6 +109,19 @@ export default function LandingPageBuilder() {
             </div>
           </div>
 
+          <div className="pt-6 border-t border-black/5">
+            <h4 className="font-bold text-sm mb-4">Başvuru Formu Soruları</h4>
+            <div className="space-y-3">
+              {['Kilo/Boy Soru', 'Sağlık Geçmişi Soru', 'Antrenman Deneyimi Soru'].map((q, i) => (
+                <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-black/5">
+                  <span className="text-xs font-bold opacity-60">{q}</span>
+                  <button className="text-[0.6rem] font-black uppercase text-primary">Aktif</button>
+                </div>
+              ))}
+            </div>
+            <p className="text-[0.6rem] opacity-30 mt-3 italic">* Özel sorular yakında eklenebilir hale gelecek.</p>
+          </div>
+
           <div className="flex items-center justify-between p-5 rounded-2xl bg-primary/5 border border-primary/10">
             <div>
               <h4 className="font-bold text-sm">Yayına Al</h4>

@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useStore } from '../../stores/useStore'
+import DataImporter from '../../components/admin/DataImporter'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20, filter: 'blur(8px)' },
@@ -324,6 +325,13 @@ export default function Settings() {
                 </p>
               </div>
             </div>
+          </motion.div>
+        )}
+
+        {/* Data Import Tab (Competitive edge: Fast migration) */}
+        {activeTab === 'data' && (
+          <motion.div variants={fadeUp} className="mt-10">
+            <DataImporter />
           </motion.div>
         )}
 
