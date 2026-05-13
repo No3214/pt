@@ -149,6 +149,9 @@ interface AppState {
   // WhatsApp Templates
   whatsappTemplates: { onboarding: string; measurement: string }
   updateTemplate: (key: 'onboarding' | 'measurement', value: string) => void
+  // Branding (B2B / White-label)
+  branding: { name: string; colors: { primary: string; secondary: string; accent: string } }
+  fetchBranding: () => Promise<void>
 }
 
 export const useStore = create<AppState>()(
@@ -403,6 +406,29 @@ export const useStore = create<AppState>()(
       updateTemplate: (key, value) => set(s => ({
         whatsappTemplates: { ...s.whatsappTemplates, [key]: value }
       })),
+
+      // ─── Branding ───
+      branding: {
+        name: 'ARENA Performance',
+        colors: { primary: '#C2684A', secondary: '#7A9E82', accent: '#4A6D88' }
+      },
+      fetchBranding: async () => {
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) return
+
+        const { data: profile } = await supabase.from('profiles').select('tenant_id').eq('id', user.id).single()
+        if (profile?.tenant_id) {
+          const { data: tenant } = await supabase.from('tenants').select('*').eq('id', profile.tenant_id).single()
+          if (tenant && tenant.brand) {
+            set({
+              branding: {
+                name: tenant.brand.name || tenant.name,
+                colors: tenant.brand.colors || get().branding.colors
+              }
+            })
+          }
+        }
+      }
     }),
     { name: 'arena-store' }
   )

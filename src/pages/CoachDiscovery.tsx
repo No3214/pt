@@ -16,12 +16,21 @@ export default function CoachDiscovery() {
   }, [])
 
   const fetchCoaches = async () => {
-    const { data } = await supabase
+    const { data: landings } = await supabase
       .from('coach_landings')
-      .select('slug, coach_profiles(*)')
+      .select('slug, coach_id, coach_profiles(*)')
       .eq('is_published', true)
 
-    if (data) setCoaches(data)
+    // Fetch gym associations
+    const { data: staff } = await supabase.from('gym_roster').select('*')
+
+    if (landings) {
+      const merged = landings.map(l => ({
+        ...l,
+        gym: staff?.find(s => s.coach_id === l.coach_id)
+      }))
+      setCoaches(merged)
+    }
     setLoading(false)
   }
 
@@ -75,6 +84,9 @@ export default function CoachDiscovery() {
                 <div>
                   <h3 className="font-bold text-xl">{c.coach_profiles.name}</h3>
                   <p className="text-xs text-primary font-bold uppercase tracking-widest">{c.coach_profiles.professional_data?.headline || 'Elite Coach'}</p>
+                  {c.gym && (
+                    <p className="text-[0.6rem] opacity-40 font-bold mt-1">🏢 {c.gym.gym_id === '00000000-0000-0000-0000-000000000001' ? 'ARENA HQ' : 'Partner Salon'}</p>
+                  )}
                 </div>
               </div>
 
